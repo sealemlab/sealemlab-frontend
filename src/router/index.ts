@@ -8,10 +8,7 @@ VueRouter.prototype.push = function push(location: any) {
 };
 
 const routes: Array<RouteConfig> = [
-  {
-    path: "/",
-    redirect: "/home",
-  },
+  { path: "/", redirect: "/home" },
   {
     path: "/home",
     name: "Home",
@@ -19,8 +16,26 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/nft",
-    name: "Nft",
+    name: "NFT",
     component: () => import("../views/Nft/index.vue"),
+    children: [
+      { path: "/", redirect: "nft1" },
+      {
+        path: "nft1",
+        name: "nft1",
+        component: () => import("../views/Nft/components/nft1.vue"),
+      },
+      {
+        path: "nft2",
+        name: "nft2",
+        component: () => import("../views/Nft/components/nft2.vue"),
+      },
+      {
+        path: "nft3",
+        name: "nft3",
+        component: () => import("../views/Nft/components/nft3.vue"),
+      },
+    ],
   },
 ];
 

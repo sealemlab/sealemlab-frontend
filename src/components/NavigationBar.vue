@@ -32,8 +32,8 @@ export default {
       showLangSelect: false,
       lang: "English",
       navArr: [
-        { label: "message.nav.txt1", link: "home" },
-        { label: "message.nav.txt2", link: "nft" },
+        { label: "message.nav.txt1", link: "/home" },
+        { label: "message.nav.txt2", link: "/nft" },
         { label: "message.nav.txt3", link: "" },
         { label: "message.nav.txt4", link: "" },
         { label: "message.nav.txt5", link: "" },
@@ -45,15 +45,10 @@ export default {
   },
   watch: {
     $route(to, from) {
-      switch (to.path) {
-        case "/home":
-          this.navActive = 0;
-          break;
-        case "/nft":
-          this.navActive = 1;
-          break;
-        default:
-          break;
+      if (to.path == "/home") {
+        this.navActive = 0;
+      } else if (to.path.indexOf("/nft") !== -1) {
+        this.navActive = 1;
       }
     },
   },
