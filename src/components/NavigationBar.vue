@@ -4,7 +4,7 @@
       <img class="logo" src="../assets/images/logo.png" alt="" />
       <ul>
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
-          {{ $t(item.label) }}
+          <span> {{ $t(item.label) }}</span>
         </li>
       </ul>
     </div>
@@ -94,7 +94,13 @@ export default {
       margin: 0 10px;
       padding: 10px 15px;
       &.active {
-        color: #00e6ff;
+        span {
+          font-weight: bold;
+          color: #d8d8d8;
+          background: linear-gradient(180deg, #78c7d4 0%, #6157a4 100%), linear-gradient(180deg, #00e6ff 0%, #8847f3 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
         background: url("../assets/images/menubg.png") no-repeat;
         background-size: 100% 100%;
       }
@@ -131,6 +137,7 @@ export default {
       position: absolute;
       top: 100%;
       left: 0;
+      z-index: 99;
       transition: transform 0.3s;
       transform-origin: top center;
       padding: 10px 0;

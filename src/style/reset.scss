@@ -85,7 +85,8 @@ video {
   box-sizing: border-box;
   vertical-align: baseline;
 }
-ol,ul {
+ol,
+ul {
   list-style: none;
 }
 html,
@@ -95,9 +96,21 @@ body {
   color: #ffffff;
   font-size: 18px;
 }
-.display_flex{
+.display_flex {
   display: flex;
 }
-.margin0{
+.margin0 {
   margin-right: 0 !important;
+}
+// 重置滚动条样式
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #939393;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
