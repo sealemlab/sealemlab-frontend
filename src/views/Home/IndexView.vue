@@ -46,42 +46,46 @@
           </div>
         </div>
         <div class="bottom_box display_flex">
-          <div class="btn btn1">
-            BUY NFT
+          <div class="btn" :class="{ en_Bold: getLangStatus }">
+            购买NFT
           </div>
-          <div class="btn btn2">
-            PLAY GAME
+          <div class="btn btn2" :class="{ en_Bold: getLangStatus }">
+            玩游戏
           </div>
         </div>
       </div>
     </div>
+    <!-- 什么是圣域 -->
     <div class="character_introduction display_flex">
       <div class="people_box"><img src="../..//assets/images/people.png" class="people" /></div>
       <div class="right_box display_flex">
-        <span class="title_txt">What is Sacred Realm</span>
+        <span class="title_txt" :class="{ en_Bold: getLangStatus }">什么是圣域</span>
         <img src="../..//assets/images/people_line.png" class="people_line" />
-        <span class="txt_content">《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。
-圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</span>
+        <span class="txt_content" :class="{ en_Regular: getLangStatus }">《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。</span>
+        <span class="txt_content" :class="{ en_Regular: getLangStatus }">圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</span>
       </div>
     </div>
-    <div class="characteristic_box display_flex">
-      <span class="title_txt">特 点</span>
-      <img src="../..//assets/images/people_line.png" class="people_line" />
+    <!-- 特点 -->
+    <div class="characteristic_box display_flex add_bg">
+      <span class="title_txt" :class="{ en_Bold: getLangStatus }">特 点</span>
+      <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
-        <div class="onebox display_flex" :class="{margin0:index % 4 == 3 }" v-for="(item, index) in spArr" :key="index">
+        <div class="onebox display_flex" :class="{margin0:index == 3}" v-for="(item, index) in spArr" :key="index">
           <img :src="item.src" class="img_sp" />
-          <span class="txt">{{item.txt}}</span>
-          <span v-if="item.txt1">{{item.txt1}}</span>
+          <span class="txt" :class="{ en_Regular: getLangStatus }">{{item.txt}}</span>
+          <span class="txt" :class="{ en_Regular: getLangStatus }" v-if="item.txt1">{{item.txt1}}</span>
         </div>
       </div>
     </div>
+    <!-- 在圣域怎么赚钱 -->
     <div class="characteristic_box make_money display_flex">
-      <span class="title_txt">在圣域怎样赚钱？</span>
+      <span class="title_txt" :class="{ en_Bold: getLangStatus }">在圣域怎样赚钱？</span>
       <img src="../..//assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
-        <div class="txtbox display_flex" :class="{margin0:index % 4 == 3 }" v-for="(item, index) in makeMoneyArr" :key="index">{{item.txt}}</div>
+        <div class="txtbox display_flex" :class="{ en_Regular: getLangStatus }" v-for="(item, index) in makeMoneyArr" :key="index">{{item.txt}}</div>
       </div>
     </div>
+    <!-- 游戏人物展示 -->
     <div class="characteristic_box make_money_people display_flex">
       <span class="title_txt">游戏人物展示</span>
       <img src="../..//assets/images/people_line.png" class="people_line" />
@@ -96,9 +100,13 @@
         </div>
         <div class="right_maxpeople">
           <img src="../..//assets/images/peoplemax.png" class="peoplemax" />
+          <p class="add_title" :class="{ en_Regular: getLangStatus }">格斗家</p>
+          <p class="add_content" :class="{ en_Regular: getLangStatus }">《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。</p>
+          <p class="add_content" :class="{ en_Regular: getLangStatus }">圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</p>
         </div>
       </div>
     </div>
+    <!-- 游戏场景展示 -->
     <div class="characteristic_box make_money_people display_flex">
       <span class="title_txt">游戏场景展示</span>
       <img src="../..//assets/images/people_line.png" class="people_line" />
@@ -114,14 +122,36 @@
         </div>
       </div>
     </div>
+    <!-- 团队 -->
     <div class="characteristic_box make_money_people display_flex">
       <span class="title_txt">团 队</span>
       <img src="../..//assets/images/people_line.png" class="people_line" />
       <div class="team_box display_flex">
-        <div class="oneteam display_flex" :class="{margin0:index % 3 == 2 }" v-for="(item, index) in teamArr" :key="index">
-          <img :src="item.src" class="teaming" />
-          <span class="span1">{{item.txt}}</span>
-          <span class="span2">{{item.name}}</span>
+        <div class="top_team display_flex">
+          <div class="out_box display_flex" :class="{margin0:index == 1}" v-for="(item, index) in teamArr" :key="index">
+            <div class="oneteam display_flex">
+              <img :src="item.src" class="teaming" />
+              <span class="span1">{{item.txt}}</span>
+              <span class="span2">{{item.name}}</span>
+              <div class="address_peopllle display_flex">
+                <img src="../..//assets/images/in.png" class="ling_ying" />
+                <img src="../..//assets/images/twitter.png" class="twitter" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="top_team display_flex">
+          <div class="out_box display_flex" v-for="(item, index) in teamArr1" :key="index">
+            <div class="oneteam display_flex">
+              <img :src="item.src" class="teaming" />
+              <span class="span1">{{item.txt}}</span>
+              <span class="span2">{{item.name}}</span>
+              <div class="address_peopllle display_flex">
+                <img src="../..//assets/images/in.png" class="ling_ying" />
+                <img src="../..//assets/images/twitter.png" class="twitter" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -129,25 +159,29 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters(["getLangStatus"])
+  },
   data(){
     return{
       spArr:[
         {
-          src:require('../..//assets/images/sp1.png'),
+          src:require('../..//assets/images/characteristic1.png'),
           txt:'DEFI+GAMEFI',
           txt1:'双循环模型'
         },
         {
-          src:require('../..//assets/images/sp2.png'),
+          src:require('../..//assets/images/characteristic2.png'),
           txt:'DEFI+GAMEFI',
         },
         {
-          src:require('../..//assets/images/sp3.png'),
+          src:require('../..//assets/images/characteristic3.png'),
           txt:'DEFI+GAMEFI',
         },
         {
-          src:require('../..//assets/images/sp4.png'),
+          src:require('../..//assets/images/characteristic4.png'),
           txt:'DEFI+GAMEFI',
         }
       ],
@@ -158,18 +192,20 @@ export default {
           name:'DomLane'
         },
         {
+          src:require('../..//assets/images/cto.png'),
+          txt:'CTO',
+          name:'Kim Talon'
+        },
+      ],
+      teamArr1:[
+        {
           src:require('../..//assets/images/cmo.png'),
           txt:'CMO',
           name:'Greer Phantomhive'
         },
         {
-          src:require('../..//assets/images/cto.png'),
-          txt:'CTO',
-          name:'Kim Talon'
-        },
-        {
           src:require('../..//assets/images/svp.png'),
-          txt:'SVP Marketing Strate',
+          txt:'Marketing Strate',
           name:'Amelia Emma'
         },
         {
@@ -177,7 +213,7 @@ export default {
           txt:'Co-Founder',
           name:'Tinsley-Hafen'
         },
-         {
+        {
           src:require('../..//assets/images/founder1.png'),
           txt:'Co-Founder',
           name:'Henry Evans'
@@ -188,9 +224,13 @@ export default {
         {txt:'定期质押ST享有高APY的SR'},
         {txt:'定期质押ST享有高APY的SR'},
         {txt:'定期质押ST享有高APY的SR'},
+        {txt:'定期质押ST享有高APY的SR'},
         {txt:'定期质押ST享有高APY的SR'}
       ]
     }
+  },
+  mounted(){
+    console.log('getLangStatus: ', this.getLangStatus);
   }
 }
 </script>
@@ -221,20 +261,22 @@ export default {
             width: 100%;
             align-items: center;
             .token_txt{
-              font-size: 34px;
-              line-height: 37px;
-              background: linear-gradient(180deg, #00E6FF 0%, #8847F3 100%);
+              font-size: 28px;
+              font-family: Facon;
+              color: #FFFFFF;
+              line-height: 29px;
+              background:linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
             }
             .tokenimg{
               margin-left: 5px;
-              width: 445px;
+              width: 371px;
               object-fit: contain;
             }
             .tobuyimg{
               margin-left: 5px;
-              width: 121px;
+              width: 206px;
               object-fit: contain;
             }
           }
@@ -245,8 +287,8 @@ export default {
               flex: 1;
               flex-direction: column;
               .line_sr{
-                width: 279px;
-                height: 51px;
+                width: 217px;
+                height: 40px;
                 align-items: center;
                 background-image: url("../..//assets/images/coinbg.png");
                 background-size: 100% 100%;
@@ -257,6 +299,10 @@ export default {
                 }
                 .sr_price{
                   margin-left: 20px;
+                  font-size: 22px;
+                  font-family: TrajanPro-Bold, TrajanPro;
+                  font-weight: bold;
+                  color: #FFFFFF;
                 }
               }
               .margin_30{
@@ -268,6 +314,11 @@ export default {
                 margin-top: 13px;
                 .sr_address_txt{
                   margin-right: 5px;
+                  font-size: 18px;
+                  font-family: TrajanPro-Bold, TrajanPro;
+                  font-weight: bold;
+                  color: #FFFFFF;
+                  line-height: 23px;
                 }
                 .copy{
                   width: 13px;
@@ -280,7 +331,7 @@ export default {
             margin-top: 13px;
             align-items: center;
             .link_img{
-              width: 67px;
+              width: 52px;
               object-fit: contain;
               margin-right: 30px;
             }
@@ -296,17 +347,18 @@ export default {
         align-items: center;
         justify-content: center;
         .btn{
-          width: 369px;
-          height: 101px;
+          font-size: 28px;
+          font-weight: bold;
+          font-family: WenYue-GuDianMingChaoTi-JRFC;
+          color: #381A02;
+          width: 249px;
+          height: 71px;
           text-align: center;
-          line-height: 101px;
+          line-height: 71px;
           background-size: 100% 100%;
-        }
-        .btn1{
           background-image: url("../..//assets/images/buynft.png");
         }
         .btn2{
-          background-image: url("../..//assets/images/playgame.png");
           margin-left: 82px;
         }
       }
@@ -328,17 +380,30 @@ export default {
       align-items: center;
       justify-content: center;
       .title_txt{
-        font-size: 50px;
-        font-weight: bold;
+        font-size: 45px;
+        font-weight: 400;
         color: #00C1FF;
-        line-height: 61px;
-        text-shadow: 1px 4px 2px #00DFFF, 0px -4px 6px #7756EE;
+        font-family: WenYue-GuDianMingChaoTi-JRFC;
+        line-height: 54px;
+        background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
       .txt_content{
         width: 645px;
-        font-size: 14px;
+        font-size: 16px;
+        font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+        font-weight: normal;
+        color: #FFFFFF;
+        line-height: 32px;
+        margin-left: 84px;
       }
     }
+  }
+  .tedianbg{
+    background: url("../../assets/images/tedianbg.png") no-repeat;
+    background-size: 100% 100%;
+    height: auto;
   }
   .characteristic_box{
     width: 100%;
@@ -346,28 +411,33 @@ export default {
     align-items: center;
     margin-top: 130px;
     .title_txt{
-      font-size: 60px;
-      // font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
-      // font-weight: normal;
+      font-size: 45px;
+      font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+      font-weight: normal;
       color: #00C1FF;
-      line-height: 60px;
-      text-shadow: 1px 4px 2px #00DFFF, 0px -4px 6px #7756EE;
+      line-height: 45px;
+      background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .imgbox{
       width: 100%;
-      // justify-content: space-between;
+      justify-content: center;
       flex-wrap: wrap;
-      padding: 0 87px;
       .onebox{
         flex-direction: column;
         align-items: center;
-        margin-right: 95px;
+        margin-right: 222px;
         .img_sp{
-          width: 238px;
+          width: 79px;
           object-fit: contain;
         }
         .txt{
-          margin-top: -80px;
+          font-size: 14px;
+          font-family: WenYue-GuDianMingChaoTi-JRFC;
+          font-weight: 400;
+          color: #FFFFFF;
+          line-height: 32px;
         }
       }
       .txtbox{
@@ -379,6 +449,10 @@ export default {
         background-size: 100% 100%;
         margin-right: 121px;
         margin-bottom: 83px;
+        font-size: 16px;
+        font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+        font-weight: normal;
+        color: #FFFFFF;
       }
     }
     .show_peoplebox{
@@ -400,6 +474,24 @@ export default {
         .peoplemax{
           width: 100%;
           object-fit: contain;
+        }
+        .add_title{
+          font-size: 45px;
+          font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+          font-weight: normal;
+          color: #00C1FF;
+          line-height: 45px;
+          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin: 30px 0;
+        }
+        .add_content{
+          font-size: 16px;
+          font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+          font-weight: normal;
+          color: #FFFFFF;
+          line-height: 32px;
         }
       }
     }
@@ -425,23 +517,68 @@ export default {
       }
     }
     .team_box{
+      margin-top: 52px;
       width: 100%;
-      flex-wrap: wrap;
-      justify-content: center;
-      .oneteam{
-        flex-direction: column;
+      flex-direction: column;
+      align-items: center;
+      .top_team{
+        justify-content: center;
         align-items: center;
-        margin-right: 257px;
-        margin-bottom: 90px;
-        .teaming{
-          width: 217px;
-          object-fit: contain;
-        }
-        .span1{
-          margin:34px 0 17px;
-        }
-        .span2{
-
+        .out_box{
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          padding: 1px;
+          margin-right: 50px;
+          margin-bottom: 90px;
+          width: 229px;
+          border-radius: 29px;
+          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          .oneteam{
+            border-radius: 29px;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 20px 0;
+            background: #000;
+            .teaming{
+              width: 124px;
+              object-fit: contain;
+            }
+            .span1{
+              margin:28px 0 6px;
+              font-size: 20px;
+              font-family: TrajanPro-Bold, TrajanPro;
+              font-weight: bold;
+              color: #FFFFFF;
+              line-height: 32px;
+              background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+            .span2{
+              font-size: 16px;
+              font-family: TrajanPro-Bold, TrajanPro;
+              font-weight: bold;
+              color: #FFFFFF;
+              line-height: 32px;
+              margin-bottom: 10px;
+            }
+            .address_peopllle{
+              justify-content: center;
+              align-items: center;
+              .ling_ying{
+                width: 19px;
+                object-fit: contain;
+              }
+              .twitter{
+                width: 23px;
+                object-fit: contain;
+                margin-left: 15px;
+              }
+            }
+          }
         }
       }
     }

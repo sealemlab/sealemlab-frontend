@@ -119,6 +119,13 @@ body {
   font-family: 'Facon';
   src:url('../assets/fonts/Facon-2.ttf');
 }
+//英文字体样式
+.en_Bold{
+  font-family: TrajanPro-Bold !important;
+}
+.en_Regular{
+  font-family: TrajanPro-Regular !important;
+}
 // 重置滚动条样式
 ::-webkit-scrollbar {
   width: 5px;
