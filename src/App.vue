@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <NavigationBar />
-    <router-view />
+    <div class="view_center">
+      <router-view />
+    </div>
   </div>
 </template>
 <script>
@@ -27,6 +29,12 @@ export default {
 
 <style lang="scss">
 #app {
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
+  .view_center {
+    width: 100vw;
+    height: calc(100vh - 80px);
+    overflow: auto;
+  }
 }
 </style>
