@@ -197,7 +197,6 @@ export default {
 <style lang="scss" soped>
 .home{
   width: 100%;
-  margin-top: -96px;
   .home_bgbox{
     width: 100%;
     position: relative;
