@@ -101,3 +101,20 @@ body {
 .margin0{
   margin-right: 0 !important;
 }
+// 字体样式
+@font-face {
+  font-family: 'TrajanPro-Bold';
+  src:url('../assets/fonts/TrajanPro-Bold-4.otf');
+}
+@font-face {
+  font-family: 'WenYue-GuDianMingChaoTi-JRFC';
+  src:url('../assets/fonts/WenYue-GuDianMingChaoTi-JRFC-2.otf');
+}
+@font-face {
+  font-family: 'TrajanPro-Regular';
+  src:url('../assets/fonts/TrajanusBricks-1.ttf');
+}
+@font-face {
+  font-family: 'Facon';
+  src:url('../assets/fonts/Facon-2.ttf');
+}
