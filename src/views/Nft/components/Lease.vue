@@ -1,5 +1,5 @@
 <template>
-  <h1>nft3</h1>
+  <h1></h1>
 </template>
 
 <script>

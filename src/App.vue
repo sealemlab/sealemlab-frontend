@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <NavigationBar />
-    <!-- <div class="view_center"> -->
-      <router-view />
-    <!-- </div> -->
+    <router-view />
     <FooterComponents />
   </div>
 </template>
@@ -13,7 +11,7 @@ import FooterComponents from "@/components/FooterComponents.vue";
 export default {
   components: {
     NavigationBar,
-    FooterComponents
+    FooterComponents,
   },
   methods: {
     setRem() {
@@ -36,10 +34,5 @@ export default {
   min-height: 100vh;
   padding-top: 80px;
   background: #000;
-  // .view_center {
-  //   width: 100vw;
-  //   height: calc(100vh - 80px);
-  //   overflow: auto;
-  // }
 }
 </style>
