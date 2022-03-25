@@ -16,7 +16,7 @@
                   <span class="sr_price">$12.25</span>
                 </div>
                 <div class="sr_address display_flex">
-                  <span class="sr_address_txt">SR: 0x73CA0db...4Ce2854897</span>
+                  <span class="sr_address_txt">SR: 0x73CA0db...4Ce2850894</span>
                   <img src="../../assets/images/copy.png" class="copy" />
                 </div>
               </div>
@@ -26,7 +26,7 @@
                   <span class="sr_price">$12.25</span>
                 </div>
                 <div class="sr_address margin_30 display_flex">
-                  <span class="sr_address_txt">ST: 0x73CA0db...4Ce2854897</span>
+                  <span class="sr_address_txt">ST: 0x73CA0db...4Ce2850894</span>
                   <img src="../../assets/images/copy.png" class="copy" />
                 </div>
               </div>
@@ -61,12 +61,12 @@
       <div class="right_box display_flex">
         <span class="title_txt" :class="{ en_Bold: getLangStatus }">什么是圣域</span>
         <img src="../../assets/images/people_line.png" class="people_line" />
-        <span class="txt_content" :class="{ en_Regular: getLangStatus }">《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。</span>
+        <span class="txt_content" :class="{ en_Regular: getLangStatus }">{{inter}}</span>
         <span class="txt_content" :class="{ en_Regular: getLangStatus }">圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</span>
       </div>
     </div>
     <!-- 特点 -->
-    <div class="characteristic_box display_flex add_bg">
+    <div class="characteristic_box display_flex tedianbg">
       <span class="title_txt" :class="{ en_Bold: getLangStatus }">特 点</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
@@ -192,6 +192,8 @@ export default {
   },
   data(){
     return{
+      inter:'',
+      datatxt:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏,游戏采用虚幻4引擎打造,有着超精致的画面表现、动作性以及打击感。',
       spArr:[
         {
           src:require('../../assets/images/characteristic1.png'),
@@ -293,7 +295,7 @@ export default {
           disableOnInteraction: false,
         },
         slidesPerView: 4,//一行显示的slider
-        centeredSlides : true,
+        // centeredSlides : true,
         freeMode: true,//	free模式，slide会根据惯性滑动且不会贴合
         pagination: {
           el: ".swiper-pagination",
@@ -301,8 +303,29 @@ export default {
           bulletClass: 'my-bullet',
           bulletActiveClass: 'my-bullet-active'
         },
-      }
+      },
+      index:0
     }
+  },
+  methods:{
+    typewriting(){
+      let index=0
+      const that = this
+      function type(){
+        that.inter = that.datatxt.substring(0,index++);
+      }
+      let timenull = setInterval(() => {
+        if(that.inter.length == that.datatxt.length){
+          clearInterval(timenull)
+          return
+        }
+        console.log("定时器执行中")
+        type()
+      },100);
+    }
+  },
+  mounted(){
+    this.typewriting()
   }
 }
 </script>
@@ -477,7 +500,7 @@ export default {
         -webkit-text-fill-color: transparent;
       }
       .txt_content{
-        width: 645px;
+        width: 60%;
         font-size: 16px;
         font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
         font-weight: normal;
@@ -510,6 +533,7 @@ export default {
       width: 90vw;
       justify-content: space-around;
       flex-wrap: wrap;
+      margin-top: 130px;
       .onebox{
         flex-direction: column;
         align-items: center;
@@ -538,6 +562,11 @@ export default {
         font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
         font-weight: normal;
         color: #FFFFFF;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .txtbox:hover{
+        transform: scale(1.2);
       }
     }
     .show_peoplebox{
@@ -558,6 +587,10 @@ export default {
           // margin-right: 14px;
           margin-bottom: 20px;
           cursor: pointer;
+          transition: all 0.3s;
+        }
+        .people1:hover{
+          transform: scale(1.1);
         }
       }
       .right_maxpeople{
@@ -625,6 +658,8 @@ export default {
           margin-bottom: 90px;
           width: 229px;
           border-radius: 29px;
+          cursor: pointer;
+          transition: all 0.3s;
           background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
           .oneteam{
             border-radius: 29px;
@@ -671,6 +706,9 @@ export default {
             }
           }
         }
+        .out_box:hover{
+          transform: scale(1.2);
+        }
       }
     }
     .partener_box{
@@ -705,6 +743,7 @@ export default {
         display: flex;
         height: 220px;
         flex-direction: column;
+        align-items: flex-start;
         .time_class{
           font-size: 26px;
           font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
@@ -739,6 +778,11 @@ export default {
 }
 @media screen and (min-width: 1440px) {
   .home{
+    .character_introduction{
+      .people_box{
+        width: 30%;
+      }
+    }
     .characteristic_box{
       .imgbox {
         width: 49vw;
