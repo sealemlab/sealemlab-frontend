@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <NavigationBar />
-    <div class="view_center">
+    <!-- <div class="view_center"> -->
       <router-view />
-    </div>
+    <!-- </div> -->
+    <FooterComponents />
   </div>
 </template>
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
+import FooterComponents from "@/components/FooterComponents.vue";
 export default {
   components: {
     NavigationBar,
+    FooterComponents
   },
   methods: {
     setRem() {
@@ -30,12 +33,13 @@ export default {
 <style lang="scss">
 #app {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  padding-top: 80px;
   background: #000;
-  .view_center {
-    width: 100vw;
-    height: calc(100vh - 80px);
-    overflow: auto;
-  }
+  // .view_center {
+  //   width: 100vw;
+  //   height: calc(100vh - 80px);
+  //   overflow: auto;
+  // }
 }
 </style>

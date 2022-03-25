@@ -1,33 +1,33 @@
 <template>
   <div class="home">
     <div class="home_bgbox">
-      <img src="../..//assets/images/homebg.png" class="homebg" />
+      <img src="../../assets/images/homebg.png" class="homebg" />
       <div class="content_box display_flex">
         <div class="top_box display_flex">
           <div class="left_box display_flex">
             <div class="token_box display_flex">
               <span class="token_txt">TOKEN</span>
-              <img src="../..//assets/images/tokenimg.png" class="tokenimg" />
+              <img src="../../assets/images/tokenimg.png" class="tokenimg" />
             </div>
             <div class="coin_box display_flex">
               <div class="sr_box display_flex">
                 <div class="line_sr display_flex">
-                  <img src="../..//assets/images/srlogo.png" class="srlogo" />
+                  <img src="../../assets/images/srlogo.png" class="srlogo" />
                   <span class="sr_price">$12.25</span>
                 </div>
                 <div class="sr_address display_flex">
                   <span class="sr_address_txt">SR: 0x73CA0db...4Ce2854897</span>
-                  <img src="../..//assets/images/copy.png" class="copy" />
+                  <img src="../../assets/images/copy.png" class="copy" />
                 </div>
               </div>
               <div class="sr_box display_flex">
                 <div class="line_sr margin_30 display_flex">
-                  <img src="../..//assets/images/stlogo.png" class="srlogo" />
+                  <img src="../../assets/images/stlogo.png" class="srlogo" />
                   <span class="sr_price">$12.25</span>
                 </div>
                 <div class="sr_address margin_30 display_flex">
                   <span class="sr_address_txt">ST: 0x73CA0db...4Ce2854897</span>
-                  <img src="../..//assets/images/copy.png" class="copy" />
+                  <img src="../../assets/images/copy.png" class="copy" />
                 </div>
               </div>
             </div>
@@ -35,13 +35,13 @@
           <div class="left_box display_flex">
             <div class="token_box display_flex">
               <span class="token_txt">HOW TO BUY</span>
-              <img src="../..//assets/images/tobuyimg.png" class="tobuyimg" />
+              <img src="../../assets/images/tobuyimg.png" class="tobuyimg" />
             </div>
             <div class="link_ display_flex">
-              <img src="../..//assets/images/tel.png" class="link_img" />
-              <img src="../..//assets/images/git.png" class="link_img" />
-              <img src="../..//assets/images/game.png" class="link_img" />
-              <img src="../..//assets/images/m.png" class="link_img last_img" />
+              <img src="../../assets/images/tel.png" class="link_img" />
+              <img src="../../assets/images/git.png" class="link_img" />
+              <img src="../../assets/images/game.png" class="link_img" />
+              <img src="../../assets/images/m.png" class="link_img last_img" />
             </div>
           </div>
         </div>
@@ -57,10 +57,10 @@
     </div>
     <!-- 什么是圣域 -->
     <div class="character_introduction display_flex">
-      <div class="people_box"><img src="../..//assets/images/people.png" class="people" /></div>
+      <div class="people_box"><img src="../../assets/images/people.png" class="people" /></div>
       <div class="right_box display_flex">
         <span class="title_txt" :class="{ en_Bold: getLangStatus }">什么是圣域</span>
-        <img src="../..//assets/images/people_line.png" class="people_line" />
+        <img src="../../assets/images/people_line.png" class="people_line" />
         <span class="txt_content" :class="{ en_Regular: getLangStatus }">《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。</span>
         <span class="txt_content" :class="{ en_Regular: getLangStatus }">圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</span>
       </div>
@@ -70,7 +70,7 @@
       <span class="title_txt" :class="{ en_Bold: getLangStatus }">特 点</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
-        <div class="onebox display_flex" :class="{margin0:index == 3}" v-for="(item, index) in spArr" :key="index">
+        <div class="onebox display_flex" v-for="(item, index) in spArr" :key="index">
           <img :src="item.src" class="img_sp" />
           <span class="txt" :class="{ en_Regular: getLangStatus }">{{item.txt}}</span>
           <span class="txt" :class="{ en_Regular: getLangStatus }" v-if="item.txt1">{{item.txt1}}</span>
@@ -78,9 +78,9 @@
       </div>
     </div>
     <!-- 在圣域怎么赚钱 -->
-    <div class="characteristic_box make_money display_flex">
+    <div class="characteristic_box make_money_people display_flex">
       <span class="title_txt" :class="{ en_Bold: getLangStatus }">在圣域怎样赚钱？</span>
-      <img src="../..//assets/images/people_line.png" class="people_line" />
+      <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
         <div class="txtbox display_flex" :class="{ en_Regular: getLangStatus }" v-for="(item, index) in makeMoneyArr" :key="index">{{item.txt}}</div>
       </div>
@@ -88,18 +88,22 @@
     <!-- 游戏人物展示 -->
     <div class="characteristic_box make_money_people display_flex">
       <span class="title_txt">游戏人物展示</span>
-      <img src="../..//assets/images/people_line.png" class="people_line" />
+      <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="show_peoplebox display_flex">
         <div class="left_people display_flex">
-          <img src="../..//assets/images/people1.png" class="people1" />
-          <img src="../..//assets/images/people1.png" class="people1" />
-          <img src="../..//assets/images/people1.png" class="people1" />
-          <img src="../..//assets/images/people1.png" class="people1" />
-          <img src="../..//assets/images/people1.png" class="people1" />
-          <img src="../..//assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
+          <img src="../../assets/images/people1.png" class="people1" />
         </div>
         <div class="right_maxpeople">
-          <img src="../..//assets/images/peoplemax.png" class="peoplemax" />
+          <img src="../../assets/images/peoplemax.png" class="peoplemax" />
           <p class="add_title" :class="{ en_Regular: getLangStatus }">格斗家</p>
           <p class="add_content" :class="{ en_Regular: getLangStatus }">《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。</p>
           <p class="add_content" :class="{ en_Regular: getLangStatus }">圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</p>
@@ -109,23 +113,23 @@
     <!-- 游戏场景展示 -->
     <div class="characteristic_box make_money_people display_flex">
       <span class="title_txt">游戏场景展示</span>
-      <img src="../..//assets/images/people_line.png" class="people_line" />
+      <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="game_scene">
-        <img src="../..//assets/images/gameSceneMax.png" class="gameSceneMax" />
+        <img src="../../assets/images/gameSceneMax.png" class="gameSceneMax" />
         <div class="position_img display_flex">
-          <img src="../..//assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../..//assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../..//assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../..//assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../..//assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../..//assets/images/gameScene1.png" class="gameScene1" />
+          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
+          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
+          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
+          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
+          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
+          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
         </div>
       </div>
     </div>
     <!-- 团队 -->
     <div class="characteristic_box make_money_people display_flex">
       <span class="title_txt">团 队</span>
-      <img src="../..//assets/images/people_line.png" class="people_line" />
+      <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="team_box display_flex">
         <div class="top_team display_flex">
           <div class="out_box display_flex" :class="{margin0:index == 1}" v-for="(item, index) in teamArr" :key="index">
@@ -134,8 +138,8 @@
               <span class="span1">{{item.txt}}</span>
               <span class="span2">{{item.name}}</span>
               <div class="address_peopllle display_flex">
-                <img src="../..//assets/images/in.png" class="ling_ying" />
-                <img src="../..//assets/images/twitter.png" class="twitter" />
+                <img src="../../assets/images/in.png" class="ling_ying" />
+                <img src="../../assets/images/twitter.png" class="twitter" />
               </div>
             </div>
           </div>
@@ -147,11 +151,33 @@
               <span class="span1">{{item.txt}}</span>
               <span class="span2">{{item.name}}</span>
               <div class="address_peopllle display_flex">
-                <img src="../..//assets/images/in.png" class="ling_ying" />
-                <img src="../..//assets/images/twitter.png" class="twitter" />
+                <img src="../../assets/images/in.png" class="ling_ying" />
+                <img src="../../assets/images/twitter.png" class="twitter" />
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- 时间轴 -->
+    <div class="characteristic_box make_money_people display_flex">
+      <span class="title_txt" :class="{ en_Bold: getLangStatus }">时 间 轴</span>
+      <img src="../../assets/images/people_line.png" class="people_line" />
+      <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
+        <swiper-slide v-for="(item, index) in swiperArr" :key="index">
+          <p class="time_class">{{item.time}}</p>
+          <p class="content_class">{{item.content}}</p>
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
+    </div>
+    <!-- 合作者 -->
+    <div class="characteristic_box make_money_people display_flex">
+      <span class="title_txt" :class="{ en_Bold: getLangStatus }">合 作 者</span>
+      <img src="../../assets/images/people_line.png" class="people_line" />
+      <div class="partener_box display_flex">
+        <div class="one_partener display_flex" :class="{ en_Regular: getLangStatus }" v-for="(item, index) in partenerArr" :key="index">
+          <img :src="item.src" :class="{par1:index == 0,par2:index == 1,par3:index == 2,par4:index == 3}" />
         </div>
       </div>
     </div>
@@ -168,53 +194,53 @@ export default {
     return{
       spArr:[
         {
-          src:require('../..//assets/images/characteristic1.png'),
+          src:require('../../assets/images/characteristic1.png'),
           txt:'DEFI+GAMEFI',
           txt1:'双循环模型'
         },
         {
-          src:require('../..//assets/images/characteristic2.png'),
+          src:require('../../assets/images/characteristic2.png'),
           txt:'DEFI+GAMEFI',
         },
         {
-          src:require('../..//assets/images/characteristic3.png'),
+          src:require('../../assets/images/characteristic3.png'),
           txt:'DEFI+GAMEFI',
         },
         {
-          src:require('../..//assets/images/characteristic4.png'),
+          src:require('../../assets/images/characteristic4.png'),
           txt:'DEFI+GAMEFI',
         }
       ],
       teamArr:[
         {
-          src:require('../..//assets/images/ceo.png'),
+          src:require('../../assets/images/ceo.png'),
           txt:'CEO',
           name:'DomLane'
         },
         {
-          src:require('../..//assets/images/cto.png'),
+          src:require('../../assets/images/cto.png'),
           txt:'CTO',
           name:'Kim Talon'
         },
       ],
       teamArr1:[
         {
-          src:require('../..//assets/images/cmo.png'),
+          src:require('../../assets/images/cmo.png'),
           txt:'CMO',
           name:'Greer Phantomhive'
         },
         {
-          src:require('../..//assets/images/svp.png'),
+          src:require('../../assets/images/svp.png'),
           txt:'Marketing Strate',
           name:'Amelia Emma'
         },
         {
-          src:require('../..//assets/images/founder.png'),
+          src:require('../../assets/images/founder.png'),
           txt:'Co-Founder',
           name:'Tinsley-Hafen'
         },
         {
-          src:require('../..//assets/images/founder1.png'),
+          src:require('../../assets/images/founder1.png'),
           txt:'Co-Founder',
           name:'Henry Evans'
         }
@@ -226,14 +252,74 @@ export default {
         {txt:'定期质押ST享有高APY的SR'},
         {txt:'定期质押ST享有高APY的SR'},
         {txt:'定期质押ST享有高APY的SR'}
-      ]
+      ],
+      partenerArr:[{
+        src:require('../../assets/images/partener1.png'),
+      },
+      {
+        src:require('../../assets/images/partener2.png'),
+      },
+      {
+        src:require('../../assets/images/partener3.png'),
+      },
+      {
+        src:require('../../assets/images/partener4.png'),
+      }
+      ],
+      swiperArr:[
+        {
+          time:'2022 Q1',
+          content:'项目启动，组建核心团队，产品可能性及市场'
+        },
+        {
+          time:'2022 Q2',
+          content:'项目启动，组建核心团队，产品可能性及市场'
+        },
+        {
+          time:'2022 Q3',
+          content:'项目启动，组建核心团队，产品可能性及市场'
+        },
+        {
+          time:'2022 Q4',
+          content:'项目启动，组建核心团队，产品可能性及市场'
+        }
+      ],
+      swiperOption:{
+        loop: true,//循环播放
+        mousewheel: true,//鼠标滚动
+        autoplay: {
+          delay: 1000,
+          stopOnLastSlide: false,
+          disableOnInteraction: false,
+        },
+        slidesPerView: 4,//一行显示的slider
+        centeredSlides : true,
+        freeMode: true,//	free模式，slide会根据惯性滑动且不会贴合
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+          bulletClass: 'my-bullet',
+          bulletActiveClass: 'my-bullet-active'
+        },
+      }
     }
-  },
-  mounted(){
-    console.log('getLangStatus: ', this.getLangStatus);
   }
 }
 </script>
+<style>
+.my-bullet{
+  width: 93px;
+  height: 3px;
+  background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+  opacity: 0.28;
+  display: inline-block;
+  margin: 0 10px;
+}
+.my-bullet-active{
+  opacity: 1;
+  background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+}
+</style>
 <style lang="scss" soped>
 .home{
   width: 100%;
@@ -290,7 +376,7 @@ export default {
                 width: 217px;
                 height: 40px;
                 align-items: center;
-                background-image: url("../..//assets/images/coinbg.png");
+                background-image: url("../../assets/images/coinbg.png");
                 background-size: 100% 100%;
                 padding: 0 20px;
                 .srlogo{
@@ -356,7 +442,7 @@ export default {
           text-align: center;
           line-height: 71px;
           background-size: 100% 100%;
-          background-image: url("../..//assets/images/buynft.png");
+          background-image: url("../../assets/images/buynft.png");
         }
         .btn2{
           margin-left: 82px;
@@ -365,17 +451,18 @@ export default {
     }
   }
   .character_introduction{
-    width: 100%;
+    width: 90vw;
+    margin: 0 auto;
     justify-content: center;
     .people_box{
-      width: 494px;
+      width: 40%;
       .people{
         width: 100%;
         object-fit: contain;
       }
     }
     .right_box{
-      width: 700px;
+      width: 60%;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -396,7 +483,6 @@ export default {
         font-weight: normal;
         color: #FFFFFF;
         line-height: 32px;
-        margin-left: 84px;
       }
     }
   }
@@ -421,13 +507,12 @@ export default {
       -webkit-text-fill-color: transparent;
     }
     .imgbox{
-      width: 100%;
-      justify-content: center;
+      width: 90vw;
+      justify-content: space-around;
       flex-wrap: wrap;
       .onebox{
         flex-direction: column;
         align-items: center;
-        margin-right: 222px;
         .img_sp{
           width: 79px;
           object-fit: contain;
@@ -445,9 +530,9 @@ export default {
         height: 52px;
         justify-content: center;
         align-items: center;
-        background-image: url("../..//assets/images/makemoneybg.png");
+        background-image: url("../../assets/images/makemoneybg.png");
         background-size: 100% 100%;
-        margin-right: 121px;
+        // margin-right: 121px;
         margin-bottom: 83px;
         font-size: 16px;
         font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
@@ -456,21 +541,27 @@ export default {
       }
     }
     .show_peoplebox{
-      width: 100%;
-      justify-content: center;
+      width: 90vw;
+      margin: 0 auto;
+      // justify-content: center;
+      align-items: flex-start;
       .left_people{
-        width: 502px;
+        width: 34%;
+        max-height: 115vh;
+        overflow: auto;
         align-items: center;
         flex-wrap: wrap;
+        justify-content: space-around;
         .people1{
-          width: 237px;
+          width:46%;
           object-fit: contain;
-          margin-right: 14px;
+          // margin-right: 14px;
           margin-bottom: 20px;
+          cursor: pointer;
         }
       }
       .right_maxpeople{
-        width: 838px;
+        width: 66%;
         .peoplemax{
           width: 100%;
           object-fit: contain;
@@ -582,17 +673,82 @@ export default {
         }
       }
     }
-  }
-  .make_money{
-    margin-top: 230px;
+    .partener_box{
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      .one_partener{
+        .par1{
+          width: 196px;
+          object-fit: contain;
+        }
+        .par2{
+          width: 245px;
+          object-fit: contain;
+        }
+        .par3{
+          width: 194px;
+          object-fit: contain;
+        }
+        .par4{
+          width: 247px;
+          object-fit: contain;
+        }
+      }
+    }
+    .self_swiper{
+      width:90vw;
+      margin: 0 auto;
+      margin-top: 114px;
+      margin-bottom: 90px;
+      .swiper-slide{
+        display: flex;
+        height: 220px;
+        flex-direction: column;
+        .time_class{
+          font-size: 26px;
+          font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+          font-weight: normal;
+          color: #00C1FF;
+          line-height: 26px;
+          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .content_class{
+          max-width: 50%;
+          font-size: 18px;
+          font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+          font-weight: normal;
+          color: #FFFFFF;
+          line-height: 32px;
+          margin-top: 10px;
+        }
+      }
+    }
   }
   .make_money_people{
-    margin-top: 137px;
+    margin-top: 150px;
   }
+  
 }
 .people_line{
   width: 646px;
   object-fit: contain;
   margin: 38px 0;
+}
+@media screen and (min-width: 1440px) {
+  .home{
+    .characteristic_box{
+      .imgbox {
+        width: 49vw;
+      }
+      .show_peoplebox{
+        .left_people{
+          max-height: 79vh;
+        }
+      }
+    }
+  }
 }
 </style>
