@@ -6,9 +6,7 @@
       </video>
     </div>
     <NavigationBar />
-    <!-- <div class="view_center"> -->
-      <router-view />
-    <!-- </div> -->
+    <router-view />
     <FooterComponents />
   </div>
 </template>
@@ -18,7 +16,7 @@ import FooterComponents from "@/components/FooterComponents.vue";
 export default {
   components: {
     NavigationBar,
-    FooterComponents
+    FooterComponents,
   },
   methods: {
     setRem() {

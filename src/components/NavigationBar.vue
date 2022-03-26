@@ -67,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 .nav {
   position: fixed;
-  top:0;
+  top: 0;
   left: 0;
   z-index: 9;
   width: 100%;
@@ -81,8 +81,8 @@ export default {
   display: flex;
   align-items: center;
   .logo {
-    width: 127px;
-    object-fit: contain;
+    width: auto;
+    height: 60px;
     margin-right: 20px;
   }
   ul {
@@ -92,7 +92,7 @@ export default {
       cursor: pointer;
       margin: 0 10px;
       padding: 10px 15px;
-      span{
+      span {
         font-size: 19px;
         font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
         font-weight: normal;
@@ -101,7 +101,7 @@ export default {
         span {
           font-weight: bold;
           color: #d8d8d8;
-          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -116,14 +116,14 @@ export default {
   align-items: center;
   .connect {
     cursor: pointer;
-    padding: 0 20px;
+    padding: 5px 20px;
     background: url("../assets/images/connect.png") no-repeat;
     background-size: 100% 100%;
     margin-right: 10px;
     font-size: 16px;
     font-family: WenYue-GuDianMingChaoTi-JRFC;
     font-weight: 800;
-    color: #381A02;
+    color: #381a02;
   }
   .lang_box {
     cursor: pointer;
