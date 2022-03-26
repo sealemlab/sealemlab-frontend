@@ -17,7 +17,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/nft",
     // name: "NFT",
-    component: () => import("../views/Nft/Index.vue"),
+    component: () => import("../views/Nft/index.vue"),
     children: [
       { path: "/", redirect: "role" },
       {
