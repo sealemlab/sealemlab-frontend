@@ -319,7 +319,7 @@ export default {
           clearInterval(timenull)
           return
         }
-        console.log("定时器执行中")
+        // console.log("定时器执行中")
         type()
       },100);
     }
