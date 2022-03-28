@@ -577,7 +577,8 @@ export default {
       .left_people{
         width: 34%;
         max-height: 115vh;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
         align-items: center;
         flex-wrap: wrap;
         justify-content: space-around;

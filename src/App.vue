@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <div class="video_">
-      <video style="width:100%" loop autoplay>
+      <video style="width:100%" loop autoplay muted>
         <source src="./assets/video/1.mp4" type="video/mp4">
       </video>
+      <!-- <iframe style="display: none" allow="autoplay" src="./assets/video/1.mp4"></iframe> -->
     </div>
     <NavigationBar />
     <router-view />
