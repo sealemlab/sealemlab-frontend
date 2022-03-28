@@ -91,22 +91,13 @@
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="show_peoplebox display_flex">
         <div class="left_people display_flex">
-          <img src="../../assets/images/people1.png" class="people1" />
-          <img src="../../assets/images/people1.png" class="people1" />
-          <img src="../../assets/images/people1.png" class="people1" />
-          <img src="../../assets/images/people1.png" class="people1" />
-          <img src="../../assets/images/people1.png" class="people1" />
-          <img src="../../assets/images/people1.png" class="people1" />
-          <img src="../../assets/images/people1.png" class="people1" />
-          <img src="../../assets/images/people1.png" class="people1" />
-          <img src="../../assets/images/people1.png" class="people1" />
-          <img src="../../assets/images/people1.png" class="people1" />
+          <img :src="item.src" class="people1" @click="peopleClick(index)" v-for="(item,index) in peopleArr" :key="index" />
         </div>
         <div class="right_maxpeople">
-          <img src="../../assets/images/peoplemax.png" class="peoplemax" />
-          <p class="add_title" :class="{ en_Regular: getLangStatus }">格斗家</p>
-          <p class="add_content" :class="{ en_Regular: getLangStatus }">《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。</p>
-          <p class="add_content" :class="{ en_Regular: getLangStatus }">圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</p>
+          <img :src="peopleArr[peopleIndex].maxSrc" class="peoplemax"/>
+          <p class="add_title" :class="{ en_Regular: getLangStatus }" >{{peopleArr[peopleIndex].title}}</p>
+          <p class="add_content" :class="{ en_Regular: getLangStatus }" >{{peopleArr[peopleIndex].describe}}</p>
+          <p class="add_content" :class="{ en_Regular: getLangStatus }" v-if="peopleArr[peopleIndex].supplementContent">{{peopleArr[peopleIndex].supplementContent}}</p>
         </div>
       </div>
     </div>
@@ -192,6 +183,7 @@ export default {
   },
   data(){
     return{
+      peopleIndex:0,// 人物展示对应大图的索引
       inter:'',
       datatxt:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏,游戏采用虚幻4引擎打造,有着超精致的画面表现、动作性以及打击感。',
       spArr:[
@@ -233,7 +225,7 @@ export default {
         },
         {
           src:require('../../assets/images/svp.png'),
-          txt:'Marketing Strate',
+          txt:'SVP',
           name:'Amelia Emma'
         },
         {
@@ -304,10 +296,70 @@ export default {
           bulletActiveClass: 'my-bullet-active'
         },
       },
-      index:0
+      peopleArr:[
+        {
+          src:require('../../assets/images/people1.png'),
+          maxSrc:require('../../assets/images/peoplemax.png'),
+          title:'格斗家',
+          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
+          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+        },
+        {
+          src:require('../../assets/images/people1.png'),
+          maxSrc:require('../../assets/images/peoplemax.png'),
+          title:'预言家',
+          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
+          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+        },
+        {
+          src:require('../../assets/images/people1.png'),
+          maxSrc:require('../../assets/images/peoplemax.png'),
+          title:'军事家',
+          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
+          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+        },
+        {
+          src:require('../../assets/images/people1.png'),
+          maxSrc:require('../../assets/images/peoplemax.png'),
+          title:'思想家',
+          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
+          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+        },
+        {
+          src:require('../../assets/images/people1.png'),
+          maxSrc:require('../../assets/images/peoplemax.png'),
+          title:'军事家',
+          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
+          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+        },
+        {
+          src:require('../../assets/images/people1.png'),
+          maxSrc:require('../../assets/images/peoplemax.png'),
+          title:'思想家',
+          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
+          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+        },
+        {
+          src:require('../../assets/images/people1.png'),
+          maxSrc:require('../../assets/images/peoplemax.png'),
+          title:'科学家',
+          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
+          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+        },
+        {
+          src:require('../../assets/images/people1.png'),
+          maxSrc:require('../../assets/images/peoplemax.png'),
+          title:'生物学家',
+          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
+          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+        },
+      ]
     }
   },
   methods:{
+    peopleClick(index){
+      this.peopleIndex = index
+    },
     typewriting(){
       let index=0
       const that = this
@@ -533,7 +585,7 @@ export default {
       width: 90vw;
       justify-content: space-around;
       flex-wrap: wrap;
-      margin-top: 130px;
+      // margin-top: 130px;
       .onebox{
         flex-direction: column;
         align-items: center;
@@ -738,8 +790,8 @@ export default {
     .self_swiper{
       width:90vw;
       margin: 0 auto;
-      margin-top: 114px;
-      margin-bottom: 90px;
+      // margin-top: 114px;
+      // margin-bottom: 90px;
       .swiper-slide{
         display: flex;
         height: 220px;
@@ -787,6 +839,7 @@ export default {
     .characteristic_box{
       .imgbox {
         width: 49vw;
+        max-width: 60vw;
       }
       .show_peoplebox{
         .left_people{
