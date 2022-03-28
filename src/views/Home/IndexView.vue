@@ -95,9 +95,9 @@
         </div>
         <div class="right_maxpeople">
           <img :src="peopleArr[peopleIndex].maxSrc" class="peoplemax"/>
-          <p class="add_title" :class="{ en_Regular: getLangStatus }" >{{peopleArr[peopleIndex].title}}</p>
-          <p class="add_content" :class="{ en_Regular: getLangStatus }" >{{peopleArr[peopleIndex].describe}}</p>
-          <p class="add_content" :class="{ en_Regular: getLangStatus }" v-if="peopleArr[peopleIndex].supplementContent">{{peopleArr[peopleIndex].supplementContent}}</p>
+          <p class="add_title" :class="{ en_Regular: isEnLang }" >{{peopleArr[peopleIndex].title}}</p>
+          <p class="add_content" :class="{ en_Regular: isEnLang }" >{{peopleArr[peopleIndex].describe}}</p>
+          <p class="add_content" :class="{ en_Regular: isEnLang }" v-if="peopleArr[peopleIndex].supplementContent">{{peopleArr[peopleIndex].supplementContent}}</p>
         </div>
       </div>
     </div>
