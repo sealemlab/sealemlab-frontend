@@ -11,12 +11,11 @@
     <div class="nav_right">
       <div class="connect">{{ $t("message.nav.txt9") }}</div>
       <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
-        <span>{{ lang }}</span>
+        <span>{{ language }}</span>
         <img src="../assets/images/accrow.png" alt="" />
         <transition name="select-lang" appear>
           <ul v-show="showLangSelect">
-            <li @click="selectLang($t('message.nav.txt10'))">{{ $t("message.nav.txt10") }}</li>
-            <li @click="selectLang($t('message.nav.txt11'))">{{ $t("message.nav.txt11") }}</li>
+            <li v-for="(item, index) in langArr" :key="index" @click="selectLang(index)">{{ item }}</li>
           </ul>
         </transition>
       </div>
@@ -30,7 +29,8 @@ export default {
     return {
       navActive: 0,
       showLangSelect: false,
-      lang: "English",
+      language: "",
+      langArr: ["English", "中文繁体"],
       navArr: [
         { label: "message.nav.txt1", link: "/home" },
         { label: "message.nav.txt2", link: "/nft" },
@@ -44,7 +44,7 @@ export default {
     };
   },
   watch: {
-    $route(to, from) {
+    $route(to) {
       if (to.path == "/home") {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft") !== -1) {
@@ -52,13 +52,18 @@ export default {
       }
     },
   },
+  created() {
+    this.language = this.$i18n.locale == "en" ? this.langArr[0] : this.langArr[1];
+  },
   methods: {
     toRoute(link) {
       if (link) this.$router.push(link);
     },
-    selectLang(lang) {
-      this.lang = lang;
-      this.showLangSelect = false;
+    selectLang(index) {
+      this.language = this.langArr[index];
+      this.$i18n.locale = this.language == "English" ? "en" : "cn";
+      this.$utils.setCookie("LANG", this.$i18n.locale);
+      location.reload();
     },
   },
 };

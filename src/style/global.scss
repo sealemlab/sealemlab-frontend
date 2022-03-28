@@ -4,23 +4,27 @@
   height: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #939393;
+  background: #825f35;
   border-radius: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #000;
 }
 
-.ff_Facon {
+// 英文特殊体
+.ff_en_special {
   font-family: Facon;
 }
-.ff_TrajanProBold {
-  font-family: TrajanPro-Bold;
-}
-.ff_TrajanProRegular {
+// 英文常规
+.ff_en_regular {
   font-family: TrajanPro-Regular;
 }
-.ff_WenYue {
+// 英文粗体
+.ff_en_bold {
+  font-family: TrajanPro-Bold;
+}
+// 中文常规
+.ff_cn_regular {
   font-family: WenYue-GuDianMingChaoTi-JRFC;
 }
 

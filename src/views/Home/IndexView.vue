@@ -46,10 +46,10 @@
           </div>
         </div>
         <div class="bottom_box display_flex">
-          <div class="btn" :class="{ en_Bold: getLangStatus }">
+          <div class="btn" :class="{ en_Bold: isEnLang }">
             购买NFT
           </div>
-          <div class="btn btn2" :class="{ en_Bold: getLangStatus }">
+          <div class="btn btn2" :class="{ en_Bold: isEnLang }">
             玩游戏
           </div>
         </div>
@@ -59,30 +59,30 @@
     <div class="character_introduction display_flex">
       <div class="people_box"><img src="../../assets/images/people.png" class="people" /></div>
       <div class="right_box display_flex">
-        <span class="title_txt" :class="{ en_Bold: getLangStatus }">什么是圣域</span>
+        <span class="title_txt" :class="{ en_Bold: isEnLang }">什么是圣域</span>
         <img src="../../assets/images/people_line.png" class="people_line" />
-        <span class="txt_content" :class="{ en_Regular: getLangStatus }">{{inter}}</span>
-        <span class="txt_content" :class="{ en_Regular: getLangStatus }">圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</span>
+        <span class="txt_content" :class="{ en_Regular: isEnLang }">{{inter}}</span>
+        <span class="txt_content" :class="{ en_Regular: isEnLang }">圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</span>
       </div>
     </div>
     <!-- 特点 -->
     <div class="characteristic_box display_flex tedianbg">
-      <span class="title_txt" :class="{ en_Bold: getLangStatus }">特 点</span>
+      <span class="title_txt" :class="{ en_Bold: isEnLang }">特 点</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
         <div class="onebox display_flex" v-for="(item, index) in spArr" :key="index">
           <img :src="item.src" class="img_sp" />
-          <span class="txt" :class="{ en_Regular: getLangStatus }">{{item.txt}}</span>
-          <span class="txt" :class="{ en_Regular: getLangStatus }" v-if="item.txt1">{{item.txt1}}</span>
+          <span class="txt" :class="{ en_Regular: isEnLang }">{{item.txt}}</span>
+          <span class="txt" :class="{ en_Regular: isEnLang }" v-if="item.txt1">{{item.txt1}}</span>
         </div>
       </div>
     </div>
     <!-- 在圣域怎么赚钱 -->
     <div class="characteristic_box make_money_people display_flex">
-      <span class="title_txt" :class="{ en_Bold: getLangStatus }">在圣域怎样赚钱？</span>
+      <span class="title_txt" :class="{ en_Bold: isEnLang }">在圣域怎样赚钱？</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
-        <div class="txtbox display_flex" :class="{ en_Regular: getLangStatus }" v-for="(item, index) in makeMoneyArr" :key="index">{{item.txt}}</div>
+        <div class="txtbox display_flex" :class="{ en_Regular: isEnLang }" v-for="(item, index) in makeMoneyArr" :key="index">{{item.txt}}</div>
       </div>
     </div>
     <!-- 游戏人物展示 -->
@@ -152,7 +152,7 @@
     </div>
     <!-- 时间轴 -->
     <div class="characteristic_box make_money_people display_flex">
-      <span class="title_txt" :class="{ en_Bold: getLangStatus }">时 间 轴</span>
+      <span class="title_txt" :class="{ en_Bold: isEnLang }">时 间 轴</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
         <swiper-slide v-for="(item, index) in swiperArr" :key="index">
@@ -164,10 +164,10 @@
     </div>
     <!-- 合作者 -->
     <div class="characteristic_box make_money_people display_flex">
-      <span class="title_txt" :class="{ en_Bold: getLangStatus }">合 作 者</span>
+      <span class="title_txt" :class="{ en_Bold: isEnLang }">合 作 者</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="partener_box display_flex">
-        <div class="one_partener display_flex" :class="{ en_Regular: getLangStatus }" v-for="(item, index) in partenerArr" :key="index">
+        <div class="one_partener display_flex" :class="{ en_Regular: isEnLang }" v-for="(item, index) in partenerArr" :key="index">
           <img :src="item.src" :class="{par1:index == 0,par2:index == 1,par3:index == 2,par4:index == 3}" />
         </div>
       </div>
@@ -179,7 +179,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["getLangStatus"])
+    ...mapGetters(["isEnLang"])
   },
   data(){
     return{

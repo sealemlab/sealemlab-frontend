@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="main_box">
-      <ul>
+      <ul :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">
         <li>Wonderful display, perfect trading platform</li>
         <li>Sacred Realm nft</li>
         <li>Dark nemesis, good at uninterrupted attack, so that the enemy has no room to fight back!</li>
@@ -9,24 +9,34 @@
     </div>
     <div class="tab_box">
       <div class="tab_left">
-        <router-link class="a_link" v-for="(route, index) in navArr" :key="index" :to="route.link">{{ route.label }}</router-link>
+        <router-link class="a_link" :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'" v-for="(route, index) in navArr" :key="index" :to="route.link">
+          {{ route.label }}
+        </router-link>
       </div>
       <div class="tab_right"><router-view /></div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-@Component
-export default class NFT extends Vue {
-  public navArr = [
-    { label: "角   色", link: "/nft/role" },
-    { label: "购买盲盒", link: "/nft/buy-blind-box" },
-    // { label: "赠送", link: "/nft/giving" },
-    // { label: "租赁", link: "/nft/lease" },
-  ];
-}
+<script>
+import { mapGetters } from "vuex";
+export default {
+  data() {
+    return {
+      navArr: [
+        { label: "角   色", link: "/nft/role" },
+        { label: "购买盲盒", link: "/nft/buy-blind-box" },
+        { label: "赠送", link: "/nft/giving" },
+        { label: "租赁", link: "/nft/lease" },
+      ],
+    };
+  },
+  computed: { ...mapGetters(["isEnLang"]) },
+  created() {
+    // console.log("当前语言：", this.$i18n.locale);
+    // console.log("English：", this.isEnLang);
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -44,8 +54,6 @@ export default class NFT extends Vue {
       position: relative;
       top: 60%;
       li {
-        font-family: TrajanPro-Bold, TrajanPro;
-        font-weight: bold;
         &:nth-child(1) {
           font-size: 26px;
         }
@@ -63,6 +71,7 @@ export default class NFT extends Vue {
   }
   .tab_box {
     width: 80vw;
+    min-height: 25vh;
     margin: 0 auto;
     position: relative;
     top: 50px;
@@ -75,8 +84,6 @@ export default class NFT extends Vue {
         display: block;
         text-decoration: none;
         font-size: 35px;
-        font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
-        font-weight: normal;
         color: #ffffff;
         padding: 20px 50px;
         margin-bottom: 20px;
