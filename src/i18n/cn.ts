@@ -2,7 +2,7 @@ export const message = {
   nav: {
     txt1: "Home",
     txt2: "NFT",
-    txt3: "拍卖",
+    txt3: "债券",
     txt4: "质押",
     txt5: "游戏",
     txt6: "路线图",
