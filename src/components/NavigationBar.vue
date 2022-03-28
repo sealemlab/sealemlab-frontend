@@ -11,7 +11,7 @@
     <div class="nav_right">
       <div class="connect">{{ $t("message.nav.txt9") }}</div>
       <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
-        <span>{{ language }}</span>
+        <span :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">{{ language }}</span>
         <img src="../assets/images/accrow.png" alt="" />
         <transition name="select-lang" appear>
           <ul v-show="showLangSelect">
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -43,6 +44,7 @@ export default {
       langArr: ["English", "中文繁体"],
     };
   },
+  computed: { ...mapGetters(["isEnLang"]) },
   watch: {
     $route(to) {
       if (to.path == "/home") {
@@ -156,8 +158,15 @@ export default {
       padding: 10px 0;
       li {
         padding: 5px 0;
+        color: #939393;
+        &:nth-child(1) {
+          font-family: TrajanPro-Bold;
+        }
+        &:nth-child(2) {
+          font-family: WenYue-GuDianMingChaoTi-JRFC;
+        }
         &:hover {
-          color: #939393;
+          color: #fff;
         }
       }
     }
