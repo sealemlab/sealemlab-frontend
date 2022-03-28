@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div class="video_">
-      <video style="width: 100%" loop autoplay muted>
+    <!-- <div class="video_"> -->
+      <video class="video_" loop autoplay muted>
         <source src="./assets/video/1.mp4" type="video/mp4" />
       </video>
       <!-- <iframe style="display: none" allow="autoplay" src="./assets/video/1.mp4"></iframe> -->
-    </div>
+    <!-- </div> -->
     <NavigationBar />
     <router-view />
     <FooterComponents />
@@ -36,8 +36,8 @@ export default {
 
 <style lang="scss">
 .video_ {
-  min-width: 100%;
-  min-height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
   position: fixed;
   top: 0;
   z-index: -999;
