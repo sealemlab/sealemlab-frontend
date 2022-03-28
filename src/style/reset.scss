@@ -126,15 +126,3 @@ body {
 .en_Regular{
   font-family: TrajanPro-Regular !important;
 }
-// 重置滚动条样式
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background: #939393;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}

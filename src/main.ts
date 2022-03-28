@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import i18n from "./i18n/index";
 import "./style/reset.scss";
+import "./style/global.scss";
 Vue.config.productionTip = false;
 
 import VueAwesomeSwiper from "vue-awesome-swiper";
