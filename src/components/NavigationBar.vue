@@ -28,9 +28,6 @@ export default {
   data() {
     return {
       navActive: 0,
-      showLangSelect: false,
-      language: "",
-      langArr: ["English", "中文繁体"],
       navArr: [
         { label: "message.nav.txt1", link: "/home" },
         { label: "message.nav.txt2", link: "/nft" },
@@ -41,6 +38,9 @@ export default {
         { label: "message.nav.txt7", link: "" },
         { label: "message.nav.txt8", link: "" },
       ],
+      showLangSelect: false,
+      language: "",
+      langArr: ["English", "中文繁体"],
     };
   },
   watch: {

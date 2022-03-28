@@ -2,15 +2,15 @@
   <div class="page">
     <div class="main_box">
       <ul :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">
-        <li>Wonderful display, perfect trading platform</li>
-        <li>Sacred Realm nft</li>
-        <li>Dark nemesis, good at uninterrupted attack, so that the enemy has no room to fight back!</li>
+        <li>{{ $t("message.nft.txt5") }}</li>
+        <li>{{ $t("message.nft.txt6") }}</li>
+        <li>{{ $t("message.nft.txt7") }}</li>
       </ul>
     </div>
     <div class="tab_box">
       <div class="tab_left">
         <router-link class="a_link" :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'" v-for="(route, index) in navArr" :key="index" :to="route.link">
-          {{ route.label }}
+          {{ $t(route.label) }}
         </router-link>
       </div>
       <div class="tab_right"><router-view /></div>
@@ -24,10 +24,10 @@ export default {
   data() {
     return {
       navArr: [
-        { label: "角   色", link: "/nft/role" },
-        { label: "购买盲盒", link: "/nft/buy-blind-box" },
-        { label: "赠送", link: "/nft/giving" },
-        { label: "租赁", link: "/nft/lease" },
+        { label: "message.nft.txt1", link: "/nft/role" },
+        { label: "message.nft.txt2", link: "/nft/buy-blind-box" },
+        { label: "message.nft.txt3", link: "/nft/giving" },
+        { label: "message.nft.txt4", link: "/nft/lease" },
       ],
     };
   },
@@ -56,14 +56,17 @@ export default {
       li {
         &:nth-child(1) {
           font-size: 26px;
+          line-height: 32px;
         }
         &:nth-child(2) {
           font-size: 70px;
+          line-height: 85px;
           color: #ffffff;
         }
         &:nth-child(3) {
           max-width: 500px;
           font-size: 22px;
+          line-height: 32px;
           font-weight: 400;
         }
       }

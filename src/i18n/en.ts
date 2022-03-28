@@ -9,7 +9,14 @@ export const message = {
     txt7: "白皮书",
     txt8: "用户中心",
     txt9: "连接钱包",
-    txt10: "English",
-    txt11: "Chinese",
+  },
+  nft: {
+    txt1: "Role",
+    txt2: "Buy blind box",
+    txt3: "Giving",
+    txt4: "Lease",
+    txt5: "Wonderful display, perfect trading platform",
+    txt6: "Sacred Realm nft",
+    txt7: "Dark nemesis, good at uninterrupted attack, so that the enemy has no room to fight back!",
   },
 };
