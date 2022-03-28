@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="video_">
-      <video style="width:100%" loop autoplay muted>
-        <source src="./assets/video/1.mp4" type="video/mp4">
+      <video style="width: 100%" loop autoplay muted>
+        <source src="./assets/video/1.mp4" type="video/mp4" />
       </video>
       <!-- <iframe style="display: none" allow="autoplay" src="./assets/video/1.mp4"></iframe> -->
     </div>
@@ -35,27 +35,16 @@ export default {
 </script>
 
 <style lang="scss">
-.video_ {        
-  position: fixed;
-  right: 0;
+.video_ {
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
+  position: fixed;
+  top: 0;
   z-index: -999;
 }
 #app {
-  width: 100vw;
+  width: calc(100vw - 5px);
   min-height: 100vh;
   padding-top: 80px;
-  // background-color: #000;
-  // background: url("./assets/images/bg.png") no-repeat;
-  // background-size:cover;
-  // height: auto;
-  // .view_center {
-  //   width: 100vw;
-  //   height: calc(100vh - 80px);
-  //   overflow: auto;
-  // }
 }
 </style>
