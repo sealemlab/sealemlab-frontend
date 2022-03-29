@@ -1,7 +1,9 @@
 <template>
-  <div class="page">
+  <div class="page" :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">
+    <!-- :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'" -->
+    <!-- :class="isEnLang ? 'ff_en_regular' : 'ff_cn_regular'" -->
     <div class="main_box">
-      <ul :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">
+      <ul>
         <li>{{ $t("message.nft.txt5") }}</li>
         <li>{{ $t("message.nft.txt6") }}</li>
         <li>{{ $t("message.nft.txt7") }}</li>
@@ -9,7 +11,7 @@
     </div>
     <div class="tab_box">
       <div class="tab_left">
-        <router-link class="a_link" :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'" v-for="(route, index) in navArr" :key="index" :to="route.link">
+        <router-link class="a_link" v-for="(route, index) in navArr" :key="index" :to="route.link">
           {{ $t(route.label) }}
         </router-link>
       </div>
@@ -44,8 +46,8 @@ export default {
   width: 100%;
   height: 100%;
   .main_box {
-    width: 100vw;
-    height: calc(100vw * 0.58);
+    width: 100%;
+    height: calc(100% * 0.58);
     background: url("../../assets/images/nftimage/nft_bg.png") no-repeat;
     background-size: 100% 100%;
     padding: 0 5vw;
@@ -86,7 +88,7 @@ export default {
       .a_link {
         display: block;
         text-decoration: none;
-        font-size: 35px;
+        font-size: 25px;
         color: #ffffff;
         padding: 20px 50px;
         margin-bottom: 20px;

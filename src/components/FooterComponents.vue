@@ -62,23 +62,13 @@ export default {
     .footer_logo {
       width: 185px;
       object-fit: contain;
-      // margin-right: 100px;
     }
     .onebox {
       width: inherit;
       justify-content: space-around;
       ul {
-        // margin-right: 20px;
         li {
           margin: 5px 0;
-          // font-size: 14px;
-          // font-family: TrajanPro-Regular;
-          // color: #D8D8D8;
-          // line-height: 32px;
-          // -webkit-text-stroke: 1px #979797;
-          // text-stroke: 1px #979797;
-          // -webkit-background-clip: text;
-          // -webkit-text-fill-color: transparent;
           &:nth-child(1) {
             font-size: 18px;
             font-family: TrajanPro-Bold, TrajanPro;

@@ -205,6 +205,7 @@ export default {
   display: flex;
   position: relative;
   background-image: url("../../../assets/images/nftimage/nft_bg2.png");
+  background-repeat: no-repeat;
   background-size: auto;
   background-position: center center;
   .left {
@@ -277,8 +278,6 @@ export default {
         &.active {
           div {
             font-size: 16px;
-            font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
-            font-weight: normal;
             color: #381a02;
             background-image: url("../../../assets/images/nftimage/btn_active.png");
             background-size: 100% auto;
@@ -294,8 +293,6 @@ export default {
           height: 30px;
           line-height: 30px;
           font-size: 16px;
-          font-family: SourceHanSerifCN-Regular, SourceHanSerifCN;
-          font-weight: 400;
           color: #ffffff;
           background-image: url("../../../assets/images/nftimage/btn_normal.png");
           background-size: 100% auto;
@@ -308,7 +305,6 @@ export default {
       height: auto;
       display: flex;
       justify-content: flex-end;
-
       ul {
         width: 470px;
         height: auto;
@@ -317,30 +313,28 @@ export default {
         background-image: url("../../../assets/images/nftimage/nft_bg3.png");
         background-size: 100% 100%;
         background-position: center center;
-      }
-      li {
-        font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
-        font-weight: normal;
         color: #ffffff;
-        &:nth-child(1) div:nth-child(1),
-        &:nth-child(2) div:nth-child(1) {
-          font-size: 28px;
-          line-height: 28px;
-          background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        &:nth-child(1) div:nth-child(2) {
-          font-size: 16px;
-          line-height: 32px;
-          margin: 30px 0;
-        }
-        &:nth-child(2) div:nth-child(2) {
-          margin-top: 30px;
-          img {
-            width: 55px;
-            height: 55px;
-            margin-right: 20px;
+        li {
+          &:nth-child(1) div:nth-child(1),
+          &:nth-child(2) div:nth-child(1) {
+            font-size: 28px;
+            line-height: 28px;
+            background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+          &:nth-child(1) div:nth-child(2) {
+            font-size: 16px;
+            line-height: 32px;
+            margin: 30px 0;
+          }
+          &:nth-child(2) div:nth-child(2) {
+            margin-top: 30px;
+            img {
+              width: 55px;
+              height: 55px;
+              margin-right: 20px;
+            }
           }
         }
       }

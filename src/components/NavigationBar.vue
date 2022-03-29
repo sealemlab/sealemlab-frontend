@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav" :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">
     <div class="nav_left">
       <img class="logo" src="../assets/images/logo.png" alt="" />
       <ul>
@@ -11,7 +11,7 @@
     <div class="nav_right">
       <div class="connect">{{ $t("message.nav.txt9") }}</div>
       <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
-        <span :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">{{ language }}</span>
+        <span>{{ language }}</span>
         <img src="../assets/images/accrow.png" alt="" />
         <transition name="select-lang" appear>
           <ul v-show="showLangSelect">
@@ -62,6 +62,7 @@ export default {
       if (link) this.$router.push(link);
     },
     selectLang(index) {
+      if (this.language == this.langArr[index]) return (this.showLangSelect = false);
       this.language = this.langArr[index];
       this.$i18n.locale = this.language == "English" ? "en" : "cn";
       this.$utils.setCookie("LANG", this.$i18n.locale);
@@ -101,8 +102,6 @@ export default {
       padding: 10px 15px;
       span {
         font-size: 19px;
-        font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
-        font-weight: normal;
       }
       &.active {
         span {
@@ -128,8 +127,6 @@ export default {
     background-size: 100% 100%;
     margin-right: 10px;
     font-size: 16px;
-    font-family: WenYue-GuDianMingChaoTi-JRFC;
-    font-weight: 800;
     color: #381a02;
   }
   .lang_box {
@@ -159,6 +156,7 @@ export default {
       li {
         padding: 5px 0;
         color: #939393;
+        // 语言切换单独设置，不能改
         &:nth-child(1) {
           font-family: TrajanPro-Bold;
         }

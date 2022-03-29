@@ -96,33 +96,15 @@ body {
   color: #ffffff;
   font-size: 18px;
 }
-.display_flex {
-  display: flex;
+// 重置滚动条样式
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
 }
-.margin0 {
-  margin-right: 0 !important;
+::-webkit-scrollbar-thumb {
+  background: #825f35;
+  border-radius: 5px;
 }
-// 字体样式
-@font-face {
-  font-family: 'TrajanPro-Bold';
-  src:url('../assets/fonts/TrajanPro-Bold-4.otf');
-}
-@font-face {
-  font-family: 'WenYue-GuDianMingChaoTi-JRFC';
-  src:url('../assets/fonts/WenYue-GuDianMingChaoTi-JRFC-2.otf');
-}
-@font-face {
-  font-family: 'TrajanPro-Regular';
-  src:url('../assets/fonts/TrajanusBricks-1.ttf');
-}
-@font-face {
-  font-family: 'Facon';
-  src:url('../assets/fonts/Facon-2.ttf');
-}
-//英文字体样式
-.en_Bold{
-  font-family: TrajanPro-Bold !important;
-}
-.en_Regular{
-  font-family: TrajanPro-Regular !important;
+::-webkit-scrollbar-track {
+  background: #000;
 }

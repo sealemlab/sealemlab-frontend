@@ -1,6 +1,5 @@
 <template>
   <div class="box">
-    <!-- :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'" -->
     <ul class="title_box">
       <li>购买盲盒</li>
       <li><img src="../../../assets/images/nftimage/nft_line_title.png" alt="" /></li>
@@ -37,7 +36,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -47,7 +45,6 @@ export default {
       totalAmount: 10,
     };
   },
-  computed: { ...mapGetters(["isEnLang"]) },
   mounted() {
     // this.$nextTick(() => {});
   },
@@ -79,7 +76,6 @@ export default {
     li {
       &:nth-child(1) {
         font-size: 45px;
-        font-family: WenYue-GuDianMingChaoTi-JRFC;
         color: #00c1ff;
         line-height: 45px;
         background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
@@ -95,7 +91,6 @@ export default {
       }
       &:nth-child(3) {
         font-size: 16px;
-        font-family: WenYue-GuDianMingChaoTi-JRFC;
         color: #ffffff;
         line-height: 16px;
       }
@@ -114,8 +109,6 @@ export default {
       .title {
         margin-bottom: 30px;
         font-size: 28px;
-        font-family: WenYue-GuDianMingChaoTi-JRFC;
-        font-weight: normal;
         color: #ffffff;
         line-height: 28px;
         background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
@@ -131,15 +124,11 @@ export default {
           div {
             &:nth-child(1) {
               font-size: 16px;
-              font-family: SourceHanSerifCN-SemiBold, SourceHanSerifCN;
-              font-weight: 600;
               color: #ffffff;
               line-height: 23px;
             }
             &:nth-child(2) {
               font-size: 28px;
-              font-family: SourceHanSerifCN-SemiBold, SourceHanSerifCN;
-              font-weight: 600;
               color: #f1b713;
               line-height: 40px;
               background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
@@ -182,8 +171,6 @@ export default {
         box-shadow: inset 0px 2px 3px 0px #f2d383, inset 0px -2px 11px 0px #f2d57d;
         border-radius: 5px;
         font-size: 20px;
-        font-family: WenYue-GuDianMingChaoTi-JRFC;
-        font-weight: normal;
         color: #381a02;
         line-height: 20px;
       }
