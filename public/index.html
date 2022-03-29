@@ -1,17 +1,130 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <style>
+    .begin_box {
+      display: none;
+      position: fixed;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+    }
+
+    #video {
+      min-width: 100vw;
+      min-height: 100vh;
+    }
+
+    .home_btn {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0 10px;
+      height: 71px;
+      text-align: center;
+      line-height: 71px;
+      color: #fff;
+      background:linear-gradient(#A07F3C,#F9DC8C);
+      cursor: pointer;
+      border: none;
+      border-radius: 12px;
+      font-size: 32px;
+      font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+      font-weight: normal;
+    }
+    .play_btn{
+      position: absolute;
+      bottom: 30px;
+      right: 10%;
+      padding:0 40px;
+      line-height: 50px;
+      background:linear-gradient(#A07F3C,#F9DC8C);
+      cursor: pointer;
+      border: none;
+      border-radius: 12px;
+      font-size: 26px;
+      font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+      font-weight: normal;
+    }
+    .app {
+      display: none;
+    }
+    .beginLeave{
+      animation: anim 1s 1;
+    }
+    @keyframes anim { 
+      0% {opacity:1;}
+      100%{opacity:0;}
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+      Please enable it to continue.</strong>
+  </noscript>
+  <div class="begin_box">
+    <video id="video" autoplay muted loop>
+      <source src="./beging.mp4" type="video/mp4">
+      Your browser does not support HTML5 Video Tags.
+    </video>
+    <button class="home_btn" onclick="enter()">进入Sacred Realm</button>
+    <button class="play_btn" onclick="play()">Play</button>
+  </div>
+  <div id="app" class="app"></div>
+  <script>
+    let boolean_ = true
+    let self_app = document.getElementById('app')
+    let video = document.getElementById("video");
+    let box = document.getElementsByClassName('begin_box')[0]
+    let btn_enter = document.getElementsByClassName('home_btn')[0]
+    let btn_play = document.getElementsByClassName('play_btn')[0]
+    box.onmousemove = function (e){
+      if(!boolean_){
+        boolean_ = true
+        btn_play.style.display = 'block'
+        btn_enter.style.display = 'block'
+      }
+    }
+    box.onmouseout = function(){
+      boolean_ = false
+      btn_play.style.display = 'none'
+      btn_enter.style.display = 'none'
+    }
+    function enter() {
+      self_app.style.display = 'block'
+      box.classList.add("beginLeave")
+      video.muted = true;
+      setTimeout(() => {
+        box.style.display = 'none'
+      },1000)
+      
+    }
+    function play() {
+      video.muted = false;
+      video.play();
+    }
+    window.onload = function () {
+      if (window.name == "") {
+        box.style.display = 'block'
+        self_app.style.display = 'none'
+        window.name = "firstLoad"
+      } else if (window.name == "firstLoad") {
+        box.style.display = 'none'
+        self_app.style.display = 'block'
+      }
+    }
+  </script>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>

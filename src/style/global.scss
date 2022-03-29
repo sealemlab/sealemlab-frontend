@@ -16,19 +16,61 @@
 }
 @font-face {
   font-family: "TrajanPro-Regular";
-  src: url("../assets/fonts/TrajanusBricks-1.ttf");
+  src: url("../assets/fonts/Times New Roman.ttf");
 }
 @font-face {
   font-family: "Facon";
   src: url("../assets/fonts/Facon-2.ttf");
 }
-//英文字体样式
+//英文粗体
 .en_Bold {
   font-family: TrajanPro-Bold !important;
 }
+//英文细体
 .en_Regular {
   font-family: TrajanPro-Regular !important;
 }
+// 英文特殊字体
+.en_special {
+  font-family: Facon !important;
+}
+// 中文
+.cn_lang {
+  font-family: WenYue-GuDianMingChaoTi-JRFC !important;
+}
+// 大标题字号
+.font45{
+  font-size: 45px;
+}
+// banner 标题 eg:token
+.font34{
+  font-size: 34px;
+}
+// 主按钮字号
+.font28{
+  font-size: 28px;
+}
+.font26{
+  font-size: 26px;
+}
+.font22{
+  font-size: 22px;
+}
+.font20{
+  font-size: 20px;
+}
+.font18{
+  font-size: 18px;
+}
+// 正文字号
+.font16{
+  font-size: 16px;
+}
+.font14{
+  font-size: 14px;
+}
+
+
 
 // 英文特殊体
 .ff_en_special {

@@ -6,27 +6,27 @@
         <div class="top_box display_flex">
           <div class="left_box display_flex">
             <div class="token_box display_flex">
-              <span class="token_txt">TOKEN</span>
+              <span class="token_txt font28">{{ $t("message.home.txt1")}}</span>
               <img src="../../assets/images/tokenimg.png" class="tokenimg" />
             </div>
             <div class="coin_box display_flex">
               <div class="sr_box display_flex">
                 <div class="line_sr display_flex">
                   <img src="../../assets/images/srlogo.png" class="srlogo" />
-                  <span class="sr_price">$12.25</span>
+                  <span class="sr_price font22">$12.25</span>
                 </div>
                 <div class="sr_address display_flex">
-                  <span class="sr_address_txt">SR: 0x73CA0db...4Ce2850894</span>
+                  <span class="sr_address_txt font18">SR: 0x73CA0db...4Ce2850894</span>
                   <img src="../../assets/images/copy.png" class="copy" />
                 </div>
               </div>
               <div class="sr_box display_flex">
                 <div class="line_sr margin_30 display_flex">
                   <img src="../../assets/images/stlogo.png" class="srlogo" />
-                  <span class="sr_price">$12.25</span>
+                  <span class="sr_price font22">$12.25</span>
                 </div>
                 <div class="sr_address margin_30 display_flex">
-                  <span class="sr_address_txt">ST: 0x73CA0db...4Ce2850894</span>
+                  <span class="sr_address_txt font18">ST: 0x73CA0db...4Ce2850894</span>
                   <img src="../../assets/images/copy.png" class="copy" />
                 </div>
               </div>
@@ -34,7 +34,7 @@
           </div>
           <div class="left_box display_flex">
             <div class="token_box display_flex">
-              <span class="token_txt">HOW TO BUY</span>
+              <span class="token_txt font28">{{ $t("message.home.txt2")}}</span>
               <img src="../../assets/images/tobuyimg.png" class="tobuyimg" />
             </div>
             <div class="link_ display_flex">
@@ -45,12 +45,12 @@
             </div>
           </div>
         </div>
-        <div class="bottom_box display_flex">
-          <div class="btn" :class="{ en_Bold: isEnLang }">
-            购买NFT
+        <div class="bottom_box display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
+          <div class="btn font28">
+            {{ $t("message.home.txt3")}}
           </div>
-          <div class="btn btn2" :class="{ en_Bold: isEnLang }">
-            玩游戏
+          <div class="btn font28 btn2" >
+            {{ $t("message.home.txt4")}}
           </div>
         </div>
       </div>
@@ -59,35 +59,37 @@
     <div class="character_introduction display_flex">
       <div class="people_box"><img src="../../assets/images/people.png" class="people" /></div>
       <div class="right_box display_flex">
-        <span class="title_txt" :class="{ en_Bold: isEnLang }">什么是圣域</span>
+        <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt5")}}</span>
         <img src="../../assets/images/people_line.png" class="people_line" />
-        <span class="txt_content" :class="{ en_Regular: isEnLang }">{{inter}}</span>
-        <span class="txt_content" :class="{ en_Regular: isEnLang }">圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！</span>
+        <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt6")}}</span>
+        <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt7")}}</span>
       </div>
     </div>
     <!-- 特点 -->
     <div class="characteristic_box display_flex tedianbg">
-      <span class="title_txt" :class="{ en_Bold: isEnLang }">特 点</span>
+      <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt8")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
-        <div class="onebox display_flex" v-for="(item, index) in spArr" :key="index">
+        <div class="onebox display_flex" :class="isEnLang?'en_Regular':'cn_lang'" v-for="(item, index) in spArr" :key="index">
           <img :src="item.src" class="img_sp" />
-          <span class="txt" :class="{ en_Regular: isEnLang }">{{item.txt}}</span>
-          <span class="txt" :class="{ en_Regular: isEnLang }" v-if="item.txt1">{{item.txt1}}</span>
+          <span class="txt font14">{{$t(item.txt)}}</span>
+          <span class="txt font14" v-if="item.txt1">{{$t(item.txt1)}}</span>
         </div>
       </div>
     </div>
     <!-- 在圣域怎么赚钱 -->
     <div class="characteristic_box make_money_people display_flex">
-      <span class="title_txt" :class="{ en_Bold: isEnLang }">在圣域怎样赚钱？</span>
+      <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt9")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
-        <div class="txtbox display_flex" :class="{ en_Regular: isEnLang }" v-for="(item, index) in makeMoneyArr" :key="index">{{item.txt}}</div>
+        <div class="txtbox display_flex" :class="isEnLang?'en_Regular':'cn_lang'" v-for="(item, index) in makeMoneyArr" :key="index">
+          {{$t(item.txt)}}
+        </div>
       </div>
     </div>
     <!-- 游戏人物展示 -->
     <div class="characteristic_box make_money_people display_flex">
-      <span class="title_txt">游戏人物展示</span>
+      <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt21")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="show_peoplebox display_flex">
         <div class="left_people display_flex">
@@ -95,15 +97,15 @@
         </div>
         <div class="right_maxpeople">
           <img :src="peopleArr[peopleIndex].maxSrc" class="peoplemax"/>
-          <p class="add_title" :class="{ en_Regular: isEnLang }" >{{peopleArr[peopleIndex].title}}</p>
-          <p class="add_content" :class="{ en_Regular: isEnLang }" >{{peopleArr[peopleIndex].describe}}</p>
-          <p class="add_content" :class="{ en_Regular: isEnLang }" v-if="peopleArr[peopleIndex].supplementContent">{{peopleArr[peopleIndex].supplementContent}}</p>
+          <p class="add_title font45" :class="isEnLang?'en_Bold':'cn_lang'">{{$t(peopleArr[peopleIndex].title)}}</p>
+          <p class="add_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(peopleArr[peopleIndex].describe)}}</p>
+          <p class="add_content font16" :class="isEnLang?'en_Regular':'cn_lang'" v-if="peopleArr[peopleIndex].supplementContent">{{$t(peopleArr[peopleIndex].supplementContent)}}</p>
         </div>
       </div>
     </div>
     <!-- 游戏场景展示 -->
     <div class="characteristic_box make_money_people display_flex">
-      <span class="title_txt">游戏场景展示</span>
+      <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt46")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="game_scene">
         <img src="../../assets/images/gameSceneMax.png" class="gameSceneMax" />
@@ -119,15 +121,15 @@
     </div>
     <!-- 团队 -->
     <div class="characteristic_box make_money_people display_flex">
-      <span class="title_txt">团 队</span>
+      <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt47")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="team_box display_flex">
         <div class="top_team display_flex">
           <div class="out_box display_flex" :class="{margin0:index == 1}" v-for="(item, index) in teamArr" :key="index">
-            <div class="oneteam display_flex">
+            <div class="oneteam display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
               <img :src="item.src" class="teaming" />
-              <span class="span1">{{item.txt}}</span>
-              <span class="span2">{{item.name}}</span>
+              <span class="span1 font20">{{$t(item.name)}}</span>
+              <span class="span2 font16">{{item.txt}}</span>
               <div class="address_peopllle display_flex">
                 <img src="../../assets/images/in.png" class="ling_ying" />
                 <img src="../../assets/images/twitter.png" class="twitter" />
@@ -137,10 +139,10 @@
         </div>
         <div class="top_team display_flex">
           <div class="out_box display_flex" v-for="(item, index) in teamArr1" :key="index">
-            <div class="oneteam display_flex">
+            <div class="oneteam display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
               <img :src="item.src" class="teaming" />
-              <span class="span1">{{item.txt}}</span>
-              <span class="span2">{{item.name}}</span>
+              <span class="span1 font20">{{$t(item.name)}}</span>
+              <span class="span2 font16">{{item.txt}}</span>
               <div class="address_peopllle display_flex">
                 <img src="../../assets/images/in.png" class="ling_ying" />
                 <img src="../../assets/images/twitter.png" class="twitter" />
@@ -152,19 +154,19 @@
     </div>
     <!-- 时间轴 -->
     <div class="characteristic_box make_money_people display_flex">
-      <span class="title_txt" :class="{ en_Bold: isEnLang }">时 间 轴</span>
+      <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt54")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
         <swiper-slide v-for="(item, index) in swiperArr" :key="index">
-          <p class="time_class">{{item.time}}</p>
-          <p class="content_class">{{item.content}}</p>
+          <p class="time_class font20" :class="isEnLang?'en_Bold':'cn_lang'">{{item.time}}</p>
+          <p class="content_class font16" :class="isEnLang?'en_Bold':'cn_lang'">{{$t(item.content)}}</p>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
     <!-- 合作者 -->
     <div class="characteristic_box make_money_people display_flex">
-      <span class="title_txt" :class="{ en_Bold: isEnLang }">合 作 者</span>
+      <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt59")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="partener_box display_flex">
         <div class="one_partener display_flex" :class="{ en_Regular: isEnLang }" v-for="(item, index) in partenerArr" :key="index">
@@ -189,63 +191,63 @@ export default {
       spArr:[
         {
           src:require('../../assets/images/characteristic1.png'),
-          txt:'DEFI+GAMEFI',
-          txt1:'双循环模型'
+          txt:"message.home.txt10",
+          txt1:"message.home.txt11",
         },
         {
           src:require('../../assets/images/characteristic2.png'),
-          txt:'DEFI+GAMEFI',
+          txt:'message.home.txt12',
         },
         {
           src:require('../../assets/images/characteristic3.png'),
-          txt:'DEFI+GAMEFI',
+          txt:'message.home.txt13',
         },
         {
           src:require('../../assets/images/characteristic4.png'),
-          txt:'DEFI+GAMEFI',
+          txt:'message.home.txt14',
         }
       ],
       teamArr:[
         {
           src:require('../../assets/images/ceo.png'),
           txt:'CEO',
-          name:'DomLane'
+          name:'message.home.txt48'
         },
         {
           src:require('../../assets/images/cto.png'),
           txt:'CTO',
-          name:'Kim Talon'
+          name:'message.home.txt49'
         },
       ],
       teamArr1:[
         {
           src:require('../../assets/images/cmo.png'),
           txt:'CMO',
-          name:'Greer Phantomhive'
+          name:'message.home.txt50'
         },
         {
           src:require('../../assets/images/svp.png'),
           txt:'SVP',
-          name:'Amelia Emma'
+          name:'message.home.txt51'
         },
         {
           src:require('../../assets/images/founder.png'),
           txt:'Co-Founder',
-          name:'Tinsley-Hafen'
+          name:'message.home.txt52'
         },
         {
           src:require('../../assets/images/founder1.png'),
           txt:'Co-Founder',
-          name:'Henry Evans'
+          name:'message.home.txt53'
         }
       ],
       makeMoneyArr:[
-        {txt:'定期质押ST享有高APY的SR'},
-        {txt:'定期质押ST享有高APY的SR'},
-        {txt:'定期质押ST享有高APY的SR'},
-        {txt:'定期质押ST享有高APY的SR'},
-        {txt:'定期质押ST享有高APY的SR'},
-        {txt:'定期质押ST享有高APY的SR'}
+        {txt:"message.home.txt15"},
+        {txt:"message.home.txt16"},
+        {txt:"message.home.txt17"},
+        {txt:"message.home.txt18"},
+        {txt:"message.home.txt19"},
+        {txt:"message.home.txt20"}
       ],
       partenerArr:[{
         src:require('../../assets/images/partener1.png'),
@@ -263,19 +265,19 @@ export default {
       swiperArr:[
         {
           time:'2022 Q1',
-          content:'项目启动，组建核心团队，产品可能性及市场'
+          content:'message.home.txt55'
         },
         {
           time:'2022 Q2',
-          content:'项目启动，组建核心团队，产品可能性及市场'
+          content:'message.home.txt56'
         },
         {
           time:'2022 Q3',
-          content:'项目启动，组建核心团队，产品可能性及市场'
+          content:'message.home.txt57'
         },
         {
           time:'2022 Q4',
-          content:'项目启动，组建核心团队，产品可能性及市场'
+          content:'message.home.txt58'
         }
       ],
       swiperOption:{
@@ -300,58 +302,58 @@ export default {
         {
           src:require('../../assets/images/people1.png'),
           maxSrc:require('../../assets/images/peoplemax.png'),
-          title:'格斗家',
-          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
-          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+          title:"message.home.txt22",
+          describe:"message.home.txt23",
+          supplementContent:"message.home.txt24"
         },
         {
           src:require('../../assets/images/people1.png'),
           maxSrc:require('../../assets/images/peoplemax.png'),
-          title:'预言家',
-          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
-          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+          title:"message.home.txt25",
+          describe:"message.home.txt26",
+          supplementContent:"message.home.txt27"
         },
         {
           src:require('../../assets/images/people1.png'),
           maxSrc:require('../../assets/images/peoplemax.png'),
-          title:'军事家',
-          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
-          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+          title:"message.home.txt28",
+          describe:"message.home.txt29",
+          supplementContent:"message.home.txt30"
         },
         {
           src:require('../../assets/images/people1.png'),
           maxSrc:require('../../assets/images/peoplemax.png'),
-          title:'思想家',
-          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
-          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+          title:"message.home.txt31",
+          describe:"message.home.txt32",
+          supplementContent:"message.home.txt33"
         },
         {
           src:require('../../assets/images/people1.png'),
           maxSrc:require('../../assets/images/peoplemax.png'),
-          title:'军事家',
-          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
-          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+          title:"message.home.txt34",
+          describe:"message.home.txt35",
+          supplementContent:"message.home.txt36"
         },
         {
           src:require('../../assets/images/people1.png'),
           maxSrc:require('../../assets/images/peoplemax.png'),
-          title:'思想家',
-          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
-          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+          title:"message.home.txt37",
+          describe:"message.home.txt38",
+          supplementContent:"message.home.txt39"
         },
         {
           src:require('../../assets/images/people1.png'),
           maxSrc:require('../../assets/images/peoplemax.png'),
-          title:'科学家',
-          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
-          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+          title:"message.home.txt40",
+          describe:"message.home.txt41",
+          supplementContent:"message.home.txt42"
         },
         {
           src:require('../../assets/images/people1.png'),
           maxSrc:require('../../assets/images/peoplemax.png'),
-          title:'生物学家',
-          describe:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。',
-          supplementContent:'圣域叙述光之英雄与黑暗力量之间的无尽战斗。玩家所扮演的光之英雄挺身而出，直到消灭黑暗之主为止，让久违的和平再度降临圣域！'
+          title:"message.home.txt43",
+          describe:"message.home.txt44",
+          supplementContent:"message.home.txt45"
         },
       ]
     }
@@ -422,7 +424,6 @@ export default {
             width: 100%;
             align-items: center;
             .token_txt{
-              font-size: 28px;
               font-family: Facon;
               color: #FFFFFF;
               line-height: 29px;
@@ -460,8 +461,7 @@ export default {
                 }
                 .sr_price{
                   margin-left: 20px;
-                  font-size: 22px;
-                  font-family: TrajanPro-Bold, TrajanPro;
+                  font-family: TrajanPro-Bold;
                   font-weight: bold;
                   color: #FFFFFF;
                 }
@@ -474,15 +474,15 @@ export default {
                 align-items: center;
                 margin-top: 13px;
                 .sr_address_txt{
+                  font-family: TrajanPro-Bold;
                   margin-right: 5px;
-                  font-size: 18px;
-                  font-family: TrajanPro-Bold, TrajanPro;
                   font-weight: bold;
                   color: #FFFFFF;
                   line-height: 23px;
                 }
                 .copy{
                   width: 13px;
+                  cursor: pointer;
                 }
               }
             }
@@ -495,6 +495,7 @@ export default {
               width: 52px;
               object-fit: contain;
               margin-right: 30px;
+              cursor: pointer;
             }
             .last_img{
               margin-right: 0;
@@ -508,9 +509,8 @@ export default {
         align-items: center;
         justify-content: center;
         .btn{
-          font-size: 28px;
+          cursor: pointer;
           font-weight: bold;
-          font-family: WenYue-GuDianMingChaoTi-JRFC;
           color: #381A02;
           width: 249px;
           height: 71px;
@@ -542,10 +542,8 @@ export default {
       align-items: center;
       justify-content: center;
       .title_txt{
-        font-size: 45px;
         font-weight: 400;
         color: #00C1FF;
-        font-family: WenYue-GuDianMingChaoTi-JRFC;
         line-height: 54px;
         background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
         -webkit-background-clip: text;
@@ -553,8 +551,6 @@ export default {
       }
       .txt_content{
         width: 60%;
-        font-size: 16px;
-        font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
         font-weight: normal;
         color: #FFFFFF;
         line-height: 32px;
@@ -572,8 +568,6 @@ export default {
     align-items: center;
     margin-top: 130px;
     .title_txt{
-      font-size: 45px;
-      font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
       font-weight: normal;
       color: #00C1FF;
       line-height: 45px;
@@ -585,7 +579,6 @@ export default {
       width: 90vw;
       justify-content: space-around;
       flex-wrap: wrap;
-      // margin-top: 130px;
       .onebox{
         flex-direction: column;
         align-items: center;
@@ -594,8 +587,6 @@ export default {
           object-fit: contain;
         }
         .txt{
-          font-size: 14px;
-          font-family: WenYue-GuDianMingChaoTi-JRFC;
           font-weight: 400;
           color: #FFFFFF;
           line-height: 32px;
@@ -653,8 +644,6 @@ export default {
           object-fit: contain;
         }
         .add_title{
-          font-size: 45px;
-          font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
           font-weight: normal;
           color: #00C1FF;
           line-height: 45px;
@@ -727,8 +716,6 @@ export default {
             }
             .span1{
               margin:28px 0 6px;
-              font-size: 20px;
-              font-family: TrajanPro-Bold, TrajanPro;
               font-weight: bold;
               color: #FFFFFF;
               line-height: 32px;
@@ -737,8 +724,6 @@ export default {
               -webkit-text-fill-color: transparent;
             }
             .span2{
-              font-size: 16px;
-              font-family: TrajanPro-Bold, TrajanPro;
               font-weight: bold;
               color: #FFFFFF;
               line-height: 32px;
@@ -790,16 +775,12 @@ export default {
     .self_swiper{
       width:90vw;
       margin: 0 auto;
-      // margin-top: 114px;
-      // margin-bottom: 90px;
       .swiper-slide{
         display: flex;
         height: 220px;
         flex-direction: column;
         align-items: flex-start;
         .time_class{
-          font-size: 26px;
-          font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
           font-weight: normal;
           color: #00C1FF;
           line-height: 26px;
@@ -808,9 +789,7 @@ export default {
           -webkit-text-fill-color: transparent;
         }
         .content_class{
-          max-width: 50%;
-          font-size: 18px;
-          font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
+          max-width: 80%;
           font-weight: normal;
           color: #FFFFFF;
           line-height: 32px;

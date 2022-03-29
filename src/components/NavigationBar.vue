@@ -1,7 +1,7 @@
 <template>
   <div class="nav" :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">
     <div class="nav_left">
-      <img class="logo" src="../assets/images/logo.png" alt="" />
+      <img class="logo" src="../assets/images/logo.png" alt="" @click="toRoute('/home')"/>
       <ul>
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
           <span> {{ $t(item.label) }}</span>
@@ -92,6 +92,7 @@ export default {
     width: auto;
     height: 60px;
     margin-right: 20px;
+    cursor: pointer;
   }
   ul {
     display: flex;
