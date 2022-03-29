@@ -6,14 +6,14 @@
         <div class="top_box display_flex">
           <div class="left_box display_flex">
             <div class="token_box display_flex">
-              <span class="token_txt font28">{{ $t("message.home.txt1")}}</span>
+              <span class="token_txt font28" :class="isEnLang?'en_special':'cn_lang'">{{ $t("message.home.txt1")}}</span>
               <img src="../../assets/images/tokenimg.png" class="tokenimg" />
             </div>
             <div class="coin_box display_flex">
               <div class="sr_box display_flex">
                 <div class="line_sr display_flex">
                   <img src="../../assets/images/srlogo.png" class="srlogo" />
-                  <span class="sr_price font22">$12.25</span>
+                  <span class="sr_price font22" :class="isEnLang?'en_Bold':'cn_lang'">$12.25</span>
                 </div>
                 <div class="sr_address display_flex">
                   <span class="sr_address_txt font18">SR: 0x73CA0db...4Ce2850894</span>
@@ -23,7 +23,7 @@
               <div class="sr_box display_flex">
                 <div class="line_sr margin_30 display_flex">
                   <img src="../../assets/images/stlogo.png" class="srlogo" />
-                  <span class="sr_price font22">$12.25</span>
+                  <span class="sr_price font22" :class="isEnLang?'en_Bold':'cn_lang'">$12.25</span>
                 </div>
                 <div class="sr_address margin_30 display_flex">
                   <span class="sr_address_txt font18">ST: 0x73CA0db...4Ce2850894</span>
@@ -34,7 +34,7 @@
           </div>
           <div class="left_box display_flex">
             <div class="token_box display_flex">
-              <span class="token_txt font28">{{ $t("message.home.txt2")}}</span>
+              <span class="token_txt font28" :class="isEnLang?'en_special':'cn_lang'">{{ $t("message.home.txt2")}}</span>
               <img src="../../assets/images/tobuyimg.png" class="tobuyimg" />
             </div>
             <div class="link_ display_flex">
@@ -82,7 +82,7 @@
       <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt9")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="imgbox display_flex">
-        <div class="txtbox display_flex" :class="isEnLang?'en_Regular':'cn_lang'" v-for="(item, index) in makeMoneyArr" :key="index">
+        <div class="txtbox display_flex font16" :class="isEnLang?'en_Regular':'cn_lang'" v-for="(item, index) in makeMoneyArr" :key="index">
           {{$t(item.txt)}}
         </div>
       </div>
@@ -424,7 +424,6 @@ export default {
             width: 100%;
             align-items: center;
             .token_txt{
-              font-family: Facon;
               color: #FFFFFF;
               line-height: 29px;
               background:linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
@@ -461,7 +460,6 @@ export default {
                 }
                 .sr_price{
                   margin-left: 20px;
-                  font-family: TrajanPro-Bold;
                   font-weight: bold;
                   color: #FFFFFF;
                 }
@@ -474,7 +472,6 @@ export default {
                 align-items: center;
                 margin-top: 13px;
                 .sr_address_txt{
-                  font-family: TrajanPro-Bold;
                   margin-right: 5px;
                   font-weight: bold;
                   color: #FFFFFF;
@@ -601,8 +598,6 @@ export default {
         background-size: 100% 100%;
         // margin-right: 121px;
         margin-bottom: 83px;
-        font-size: 16px;
-        font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
         font-weight: normal;
         color: #FFFFFF;
         cursor: pointer;
@@ -653,8 +648,6 @@ export default {
           margin: 30px 0;
         }
         .add_content{
-          font-size: 16px;
-          font-family: WenYue-GuDianMingChaoTi-JRFC, WenYue-GuDianMingChaoTi;
           font-weight: normal;
           color: #FFFFFF;
           line-height: 32px;
