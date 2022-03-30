@@ -37,7 +37,7 @@ export default {
         // { label: "message.nav.txt5", link: "" },
         // { label: "message.nav.txt6", link: "" },
         { label: "message.nav.txt7", link: "" },
-        { label: "message.nav.txt8", link: "" },
+        { label: "message.nav.txt8", link: "/user" },
       ],
       showLangSelect: false,
       language: "",
@@ -47,10 +47,18 @@ export default {
   computed: { ...mapGetters(["isEnLang"]) },
   watch: {
     $route(to) {
-      if (to.path == "/home") {
-        this.navActive = 0;
-      } else if (to.path.indexOf("/nft") !== -1) {
-        this.navActive = 1;
+      switch(to.path){
+        case '/home':
+          this.navActive = 0;
+          break;
+        case '/nft':
+          this.navActive = 1;
+          break;
+        case '/user':
+          this.navActive = 5;
+          break;
+        default:
+          break;
       }
     },
   },

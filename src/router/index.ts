@@ -42,6 +42,11 @@ const routes: Array<RouteConfig> = [
       },
     ],
   },
+  {
+    path: "/user",
+    name: "User",
+    component: () => import("../views/User/index.vue"),
+  },
 ];
 
 const router = new VueRouter({

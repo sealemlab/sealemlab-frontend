@@ -4,7 +4,9 @@
 .margin0 {
   margin-right: 0 !important;
 }
-
+img{
+  object-fit: contain;
+}
 // 字体样式
 @font-face {
   font-family: "TrajanPro-Bold";
