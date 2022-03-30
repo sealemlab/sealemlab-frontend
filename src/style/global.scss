@@ -24,6 +24,24 @@ img{
   font-family: "Facon";
   src: url("../assets/fonts/Facon-2.ttf");
 }
+
+// // 英文特殊体
+// .ff_en_special {
+//   font-family: Facon;
+// }
+// // 英文常规
+// .ff_en_regular {
+//   font-family: TrajanPro-Regular;
+// }
+// // 英文粗体
+// .ff_en_bold {
+//   font-family: TrajanPro-Bold;
+// }
+// // 中文常规
+// .ff_cn_regular {
+//   font-family: WenYue-GuDianMingChaoTi-JRFC;
+// }
+
 //英文粗体
 .en_Bold {
   font-family: TrajanPro-Bold !important;
@@ -41,163 +59,33 @@ img{
   font-family: WenYue-GuDianMingChaoTi-JRFC !important;
 }
 // 大标题字号
-.font45{
+.font45 {
   font-size: 45px;
 }
 // banner 标题 eg:token
-.font34{
+.font34 {
   font-size: 34px;
 }
 // 主按钮字号
-.font28{
+.font28 {
   font-size: 28px;
 }
-.font26{
+.font26 {
   font-size: 26px;
 }
-.font22{
+.font22 {
   font-size: 22px;
 }
-.font20{
+.font20 {
   font-size: 20px;
 }
-.font18{
+.font18 {
   font-size: 18px;
 }
 // 正文字号
-.font16{
+.font16 {
   font-size: 16px;
 }
-.font14{
+.font14 {
   font-size: 14px;
-}
-
-
-
-// 英文特殊体
-.ff_en_special {
-  font-family: Facon;
-}
-// 英文常规
-.ff_en_regular {
-  font-family: TrajanPro-Regular;
-}
-// 英文粗体
-.ff_en_bold {
-  font-family: TrajanPro-Bold;
-}
-// 中文常规
-.ff_cn_regular {
-  font-family: WenYue-GuDianMingChaoTi-JRFC;
-}
-
-// 以下待定还用不用
-// 大标题
-// 英文  Trajan pro 粗体45号
-// 中文  文悦古典明朝体 45号
-.headlines {
-  font-size: 45px;
-  font-family: TrajanPro-Bold;
-  font-weight: 400;
-  color: #00c1ff;
-  background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-// 大标题  正文
-// 英文  Trajan pro 常规体 16号
-// 中文  文悦古典明朝体 16号
-.headline_body {
-  font-size: 16px;
-  font-family: TrajanPro-Regular;
-  color: #ffffff;
-}
-
-// banner  标题
-// 英文  facon 常规体 34号
-.banner_title {
-  font-size: 34px;
-  font-family: Facon;
-  color: #ffffff;
-  background: linear-gradient(180deg, #00e6ff 0%, #8847f3 100%), linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-// banner  标题文字描述带背景
-// 英文  facon 常规体 22号
-.banner_title_bg {
-  font-size: 22px;
-  font-family: Facon;
-  color: #ffffff;
-}
-// banner  标题文字描述不带背景
-// 英文  facon 常规体 18号
-.banner_title_nobg {
-  font-size: 18px;
-  font-family: Facon;
-  color: #ffffff;
-}
-
-// 主按钮
-// 英文  facon 粗 28号
-.main_button {
-  font-size: 28px;
-  font-family: Facon;
-  font-weight: bold;
-  color: #381a02;
-  line-height: 34px;
-}
-
-// 次标题1
-// 英文  Trajan pro 粗体20号
-.subheading1 {
-  font-size: 20px;
-  font-family: TrajanPro-Bold;
-  color: #ffffff;
-  background: linear-gradient(180deg, #00e6ff 0%, #8847f3 100%), linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-// 次标题1正文1
-// 中文  文悦古典明朝体 16号
-.subheading1_body1 {
-  font-size: 16px;
-  font-family: WenYue-GuDianMingChaoTi-JRFC;
-  color: #ffffff;
-}
-
-// 次标题2
-// 英文  Trajan pro 粗体26号
-.subheading2 {
-  font-size: 26px;
-  font-family: TrajanPro-Bold;
-  color: #00c1ff;
-  background: linear-gradient(180deg, #00e6ff 0%, #8847f3 100%), linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-// 次标题2正文2
-// 中文  文悦古典明朝体 16号
-.subheading2_body2 {
-  font-size: 16px;
-  font-family: WenYue-GuDianMingChaoTi-JRFC;
-  color: #ffffff;
-}
-// 次标题3
-// 英文  Trajan pro 粗体18号
-.subheading3 {
-  font-size: 18px;
-  font-family: TrajanPro-Bold;
-  color: #ffffff;
-  background: linear-gradient(180deg, #00e6ff 0%, #8847f3 100%), linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-// 次标题3正文3
-// 英文  Trajan pro 粗体14号
-.subheading3_body3 {
-  font-size: 14px;
-  font-family: TrajanPro-Bold;
-  color: #ffffff;
 }

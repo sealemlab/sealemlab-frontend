@@ -1,5 +1,5 @@
 <template>
-  <div class="nav" :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">
+  <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
       <img class="logo" src="../assets/images/logo.png" alt="" @click="toRoute('/home')"/>
       <ul>
