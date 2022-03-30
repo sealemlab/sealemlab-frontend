@@ -1,7 +1,5 @@
 <template>
-  <div class="page" :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'">
-    <!-- :class="isEnLang ? 'ff_en_bold' : 'ff_cn_regular'" -->
-    <!-- :class="isEnLang ? 'ff_en_regular' : 'ff_cn_regular'" -->
+  <div class="page" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="main_box">
       <ul>
         <li>{{ $t("message.nft.txt5") }}</li>
