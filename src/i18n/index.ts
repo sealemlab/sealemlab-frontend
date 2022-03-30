@@ -4,7 +4,6 @@ import utils from "../utils/index";
 Vue.use(VueI18n);
 const i18n = new VueI18n({
   locale: utils.getCookie("LANG") || "cn",
-  // locale: "cn",
   messages: {
     cn: require("./cn"),
     en: require("./en"),

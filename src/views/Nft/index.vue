@@ -44,8 +44,8 @@ export default {
   width: 100%;
   height: 100%;
   .main_box {
-    width: 100%;
-    height: calc(100% * 0.58);
+    width: 100vw;
+    height: 58vw;
     background: url("../../assets/images/nftimage/nft_bg.png") no-repeat;
     background-size: 100% 100%;
     padding: 0 5vw;

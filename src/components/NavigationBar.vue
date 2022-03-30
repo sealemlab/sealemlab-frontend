@@ -1,7 +1,7 @@
 <template>
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
-      <img class="logo" src="../assets/images/logo.png" alt="" @click="toRoute('/home')"/>
+      <img class="logo" src="../assets/images/logo.png" alt="" @click="toRoute('/home')" />
       <ul>
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
           <span> {{ $t(item.label) }}</span>
@@ -41,24 +41,18 @@ export default {
       ],
       showLangSelect: false,
       language: "",
-      langArr: ["English", "中文繁体"],
+      langArr: ["English", "繁体中文"],
     };
   },
   computed: { ...mapGetters(["isEnLang"]) },
   watch: {
     $route(to) {
-      switch(to.path){
-        case '/home':
-          this.navActive = 0;
-          break;
-        case '/nft':
-          this.navActive = 1;
-          break;
-        case '/user':
-          this.navActive = 5;
-          break;
-        default:
-          break;
+      if (to.path == "/home") {
+        this.navActive = 0;
+      } else if (to.path.indexOf("/nft/") !== -1) {
+        this.navActive = 1;
+      } else if (to.path == "/user") {
+        this.navActive = 5;
       }
     },
   },
