@@ -108,9 +108,21 @@
       <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt46")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="game_scene">
-        <img :src="gameArr[gameIndex].maxSrc" class="gameSceneMax" />
-        <div class="position_img display_flex">
-          <img :src="item.src" v-for="(item,index) in gameArr" :key="index" @click="gameClick(index)" class="gameScene1" />
+        <!-- 跟着联动的swiper -->
+        <div class="bottom_swiper">
+          <swiper :options="gameMaxSwiperOption" ref="gameMaxSwiper" class="gameMax_swiper">
+            <swiper-slide v-for="(item,index) in gameArr" :key="index">
+              <img :src="item.maxSrc" />
+            </swiper-slide>
+          </swiper>
+        </div>
+        <!-- 点击的swiper -->
+        <div class="position_img display_flex" style="min-height: 240px;">
+          <swiper :options="gameSwiperOption" ref="gameSwiper" class="game_swiper">
+            <swiper-slide v-for="(item,index) in gameArr" :key="index">
+              <img :src="item.src" @click="gameClick(item)" class="gameScene1" />
+            </swiper-slide>
+          </swiper>
         </div>
       </div>
     </div>
@@ -294,6 +306,25 @@ export default {
           bulletActiveClass: 'my-bullet-active'
         },
       },
+      // 点击的swiper
+      gameSwiperOption:{
+        slidesPerView: 3, // 一行展示几个
+        slidesPerColumn: 2, //设置多行布局里面每列的slide数量
+        on: {
+          tap: () => {
+            this.gameIndex = this.$refs.gameSwiper.swiper.clickedIndex;
+          },
+        },
+      },
+      // 跟着联动的swiper
+      gameMaxSwiperOption:{
+        loop:true,
+        on: {
+          slideChange: () => {
+            this.gameIndex = this.$refs.gameMaxSwiper.swiper.activeIndex;
+          },
+        },
+      },
       peopleArr:[
         {
           src:require('../../assets/images/people1.png'),
@@ -347,38 +378,50 @@ export default {
       ],
       gameArr:[
         {
+          id:1,
           src:require('../../assets/images/game1.png'),
           maxSrc:require('../../assets/images/gameSceneMax1.png')
         },
         {
+          id:2,
           src:require('../../assets/images/game2.png'),
           maxSrc:require('../../assets/images/gameSceneMax2.png')
         },
         {
+          id:3,
           src:require('../../assets/images/game3.png'),
           maxSrc:require('../../assets/images/gameSceneMax3.png')
         },
         {
+          id:4,
           src:require('../../assets/images/game4.png'),
           maxSrc:require('../../assets/images/gameSceneMax4.png')
         },
         {
+          id:5,
           src:require('../../assets/images/game5.png'),
           maxSrc:require('../../assets/images/gameSceneMax5.png')
         },
         {
+          id:6,
           src:require('../../assets/images/game6.png'),
           maxSrc:require('../../assets/images/gameSceneMax6.png')
         }
       ]
     }
   },
+  watch: {
+    gameIndex(newVal) {
+      this.$refs.gameSwiper.swiper.slideTo(newVal);
+      this.$refs.gameMaxSwiper.swiper.slideTo(newVal);
+    },
+  },
   methods:{
     peopleClick(index){
       this.peopleIndex = index
     },
-    gameClick(index){
-      this.gameIndex = index
+    gameClick(item){
+      this.gameIndex = item.id
     },
     typewriting(){
       let index=0
@@ -418,6 +461,7 @@ export default {
 <style lang="scss" soped>
 .home{
   width: 100%;
+  margin-top: -80px;
   .home_bgbox{
     width: 100%;
     position: relative;
@@ -675,22 +719,28 @@ export default {
     .game_scene{
       width: 100%;
       position: relative;
-      .gameSceneMax{
+      .bottom_swiper{
         width: 100%;
-        object-fit: contain;
+        .gameMax_swiper{
+          width: 100%;
+          img{
+            width: 100%;
+          }
+        }
       }
       .position_img{
-        cursor: pointer;
         width: 714px;
         position: absolute;
         bottom: 31px;
-        left: 42px;
-        align-items: center;
-        flex-wrap: wrap;
-        .gameScene1{
-          width: 218px;
-          margin-right: 19px;
-          margin-bottom: 21px;
+        .game_swiper{
+          width: 100%;
+          .swiper-slide{
+            height: 50%;
+            .gameScene1{
+              width: 95%;
+              cursor: pointer;
+            }
+          }
         }
       }
     }

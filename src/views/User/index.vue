@@ -125,12 +125,6 @@ export default {
       ]
     }
   },
-  // watch:{
-  //   $route(to){
-  //     console.log('用户中心to: ', to);
-  //     this.li_index = to.params.id
-  //   }
-  // },
   methods:{
     liClick(item,index){
       console.log('index: ', index);

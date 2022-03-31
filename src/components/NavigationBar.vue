@@ -46,7 +46,10 @@ export default {
   },
   computed: { ...mapGetters(["isEnLang"]) },
   watch: {
-    $route(to) {
+    $route(to,from) {
+      if(from.matched.length && to.matched[0].path != from.matched[0].path){
+        window.scrollTo(0, 0);
+      }
       if (to.path == "/home") {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {

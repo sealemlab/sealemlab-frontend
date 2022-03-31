@@ -44,7 +44,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/user",
-    name: "User",
+    // name: "User",
     component: () => import("../views/User/index.vue"),
     children: [
       { path: "/", redirect: "assets" },
