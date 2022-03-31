@@ -7,11 +7,11 @@
           <span class="font16 margin_top">合约:0x77749fc693……053</span>
         </div>
         <div class="menu display_flex">
-          <div class="onebox" :class="{ activeMenu: menuIndex == index }" v-for="(item, index) in menuArr" :key="index" @click="menuClick(index)">{{item.title}}</div>
+          <div class="onebox" :class="{ activeMenu: menuIndex == index }" v-for="(item, index) in menuArr" :key="index" @click="menuClick(item,index)">{{item.title}}</div>
         </div>
       </div>
       <div class="content display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
-        <p class="font45 buybox_txt">购买盲盒</p>
+        <p class="font45 buybox_txt">{{title}}</p>
         <p class="font16">购买盲盒参与游戏，自由交易</p>
         <div class="imgbox">
           <swiper ref="swiper" :options="swiperOption" class="self_swiper">
@@ -34,6 +34,7 @@ export default {
   },
   data(){
     return{
+      title:'购买盲盒',
       menuIndex:0,
       menuArr:[
         {title:'全部'},
@@ -74,7 +75,8 @@ export default {
     }
   },
   methods:{
-    menuClick(index){
+    menuClick(item,index){
+      this.title = item.title
       this.menuIndex = index
     }
   }
