@@ -108,14 +108,9 @@
       <span class="title_txt font45" :class="isEnLang?'en_Bold':'cn_lang'">{{ $t("message.home.txt46")}}</span>
       <img src="../../assets/images/people_line.png" class="people_line" />
       <div class="game_scene">
-        <img src="../../assets/images/gameSceneMax.png" class="gameSceneMax" />
+        <img :src="gameArr[gameIndex].maxSrc" class="gameSceneMax" />
         <div class="position_img display_flex">
-          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
-          <img src="../../assets/images/gameScene1.png" class="gameScene1" />
+          <img :src="item.src" v-for="(item,index) in gameArr" :key="index" @click="gameClick(index)" class="gameScene1" />
         </div>
       </div>
     </div>
@@ -185,6 +180,7 @@ export default {
   },
   data(){
     return{
+      gameIndex:0,//游戏场景展示对应大图的索引
       peopleIndex:0,// 人物展示对应大图的索引
       inter:'',
       datatxt:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏,游戏采用虚幻4引擎打造,有着超精致的画面表现、动作性以及打击感。',
@@ -301,66 +297,88 @@ export default {
       peopleArr:[
         {
           src:require('../../assets/images/people1.png'),
-          maxSrc:require('../../assets/images/peoplemax.png'),
+          maxSrc:require('../../assets/images/peoplemax1.png'),
           title:"message.home.txt22",
           describe:"message.home.txt23",
           supplementContent:"message.home.txt24"
         },
         {
-          src:require('../../assets/images/people1.png'),
-          maxSrc:require('../../assets/images/peoplemax.png'),
+          src:require('../../assets/images/people2.png'),
+          maxSrc:require('../../assets/images/peoplemax2.png'),
           title:"message.home.txt25",
           describe:"message.home.txt26",
           supplementContent:"message.home.txt27"
         },
         {
-          src:require('../../assets/images/people1.png'),
-          maxSrc:require('../../assets/images/peoplemax.png'),
+          src:require('../../assets/images/people3.png'),
+          maxSrc:require('../../assets/images/peoplemax3.png'),
           title:"message.home.txt28",
           describe:"message.home.txt29",
           supplementContent:"message.home.txt30"
         },
         {
-          src:require('../../assets/images/people1.png'),
-          maxSrc:require('../../assets/images/peoplemax.png'),
+          src:require('../../assets/images/people4.png'),
+          maxSrc:require('../../assets/images/peoplemax4.png'),
           title:"message.home.txt31",
           describe:"message.home.txt32",
           supplementContent:"message.home.txt33"
         },
         {
-          src:require('../../assets/images/people1.png'),
-          maxSrc:require('../../assets/images/peoplemax.png'),
+          src:require('../../assets/images/people5.png'),
+          maxSrc:require('../../assets/images/peoplemax5.png'),
           title:"message.home.txt34",
           describe:"message.home.txt35",
           supplementContent:"message.home.txt36"
         },
         {
-          src:require('../../assets/images/people1.png'),
-          maxSrc:require('../../assets/images/peoplemax.png'),
+          src:require('../../assets/images/people6.png'),
+          maxSrc:require('../../assets/images/peoplemax6.png'),
           title:"message.home.txt37",
           describe:"message.home.txt38",
           supplementContent:"message.home.txt39"
         },
+        // {
+        //   src:require('../../assets/images/people7.png'),
+        //   maxSrc:require('../../assets/images/peoplemax7.png'),
+        //   title:"message.home.txt40",
+        //   describe:"message.home.txt41",
+        //   supplementContent:"message.home.txt42"
+        // }
+      ],
+      gameArr:[
         {
-          src:require('../../assets/images/people1.png'),
-          maxSrc:require('../../assets/images/peoplemax.png'),
-          title:"message.home.txt40",
-          describe:"message.home.txt41",
-          supplementContent:"message.home.txt42"
+          src:require('../../assets/images/game1.png'),
+          maxSrc:require('../../assets/images/gameSceneMax1.png')
         },
         {
-          src:require('../../assets/images/people1.png'),
-          maxSrc:require('../../assets/images/peoplemax.png'),
-          title:"message.home.txt43",
-          describe:"message.home.txt44",
-          supplementContent:"message.home.txt45"
+          src:require('../../assets/images/game2.png'),
+          maxSrc:require('../../assets/images/gameSceneMax2.png')
         },
+        {
+          src:require('../../assets/images/game3.png'),
+          maxSrc:require('../../assets/images/gameSceneMax3.png')
+        },
+        {
+          src:require('../../assets/images/game4.png'),
+          maxSrc:require('../../assets/images/gameSceneMax4.png')
+        },
+        {
+          src:require('../../assets/images/game5.png'),
+          maxSrc:require('../../assets/images/gameSceneMax5.png')
+        },
+        {
+          src:require('../../assets/images/game6.png'),
+          maxSrc:require('../../assets/images/gameSceneMax6.png')
+        }
       ]
     }
   },
   methods:{
     peopleClick(index){
       this.peopleIndex = index
+    },
+    gameClick(index){
+      this.gameIndex = index
     },
     typewriting(){
       let index=0
@@ -662,6 +680,7 @@ export default {
         object-fit: contain;
       }
       .position_img{
+        cursor: pointer;
         width: 714px;
         position: absolute;
         bottom: 31px;

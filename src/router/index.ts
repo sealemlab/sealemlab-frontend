@@ -46,6 +46,24 @@ const routes: Array<RouteConfig> = [
     path: "/user",
     name: "User",
     component: () => import("../views/User/index.vue"),
+    children: [
+      { path: "/", redirect: "assets" },
+      {
+        path: "assets/:id",
+        name: "Assets",
+        component: () => import("../views/User/assets.vue"),
+      },
+      {
+        path: "blindbox/:id",
+        name: "Blindbox",
+        component: () => import("../views/User/blindbox.vue"),
+      },
+      {
+        path: "invite/:id",
+        name: "Invite",
+        component: () => import("../views/User/invite.vue"),
+      }
+    ],
   },
 ];
 

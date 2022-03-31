@@ -37,7 +37,7 @@ export default {
         // { label: "message.nav.txt5", link: "" },
         // { label: "message.nav.txt6", link: "" },
         { label: "message.nav.txt7", link: "" },
-        { label: "message.nav.txt8", link: "/user" },
+        { label: "message.nav.txt8", link: "/user/assets/0" },
       ],
       showLangSelect: false,
       language: "",
@@ -51,7 +51,7 @@ export default {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
-      } else if (to.path == "/user") {
+      } else if (to.path.indexOf("/user/") !== -1) {
         this.navActive = 5;
       }
     },

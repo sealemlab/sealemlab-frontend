@@ -1,7 +1,7 @@
 <template>
   <div class="user_center_page">
     <div class="user_info display_flex">
-      <img src="../../assets/images/usercorebg.png" class="use_bg" />
+      <!-- <img src="../../assets/images/usercorebg.png" class="use_bg" /> -->
       <div class="user_head_portrait display_flex">
         <img src="../../assets/images/userhead.png" class="user_head">
         <div class="user_name display_flex">
@@ -10,7 +10,7 @@
         </div>
         <div class="invitation_code font20" :class="isEnLang?'en_Bold':'cn_lang'">邀请链接:21233443535353</div>
       </div>
-      <div class="content display_flex">
+      <div class="content display_flex" v-if="li_index == 0">
         <div class="box display_flex" v-for="(item, index) in walletArr" :key="index">
           <div class="coin_name display_flex font20" :class="isEnLang?'en_Bold':'cn_lang'">
             <div class="leftbox display_flex">
@@ -36,13 +36,38 @@
           </div>
         </div>
       </div>
+      <div class="invite_content content display_flex" v-if="li_index == 1">
+        <div class="invite_title display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
+          <div class="left display_flex">
+            <span class="font35">总收入</span>
+            <div class="income_box display_flex font26">
+              <div class="imgbox display_flex">
+                <img src="../../assets/images/stlogo.png" class="homebg" />
+                <span>ST</span>
+              </div>
+              <span>100</span>
+            </div>
+          </div>
+          <div class="left display_flex">
+            <span class="font35">当期收入</span>
+            <div class="income_box display_flex font26">
+              <div class="imgbox display_flex">
+                <img src="../../assets/images/srlogo.png" class="homebg" />
+                <span>SR</span>
+              </div>
+              <span>100</span>
+            </div>
+          </div>
+        </div>
+        <p class="message font16" :class="isEnLang?'en_Regular':'cn_lang'">提示：您的帳戶中至少需要一個 NFT 才能獲得推薦收入.</p>
+      </div>
     </div>
     <div class="content_box display_flex">
       <ul class="display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
-        <li class="font30" :class="{ active_li: li_index == index }" v-for="(item,index) in menuArr" :key="index" @click="liClick(index)">{{item.name}}</li>
+        <li class="font30" :class="{ active_li: li_index == index }" v-for="(item,index) in menuArr" :key="index" @click="liClick(item,index)">{{item.name}}</li>
       </ul>
       <div class="main">
-        
+        <router-view />
       </div>
     </div>
   </div>
@@ -94,22 +119,34 @@ export default {
       }
       ],
       menuArr:[
-        {name:'资产'},
-        {name:'邀请奖励'},
-        {name:'盲盒'},
+        {name:'资产',link:'/user/assets/0'},
+        {name:'邀请奖励',link:'/user/invite/1'},
+        {name:'盲盒',link:'/user/blindbox/2'},
       ]
     }
   },
+  // watch:{
+  //   $route(to){
+  //     console.log('用户中心to: ', to);
+  //     this.li_index = to.params.id
+  //   }
+  // },
   methods:{
-    liClick(index){
+    liClick(item,index){
+      console.log('index: ', index);
       this.li_index = index
+      this.$router.push(item.link)
     }
+  },
+  mounted(){
+    this.li_index = this.$route.params.id
   }
 }
 </script>
 <style lang="scss" scoped>
 .user_center_page{
   width: 100%;
+  min-height: calc(100vh - 400px);
   margin-top: -80px;
   .user_info{
     position: relative;
@@ -119,14 +156,16 @@ export default {
     align-items: center;
     padding: 0 70px;
     padding-top: 155px;
-    .use_bg{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: -1;
-      object-fit: contain;
-    }
+    background-image: url("../../assets/images/usercorebg.png");
+    background-size: 100% 100%;
+    // .use_bg{
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   z-index: -1;
+    //   object-fit: contain;
+    // }
     .user_head_portrait{
       flex-direction: column;
       align-items: center;
@@ -203,14 +242,47 @@ export default {
         }
       }
     }
+    .invite_content{
+      flex-direction: column;
+      .invite_title{
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        .left{
+          flex-direction: column;
+          .income_box{
+            margin-top: 26px;
+            width: 334px;
+            height: 86px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            background-image: url("../../assets/images/income.png");
+            background-size: 100% 100%;
+            .imgbox{
+              align-items: center;
+              .homebg{
+                width: 47px;
+                margin-right: 14px;
+              }
+            }
+          }
+        }
+      }
+      .message{
+        margin-top: 30px;
+        font-weight: normal;
+        color: #ccc;
+        line-height: 20px;
+      }
+    }
   }
   .content_box{
     width: 100%;
     background: #000;
-    padding: 0 70px;
+    padding: 80px 70px;
     ul{
       flex-direction: column;
-      margin-top: 80px;
       li{
         // margin-top: 80px;
         font-weight: normal;
@@ -227,6 +299,10 @@ export default {
       .active_li{
         background: linear-gradient(90deg,#BF9A50,rgba(7,31,58,0) 100%,#B89B5B 0);
       }
+    }
+    .main{
+      width: 100%;
+      padding-left: 60px;
     }
   }
 }

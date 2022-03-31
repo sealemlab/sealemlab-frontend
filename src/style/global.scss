@@ -7,6 +7,11 @@
 img{
   object-fit: contain;
 }
+.demo_font_color{
+  background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 // 字体样式
 @font-face {
   font-family: "TrajanPro-Bold";
