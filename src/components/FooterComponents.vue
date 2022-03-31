@@ -48,6 +48,7 @@ export default {
   width: 100%;
   flex-direction: column;
   align-items: center;
+  margin-top: 200px;
   .footer_img {
     width: 100%;
     object-fit: contain;
