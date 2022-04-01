@@ -32,10 +32,6 @@ export default {
     };
   },
   computed: { ...mapGetters(["isEnLang"]) },
-  created() {
-    // console.log("当前语言：", this.$i18n.locale);
-    // console.log("English：", this.isEnLang);
-  },
 };
 </script>
 

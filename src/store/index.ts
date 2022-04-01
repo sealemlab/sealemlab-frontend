@@ -12,9 +12,6 @@ export default new Vuex.Store({
     //     : "//cdn.hashland.com/testimgs/", //图片前缀
   },
   getters: {
-    // isEnLang() {
-    //   return i18n.locale == "en";
-    // },
     isEnLang() {
       return i18n.locale == "en";
     },

@@ -46,8 +46,8 @@ export default {
   },
   computed: { ...mapGetters(["isEnLang"]) },
   watch: {
-    $route(to,from) {
-      if(from.matched.length && to.matched[0].path != from.matched[0].path){
+    $route(to, from) {
+      if (from.matched.length && to.matched[0].path != from.matched[0].path) {
         window.scrollTo(0, 0);
       }
       if (to.path == "/home") {
@@ -82,7 +82,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9;
+  z-index: 9999;
   width: 100%;
   height: 80px;
   background: #000000;

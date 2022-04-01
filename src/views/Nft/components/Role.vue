@@ -15,8 +15,8 @@
               <div class="img" :class="{ active: currentSwiperIndex == index }"><img :src="item" alt="" /></div>
             </swiper-slide>
           </swiper>
-          <div class="swiper-button-prev" @click="prevBtn"></div>
-          <div class="swiper-button-next" @click="nextBtn"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
         </ul>
       </div>
       <div class="right">
@@ -183,18 +183,9 @@ export default {
       this.$refs.swiper2.swiper.slideTo(newVal);
     },
   },
-  mounted() {
-    // this.$nextTick(() => {});
-  },
   methods: {
     clickTabClass(index) {
       this.currentClass = index;
-    },
-    prevBtn() {
-      // this.currentSwiperIndex--;
-    },
-    nextBtn() {
-      // this.currentSwiperIndex++;
     },
   },
 };

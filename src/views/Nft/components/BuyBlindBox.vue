@@ -20,7 +20,7 @@
             <div>数量</div>
             <div class="btns">
               <span class="btn" @click="deleteAmount">-</span>
-              <span>{{ amount }}</span>
+              <input type="number" v-model="amount" />
               <span class="btn" @click="addAmount">+</span>
             </div>
           </li>
@@ -45,12 +45,19 @@ export default {
       totalAmount: 10,
     };
   },
-  mounted() {
-    // this.$nextTick(() => {});
+  watch: {
+    amount(newVal, oldVal) {
+      if (newVal && newVal <= 99999) {
+        this.amount = newVal;
+      } else {
+        this.amount = oldVal;
+        // console.log("");
+      }
+    },
   },
   methods: {
     clickBuy() {
-      console.log("clickBuy");
+      console.log("clickBuy", this.amount, typeof this.amount);
     },
     deleteAmount() {
       this.amount--;
@@ -125,12 +132,11 @@ export default {
             &:nth-child(1) {
               font-size: 16px;
               color: #ffffff;
-              line-height: 23px;
             }
-            &:nth-child(2) {
+            &:nth-child(2),
+            input {
               font-size: 28px;
               color: #f1b713;
-              line-height: 40px;
               background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
@@ -139,23 +145,21 @@ export default {
               display: flex;
               align-items: center;
               span {
-                &:nth-child(1),
-                &:nth-child(3) {
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  cursor: pointer;
-                  width: 20px;
-                  height: 20px;
-                  border-radius: 50%;
-                  border: 1px solid #939393;
-                  font-size: 20px;
-                }
-                &:nth-child(2) {
-                  margin: 0 10px;
-                  text-align: right;
-                  min-width: 2em;
-                }
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                border: 1px solid #939393;
+                font-size: 20px;
+              }
+              input {
+                width: 3em;
+                height: 100%;
+                margin: 0 10px;
+                text-align: right;
               }
             }
           }

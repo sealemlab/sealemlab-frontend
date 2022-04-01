@@ -108,3 +108,17 @@ body {
 ::-webkit-scrollbar-track {
   background: #000;
 }
+input {
+  // background: none;
+  // outline: none;
+  // border: 0px;
+  // caret-color: white;
+  &[type="number"] {
+    -moz-appearance: textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
