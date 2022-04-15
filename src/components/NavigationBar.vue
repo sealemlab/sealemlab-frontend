@@ -4,12 +4,19 @@
       <img class="logo" src="../assets/images/logo.png" alt="" @click="toRoute('/home')" />
       <ul>
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
-          <span> {{ $t(item.label) }}</span>
+          <span class="font18"> {{ $t(item.label) }}</span>
         </li>
       </ul>
     </div>
     <div class="nav_right">
-      <div class="connect">{{ $t("message.nav.txt9") }}</div>
+      <div class="st_price">
+        <img src="../assets/images/stlogo.png" class="st_price_img" />
+        <span class="font_price font16">$5.45</span>
+      </div>
+      <div class="login_box">
+        <span class="font_login font16">Register/Login</span>
+      </div>
+      <div class="connect font16">{{ $t("message.nav.txt9") }}</div>
       <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
         <span>{{ language }}</span>
         <img src="../assets/images/accrow.png" alt="" />
@@ -30,18 +37,17 @@ export default {
     return {
       navActive: 0,
       navArr: [
-        { label: "message.nav.txt1", link: "/home" },
-        { label: "message.nav.txt2", link: "/nft" },
-        { label: "message.nav.txt3", link: "" },
+        { label: "message.nav.txt1", link: "/bond" },
+        { label: "message.nav.txt2", link: "" },
+        { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
-        // { label: "message.nav.txt5", link: "" },
-        // { label: "message.nav.txt6", link: "" },
-        { label: "message.nav.txt7", link: "" },
-        { label: "message.nav.txt8", link: "/user/assets/0" },
+        { label: "message.nav.txt5", link: "" },
+        { label: "message.nav.txt6", link: "/user/assets/0" },
+        { label: "message.nav.txt7", link: "" }
       ],
       showLangSelect: false,
       language: "",
-      langArr: ["English", "繁体中文"],
+      langArr: ["EN", "CN"],
     };
   },
   computed: { ...mapGetters(["isEnLang"]) },
@@ -51,9 +57,11 @@ export default {
         window.scrollTo(0, 0);
       }
       if (to.path == "/home") {
+        this.navActive = -1;
+      }else if (to.path == '/bond') {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
-        this.navActive = 1;
+        this.navActive = 2;
       } else if (to.path.indexOf("/user/") !== -1) {
         this.navActive = 5;
       }
@@ -69,7 +77,7 @@ export default {
     selectLang(index) {
       if (this.language == this.langArr[index]) return (this.showLangSelect = false);
       this.language = this.langArr[index];
-      this.$i18n.locale = this.language == "English" ? "en" : "cn";
+      this.$i18n.locale = this.language == "EN" ? "en" : "cn";
       this.$utils.setCookie("LANG", this.$i18n.locale);
       location.reload();
     },
@@ -89,14 +97,15 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  // padding: 0 96px;
 }
 .nav_left {
   display: flex;
   align-items: center;
   .logo {
     width: auto;
-    height: 60px;
-    margin-right: 20px;
+    height: 62px;
+    margin-right: 14px;
     cursor: pointer;
   }
   ul {
@@ -104,21 +113,17 @@ export default {
     align-items: center;
     li {
       cursor: pointer;
-      margin: 0 10px;
-      padding: 10px 15px;
-      span {
-        font-size: 19px;
-      }
+      padding: 10px 14px;
+      font-weight: bold;
+      color: #fff;
       &.active {
         span {
-          font-weight: bold;
-          color: #d8d8d8;
           background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
-        background: url("../assets/images/menubg.png") no-repeat;
-        background-size: 100% 100%;
+        // background: url("../assets/images/menubg.png") no-repeat;
+        // background-size: 100% 100%;
       }
     }
   }
@@ -126,14 +131,42 @@ export default {
 .nav_right {
   display: flex;
   align-items: center;
+  .st_price{
+    display: flex;
+    align-items: center;
+    .st_price_img{
+      width: 32px;
+    }
+    .font_price{
+      font-weight: bold;
+      color: #F0C682;
+      line-height: 19px;
+      margin-left: 10px;
+    }
+  }
+  .login_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 23px 0 53px;
+    .font_login{
+      font-weight: bold;
+      color: #FFFFFF;
+      line-height: 19px;
+    }
+  }
   .connect {
     cursor: pointer;
-    padding: 5px 20px;
-    background: url("../assets/images/connect.png") no-repeat;
-    background-size: 100% 100%;
-    margin-right: 10px;
-    font-size: 16px;
-    color: #381a02;
+    padding: 5px 10px;
+    background: #232229;
+    border: 1px solid #4f4e53;
+    border-radius: 8px;
+    // background: url("../assets/images/connect.png") no-repeat;
+    // background-size: 100% 100%;
+    margin-right: 17px;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 19px;
   }
   .lang_box {
     cursor: pointer;

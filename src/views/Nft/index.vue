@@ -1,15 +1,8 @@
 <template>
-  <div class="page" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
-    <div class="main_box">
-      <ul>
-        <li>{{ $t("message.nft.txt5") }}</li>
-        <li>{{ $t("message.nft.txt6") }}</li>
-        <li>{{ $t("message.nft.txt7") }}</li>
-      </ul>
-    </div>
+  <div class="page">
     <div class="tab_box">
       <div class="tab_left">
-        <router-link class="a_link" v-for="(route, index) in navArr" :key="index" :to="route.link">
+        <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
           {{ $t(route.label) }}
         </router-link>
       </div>
@@ -26,8 +19,10 @@ export default {
       navArr: [
         { label: "message.nft.txt1", link: "/nft/role" },
         { label: "message.nft.txt2", link: "/nft/buy-blind-box" },
-        { label: "message.nft.txt3", link: "/nft/giving" },
-        { label: "message.nft.txt4", link: "/nft/lease" },
+        { label: "message.nft.txt3", link: "/nft/blind-box" },
+        { label: "message.nft.txt4", link: "/nft/my-nft" },
+        { label: "message.nft.txt5", link: "/nft/giving" },
+        { label: "message.nft.txt6", link: "/nft/lease" },
       ],
     };
   },
@@ -39,35 +34,7 @@ export default {
 .page {
   width: 100%;
   height: 100%;
-  .main_box {
-    width: 100%;
-    height: 58vw;
-    background: url("../../assets/images/nftimage/nft_bg.png") no-repeat;
-    background-size: 100% 100%;
-    padding: 0 5vw;
-    ul {
-      max-width: 800px;
-      position: relative;
-      top: 60%;
-      li {
-        &:nth-child(1) {
-          font-size: 26px;
-          line-height: 32px;
-        }
-        &:nth-child(2) {
-          font-size: 70px;
-          line-height: 85px;
-          color: #ffffff;
-        }
-        &:nth-child(3) {
-          max-width: 500px;
-          font-size: 22px;
-          line-height: 32px;
-          font-weight: 400;
-        }
-      }
-    }
-  }
+  margin-top: 80px;
   .tab_box {
     width: 80vw;
     min-height: 25vh;
@@ -82,9 +49,8 @@ export default {
       .a_link {
         display: block;
         text-decoration: none;
-        font-size: 25px;
         color: #ffffff;
-        padding: 20px 50px;
+        padding: 10px;
         margin-bottom: 20px;
         &.router-link-active {
           background: linear-gradient(270deg, rgba(140, 106, 56, 0) 0%, #bf9a50 100%);

@@ -1,7 +1,6 @@
 <template>
   <!-- 底部 -->
   <div class="footer_box display_flex">
-    <img src="../assets/images/footer_img.png" class="footer_img" />
     <div class="footer_content display_flex">
       <img src="../assets/images/logo.png" class="footer_logo" />
       <div class="onebox display_flex">
@@ -12,7 +11,15 @@
         </ul>
       </div>
     </div>
-    <p class="copyright font14 en_Regular">COPYRIGHT © 2022 Sacred Realm, All rights Reserved</p>
+    <div class="footerbox">
+      <div class="link_imgbox">
+        <img src="../assets/images/footerimg1.png" class="tel_img" />
+        <img src="../assets/images/footerimg2.png" class="tel_img" />
+        <img src="../assets/images/footerimg3.png" class="tel_img" />
+        <img src="../assets/images/footerimg4.png" class="tel_img" />
+      </div>
+      <p class="copyright font14 en_Regular">COPYRIGHT © 2022 Sacred Realm, All rights Reserved</p>
+    </div>
   </div>
 </template>
 <script>
@@ -45,10 +52,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .footer_box {
+  // border-top: 1px solid#ECCF83;
+  // border-bottom: 8px solid#ECCF83;
+  margin-top: 50px;
+  padding: 60px 0;
   width: 100%;
   flex-direction: column;
   align-items: center;
-  margin-top: 200px;
+  background: url("../assets/images/footerbg.png") no-repeat #000;
+  background-size: 100% 100%;
   .footer_img {
     width: 100%;
     object-fit: contain;
@@ -89,9 +101,24 @@ export default {
       }
     }
   }
-  .copyright {
-    line-height: 60px;
-    letter-spacing: 0.52px;
+  .footerbox{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .link_imgbox{
+      display: flex;
+      align-items: center;
+      .tel_img{
+        width: 41px;
+        margin-right: 26px;
+      }
+    }
+    .copyright {
+      margin-top: 20px;
+      line-height: 60px;
+      letter-spacing: 0.52px;
+    }
   }
 }
 </style>

@@ -3,7 +3,7 @@ import VueI18n from "vue-i18n";
 import utils from "../utils/index";
 Vue.use(VueI18n);
 const i18n = new VueI18n({
-  locale: utils.getCookie("LANG") || "cn",
+  locale: utils.getCookie("LANG") || "en",
   messages: {
     cn: require("./cn"),
     en: require("./en"),

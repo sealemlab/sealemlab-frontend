@@ -15,6 +15,11 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Home/IndexView.vue"),
   },
   {
+    path: "/bond",
+    name: "Bond",
+    component: () => import("../views/Bond/inedx.vue"),
+  },
+  {
     path: "/nft",
     // name: "NFT",
     component: () => import("../views/Nft/index.vue"),
@@ -29,6 +34,16 @@ const routes: Array<RouteConfig> = [
         path: "buy-blind-box",
         name: "BuyBlindBox",
         component: () => import("../views/Nft/components/BuyBlindBox.vue"),
+      },
+      {
+        path: "blind-box",
+        name: "BlindBox",
+        component: () => import("../views/Nft/components/BlindBox.vue"),
+      },
+      {
+        path: "my-nft",
+        name: "MyNft",
+        component: () => import("../views/Nft/components/MyNft.vue"),
       },
       {
         path: "giving",

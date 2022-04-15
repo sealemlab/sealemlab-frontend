@@ -1,11 +1,9 @@
 <template>
-  <div id="app">
-    <!-- <div class="video_"> -->
-      <video class="video_" loop autoplay muted>
+  <div id="app" :class="isEnLang?'en_Bold':'cn_lang'">
+      <!-- <video class="video_" loop autoplay muted>
         <source src="./assets/video/1.mp4" type="video/mp4" />
-      </video>
+      </video> -->
       <!-- <iframe style="display: none" allow="autoplay" src="./assets/video/1.mp4"></iframe> -->
-    <!-- </div> -->
     <NavigationBar />
     <router-view />
     <FooterComponents />
@@ -14,7 +12,11 @@
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters(["isEnLang"])
+  },
   components: {
     NavigationBar,
     FooterComponents,
@@ -22,6 +24,7 @@ export default {
   methods: {
     setRem() {
       const bodyWidth = document.body.clientWidth;
+      console.log('bodyWidth: ', bodyWidth);
       const rem375 = (bodyWidth * 100) / 375;
       if (bodyWidth <= 980) {
         document.getElementsByTagName("html")[0].style.fontSize = rem375 + "px";
@@ -45,6 +48,7 @@ export default {
 #app {
   width: calc(100vw - 5px);
   min-height: 100vh;
-  padding-top: 80px;
+  background: #000000;
+  padding-bottom: 30px;
 }
 </style>

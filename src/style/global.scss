@@ -1,68 +1,55 @@
 .display_flex {
   display: flex;
 }
-.margin0 {
+.margin_right0 {
   margin-right: 0 !important;
+}
+.margin0{
+  margin: 0 !important;
+}
+.color_fff{
+  color: #fff !important;
 }
 img{
   object-fit: contain;
 }
 .demo_font_color{
-  background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+  background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 // 字体样式
 @font-face {
-  font-family: "TrajanPro-Bold";
-  src: url("../assets/fonts/TrajanPro-Bold-4.otf");
+  font-family: "SFCompactDisplay-Bold";
+  src: url("../assets/fonts/SF-Compact-Display-Bold.otf");
 }
 @font-face {
-  font-family: "WenYue-GuDianMingChaoTi-JRFC";
-  src: url("../assets/fonts/WenYue-GuDianMingChaoTi-JRFC-2.otf");
+  font-family: "SFCompactDisplay-Regular";
+  src: url("../assets/fonts/SF-Compact-Display-Regular.otf");
 }
 @font-face {
-  font-family: "TrajanPro-Regular";
-  src: url("../assets/fonts/Times New Roman.ttf");
-}
-@font-face {
-  font-family: "Facon";
-  src: url("../assets/fonts/Facon-2.ttf");
+  font-family: "SFCompactDisplay-Heavy";
+  src: url("../assets/fonts/SF-Compact-Display-Heavy.otf");
 }
 
-// // 英文特殊体
-// .ff_en_special {
-//   font-family: Facon;
-// }
-// // 英文常规
-// .ff_en_regular {
-//   font-family: TrajanPro-Regular;
-// }
-// // 英文粗体
-// .ff_en_bold {
-//   font-family: TrajanPro-Bold;
-// }
-// // 中文常规
-// .ff_cn_regular {
-//   font-family: WenYue-GuDianMingChaoTi-JRFC;
-// }
 
 //英文粗体
 .en_Bold {
-  font-family: TrajanPro-Bold !important;
+  font-family: "SFCompactDisplay-Bold" !important;
 }
 //英文细体
 .en_Regular {
-  font-family: TrajanPro-Regular !important;
+  font-family: "SFCompactDisplay-Regular" !important;
 }
 // 英文特殊字体
 .en_special {
-  font-family: Facon !important;
+  font-family: "SFCompactDisplay-Heavy" !important;
 }
 // 中文
-.cn_lang {
-  font-family: WenYue-GuDianMingChaoTi-JRFC !important;
-}
+// .cn_lang {
+//   font-family: WenYue-GuDianMingChaoTi-JRFC !important;
+// }
+
 // 大标题字号
 .font45 {
   font-size: 45px;
