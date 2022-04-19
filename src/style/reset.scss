@@ -123,3 +123,7 @@ input {
     }
   }
 }
+input:-webkit-autofill {
+  background: transparent !important;
+  color: #fff;
+}
