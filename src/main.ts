@@ -5,9 +5,14 @@ import store from "./store";
 import i18n from "./i18n/index";
 import "./style/reset.scss";
 import "./style/global.scss";
+
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);
+
+import Proup from "@/components/Proup.vue";
+Vue.component("Proup", Proup);
+
 import utils from "./utils/index";
 Vue.prototype.$utils = utils;
 

@@ -61,6 +61,13 @@
         </div>
         <p class="message font16" :class="isEnLang?'en_Regular':'cn_lang'">提示：您的帳戶中至少需要一個 NFT 才能獲得推薦收入.</p>
       </div>
+      <div class="bindbox_page" v-if="li_index == 2">
+        <div class="bind_left">
+          <span class="font35 my_box">我的盲盒</span>
+          <span class="font16 _open">批量打开</span>
+        </div>
+        <img src="../../assets/images/box.png" class="bindimg" />
+      </div>
     </div>
     <div class="content_box display_flex">
       <ul class="display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
@@ -152,14 +159,6 @@ export default {
     padding-top: 155px;
     background-image: url("../../assets/images/usercorebg.png");
     background-size: 100% 100%;
-    // .use_bg{
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    //   width: 100%;
-    //   z-index: -1;
-    //   object-fit: contain;
-    // }
     .user_head_portrait{
       flex-direction: column;
       align-items: center;
@@ -268,6 +267,28 @@ export default {
         font-weight: normal;
         color: #ccc;
         line-height: 20px;
+      }
+    }
+    .bindbox_page{
+      width: calc(100% - 230px);
+      display: flex;
+      align-items: center;
+      .bind_left{
+        display: flex;
+        flex-direction: column;
+        .my_box{
+          font-weight: normal;
+          color: #FFFFFF;
+          line-height: 43px;
+        }
+        ._open{
+          font-weight: normal;
+          color: #FFFFFF;
+          line-height: 20px;
+        }
+      }
+      .bindimg{
+        width:80%;
       }
     }
   }

@@ -13,6 +13,27 @@
 img{
   object-fit: contain;
 }
+.ani_shake{
+  // animation-name: shock;
+  // animation-duration: .1s; //规定完成动画所花费的时间，以秒或毫秒计
+  // animation-timing-function: linear; //规定动画的速度曲线。
+  // animation-delay: 0s; // 规定在动画开始之前的延迟。
+  // animation-iteration-count: 3; //规定动画应该播放的次数。
+  // animation-direction: normal; //规定是否应该轮流反向播放动画。
+  animation: shock 0.1s linear 0s 3 normal;
+}
+@keyframes shock {
+  0% {
+    margin-left: 0px;
+    margin-right: 5px;
+    margin-top: 0px;
+  }
+  100% {
+    margin-left: 5px;
+    margin-right: 0px;
+    margin-top: 5px	;
+  }
+}
 .demo_font_color{
   background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
   -webkit-background-clip: text;
@@ -80,4 +101,7 @@ img{
 }
 .font14 {
   font-size: 14px;
+}
+.font12 {
+  font-size: 12px;
 }

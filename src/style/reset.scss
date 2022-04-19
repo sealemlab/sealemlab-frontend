@@ -111,8 +111,8 @@ body {
 }
 input {
   // background: none;
-  // outline: none;
-  // border: 0px;
+  border: none;
+  outline: none;
   // caret-color: white;
   &[type="number"] {
     -moz-appearance: textfield;

@@ -80,6 +80,11 @@ const routes: Array<RouteConfig> = [
       }
     ],
   },
+  {
+    path: "/signin/:name",
+    name: "SignIn",
+    component: () => import("../views/Login/index.vue"),
+  },
 ];
 
 const router = new VueRouter({

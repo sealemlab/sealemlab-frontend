@@ -14,7 +14,7 @@
         <span class="font_price font16">$5.45</span>
       </div>
       <div class="login_box">
-        <span class="font_login font16">Register/Login</span>
+        <span class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick">Register/Login</span>
       </div>
       <div class="connect font16">{{ $t("message.nav.txt9") }}</div>
       <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
@@ -64,6 +64,8 @@ export default {
         this.navActive = 2;
       } else if (to.path.indexOf("/user/") !== -1) {
         this.navActive = 5;
+      }else if (to.path.indexOf("/signin/") !== -1) {
+        this.navActive = 7;
       }
     },
   },
@@ -73,6 +75,10 @@ export default {
   methods: {
     toRoute(link) {
       if (link) this.$router.push(link);
+    },
+    loginClick(){
+      // 先跳主页页面  后续逻辑产品确认以后在搞
+      this.$router.push('/signin/register');
     },
     selectLang(index) {
       if (this.language == this.langArr[index]) return (this.showLangSelect = false);
@@ -116,16 +122,17 @@ export default {
       padding: 10px 14px;
       font-weight: bold;
       color: #fff;
-      &.active {
-        span {
-          background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        // background: url("../assets/images/menubg.png") no-repeat;
-        // background-size: 100% 100%;
-      }
     }
+  }
+}
+.active {
+  background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  span {
+    background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
+    -webkit-background-clip: text ;
+    -webkit-text-fill-color: transparent;
   }
 }
 .nav_right {
@@ -148,10 +155,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     margin: 0 23px 0 53px;
     .font_login{
       font-weight: bold;
-      color: #FFFFFF;
       line-height: 19px;
     }
   }

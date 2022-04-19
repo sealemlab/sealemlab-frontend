@@ -3,7 +3,7 @@
     <div class="box display_flex">
       <div class="title_box display_flex">
         <div class="address_box display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
-          <span class="font45">10 NFT</span>
+          <span class="font26">10 NFT</span>
           <span class="font16 margin_top">合约:0x77749fc693……053</span>
         </div>
         <div class="menu display_flex">
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="content display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
-        <p class="font45 buybox_txt">{{title}}</p>
+        <p class="font26 buybox_txt">{{title}}</p>
         <p class="font16">购买盲盒参与游戏，自由交易</p>
         <div class="imgbox">
           <swiper ref="swiper" :options="swiperOption" class="self_swiper">

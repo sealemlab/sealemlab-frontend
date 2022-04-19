@@ -2,19 +2,19 @@
   <div class="invite_page" :class="isEnLang?'en_Bold':'cn_lang'">
     <div class="title_box display_flex">
       <div class="onebox display_flex" >
-        <span class="font45 demo_font_color">邀请总数</span>
-        <span class="font45">10</span>
+        <span class="font26 demo_font_color">邀请总数</span>
+        <span class="font26">10</span>
       </div>
       <div class="onebox display_flex">
-        <span class="font45 demo_font_color">邀请奖励</span>
-        <span class="font45">10323</span>
+        <span class="font26 demo_font_color">邀请奖励</span>
+        <span class="font26">10323</span>
       </div>
       <div class="btn_box display_flex font20">
         现在邀请
       </div>
     </div>
     <div class="ranking demo_font_color">
-      <p class="font45">邀请排行榜</p>
+      <p class="font26">邀请排行榜</p>
       <div class="listbox">
         <div class="topline">
           <div class="title_onebox fontsize18">{{ $t("message.invite.txt1") }}</div>

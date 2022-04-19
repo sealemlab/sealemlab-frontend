@@ -42,7 +42,7 @@
             <span class="coin_class">{{item.num}}%</span>
             <span class="coin_class">{{item.day}} day</span>
             <div class="coin_class">
-              <span class="btn_txt font12">Bond</span>
+              <span class="btn_txt font12" @click="BondClick(1)">Bond</span>
             </div>
           </div>
         </div>
@@ -59,14 +59,14 @@
           <div class="radious font12">?</div>
         </div>
         <span class="txt_">$45678956</span>
-        <span class="btn_txt">Bond</span>
+        <span class="btn_txt" @click="BondClick(1)">Bond</span>
         <span class="txt_"></span>
         <div class="layout_box margin0">
           <span class="insert">Interest receivable</span>
           <div class="radious font12">?</div>
         </div>
         <span class="txt_">$45678956</span>
-        <span class="btn_txt">Bond</span>
+        <span class="btn_txt" @click="BondClick(1)">Bond</span>
       </div>
       <!-- 表格内层标题 -->
       <div class="list_title self_calss_list font20">
@@ -85,13 +85,19 @@
         </div>
       </div>
     </div>
+    <InputProup :proupDis="proupDis" @closeProup="closeProup" />
   </div>
 </template>
 
 <script>
+import InputProup from './InputPopup.vue'
 export default {
+  components:{
+    InputProup
+  },
   data(){
     return{
+      proupDis:false,//弹窗变量
       coinArr:[
         {
           title:'ST-BNB',
@@ -126,6 +132,15 @@ export default {
           day:5
         },
       ]
+    }
+  },
+  methods:{
+    closeProup(){
+      this.proupDis = false
+    },
+    BondClick(data){
+      console.log('data: ', data);
+      this.proupDis = true
     }
   }
 };

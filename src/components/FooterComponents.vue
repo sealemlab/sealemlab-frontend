@@ -12,12 +12,6 @@
       </div>
     </div>
     <div class="footerbox">
-      <div class="link_imgbox">
-        <img src="../assets/images/footerimg1.png" class="tel_img" />
-        <img src="../assets/images/footerimg2.png" class="tel_img" />
-        <img src="../assets/images/footerimg3.png" class="tel_img" />
-        <img src="../assets/images/footerimg4.png" class="tel_img" />
-      </div>
       <p class="copyright font14 en_Regular">COPYRIGHT © 2022 Sacred Realm, All rights Reserved</p>
     </div>
   </div>
@@ -106,14 +100,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .link_imgbox{
-      display: flex;
-      align-items: center;
-      .tel_img{
-        width: 41px;
-        margin-right: 26px;
-      }
-    }
     .copyright {
       margin-top: 20px;
       line-height: 60px;
