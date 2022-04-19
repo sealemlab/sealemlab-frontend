@@ -19,7 +19,7 @@
             <input :type="index == 2 || index == 3 ?'password':'text'" v-model.trim="item.inputvalue"
               class="input font16"
               :placeholder="item.placeholder"
-              autocomplete="off"
+              auto-complete="new-password"
               @blur="blurEvent(index)"
               @focus="focusEvent(index)"
             />

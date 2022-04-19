@@ -19,7 +19,7 @@
             class="input font16"
             :type="index == 1 ?'password':'text'"
             :placeholder="item.placeholder"
-            autocomplete="off"
+            auto-complete="new-password"
             @blur="blurEvent(index)"
             @focus="focusEvent(index)"
           />

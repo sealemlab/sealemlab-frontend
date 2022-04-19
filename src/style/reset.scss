@@ -110,10 +110,8 @@ body {
   background: #000;
 }
 input {
-  // background: none;
   border: none;
   outline: none;
-  // caret-color: white;
   &[type="number"] {
     -moz-appearance: textfield;
     &::-webkit-inner-spin-button,
@@ -124,6 +122,6 @@ input {
   }
 }
 input:-webkit-autofill {
-  background: transparent !important;
+  background: #171718 !important;
   color: #fff;
 }
