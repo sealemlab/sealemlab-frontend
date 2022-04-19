@@ -19,7 +19,6 @@
             class="input font16"
             :type="index == 1 ?'password':'text'"
             :placeholder="item.placeholder"
-            auto-complete="new-password"
             @blur="blurEvent(index)"
             @focus="focusEvent(index)"
           />
@@ -127,6 +126,7 @@ export default {
           if (!emailReg.test(this.user[index].inputvalue)){
             this.user[index].tip = '请输入正确的邮箱'
             this.user[index].tip_status = true
+            this.user[index].status = false
           }else{
             this.user[index].status = true
           }
@@ -135,6 +135,7 @@ export default {
           if (!this.user[index].inputvalue){
             this.user[index].tip = '请输入密码'
             this.user[index].tip_status = true
+            this.user[index].status = false
           }else{
             this.user[index].status = true
           }

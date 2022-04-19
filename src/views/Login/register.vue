@@ -19,7 +19,6 @@
             <input :type="index == 2 || index == 3 ?'password':'text'" v-model.trim="item.inputvalue"
               class="input font16"
               :placeholder="item.placeholder"
-              auto-complete="new-password"
               @blur="blurEvent(index)"
               @focus="focusEvent(index)"
             />
@@ -187,6 +186,7 @@ export default {
     checkFun(index,content){
       this.user[index].tip = content
       this.user[index].tip_status = true
+      this.user[index].status = false
     },
     registerClick(){
       // 如果status状态都为true  那么证明所有的校验都通过
