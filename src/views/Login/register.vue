@@ -1,20 +1,20 @@
 <template>
   <div class="register_page">
-    <span class="font30 establish_txt">创建账户</span>
-    <span class="font26 subtitle_txt">游戏账户在希莱姆平台通用</span>
+    <span class="font30 establish_txt">{{$t("message.signin.txt1")}}</span>
+    <span class="font26 subtitle_txt">{{$t("message.signin.txt2")}}</span>
     <div class="content">
       <div class="left_content">
         <div class="onebox" v-for="(item, index) in list" :key="index">
           <div class="imgbox_"><img :src="item.src" class="img_" /></div>
           <div class="right_txt">
-            <span class="font22 txt_1">{{item.title}}</span>
-            <span class="font16 txt_2">{{item.explain}}</span>
+            <span class="font22 txt_1">{{$t(item.title)}}</span>
+            <span class="font16 txt_2">{{$t(item.explain)}}</span>
           </div>
         </div>
       </div>
       <div class="left_content right_content">
         <div class="user_inputbox" v-for="(item, index) in user" :key="index">
-          <p class="font16 email_txt">{{item.title}}</p>
+          <p class="font16 email_txt">{{$t(item.title)}}</p>
           <div class="inputbox">
             <input :type="index == 2 || index == 3 ?'password':'text'" v-model.trim="item.inputvalue"
               class="input font16"
@@ -30,10 +30,14 @@
             <span class="ani_shake" v-show="item.tip_status">* {{ item.tip }}</span>
           </div>
         </div>
-        <div class="btn_box font18" @click="registerClick">
-          创建账户
+        <div class="agree_box">
+          <div class="circular_"></div>
+          <div class="agree_txt">{{$t("message.signin.txt20")}}<span class="span">{{$t("message.signin.txt21")}}</span></div>
         </div>
-        <p class="font12 tip_txt" @click="loginClick">如果已经注册请点击<span class="tip_login">登录</span></p>
+        <div class="btn_box font18" @click="registerClick">
+          {{$t("message.signin.txt1")}}
+        </div>
+        <p class="font12 tip_txt" @click="loginClick">{{$t("message.signin.txt22")}}<span class="tip_login">{{$t("message.signin.txt23")}}</span></p>
       </div>
     </div>
     <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup>
@@ -53,46 +57,38 @@ export default {
       list:[
         {
           src:require('../../assets/images/register1.png'),
-          title:'注册',
-          explain:'冒险等着你,成为 Sacred Realm 世界的传奇！'
+          title:'message.signin.txt3',
+          explain:'message.signin.txt4'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'安全',
-          explain:'It secures the players with high security and instant solutions.'
+          src:require('../../assets/images/register2.png'),
+          title:'message.signin.txt5',
+          explain:'message.signin.txt6'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'EVENTS',
-          explain:'High gaming pleasure with multiple and fun in-game activities.'
+          src:require('../../assets/images/register3.png'),
+          title:'message.signin.txt7',
+          explain:'message.signin.txt8'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'注册',
-          explain:'冒险等着你,成为 Sacred Realm 世界的传奇！'
+          src:require('../../assets/images/register4.png'),
+          title:'message.signin.txt9',
+          explain:'message.signin.txt10'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'注册',
-          explain:'冒险等着你,成为 Sacred Realm 世界的传奇！'
+          src:require('../../assets/images/register5.png'),
+          title:'message.signin.txt11',
+          explain:'message.signin.txt12'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'注册',
-          explain:'冒险等着你,成为 Sacred Realm 世界的传奇！'
+          src:require('../../assets/images/register6.png'),
+          title:'message.signin.txt13',
+          explain:'message.signin.txt14'
         },
       ],
       user:[
         {
-          title:'邮箱',
-          inputvalue:'',
-          placeholder:'Please enter the email',
-          tip:'邮箱不能为空',
-          tip_status:false,
-          status:false
-        },
-        {
-          title:'用户名',
+          title:'message.signin.txt15',
           inputvalue:'',
           placeholder:'请输入用户名',
           tip:'用户名不能为空',
@@ -100,7 +96,15 @@ export default {
           status:false
         },
         {
-          title:'输入密码',
+          title:'message.signin.txt16',
+          inputvalue:'',
+          placeholder:'Please enter the email',
+          tip:'邮箱不能为空',
+          tip_status:false,
+          status:false
+        },
+        {
+          title:'message.signin.txt17',
           inputvalue:'',
           placeholder:'Please enter the content',
           tip:'密码不能为空',
@@ -108,7 +112,7 @@ export default {
           status:false
         },
         {
-          title:'确认密码',
+          title:'message.signin.txt18',
           inputvalue:'',
           placeholder:'Please enter the content',
           tip:'请先输入密码',
@@ -116,7 +120,7 @@ export default {
           status:false
         },
         {
-          title:'验证码',
+          title:'message.signin.txt19',
           inputvalue:'',
           placeholder:'Please enter the content',
           tip:'请输入验证码',
@@ -309,7 +313,7 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-top: 15px;
+          margin-top: 12px;
           .input{
             background: #171718;
             box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
@@ -339,9 +343,32 @@ export default {
           margin-top: 10px;
         }
       }
+      .agree_box{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .circular_{
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: #D8D8D8;
+          border: 1px solid #979797;
+        }
+        .agree_txt{
+          margin-left: 10px;
+          font-weight: 400;
+          color: #FFFFFF;
+          line-height: 22px;
+          .span{
+            color: #ECCF83;
+            margin-left: 5px;
+          }
+        }
+      }
       .btn_box{
         cursor: pointer;
-        width: 232px;
+        width: 100%;
         height: 54px;
         background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
         border-radius: 4px;

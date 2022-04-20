@@ -85,6 +85,28 @@ const routes: Array<RouteConfig> = [
     name: "SignIn",
     component: () => import("../views/Login/index.vue"),
   },
+  {
+    path: "/myaccount",
+    component: () => import("../views/Myaccount/index.vue"),
+    children: [
+      { path: "/", redirect: "information" },
+      {
+        path: "bindwallet",
+        name: "BindWallet",
+        component: () => import("../views/Myaccount/bindwallet.vue"),
+      },
+      {
+        path: "information",
+        name: "Information",
+        component: () => import("../views/Myaccount/information.vue"),
+      },
+      {
+        path: "logout",
+        name: "Logout",
+        component: () => import("../views/Myaccount/logout.vue"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

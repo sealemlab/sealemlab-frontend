@@ -3,30 +3,30 @@
     <div class="bond_introduce">
       <img src="../../assets/images/bondbg.png" class="bond_bg" />
       <div class="txt_box">
-        <span class="txt1 font45">Bond</span>
-        <span class="txt2 font16">Get high-yield st with preferential discounts</span>
+        <span class="txt1 font45">{{$t("message.bond.txt1")}}</span>
+        <span class="txt2 font16">{{$t("message.bond.txt2")}}</span>
       </div> 
     </div>
     <div class="content">
       <!-- 标题 -->
       <div class="layout_box">
-        <span class="font30 text_">Bond</span>
+        <span class="font30 text_">{{$t("message.bond.txt1")}}</span>
         <div class="radious font12">?</div>
       </div>
       <!-- 表格 -->
       <div class="container">
         <div class="title_box font24">
-          <span class="font_class">Treasury</span>
+          <span class="font_class">{{$t("message.bond.txt3")}}</span>
           <span class="font_class">$45678956</span>
           <span class="font_class"></span>
-          <span class="font_class">Treasury</span>
+          <span class="font_class">ST{{$t("message.bond.txt4")}}</span>
           <span class="font_class">$45678956</span>
         </div>
         <div class="list_title_box font20">
-          <span class="list_font_class">Bond</span>
-          <span class="list_font_class">Price</span>
-          <span class="list_font_class">Discount</span>
-          <span class="list_font_class">Time</span>
+          <span class="list_font_class">{{$t("message.bond.txt1")}}</span>
+          <span class="list_font_class">{{$t("message.bond.txt4")}}</span>
+          <span class="list_font_class">{{$t("message.bond.txt5")}}</span>
+          <span class="list_font_class">{{$t("message.bond.txt6")}}</span>
           <span class="list_font_class"></span>
         </div>
         <div class="coin_box">
@@ -34,46 +34,46 @@
             <div class="second_box">
               <span class="line_txt">{{item.title}}</span>
               <div class="line_radious">
-                <span class="line_txt">Set up LP</span>
+                <span class="line_txt">{{$t("message.bond.txt7")}}</span>
                 <img src="../../assets/images/link.png" class="link_img" />
               </div>
             </div>
             <span class="coin_class">$ {{item.price}}</span>
             <span class="coin_class">{{item.num}}%</span>
-            <span class="coin_class">{{item.day}} day</span>
+            <span class="coin_class">{{item.day}} {{$t("message.bond.txt19")}}</span>
             <div class="coin_class">
-              <span class="btn_txt font12" @click="BondClick(1)">Bond</span>
+              <span class="btn_txt font12" @click="BondClick(1)">{{$t("message.bond.txt1")}}</span>
             </div>
           </div>
         </div>
       </div>
       <!-- 标题 -->
       <div class="layout_box">
-        <span class="font30 text_">Bond assets</span>
+        <span class="font30 text_">{{$t("message.bond.txt8")}}</span>
         <div class="radious font12">?</div>
       </div>
       <!-- 表格外层标题 -->
       <div class="list_title font24">
         <div class="layout_box margin0">
-          <span class="insert">Interest receivable</span>
+          <span class="insert">{{$t("message.bond.txt9")}}</span>
           <div class="radious font12">?</div>
         </div>
         <span class="txt_">$45678956</span>
-        <span class="btn_txt" @click="BondClick(1)">Bond</span>
+        <span class="btn_txt" @click="BondClick(1)">{{$t("message.bond.txt10")}}</span>
         <span class="txt_"></span>
         <div class="layout_box margin0">
-          <span class="insert">Interest receivable</span>
+          <span class="insert">{{$t("message.bond.txt11")}}</span>
           <div class="radious font12">?</div>
         </div>
         <span class="txt_">$45678956</span>
-        <span class="btn_txt" @click="BondClick(1)">Bond</span>
+        <span class="btn_txt" @click="BondClick(1)">{{$t("message.bond.txt12")}}</span>
       </div>
       <!-- 表格内层标题 -->
       <div class="list_title self_calss_list font20">
-        <span class="empty_class color_fff">Bond</span>
-        <span class="empty_class color_fff">Time</span>
-        <span class="empty_class color_fff">Balance</span>
-        <span class="empty_class color_fff">Profit</span>
+        <span class="empty_class color_fff">{{$t("message.bond.txt1")}}</span>
+        <span class="empty_class color_fff">{{$t("message.bond.txt13")}}</span>
+        <span class="empty_class color_fff">{{$t("message.bond.txt14")}}</span>
+        <span class="empty_class color_fff">{{$t("message.bond.txt15")}}</span>
       </div>
       <!-- 表格 -->
       <div class="outbox_">

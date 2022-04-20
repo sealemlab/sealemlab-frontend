@@ -14,7 +14,12 @@
         <span class="font_price font16">$5.45</span>
       </div>
       <div class="login_box">
-        <span class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick">Register/Login</span>
+        <span v-if="getLogin" class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick">
+          {{$t("message.nav.txt8_1")}}
+        </span>
+        <span v-else class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick">
+          {{$t("message.nav.txt8")}}
+        </span>
       </div>
       <div class="connect font16">{{ $t("message.nav.txt9") }}</div>
       <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
@@ -50,7 +55,7 @@ export default {
       langArr: ["EN", "CN"],
     };
   },
-  computed: { ...mapGetters(["isEnLang"]) },
+  computed: { ...mapGetters(["isEnLang","getLogin"]) },
   watch: {
     $route(to, from) {
       if (from.matched.length && to.matched[0].path != from.matched[0].path) {
@@ -66,6 +71,8 @@ export default {
         this.navActive = 5;
       }else if (to.path.indexOf("/signin/") !== -1) {
         this.navActive = 7;
+      }else if (to.path.indexOf("/myaccount/") !== -1) {
+        this.navActive = 7;
       }
     },
   },
@@ -77,8 +84,11 @@ export default {
       if (link) this.$router.push(link);
     },
     loginClick(){
-      // 先跳主页页面  后续逻辑产品确认以后在搞
-      this.$router.push('/signin/register');
+      if(this.getLogin){
+        this.$router.push('/myaccount/information');
+      }else{
+        this.$router.push('/signin/register');
+      }
     },
     selectLang(index) {
       if (this.language == this.langArr[index]) return (this.showLangSelect = false);
@@ -87,7 +97,7 @@ export default {
       this.$utils.setCookie("LANG", this.$i18n.locale);
       location.reload();
     },
-  },
+  }
 };
 </script>
 

@@ -6,17 +6,22 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    // imgUrl:
-    //   process.env.NODE_ENV === "production"
-    //     ? "//cdn.hashland.com/images/"
-    //     : "//cdn.hashland.com/testimgs/", //图片前缀
+    loginStatus: localStorage.getItem('getLogin') || false, // 登录状态
   },
   getters: {
     isEnLang() {
       return i18n.locale == "en";
     },
+    getLogin(state){
+      return state.loginStatus
+    }
   },
-  mutations: {},
+  mutations: {
+    // 设置登录状态
+    setLogin(state, data) {
+      state.loginStatus = data;
+    },
+  },
   actions: {},
   plugins: [
     createPersistedState({

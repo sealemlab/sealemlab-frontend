@@ -5,13 +5,13 @@
       <div class="propu_content">
         <div class="left_">
           <div class="layout_box">
-            <span class="font20 text_">Bond price</span>
+            <span class="font20 text_">{{$t("message.bond.txt1")}}{{$t("message.bond.txt4")}}</span>
             <div class="radious font12">?</div>
           </div>
           <span class="font16 distance" :class="isEnLang?'en_Regular':'cn_lang'">$123</span>
         </div>
         <div class="left_">
-          <span class="font20 text_">Market price</span>
+          <span class="font20 text_">{{$t("message.nav.txt4")}}{{$t("message.bond.txt4")}}</span>
           <span class="font16 distance" :class="isEnLang?'en_Regular':'cn_lang'">$123</span>
         </div>
       </div>
@@ -20,40 +20,40 @@
           type="text"
           v-model="peopleAddress"
           class="input font16"
-          placeholder="Please enter the content"
+          :placeholder='$t("message.bond.txt16")'
         />
         <div class="btn font16" @click="besure">
           MAX
         </div>
       </div>
-      <div class="main_button font16">Bond</div>
+      <div class="main_button font16">{{$t("message.bond.txt1")}}</div>
       <div class="line_box">
         <div class="layout_box">
-          <span class="font14 wallet_">Wallet balance</span>
+          <span class="font14 wallet_">{{$t("message.bond.txt17")}}</span>
           <div class="radious font12">?</div>
         </div>
         <span class="font14 price_txt">12.234  ST-BUSD LP</span>
       </div>
       <div class="line_box">
         <div class="layout_box">
-          <span class="font14 wallet_">Expected income</span>
+          <span class="font14 wallet_">{{$t("message.bond.txt18")}}</span>
           <div class="radious font12">?</div>
         </div>
         <span class="font14 price_txt">12.234 ST</span>
       </div>
       <div class="line_box">
         <div class="layout_box">
-          <span class="font14 wallet_">Maximum purchase</span>
+          <span class="font14 wallet_">{{$t("message.bond.txt5")}}</span>
           <div class="radious font12">?</div>
         </div>
         <span class="font14 price_txt">12.234 ST-BUSD LP</span>
       </div>
       <div class="line_box">
         <div class="layout_box">
-          <span class="font14 wallet_">duration</span>
+          <span class="font14 wallet_">{{$t("message.bond.txt6")}}</span>
           <div class="radious font12">?</div>
         </div>
-        <span class="font14 price_txt">2 days</span>
+        <span class="font14 price_txt">2 {{$t("message.bond.txt19")}}</span>
       </div>
       <img src="../../assets/images/close.png" class="close_img" @click.stop="closeProup"/>
     </div>

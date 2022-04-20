@@ -1,48 +1,49 @@
 <template>
   <div class="buy_blind_box">
-    <div class="box">
-      <ul class="title_box">
-        <li class="font45">购买盲盒</li>
-        <li><img src="../../../assets/images/nftimage/nft_line_title.png" alt="" /></li>
-        <li class="font16" :class="isEnLang?'en_Regular':'cn_lang'">购买盲盒参与游戏，自由交易</li>
-      </ul>
+    <ul class="title_box">
+      <li class="font45 box_txt">{{$t("message.nft.txt20")}}</li>
+      <li class="font16">
+        {{$t("message.nft.txt21")}}
+      </li>
+      <li class="font16">
+        {{$t("message.nft.txt22")}}
+      </li>
+    </ul>
+    <div class="conten_box">
       <div class="treasure_chest_box">
         <img src="../../../assets/images/nftimage/treasure_chest.png" alt="" />
       </div>
-      <div class="buy_box">
-        <div>
-          <div class="title font20">The remaining /The total ：{{ proportion }}</div>
-          <ul class="font16">
-            <li>
-              <div>价格</div>
-              <div>{{ price }} ST</div>
-            </li>
-            <li>
-              <div>数量</div>
-              <div class="btns">
-                <span class="btn" @click="deleteAmount">-</span>
-                <input type="number" v-model="amount" />
-                <span class="btn" @click="addAmount">+</span>
-              </div>
-            </li>
-            <li>
-              <div>总金额</div>
-              <div>{{ totalAmount }} ST</div>
-            </li>
-          </ul>
-          <div class="buy_btn font14" @click="clickBuy">购 买</div>
+      <div class="right_content">
+        <p class="font20 title_txt">
+          {{$t("message.nft.txt23")}}0
+        </p>
+        <div class="line_onebox font16">
+          <span class="lefttxt">{{$t("message.nft.txt24")}}</span>
+          <span class="righttxt">10 ST</span>
         </div>
+        <div class="line_onebox font16">
+          <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
+          <div class="btns">
+            <span class="btn" @click="deleteAmount">-</span>
+            <input type="number" class="font26" v-model="amount" />
+            <span class="btn" @click="addAmount">+</span>
+          </div>
+        </div>
+        <div class="line_onebox font16">
+          <span class="lefttxt">{{$t("message.nft.txt26")}}</span>
+          <span class="righttxt">10 ST</span>
+        </div>
+        <div class="balance_txt">
+          {{$t("message.nft.txt27")}} 1.02 ST
+          <img src="../../../assets/images/link.png" class="link_img" />
+        </div>
+        <div class="btnbox font12">{{$t("message.nft.txt28")}}</div>
       </div>
     </div>
     <div class="describe_box">
-      <p class="font30 title_">Description</p>
-      <div class="package_">
-        <span class="font20 small_title">NFT Description:</span>
-        <span class="font16 txt_" :class="isEnLang ? 'en_Regular' : 'cn_lang'">3D blind box assets, high star NFT dynamic effect display, ordinary treasure chest, legend treasure chest</span>
-        <span class="font20 small_title">Contents of the blind box:</span>
-        <span class="font16 txt_">clothing, weapons, rings, boots</span>
-        <span class="font20 small_title">NFT action:</span>
-        <span class="font16 txt_">3D blind box assets, high star NFT dynamic effect display, ordinary treasure chest, legend treasure chest</span>
+      <p class="font30 title_">{{$t("message.nft.txt29")}}</p>
+      <div class="package_ font16">
+        {{$t("message.nft.txt30")}}
       </div>
     </div>
   </div>
@@ -87,165 +88,153 @@ export default {
 <style lang="scss" scoped>
 .buy_blind_box{
   width: 100%;
+  margin-top: 50px;
 }
-.box {
+.title_box {
   width: 100%;
-  height: auto;
-  background-image: url("../../../assets/images/nftimage/nft_bg4.png");
-  background-size: 100% 100%;
-  background-position: center center;
-  position: relative;
-  .title_box {
-    margin: 0 auto;
-    text-align: center;
-    li {
-      &:nth-child(1) {
-        color: #00c1ff;
-        line-height: 45px;
-        background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      &:nth-child(2) {
-        img {
-          width: 400px;
-          height: auto;
-          margin: 30px 0;
-        }
-      }
-      &:nth-child(3) {
-        color: #ffffff;
-        line-height: 16px;
-      }
+  text-align: center;
+  li {
+    &:nth-child(1) {
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 63px;
+    }
+    &:nth-child(2) {
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 32px;
+      margin-top: 20px;
+    }
+    &:nth-child(3) {
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 32px;
     }
   }
-  .buy_box {
+}
+.conten_box {
+  width: 100%;
+  display: flex;
+  margin: 87px 0;
+  .treasure_chest_box {
+    width: 50%;
+    img {
+      width: 100%;
+      height: 400px;
+      animation: treasure_chest 4s ease-in-out infinite;
+    }
+  }
+  .right_content{
+    width: 410px;
+    padding: 20px 70px 20px 20px;
     display: flex;
-    justify-content: flex-end;
-    > div {
-      margin: 50px 0;
-      padding: 34px 20px;
-      background-image: url("../../../assets/images/nftimage/nft_bg5.png");
-      background-size: 100% 100%;
-      background-position: center center;
-      .title {
-        margin-bottom: 30px;
-        color: #ffffff;
-        line-height: 28px;
-        background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    flex-direction: column;
+    background: rgba(16, 16, 16, 0.49);
+    box-shadow: 0px 6px 11px 0px rgba(0, 0, 0, 0.59);
+    border-radius: 25px;
+    border: 1px solid rgba(236, 207, 131, 0.5);
+    .title_txt{
+      font-weight: 600;
+      color: #ECCF83;
+      line-height: 28px;
+      margin-bottom: 30px;
+    }
+    .line_onebox{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      .lefttxt{
+        font-weight: 400;
+        color: #FFFFFF;
+        line-height: 22px;
       }
-      ul {
-        li {
-          margin: 30px 0;
+      .righttxt{
+        font-weight: bold;
+        color: #ECCF83;
+        line-height: 19px;
+      }
+      .btns {
+        display: flex;
+        align-items: center;
+        span {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          div {
-            &:nth-child(1) {
-              font-size: 16px;
-              color: #ffffff;
-            }
-            &:nth-child(2),
-            input {
-              font-size: 28px;
-              color: #f1b713;
-              background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            }
-            &.btns {
-              display: flex;
-              align-items: center;
-              span {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                border: 1px solid #939393;
-                font-size: 20px;
-              }
-              input {
-                max-width: 50px;
-                height: 100%;
-                margin: 0 10px;
-                text-align: right;
-                border: none;
-              }
-            }
-          }
+          justify-content: center;
+          cursor: pointer;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 1px solid #939393;
+          color: #825f35;
+        }
+        input {
+          max-width: 50px;
+          height: 100%;
+          margin: 0 10px;
+          text-align: center;
+          color: #f1b713;
+          background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
       }
-      .buy_btn {
-        width: fit-content;
-        height: fit-content;
-        margin: 0 auto;
-        padding: 10px 80px;
-        cursor: pointer;
-        background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-        box-shadow: inset 0px 2px 3px 0px #f2d383, inset 0px -2px 11px 0px #f2d57d;
-        border-radius: 5px;
-        font-size: 20px;
-        color: #381a02;
-        line-height: 20px;
+    }
+    .balance_txt{
+      border-top: 1px solid #979797;
+      padding-top: 15px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      font-weight: 400;
+      color: #9B9995;
+      line-height: 14px;
+      .link_img{
+        width:15px;
+        margin-left: 15px;
       }
     }
-  }
-  .treasure_chest_box {
-    width: fit-content;
-    height: fit-content;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    img {
-      width: 600px;
-      height: auto;
+    .btnbox{
+      margin-top: 34px;
+      width: 163px;
+      height: 48px;
+      background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+      box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+      border-radius: 4px;
+      backdrop-filter: blur(14px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      color: #000000;
+      margin-left: 35%;
+      cursor: pointer;
     }
-    animation: treasure_chest 2s ease-in-out infinite;
   }
 }
 .describe_box{
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   .title_{
-    width: 100%;
-    text-align: center;
     font-weight: bold;
     color: #FFFFFF;
     line-height: 36px;
-    margin-bottom: 18px;
+    margin-bottom: 30px;
   }
   .package_{
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    .small_title{
-      font-weight: bold;
-      color: #FFFFFF;
-      line-height: 24px;
-      margin-bottom: 18px;
-    }
-    .txt_{
-      font-weight: 400;
-      color: #FFFFFF;
-      line-height: 19px;
-      margin-bottom: 67px;
-    }
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 32px;
   }
 }
 @keyframes treasure_chest {
   0% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.5);
   }
   50% {
     opacity: 0.6;
@@ -253,7 +242,7 @@ export default {
   }
   100% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.5);
   }
 }
 </style>

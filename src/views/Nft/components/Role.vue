@@ -1,45 +1,50 @@
 <template>
-  <div>
-    <div class="box">
-      <div class="left">
-        <div class="main_img">
+  <div class="box">
+    <ul class="tab_box">
+      <li v-for="(item, index) in tabClassArr" :key="index" @click="clickTabClass(index)">
+        <img :src="item.image" alt="" />
+        <div class="font16 border_type" :class="{ active: currentClass == index }">{{ $t(item.label) }}</div>
+      </li>
+    </ul>
+    <div class="content">
+      <div class="left_content">
+        <div class="swiperbox_1">
           <swiper ref="swiper1" :options="swiperOption1">
             <swiper-slide v-for="(item, index) in tabClassArr[currentClass].classFigureArr" :key="index">
-              <img :src="item" alt="" />
+              <img :src="item" class="people_img" />
             </swiper-slide>
           </swiper>
         </div>
-        <ul class="vice_img">
+        <div class="swiperbox_2">
           <swiper ref="swiper2" :options="swiperOption2">
             <swiper-slide v-for="(item, index) in tabClassArr[currentClass].classFashionArr" :key="index">
-              <div class="img" :class="{ active: currentSwiperIndex == index }"><img :src="item" alt="" /></div>
+              <div class="img_box" :class="{ active: currentSwiperIndex == index }">
+                <img :src="item" alt="" />
+              </div>
             </swiper-slide>
           </swiper>
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
-        </ul>
+        </div>
       </div>
-      <div class="right">
-        <ul class="tab_box">
-          <li v-for="(item, index) in tabClassArr" :key="index" :class="{ active: currentClass == index }" @click="clickTabClass(index)">
-            <img :src="item.image" alt="" />
-            <div>{{ item.label }}</div>
+      <div class="right_content">
+        <ul>
+          <li class="font20">
+            {{ $t(tabClassArr[currentClass].label) }}
+          </li>
+          <li class="font16">
+            {{ $t(tabClassArr[currentClass].classIntroduce) }}
+          </li>
+          <li class="font20">
+            {{ $t(tabClassArr[currentClass].arms) }}:<span class="font16">{{ $t(tabClassArr[currentClass].skill_content) }}</span> 
+          </li>
+          <li class="font20">
+            {{ $t(tabClassArr[currentClass].skill) }}
+          </li>
+          <li>
+            <img v-for="(item, index) in tabClassArr[currentClass].skills" :key="index" :src="item" alt="" />
           </li>
         </ul>
-        <div class="tab_content">
-          <ul>
-            <li>
-              <div>{{ tabClassArr[currentClass].label }}</div>
-              <div>{{ tabClassArr[currentClass].classIntroduce }}</div>
-            </li>
-            <li>
-              <div>技能</div>
-              <div>
-                <img v-for="(item, index) in tabClassArr[currentClass].skills" :key="index" :src="item" alt="" />
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>
@@ -53,8 +58,11 @@ export default {
       tabClassArr: [
         {
           image: require("../../../assets/images/nftimage/nft_class1.png"),
-          label: "格斗家",
-          classIntroduce: "《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。",
+          label: "message.nft.txt8",
+          arms: "message.nft.txt12",
+          skill: "message.nft.txt13",
+          skill_content: "message.nft.txt15",
+          classIntroduce: "message.nft.txt14",
           skills: [
             require("../../../assets/images/nftimage/nft_class1_skills1.png"),
             require("../../../assets/images/nftimage/nft_class1_skills2.png"),
@@ -76,8 +84,11 @@ export default {
         },
         {
           image: require("../../../assets/images/nftimage/nft_class2.png"),
-          label: "格斗家2",
-          classIntroduce: "《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。",
+          label: "message.nft.txt9",
+          arms: "message.nft.txt12",
+          skill: "message.nft.txt13",
+          skill_content: "message.nft.txt15",
+          classIntroduce: "message.nft.txt14",
           skills: [
             require("../../../assets/images/nftimage/nft_class1_skills1.png"),
             require("../../../assets/images/nftimage/nft_class1_skills2.png"),
@@ -99,8 +110,11 @@ export default {
         },
         {
           image: require("../../../assets/images/nftimage/nft_class3.png"),
-          label: "格斗家3",
-          classIntroduce: "《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。",
+          label: "message.nft.txt10",
+          arms: "message.nft.txt12",
+          skill: "message.nft.txt13",
+          skill_content: "message.nft.txt15",
+          classIntroduce: "message.nft.txt14",
           skills: [
             require("../../../assets/images/nftimage/nft_class1_skills1.png"),
             require("../../../assets/images/nftimage/nft_class1_skills2.png"),
@@ -122,8 +136,11 @@ export default {
         },
         {
           image: require("../../../assets/images/nftimage/nft_class4.png"),
-          label: "格斗家4",
-          classIntroduce: "《圣域》是一款基于区块链技术的大型多人在线MORPG游戏，游戏采用虚幻4引擎打造，有着超精致的画面表现、动作性以及打击感。",
+          label: "message.nft.txt11",
+          arms: "message.nft.txt12",
+          skill: "message.nft.txt13",
+          skill_content: "message.nft.txt15",
+          classIntroduce: "message.nft.txt14",
           skills: [
             require("../../../assets/images/nftimage/nft_class1_skills1.png"),
             require("../../../assets/images/nftimage/nft_class1_skills2.png"),
@@ -193,138 +210,149 @@ export default {
 
 <style lang="scss" scoped>
 .box {
+  width: 100%;
   display: flex;
-  position: relative;
-  background-image: url("../../../assets/images/nftimage/nft_bg2.png");
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: center center;
-  .left {
-    padding: 80px 0;
-    width: 60%;
-    height: auto;
-    .main_img img {
-      width: 585px;
-      height: 640px;
-    }
-    .vice_img {
-      max-width: 585px;
-      position: relative;
-      left: 80px;
-      .img {
-        width: 85px;
-        height: 85px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: url("../../../assets/images/nftimage/nft_class1_fashion_normal.png");
-        background-size: 100% auto;
-        background-position: center center;
-        transform: scale(0.8);
+  flex-direction: column;
+  margin-top: 50px;
+  .tab_box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    li {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        width: 72px;
+      }
+      .border_type{
+        margin-top: 8px;
+        width: 133px;
+        height: 35px;
+        background: rgba(16, 16, 16, 0.49);
+        box-shadow: 0px 6px 11px 0px rgba(0, 0, 0, 0.59);
+        border-radius: 4px;
+        border: 1px solid rgba(236, 207, 131, 0.5);
+        backdrop-filter: blur(14px);
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        line-height: 33px;
         &.active {
-          background-image: url("../../../assets/images/nftimage/nft_class1_fashion_active.png");
-          background-size: 100% auto;
-          background-position: center center;
-          transform: scale(1);
+          background: #101010;
+          box-shadow: 0px 6px 11px 0px rgba(0, 0, 0, 0.59);
+          border-radius: 4px;
+          border: 1px solid #ECCF83;
+          backdrop-filter: blur(14px);
+          color: #ffffff;
         }
-        img {
-          width: auto;
-          height: 80%;
-        }
-      }
-      .swiper-slide {
-        display: flex;
-        justify-content: center;
-        width: fit-content;
-      }
-      .swiper-button-prev {
-        background-image: url("../../../assets/images/nftimage/btn_left.png");
-        background-size: 100% auto;
-        width: 40px;
-        left: -40px;
-      }
-      .swiper-button-next {
-        background-image: url("../../../assets/images/nftimage/btn_right.png");
-        background-size: 100% auto;
-        width: 40px;
-        right: -40px;
-      }
-      .swiper-button-disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
       }
     }
   }
-  .right {
-    width: 40%;
-    height: auto;
-    .tab_box {
+  .content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    .left_content{
+      width: 60%;
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      text-align: center;
-      li {
-        cursor: pointer;
-        margin-left: 30px;
-        &.active {
-          div {
-            font-size: 16px;
-            color: #381a02;
-            background-image: url("../../../assets/images/nftimage/btn_active.png");
-            background-size: 100% auto;
-            background-position: center center;
+      flex-direction: column;
+      .swiperbox_1{
+        width: 100%;
+        .people_img{
+          max-width: 469px;
+          width: 100%;
+        }
+      }
+      .swiperbox_2{
+        width: 100%;
+        position: relative;
+        margin-top: 25px;
+        .img_box {
+          width: 75px;
+          height: 75px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-image: url("../../../assets/images/nftimage/nft_class1_fashion_normal.png");
+          background-size: 100% 100%;
+          padding: 10px;
+          &.active {
+            background-image: url("../../../assets/images/nftimage/nft_class1_fashion_active.png");
+            background-size: 100% 100%;
+          }
+          img {
+            width: 80%;
           }
         }
-        img {
-          width: auto;
-          height: 100px;
+        .swiper-slide {
+          display: flex;
+          justify-content: center;
+          width: fit-content;
         }
-        div {
-          width: 100%;
-          height: 30px;
-          line-height: 30px;
-          font-size: 16px;
-          color: #ffffff;
-          background-image: url("../../../assets/images/nftimage/btn_normal.png");
+        .swiper-button-prev {
+          background-image: url("../../../assets/images/nftimage/btn_left.png");
           background-size: 100% auto;
-          background-position: center center;
+          width: 40px;
+          left: -40px;
+        }
+        .swiper-button-next {
+          background-image: url("../../../assets/images/nftimage/btn_right.png");
+          background-size: 100% auto;
+          width: 40px;
+          right: -40px;
+        }
+        .swiper-button-disabled {
+          cursor: not-allowed;
+          opacity: 0.5;
         }
       }
     }
-    .tab_content {
-      width: 100%;
-      height: auto;
-      display: flex;
-      justify-content: flex-end;
+    .right_content{
+      width: 40%;
       ul {
-        width: 470px;
+        width: 100%;
         height: auto;
-        margin: 50px 0;
-        padding: 50px 30px;
+        padding: 39px 30px;
         background-image: url("../../../assets/images/nftimage/nft_bg3.png");
         background-size: 100% 100%;
-        background-position: center center;
         color: #ffffff;
-        li {
-          &:nth-child(1) div:nth-child(1),
-          &:nth-child(2) div:nth-child(1) {
-            font-size: 28px;
-            line-height: 28px;
-            background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        li{
+          font-weight: 600;
+          line-height: 28px;
+          &:nth-child(1){
+            color: #ECCF83;
           }
-          &:nth-child(1) div:nth-child(2) {
-            font-size: 16px;
-            line-height: 32px;
-            margin: 30px 0;
+          &:nth-child(2){
+            color: #FFFFFF;
+            margin-top: 14px;
           }
-          &:nth-child(2) div:nth-child(2) {
-            margin-top: 30px;
-            img {
-              width: 55px;
-              height: 55px;
-              margin-right: 20px;
+          &:nth-child(3){
+            color: #ECCF83;
+            margin-top: 40px;
+            span{
+              font-weight: 400;
+              color: #FFFFFF;
+              line-height: 22px;
+              margin-left: 10px;
+            }
+          }
+          &:nth-child(4){
+            color: #ECCF83;
+            margin-top: 40px;
+          }
+          &:nth-child(5){
+            margin-top: 17px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            img{
+              width: 42px;
+              margin-right: 30px;
             }
           }
         }

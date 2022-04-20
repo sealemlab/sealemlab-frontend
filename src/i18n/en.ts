@@ -1,13 +1,14 @@
 export const message = {
   nav: {
-    txt1: "Bond",
-    txt2: "Staking",
+    txt1: "债券",
+    txt2: "质押",
     txt3: "NFT",
-    txt4: "Market",
-    txt5: "Game",
-    txt6: "User center",
-    txt7: "White paper",
-    txt9: "Connect",
+    txt4: "市场",
+    txt5: "游戏",
+    txt6: "用户中心",
+    txt7: "白皮书",
+    txt8: "注册/登录",
+    txt8_1: "我的账号",
   },
   home: {
     txt1: "New generation DeFi + Gamefi protocol",

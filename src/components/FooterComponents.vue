@@ -6,7 +6,7 @@
       <div class="onebox display_flex">
         <ul v-for="(item, index) in footerArr" :key="index">
           <li class="font14 en_Regular" v-for="(ele, index1) in item.children" :key="index1">
-            {{ ele }}
+            {{ $t(ele) }}
           </li>
         </ul>
       </div>
@@ -24,20 +24,42 @@ export default {
         {
           id:1,
           children:[
-            'ABOUT','White','Paper','Project','Overview','FAQ','Token','Metrics','Game','Instructions',
+            "message.footer.txt1",
+            "message.footer.txt2",
+            "message.footer.txt3",
+            "message.footer.txt4",
+            "message.footer.txt5",
+            "message.footer.txt6",
           ]
         },
         {
           id:2,
-          children:[ 'SOCIAL','Telegram','Twitter','Discord','Medium']
+          children:[
+            "message.footer.txt20",
+            "message.footer.txt7",
+            "message.footer.txt8",
+            "message.footer.txt9",
+            "message.footer.txt10",
+          ]
         },
         {
           id:3,
-          children:['DEVELOPERS','Github','Bug','Bounty','Audits']
+          children:[
+            "message.footer.txt11",
+            "message.footer.txt12",
+            "message.footer.txt13",
+          ]
         },
         {
           id:4,
-          children:['OTHERS','Official','Token','Help','Center','Team','SSR $5.20','SR $5.20']
+          children:[
+            "message.footer.txt14",
+            "message.footer.txt15",
+            "message.footer.txt16",
+            "message.footer.txt17",
+            "message.footer.txt18",
+            "message.footer.txt19",
+          ]
         }
       ]
     }
@@ -46,8 +68,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .footer_box {
-  // border-top: 1px solid#ECCF83;
-  // border-bottom: 8px solid#ECCF83;
   margin-top: 50px;
   padding: 60px 0;
   width: 100%;
@@ -74,7 +94,7 @@ export default {
       justify-content: space-around;
       ul {
         li {
-          margin: 5px 0;
+          margin: 14px 0;
           letter-spacing: 0.52px;
           &:nth-child(1) {
             font-size: 18px;

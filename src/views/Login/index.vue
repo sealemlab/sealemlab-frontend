@@ -18,7 +18,7 @@ export default {
     }
   },
   watch: {
-    $route(to, from) {
+    $route(to) {
       this.name = to.params.name
       window.scrollTo(0, 0);
     }

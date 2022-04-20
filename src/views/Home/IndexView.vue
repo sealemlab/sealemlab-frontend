@@ -3,14 +3,14 @@
     <div class="home_bgbox">
       <img src="../../assets/images/homebg.png" class="homebg" />
       <div class="content">
-        <span class="home_font font45">{{ $t("message.home.txt1")}}</span>
+        <span class="home_font font45">{{ $t("message.home.txt1") }}</span>
         <div class="content_center">
           <div class="leftbox">
-            <p class="font_1 font26">Purchase Bond, obtain</p>
+            <p class="font_1 font26">{{$t("message.home.txt2")}}</p>
             <p class="font_2 font45 demo_font_color">1000% APY</p>
             <div class="btnbox font16">
-              <span>Bond</span>
-              <span>Bond</span>
+              <span>{{$t("message.home.txt3")}}</span>
+              <span>{{$t("message.home.txt4")}}</span>
             </div>
           </div>
           <div class="rightbox">
@@ -22,12 +22,12 @@
         </div>
         <div class="content_footer">
           <div class="left">
-            <span class="font30" >Genesis NFT</span>
-            <span class="font16 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">Hold NFT and enjoy recommended dividends</span>
+            <span class="font30">{{$t("message.home.txt5")}}</span>
+            <span class="font16 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
           </div>
           <div class="btnbox font16">
-            <span>Bond</span>
-            <span>Bond</span>
+            <span>{{$t("message.home.txt7")}}</span>
+            <span>{{$t("message.home.txt8")}}</span>
           </div>
         </div>
       </div>
@@ -40,8 +40,8 @@
           <img src="../../assets/images/ag2.png" class="ag2_class" />
         </div>
         <div class="fontbox">
-          <span class="font30 title_txt">Sealem Lab characteristics</span>
-          <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt6")}}</span>
+          <span class="font30 title_txt">{{$t("message.home.txt9")}}</span>
+          <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
         </div>
       </div>
       <div class="people_box"><img src="../../assets/images/people.png" class="people" /></div>
@@ -50,7 +50,7 @@
     <div class="content_">
       <!-- 特点 -->
       <div class="box_ display_flex">
-        <div class="title_txt font30">Sealem Lab characteristics</div>
+        <div class="title_txt font30">{{$t("message.home.txt_characteristic")}}</div>
         <div class="imgbox display_flex">
           <div class="onebox display_flex" v-for="(item, index) in spArr" :key="index">
             <img :src="item.src" class="img_sp" />
@@ -61,73 +61,68 @@
       </div>
       <!-- 在圣域怎么赚钱 -->
       <div class="box_ make_money_people display_flex">
-        <div class="title_txt font30">How do you make money in hillem?</div>
-        <div class="team_box self_class display_flex">
-          <div class="top_team self_container display_flex">
-            <div class="out_box self_class display_flex" :class="{margin_right0:index == 1}" v-for="(item, index) in makeMoneyArr" :key="index">
-              <div class="oneteam son_self_class display_flex">
-                <span class="sele_span font16" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt)}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="top_team self_container display_flex">
-            <div class="out_box self_class display_flex" :class="{margin_right0:index == 1}" v-for="(item, index) in makeMoneyArr1" :key="index">
-              <div class="oneteam son_self_class display_flex">
-                <span class="sele_span font16" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt)}}</span>
-              </div>
+        <div class="title_txt font30">{{$t("message.home.txt_makemoney")}}</div>
+        <div class="make_money">
+          <div class="make_box" v-for="(item, index) in makeMoneyArr" :key="index">
+            <div class="make_one">
+              <span class="_span font16" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt)}}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- 团队 -->
-    <div class="team_container display_flex">
-      <div class="title_txt font30">Team member</div>
-      <div class="team_box display_flex">
-        <div class="top_team display_flex">
-          <div class="out_box display_flex" :class="{margin_right0:index == 1}" v-for="(item, index) in teamArr" :key="index">
-            <div class="oneteam display_flex" >
-              <img :src="item.src" class="teaming" />
-              <span class="span1 font20">{{$t(item.name)}}</span>
-              <span class="span2 font16">{{item.txt}}</span>
-              <div class="address_peopllle display_flex">
-                <img src="../../assets/images/in.png" class="ling_ying" />
-                <img src="../../assets/images/twitter.png" class="twitter" />
+    <div class="teamboxs">
+      <div class="team_container display_flex">
+        <div class="title_txt font30">{{$t("message.home.txt47")}}</div>
+        <div class="team_box display_flex">
+          <div class="top_team display_flex">
+            <div class="out_box display_flex" :class="{margin_right0:index == 1}" v-for="(item, index) in teamArr" :key="index">
+              <div class="oneteam display_flex" >
+                <img :src="item.src" class="teaming" />
+                <span class="span1 font20">{{$t(item.name)}}</span>
+                <span class="span2 font16">{{item.txt}}</span>
+                <div class="address_peopllle display_flex">
+                  <img src="../../assets/images/in.png" class="ling_ying" />
+                  <img src="../../assets/images/twitter.png" class="twitter" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="top_team display_flex">
+            <div class="out_box display_flex" v-for="(item, index) in teamArr1" :key="index">
+              <div class="oneteam display_flex" >
+                <img :src="item.src" class="teaming" />
+                <span class="span1 font20">{{$t(item.name)}}</span>
+                <span class="span2 font16">{{item.txt}}</span>
+                <div class="address_peopllle display_flex">
+                  <img src="../../assets/images/in.png" class="ling_ying" />
+                  <img src="../../assets/images/twitter.png" class="twitter" />
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="top_team display_flex">
-          <div class="out_box display_flex" v-for="(item, index) in teamArr1" :key="index">
-            <div class="oneteam display_flex" >
-              <img :src="item.src" class="teaming" />
-              <span class="span1 font20">{{$t(item.name)}}</span>
-              <span class="span2 font16">{{item.txt}}</span>
-              <div class="address_peopllle display_flex">
-                <img src="../../assets/images/in.png" class="ling_ying" />
-                <img src="../../assets/images/twitter.png" class="twitter" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <img src="../../assets/images/team_ag1.png" class="team_ag1" />
+        <img src="../../assets/images/team_ag2.png" class="team_ag2" />
       </div>
-      <img src="../../assets/images/team_ag1.png" class="team_ag1" />
-      <img src="../../assets/images/team_ag2.png" class="team_ag2" />
     </div>
     <!-- 时间轴 -->
-    <div class="time_axis display_flex">
-      <div class="title_txt font30">Road map</div>
-      <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
-        <swiper-slide v-for="(item, index) in swiperArr" :key="index">
-          <p class="time_class font20" >{{item.time}}</p>
-          <p class="content_class font16" >{{$t(item.content)}}</p>
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
+    <div class="time_axis_box">
+      <div class="time_axis display_flex">
+        <div class="title_txt font30">{{$t("message.home.txt54")}}</div>
+        <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
+          <swiper-slide v-for="(item, index) in swiperArr" :key="index">
+            <p class="time_class font20" >{{item.time}}</p>
+            <p class="content_class font16" >{{$t(item.content)}}</p>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+      </div>
     </div>
     <!-- 合作者 -->
     <div class="characteristic_box display_flex">
-      <div class="title_txt font30">collaborator</div>
+      <div class="title_txt font30">{{$t("message.home.txt59")}}</div>
       <div class="partener_box display_flex">
         <div class="one_partener display_flex" :class="{ en_Regular: isEnLang }" v-for="(item, index) in partenerArr" :key="index">
           <img :src="item.src" :class="{par1:index == 0,par2:index == 1,par3:index == 2,par4:index == 3}" />
@@ -195,11 +190,6 @@ export default {
           name:'message.home.txt50'
         },
         {
-          src:require('../../assets/images/svp.png'),
-          txt:'SVP',
-          name:'message.home.txt51'
-        },
-        {
           src:require('../../assets/images/founder.png'),
           txt:'Co-Founder',
           name:'message.home.txt52'
@@ -208,19 +198,21 @@ export default {
           src:require('../../assets/images/founder1.png'),
           txt:'Co-Founder',
           name:'message.home.txt53'
+        },
+        {
+          src:require('../../assets/images/svp.png'),
+          txt:'SVP',
+          name:'message.home.txt51'
         }
       ],
 
       makeMoneyArr:[
         {txt:"message.home.txt16"},
         {txt:"message.home.txt17"},
-        {txt:"message.home.txt18"}
-      ],
-      makeMoneyArr1:[
+        {txt:"message.home.txt18"},
         {txt:"message.home.txt19"},
         {txt:"message.home.txt20"},
-        {txt:"message.home.txt21"},
-        {txt:"message.home.txt22"}
+        {txt:"message.home.txt21"}
       ],
 
       partenerArr:[{
@@ -449,7 +441,7 @@ export default {
   }
   .content_{
     width: 100%;
-    padding: 0 120px;
+    // padding: 0 120px;
     padding-top: 60px;
     display: flex;
     flex-direction: column;
@@ -457,7 +449,8 @@ export default {
     background: #1F1F1F;
     margin-top: 30px;
     .box_{
-      width: 100%;
+      width: 90vw;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -488,61 +481,99 @@ export default {
           }
         }
       }
+      .make_money{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .make_box{
+          padding: 1px;
+          margin-bottom: 44px;
+          width: 30%;
+          min-height: 92px;
+          border-radius: 29px;
+          cursor: pointer;
+          transition: all 0.3s;
+          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          .make_one{
+            border-radius: 29px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            ._span{
+              font-weight: 400;
+              color: #FFFFFF;
+              line-height: 22px;
+            }
+          }        
+        }
+      }
     }
   }
-  .team_container{
-    position: relative;
+  .teamboxs{
     width: 100%;
-    padding: 0 120px;
-    padding-top: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     background: url("../../assets/images/teambg.png") no-repeat #000;
     background-size: 100% 100%;
-    padding-bottom: 100px;
-    .team_ag1{
-      width: 191px;
-      position: absolute;
-      right: 50px;
-      bottom: -100px;
-    }
-    .team_ag2{
-      width: 75px;
-      position: absolute;
-      left: 160px;
-      bottom: -40px;
+    .team_container{
+      position: relative;
+      width: 90vw;
+      margin: 0 auto;
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      padding-bottom: 100px;
+      .team_ag1{
+        width: 191px;
+        position: absolute;
+        right: 50px;
+        bottom: -100px;
+      }
+      .team_ag2{
+        width: 75px;
+        position: absolute;
+        left: 160px;
+        bottom: -40px;
+      }
     }
   }
-  .time_axis{
+  .time_axis_box{
     width: 100%;
-    padding: 0 120px;
-    padding-top: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     background: #1F1F1F;
-    .self_swiper{
-      width:100%;
-      .swiper-slide{
-        display: flex;
-        height: 220px;
-        flex-direction: column;
-        align-items: flex-start;
-        .time_class{
-          font-weight: normal;
-          color: #00C1FF;
-          line-height: 26px;
-          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        .content_class{
-          max-width: 80%;
-          font-weight: normal;
-          color: #FFFFFF;
-          line-height: 32px;
-          margin-top: 10px;
+    .time_axis{
+      width: 90vw;
+      margin: 0 auto;
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .self_swiper{
+        width:100%;
+        .swiper-slide{
+          display: flex;
+          height: 220px;
+          flex-direction: column;
+          align-items: flex-start;
+          .time_class{
+            font-weight: normal;
+            color: #00C1FF;
+            line-height: 26px;
+            background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+          .content_class{
+            max-width: 80%;
+            font-weight: normal;
+            color: #FFFFFF;
+            line-height: 32px;
+            margin-top: 10px;
+          }
         }
       }
     }
@@ -554,8 +585,8 @@ export default {
     margin-bottom: 100px;
   }
   .characteristic_box{
-    width: 100%;
-    padding: 0 120px;
+    width: 90vw;
+    margin: 0 auto;
     flex-direction: column;
     align-items: center;
     margin-top: 70px;
@@ -590,89 +621,66 @@ export default {
     .top_team{
       justify-content: center;
       align-items: center;
-      .out_box{
-        width: 100%;
-        flex-wrap: wrap;
+    }
+  }
+  .out_box{
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+    margin-right: 50px;
+    margin-bottom: 70px;
+    width: 229px;
+    border-radius: 29px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+    .oneteam{
+      border-radius: 29px;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 20px 0;
+      background: #000;
+      .teaming{
+        width: 124px;
+      }
+      .span1{
+        margin:28px 0 6px;
+        font-weight: bold;
+        color: #FFFFFF;
+        line-height: 32px;
+        background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .span2{
+        font-weight: bold;
+        color: #FFFFFF;
+        line-height: 32px;
+        margin-bottom: 10px;
+      }
+      .address_peopllle{
         justify-content: center;
         align-items: center;
-        padding: 1px;
-        margin-right: 50px;
-        margin-bottom: 70px;
-        width: 229px;
-        border-radius: 29px;
-        cursor: pointer;
-        transition: all 0.3s;
-        background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-        .oneteam{
-          border-radius: 29px;
-          flex-direction: column;
-          align-items: center;
-          width: 100%;
-          padding: 20px 0;
-          background: #000;
-          .teaming{
-            width: 124px;
-          }
-          .span1{
-            margin:28px 0 6px;
-            font-weight: bold;
-            color: #FFFFFF;
-            line-height: 32px;
-            background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-          .span2{
-            font-weight: bold;
-            color: #FFFFFF;
-            line-height: 32px;
-            margin-bottom: 10px;
-          }
-          .address_peopllle{
-            justify-content: center;
-            align-items: center;
-            .ling_ying{
-              width: 19px;
-              
-            }
-            .twitter{
-              width: 23px;
-              
-              margin-left: 15px;
-            }
-          }
+        .ling_ying{
+          width: 19px;
+          
         }
-      }
-      .out_box:hover{
-        transform: scale(1.2);
+        .twitter{
+          width: 23px;
+          
+          margin-left: 15px;
+        }
       }
     }
   }
-  .self_class{
-    .self_container{
-      width: 100%;
-      justify-content: space-around;
-      .self_class{
-        width: fit-content;
-        border-radius:0;
-        margin-right: 0;
-        .son_self_class{
-          width: 246px;
-          height: 92px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 0;
-          padding:0 5px;
-          .sele_span{
-            max-width: 190px;
-            font-weight: 400;
-            color: #FFFFFF;
-            line-height: 22px;
-          }
-        }
-      }
-    }
+  .out_box:hover{
+    transform: scale(1.2);
+  }
+  .make_box:hover{
+    transform: scale(1.2);
   }
 }
 .btnbox{

@@ -1,20 +1,20 @@
 <template>
   <div class="register_page">
-    <span class="font30 establish_txt">登录账户</span>
-    <span class="font26 subtitle_txt">游戏账户在希莱姆平台通用</span>
+    <span class="font30 establish_txt">{{$t("message.signin.txt24")}}</span>
+    <span class="font26 subtitle_txt">{{$t("message.signin.txt25")}}</span>
     <div class="content">
       <div class="left_content">
         <div class="onebox" v-for="(item, index) in list" :key="index">
           <div class="imgbox_"><img :src="item.src" class="img_" /></div>
           <div class="right_txt">
-            <span class="font22 txt_1">{{item.title}}</span>
-            <span class="font16 txt_2">{{item.explain}}</span>
+            <span class="font22 txt_1">{{$t(item.title)}}</span>
+            <span class="font16 txt_2">{{$t(item.explain)}}</span>
           </div>
         </div>
       </div>
       <div class="left_content right_content">
         <div class="user_inputbox" v-for="(item, index) in user" :key="index">
-          <p class="font16 email_txt">{{item.title}}</p>
+          <p class="font16 email_txt">{{$t(item.title)}}</p>
           <input v-model.trim="item.inputvalue"
             class="input font16"
             :type="index == 1 ?'password':'text'"
@@ -29,17 +29,17 @@
         <div class="remember_box">
           <div class="_check" @click="rememberStatus = !rememberStatus">
             <div class="checkbox"><span class="correct font22" v-if="rememberStatus"></span></div>
-            <span class="font16 account">记住账号</span>
+            <span class="font16 account">{{$t("message.signin.txt28")}}</span>
           </div>
-          <span class="font16 forget" @click="forgetNumberClick">忘记密码</span>
+          <span class="font16 forget" @click="forgetNumberClick">{{$t("message.signin.txt29")}}</span>
         </div>
-        <p class="explain font16">
-          We recommend that you use the "Remember Me" feature only on your own computer for your account security.
-        </p>
+        <div class="explain font16">
+          <div class="radious font12">?</div>{{$t("message.signin.txt26")}}
+        </div>
         <div class="btn_box font18" @click="loginClick">
-          登录
+          {{$t("message.signin.txt23")}}
         </div>
-        <p class="font12 tip_txt" @click="registerClick">如果没有账号，请点击<span class="tip_login">注册</span></p>
+        <p class="font12 tip_txt" @click="registerClick">{{$t("message.signin.txt27")}}<span class="tip_login">{{$t("message.signin.txt3")}}</span></p>
       </div>
     </div>
     <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup>
@@ -57,38 +57,38 @@ export default {
       list:[
         {
           src:require('../../assets/images/register1.png'),
-          title:'注册',
-          explain:'冒险等着你,成为 Sacred Realm 世界的传奇！'
+          title:'message.signin.txt3',
+          explain:'message.signin.txt4'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'安全',
-          explain:'It secures the players with high security and instant solutions.'
+          src:require('../../assets/images/register2.png'),
+          title:'message.signin.txt5',
+          explain:'message.signin.txt6'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'EVENTS',
-          explain:'High gaming pleasure with multiple and fun in-game activities.'
+          src:require('../../assets/images/register3.png'),
+          title:'message.signin.txt7',
+          explain:'message.signin.txt8'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'注册',
-          explain:'冒险等着你,成为 Sacred Realm 世界的传奇！'
+          src:require('../../assets/images/register4.png'),
+          title:'message.signin.txt9',
+          explain:'message.signin.txt10'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'注册',
-          explain:'冒险等着你,成为 Sacred Realm 世界的传奇！'
+          src:require('../../assets/images/register5.png'),
+          title:'message.signin.txt11',
+          explain:'message.signin.txt12'
         },
         {
-          src:require('../../assets/images/register1.png'),
-          title:'注册',
-          explain:'冒险等着你,成为 Sacred Realm 世界的传奇！'
+          src:require('../../assets/images/register6.png'),
+          title:'message.signin.txt13',
+          explain:'message.signin.txt14'
         },
       ],
       user:[
         {
-          title:'邮箱',
+          title:'message.signin.txt16',
           inputvalue:'',
           placeholder:'Please enter the content',
           tip:'邮箱不能为空',
@@ -96,7 +96,7 @@ export default {
           status:false
         },
         {
-          title:'输入密码',
+          title:'message.signin.txt17',
           inputvalue:'',
           placeholder:'Please enter the content',
           tip:'密码不能为空',
@@ -159,8 +159,10 @@ export default {
         })
       }else{
         console.log("所有校验都通过")
-        this.content = '登录成功'
-        this.proupStatus = true
+        // this.content = '登录成功'
+        // this.proupStatus = true
+        this.$store.commit("setLogin", true);
+        this.$router.push('/myaccount/information');
       }
     },
     forgetNumberClick(){
@@ -305,11 +307,23 @@ export default {
         margin-top: 57px;
         font-weight: 400;
         color: #FFFFFF;
-        line-height: 22px;
+        display: flex;
+        .radious{
+          width: 14px;
+          height: 14px;
+          border: 1px solid #A9A7A7;
+          font-weight: 400;
+          color: #A9A7A7;
+          line-height: 15px;
+          border-radius: 50%;
+          text-align: center;
+          margin-top: 3px;
+          margin-right: 9px;
+        }
       }
       .btn_box{
         cursor: pointer;
-        width: 232px;
+        width: 100%;
         height: 54px;
         background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
         border-radius: 4px;
