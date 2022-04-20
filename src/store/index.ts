@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    loginStatus: localStorage.getItem('getLogin') || false, // 登录状态
+    loginStatus:false, // 登录状态
   },
   getters: {
     isEnLang() {
@@ -29,7 +29,7 @@ export default new Vuex.Store({
       reducer(val) {
         return {
           // 只储存state中的MenuActive
-          // MenuActive: val.MenuActive,
+          loginStatus: val.loginStatus,
         };
       },
     }),

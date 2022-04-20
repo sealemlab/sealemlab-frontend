@@ -47,7 +47,7 @@ export default {
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
         { label: "message.nav.txt5", link: "" },
-        { label: "message.nav.txt6", link: "/user/assets/0" },
+        { label: "message.nav.txt6", link: "" },
         { label: "message.nav.txt7", link: "" }
       ],
       showLangSelect: false,
@@ -67,13 +67,14 @@ export default {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 2;
-      } else if (to.path.indexOf("/user/") !== -1) {
-        this.navActive = 5;
-      }else if (to.path.indexOf("/signin/") !== -1) {
+      } else if (to.path.indexOf("/signin/") !== -1) {
         this.navActive = 7;
       }else if (to.path.indexOf("/myaccount/") !== -1) {
         this.navActive = 7;
       }
+      // else if (to.path.indexOf("/user/") !== -1) {
+      //   this.navActive = 5;
+      // }
     },
   },
   created() {
@@ -87,7 +88,7 @@ export default {
       if(this.getLogin){
         this.$router.push('/myaccount/information');
       }else{
-        this.$router.push('/signin/register');
+        this.$router.push('/signin/login');
       }
     },
     selectLang(index) {

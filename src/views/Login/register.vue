@@ -22,7 +22,7 @@
               @blur="blurEvent(index)"
               @focus="focusEvent(index)"
             />
-            <div class="code font16" v-if="index == user.length - 1" @click="sendCode">
+            <div class="code font16" v-if="index == 2" @click="sendCode">
               {{code_txt}}
             </div>
           </div>
@@ -37,7 +37,15 @@
         <div class="btn_box font18" @click="registerClick">
           {{$t("message.signin.txt1")}}
         </div>
-        <p class="font12 tip_txt" @click="loginClick">{{$t("message.signin.txt22")}}<span class="tip_login">{{$t("message.signin.txt23")}}</span></p>
+        <p class="font12 tip_txt" @click="loginClick" v-if="$i18n.locale == 'cn'">
+          {{$t("message.signin.txt22")}}
+          <span class="tip_login">{{$t("message.signin.txt23")}}</span>
+        </p>
+        <p class="font12 tip_txt" @click="loginClick" v-if="$i18n.locale == 'en'">
+          {{$t("message.signin.txt30")}}
+          <span class="tip_login">{{$t("message.signin.txt31")}}</span>
+          {{$t("message.signin.txt32")}}
+        </p>
       </div>
     </div>
     <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup>
@@ -90,7 +98,7 @@ export default {
         {
           title:'message.signin.txt15',
           inputvalue:'',
-          placeholder:'请输入用户名',
+          placeholder:'Please enter the name',
           tip:'用户名不能为空',
           tip_status:false,
           status:false
@@ -100,6 +108,14 @@ export default {
           inputvalue:'',
           placeholder:'Please enter the email',
           tip:'邮箱不能为空',
+          tip_status:false,
+          status:false
+        },
+        {
+          title:'message.signin.txt19',
+          inputvalue:'',
+          placeholder:'Please enter the content',
+          tip:'请输入验证码',
           tip_status:false,
           status:false
         },
@@ -119,14 +135,6 @@ export default {
           tip_status:false,
           status:false
         },
-        {
-          title:'message.signin.txt19',
-          inputvalue:'',
-          placeholder:'Please enter the content',
-          tip:'请输入验证码',
-          tip_status:false,
-          status:false
-        }
       ]
     }
   },
@@ -163,22 +171,22 @@ export default {
           }
           break;
         case 2:
+          if (this.user[index].inputvalue.length != 6){
+            this.checkFun(index,'请输入6位验证码')
+          }else{
+            this.user[index].status = true
+          }
+          break;
+        case 3:
           if (!pwReg.test(this.user[index].inputvalue)){
             this.checkFun(index,'密码不合法')
           }else{
             this.user[index].status = true
           }
           break;
-        case 3:
-          if (this.user[2].inputvalue !== this.user[3].inputvalue){
-            this.checkFun(index,'密码俩次输入不一样')
-          }else{
-            this.user[index].status = true
-          }
-          break;
         case 4:
-          if (this.user[index].inputvalue.length != 6){
-            this.checkFun(index,'请输入6位验证码')
+          if (this.user[3].inputvalue !== this.user[4].inputvalue){
+            this.checkFun(index,'密码俩次输入不一样')
           }else{
             this.user[index].status = true
           }

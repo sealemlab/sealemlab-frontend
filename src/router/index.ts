@@ -99,12 +99,7 @@ const routes: Array<RouteConfig> = [
         path: "information",
         name: "Information",
         component: () => import("../views/Myaccount/information.vue"),
-      },
-      {
-        path: "logout",
-        name: "Logout",
-        component: () => import("../views/Myaccount/logout.vue"),
-      },
+      }
     ],
   },
 ];

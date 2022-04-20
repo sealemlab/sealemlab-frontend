@@ -33,8 +33,9 @@
           </div>
           <span class="font16 forget" @click="forgetNumberClick">{{$t("message.signin.txt29")}}</span>
         </div>
-        <div class="explain font16">
-          <div class="radious font12">?</div>{{$t("message.signin.txt26")}}
+        <div class="explain">
+          <div class="radious font12">?</div>
+          <span class="txt_ font16">{{$t("message.signin.txt26")}}</span>
         </div>
         <div class="btn_box font18" @click="loginClick">
           {{$t("message.signin.txt23")}}
@@ -305,8 +306,6 @@ export default {
         width: fit-content;
         padding: 0 25px;
         margin-top: 57px;
-        font-weight: 400;
-        color: #FFFFFF;
         display: flex;
         .radious{
           width: 14px;
@@ -319,6 +318,11 @@ export default {
           text-align: center;
           margin-top: 3px;
           margin-right: 9px;
+        }
+        .txt_{
+          font-weight: 400;
+          color: #FFFFFF;
+          line-height: 22px;
         }
       }
       .btn_box{

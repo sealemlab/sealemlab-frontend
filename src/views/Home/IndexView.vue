@@ -336,8 +336,12 @@ export default {
       .home_font{
         font-weight: bold;
         color: #FFFFFF;
-        line-height: 22px;
+        line-height: 63px;
+        letter-spacing: 4px;
         width: fit-content;
+        background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
       .content_center{
         width: 100%;
@@ -405,7 +409,11 @@ export default {
       width: 50%;
       flex-direction: column;
       align-items: center;
+      position: relative;
       .ag_box{
+        position: absolute;
+        top: -50px;
+        left: 0;
         width: 100%;
         display: flex;
         align-items: center;
@@ -462,7 +470,7 @@ export default {
         .onebox{
           flex-direction: column;
           border-right:1px solid #D4BA76;
-          padding:0 15px;
+          padding:0 10px;
           &:nth-child(1){
             padding-left: 0;
           }

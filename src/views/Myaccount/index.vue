@@ -2,7 +2,7 @@
   <div class="nft_page">
     <div class="content_box">
       <div class="display_flex menu_box">
-        <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
+        <router-link class="a_link font18" @click.native="liClick(index)" v-for="(route, index) in navArr" :key="index" :to="route.link">
           {{ $t(route.label) }}
         </router-link>
       </div>
@@ -22,15 +22,16 @@ export default {
       navArr: [
         { label: "message.account.txt1", link: "/myaccount/information" },
         { label: "message.account.txt2", link: "/myaccount/bindwallet" },
-        { label: "message.account.txt3", link: "/myaccount/logout" },
+        { label: "message.account.txt3", link: "/signin/login" }
       ],
     };
   },
   computed: { ...mapGetters(["isEnLang"]) },
   methods:{
-    liClick(item,index){
-      this.li_index = index
-      this.$router.push(item.link)
+    liClick(index){
+      if(index == 2){
+        this.$store.commit("setLogin", false);
+      }
     }
   }
 };

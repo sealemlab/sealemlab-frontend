@@ -19,7 +19,7 @@
           <span class="font_class">{{$t("message.bond.txt3")}}</span>
           <span class="font_class">$45678956</span>
           <span class="font_class"></span>
-          <span class="font_class">ST{{$t("message.bond.txt4")}}</span>
+          <span class="font_class">ST {{$t("message.bond.txt4")}}</span>
           <span class="font_class">$45678956</span>
         </div>
         <div class="list_title_box font20">

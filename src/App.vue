@@ -46,7 +46,7 @@ export default {
   z-index: -999;
 }
 #app {
-  width: calc(100vw - 5px);
+  width: 100vw;
   min-height: 100vh;
   background: #000000;
   padding-bottom: 30px;
