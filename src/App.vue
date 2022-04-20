@@ -1,9 +1,5 @@
 <template>
   <div id="app" :class="isEnLang?'en_Bold':'cn_lang'">
-      <!-- <video class="video_" loop autoplay muted>
-        <source src="./assets/video/1.mp4" type="video/mp4" />
-      </video> -->
-      <!-- <iframe style="display: none" allow="autoplay" src="./assets/video/1.mp4"></iframe> -->
     <NavigationBar />
     <router-view />
     <FooterComponents />

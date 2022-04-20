@@ -52,7 +52,10 @@ img{
   font-family: "SFCompactDisplay-Heavy";
   src: url("../assets/fonts/SF-Compact-Display-Heavy.otf");
 }
-
+@font-face {
+  font-family: "PingFangTC-Semibold";
+  src: url("../assets/fonts/FZYouHFW.TTF");
+}
 
 //英文粗体
 .en_Bold {
@@ -67,9 +70,9 @@ img{
   font-family: "SFCompactDisplay-Heavy" !important;
 }
 // 中文
-// .cn_lang {
-//   font-family: WenYue-GuDianMingChaoTi-JRFC !important;
-// }
+.cn_lang {
+  font-family: "PingFangTC-Semibold" !important;
+}
 
 // 大标题字号
 .font45 {

@@ -3,7 +3,7 @@
     <div class="box">
       <div class="left_content">
         <div class="oneline" v-for="(item, index) in list" :key="index">
-          <span class="font20">{{ $t(item.title)}}</span>
+          <span class="font18 txt_frontend">{{ $t(item.title)}}</span>
           <input :type="index != list.length - 1?'text':'date'" class="input font18" v-model="item.inputValue" v-if="index != 2" />
           <div class="inputbox" v-if="index == 2">
             <div class="add_eye">
@@ -69,7 +69,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .information_page{
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   margin-top: 67px;
   .box{
@@ -78,19 +78,22 @@ export default {
     background: #101010;
     border: 2px solid #242222;
     .left_content{
-      flex: 1;
+      width: 55%;
       display: flex;
       flex-direction: column;
       border-right: 2px solid #242222;
-      padding: 30px 34px;
+      padding: 30px 30px;
       .oneline{
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 34px;
+        .txt_frontend{
+          min-width: 85px;
+        }
         .input{
-          width: 78%;
+          width: calc(100% - 120px);
           height: 46px;
           background: #171718;
           box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
@@ -100,12 +103,12 @@ export default {
           padding: 0 10px;
         }
         .inputbox{
-          width: 84%;
+          width:calc(100% - 100px);
           display: flex;
           align-items: center;
           justify-content: space-between;
           .add_eye{
-            width: calc(100% - 120px);
+            width: 50%;
             position: relative;
             input{
               width: 100%;
@@ -125,7 +128,8 @@ export default {
             }
           }
           .input_btn{
-            width: 93px;
+            // width: 93px;
+            padding: 0 10px;
             height: 34px;
             background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
             border-radius: 4px;
@@ -135,7 +139,6 @@ export default {
             align-items: center;
             font-weight: 600;
             color: #000000;
-            line-height: 20px;
           }
         }
       }
@@ -163,6 +166,7 @@ export default {
       }
     }
     .right_content{
+      width: 45%;
       border: none;
       .right_line{
         width: 100%;

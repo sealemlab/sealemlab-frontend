@@ -358,6 +358,7 @@ export default {
             line-height: 22px;
           }
           .font_2{
+            font-weight: bolder;
             color: #FFFFFF;
             line-height: 54px;
             margin: 13px 0 28px 0;
@@ -376,15 +377,17 @@ export default {
         width: 100%;
         height: 146px;
         padding: 0 63px;
+        padding-top: 20px;
         margin-top: 59px;
         display: flex;
-        align-items: center;
+        // align-items: center;
         justify-content: space-between;
         background: url("../../assets/images/content_footer.png") no-repeat #000;
         background-size: 100% 100%;
         .left{
           display: flex;
           flex-direction: column;
+          // margin-top: -50px;
           .margin_top{
             margin-top: 10px;
           }
@@ -481,7 +484,7 @@ export default {
             font-weight: bold;
             color: #FFFFFF;
             line-height: 22px;
-            margin: 5px 0;
+            margin: 10px 0;
           }
           .txt1{
             font-weight: 400;
@@ -693,7 +696,7 @@ export default {
 }
 .btnbox{
   display: flex;
-  align-items: center;
+  // align-items: center;
   span{
     width: 170px;
     height: 45px;
