@@ -179,8 +179,8 @@ export default {
       }
     },
     forgetNumberClick(){
-      this.title = '找回密码'
-      this.passStatus = true
+      // this.title = '找回密码'
+      // this.passStatus = true
     }
   }
 }
