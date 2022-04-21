@@ -37,14 +37,9 @@
         <div class="btn_box font18" @click="registerClick">
           {{$t("message.signin.txt1")}}
         </div>
-        <p class="font12 tip_txt" @click="loginClick" v-if="$i18n.locale == 'cn'">
+        <p class="font12 tip_txt" @click="loginClick">
           {{$t("message.signin.txt22")}}
           <span class="tip_login">{{$t("message.signin.txt23")}}</span>
-        </p>
-        <p class="font12 tip_txt" @click="loginClick" v-if="$i18n.locale == 'en'">
-          {{$t("message.signin.txt30")}}
-          <span class="tip_login">{{$t("message.signin.txt31")}}</span>
-          {{$t("message.signin.txt32")}}
         </p>
       </div>
     </div>
@@ -249,7 +244,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 67px;
   .establish_txt{
     font-weight: 600;
     line-height: 42px;

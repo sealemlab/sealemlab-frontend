@@ -87,8 +87,8 @@ export default {
           label: "message.nft.txt9",
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",
-          skill_content: "message.nft.txt15",
-          classIntroduce: "message.nft.txt14",
+          skill_content: "message.nft.txt15_1",
+          classIntroduce: "message.nft.txt14_1",
           skills: [
             require("../../../assets/images/nftimage/nft_class1_skills1.png"),
             require("../../../assets/images/nftimage/nft_class1_skills2.png"),
@@ -113,8 +113,8 @@ export default {
           label: "message.nft.txt10",
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",
-          skill_content: "message.nft.txt15",
-          classIntroduce: "message.nft.txt14",
+          skill_content: "message.nft.txt15_3",
+          classIntroduce: "message.nft.txt14_3",
           skills: [
             require("../../../assets/images/nftimage/nft_class1_skills1.png"),
             require("../../../assets/images/nftimage/nft_class1_skills2.png"),
@@ -139,8 +139,8 @@ export default {
           label: "message.nft.txt11",
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",
-          skill_content: "message.nft.txt15",
-          classIntroduce: "message.nft.txt14",
+          skill_content: "message.nft.txt15_2",
+          classIntroduce: "message.nft.txt14_2",
           skills: [
             require("../../../assets/images/nftimage/nft_class1_skills1.png"),
             require("../../../assets/images/nftimage/nft_class1_skills2.png"),

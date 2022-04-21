@@ -31,6 +31,6 @@ export default {
 <style lang="scss" scoped>
 .login_register{
   width: 100%;
-  margin-top: 80px;
+  padding-top: 160px;
 }
 </style>

@@ -12,7 +12,9 @@
       </div>
     </div>
     <div class="footerbox">
-      <p class="copyright font14 en_Regular">COPYRIGHT © 2022 Sacred Realm, All rights Reserved</p>
+      <p class="copyright font14 en_Regular">
+        {{$t("message.footer.txt21")}}
+      </p>
     </div>
   </div>
 </template>

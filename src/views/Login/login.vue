@@ -34,7 +34,9 @@
           <span class="font16 forget" @click="forgetNumberClick">{{$t("message.signin.txt29")}}</span>
         </div>
         <div class="explain">
-          <div class="radious font12">?</div>
+          <div class="radious">
+            <img src="../../assets/images/ques.png" class="ques_img" />
+          </div>
           <span class="txt_ font16">{{$t("message.signin.txt26")}}</span>
         </div>
         <div class="btn_box font18" @click="loginClick">
@@ -179,7 +181,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 67px;
   .establish_txt{
     font-weight: 600;
     line-height: 42px;
@@ -308,16 +309,11 @@ export default {
         margin-top: 57px;
         display: flex;
         .radious{
-          width: 14px;
-          height: 14px;
-          border: 1px solid #A9A7A7;
-          font-weight: 400;
-          color: #A9A7A7;
-          line-height: 15px;
-          border-radius: 50%;
-          text-align: center;
           margin-top: 3px;
           margin-right: 9px;
+          .ques_img{
+            width: 13px;
+          }
         }
         .txt_{
           font-weight: 400;

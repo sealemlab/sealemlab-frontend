@@ -230,20 +230,28 @@ export default {
       ],
       swiperArr:[
         {
-          time:'2022 Q1',
+          time:'2020 Q4',
           content:'message.home.txt55'
         },
         {
-          time:'2022 Q2',
+          time:'2021 Q1',
           content:'message.home.txt56'
         },
         {
-          time:'2022 Q3',
+          time:'2021 Q2',
           content:'message.home.txt57'
         },
         {
-          time:'2022 Q4',
+          time:'2021 Q3',
           content:'message.home.txt58'
+        },
+        {
+          time:'2021 Q4',
+          content:'message.home.txt60'
+        },
+        {
+          time:'2022 Q1',
+          content:'message.home.txt61'
         }
       ],
       swiperOption:{
@@ -387,7 +395,6 @@ export default {
         .left{
           display: flex;
           flex-direction: column;
-          // margin-top: -50px;
           .margin_top{
             margin-top: 10px;
           }
@@ -440,7 +447,7 @@ export default {
           margin: 110px 0 36px 0;
         }
         .txt_content{
-          width: 60%;
+          width: 90%;
           font-weight: 400;
           line-height: 22px;
         }
@@ -452,7 +459,6 @@ export default {
   }
   .content_{
     width: 100%;
-    // padding: 0 120px;
     padding-top: 60px;
     display: flex;
     flex-direction: column;
@@ -502,18 +508,17 @@ export default {
           margin-bottom: 44px;
           width: 30%;
           min-height: 92px;
-          border-radius: 29px;
           cursor: pointer;
           transition: all 0.3s;
           background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
           .make_one{
-            border-radius: 29px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             width: 100%;
             height: 100%;
+            padding: 0 10px;
             background: #000;
             ._span{
               font-weight: 400;
@@ -696,7 +701,6 @@ export default {
 }
 .btnbox{
   display: flex;
-  // align-items: center;
   span{
     width: 170px;
     height: 45px;

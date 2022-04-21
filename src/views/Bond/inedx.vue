@@ -59,7 +59,7 @@
           <div class="radious font12">?</div>
         </div>
         <span class="txt_">$45678956</span>
-        <span class="btn_txt" @click="BondClick(1)">{{$t("message.bond.txt10")}}</span>
+        <span class="btn_txt">{{$t("message.bond.txt10")}}</span>
         <span class="txt_"></span>
         <div class="layout_box margin0">
           <span class="insert">{{$t("message.bond.txt11")}}</span>
