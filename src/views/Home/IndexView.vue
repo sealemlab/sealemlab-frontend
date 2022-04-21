@@ -9,7 +9,7 @@
             <p class="font_1 font26">{{$t("message.home.txt2")}}</p>
             <p class="font_2 font45 demo_font_color">1000% APY</p>
             <div class="btnbox font16">
-              <span>{{$t("message.home.txt3")}}</span>
+              <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
             </div>
           </div>
@@ -20,10 +20,10 @@
             <img src="../../assets/images/tel_4.png" class="tel_img" />
           </div>
         </div>
-        <div class="content_footer">
+        <div class="content_footer" :class="isEnLang?'paddingleftright':''">
           <div class="left">
             <span class="font30">{{$t("message.home.txt5")}}</span>
-            <span class="font16 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
+            <span class="font30 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
           </div>
           <div class="btnbox font16">
             <span>{{$t("message.home.txt7")}}</span>
@@ -252,6 +252,18 @@ export default {
         {
           time:'2022 Q1',
           content:'message.home.txt61'
+        },
+        {
+          time:'2022 Q2',
+          content:'message.home.txt62'
+        },
+        {
+          time:'2022 Q3',
+          content:'message.home.txt63'
+        },
+        {
+          time:'2022 Q4',
+          content:'message.home.txt64'
         }
       ],
       swiperOption:{
@@ -281,6 +293,9 @@ export default {
     },
   },
   methods:{
+    bondClick(){
+      this.$router.push('/bond');
+    },
     peopleClick(index){
       this.peopleIndex = index
     },
@@ -381,14 +396,16 @@ export default {
           }
         }
       }
+      .paddingleftright{
+        padding: 20px 18px 0 !important;
+      }
       .content_footer{
         width: 100%;
         height: 146px;
         padding: 0 63px;
         padding-top: 20px;
         margin-top: 59px;
-        display: flex;
-        // align-items: center;
+        display: flex;;
         justify-content: space-between;
         background: url("../../assets/images/content_footer.png") no-repeat #000;
         background-size: 100% 100%;
@@ -572,7 +589,8 @@ export default {
         width:100%;
         .swiper-slide{
           display: flex;
-          height: 220px;
+          // height: 260px;
+          padding-bottom: 40px;
           flex-direction: column;
           align-items: flex-start;
           .time_class{
@@ -711,8 +729,12 @@ export default {
     text-align: center;
     line-height: 43px;
     margin-right: 43px;
+    cursor: pointer;
     &.active{
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+    }
+    &:nth-child(2){
+      margin-right: 0;
     }
   }
 }

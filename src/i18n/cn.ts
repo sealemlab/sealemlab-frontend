@@ -57,10 +57,13 @@ export const message = {
     txt57: "swap及债券研发,模型设定",
     txt58: "游戏团队招募及开发",
     txt60:"社交媒体建立 ,竞品分析与NFT市场搭建",
-    txt61:"早期公会招募",
+    txt61:"早期公会招募,市场营销",
+    txt62:"Sealem和第一款游戏《圣域》官网上线,CoinMarketCap / CoinGecko 收录,公开发售,首批代币铸造及Pancakeswap列出,上线更多DEX/CEX ,多语种社区建立,NFT创世盲盒预售,DAO治理开放,NFT市场上线,第一款游戏《圣域》上线,IOS,Google商店上线",
+    txt63:"Swap上线 更多CEX列出,全球公会招募,游戏更新 新游发行投票,迪拜线下公会竞赛,迪拜Gamefi圆桌会议举办",
+    txt64:"跨链计划 sealem v2发布,创作者平台上线,更多的营销",
+
 
     txt59: "合 作 者",
-
   },
   footer:{
     txt1:"關於",
