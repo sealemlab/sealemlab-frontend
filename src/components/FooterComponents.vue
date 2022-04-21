@@ -71,7 +71,7 @@ export default {
 <style lang="scss" scoped>
 .footer_box {
   margin-top: 50px;
-  padding: 60px 0;
+  padding-top: 60px;
   width: 100%;
   flex-direction: column;
   align-items: center;

@@ -45,6 +45,5 @@ export default {
   width: 100vw;
   min-height: 100vh;
   background: #000000;
-  padding-bottom: 30px;
 }
 </style>

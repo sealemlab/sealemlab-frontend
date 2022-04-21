@@ -46,13 +46,20 @@
       </div>
     </div>
     <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup>
+    <PassProup :passStatus="passStatus" :title="title" @closePassProup="closePassProup"></PassProup>
   </div>
 </template>
 <script>
 const emailReg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
+import PassProup from '../../components/Password.vue'
 export default {
+  components:{
+    PassProup
+  },
   data(){
     return {
+      title:"修改密码",//修改密码弹窗标题
+      passStatus:false,//修改密码弹窗
       content:'',
       proupStatus:false,//弹窗状态
       rememberStatus:false,//记住我状态
@@ -113,6 +120,9 @@ export default {
     proupClose(){
       this.proupStatus = false
     },
+    closePassProup(){
+      this.passStatus = false
+    },
     registerClick(){
       this.$router.push('/signin/register');
     },
@@ -169,8 +179,8 @@ export default {
       }
     },
     forgetNumberClick(){
-      this.content = '页面铺设中'
-      this.proupStatus = true
+      this.title = '找回密码'
+      this.passStatus = true
     }
   }
 }
