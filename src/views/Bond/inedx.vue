@@ -66,7 +66,7 @@
           <div class="radious font12">?</div>
         </div>
         <span class="txt_">$45678956</span>
-        <span class="btn_txt" @click="BondClick(1)">{{$t("message.bond.txt12")}}</span>
+        <span class="btn_txt">{{$t("message.bond.txt12")}}</span>
       </div>
       <!-- 表格内层标题 -->
       <div class="list_title self_calss_list font20">
@@ -85,7 +85,7 @@
         </div>
       </div>
     </div>
-    <InputProup :proupDis="proupDis" @closeProup="closeProup" />
+    <InputProup :proupDis="proupDis" @input="inputClick" @sureclick="proupClick" @closeProup="closeProup" />
   </div>
 </template>
 
@@ -97,6 +97,7 @@ export default {
   },
   data(){
     return{
+      inputvalue:"",
       proupDis:false,//弹窗变量
       coinArr:[
         {
@@ -135,6 +136,14 @@ export default {
     }
   },
   methods:{
+    inputClick(val){
+      console.log('val: ', val);
+      this.inputvalue = val
+    },
+    // 弹窗按钮的确认事件
+    proupClick(){
+      console.log('this.inputvalue: ', this.inputvalue);
+    },
     closeProup(){
       this.proupDis = false
     },

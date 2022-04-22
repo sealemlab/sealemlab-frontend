@@ -6,6 +6,9 @@ import i18n from "./i18n/index";
 import "./style/reset.scss";
 import "./style/global.scss";
 
+import api from "./api/api";
+Vue.prototype.$api = api;
+
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);

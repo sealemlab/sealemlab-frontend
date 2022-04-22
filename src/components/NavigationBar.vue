@@ -43,7 +43,7 @@ export default {
       navActive: 0,
       navArr: [
         { label: "message.nav.txt1", link: "/bond" },
-        { label: "message.nav.txt2", link: "" },
+        // { label: "message.nav.txt2", link: "" },
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
         { label: "message.nav.txt5", link: "" },
@@ -66,7 +66,7 @@ export default {
       }else if (to.path == '/bond') {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
-        this.navActive = 2;
+        this.navActive = 1;
       } else if (to.path.indexOf("/signin/") !== -1) {
         this.navActive = 7;
       }else if (to.path.indexOf("/myaccount/") !== -1) {

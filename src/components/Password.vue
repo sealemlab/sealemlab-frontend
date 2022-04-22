@@ -51,6 +51,15 @@ export default {
       code_txt:'发送验证码'
     }
   },
+  watch:{
+    passStatus(newvala){
+      if(newvala){
+        document.body.style.overflow='hidden'
+      }else{
+        document.body.style.overflow='visible'
+      }
+    }
+  },
   methods: {
     // 弹窗关闭
     closePassProup () {

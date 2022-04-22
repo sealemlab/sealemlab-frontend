@@ -25,7 +25,7 @@
           <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
           <div class="btns">
             <span class="btn" @click="deleteAmount">-</span>
-            <input type="number" class="font26" v-model="amount" />
+            <input type="number" class="font16" v-model="amount" />
             <span class="btn" @click="addAmount">+</span>
           </div>
         </div>

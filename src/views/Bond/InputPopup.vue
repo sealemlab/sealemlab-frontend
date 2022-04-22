@@ -18,15 +18,20 @@
       <div class="input_box">
         <input
           type="text"
-          v-model="peopleAddress"
+          v-model="msg"
           class="input font16"
           :placeholder='$t("message.bond.txt16")'
+          @blur="blurEvent"
+          @focus="focusEvent"
         />
-        <div class="btn font16" @click="besure">
+        <div class="btn font16">
           MAX
         </div>
       </div>
-      <div class="main_button font16">{{$t("message.bond.txt1")}}</div>
+      <div class="input_prompt font12">
+        <span class="ani_shake" v-if="status">请先输入数量</span>
+      </div>
+      <div class="main_button font16" @click="bondFun">{{$t("message.bond.txt1")}}</div>
       <div class="line_box">
         <div class="layout_box">
           <span class="font14 wallet_">{{$t("message.bond.txt17")}}</span>
@@ -62,10 +67,41 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  data(){
+    return{
+      msg:'',
+      status:false
+    }
+  },
+  watch:{
+    proupDis(newvala){
+      if(newvala){
+        document.body.style.overflow='hidden'
+      }else{
+        document.body.style.overflow='visible'
+        this.msg = ''
+        this.status = false
+      }
+    },
+    // inputvalue(nval,oval){
+    //   if(nval != oval){
+    //     this.msg = nval
+    //   }
+    // },
+    msg(nval,oval){
+      if(nval != oval){
+        this.$emit('input',nval)
+      }
+    }
+  },
   computed: {
     ...mapGetters(["isEnLang"])
   },
   props: {
+    // inputvalue: {
+    //   type: String,
+    //   default: ''
+    // },
     proupDis: {
       type: Boolean,
       default: false
@@ -76,9 +112,16 @@ export default {
     closeProup () {
       this.$emit('closeProup')
     },
-    // 去绑定
-    besurefun(){
-      this.$emit('besurefun')
+    bondFun(){
+      this.$emit('sureclick')
+    },
+    focusEvent(){
+      this.status = false
+    },
+    blurEvent(){
+      if(!this.msg){
+        this.status = true
+      }
     }
   }
 }
@@ -163,7 +206,7 @@ export default {
     .main_button{
       width: 216px;
       height: 45px;
-      margin: 50px 0 37px;
+      margin: 20px 0 37px;
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
       box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
       border-radius: 4px;
@@ -173,6 +216,7 @@ export default {
       align-items: center;
       font-weight: bold;
       color: #000000;
+      cursor: pointer;
     }
     .line_box{
       width: 100%;
@@ -222,5 +266,11 @@ export default {
       line-height: 16px;
     }
   }
+}
+.input_prompt {
+  width: 100%;
+  min-height: 20px;
+  color: #fb3e3e;
+  margin-top: 10px;
 }
 </style>

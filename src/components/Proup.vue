@@ -26,6 +26,15 @@ export default {
       default: ''
     }
   },
+  watch:{
+    proupStatus(newvala){
+      if(newvala){
+        document.body.style.overflow='hidden'
+      }else{
+        document.body.style.overflow='visible'
+      }
+    }
+  },
   methods: {
     // 弹窗关闭
     closeProup () {
