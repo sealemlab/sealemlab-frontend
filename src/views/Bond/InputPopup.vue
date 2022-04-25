@@ -16,20 +16,13 @@
         </div>
       </div>
       <div class="input_box">
-        <input
-          type="text"
-          v-model="msg"
-          class="input font16"
-          :placeholder='$t("message.bond.txt16")'
-          @blur="blurEvent"
-          @focus="focusEvent"
-        />
+        <slot name="input_slot"></slot>
         <div class="btn font16">
           MAX
         </div>
       </div>
       <div class="input_prompt font12">
-        <span class="ani_shake" v-if="status">请先输入数量</span>
+        <span class="ani_shake" v-if="afferentStatus">请先输入数量</span>
       </div>
       <div class="main_button font16" @click="bondFun">{{$t("message.bond.txt1")}}</div>
       <div class="line_box">
@@ -67,12 +60,6 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  data(){
-    return{
-      msg:'',
-      status:false
-    }
-  },
   watch:{
     proupDis(newvala){
       if(newvala){
@@ -82,30 +69,20 @@ export default {
         this.msg = ''
         this.status = false
       }
-    },
-    // inputvalue(nval,oval){
-    //   if(nval != oval){
-    //     this.msg = nval
-    //   }
-    // },
-    msg(nval,oval){
-      if(nval != oval){
-        this.$emit('input',nval)
-      }
     }
   },
   computed: {
     ...mapGetters(["isEnLang"])
   },
   props: {
-    // inputvalue: {
-    //   type: String,
-    //   default: ''
-    // },
     proupDis: {
       type: Boolean,
       default: false
-    }
+    },
+    afferentStatus: {
+      type: Boolean,
+      default: false
+    },
   },
   methods: {
     // 弹窗关闭
@@ -114,14 +91,6 @@ export default {
     },
     bondFun(){
       this.$emit('sureclick')
-    },
-    focusEvent(){
-      this.status = false
-    },
-    blurEvent(){
-      if(!this.msg){
-        this.status = true
-      }
     }
   }
 }
@@ -179,15 +148,6 @@ export default {
       border-radius: 8px;
       border: 1px solid #373636;
       margin-top: 42px;
-      .input {
-        background: transparent;
-        height: 100%;
-        border: none;
-        outline: none;
-        color: #ffffff;
-        padding-left: 15px;
-        width: calc(100% - 96px);
-      }
       .btn {
         cursor: pointer;
         width: 96px;
@@ -266,11 +226,5 @@ export default {
       line-height: 16px;
     }
   }
-}
-.input_prompt {
-  width: 100%;
-  min-height: 20px;
-  color: #fb3e3e;
-  margin-top: 10px;
 }
 </style>

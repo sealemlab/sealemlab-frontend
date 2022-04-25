@@ -85,7 +85,9 @@
         </div>
       </div>
     </div>
-    <InputProup :proupDis="proupDis" @input="inputClick" @sureclick="proupClick" @closeProup="closeProup" />
+    <InputProup :afferentStatus="afferentStatus" :proupDis="proupDis" @sureclick="proupClick" @closeProup="closeProup">
+      <Input slot="input_slot" @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt16")' @input="inputClick"></Input>
+    </InputProup>
   </div>
 </template>
 
@@ -97,6 +99,7 @@ export default {
   },
   data(){
     return{
+      afferentStatus:false,
       inputvalue:"",
       proupDis:false,//弹窗变量
       coinArr:[
@@ -136,16 +139,23 @@ export default {
     }
   },
   methods:{
+    blurEvent(){
+      if(!this.inputvalue)this.afferentStatus = true
+    },
+    focusEvent(){
+      this.afferentStatus = false
+    },
     inputClick(val){
-      console.log('val: ', val);
       this.inputvalue = val
     },
     // 弹窗按钮的确认事件
     proupClick(){
-      console.log('this.inputvalue: ', this.inputvalue);
+      if(!this.inputvalue){
+        this.afferentStatus = true
+      }
     },
     closeProup(){
-      this.proupDis = false
+      this.proupDis = this.afferentStatus = false
     },
     BondClick(data){
       console.log('data: ', data);

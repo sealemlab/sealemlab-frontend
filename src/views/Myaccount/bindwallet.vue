@@ -57,7 +57,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-left: 20px;
+      // padding-left: 20px;
       margin-top: 15px;
       .span1{
         font-weight: 400;

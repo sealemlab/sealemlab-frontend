@@ -4,7 +4,7 @@
       <p class="propu_title_txt font24">提示</p>
       <div class="proup_content">
         <img src="../assets/images/success.png" class="success_img" />
-        {{content}}
+        {{$t(content)}}
       </div>
       <img src="../assets/images/close.png" class="close_img" @click.stop="closeProup"/>
     </div>

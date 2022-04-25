@@ -1,13 +1,13 @@
 <template>
   <div class="register_page">
-    <span class="font30 establish_txt">{{$t("message.signin.txt1")}}</span>
+    <span class="font30 establish_txt mobile_font16">{{$t("message.signin.txt1")}}</span>
     <span class="font26 subtitle_txt">{{$t("message.signin.txt2")}}</span>
     <div class="content">
       <div class="left_content">
         <div class="onebox" v-for="(item, index) in list" :key="index">
           <div class="imgbox_"><img :src="item.src" class="img_" /></div>
           <div class="right_txt">
-            <span class="font22 txt_1">{{$t(item.title)}}</span>
+            <span class="font22 txt_1 mobile_font14">{{$t(item.title)}}</span>
             <span class="font16 txt_2">{{$t(item.explain)}}</span>
           </div>
         </div>
@@ -16,26 +16,29 @@
         <div class="user_inputbox" v-for="(item, index) in user" :key="index">
           <p class="font16 email_txt">{{$t(item.title)}}</p>
           <div class="inputbox">
-            <input :type="index == 2 || index == 3 ?'password':'text'" v-model.trim="item.inputvalue"
+            <input :type="index == 1 || index == 2 ?'password':'text'" v-model.trim="item.inputvalue"
               class="input font16"
               :placeholder="item.placeholder"
               @blur="blurEvent(index)"
               @focus="focusEvent(index)"
             />
-            <div class="code font16" v-if="index == 2" @click="sendCode">
+            <!-- <div class="code font16" v-if="index == 2" @click="sendCode">
               {{code_txt}}
-            </div>
+            </div> -->
           </div>
           <div class="input_prompt font12">
             <span class="ani_shake" v-show="item.tip_status">* {{ item.tip }}</span>
           </div>
         </div>
-        <div class="agree_box">
-          <div class="circular_"></div>
-          <div class="agree_txt">{{$t("message.signin.txt20")}}<span class="span">{{$t("message.signin.txt21")}}</span></div>
+        <div class="agree_box" @click="igraeeClick">
+          <div class="circular_">
+            <span class="sure_box" v-if="IAgree"></span>
+          </div>
+          <div class="agree_txt">{{$t("message.signin.txt20")}}<span class="span" @click.stop="agreementFun">{{$t("message.signin.txt21")}}</span></div>
         </div>
         <div class="btn_box font18" @click="registerClick">
           {{$t("message.signin.txt1")}}
+          <BtnLoading :isloading="btnloding"></BtnLoading>
         </div>
         <p class="font12 tip_txt" @click="loginClick">
           {{$t("message.signin.txt22")}}
@@ -47,12 +50,11 @@
   </div>
 </template>
 <script>
-const emailReg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
-// const emailReg = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$"; // 邮箱输入校验
-const pwReg = /^[a-zA-Z0-9]{6,16}$/; // 6-16位数字英文组合
 export default {
   data(){
     return {
+      btnloding:false,
+      IAgree:false,
       timeer:null,
       code_txt:'发送验证码',
       content:'',
@@ -90,33 +92,33 @@ export default {
         },
       ],
       user:[
-        {
-          title:'message.signin.txt15',
-          inputvalue:'',
-          placeholder:'Please enter the name',
-          tip:'用户名不能为空',
-          tip_status:false,
-          status:false
-        },
+        // {
+        //   title:'message.signin.txt15',
+        //   inputvalue:'',
+        //   placeholder:'Please enter the name',
+        //   tip:'用户名不能为空',
+        //   tip_status:false,
+        //   status:false
+        // },
         {
           title:'message.signin.txt16',
-          inputvalue:'',
+          inputvalue:'1@xx.com',
           placeholder:'Please enter the email',
           tip:'邮箱不能为空',
           tip_status:false,
           status:false
         },
-        {
-          title:'message.signin.txt19',
-          inputvalue:'',
-          placeholder:'Please enter the content',
-          tip:'请输入验证码',
-          tip_status:false,
-          status:false
-        },
+        // {
+        //   title:'message.signin.txt19',
+        //   inputvalue:'',
+        //   placeholder:'Please enter the content',
+        //   tip:'请输入验证码',
+        //   tip_status:false,
+        //   status:false
+        // },
         {
           title:'message.signin.txt17',
-          inputvalue:'',
+          inputvalue:'123456',
           placeholder:'Please enter the content',
           tip:'密码不能为空',
           tip_status:false,
@@ -124,7 +126,7 @@ export default {
         },
         {
           title:'message.signin.txt18',
-          inputvalue:'',
+          inputvalue:'123456',
           placeholder:'Please enter the content',
           tip:'请先输入密码',
           tip_status:false,
@@ -134,6 +136,12 @@ export default {
     }
   },
   methods:{
+    agreementFun(){
+      console.log("协议点击,跳转链接")
+    },
+    igraeeClick(){
+      this.IAgree = !this.IAgree
+    },
     proupClose(){
       this.proupStatus = false
     },
@@ -150,37 +158,35 @@ export default {
       }
       switch(index){
         case 0:
-          if (!emailReg.test(this.user[index].inputvalue)){
+          if (!this.$store.state.emailReg.test(this.user[index].inputvalue)){
             this.checkFun(index,'邮箱不合法')
           }else{
             this.user[index].status = true
           }
-          //emailReg.test(this.user[1].inputvalue)
-          //this.user[1].inputvalue.matches(emailReg)
           break;
+        // case 1:
+        //   if(this.user[index].inputvalue.length > 10 ||  this.user[index].inputvalue.length < 3){
+        //     this.checkFun(index,'用户名长度不符合规则')
+        //   }else{
+        //     this.user[index].status = true
+        //   }
+        //   break;
+        // case 2:
+        //   if (this.user[index].inputvalue.length != 6){
+        //     this.checkFun(index,'请输入6位验证码')
+        //   }else{
+        //     this.user[index].status = true
+        //   }
+        //   break;
         case 1:
-          if(this.user[index].inputvalue.length > 10 ||  this.user[index].inputvalue.length < 3){
-            this.checkFun(index,'用户名长度不符合规则')
-          }else{
-            this.user[index].status = true
-          }
-          break;
-        case 2:
-          if (this.user[index].inputvalue.length != 6){
-            this.checkFun(index,'请输入6位验证码')
-          }else{
-            this.user[index].status = true
-          }
-          break;
-        case 3:
-          if (!pwReg.test(this.user[index].inputvalue)){
+          if (!this.$store.state.pwReg.test(this.user[index].inputvalue)){
             this.checkFun(index,'密码不合法')
           }else{
             this.user[index].status = true
           }
           break;
-        case 4:
-          if (this.user[3].inputvalue !== this.user[4].inputvalue){
+        case 2:
+          if (this.user[1].inputvalue !== this.user[2].inputvalue){
             this.checkFun(index,'密码俩次输入不一样')
           }else{
             this.user[index].status = true
@@ -196,6 +202,7 @@ export default {
       this.user[index].status = false
     },
     registerClick(){
+      if(this.btnloding)return
       // 如果status状态都为true  那么证明所有的校验都通过
       let istrue = this.user.every(item => {
         return item.status == true
@@ -210,31 +217,21 @@ export default {
           }
         })
       }else{
+        this.btnloding = true
         console.log("所有校验都通过")
-        this.content = '账号申请成功'
+        
+        // let data ={
+        //   email:this.user[0].inputvalue,
+        //   password:this.user[1].inputvalue
+        // }
+        // this.$api.registerFun(data).then((res) => {
+        //   console.log('res: ', res);
+        // });
+
         this.proupStatus = true
+        this.content = 'message.tip.txt1'
       }
     },
-    sendCode(){
-      if(this.user[0].inputvalue == ''){
-        this.content = '请先输入邮箱账号'
-        this.proupStatus = true
-        return
-      }
-      if(this.timeer)return
-      let owtime = 60
-      clearInterval(this.timeer)
-      this.timeer = setInterval(() => {
-        if (owtime <= 0) {
-          clearInterval(this.timeer);
-          this.timeer = null
-          this.code_txt = '重新发送';
-          return;
-        }
-        this.code_txt = owtime + 's'
-        owtime -= 1;
-      }, 1000);
-    }
   }
 }
 </script>
@@ -338,12 +335,6 @@ export default {
             margin-left: 8px;
           }
         }
-        .input_prompt {
-          width: 100%;
-          min-height: 20px;
-          color: #fb3e3e;
-          margin-top: 10px;
-        }
       }
       .agree_box{
         width: 100%;
@@ -356,6 +347,15 @@ export default {
           border-radius: 50%;
           background: #D8D8D8;
           border: 1px solid #979797;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .sure_box{
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #000000;
+          }
         }
         .agree_txt{
           margin-left: 10px;
@@ -394,6 +394,31 @@ export default {
           line-height: 17px;
           margin: 0 5px;
         }
+      }
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .register_page{
+    .establish_txt{
+      font-weight: 600;
+      line-height: 0.2rem;
+      margin-bottom: 0.15rem;
+    }
+    .content{
+      flex-direction: column;
+      margin-top: 0.3rem;
+      .left_content{
+        .onebox{
+          padding: 0.18rem 0.1rem;
+          .imgbox_{
+            width: 0.2rem;
+            margin-right: 0.15rem;
+          }
+        }
+      }
+      .right_content{
+        padding: 0.23rem 0.1rem;
       }
     }
   }

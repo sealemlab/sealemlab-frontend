@@ -3,11 +3,11 @@
     <div class="home_bgbox">
       <img src="../../assets/images/homebg.png" class="homebg" />
       <div class="content">
-        <span class="home_font font45">{{ $t("message.home.txt1") }}</span>
+        <span class="home_font font45 demo_font_color">{{ $t("message.home.txt1") }}</span>
         <div class="content_center">
           <div class="leftbox">
-            <p class="font_1 font26">{{$t("message.home.txt2")}}</p>
-            <p class="font_2 font45 demo_font_color">1000% APY</p>
+            <p class="font_1 font26 mobile_font14">{{$t("message.home.txt2")}}</p>
+            <p class="font_2 font45 demo_font_color mobile_font14">1000% APY</p>
             <div class="btnbox font16">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
@@ -25,7 +25,7 @@
             <span class="font30">{{$t("message.home.txt5")}}</span>
             <span class="font30 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
           </div>
-          <div class="btnbox font16">
+          <div class="btnbox font16 mobile_font14">
             <span>{{$t("message.home.txt7")}}</span>
             <span>{{$t("message.home.txt8")}}</span>
           </div>
@@ -40,7 +40,7 @@
           <img src="../../assets/images/ag2.png" class="ag2_class" />
         </div>
         <div class="fontbox">
-          <span class="font30 title_txt">{{$t("message.home.txt9")}}</span>
+          <span class="font30 title_txt mobile_font18">{{$t("message.home.txt9")}}</span>
           <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
         </div>
       </div>
@@ -50,11 +50,11 @@
     <div class="content_">
       <!-- 特点 -->
       <div class="box_ display_flex">
-        <div class="title_txt font30">{{$t("message.home.txt_characteristic")}}</div>
+        <div class="title_txt font30 mobile_font16">{{$t("message.home.txt_characteristic")}}</div>
         <div class="imgbox display_flex">
           <div class="onebox display_flex" v-for="(item, index) in spArr" :key="index">
             <img :src="item.src" class="img_sp" />
-            <span class="txt font20">{{$t(item.txt)}}</span>
+            <span class="txt font20 mobile_font14">{{$t(item.txt)}}</span>
             <span class="txt1 font14" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt1)}}</span>
           </div>
         </div>
@@ -407,8 +407,10 @@ export default {
         margin-top: 59px;
         display: flex;;
         justify-content: space-between;
-        background: url("../../assets/images/content_footer.png") no-repeat #000;
-        background-size: 100% 100%;
+        background: linear-gradient(#BFA66A,#000000);
+        border-radius: 25px;
+        // background: url("../../assets/images/content_footer.png") no-repeat #000;
+        // background-size: 100% 100%;
         .left{
           display: flex;
           flex-direction: column;
@@ -738,24 +740,401 @@ export default {
     }
   }
 }
-.people_line{
-  width: 646px;
-  
-  margin: 38px 0;
-}
-@media screen and (min-width: 1440px) {
+@media screen and (max-width: 980px) {
   .home{
+    padding-top: 0.8rem;
+    .home_bgbox{
+      .content{
+        position: absolute;
+        top: 1rem;
+        left: 0%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0.2rem;
+        .home_font{
+          font-weight: bold;
+          color: #FFFFFF;
+          line-height: 0.2rem;
+          letter-spacing: 4px;
+          width: fit-content;
+        }
+        .content_center{
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 0.33rem;
+          .leftbox{
+            display: flex;
+            flex-direction: column;
+            .font_1{
+              font-weight: bold;
+              color: #FFFFFF;
+              line-height: 0.22rem;
+            }
+            .font_2{
+              font-weight: bolder;
+              color: #FFFFFF;
+              line-height: 0.16rem;
+              margin: 0.05rem 0 0.2rem 0;
+            }
+          }
+          .rightbox{
+            display: flex;
+            align-items: center;
+            .tel_img{
+              width: 0.1rem;
+              margin-right: 0.13rem;
+            }
+          }
+        }
+        .paddingleftright{
+          padding: 20px 18px 0 !important;
+        }
+        .content_footer{
+          width: 100%;
+          height: 1.2rem;
+          padding: 0.2rem 0.1rem;
+          margin-top: 0.48rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          background: linear-gradient(#BFA66A,#000000);
+          border-radius: 0.25rem;
+          .left{
+            display: flex;
+            flex-direction: column;
+            .margin_top{
+              margin-top: 10px;
+            }
+          }
+        }
+      }
+    }
     .character_introduction{
+      width: 100%;
+      padding: 0 0.3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       .people_box{
-        width: 30%;
+        width: 100%;
+        .people{
+          width: 100%;
+          max-width:100%;
+        }
+      }
+      .right_box{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        .ag_box{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .ag1_class{
+            width: 0.33rem;
+          }
+          .ag2_class{
+            width: 0.26;
+            margin-left: 0.2rem;
+          }
+        }
+        .fontbox{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .title_txt{
+            text-align: left;
+            font-weight: bold;
+            line-height: 0.21rem;
+            margin: 0.82rem 0 0.17rem 0;
+          }
+          .txt_content{
+            width:100%;
+            font-weight: 400;
+            line-height: 0.14rem;
+          }
+        }
+      }
+    }
+    .margintop{
+      margin-top: 2rem;
+    }
+    .title_txt{
+      width: 100%;
+      font-weight: bold;
+      line-height: 0.19rem;
+      margin-bottom: 0.3rem;
+    }
+    .content_{
+      width: 100%;
+      padding-top: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #1F1F1F;
+      margin-top: 0.3rem;
+      .box_{
+        .imgbox{
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.6rem;
+          .onebox{
+            flex-direction: column;
+            border-right:none;
+            padding:0 10px;
+            margin-bottom: 0.25rem;
+            &:nth-child(1){
+              padding-left: 0;
+            }
+            .img_sp{
+              width: .38rem;
+            }
+            .txt{
+              font-weight: bold;
+              color: #FFFFFF;
+              line-height: 12px;
+              margin: 10px 0;
+            }
+            .txt1{
+              font-weight: 400;
+              max-width: 100%;
+            }
+          }
+        }
+        .make_money{
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          .make_box{
+            padding: 1px;
+            margin-bottom: 44px;
+            width: 30%;
+            min-height: 92px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+            .make_one{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              width: 100%;
+              height: 100%;
+              padding: 0 10px;
+              background: #000;
+              ._span{
+                font-weight: 400;
+                color: #FFFFFF;
+                line-height: 22px;
+              }
+            }        
+          }
+        }
+      }
+    }
+    .teamboxs{
+      display: none;
+      width: 100%;
+      background: url("../../assets/images/teambg.png") no-repeat #000;
+      background-size: 100% 100%;
+      .team_container{
+        position: relative;
+        width: 90vw;
+        margin: 0 auto;
+        padding-top: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        padding-bottom: 100px;
+        .team_ag1{
+          width: 191px;
+          position: absolute;
+          right: 50px;
+          bottom: -100px;
+        }
+        .team_ag2{
+          width: 75px;
+          position: absolute;
+          left: 160px;
+          bottom: -40px;
+        }
+      }
+    }
+    .time_axis_box{
+      display: none;
+      width: 100%;
+      background: #1F1F1F;
+      .time_axis{
+        width: 90vw;
+        margin: 0 auto;
+        padding-top: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .self_swiper{
+          width:100%;
+          .swiper-slide{
+            display: flex;
+            // height: 260px;
+            padding-bottom: 40px;
+            flex-direction: column;
+            align-items: flex-start;
+            .time_class{
+              font-weight: normal;
+              color: #00C1FF;
+              line-height: 26px;
+              background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+            .content_class{
+              max-width: 80%;
+              font-weight: normal;
+              color: #FFFFFF;
+              line-height: 32px;
+              margin-top: 10px;
+            }
+          }
+        }
       }
     }
     .characteristic_box{
-      .imgbox {
-        width: 49vw;
-        max-width: 60vw;
+      width: 90vw;
+      margin: 0 auto;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0.4rem;
+      .partener_box{
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        .one_partener{
+          .par1{
+            width: 0.55rem;
+          }
+          .par2{
+            width: 0.55rem;
+          }
+          .par3{
+            width: 0.55rem;
+          }
+          .par4{
+            width: 0.55rem;
+          }
+        }
+      }
+    }
+    .team_box{
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      .top_team{
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .out_box{
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 1px;
+      margin-right: 50px;
+      margin-bottom: 70px;
+      width: 229px;
+      border-radius: 29px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+      .oneteam{
+        border-radius: 29px;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 20px 0;
+        background: #000;
+        .teaming{
+          width: 124px;
+        }
+        .span1{
+          margin:28px 0 6px;
+          font-weight: bold;
+          color: #FFFFFF;
+          line-height: 32px;
+          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .span2{
+          font-weight: bold;
+          color: #FFFFFF;
+          line-height: 32px;
+          margin-bottom: 10px;
+        }
+        .address_peopllle{
+          justify-content: center;
+          align-items: center;
+          .ling_ying{
+            width: 19px;
+            
+          }
+          .twitter{
+            width: 23px;
+            
+            margin-left: 15px;
+          }
+        }
+      }
+    }
+  }
+  .btnbox{
+    span{
+      width: 0.97rem;
+      height: 0.29rem;
+      background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+      border-radius: 0.04rem;
+      border: 1px solid #ECCF83;
+      text-align: center;
+      line-height: 0.29rem;
+      margin-right: 0.13rem;
+      cursor: pointer;
+      &.active{
+        background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+      }
+      &:nth-child(2){
+        margin-right: 0;
       }
     }
   }
 }
+// @media screen and (min-width: 1440px) {
+//   .home{
+//     .character_introduction{
+//       .people_box{
+//         width: 30%;
+//       }
+//     }
+//     .characteristic_box{
+//       .imgbox {
+//         width: 49vw;
+//         max-width: 60vw;
+//       }
+//     }
+//   }
+// }
+
 </style>

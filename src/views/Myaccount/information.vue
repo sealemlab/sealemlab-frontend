@@ -4,13 +4,13 @@
       <div class="left_content">
         <div class="oneline" v-for="(item, index) in list" :key="index">
           <span class="font18 txt_frontend">{{ $t(item.title)}}</span>
-          <input :type="index != list.length - 1?'text':'date'" class="input font18" v-model="item.inputValue" v-if="index != 2" />
-          <div class="inputbox" v-if="index == 2">
+          <input :type="index == 0?'text':'password'" class="input font18" v-model="item.inputValue" v-if="index == 0" />
+          <div class="inputbox" v-if="index == 1">
             <div class="add_eye">
               <input type="text" class="input font18" v-model="item.inputValue" />
               <img src="../../assets/images/eye1.png" class="eye_img" />
             </div>
-            <div class="input_btn font14">{{$t("message.account.txt8")}}</div>
+            <div class="input_btn font14" @click="changePassword">{{$t("message.account.txt8")}}</div>
           </div>
         </div>
         <div class="lin_content font12">
@@ -39,17 +39,25 @@
         </div>
       </div>
     </div>
+    <PassProup :codestatus='codestatus' :btntxt="'message.btn_txt1'" :passStatus="passStatus" :title="title" @closePassProup="closePassProup" @sureClick="sureClick"></PassProup>
   </div>
 </template>
 <script>
+import PassProup from '../../components/Password.vue'
 export default {
+  components:{
+    PassProup
+  },
   data(){
     return {
+      codestatus:true,
+      title:"修改密码",//修改密码弹窗标题
+      passStatus:false,//修改密码弹窗
       list:[
-        {
-          title:'message.account.txt4',
-          inputValue:''
-        },
+        // {
+        //   title:'message.account.txt4',
+        //   inputValue:''
+        // },
         {
           title:'message.account.txt5',
           inputValue:''
@@ -58,11 +66,41 @@ export default {
           title:'message.account.txt6',
           inputValue:''
         },
-        {
-          title:'message.account.txt7',
-          inputValue:''
-        }
+        // {
+        //   title:'message.account.txt7',
+        //   inputValue:''
+        // }
       ]
+    }
+  },
+  methods:{
+    closePassProup(){
+      this.passStatus = false
+    },
+    sureClick(data){
+      console.log('父页面获取的参数data: ', data);
+      let istrue = data.every(item => {
+        return item.status == true
+      })
+      if(!istrue){
+        data.forEach(item => {
+          if(item.status && !item.tip_status){
+            console.log("当前通过校验")
+          }else{
+            item.tip_status = true
+            item.status = false
+          }
+        })
+      }else{
+        console.log("所有校验都通过")
+        
+      }
+    },
+    changePassword(){
+      console.log("修改密码")
+      this.title = '修改密码'
+      this.passStatus = true
+      this.codestatus = false
     }
   }
 }
@@ -76,7 +114,7 @@ export default {
     width: 100%;
     display: flex;
     background: #101010;
-    border: 2px solid #242222;
+    // border: 2px solid #242222;
     .left_content{
       width: 55%;
       display: flex;
@@ -139,6 +177,7 @@ export default {
             align-items: center;
             font-weight: 600;
             color: #000000;
+            cursor: pointer;
           }
         }
       }
@@ -155,10 +194,11 @@ export default {
         background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
         border-radius: 4px;
         backdrop-filter: blur(14px);
-        // margin: 0 auto;
-        margin-left: 76px;
+        cursor: pointer;
+        // margin-left: 76px;
         font-weight: 600;
         color: #000000;
+        margin: 0 auto;
         margin-top: 30px;
         display: flex;
         justify-content: center;

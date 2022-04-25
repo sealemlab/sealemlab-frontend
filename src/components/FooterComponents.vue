@@ -79,7 +79,7 @@ export default {
   background-size: 100% 100%;
   .footer_img {
     width: 100%;
-    object-fit: contain;
+    
   }
   .footer_content {
     width: 100%;
@@ -89,7 +89,7 @@ export default {
     padding: 0 49.5px;
     .footer_logo {
       width: 185px;
-      object-fit: contain;
+      
     }
     .onebox {
       width: inherit;
@@ -126,6 +126,66 @@ export default {
       margin-top: 20px;
       line-height: 60px;
       letter-spacing: 0.52px;
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .footer_box {
+    margin-top: 0.5rem;
+    padding-top: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background: url("../assets/images/footerbg.png") no-repeat #000;
+    background-size: 100% 100%;
+    .footer_img {
+      width: 100%;
+    }
+    .footer_content {
+      width: 100%;
+      align-items: center;
+      justify-content: space-around;
+      margin: 0.2rem 0;
+      padding: 0 0.2rem;
+      .footer_logo {
+        width: 0.48rem;
+      }
+      .onebox {
+        width: inherit;
+        justify-content: space-around;
+        ul {
+          li {
+            margin: 14px 0;
+            letter-spacing: 0.52px;
+            &:nth-child(1) {
+              font-size: 18px;
+              font-family: TrajanPro-Bold, TrajanPro;
+              font-weight: bold;
+              color: #ffffff;
+              line-height: 23px;
+              background: linear-gradient(
+                180deg,
+                #825f35 0%,
+                #fadd82 51%,
+                #876333 100%
+              );
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+          }
+        }
+      }
+    }
+    .footerbox{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .copyright {
+        margin-top: 0;
+        line-height: 0.12rem;
+        letter-spacing: 0.52px;
+      }
     }
   }
 }

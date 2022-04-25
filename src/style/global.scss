@@ -13,6 +13,15 @@
 img{
   object-fit: contain;
 }
+.disply_none{
+  display: none !important;
+}
+.input_prompt {
+  width: 100%;
+  min-height: 20px;
+  color: #fb3e3e;
+  margin-top: 10px;
+}
 .ani_shake{
   // animation-name: shock;
   // animation-duration: .1s; //规定完成动画所花费的时间，以秒或毫秒计
@@ -73,41 +82,78 @@ img{
 .cn_lang {
   font-family: "PingFangTC-Semibold" !important;
 }
-
-// 大标题字号
-.font45 {
-  font-size: 45px;
+@media screen and (min-width: 981px) {
+  // 大标题字号
+  .font45 {
+    font-size: 45px;
+  }
+  // banner 标题 eg:token
+  .font34 {
+    font-size: 34px;
+  }
+  .font30 {
+    font-size: 30px;
+  }
+  // 主按钮字号
+  .font28 {
+    font-size: 28px;
+  }
+  .font26 {
+    font-size: 26px;
+  }
+  .font22 {
+    font-size: 22px;
+  }
+  .font20 {
+    font-size: 20px;
+  }
+  .font18 {
+    font-size: 18px;
+  }
+  // 正文字号
+  .font16 {
+    font-size: 16px;
+  }
+  .font14 {
+    font-size: 14px;
+  }
+  .font12 {
+    font-size: 12px;
+  }
 }
-// banner 标题 eg:token
-.font34 {
-  font-size: 34px;
-}
-.font30 {
-  font-size: 30px;
-}
-// 主按钮字号
-.font28 {
-  font-size: 28px;
-}
-.font26 {
-  font-size: 26px;
-}
-.font22 {
-  font-size: 22px;
-}
-.font20 {
-  font-size: 20px;
-}
-.font18 {
-  font-size: 18px;
-}
-// 正文字号
-.font16 {
-  font-size: 16px;
-}
-.font14 {
-  font-size: 14px;
-}
-.font12 {
-  font-size: 12px;
+@media screen and (max-width: 980px) {
+  .mobile_font45 {
+    font-size: 0.45rem;
+  }
+  .mobile_font34 {
+    font-size: 0.34rem;
+  }
+  .mobile_font30 {
+    font-size: 0.30rem;
+  }
+  .mobile_font28 {
+    font-size: 0.28rem;
+  }
+  .mobile_font26 {
+    font-size: 0.26rem;
+  }
+  .mobile_font22 {
+    font-size: 0.22rem;
+  }
+  .mobile_font20 {
+    font-size: 0.20rem;
+  }
+  .mobile_font18 {
+    font-size: 0.18rem;
+  }
+  // 正文字号
+  .mobile_font16 {
+    font-size: 0.16rem;
+  }
+  .mobile_font14 {
+    font-size: 0.14rem;
+  }
+  .mobile_font12 {
+    font-size: 0.12rem;
+  }
 }

@@ -13,8 +13,14 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);
 
+import BtnLoading from "./components/Btnloading.vue";
+Vue.component("BtnLoading", BtnLoading);
+
 import Proup from "@/components/Proup.vue";
 Vue.component("Proup", Proup);
+
+import Input from "@/components/InpuptComponents.vue";
+Vue.component("Input", Input);
 
 import utils from "./utils/index";
 Vue.prototype.$utils = utils;

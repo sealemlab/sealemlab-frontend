@@ -1,6 +1,6 @@
 <template>
   <div class="register_page">
-    <span class="font30 establish_txt">{{$t("message.signin.txt24")}}</span>
+    <span class="font30 establish_txt mobile_font16">{{$t("message.signin.txt24")}}</span>
     <span class="font26 subtitle_txt">{{$t("message.signin.txt25")}}</span>
     <div class="content">
       <div class="left_content">
@@ -14,7 +14,7 @@
       </div>
       <div class="left_content right_content">
         <div class="user_inputbox" v-for="(item, index) in user" :key="index">
-          <p class="font16 email_txt">{{$t(item.title)}}</p>
+          <p class="font16 email_txt mobile_font14">{{$t(item.title)}}</p>
           <input v-model.trim="item.inputvalue"
             class="input font16"
             :type="index == 1 ?'password':'text'"
@@ -46,11 +46,10 @@
       </div>
     </div>
     <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup>
-    <PassProup :passStatus="passStatus" :title="title" @closePassProup="closePassProup"></PassProup>
+    <PassProup :btntxt="'message.btn_txt2'" :codestatus='codestatus' :passStatus="passStatus" :title="title" @closePassProup="closePassProup" @sureClick="sureClick"></PassProup>
   </div>
 </template>
 <script>
-const emailReg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
 import PassProup from '../../components/Password.vue'
 export default {
   components:{
@@ -58,6 +57,7 @@ export default {
   },
   data(){
     return {
+      codestatus:false,//修改密码组件的验证码是否显示
       title:"修改密码",//修改密码弹窗标题
       passStatus:false,//修改密码弹窗
       content:'',
@@ -121,7 +121,7 @@ export default {
       this.proupStatus = false
     },
     closePassProup(){
-      this.passStatus = false
+      this.passStatus = this.codestatus = false
     },
     registerClick(){
       this.$router.push('/signin/register');
@@ -136,7 +136,7 @@ export default {
       }
       switch(index){
         case 0:
-          if (!emailReg.test(this.user[index].inputvalue)){
+          if (!this.$store.state.emailReg.test(this.user[index].inputvalue)){
             this.user[index].tip = '请输入正确的邮箱'
             this.user[index].tip_status = true
             this.user[index].status = false
@@ -179,9 +179,28 @@ export default {
       }
     },
     forgetNumberClick(){
-      // this.title = '找回密码'
-      // this.passStatus = true
-    }
+      this.title = '找回密码'
+      this.passStatus = this.codestatus = true
+    },
+    sureClick(data){
+      console.log('父页面获取的参数data: ', data);
+      let istrue = data.every(item => {
+        return item.status == true
+      })
+      if(!istrue){
+        data.forEach(item => {
+          if(item.status && !item.tip_status){
+            console.log("当前通过校验")
+          }else{
+            item.tip_status = true
+            item.status = false
+          }
+        })
+      }else{
+        console.log("所有校验都通过")
+        
+      }
+    },
   }
 }
 </script>
@@ -269,12 +288,6 @@ export default {
           margin-top: 15px;
           padding: 0 15px;
         }
-        .input_prompt {
-          width: 100%;
-          min-height: 20px;
-          color: #fb3e3e;
-          margin-top: 10px;
-        }
       }
       .remember_box{
         width: 100%;
@@ -356,6 +369,174 @@ export default {
           color: #ECCF83;
           line-height: 17px;
           margin: 0 5px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .register_page{
+    .establish_txt{
+      font-weight: 600;
+      line-height: 0.2rem;
+      margin-bottom: 0.15rem;
+    }
+    .subtitle_txt{
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 0.14rem;
+    }
+    .content{
+      width: 90vw;
+      background: #101010;
+      border: 2px solid #242222;
+      border-bottom: none;
+      border-right: none;
+      margin: 0 auto;
+      margin-top: 0.3rem;
+      display: flex;
+      flex-direction: column;
+      .left_content{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        border-right: 2px solid #242222;
+        .onebox{
+          width: 100%;
+          padding: 0.18rem 0.1rem;
+          display: flex;
+          align-items: center;
+          border-bottom: 2px solid #242222;
+          .imgbox_{
+            width: 0.2rem;
+            margin-right: 0.15rem;
+            .img_{
+              width: 100%;
+            }
+          }
+          .right_txt{
+            display: flex;
+            flex-direction: column;
+            .txt_1{
+              font-weight: 600;
+              color: #ECCF83;
+              line-height: 0.14rem;
+            }
+            .txt_2{
+              font-weight: 400;
+              color: #ECCF83;
+              line-height: 0.14rem;
+              margin-top: 0.08rem;
+            }
+          }
+        }
+      }
+      .right_content{
+        padding: 0.23rem 0.1rem;
+        align-items: center;
+        border-bottom: 2px solid #242222;
+        .user_inputbox{
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 10px;
+          .email_txt{
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 22px;
+          }
+          .input{
+            background: #171718;
+            box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+            border-radius: 8px;
+            border: 1px solid #373636;
+            height: 46px;
+            color: #ffffff;
+            margin-top: 15px;
+            padding: 0 15px;
+          }
+        }
+        .remember_box{
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          ._check{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .account{
+              margin-left: 13px;
+              font-weight: 400;
+              color: #FFFFFF;
+              line-height: 22px;
+            }
+            .checkbox{
+              width: 24px;
+              height: 24px;
+              background: #D8D8D8;
+              border-radius: 2px;
+              border: 1px solid #979797;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .correct:before {
+                content: '\2714';
+                color: #000;
+              }
+            }
+          }
+          .forget{
+            font-weight: 400;
+            color: #ECCF83;
+            line-height: 22px;
+          }
+        }
+        .explain{
+          width: fit-content;
+          padding: 0 25px;
+          margin-top: 57px;
+          display: flex;
+          .radious{
+            margin-top: 3px;
+            margin-right: 9px;
+            .ques_img{
+              width: 13px;
+            }
+          }
+          .txt_{
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 22px;
+          }
+        }
+        .btn_box{
+          cursor: pointer;
+          width: 100%;
+          height: 54px;
+          background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+          border-radius: 4px;
+          backdrop-filter: blur(14px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 46px;
+          font-weight: 600;
+          color: #000000;
+        }
+        .tip_txt{
+          cursor: pointer;
+          font-weight: 400;
+          color: #969090;
+          line-height: 17px;
+          margin-top: 16px;
+          .tip_login{
+            font-weight: 400;
+            color: #ECCF83;
+            line-height: 17px;
+            margin: 0 5px;
+          }
         }
       }
     }

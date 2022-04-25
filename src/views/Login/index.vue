@@ -33,4 +33,10 @@ export default {
   width: 100%;
   padding-top: 160px;
 }
+@media screen and (max-width: 980px) {
+  .login_register{
+    width: 100%;
+    padding-top: 1.1rem;
+  }
+}
 </style>

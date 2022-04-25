@@ -9,7 +9,8 @@ export const message = {
     txt7: "白皮书",
     txt8: "註冊/登录",
     txt8_1: "我的账号",
-    txt9:"连接钱包"
+    txt9:"连接钱包",
+    txt10:"Home"
   },
   home: {
     txt1: "新一代Defi+Gamefi协议",
@@ -159,7 +160,7 @@ export const message = {
     txt13:"剩余时长",
     txt14:"余额",
     txt15:"收益",
-    txt16:"请输入内容",
+    txt16:"請輸入內容",
     txt17:"钱包余额",
     txt18:"预期收益",
     txt19:"天",
@@ -216,6 +217,16 @@ export const message = {
     txt18:"为了在游戏中查看您的 nft 产品,您需要完成签名过程",
     txt19:"您可以通过使用 MetaMask 插件签名来访问您的游戏内 NFT 产品。",
     txt20:"账户名",
-    txt21:"解除"
+    txt21:"解除",
+    txt22:"输入你的电子邮件",
+    txt23:"输入验证码",
+    txt24:"输入新密码",
+    txt25:"重新输入新密码",
+    txt26:"输入您当前的密码",
+  },
+  btn_txt1:"确认修改",
+  btn_txt2:"确认找回",
+  tip:{
+    txt1:'创建账户成功,请到邮箱激活账户'
   }
 };

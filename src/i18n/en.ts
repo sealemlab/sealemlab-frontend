@@ -9,7 +9,8 @@ export const message = {
     txt7: "White paper",
     txt8: "Register/Login",
     txt8_1: "My Account",
-    txt9:"Connect"
+    txt9:"Connect",
+    txt10:"Home"
   },
   home: {
     txt1: "New generation DeFi + Gamefi protocol",
@@ -215,6 +216,16 @@ export const message = {
     txt18:"In order to view your NFT products in the game, you need to complete the signing process.",
     txt19:"You can access your in-game NFT products by using the metamask plug-in signature.",
     txt20:"Account name",
-    txt21:"Remove"
+    txt21:"Remove",
+    txt22:"输入你的电子邮件",
+    txt23:"输入验证码",
+    txt24:"输入新密码",
+    txt25:"重新输入新密码",
+    txt26:"输入您当前的密码",
+  },
+  btn_txt1:"确认修改",
+  btn_txt2:"确认找回",
+  tip:{
+    txt1:'创建账户成功,请到邮箱激活账户'
   }
 };

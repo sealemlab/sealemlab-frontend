@@ -2,9 +2,9 @@
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
       <img class="logo" src="../assets/images/logo.png" alt="" @click="toRoute('/home')" />
-      <ul>
+      <ul :class="getIsMobile?'disply_none':''">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
-          <span class="font18"> {{ $t(item.label) }}</span>
+          <span class="font18">{{ $t(item.label) }}</span>
         </li>
       </ul>
     </div>
@@ -22,7 +22,7 @@
         </span>
       </div>
       <div class="connect font16">{{ $t("message.nav.txt9") }}</div>
-      <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
+      <div class="lang_box" :class="getIsMobile?'disply_none':''" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
         <span>{{ language }}</span>
         <img src="../assets/images/accrow.png" alt="" />
         <transition name="select-lang" appear>
@@ -55,7 +55,7 @@ export default {
       langArr: ["EN", "CN"],
     };
   },
-  computed: { ...mapGetters(["isEnLang","getLogin"]) },
+  computed: { ...mapGetters(["isEnLang","getLogin","getIsMobile"]) },
   watch: {
     $route(to, from) {
       if (from.matched.length && to.matched[0].path != from.matched[0].path) {
@@ -107,14 +107,14 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 9;
   width: 100%;
   height: 80px;
   background: #000000;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  // padding: 0 96px;
+  padding: 0 1vw;
 }
 .nav_left {
   display: flex;
@@ -234,5 +234,46 @@ export default {
 .select-lang-enter-to,
 .select-lang-leave {
   transform: scaleY(1);
+}
+@media screen and (max-width: 980px) {
+  .nav{
+    padding: 0 0.2rem;
+    background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+    border-radius: 0px 0px 17px 17px;
+    border: 1px solid #ECCF83;
+  }
+  .nav_left {
+    .logo {
+      width: auto;
+      height: 0.3rem;
+      margin-right: 0.2rem;
+    }
+  }
+  .nav_right {
+    justify-content: space-between;
+    .st_price{
+      .st_price_img{
+        width: 0.19rem;
+      }
+      .font_price{
+        line-height: 0.14rem;
+        margin-left: 0.1rem;
+      }
+    }
+    .login_box{
+      margin: 0 0.3rem 0;
+      .font_login{
+        font-weight: bold;
+        line-height: 0.14rem;
+      }
+    }
+    .connect {
+      cursor: pointer;
+      padding: 0.05rem 0.15rem;
+      border-radius: 0.08rem;
+      margin-right: 0.1rem;
+      line-height: 0.12rem;
+    }
+  }
 }
 </style>
