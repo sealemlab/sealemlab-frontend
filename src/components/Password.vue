@@ -3,7 +3,7 @@
     <div class="proup_boxs">
       <p class="propu_title_txt font24">{{title}}</p>
       <div class="proup_content" v-for="(item, index) in arr" :key="index">
-        <p class="p1 font16">{{item.title}}</p>
+        <p class="p1 font16">{{$t(item.title)}}</p>
         <input 
         :type="item.id == 3 || item.id == 4?'password':'text'"
         v-model.trim="item.inputvalue" 

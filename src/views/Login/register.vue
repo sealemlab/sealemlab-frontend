@@ -19,6 +19,7 @@
             <input :type="index == 1 || index == 2 ?'password':'text'" v-model.trim="item.inputvalue"
               class="input font16"
               :placeholder="item.placeholder"
+              autocomplete="new-password"
               @blur="blurEvent(index)"
               @focus="focusEvent(index)"
             />
@@ -30,8 +31,8 @@
             <span class="ani_shake" v-show="item.tip_status">* {{ item.tip }}</span>
           </div>
         </div>
-        <div class="agree_box" @click="igraeeClick">
-          <div class="circular_">
+        <div class="agree_box" ref="circular" @click="igraeeClick">
+          <div class="circular_" >
             <span class="sure_box" v-if="IAgree"></span>
           </div>
           <div class="agree_txt">{{$t("message.signin.txt20")}}<span class="span" @click.stop="agreementFun">{{$t("message.signin.txt21")}}</span></div>
@@ -92,37 +93,21 @@ export default {
         },
       ],
       user:[
-        // {
-        //   title:'message.signin.txt15',
-        //   inputvalue:'',
-        //   placeholder:'Please enter the name',
-        //   tip:'用户名不能为空',
-        //   tip_status:false,
-        //   status:false
-        // },
         {
           title:'message.signin.txt16',
-          inputvalue:'1@xx.com',
+          inputvalue:'1401376424@qq.com',
           placeholder:'Please enter the email',
           tip:'邮箱不能为空',
           tip_status:false,
-          status:false
+          status:true
         },
-        // {
-        //   title:'message.signin.txt19',
-        //   inputvalue:'',
-        //   placeholder:'Please enter the content',
-        //   tip:'请输入验证码',
-        //   tip_status:false,
-        //   status:false
-        // },
         {
           title:'message.signin.txt17',
           inputvalue:'123456',
           placeholder:'Please enter the content',
           tip:'密码不能为空',
           tip_status:false,
-          status:false
+          status:true
         },
         {
           title:'message.signin.txt18',
@@ -130,7 +115,7 @@ export default {
           placeholder:'Please enter the content',
           tip:'请先输入密码',
           tip_status:false,
-          status:false
+          status:true
         },
       ]
     }
@@ -164,20 +149,6 @@ export default {
             this.user[index].status = true
           }
           break;
-        // case 1:
-        //   if(this.user[index].inputvalue.length > 10 ||  this.user[index].inputvalue.length < 3){
-        //     this.checkFun(index,'用户名长度不符合规则')
-        //   }else{
-        //     this.user[index].status = true
-        //   }
-        //   break;
-        // case 2:
-        //   if (this.user[index].inputvalue.length != 6){
-        //     this.checkFun(index,'请输入6位验证码')
-        //   }else{
-        //     this.user[index].status = true
-        //   }
-        //   break;
         case 1:
           if (!this.$store.state.pwReg.test(this.user[index].inputvalue)){
             this.checkFun(index,'密码不合法')
@@ -217,19 +188,28 @@ export default {
           }
         })
       }else{
+        if(!this.IAgree){
+          this.$refs.circular.classList.add('animation_move')
+          setTimeout(() => {
+            this.$refs.circular.classList.remove('animation_move')
+          },1000)
+          return
+        }
         this.btnloding = true
         console.log("所有校验都通过")
         
-        // let data ={
-        //   email:this.user[0].inputvalue,
-        //   password:this.user[1].inputvalue
-        // }
-        // this.$api.registerFun(data).then((res) => {
-        //   console.log('res: ', res);
-        // });
-
-        this.proupStatus = true
-        this.content = 'message.tip.txt1'
+        let data ={
+          email:this.user[0].inputvalue,
+          password:this.user[1].inputvalue
+        }
+        this.$api.registerFun(data).then((res) => {
+          console.log('res: ', res);
+          this.btnloding = false
+          this.proupStatus = true
+          this.content = 'message.tip.txt1'
+        }).catch(() => {
+          this.btnloding = false
+        });
       }
     },
   }
@@ -354,7 +334,7 @@ export default {
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: #000000;
+            background: #101010;
           }
         }
         .agree_txt{

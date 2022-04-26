@@ -3,12 +3,12 @@
     <div class="home_bgbox">
       <img src="../../assets/images/homebg.png" class="homebg" />
       <div class="content">
-        <span class="home_font font45 demo_font_color">{{ $t("message.home.txt1") }}</span>
+        <!-- <span class="home_font font45 demo_font_color">{{ $t("message.home.txt1") }}</span> -->
         <div class="content_center">
           <div class="leftbox">
             <p class="font_1 font26 mobile_font14">{{$t("message.home.txt2")}}</p>
             <p class="font_2 font45 demo_font_color mobile_font14">1000% APY</p>
-            <div class="btnbox font16">
+            <div class="btnbox font20">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
             </div>
@@ -20,7 +20,7 @@
             <img src="../../assets/images/tel_4.png" class="tel_img" />
           </div>
         </div>
-        <div class="content_footer" :class="isEnLang?'paddingleftright':''">
+        <div class="content_footer">
           <div class="left">
             <span class="font30">{{$t("message.home.txt5")}}</span>
             <span class="font30 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
@@ -33,14 +33,10 @@
       </div>
     </div>
     <!-- 什么是圣域 -->
-    <div class="character_introduction margintop">
+    <div class="character_introduction">
       <div class="right_box display_flex">
-        <div class="ag_box">
-          <img src="../../assets/images/ag1.png" class="ag1_class" />
-          <img src="../../assets/images/ag2.png" class="ag2_class" />
-        </div>
         <div class="fontbox">
-          <span class="font30 title_txt mobile_font18">{{$t("message.home.txt9")}}</span>
+          <span class="font30 span_title mobile_font18">{{$t("message.home.txt9")}}</span>
           <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
         </div>
       </div>
@@ -52,10 +48,14 @@
       <div class="box_ display_flex">
         <div class="title_txt font30 mobile_font16">{{$t("message.home.txt_characteristic")}}</div>
         <div class="imgbox display_flex">
-          <div class="onebox display_flex" v-for="(item, index) in spArr" :key="index">
-            <img :src="item.src" class="img_sp" />
-            <span class="txt font20 mobile_font14">{{$t(item.txt)}}</span>
-            <span class="txt1 font14" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt1)}}</span>
+          <div class="add_outbox" v-for="(item, index) in spArr" :key="index">
+            <div class="onebox display_flex">
+              <div class="add_content">
+                <img :src="item.src" class="img_sp" />
+                <span class="txt font20 mobile_font14">{{$t(item.txt)}}</span>
+              </div>
+              <span class="txt1 font14" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt1)}}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -350,22 +350,22 @@ export default {
     .content{
       position: absolute;
       top: 305px;
-      left: 0%;
+      left: 0;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 120px;
-      .home_font{
-        font-weight: bold;
-        color: #FFFFFF;
-        line-height: 63px;
-        letter-spacing: 4px;
-        width: fit-content;
-        background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
+      padding: 0 5vw;
+      // .home_font{
+      //   font-weight: bold;
+      //   color: #FFFFFF;
+      //   line-height: 63px;
+      //   letter-spacing: 4px;
+      //   width: fit-content;
+      //   background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+      //   -webkit-background-clip: text;
+      //   -webkit-text-fill-color: transparent;
+      // }
       .content_center{
         width: 100%;
         display: flex;
@@ -396,21 +396,13 @@ export default {
           }
         }
       }
-      .paddingleftright{
-        padding: 20px 18px 0 !important;
-      }
       .content_footer{
         width: 100%;
         height: 146px;
-        padding: 0 63px;
-        padding-top: 20px;
-        margin-top: 59px;
+        margin-top: 100px;
         display: flex;;
         justify-content: space-between;
-        background: linear-gradient(#BFA66A,#000000);
-        border-radius: 25px;
-        // background: url("../../assets/images/content_footer.png") no-repeat #000;
-        // background-size: 100% 100%;
+        align-items: center;
         .left{
           display: flex;
           flex-direction: column;
@@ -422,8 +414,9 @@ export default {
     }
   }
   .character_introduction{
-    width: 100%;
-    padding: 0 120px;
+    width: 90vw;
+    margin: 0 auto;
+    margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -431,42 +424,25 @@ export default {
       width: 50%;
       .people{
         width: 100%;
-        max-width: 640px;
+        max-width: 480px;
       }
     }
     .right_box{
       width: 50%;
       flex-direction: column;
-      align-items: center;
       position: relative;
-      .ag_box{
-        position: absolute;
-        top: -50px;
-        left: 0;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        .ag1_class{
-          width: 112px;
-        }
-        .ag2_class{
-          width: 52px;
-          margin-left: 52px;
-        }
-      }
+      padding-top: 150px;
       .fontbox{
         display: flex;
         flex-direction: column;
-        align-items: center;
-        .title_txt{
-          text-align: center;
-          font-weight: bold;
-          line-height: 36px;
-          margin: 110px 0 36px 0;
+        .span_title{
+          font-weight: normal;
+          color: #FFFFFF;
+          line-height: 34px;
+          margin-bottom: 30px;
         }
         .txt_content{
-          width: 90%;
+          max-width: 500px;
           font-weight: 400;
           line-height: 22px;
         }
@@ -495,25 +471,39 @@ export default {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 100px;
-        .onebox{
-          flex-direction: column;
+        .add_outbox{
+          width: 20%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           border-right:1px solid #D4BA76;
-          padding:0 10px;
           &:nth-child(1){
-            padding-left: 0;
+            justify-content: flex-start;
           }
-          .img_sp{
-            width: 49px;
-          }
-          .txt{
-            font-weight: bold;
-            color: #FFFFFF;
-            line-height: 22px;
-            margin: 10px 0;
-          }
-          .txt1{
-            font-weight: 400;
-            max-width: 150px;
+          .onebox{
+            flex-direction: column;
+            align-items: center;
+            &:nth-child(1){
+              padding-left: 0;
+            }
+            .add_content{
+              width: 100%;
+              display: flex;
+              align-items: center;
+              .img_sp{
+                width: 49px;
+              }
+              .txt{
+                font-weight: 600;
+                color: #FFFFFF;
+                line-height: 22px;
+                margin-left: 8px;
+              }
+            }
+            .txt1{
+              font-weight: 400;
+              margin-top: 10px;
+            }
           }
         }
       }
@@ -618,7 +608,7 @@ export default {
     width: 100%;
     font-weight: bold;
     line-height: 36px;
-    margin-bottom: 100px;
+    margin-bottom: 68px;
   }
   .characteristic_box{
     width: 90vw;
@@ -724,19 +714,19 @@ export default {
   span{
     width: 170px;
     height: 45px;
-    background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
     border-radius: 4px;
-    border: 1px solid #ECCF83;
+    background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
     backdrop-filter: blur(14px);
     text-align: center;
     line-height: 43px;
     margin-right: 43px;
     cursor: pointer;
-    &.active{
-      background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
-    }
+    color: #000000;
     &:nth-child(2){
+      border: 1px solid #ECCF83;
+      background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
       margin-right: 0;
+      color: #FFFFFF;
     }
   }
 }
@@ -753,13 +743,13 @@ export default {
         flex-direction: column;
         align-items: center;
         padding: 0 0.2rem;
-        .home_font{
-          font-weight: bold;
-          color: #FFFFFF;
-          line-height: 0.2rem;
-          letter-spacing: 4px;
-          width: fit-content;
-        }
+        // .home_font{
+        //   font-weight: bold;
+        //   color: #FFFFFF;
+        //   line-height: 0.2rem;
+        //   letter-spacing: 4px;
+        //   width: fit-content;
+        // }
         .content_center{
           width: 100%;
           display: flex;
@@ -790,9 +780,6 @@ export default {
             }
           }
         }
-        .paddingleftright{
-          padding: 20px 18px 0 !important;
-        }
         .content_footer{
           width: 100%;
           height: 1.2rem;
@@ -801,8 +788,6 @@ export default {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          background: linear-gradient(#BFA66A,#000000);
-          border-radius: 0.25rem;
           .left{
             display: flex;
             flex-direction: column;
@@ -832,22 +817,6 @@ export default {
         flex-direction: column;
         align-items: center;
         position: relative;
-        .ag_box{
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          .ag1_class{
-            width: 0.33rem;
-          }
-          .ag2_class{
-            width: 0.26;
-            margin-left: 0.2rem;
-          }
-        }
         .fontbox{
           display: flex;
           flex-direction: column;

@@ -21,6 +21,7 @@
             :placeholder="item.placeholder"
             @blur="blurEvent(index)"
             @focus="focusEvent(index)"
+            autocomplete="new-password"
           />
           <div class="input_prompt font12">
             <span :class="{ani_shake:item.tip_status}" v-if="item.tip_status">* {{ item.tip }}</span>
@@ -41,6 +42,7 @@
         </div>
         <div class="btn_box font18" @click="loginClick">
           {{$t("message.signin.txt23")}}
+          <BtnLoading :isloading="btnloding"></BtnLoading>
         </div>
         <p class="font12 tip_txt" @click="registerClick">{{$t("message.signin.txt27")}}<span class="tip_login">{{$t("message.signin.txt3")}}</span></p>
       </div>
@@ -57,6 +59,7 @@ export default {
   },
   data(){
     return {
+      btnloding:false,
       codestatus:false,//修改密码组件的验证码是否显示
       title:"修改密码",//修改密码弹窗标题
       passStatus:false,//修改密码弹窗
@@ -158,6 +161,7 @@ export default {
       }
     },
     loginClick(){
+      if(this.btnloding)return
       let istrue = this.user.every(item => {
         return item.status == true
       })
@@ -172,10 +176,21 @@ export default {
         })
       }else{
         console.log("所有校验都通过")
-        // this.content = '登录成功'
-        // this.proupStatus = true
-        this.$store.commit("setLogin", true);
-        this.$router.push('/myaccount/information');
+        this.btnloding = true
+        let data ={
+          email:this.user[0].inputvalue,
+          password:this.user[1].inputvalue
+        }
+        this.$api.loginFun(data).then((res) => {
+          console.log('res: ', res);
+          this.btnloding = false
+          this.proupStatus = true
+          this.content = 'message.tip.txt1'
+        }).catch(() => {
+          this.btnloding = false
+        });
+        // this.$store.commit("setLogin", true);
+        // this.$router.push('/myaccount/information');
       }
     },
     forgetNumberClick(){

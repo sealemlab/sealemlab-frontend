@@ -22,6 +22,7 @@ img{
   color: #fb3e3e;
   margin-top: 10px;
 }
+// 左右来回上下抖动 (input校验)
 .ani_shake{
   // animation-name: shock;
   // animation-duration: .1s; //规定完成动画所花费的时间，以秒或毫秒计
@@ -41,6 +42,20 @@ img{
     margin-left: 5px;
     margin-right: 0px;
     margin-top: 5px	;
+  }
+}
+// 左右来回抖动  (没有同意协议抖动)
+.animation_move{
+  animation: move 0.1s linear 0s 3 normal;
+}
+@keyframes move {
+  0% {
+    margin-left: 0px;
+    margin-right: 15px;
+  }
+  100% {
+    margin-left: 15px;
+    margin-right: 0px;
   }
 }
 .demo_font_color{

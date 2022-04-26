@@ -113,8 +113,8 @@ export default {
   background: #000000;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 0 1vw;
+  justify-content: space-between;
+  padding: 0 5vw;
 }
 .nav_left {
   display: flex;
