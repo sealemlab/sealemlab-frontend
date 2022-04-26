@@ -205,8 +205,8 @@ export default {
         this.$api.registerFun(data).then((res) => {
           console.log('res: ', res);
           this.btnloding = false
-          this.proupStatus = true
-          this.content = 'message.tip.txt1'
+          // this.proupStatus = true
+          // this.content = 'message.tip.txt1'
         }).catch(() => {
           this.btnloding = false
         });
