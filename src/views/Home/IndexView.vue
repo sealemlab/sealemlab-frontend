@@ -65,6 +65,7 @@
         <div class="make_money">
           <div class="make_box" v-for="(item, index) in makeMoneyArr" :key="index">
             <div class="make_one">
+              <img :src="item.src" class="money_1" />
               <span class="_span font16" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt)}}</span>
             </div>
           </div>
@@ -75,36 +76,31 @@
     <div class="teamboxs">
       <div class="team_container display_flex">
         <div class="title_txt font30">{{$t("message.home.txt47")}}</div>
-        <div class="team_box display_flex">
-          <div class="top_team display_flex">
-            <div class="out_box display_flex" :class="{margin_right0:index == 1}" v-for="(item, index) in teamArr" :key="index">
-              <div class="oneteam display_flex" >
-                <img :src="item.src" class="teaming" />
-                <span class="span1 font20">{{$t(item.name)}}</span>
-                <span class="span2 font16">{{item.txt}}</span>
-                <div class="address_peopllle display_flex">
-                  <img src="../../assets/images/in.png" class="ling_ying" />
-                  <img src="../../assets/images/twitter.png" class="twitter" />
+        <div class="teamswiper">
+          <swiper ref="teamswiper" :options="teamswiperOption" class="team_swiper">
+            <swiper-slide v-for="(item, index) in teamArr" :key="index">
+              <div class="out_box display_flex">
+                <div class="oneteam display_flex" >
+                  <img :src="item.src" class="teaming" />
+                  <span class="span1 font20">{{$t(item.name)}}</span>
+                  <span class="span2 font16">{{item.txt}}</span>
+                  <div class="address_peopllle display_flex">
+                    <img src="../../assets/images/in.png" class="ling_ying" />
+                    <img src="../../assets/images/twitter.png" class="twitter" />
+                  </div>
+                  <span class="triangle_calss" :class="item.status?'triangle_top':'triangle_bottom'" @click="showtxtFun(item)"></span>
+                  <div class="txtbox font12" v-if="item.status">
+                    <span>哈利法科学技术大学</span>
+                    <span>曾在IT-Serve任职</span>
+                    <span>2017年担任Crypto Bulls CEO</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="top_team display_flex">
-            <div class="out_box display_flex" v-for="(item, index) in teamArr1" :key="index">
-              <div class="oneteam display_flex" >
-                <img :src="item.src" class="teaming" />
-                <span class="span1 font20">{{$t(item.name)}}</span>
-                <span class="span2 font16">{{item.txt}}</span>
-                <div class="address_peopllle display_flex">
-                  <img src="../../assets/images/in.png" class="ling_ying" />
-                  <img src="../../assets/images/twitter.png" class="twitter" />
-                </div>
-              </div>
-            </div>
-          </div>
+            </swiper-slide>
+          </swiper>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
         </div>
-        <img src="../../assets/images/team_ag1.png" class="team_ag1" />
-        <img src="../../assets/images/team_ag2.png" class="team_ag2" />
       </div>
     </div>
     <!-- 时间轴 -->
@@ -142,8 +138,6 @@ export default {
     return{
       gameIndex:0,//游戏场景展示对应大图的索引
       peopleIndex:0,// 人物展示对应大图的索引
-      inter:'',
-      datatxt:'《圣域》是一款基于区块链技术的大型多人在线MORPG游戏,游戏采用虚幻4引擎打造,有着超精致的画面表现、动作性以及打击感。',
       spArr:[
         {
           src:require('../../assets/images/characteristic1.png'),
@@ -175,44 +169,47 @@ export default {
         {
           src:require('../../assets/images/ceo.png'),
           txt:'CEO',
-          name:'message.home.txt48'
+          name:'message.home.txt48',
+          status:true
         },
         {
           src:require('../../assets/images/cto.png'),
           txt:'CTO',
-          name:'message.home.txt49'
+          name:'message.home.txt49',
+          status:false
         },
-      ],
-      teamArr1:[
         {
           src:require('../../assets/images/cmo.png'),
           txt:'CMO',
-          name:'message.home.txt50'
+          name:'message.home.txt50',
+          status:false
         },
         {
           src:require('../../assets/images/founder.png'),
           txt:'Co-Founder',
-          name:'message.home.txt52'
+          name:'message.home.txt52',
+          status:false
         },
         {
           src:require('../../assets/images/founder1.png'),
           txt:'Co-Founder',
-          name:'message.home.txt53'
+          name:'message.home.txt53',
+          status:false
         },
         {
           src:require('../../assets/images/svp.png'),
           txt:'SVP',
-          name:'message.home.txt51'
+          name:'message.home.txt51',
+          status:false
         }
       ],
-
       makeMoneyArr:[
-        {txt:"message.home.txt16"},
-        {txt:"message.home.txt17"},
-        {txt:"message.home.txt18"},
-        {txt:"message.home.txt19"},
-        {txt:"message.home.txt20"},
-        {txt:"message.home.txt21"}
+        {txt:"message.home.txt16",src:require("../../assets/images/money1.png")},
+        {txt:"message.home.txt17",src:require("../../assets/images/money2.png")},
+        {txt:"message.home.txt18",src:require("../../assets/images/money3.png")},
+        {txt:"message.home.txt19",src:require("../../assets/images/money4.png")},
+        {txt:"message.home.txt20",src:require("../../assets/images/money2.png")},
+        {txt:"message.home.txt21",src:require("../../assets/images/money2.png")}
       ],
 
       partenerArr:[{
@@ -267,13 +264,13 @@ export default {
         }
       ],
       swiperOption:{
-        loop: true,//循环播放
-        mousewheel: true,//鼠标滚动
-        autoplay: {
-          delay: 1000,
-          stopOnLastSlide: false,
-          disableOnInteraction: false,
-        },
+        // loop: true,//循环播放
+        // mousewheel: true,//鼠标滚动
+        // autoplay: {
+        //   delay: 1000,
+        //   stopOnLastSlide: false,
+        //   disableOnInteraction: false,
+        // },
         slidesPerView: 3,//一行显示的slider
         // centeredSlides : true,
         freeMode: true,//	free模式，slide会根据惯性滑动且不会贴合
@@ -283,7 +280,14 @@ export default {
           bulletClass: 'my-bullet',
           bulletActiveClass: 'my-bullet-active'
         },
-      }
+      },
+      teamswiperOption: {
+        slidesPerView: 4,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }
+      },
     }
   },
   watch: {
@@ -302,24 +306,9 @@ export default {
     gameClick(item){
       this.gameIndex = item.id
     },
-    typewriting(){
-      let index=0
-      const that = this
-      function type(){
-        that.inter = that.datatxt.substring(0,index++);
-      }
-      let timenull = setInterval(() => {
-        if(that.inter.length == that.datatxt.length){
-          clearInterval(timenull)
-          return
-        }
-        // console.log("定时器执行中")
-        type()
-      },100);
+    showtxtFun(item){
+      item.status = !item.status
     }
-  },
-  mounted(){
-    this.typewriting()
   }
 }
 </script>
@@ -516,19 +505,22 @@ export default {
           padding: 1px;
           margin-bottom: 44px;
           width: 30%;
-          min-height: 92px;
           cursor: pointer;
           transition: all 0.3s;
           background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          border-radius: 8px;
           .make_one{
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            border-radius: 8px;
             width: 100%;
-            height: 100%;
-            padding: 0 10px;
+            padding:10px;
             background: #000;
+            padding-left: 26px;
+            .money_1{
+              width: 61px;
+              margin-right: 21px;
+            }
             ._span{
               font-weight: 400;
               color: #FFFFFF;
@@ -551,19 +543,27 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      
       padding-bottom: 100px;
-      .team_ag1{
-        width: 191px;
-        position: absolute;
-        right: 50px;
-        bottom: -100px;
+    }
+    .teamswiper{
+      width: 100%;
+      padding: 0 45px;
+      .team_swiper{
+        width: 100%;
+        .swiper-slide{
+          display: flex;
+          justify-content: center;
+        }
       }
-      .team_ag2{
-        width: 75px;
-        position: absolute;
-        left: 160px;
-        bottom: -40px;
+      .swiper-button-prev {
+        background-image: url("../../assets/images/nftimage/btn_left.png");
+        background-size: 100% auto;
+        width: 40px;
+      }
+      .swiper-button-next {
+        background-image: url("../../assets/images/nftimage/btn_right.png");
+        background-size: 100% auto;
+        width: 40px;
       }
     }
   }
@@ -640,35 +640,22 @@ export default {
       }
     }
   }
-  .team_box{
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    .top_team{
-      justify-content: center;
-      align-items: center;
-    }
-  }
   .out_box{
-    width: 100%;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 1px;
-    margin-right: 50px;
-    margin-bottom: 70px;
-    width: 229px;
     border-radius: 29px;
     cursor: pointer;
     transition: all 0.3s;
     background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
     .oneteam{
+      min-width: 190px;
       border-radius: 29px;
       flex-direction: column;
       align-items: center;
-      width: 100%;
       padding: 20px 0;
-      background: #000;
+      background: #1F1F1F;
       .teaming{
         width: 124px;
       }
@@ -677,13 +664,10 @@ export default {
         font-weight: bold;
         color: #FFFFFF;
         line-height: 32px;
-        background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
       }
       .span2{
         font-weight: bold;
-        color: #FFFFFF;
+        color: #9E9E9E;
         line-height: 32px;
         margin-bottom: 10px;
       }
@@ -692,18 +676,36 @@ export default {
         align-items: center;
         .ling_ying{
           width: 19px;
-          
         }
         .twitter{
           width: 23px;
-          
           margin-left: 15px;
         }
       }
+      .triangle_calss{
+        width: 0px;
+        height: 0px;
+        border: 8px solid transparent;
+        margin: 15px 0;
+      }
+      .triangle_bottom{
+        border-top-color: #ccc;
+      }
+      .triangle_top{
+        border-bottom-color: #ccc;
+      }
+      .txtbox{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        span{
+          font-weight: normal;
+          color: #9E9E9E;
+          line-height: 18px;
+        }
+      }
     }
-  }
-  .out_box:hover{
-    transform: scale(1.2);
   }
   .make_box:hover{
     transform: scale(1.2);
@@ -743,13 +745,6 @@ export default {
         flex-direction: column;
         align-items: center;
         padding: 0 0.2rem;
-        // .home_font{
-        //   font-weight: bold;
-        //   color: #FFFFFF;
-        //   line-height: 0.2rem;
-        //   letter-spacing: 4px;
-        //   width: fit-content;
-        // }
         .content_center{
           width: 100%;
           display: flex;
@@ -927,20 +922,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        
         padding-bottom: 100px;
-        .team_ag1{
-          width: 191px;
-          position: absolute;
-          right: 50px;
-          bottom: -100px;
-        }
-        .team_ag2{
-          width: 75px;
-          position: absolute;
-          left: 160px;
-          bottom: -40px;
-        }
       }
     }
     .time_axis_box{
@@ -1007,15 +989,6 @@ export default {
         }
       }
     }
-    .team_box{
-      width: 100%;
-      flex-direction: column;
-      align-items: center;
-      .top_team{
-        justify-content: center;
-        align-items: center;
-      }
-    }
     .out_box{
       width: 100%;
       flex-wrap: wrap;
@@ -1024,7 +997,6 @@ export default {
       padding: 1px;
       margin-right: 50px;
       margin-bottom: 70px;
-      width: 229px;
       border-radius: 29px;
       cursor: pointer;
       transition: all 0.3s;
@@ -1033,8 +1005,7 @@ export default {
         border-radius: 29px;
         flex-direction: column;
         align-items: center;
-        width: 100%;
-        padding: 20px 0;
+        padding: 20px 40px;
         background: #000;
         .teaming{
           width: 124px;

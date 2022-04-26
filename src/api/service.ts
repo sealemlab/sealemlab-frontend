@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from 'qs'
 const service = axios.create();
 service.defaults.headers.post["Content-Type"] = "application/json";
 service.interceptors.request.use(
@@ -35,7 +36,7 @@ export default {
   // 表单形式对应的参数形式为    .post(url, qs.stringify(data))
   post(url: string, data?:{}) {
     return new Promise((resolve, reject) => {
-      service.post(url, data).then(res => {
+      service.post(url, qs.stringify(data)).then(res => {
         resolve(res);
       }).catch(err => {
         reject(err);
