@@ -120,8 +120,20 @@
     <div class="characteristic_box display_flex">
       <div class="title_txt font30">{{$t("message.home.txt59")}}</div>
       <div class="partener_box display_flex">
-        <div class="one_partener display_flex" :class="{ en_Regular: isEnLang }" v-for="(item, index) in partenerArr" :key="index">
-          <img :src="item.src" :class="{par1:index == 0,par2:index == 1,par3:index == 2,par4:index == 3}" />
+        <div class="one_partener display_flex" v-for="(item, index) in partenerArr" :key="index">
+          <img :src="item.src" 
+          :class="{par1:index == 0,
+          par2:index == 1,
+          par3:index == 2,
+          par4:index == 3,
+          par5:index == 4,
+          par6:index == 5,
+          par7:index == 6,
+          par8:index == 7,
+          par9:index == 8,
+          par10:index == 9
+          }"
+          />
         </div>
       </div>
     </div>
@@ -223,6 +235,24 @@ export default {
       },
       {
         src:require('../../assets/images/partener4.png'),
+      },
+      {
+        src:require('../../assets/images/partener5.png'),
+      },
+      {
+        src:require('../../assets/images/partener6.png'),
+      },
+      {
+        src:require('../../assets/images/partener7.png'),
+      },
+      {
+        src:require('../../assets/images/partener8.png'),
+      },
+      {
+        src:require('../../assets/images/partener9.png'),
+      },
+      {
+        src:require('../../assets/images/partener10.png'),
       }
       ],
       swiperArr:[
@@ -618,24 +648,42 @@ export default {
     margin-top: 70px;
     .partener_box{
       width: 100%;
-      justify-content: space-around;
       align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
       .one_partener{
+        img{
+          margin-bottom: 49px;
+        }
         .par1{
-          width: 196px;
-          
+          width: 169px;
         }
         .par2{
-          width: 245px;
-          
+          width: 208px;
         }
         .par3{
-          width: 194px;
-          
+          width: 222px;
         }
         .par4{
-          width: 247px;
-          
+          width: 235px;
+        }
+        .par5{
+          width: 207px;
+        }
+        .par6{
+          width: 169px;
+        }
+        .par7{
+          width: 159px;
+        }
+        .par8{
+          width: 173px;
+        }
+        .par9{
+          width: 220px;
+        }
+        .par10{
+          width: 220px;
         }
       }
     }
