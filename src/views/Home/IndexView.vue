@@ -489,7 +489,7 @@ export default {
   .character_introduction{
     width: 90vw;
     margin: 0 auto;
-    margin-top: 70px;
+    // margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;

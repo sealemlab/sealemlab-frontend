@@ -68,7 +68,9 @@ export default {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
-      } else if (to.path.indexOf("/signin/") !== -1) {
+      }else if (to.path.indexOf("/user/") !== -1) {
+        this.navActive = 4;
+      }else if (to.path.indexOf("/signin/") !== -1) {
         this.navActive = 7;
       }else if (to.path.indexOf("/myaccount/") !== -1) {
         this.navActive = 7;
