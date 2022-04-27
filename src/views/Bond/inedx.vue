@@ -5,6 +5,7 @@
       <div class="txt_box">
         <span class="txt1 font45">{{$t("message.bond.txt1")}}</span>
         <span class="txt2 font16">{{$t("message.bond.txt2")}}</span>
+        <span class="txt2 font16">{{$t("message.bond.txt2_1")}}</span>
       </div> 
     </div>
     <div class="content">
@@ -17,17 +18,19 @@
       <div class="container">
         <div class="title_box font24">
           <span class="font_class">{{$t("message.bond.txt3")}}</span>
-          <span class="font_class">$45678956</span>
+          <span class="font_class">$123456</span>
           <span class="font_class"></span>
           <span class="font_class">ST {{$t("message.bond.txt4")}}</span>
-          <span class="font_class">$45678956</span>
+          <span class="font_class">$100000</span>
         </div>
         <div class="list_title_box font20">
           <span class="list_font_class">{{$t("message.bond.txt1")}}</span>
           <span class="list_font_class">{{$t("message.bond.txt4")}}</span>
           <span class="list_font_class">{{$t("message.bond.txt5")}}</span>
           <span class="list_font_class">{{$t("message.bond.txt6")}}</span>
-          <span class="list_font_class"></span>
+          <div class="list_font_class" @click="buyLp">
+            <span class="btn_txt bg_color font12">{{$t("message.bond.txt_btn")}}</span>
+          </div>
         </div>
         <div class="coin_box">
           <div class="alone_box font16" v-for="(item,index) in coinArr" :key="index">
@@ -58,14 +61,14 @@
           <span class="insert">{{$t("message.bond.txt9")}}</span>
           <div class="radious font12">?</div>
         </div>
-        <span class="txt_">$45678956</span>
-        <span class="btn_txt">{{$t("message.bond.txt10")}}</span>
+        <span class="txt_">$200000</span>
+        <span class="btn_txt bg_color">{{$t("message.bond.txt10")}}</span>
         <span class="txt_"></span>
         <div class="layout_box margin0">
           <span class="insert">{{$t("message.bond.txt11")}}</span>
           <div class="radious font12">?</div>
         </div>
-        <span class="txt_">$45678956</span>
+        <span class="txt_">$3000000</span>
         <span class="btn_txt">{{$t("message.bond.txt12")}}</span>
       </div>
       <!-- 表格内层标题 -->
@@ -88,17 +91,21 @@
     <InputProup :afferentStatus="afferentStatus" :proupDis="proupDis" @sureclick="proupClick" @closeProup="closeProup">
       <Input slot="input_slot" @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt16")' @input="inputClick"></Input>
     </InputProup>
+    <AddLp :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
   </div>
 </template>
 
 <script>
 import InputProup from './InputPopup.vue'
+import AddLp from './Addlp.vue'
 export default {
   components:{
-    InputProup
+    InputProup,
+    AddLp
   },
   data(){
     return{
+      addlpDis:false,//一键购买lp弹窗状态
       afferentStatus:false,
       inputvalue:"",
       proupDis:false,//弹窗变量
@@ -139,6 +146,12 @@ export default {
     }
   },
   methods:{
+    buyLp(){
+      this.addlpDis = true
+    },
+    closeLP(){
+      this.addlpDis = false
+    },
     blurEvent(){
       if(!this.inputvalue)this.afferentStatus = true
     },
@@ -185,12 +198,13 @@ export default {
         font-weight: 600;
         color: #FFFFFF;
         line-height: 54px;
+        margin-bottom: 37px;
       }
       .txt2{
         font-weight: 400;
         color: #FFFFFF;
         line-height: 19px;
-        margin-top: 37px;
+        margin-bottom: 10px;
       }
     }
   }
@@ -230,12 +244,17 @@ export default {
     height: 34px;
     text-align: center;
     line-height: 34px;
-    color: #101010;
-    background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+    color: #fff;
+    background: #373636;
     box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
     border-radius: 4px;
     backdrop-filter: blur(14px);
     cursor: pointer;
+  }
+  .bg_color{
+    color: #101010;
+    background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+    box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
   }
   .empty_class{
     display: inline-block;

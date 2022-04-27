@@ -15,11 +15,14 @@
       </div>
       <div class="right_content">
         <p class="font20 title_txt">
-          {{$t("message.nft.txt23")}}0
+          <span class="lefttxt">{{$t("message.nft.txt23")}}</span>
+          <span class="righttxt no_border">0</span>
+          <span class="unit_class"></span>
         </p>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt24")}}</span>
-          <span class="righttxt">10 ST</span>
+          <span class="righttxt no_border">10</span>
+          <span class="unit_class">ST</span>
         </div>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
@@ -28,10 +31,12 @@
             <input type="number" class="font16" v-model="amount" />
             <span class="btn" @click="addAmount">+</span>
           </div>
+          <span class="unit_class"></span>
         </div>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt26")}}</span>
-          <span class="righttxt">10 ST</span>
+          <span class="righttxt">10</span>
+          <span class="unit_class">ST</span>
         </div>
         <div class="balance_txt">
           {{$t("message.nft.txt27")}} 1.02 ST
@@ -321,8 +326,9 @@ export default {
     }
   }
   .right_content{
-    width: 410px;
-    padding: 20px 70px 20px 20px;
+    width: 405px;
+    padding:20px;
+    padding-right: 40px;
     display: flex;
     flex-direction: column;
     background: rgba(16, 16, 16, 0.49);
@@ -334,6 +340,15 @@ export default {
       color: #ECCF83;
       line-height: 28px;
       margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .unit_class{
+      min-width: 20px;
+      font-weight: bold;
+      color: #ECCF83;
+      line-height: 19px;
     }
     .line_onebox{
       width: 100%;
@@ -342,18 +357,27 @@ export default {
       align-items: center;
       margin-bottom: 30px;
       .lefttxt{
+        width: 65px;
         font-weight: 400;
         color: #FFFFFF;
         line-height: 22px;
       }
       .righttxt{
+        width: calc(100% - 100px);
+        text-align: center;
         font-weight: bold;
         color: #ECCF83;
         line-height: 19px;
+        border-bottom: 1px solid  #979797;
+      }
+      .no_border{
+        border: none;
       }
       .btns {
+        width: calc(100% - 100px);
         display: flex;
         align-items: center;
+        justify-content: center;
         span {
           display: flex;
           align-items: center;
@@ -378,8 +402,8 @@ export default {
       }
     }
     .balance_txt{
-      border-top: 1px solid #979797;
-      padding-top: 15px;
+      // border-top: 1px solid #979797;
+      // padding-top: 15px;
       width: 100%;
       display: flex;
       justify-content: flex-end;

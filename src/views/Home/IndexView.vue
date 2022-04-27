@@ -2,6 +2,9 @@
   <div class="home">
     <div class="home_bgbox">
       <img src="../../assets/images/homebg.png" class="homebg" />
+      <!-- <video class="video_" loop autoplay muted>
+        <source src="https://drive.google.com/drive/folders/1TYY0NAIGcaOCX-boVVdx20tbIMH0EUT8" type="video/mp4" />
+      </video> -->
       <div class="content">
         <!-- <span class="home_font font45 demo_font_color">{{ $t("message.home.txt1") }}</span> -->
         <div class="content_center">
@@ -14,10 +17,7 @@
             </div>
           </div>
           <div class="rightbox">
-            <img src="../../assets/images/tel_1.png" class="tel_img" />
-            <img src="../../assets/images/tel_2.png" class="tel_img" />
-            <img src="../../assets/images/tel_3.png" class="tel_img" />
-            <img src="../../assets/images/tel_4.png" class="tel_img" />
+            <a :href="item.link" target="_blank" rel="noopener noreferrer" v-for="(item,index) in comminicateArr" :key="index"><img :src="item.src" class="tel_img" /></a>
           </div>
         </div>
       </div>
@@ -113,14 +113,17 @@
                   <span class="span1 font20">{{$t(item.name)}}</span>
                   <span class="span2 font16">{{item.txt}}</span>
                   <div class="address_peopllle display_flex">
-                    <img src="../../assets/images/in.png" class="ling_ying" />
-                    <img src="../../assets/images/twitter.png" class="twitter" />
+                    <a v-if="item.LinY == ''" href="javascript:;"><img src="../../assets/images/in.png" class="ling_ying" /></a>
+                    <a v-else :href="item.LinY" target="_blank" rel="noopener noreferrer"><img src="../../assets/images/in.png" class="ling_ying" /></a>
+                    <a v-if="item.twitter == ''" href="javascript:;"><img src="../../assets/images/twitter.png" class="twitter"/></a>
+                    <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer"><img src="../../assets/images/twitter.png" class="twitter"/></a>
                   </div>
                   <span class="triangle_calss" :class="item.status?'triangle_top':'triangle_bottom'" @click="showtxtFun(item)"></span>
                   <div class="txtbox font12" v-if="item.status">
-                    <span>哈利法科学技术大学</span>
-                    <span>曾在IT-Serve任职</span>
-                    <span>2017年担任Crypto Bulls CEO</span>
+                    <span>{{$t(item.introduce1)}}</span>
+                    <span>{{$t(item.introduce2)}}</span>
+                    <span>{{$t(item.introduce3)}}</span>
+                    <span v-if="item.introduce4">{{$t(item.introduce4)}}</span>
                   </div>
                 </div>
               </div>
@@ -180,6 +183,24 @@ export default {
     return{
       gameIndex:0,//游戏场景展示对应大图的索引
       peopleIndex:0,// 人物展示对应大图的索引
+      comminicateArr:[
+        {
+          src:require("../../assets/images/tel_1.png"),
+          link:'https://t.me/sealemglobal'
+        },
+        {
+          src:require("../../assets/images/tel_2.png"),
+          link:'https://twitter.com/SealemLab'
+        },
+        {
+          src:require("../../assets/images/tel_3.png"),
+          link:'https://discord.gg/s747pMMBzq'
+        },
+        {
+          src:require("../../assets/images/tel_4.png"),
+          link:'https://medium.com/@sealemlab'
+        }
+      ],
       spArr:[
         {
           src:require('../../assets/images/characteristic1.png'),
@@ -212,37 +233,68 @@ export default {
           src:require('../../assets/images/ceo.png'),
           txt:'CEO',
           name:'message.home.txt48',
-          status:true
+          status:true,
+          twitter:'https://twitter.com/CryptoDomLane',
+          LinY:'',
+          introduce1:'message.home.introduce1',
+          introduce2:'message.home.introduce2',
+          introduce3:'message.home.introduce3',
         },
         {
           src:require('../../assets/images/cto.png'),
-          txt:'CTO',
-          name:'message.home.txt49',
-          status:false
+          txt:'CMO',
+          name:'message.home.txt50',
+          status:false,
+          twitter:'https://twitter.com/PhantomhiveGem',
+          LinY:'',
+          introduce1:'message.home.introduce4',
+          introduce2:'message.home.introduce5',
+          introduce3:'message.home.introduce6',
         },
         {
           src:require('../../assets/images/cmo.png'),
-          txt:'CMO',
-          name:'message.home.txt50',
-          status:false
-        },
-        {
-          src:require('../../assets/images/founder.png'),
-          txt:'Co-Founder',
-          name:'message.home.txt52',
-          status:false
-        },
-        {
-          src:require('../../assets/images/founder1.png'),
-          txt:'Co-Founder',
-          name:'message.home.txt53',
-          status:false
+          txt:'CTO',
+          name:'message.home.txt49',
+          status:false,
+          twitter:'https://twitter.com/TalonKim',
+          LinY:'',
+          introduce1:'message.home.introduce7',
+          introduce2:'message.home.introduce8',
+          introduce3:'message.home.introduce9',
         },
         {
           src:require('../../assets/images/svp.png'),
           txt:'SVP',
           name:'message.home.txt51',
-          status:false
+          status:false,
+          twitter:'https://twitter.com/tinsley_hafen',
+          LinY:'',
+          introduce1:'message.home.introduce10',
+          introduce2:'message.home.introduce11',
+          introduce3:'message.home.introduce12',
+        },
+        {
+          src:require('../../assets/images/founder.png'),
+          txt:'Co-Founder',
+          name:'message.home.txt52',
+          status:false,
+          twitter:'https://twitter.com/HenryEvans0',
+          LinY:'https://www.linkedin.cn/injobs/in/henry-evans-4b3566233',
+          introduce1:'message.home.introduce13',
+          introduce2:'message.home.introduce14',
+          introduce3:'message.home.introduce15',
+        },
+        {
+          src:require('../../assets/images/founder1.png'),
+          txt:'Co-Founder',
+          name:'message.home.txt53',
+          status:false,
+          twitter:'https://twitter.com/EmmaAmelialove',
+          LinY:'https://www.linkedin.com/in/amelia-emma-a11914234/',
+          introduce1:'message.home.introduce16',
+          introduce2:'message.home.introduce17',
+          introduce3:'message.home.introduce18',
+          introduce4:'message.home.introduce19',
         }
       ],
       makeMoneyArr:[
@@ -415,7 +467,16 @@ export default {
   width: 100%;
   .home_bgbox{
     width: 100%;
+    // height: 600px;
     position: relative;
+    // .video_{
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: auto;
+    //   z-index: -1;
+    // }
     .homebg{
       width: 100%;
     }
@@ -833,7 +894,7 @@ export default {
       border-radius: 29px;
       flex-direction: column;
       align-items: center;
-      padding: 20px 0;
+      padding: 20px 10px;
       background: #1F1F1F;
       .teaming{
         width: 124px;
