@@ -14,12 +14,13 @@
         <span class="font_price font16">$5.45</span>
       </div>
       <div class="login_box">
-        <span v-if="getLogin" class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick">
-          {{$t("message.nav.txt8_1")}}
-        </span>
-        <span v-else class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick">
+        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin">
           {{$t("message.nav.txt8")}}
-        </span>
+        </div>
+        <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
+          <span @click="loginClick('register')">{{$t("message.nav.txt8_1")}}</span>/
+          <span @click="loginClick('login')">{{$t("message.nav.txt8_2")}}</span>
+        </div>
       </div>
       <div class="connect font16">{{ $t("message.nav.txt9") }}</div>
       <div class="lang_box" :class="getIsMobile?'disply_none':''" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
@@ -84,11 +85,19 @@ export default {
     toRoute(link) {
       if (link) this.$router.push(link);
     },
-    loginClick(){
-      if(this.getLogin){
-        this.$router.push('/myaccount/information');
-      }else{
-        this.$router.push('/signin/login');
+    loginClick(data){
+      switch(data){
+        case 'myaccout':
+          this.$router.push('/myaccount/information');
+          break;
+        case 'register':
+          this.$router.push('/signin/register');
+          break;
+        case 'login':
+          this.$router.push('/signin/login');
+          break;
+        default:
+          break;
       }
     },
     selectLang(index) {

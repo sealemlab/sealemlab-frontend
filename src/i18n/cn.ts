@@ -7,8 +7,9 @@ export const message = {
     txt5: "游戏",
     txt6: "用戶中心",
     txt7: "白皮书",
-    txt8: "註冊/登录",
-    txt8_1: "我的账号",
+    txt8: "我的账号",
+    txt8_1: "註冊",
+    txt8_2: "登录",
     txt9:"连接钱包",
     txt10:"Home"
   },
@@ -63,8 +64,10 @@ export const message = {
     txt63:"Swap上线 更多CEX列出,全球公会招募,游戏更新 新游发行投票,迪拜线下公会竞赛,迪拜Gamefi圆桌会议举办",
     txt64:"跨链计划 sealem v2发布,创作者平台上线,更多的营销",
 
-
     txt59: "合 作 者",
+
+    txt65:"Sealem 游戏",
+    txt66:""
   },
   footer:{
     txt1:"關於",
@@ -94,7 +97,7 @@ export const message = {
     txt21:"版權所有 © 2022 Sealem Lab,保留所有權利"
   },
   nft: {
-    txt1: "展示",
+    // txt1: "展示",
     txt2: "盲盒",
     txt3: "我的盲盒",
     txt4: "我的NFT",
@@ -117,7 +120,7 @@ export const message = {
     txt20: "盲盒",
     txt21: "购买盲盒可组成套装,获得套装属性加成",
     txt22: "持有NFT参与游戏获得高收益奖励,高级NFT可大幅提升战力",
-    txt23: "剩余量:",
+    txt23: "剩余量",
     txt24: "价格",
     txt25: "数量",
     txt26: "总金额",
@@ -125,6 +128,7 @@ export const message = {
     txt28: "购买",
     txt29: "Sacred Realm盲盒介绍",
     txt30: "圣域NFT盲盒为3D数字资产,可从星级、战斗力、稀有度等衡量其价值。NFT类型主要包括服装、武器、戒指、战靴、面具等。持有NFT用户可参与圣域游戏获得游戏奖励,凭借NFT邀请新用户可赢得代币激励,租赁NFT给其他用户赚取佣金,赠送NFT给其他用户,与sealemlab其他游戏互动等。Sacred Realm游戏中四位英雄分别需要不同类型装备提升战斗力,至少需要培养2位英雄来通过PVE、PVP、GVG等模式和关卡。",
+    txt31: "穿戴展示"
   },
   invite:{
     txt1:'排名',
@@ -149,7 +153,7 @@ export const message = {
     txt2:"协议获取资产以折价换取治理代币",
     txt3:"国库",
     txt4:"价格",
-    txt5:"折扣",
+    txt5:"利率",
     txt6:"时长",
     txt7:"组建LP",
     txt8:"你的债券",
@@ -227,6 +231,7 @@ export const message = {
   btn_txt1:"确认修改",
   btn_txt2:"确认找回",
   tip:{
-    txt1:'创建账户成功,请到邮箱激活账户'
+    txt1:'创建账户成功,请到邮箱激活账户',
+    txt2:'请检查账号/密码是否正确,账号是否激活'
   }
 };

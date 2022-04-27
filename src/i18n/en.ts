@@ -7,8 +7,9 @@ export const message = {
     txt5: "Game",
     txt6: "User center",
     txt7: "White paper",
-    txt8: "Register/Login",
-    txt8_1: "My Account",
+    txt8: "My Account",
+    txt8_1: "Register",
+    txt8_2: "Login",
     txt9:"Connect",
     txt10:"Home"
   },
@@ -93,7 +94,7 @@ export const message = {
     txt21:"COPYRIGHT © 2022 Sealem Lab, All rights Reserved"
   },
   nft: {
-    txt1: "Display",
+    // txt1: "Display",
     txt2: "Mystery Box",
     txt3: "My Box",
     txt4: "My NFT",
@@ -116,7 +117,7 @@ export const message = {
     txt20: "Mystery box",
     txt21: "Buy mystery box to form a set and get set attribute bonuses",
     txt22: "Hold NFT to participate in the game to get high-yield rewards, and advanced NFT can greatly improve the combat power",
-    txt23: "The remaining:",
+    txt23: "The remaining",
     txt24: "Price",
     txt25: "Quantity",
     txt26: "Total amount",
@@ -124,6 +125,7 @@ export const message = {
     txt28: "Warrant /Buy",
     txt29: "Introduction to the Sacred Realm Mystery Box",
     txt30: "The Sacred Realm NFT mystery box is a 3D digital asset, and its value can be measured in terms of star rating, combat power, and rarity. NFT types mainly include clothing, weapons, rings, boots, masks, etc. Users who hold NFT can participate in Sacred Realm to get game rewards, invite new users with NFT to win token incentives, rent NFT to other users to earn commissions, give NFT to other users, interact with other Sealem lab games, etc. The four heroes in the Sacred Realm require different types of items to improve their combat effectiveness. At least two heroes need to be trained to pass PVE, PVP, GVG and other modes and levels.",
+    txt31: "穿戴展示"
   },
   invite:{
     txt1:'排名',
@@ -148,7 +150,7 @@ export const message = {
     txt2:"financial primitive for protocols to acquire assets in exchange for governance tokens at a discount",
     txt3:"Treasury balance",
     txt4:"Price",
-    txt5:"Discount",
+    txt5:"Interest rate",
     txt6:"Duration",
     txt7:"Get lp",
     txt8:"Your bond",

@@ -20,7 +20,7 @@ export default {
     return {
       li_index:0,
       navArr: [
-        { label: "message.nft.txt1", link: "/nft/role" },
+        // { label: "message.nft.txt1", link: "/nft/role" },
         { label: "message.nft.txt2", link: "/nft/buy-blind-box" },
         { label: "message.nft.txt3", link: "/nft/blind-box" },
         { label: "message.nft.txt4", link: "/nft/my-nft" },

@@ -44,7 +44,7 @@
           {{$t("message.signin.txt23")}}
           <BtnLoading :isloading="btnloding"></BtnLoading>
         </div>
-        <p class="font12 tip_txt" @click="registerClick">{{$t("message.signin.txt27")}}<span class="tip_login">{{$t("message.signin.txt3")}}</span></p>
+        <p class="font16 tip_txt" @click="registerClick">{{$t("message.signin.txt27")}}<span class="tip_login">{{$t("message.signin.txt3")}}</span></p>
       </div>
     </div>
     <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup>
@@ -184,8 +184,12 @@ export default {
         this.$api.loginFun(data).then((res) => {
           console.log('res: ', res);
           this.btnloding = false
-          this.proupStatus = true
-          this.content = 'message.tip.txt1'
+          if(res.code == 200){
+            console.log("登录成功")
+          }else{
+            this.proupStatus = true
+            this.content = 'message.tip.txt2'
+          }
         }).catch(() => {
           this.btnloding = false
         });

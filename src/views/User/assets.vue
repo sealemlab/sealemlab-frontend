@@ -143,13 +143,13 @@ export default {
           }
         }
         .swiper-button-prev {
-          background-image: url("../../assets/images/nftimage/btn_left.png");
+          background-image: url("../../assets/images/btn_left.png");
           background-size: 100% auto;
           width: 40px;
           left: -36px;
         }
         .swiper-button-next {
-          background-image: url("../../assets/images/nftimage/btn_right.png");
+          background-image: url("../../assets/images/btn_right.png");
           background-size: 100% auto;
           width: 40px;
           right: -36px;

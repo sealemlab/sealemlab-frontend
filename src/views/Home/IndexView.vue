@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <!-- 什么是圣域 -->
+    <!-- 希莱姆简介 -->
     <div class="character_introduction">
       <div class="right_box display_flex">
         <div class="fontbox">
@@ -41,6 +41,34 @@
         </div>
       </div>
       <div class="people_box"><img src="../../assets/images/people.png" class="people" /></div>
+    </div>
+    <div class="characteristic_box">
+      <div class="title_txt font30">{{$t("message.home.txt65")}}</div>
+      <div class="add_game_txt">
+        <span class="span1 font20">非凡的游戏体验</span>
+        <span class="span2 font16">前往游戏中心</span>
+      </div>
+      <span class="span3 font12">再也不会感到无聊了！享受多种多样的游戏玩，边玩边赚钱</span>
+      <div class="add_box">
+        <div class="left">
+          <img src="../../assets/images/game1.png" class="game1" />
+          <span class="span4 font20">圣域 游戏场景</span>
+          <div class="gameswiperbox">
+            <swiper ref="gamewiper" :options="gameswiperOption" class="game_swiper">
+              <swiper-slide v-for="(item, index) in gameArr" :key="index">
+                <img :src="item.src" class="gameswiper_img" />
+              </swiper-slide>
+            </swiper>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+        <div class="left right">
+          <img src="../../assets/images/game2.png" class="game2" />
+          <img src="../../assets/images/game3.png" class="game2" />
+          <img src="../../assets/images/game3.png" class="game2" />
+        </div>
+      </div>
     </div>
     <!-- 灰色区域---特点-在圣域怎么赚钱 -->
     <div class="content_">
@@ -107,9 +135,11 @@
     <div class="time_axis_box">
       <div class="time_axis display_flex">
         <div class="title_txt font30">{{$t("message.home.txt54")}}</div>
+        <div class="border_"></div>
         <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
           <swiper-slide v-for="(item, index) in swiperArr" :key="index">
-            <p class="time_class font20" >{{item.time}}</p>
+            <img src="../../assets/images/partenerbg.png" class="partenerbg_img" />
+            <p class="time_class font20">{{item.time}}</p>
             <p class="content_class font16" >{{$t(item.content)}}</p>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -293,16 +323,16 @@ export default {
           content:'message.home.txt64'
         }
       ],
+      // 路线图swiper配置
       swiperOption:{
-        // loop: true,//循环播放
+        loop: true,//循环播放
         // mousewheel: true,//鼠标滚动
-        // autoplay: {
-        //   delay: 1000,
-        //   stopOnLastSlide: false,
-        //   disableOnInteraction: false,
-        // },
-        slidesPerView: 3,//一行显示的slider
-        // centeredSlides : true,
+        autoplay: {
+          delay: 1000,
+          stopOnLastSlide: false,
+          disableOnInteraction: false,
+        },
+        slidesPerView: 4,//一行显示的slider
         freeMode: true,//	free模式，slide会根据惯性滑动且不会贴合
         pagination: {
           el: ".swiper-pagination",
@@ -311,6 +341,7 @@ export default {
           bulletActiveClass: 'my-bullet-active'
         },
       },
+      // 团队swiper配置
       teamswiperOption: {
         slidesPerView: 4,
         navigation: {
@@ -318,6 +349,28 @@ export default {
           prevEl: ".swiper-button-prev",
         }
       },
+      // 游戏场景swiper配置
+      gameswiperOption: {
+        slidesPerView: 4,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }
+      },
+      gameArr:[
+        {
+          src:require('../../assets/images/smallgame1.png'),
+        },
+        {
+          src:require('../../assets/images/smallgame2.png'),
+        },
+        {
+          src:require('../../assets/images/smallgame2.png'),
+        },
+        {
+          src:require('../../assets/images/smallgame2.png'),
+        }
+      ]
     }
   },
   watch: {
@@ -585,16 +638,6 @@ export default {
           justify-content: center;
         }
       }
-      .swiper-button-prev {
-        background-image: url("../../assets/images/nftimage/btn_left.png");
-        background-size: 100% auto;
-        width: 40px;
-      }
-      .swiper-button-next {
-        background-image: url("../../assets/images/nftimage/btn_right.png");
-        background-size: 100% auto;
-        width: 40px;
-      }
     }
   }
   .time_axis_box{
@@ -607,28 +650,43 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      .border_{
+        width: 100%;
+        border: 2px solid #ECCF83;
+      }
       .self_swiper{
         width:100%;
+        margin-top: -42px;
         .swiper-slide{
           display: flex;
-          // height: 260px;
           padding-bottom: 40px;
           flex-direction: column;
           align-items: flex-start;
+          .partenerbg_img{
+            width: 79px;
+            margin-bottom: 28px;
+          }
           .time_class{
+            width: 118px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 20px;
             font-weight: normal;
-            color: #00C1FF;
-            line-height: 26px;
-            background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #000000;
+            background: url("../../assets/images/partenertime.png");
+            background-size: 100% 100%;
           }
           .content_class{
+            margin-top: 25px;
             max-width: 80%;
             font-weight: normal;
             color: #FFFFFF;
             line-height: 32px;
-            margin-top: 10px;
+            padding: 10px;
+            background: #1F1F1F;
+            box-shadow: inset 0px 0px 37px 0px #000000, inset 0px 1px 3px 0px #E9CD82;
           }
         }
       }
@@ -684,6 +742,78 @@ export default {
         }
         .par10{
           width: 220px;
+        }
+      }
+    }
+    .add_game_txt{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-top: 68px;
+      .span1{
+        font-weight: normal;
+        color: #FFFFFF;
+        line-height: 23px;
+        margin-right: 16px;
+      }
+      .span2{
+        font-weight: normal;
+        color: #ECCF83;
+        line-height: 18px;
+      }
+    }
+    .span3{
+      font-weight: normal;
+      color: #9E9E9E;
+      line-height: 14px;
+    }
+    .add_box{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 26px;
+      .left{
+        width: 60%;
+        // max-width: 758px;
+        display: flex;
+        flex-direction: column;
+        .game1{
+          max-width: 758px;
+          width: 100%;
+        }
+        .span4{
+          font-weight: normal;
+          color: #FFFFFF;
+          line-height: 23px;
+          margin-top: 54px;
+        }
+        .gameswiperbox{
+          position: relative;
+          width: 100%;
+          margin-top: 26px;
+          padding: 0 58px;
+          .game_swiper{
+            width: 100%;
+            .swiper-slide{
+              display: flex;
+              justify-content: center;
+              .gameswiper_img{
+                width: 147px;
+                margin-right: 22px;
+              }
+            }
+          }
+        }
+      }
+      .right{
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        .game2{
+          max-width: 404px;
+          width: 100%;
+          margin-bottom: 37px;
         }
       }
     }
@@ -757,6 +887,16 @@ export default {
   }
   .make_box:hover{
     transform: scale(1.2);
+  }
+  .swiper-button-prev {
+    background-image: url("../../assets/images/btn_left.png");
+    background-size: 100% auto;
+    width: 40px;
+  }
+  .swiper-button-next {
+    background-image: url("../../assets/images/btn_right.png");
+    background-size: 100% auto;
+    width: 40px;
   }
 }
 .btnbox{

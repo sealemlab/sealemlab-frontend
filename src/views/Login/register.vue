@@ -41,7 +41,7 @@
           {{$t("message.signin.txt1")}}
           <BtnLoading :isloading="btnloding"></BtnLoading>
         </div>
-        <p class="font12 tip_txt" @click="loginClick">
+        <p class="font16 tip_txt" @click="loginClick">
           {{$t("message.signin.txt22")}}
           <span class="tip_login">{{$t("message.signin.txt23")}}</span>
         </p>
@@ -95,27 +95,27 @@ export default {
       user:[
         {
           title:'message.signin.txt16',
-          inputvalue:'1401376424@qq.com',
+          inputvalue:'',
           placeholder:'Please enter the email',
           tip:'邮箱不能为空',
           tip_status:false,
-          status:true
+          status:false
         },
         {
           title:'message.signin.txt17',
-          inputvalue:'123456',
-          placeholder:'Please enter the content',
+          inputvalue:'',
+          placeholder:'Please enter the password',
           tip:'密码不能为空',
           tip_status:false,
-          status:true
+          status:false
         },
         {
           title:'message.signin.txt18',
-          inputvalue:'123456',
-          placeholder:'Please enter the content',
+          inputvalue:'',
+          placeholder:'Enter again password',
           tip:'请先输入密码',
           tip_status:false,
-          status:true
+          status:false
         },
       ]
     }
@@ -205,8 +205,10 @@ export default {
         this.$api.registerFun(data).then((res) => {
           console.log('res: ', res);
           this.btnloding = false
-          // this.proupStatus = true
-          // this.content = 'message.tip.txt1'
+          if(res.code == 200){
+            this.proupStatus = true
+            this.content = 'message.tip.txt1'
+          }
         }).catch(() => {
           this.btnloding = false
         });

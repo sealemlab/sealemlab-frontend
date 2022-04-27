@@ -11,7 +11,7 @@ export default {
   // 登录
   loginFun: (data: any) => {
     return service.post(
-      `${BASE_API}/login`,data
+      `${BASE_API}/user/login`,data
     );
   }
 };
