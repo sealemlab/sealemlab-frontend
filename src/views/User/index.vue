@@ -71,7 +71,7 @@
     </div>
     <div class="content_box display_flex">
       <ul class="display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
-        <li class="font30" :class="{ active_li: li_index == index }" v-for="(item,index) in menuArr" :key="index" @click="liClick(item,index)">{{item.name}}</li>
+        <li class="font24" :class="{ active_li: li_index == index }" v-for="(item,index) in menuArr" :key="index" @click="liClick(item,index)">{{item.name}}</li>
       </ul>
       <div class="main">
         <router-view />
@@ -302,13 +302,13 @@ export default {
         // margin-top: 80px;
         font-weight: normal;
         color: #FFFFFF;
-        line-height: 86px;
+        line-height: 50px;
         width: 171px;
         display: flex;
         align-items: center;
         margin-bottom: 10px;
         color: #fff;
-        padding-left: 68px;
+        padding-left: 30px;
         cursor: pointer;
       }
       .active_li{

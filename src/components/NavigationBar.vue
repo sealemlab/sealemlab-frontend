@@ -48,7 +48,7 @@ export default {
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
         { label: "message.nav.txt5", link: "" },
-        { label: "message.nav.txt6", link: "" },
+        { label: "message.nav.txt6", link: "/user/assets/0" },
         { label: "message.nav.txt7", link: "" }
       ],
       showLangSelect: false,

@@ -20,16 +20,16 @@
             <img src="../../assets/images/tel_4.png" class="tel_img" />
           </div>
         </div>
-        <div class="content_footer">
-          <div class="left">
-            <span class="font30">{{$t("message.home.txt5")}}</span>
-            <span class="font30 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
-          </div>
-          <div class="btnbox font16 mobile_font14">
-            <span>{{$t("message.home.txt7")}}</span>
-            <span>{{$t("message.home.txt8")}}</span>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class="content_footer">
+      <div class="left">
+        <span class="font30">{{$t("message.home.txt5")}}</span>
+        <span class="font30 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
+      </div>
+      <div class="btnbox font16 mobile_font14">
+        <span>{{$t("message.home.txt7")}}</span>
+        <span>{{$t("message.home.txt8")}}</span>
       </div>
     </div>
     <!-- 希莱姆简介 -->
@@ -468,20 +468,21 @@ export default {
           }
         }
       }
-      .content_footer{
-        width: 100%;
-        height: 146px;
-        margin-top: 100px;
-        display: flex;;
-        justify-content: space-between;
-        align-items: center;
-        .left{
-          display: flex;
-          flex-direction: column;
-          .margin_top{
-            margin-top: 10px;
-          }
-        }
+    }
+  }
+  .content_footer{
+    width: 90vw;
+    margin: 0 auto;
+    height: 146px;
+    margin-top: 50px;
+    display: flex;;
+    justify-content: space-between;
+    align-items: center;
+    .left{
+      display: flex;
+      flex-direction: column;
+      .margin_top{
+        margin-top: 10px;
       }
     }
   }
