@@ -30,7 +30,12 @@ export default {
   methods:{
     liClick(index){
       if(index == 2){
-        this.$store.commit("setLogin", false);
+        this.$store.dispatch("setLogin", {
+          loginStatus:false, // 登录状态
+          rememberStatus:this.$store.state.userInfo.rememberStatus,
+          username:this.$store.state.userInfo.rememberStatus?this.$store.state.userInfo.username:'',
+          password:this.$store.state.userInfo.rememberStatus?this.$store.state.userInfo.password:''
+        })
       }
     }
   }

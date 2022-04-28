@@ -10,7 +10,7 @@
         <span class="font26">10323</span>
       </div>
       <div class="btn_box display_flex font20">
-        现在邀请
+        <!-- 现在邀请 -->
       </div>
     </div>
     <div class="ranking demo_font_color">
@@ -32,13 +32,13 @@
           <div class="boxs" v-for="(item,index) in list" :key="index">
             <div class="title_onebox">
               <div class="champion_box" v-if="index == 0">
-                <img src="../../assets/images/champion1.png" class="sort1_img" />
+                <img :src="`${$store.state.imgUrl}champion1.png`" class="sort1_img" />
               </div>
               <div class="champion_box" v-else-if="index == 1">
-                <img src="../../assets/images/champion2.png" class="sort1_img" />
+                <img :src="`${$store.state.imgUrl}champion2.png`" class="sort1_img" />
               </div>
               <div class="champion_box" v-else-if="index == 2">
-                <img src="../../assets/images/champion3.png" class="sort1_img" />
+                <img :src="`${$store.state.imgUrl}champion3.png`" class="sort1_img" />
               </div>
               <span class="pad_left fontsize16" v-else>{{index + 1}}</span>
             </div>
@@ -100,7 +100,7 @@ export default {
   .title_box{
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content:space-between;
     .onebox{
       min-height: 100px;
       flex-direction: column;

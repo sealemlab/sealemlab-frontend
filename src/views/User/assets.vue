@@ -6,11 +6,12 @@
           <span class="font26">10 NFT</span>
           <span class="font16 margin_top">合约:0x77749fc693……053</span>
         </div>
+        <div class="add_buybtn font14">购买/出售</div>
         <div class="menu display_flex">
-          <div class="onebox" :class="{ activeMenu: menuIndex == index }" v-for="(item, index) in menuArr" :key="index" @click="menuClick(item,index)">{{item.title}}</div>
+          <div class="onebox font14" :class="{ activeMenu: menuIndex == index }" v-for="(item, index) in menuArr" :key="index" @click="menuClick(item,index)">{{item.title}}</div>
         </div>
       </div>
-      <div class="content display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
+      <!-- <div class="content display_flex">
         <p class="font26 buybox_txt">{{title}}</p>
         <p class="font16">购买盲盒参与游戏，自由交易</p>
         <div class="imgbox">
@@ -22,7 +23,7 @@
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
         </div>
-      </div>
+      </div> -->
     </div> 
   </div>
 </template>
@@ -44,25 +45,25 @@ export default {
       ],
       imgArr:[
         {
-          src:require('../../assets/images/buyboximg1.png')
+          src:`${this.$store.state.imgUrl}buyboximg1.png`
         },
         {
-          src:require('../../assets/images/buyboximg1.png')
+          src:`${this.$store.state.imgUrl}buyboximg1.png`
         },
         {
-          src:require('../../assets/images/buyboximg1.png')
+          src:`${this.$store.state.imgUrl}buyboximg1.png`
         },
         {
-          src:require('../../assets/images/buyboximg1.png')
+          src:`${this.$store.state.imgUrl}buyboximg1.png`
         },
         {
-          src:require('../../assets/images/buyboximg1.png')
+          src:`${this.$store.state.imgUrl}buyboximg1.png`
         },
         {
-          src:require('../../assets/images/buyboximg1.png')
+          src:`${this.$store.state.imgUrl}buyboximg1.png`
         },
         {
-          src:require('../../assets/images/buyboximg1.png')
+          src:`${this.$store.state.imgUrl}buyboximg1.png`
         }
       ],
       swiperOption: {
@@ -98,16 +99,29 @@ export default {
           margin-top: 12px;
         }
       }
+      .add_buybtn{
+        width: 163px;
+        // padding: 0 25px;
+        height: 48px;
+        background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+        box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        color: #000000;
+      }
       .menu{
         align-items: center;
         .onebox{
           cursor: pointer;
-          width: 146px;
-          height: 49px;
+          padding: 0 15px;
+          height: 31px;
+          background: #000000;
+          border: 1px solid rgba(236, 207, 131, 0.5);
           text-align: center;
-          line-height: 47px;
-          border: 1px solid;
-          border-image: linear-gradient(180deg, rgba(150, 116, 66, 1), rgba(246, 217, 127, 1), rgba(145, 109, 58, 1)) 1 1;
+          line-height: 31px;
         }
         .activeMenu{
           background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
@@ -143,13 +157,13 @@ export default {
           }
         }
         .swiper-button-prev {
-          background-image: url("../../assets/images/btn_left.png");
+          background-image: url($bg_url + "btn_left.png");
           background-size: 100% auto;
           width: 40px;
           left: -36px;
         }
         .swiper-button-next {
-          background-image: url("../../assets/images/btn_right.png");
+          background-image: url($bg_url + "btn_right.png");
           background-size: 100% auto;
           width: 40px;
           right: -36px;

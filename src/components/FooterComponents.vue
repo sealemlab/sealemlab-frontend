@@ -2,7 +2,7 @@
   <!-- 底部 -->
   <div class="footer_box display_flex">
     <div class="footer_content display_flex">
-      <img src="../assets/images/logo.png" class="footer_logo" />
+      <img :src="`${$store.state.imgUrl}logo.png`" class="footer_logo" />
       <div class="onebox display_flex">
         <ul v-for="(item, index) in footerArr" :key="index">
           <li class="font14 en_Regular" v-for="(ele, index1) in item.children" :key="index1">
@@ -75,7 +75,7 @@ export default {
   width: 100%;
   flex-direction: column;
   align-items: center;
-  background: url("../assets/images/footerbg.png") no-repeat #000;
+  background: url($bg_url + 'footerbg.png') no-repeat #000;
   background-size: 100% 100%;
   .footer_img {
     width: 100%;
@@ -136,7 +136,7 @@ export default {
     width: 100%;
     flex-direction: column;
     align-items: center;
-    background: url("../assets/images/footerbg.png") no-repeat #000;
+    background: url($bg_url + "footerbg.png") no-repeat #000;
     background-size: 100% 100%;
     .footer_img {
       width: 100%;

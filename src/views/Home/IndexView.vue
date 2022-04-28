@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <div class="home_bgbox">
-      <img src="../../assets/images/homebg.png" class="homebg" />
-      <!-- <video class="video_" loop autoplay muted>
-        <source src="https://drive.google.com/drive/folders/1TYY0NAIGcaOCX-boVVdx20tbIMH0EUT8" type="video/mp4" />
-      </video> -->
+      <!-- <img :src="`${$store.state.imgUrl}homebg.png`" class="homebg" /> -->
+      <video class="video_" ref="video" loop autoplay muted>
+        <source :src="`${$store.state.imgUrl}sacredrealm.mp4`" type="video/mp4" />
+      </video>
       <div class="content">
         <!-- <span class="home_font font45 demo_font_color">{{ $t("message.home.txt1") }}</span> -->
         <div class="content_center">
@@ -40,19 +40,19 @@
           <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
         </div>
       </div>
-      <div class="people_box"><img src="../../assets/images/people.png" class="people" /></div>
+      <div class="people_box"><img :src="`${$store.state.imgUrl}people.png`" class="people" /></div>
     </div>
     <div class="characteristic_box">
       <div class="title_txt font30">{{$t("message.home.txt65")}}</div>
       <div class="add_game_txt">
-        <span class="span1 font20">非凡的游戏体验</span>
-        <span class="span2 font16">前往游戏中心</span>
+        <span class="span1 font20">{{$t("message.home.txt66")}}</span>
+        <span class="span2 font16">{{$t("message.home.txt67")}}</span>
       </div>
-      <span class="span3 font12">再也不会感到无聊了！享受多种多样的游戏玩，边玩边赚钱</span>
+      <span class="span3 font12">{{$t("message.home.txt68")}}</span>
       <div class="add_box">
         <div class="left">
-          <img src="../../assets/images/game1.png" class="game1" />
-          <span class="span4 font20">圣域 游戏场景</span>
+          <img :src="`${$store.state.imgUrl}game1.png`" class="game1" />
+          <span class="span4 font20">{{$t("message.home.txt69")}}</span>
           <div class="gameswiperbox">
             <swiper ref="gamewiper" :options="gameswiperOption" class="game_swiper">
               <swiper-slide v-for="(item, index) in gameArr" :key="index">
@@ -64,9 +64,9 @@
           </div>
         </div>
         <div class="left right">
-          <img src="../../assets/images/game2.png" class="game2" />
-          <img src="../../assets/images/game3.png" class="game2" />
-          <img src="../../assets/images/game3.png" class="game2" />
+          <img :src="`${$store.state.imgUrl}game2.png`" class="game2" />
+          <img :src="`${$store.state.imgUrl}game3.png`" class="game2" />
+          <img :src="`${$store.state.imgUrl}game3.png`" class="game2" />
         </div>
       </div>
     </div>
@@ -113,10 +113,10 @@
                   <span class="span1 font20">{{$t(item.name)}}</span>
                   <span class="span2 font16">{{item.txt}}</span>
                   <div class="address_peopllle display_flex">
-                    <a v-if="item.LinY == ''" href="javascript:;"><img src="../../assets/images/in.png" class="ling_ying" /></a>
-                    <a v-else :href="item.LinY" target="_blank" rel="noopener noreferrer"><img src="../../assets/images/in.png" class="ling_ying" /></a>
-                    <a v-if="item.twitter == ''" href="javascript:;"><img src="../../assets/images/twitter.png" class="twitter"/></a>
-                    <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer"><img src="../../assets/images/twitter.png" class="twitter"/></a>
+                    <a v-if="item.LinY == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}in.png`" class="ling_ying" /></a>
+                    <a v-else :href="item.LinY" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}in.png`" class="ling_ying" /></a>
+                    <a v-if="item.twitter == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}twitter.png`" class="twitter"/></a>
+                    <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}twitter.png`" class="twitter"/></a>
                   </div>
                   <span class="triangle_calss" :class="item.status?'triangle_top':'triangle_bottom'" @click="showtxtFun(item)"></span>
                   <div class="txtbox font12" v-if="item.status">
@@ -141,7 +141,7 @@
         <div class="border_"></div>
         <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
           <swiper-slide v-for="(item, index) in swiperArr" :key="index">
-            <img src="../../assets/images/partenerbg.png" class="partenerbg_img" />
+            <img :src="`${$store.state.imgUrl}partenerbg.png`" class="partenerbg_img" />
             <p class="time_class font20">{{item.time}}</p>
             <p class="content_class font16" >{{$t(item.content)}}</p>
           </swiper-slide>
@@ -185,52 +185,52 @@ export default {
       peopleIndex:0,// 人物展示对应大图的索引
       comminicateArr:[
         {
-          src:require("../../assets/images/tel_1.png"),
+          src:`${this.$store.state.imgUrl}tel_1.png`,
           link:'https://t.me/sealemglobal'
         },
         {
-          src:require("../../assets/images/tel_2.png"),
+          src:`${this.$store.state.imgUrl}tel_2.png`,
           link:'https://twitter.com/SealemLab'
         },
         {
-          src:require("../../assets/images/tel_3.png"),
+          src:`${this.$store.state.imgUrl}tel_3.png`,
           link:'https://discord.gg/s747pMMBzq'
         },
         {
-          src:require("../../assets/images/tel_4.png"),
+          src:`${this.$store.state.imgUrl}tel_4.png`,
           link:'https://medium.com/@sealemlab'
         }
       ],
       spArr:[
         {
-          src:require('../../assets/images/characteristic1.png'),
+          src:`${this.$store.state.imgUrl}characteristic1.png`,
           txt:"message.home.txt10",
           txt1:"message.home.txt11",
         },
         {
-          src:require('../../assets/images/characteristic2.png'),
+          src:`${this.$store.state.imgUrl}characteristic2.png`,
           txt:'message.home.txt12',
           txt1:'message.home.txt12_1',
         },
         {
-          src:require('../../assets/images/characteristic3.png'),
+          src:`${this.$store.state.imgUrl}characteristic3.png`,
           txt:'message.home.txt13',
           txt1:'message.home.txt13_1',
         },
         {
-          src:require('../../assets/images/characteristic4.png'),
+          src:`${this.$store.state.imgUrl}characteristic4.png`,
           txt:'message.home.txt14',
           txt1:'message.home.txt14_1',
         },
         {
-          src:require('../../assets/images/characteristic5.png'),
+          src:`${this.$store.state.imgUrl}characteristic5.png`,
           txt:'message.home.txt15',
           txt1:'message.home.txt15_1',
         }
       ],
       teamArr:[
         {
-          src:require('../../assets/images/ceo.png'),
+          src:`${this.$store.state.imgUrl}ceo.png`,
           txt:'CEO',
           name:'message.home.txt48',
           status:true,
@@ -241,7 +241,7 @@ export default {
           introduce3:'message.home.introduce3',
         },
         {
-          src:require('../../assets/images/cto.png'),
+          src:`${this.$store.state.imgUrl}cto.png`,
           txt:'CMO',
           name:'message.home.txt50',
           status:false,
@@ -252,7 +252,7 @@ export default {
           introduce3:'message.home.introduce6',
         },
         {
-          src:require('../../assets/images/cmo.png'),
+          src:`${this.$store.state.imgUrl}cmo.png`,
           txt:'CTO',
           name:'message.home.txt49',
           status:false,
@@ -263,7 +263,7 @@ export default {
           introduce3:'message.home.introduce9',
         },
         {
-          src:require('../../assets/images/svp.png'),
+          src:`${this.$store.state.imgUrl}svp.png`,
           txt:'SVP',
           name:'message.home.txt51',
           status:false,
@@ -274,7 +274,7 @@ export default {
           introduce3:'message.home.introduce12',
         },
         {
-          src:require('../../assets/images/founder.png'),
+          src:`${this.$store.state.imgUrl}founder.png`,
           txt:'Co-Founder',
           name:'message.home.txt52',
           status:false,
@@ -285,7 +285,7 @@ export default {
           introduce3:'message.home.introduce15',
         },
         {
-          src:require('../../assets/images/founder1.png'),
+          src:`${this.$store.state.imgUrl}founder1.png`,
           txt:'Co-Founder',
           name:'message.home.txt53',
           status:false,
@@ -298,43 +298,43 @@ export default {
         }
       ],
       makeMoneyArr:[
-        {txt:"message.home.txt16",src:require("../../assets/images/money1.png")},
-        {txt:"message.home.txt17",src:require("../../assets/images/money2.png")},
-        {txt:"message.home.txt18",src:require("../../assets/images/money3.png")},
-        {txt:"message.home.txt19",src:require("../../assets/images/money4.png")},
-        {txt:"message.home.txt20",src:require("../../assets/images/money2.png")},
-        {txt:"message.home.txt21",src:require("../../assets/images/money2.png")}
+        {txt:"message.home.txt16",src:`${this.$store.state.imgUrl}money1.png`},
+        {txt:"message.home.txt17",src:`${this.$store.state.imgUrl}money2.png`},
+        {txt:"message.home.txt18",src:`${this.$store.state.imgUrl}money3.png`},
+        {txt:"message.home.txt19",src:`${this.$store.state.imgUrl}money4.png`},
+        {txt:"message.home.txt20",src:`${this.$store.state.imgUrl}money2.png`},
+        {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money2.png`}
       ],
 
       partenerArr:[{
-        src:require('../../assets/images/partener1.png'),
+        src:`${this.$store.state.imgUrl}partener1.png`,
       },
       {
-        src:require('../../assets/images/partener2.png'),
+        src:`${this.$store.state.imgUrl}partener2.png`,
       },
       {
-        src:require('../../assets/images/partener3.png'),
+        src:`${this.$store.state.imgUrl}partener3.png`,
       },
       {
-        src:require('../../assets/images/partener4.png'),
+        src:`${this.$store.state.imgUrl}partener4.png`,
       },
       {
-        src:require('../../assets/images/partener5.png'),
+        src:`${this.$store.state.imgUrl}partener5.png`,
       },
       {
-        src:require('../../assets/images/partener6.png'),
+        src:`${this.$store.state.imgUrl}partener6.png`,
       },
       {
-        src:require('../../assets/images/partener7.png'),
+        src:`${this.$store.state.imgUrl}partener7.png`,
       },
       {
-        src:require('../../assets/images/partener8.png'),
+        src:`${this.$store.state.imgUrl}partener8.png`,
       },
       {
-        src:require('../../assets/images/partener9.png'),
+        src:`${this.$store.state.imgUrl}partener9.png`,
       },
       {
-        src:require('../../assets/images/partener10.png'),
+        src:`${this.$store.state.imgUrl}partener10.png`,
       }
       ],
       swiperArr:[
@@ -403,7 +403,7 @@ export default {
       },
       // 游戏场景swiper配置
       gameswiperOption: {
-        slidesPerView: 4,
+        slidesPerView:4,
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
@@ -411,16 +411,16 @@ export default {
       },
       gameArr:[
         {
-          src:require('../../assets/images/smallgame1.png'),
+          src:`${this.$store.state.imgUrl}smallgame1.png`,
         },
         {
-          src:require('../../assets/images/smallgame2.png'),
+          src:`${this.$store.state.imgUrl}smallgame2.png`,
         },
         {
-          src:require('../../assets/images/smallgame2.png'),
+          src:`${this.$store.state.imgUrl}smallgame2.png`,
         },
         {
-          src:require('../../assets/images/smallgame2.png'),
+          src:`${this.$store.state.imgUrl}smallgame2.png`,
         }
       ]
     }
@@ -432,6 +432,10 @@ export default {
     },
   },
   methods:{
+    videoPlay() {
+      this.$refs.video.muted = false;
+      this.$refs.video.play();
+    },
     bondClick(){
       this.$router.push('/bond');
     },
@@ -442,8 +446,17 @@ export default {
       this.gameIndex = item.id
     },
     showtxtFun(item){
-      item.status = !item.status
+      this.teamArr.forEach(item => {
+        item.status = false
+      })
+      item.status = true
     }
+  },
+  mounted(){
+    window.addEventListener("click",this.videoPlay)
+  },
+  destroyed(){
+    window.removeEventListener("click",this.videoPlay)
   }
 }
 </script>
@@ -466,23 +479,20 @@ export default {
 .home{
   width: 100%;
   .home_bgbox{
-    width: 100%;
-    // height: 600px;
     position: relative;
-    // .video_{
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    //   width: 100%;
-    //   height: auto;
-    //   z-index: -1;
-    // }
-    .homebg{
-      width: 100%;
+    width: 100vw;
+    height: 100vh;
+    .video_{
+      min-width: 100vw;
+      height: 100vh;
+      object-fit: cover;
     }
+    // .homebg{
+    //   width: 100%;
+    // }
     .content{
       position: absolute;
-      top: 305px;
+      bottom: 5vh;
       left: 0;
       width: 100%;
       display: flex;
@@ -678,7 +688,7 @@ export default {
   }
   .teamboxs{
     width: 100%;
-    background: url("../../assets/images/teambg.png") no-repeat #000;
+    background: url($bg_url + "teambg.png") no-repeat #000;
     background-size: 100% 100%;
     .team_container{
       position: relative;
@@ -737,7 +747,7 @@ export default {
             padding-top: 20px;
             font-weight: normal;
             color: #000000;
-            background: url("../../assets/images/partenertime.png");
+            background: url($bg_url + "partenertime.png");
             background-size: 100% 100%;
           }
           .content_class{
@@ -859,9 +869,9 @@ export default {
             .swiper-slide{
               display: flex;
               justify-content: center;
+              // margin-right: 22px;
               .gameswiper_img{
                 width: 147px;
-                margin-right: 22px;
               }
             }
           }
@@ -951,12 +961,12 @@ export default {
     transform: scale(1.2);
   }
   .swiper-button-prev {
-    background-image: url("../../assets/images/btn_left.png");
+    background-image: url($bg_url + "btn_left.png");
     background-size: 100% auto;
     width: 40px;
   }
   .swiper-button-next {
-    background-image: url("../../assets/images/btn_right.png");
+    background-image: url($bg_url + "btn_right.png");
     background-size: 100% auto;
     width: 40px;
   }
@@ -1162,7 +1172,7 @@ export default {
     .teamboxs{
       display: none;
       width: 100%;
-      background: url("../../assets/images/teambg.png") no-repeat #000;
+      background: url($bg_url + "teambg.png") no-repeat #000;
       background-size: 100% 100%;
       .team_container{
         position: relative;

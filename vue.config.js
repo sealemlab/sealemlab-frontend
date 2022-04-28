@@ -5,6 +5,18 @@ module.exports = {
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
   },
   productionSourceMap: false,
+  chainWebpack(config) {
+    const oneOfsMap = config.module.rule('scss').oneOfs.store
+    oneOfsMap.forEach((item) => {
+      item
+        .use('sass-resources-loader')
+        .loader('sass-resources-loader')
+        .options({
+          resources: './src/style/self.scss'  //相对路径
+        })
+        .end()
+    })
+  }
   // devServer: {
   //   proxy: {
   //     '/api': {

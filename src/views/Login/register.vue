@@ -62,32 +62,32 @@ export default {
       proupStatus:false,//弹窗状态
       list:[
         {
-          src:require('../../assets/images/register1.png'),
+          src:`${this.$store.state.imgUrl}register1.png`,
           title:'message.signin.txt3',
           explain:'message.signin.txt4'
         },
         {
-          src:require('../../assets/images/register2.png'),
+          src:`${this.$store.state.imgUrl}register2.png`,
           title:'message.signin.txt5',
           explain:'message.signin.txt6'
         },
         {
-          src:require('../../assets/images/register3.png'),
+          src:`${this.$store.state.imgUrl}register3.png`,
           title:'message.signin.txt7',
           explain:'message.signin.txt8'
         },
         {
-          src:require('../../assets/images/register4.png'),
+          src:`${this.$store.state.imgUrl}register4.png`,
           title:'message.signin.txt9',
           explain:'message.signin.txt10'
         },
         {
-          src:require('../../assets/images/register5.png'),
+          src:`${this.$store.state.imgUrl}register5.png`,
           title:'message.signin.txt11',
           explain:'message.signin.txt12'
         },
         {
-          src:require('../../assets/images/register6.png'),
+          src:`${this.$store.state.imgUrl}register6.png`,
           title:'message.signin.txt13',
           explain:'message.signin.txt14'
         },
@@ -129,6 +129,9 @@ export default {
     },
     proupClose(){
       this.proupStatus = false
+      setTimeout(() => {
+        this.$router.push('/signin/login')
+      },500)
     },
     loginClick(){
       this.$router.push('/signin/login')

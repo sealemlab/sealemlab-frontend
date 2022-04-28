@@ -4,8 +4,9 @@
       <p class="propu_title_txt font24">ADD&nbsp;&nbsp;&nbsp;LP</p>
       <div class="box">
         <span class="font20 lp_class">LP种类</span>
-        <div class="select_box">
-          <span class="font16">BNB-ST</span>
+        <div class="select_box font16">
+          <p class="oneselect">BNB-ST</p>
+          <p class="oneselect">BNB-ST</p>
           <span class="triangle_calss"></span>
         </div>
       </div>
@@ -13,7 +14,7 @@
       <p class="title_ font20">BNB-ST LP PURCHASED</p>
       <div class="content font16">
         <p class="p1 p">10 BNB</p>
-        <p class="p2 p"><img src="../../assets/images/change.png" class="change_img" /></p>
+        <p class="p2 p"><img :src="`${$store.state.imgUrl}change.png`" class="change_img" /></p>
         <p class="p3 p">5.045789 BNB-ST LP</p>
       </div>
       <div class="moneybox">
@@ -23,7 +24,7 @@
         <div class="onebox font14">$ 500</div>
       </div>
       <div class="main_button font16" @click="bondFun">{{$t("message.bond.txt1")}}</div>
-      <img src="../../assets/images/close.png" class="close_img" @click.stop="closeProup"/>
+      <img :src="`${$store.state.imgUrl}close.png`" class="close_img" @click.stop="closeProup"/>
     </div>
   </div>
 </template>
@@ -79,7 +80,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 20px 100px;
-    background-image: url("../../assets/images/proupbg.png");
+    background-image: url($bg_url + "proupbg.png");
     background-size: 100% 100%;
     .propu_title_txt{
       font-weight: bold;
@@ -100,15 +101,17 @@ export default {
       .select_box{
         position: relative;
         width: calc(100% - 100px);
-        height: 52px;
-        background: #171718;
-        box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
-        border-radius: 8px;
+        // border-radius: 8px;
         border: 1px solid #373636;
-        text-align: center;
-        line-height: 50px;
-        font-weight: 400;
-        color: #FFFFFF;
+        .oneselect{
+          text-align: center;
+          line-height: 50px;
+          font-weight: 400;
+          color: #FFFFFF;
+          width: 100%;
+          background: #171718;
+          // box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+        }
         .triangle_calss{
           position: absolute;
           right: 0;
@@ -118,6 +121,7 @@ export default {
           height: 0px;
           border: 8px solid transparent;
           border-top-color: #ccc;
+          cursor: pointer;
         }
       }
     }
@@ -179,7 +183,7 @@ export default {
       }
     }
     .main_button{
-      width: 330px;
+      width: 70%;
       height: 45px;
       margin: 48px 0 37px;
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);

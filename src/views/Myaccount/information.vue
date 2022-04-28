@@ -8,7 +8,7 @@
           <div class="inputbox" v-if="index == 1">
             <div class="add_eye">
               <input type="text" class="input font18" v-model="item.inputValue" />
-              <img src="../../assets/images/eye1.png" class="eye_img" />
+              <img :src="`${$store.state.imgUrl}eye1.png`" class="eye_img" />
             </div>
             <div class="input_btn font14" @click="changePassword">{{$t("message.account.txt8")}}</div>
           </div>
@@ -78,7 +78,6 @@ export default {
       this.passStatus = false
     },
     sureClick(data){
-      console.log('父页面获取的参数data: ', data);
       let istrue = data.every(item => {
         return item.status == true
       })
@@ -97,7 +96,6 @@ export default {
       }
     },
     changePassword(){
-      console.log("修改密码")
       this.title = '修改密码'
       this.passStatus = true
       this.codestatus = false

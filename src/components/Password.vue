@@ -28,7 +28,7 @@
       <div class="btn font18" @click="sureClick">
         {{$t(btntxt)}}
       </div>
-      <img src="../assets/images/passclose.png" class="close_img" @click.stop="closePassProup"/>
+      <img :src="`${$store.state.imgUrl}passclose.png`" class="close_img" @click.stop="closePassProup"/>
     </div>
   </div>
 </template>
@@ -148,7 +148,6 @@ export default {
       }
     },
     codestatus(newvala){
-      console.log('codeStatus---newvala: ', newvala);
       if(newvala){
         this.arr = this.RetrievePassword
       }else{
@@ -168,12 +167,10 @@ export default {
       this.arr[index].tip_status = false
     },
     blurEvent(index,item){
-      console.log('index,item: ', index,item);
       if(this.arr[index].inputvalue == ''){
         this.arr[index].tip_status = true
         return
       }
-      console.log('item.id: ', item.id);
       switch(item.id){
         case 1:
           if (!this.$store.state.emailReg.test(this.arr[index].inputvalue)){
@@ -212,7 +209,6 @@ export default {
           }
           break;
         case 5: 
-          console.log('id为5的判断')
           if (this.arr[index].inputvalue){
             this.arr[index].tip = '当前密码不正确'
             this.arr[index].tip_status = true

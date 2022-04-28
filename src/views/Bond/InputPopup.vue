@@ -53,7 +53,7 @@
         </div>
         <span class="font14 price_txt">2 {{$t("message.bond.txt19")}}</span>
       </div>
-      <img src="../../assets/images/close.png" class="close_img" @click.stop="closeProup"/>
+      <img :src="`${$store.state.imgUrl}close.png`" class="close_img" @click.stop="closeProup"/>
     </div>
   </div>
 </template>
@@ -115,7 +115,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 20px 100px;
-    background-image: url("../../assets/images/proupbg.png");
+    background-image: url($bg_url + "proupbg.png");
     background-size: 100% 100%;
     .propu_title_txt{
       font-weight: bold;

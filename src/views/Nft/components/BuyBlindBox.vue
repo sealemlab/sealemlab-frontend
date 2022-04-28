@@ -11,7 +11,7 @@
     </ul>
     <div class="conten_box">
       <div class="treasure_chest_box">
-        <img src="../../../assets/images/bindbox.png" alt="" />
+        <img :src="`${$store.state.imgUrl}bindbox.png`" alt="" />
       </div>
       <div class="right_content">
         <p class="font20 title_txt">
@@ -40,7 +40,7 @@
         </div>
         <div class="balance_txt">
           {{$t("message.nft.txt27")}} 1.02 ST
-          <img src="../../../assets/images/link.png" class="link_img" />
+          <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
         </div>
         <div class="btnbox font12">{{$t("message.nft.txt28")}}</div>
       </div>
@@ -117,107 +117,107 @@ export default {
       currentClass: 0,
       tabClassArr: [
         {
-          image: require("../../../assets/images/nft_class1.png"),
+          image: `${this.$store.state.imgUrl}nft_class1.png`,
           label: "message.nft.txt8",
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",
           skill_content: "message.nft.txt15",
           classIntroduce: "message.nft.txt14",
           skills: [
-            require("../../../assets/images/nft_class1_skills1.png"),
-            require("../../../assets/images/nft_class1_skills2.png"),
-            require("../../../assets/images/nft_class1_skills3.png"),
-            require("../../../assets/images/nft_class1_skills4.png"),
+            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
           ],
           classFigureArr: [
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
           ],
           classFashionArr: [
-            require("../../../assets/images/nft_class1_fashion1.png"),
-            require("../../../assets/images/nft_class1_fashion2.png"),
-            require("../../../assets/images/nft_class1_fashion3.png"),
-            require("../../../assets/images/nft_class1_fashion4.png"),
+            `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion2.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion3.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion4.png`,
           ],
         },
         {
-          image: require("../../../assets/images/nft_class2.png"),
+          image: `${this.$store.state.imgUrl}nft_class2.png`,
           label: "message.nft.txt9",
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",
           skill_content: "message.nft.txt15_1",
           classIntroduce: "message.nft.txt14_1",
           skills: [
-            require("../../../assets/images/nft_class1_skills1.png"),
-            require("../../../assets/images/nft_class1_skills2.png"),
-            require("../../../assets/images/nft_class1_skills3.png"),
-            require("../../../assets/images/nft_class1_skills4.png"),
+            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
           ],
           classFigureArr: [
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
           ],
           classFashionArr: [
-            require("../../../assets/images/nft_class1_fashion1.png"),
-            require("../../../assets/images/nft_class1_fashion2.png"),
-            require("../../../assets/images/nft_class1_fashion3.png"),
-            require("../../../assets/images/nft_class1_fashion4.png"),
+            `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion2.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion3.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion4.png`,
           ],
         },
         {
-          image: require("../../../assets/images/nft_class3.png"),
+          image: `${this.$store.state.imgUrl}nft_class3.png`,
           label: "message.nft.txt10",
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",
           skill_content: "message.nft.txt15_3",
           classIntroduce: "message.nft.txt14_3",
           skills: [
-            require("../../../assets/images/nft_class1_skills1.png"),
-            require("../../../assets/images/nft_class1_skills2.png"),
-            require("../../../assets/images/nft_class1_skills3.png"),
-            require("../../../assets/images/nft_class1_skills4.png"),
+            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
           ],
           classFigureArr: [
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
           ],
           classFashionArr: [
-            require("../../../assets/images/nft_class1_fashion1.png"),
-            require("../../../assets/images/nft_class1_fashion2.png"),
-            require("../../../assets/images/nft_class1_fashion3.png"),
-            require("../../../assets/images/nft_class1_fashion4.png"),
+            `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion2.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion3.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion4.png`,
           ],
         },
         {
-          image: require("../../../assets/images/nft_class4.png"),
+          image: `${this.$store.state.imgUrl}nft_class4.png`,
           label: "message.nft.txt11",
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",
           skill_content: "message.nft.txt15_2",
           classIntroduce: "message.nft.txt14_2",
           skills: [
-            require("../../../assets/images/nft_class1_skills1.png"),
-            require("../../../assets/images/nft_class1_skills2.png"),
-            require("../../../assets/images/nft_class1_skills3.png"),
-            require("../../../assets/images/nft_class1_skills4.png"),
+            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
+            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
           ],
           classFigureArr: [
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
-            require("../../../assets/images/nft_class1_figure1.png"),
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
           ],
           classFashionArr: [
-            require("../../../assets/images/nft_class1_fashion1.png"),
-            require("../../../assets/images/nft_class1_fashion2.png"),
-            require("../../../assets/images/nft_class1_fashion3.png"),
-            require("../../../assets/images/nft_class1_fashion4.png"),
+            `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion2.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion3.png`,
+            `${this.$store.state.imgUrl}nft_class1_fashion4.png`,
           ],
         },
       ],
@@ -260,7 +260,6 @@ export default {
         this.amount = newVal;
       } else {
         this.amount = oldVal;
-        // console.log("");
       }
     },
     currentSwiperIndex(newVal) {
@@ -271,9 +270,6 @@ export default {
   methods: {
     clickTabClass(index) {
       this.currentClass = index;
-    },
-    clickBuy() {
-      console.log("clickBuy", this.amount, typeof this.amount);
     },
     deleteAmount() {
       this.amount--;
@@ -322,7 +318,6 @@ export default {
       width: 100%;
       max-width: 510px;
       height: 400px;
-      animation: treasure_chest 2s ease-in-out infinite;
     }
   }
   .right_content{
@@ -451,20 +446,6 @@ export default {
     line-height: 32px;
   }
 }
-@keyframes treasure_chest {
-  0% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-}
 .box {
   width: 100%;
   display: flex;
@@ -542,11 +523,11 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          background-image: url("../../../assets/images/nft_class1_fashion_normal.png");
+          background-image: url($bg_url + "nft_class1_fashion_normal.png");
           background-size: 100% 100%;
           padding: 10px;
           &.active {
-            background-image: url("../../../assets/images/nft_class1_fashion_active.png");
+            background-image: url($bg_url + "nft_class1_fashion_active.png");
             background-size: 100% 100%;
           }
           img {
@@ -559,13 +540,13 @@ export default {
           width: fit-content;
         }
         .swiper-button-prev {
-          background-image: url("../../../assets/images/btn_left.png");
+          background-image: url($bg_url + "btn_left.png");
           background-size: 100% auto;
           width: 40px;
           left: -40px;
         }
         .swiper-button-next {
-          background-image: url("../../../assets/images/btn_right.png");
+          background-image: url($bg_url + "btn_right.png");
           background-size: 100% auto;
           width: 40px;
           right: -40px;
@@ -582,7 +563,7 @@ export default {
         width: 100%;
         height: auto;
         padding: 39px 30px;
-        background-image: url("../../../assets/images/nft_bg3.png");
+        background-image: url($bg_url + "nft_bg3.png");
         background-size: 100% 100%;
         color: #ffffff;
         li{

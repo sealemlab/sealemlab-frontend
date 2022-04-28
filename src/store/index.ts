@@ -6,7 +6,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    loginStatus:false, // 登录状态
+    userInfo:{
+      loginStatus:false, // 登录状态
+      username:'',
+      password:'',
+      rememberStatus:false
+    },
+    imgUrl:process.env.NODE_ENV === 'production'?'//cdn.hashland.com/sacredTestImg/':'//cdn.hashland.com/sacredTestImg/',//图片前缀
     codeTime:60,//验证码重新发送时间
     emailReg:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,//邮箱校验
     pwReg: /^[a-zA-Z0-9]{6,16}$/ //密码校验 6-16位数字英文组合
@@ -16,7 +22,7 @@ export default new Vuex.Store({
       return i18n.locale == "en";
     },
     getLogin(state){
-      return state.loginStatus
+      return state.userInfo
     },
     // 是否是移动端
     getIsMobile(){
@@ -26,17 +32,21 @@ export default new Vuex.Store({
   mutations: {
     // 设置登录状态
     setLogin(state, data) {
-      state.loginStatus = data;
+      state.userInfo = data;
     },
   },
-  actions: {},
+  actions: {
+    setLogin({commit},data){
+      commit('setLogin',data)
+    }
+  },
   plugins: [
     createPersistedState({
-      storage: window.sessionStorage,
+      storage: window.localStorage,
       reducer(val) {
         return {
           // 只储存state中的MenuActive
-          loginStatus: val.loginStatus,
+          userInfo: val.userInfo,
         };
       },
     }),

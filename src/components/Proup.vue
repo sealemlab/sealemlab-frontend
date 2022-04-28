@@ -3,10 +3,10 @@
     <div class="proup_boxs">
       <p class="propu_title_txt font24">提示</p>
       <div class="proup_content">
-        <img src="../assets/images/success.png" class="success_img" />
+        <img :src="`${$store.state.imgUrl}success.png`" class="success_img" />
         {{$t(content)}}
       </div>
-      <img src="../assets/images/close.png" class="close_img" @click.stop="closeProup"/>
+      <img :src="`${$store.state.imgUrl}close.png`" class="close_img" @click.stop="closeProup"/>
     </div>
   </div>
 </template>
@@ -63,7 +63,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 20px 100px;
-    background-image: url("../assets/images/proupbg.png");
+    background-image: url($bg_url + "proupbg.png");
     background-size: 100% 100%;
     .propu_title_txt{
       font-weight: bold;

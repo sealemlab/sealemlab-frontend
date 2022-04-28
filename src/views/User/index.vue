@@ -1,48 +1,43 @@
 <template>
   <div class="user_center_page">
     <div class="user_info display_flex">
-      <!-- <img src="../../assets/images/usercorebg.png" class="use_bg" /> -->
       <div class="user_head_portrait display_flex">
-        <img src="../../assets/images/userhead.png" class="user_head">
-        <div class="user_name display_flex">
-          <span class="font34 name_txt" :class="isEnLang?'en_Bold':'cn_lang'">名称</span>
-          <img src="../../assets/images/write.png" class="img_write">
-        </div>
-        <div class="invitation_code font20" :class="isEnLang?'en_Bold':'cn_lang'">邀请链接:21233443535353</div>
+        <span class="font20 user_name">{{getLogin.username?getLogin.username:'暂未登录'}}</span>
+        <div class="invitation_code font16">邀请链接:21233443535353</div>
       </div>
       <div class="content display_flex" v-if="li_index == 0">
         <div class="box display_flex" v-for="(item, index) in walletArr" :key="index">
-          <div class="coin_name display_flex font20" :class="isEnLang?'en_Bold':'cn_lang'">
+          <div class="coin_name display_flex font20">
             <div class="leftbox display_flex">
               <img :src="item.coin_logo" class="coin_log" />
-              <span class="bnb_class">{{item.num}} {{item.company}}</span>
+              <span class="bnb_class">{{item.company}}</span>
             </div>
             <span class="txt" v-if="item.explain">{{item.explain}}</span>
           </div>
-          <div class="onelin display_flex font16" :class="isEnLang?'en_Bold':'cn_lang'">
+          <div class="onelin display_flex font16">
             <span>{{item.name1}}</span>
             <span>{{item.num1}}(≈${{item.num1_money}})</span>
           </div>
-          <div class="onelin display_flex font16" v-if="item.name2" :class="isEnLang?'en_Bold':'cn_lang'">
+          <div class="onelin display_flex font16" v-if="item.name2">
             <span>{{item.name2}}</span>
             <span>{{item.num2}}(≈${{item.num2_money}})</span>
           </div>
-          <div class="onelin display_flex font16" v-if="item.name3" :class="isEnLang?'en_Bold':'cn_lang'">
+          <div class="onelin display_flex font16" v-if="item.name3">
             <span>{{item.name3}}</span>
             <div class="address display_flex">
               <span>{{item.address}}</span>
-              <img src="../../assets/images/copy.png" class="copy_img" />
+              <img :src="`${$store.state.imgUrl}add.png`" class="copy_img" />
             </div>
           </div>
         </div>
       </div>
       <div class="invite_content content display_flex" v-if="li_index == 1">
-        <div class="invite_title display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
+        <div class="invite_title display_flex">
           <div class="left display_flex">
             <span class="font35">总收入</span>
             <div class="income_box display_flex font26">
               <div class="imgbox display_flex">
-                <img src="../../assets/images/stlogo.png" class="homebg" />
+                <img :src="`${$store.state.imgUrl}stlogo.png`" class="homebg" />
                 <span>ST</span>
               </div>
               <span>100</span>
@@ -52,25 +47,21 @@
             <span class="font35">当期收入</span>
             <div class="income_box display_flex font26">
               <div class="imgbox display_flex">
-                <img src="../../assets/images/srlogo.png" class="homebg" />
+                <img :src="`${$store.state.imgUrl}srlogo.png`" class="homebg" />
                 <span>SR</span>
               </div>
               <span>100</span>
             </div>
           </div>
         </div>
-        <p class="message font16" :class="isEnLang?'en_Regular':'cn_lang'">提示：您的帳戶中至少需要一個 NFT 才能獲得推薦收入.</p>
+        <!-- <p class="message font16" :class="isEnLang?'en_Regular':'cn_lang'">提示：您的帳戶中至少需要一個 NFT 才能獲得推薦收入.</p> -->
       </div>
-      <div class="bindbox_page" v-if="li_index == 2">
-        <div class="bind_left">
-          <span class="font35 my_box">我的盲盒</span>
-          <span class="font16 _open">批量打开</span>
-        </div>
-        <img src="../../assets/images/box.png" class="bindimg" />
+      <div class="feedback_page font30" v-if="li_index == 2">
+        意见反馈
       </div>
     </div>
     <div class="content_box display_flex">
-      <ul class="display_flex" :class="isEnLang?'en_Bold':'cn_lang'">
+      <ul class="display_flex">
         <li class="font24" :class="{ active_li: li_index == index }" v-for="(item,index) in menuArr" :key="index" @click="liClick(item,index)">{{item.name}}</li>
       </ul>
       <div class="main">
@@ -83,24 +74,21 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["isEnLang"])
+    ...mapGetters(["isEnLang","getLogin"])
   },
   data(){
     return {
       li_index:0,
       walletArr:[{
-        coin_logo:require('../../assets/images/stlogo.png'),
+        coin_logo:`${this.$store.state.imgUrl}bnblogo.png`,
         company:'BNB',
-        num:10,
         name1:'钱包余额',
         num1:100,
         num1_money:100
       },
       {
-        coin_logo:require('../../assets/images/stlogo.png'),
+        coin_logo:`${this.$store.state.imgUrl}stlogo.png`,
         company:'ST',
-        num:10,
-        explain:'余额',
         name1:'钱包余额',
         num1:100,
         num1_money:100,
@@ -111,10 +99,9 @@ export default {
         address:'0xsdf***fdhd'
       },
       {
-        coin_logo:require('../../assets/images/stlogo.png'),
+        coin_logo:`${this.$store.state.imgUrl}srlogo.png`,
         company:'SR',
-        num:10,
-        explain:'提现',
+        explain:'Claim',
         name1:'钱包余额',
         num1:100,
         num1_money:100,
@@ -128,13 +115,12 @@ export default {
       menuArr:[
         {name:'资产',link:'/user/assets/0'},
         {name:'邀请奖励',link:'/user/invite/1'},
-        {name:'盲盒',link:'/user/blindbox/2'},
+        {name:'Feedback',link:'/user/feedback/2'},
       ]
     }
   },
   methods:{
     liClick(item,index){
-      console.log('index: ', index);
       this.li_index = index
       this.$router.push(item.link)
     }
@@ -156,49 +142,33 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 0 70px;
-    padding-top: 155px;
-    background-image: url("../../assets/images/usercorebg.png");
+    padding-top: 75px;
+    background-image: url($bg_url + "bondbg.png");
     background-size: 100% 100%;
     .user_head_portrait{
       flex-direction: column;
       align-items: center;
-      .user_head{
-        width: 133px;
-      }
       .user_name{
-        margin: 20px 0;
-        align-items: center;
-        .name_txt{
-          font-weight: normal;
-          color: #00C1FF;
-          line-height: 43px;
-          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        .img_write{
-          width: 28px;
-        }
+        font-weight: bold;
+        color: #ECCF83;
+        line-height: 24px;
       }
       .invitation_code{
-        border-radius: 15px;
-        box-shadow: inset -2px 1px 22px 0 #F3D67D;
-        padding: 0 20px;
         font-weight: normal;
         color: #FFFFFF;
-        height: 39px;
-        line-height: 39px;
+        line-height: 20px;
+        margin-top: 32px;
       }
     }
     .content{
-      width: calc(100% - 300px);
+      width: calc(100% - 230px);
       justify-content: space-between;
       .box{
         width: 30%;
         padding: 15px 19px;
         flex-direction: column;
-        background: url("../../assets/images/balancebg.png") no-repeat;
-        background-size: 100% 100%;
+        background: rgba(248, 229, 186, 0.23);
+        border-radius: 14px;
         .coin_name{
           align-items: center;
           justify-content: space-between;
@@ -208,7 +178,7 @@ export default {
               width: 36px;
             }
             .bnb_class{
-              margin-left: 18px;
+              margin-left: 10px;
               font-weight: bold;
               color: #FFFFFF;
               line-height: 24px;
@@ -237,6 +207,7 @@ export default {
     }
     .invite_content{
       flex-direction: column;
+      padding: 0 30px;
       .invite_title{
         width: 100%;
         align-items: center;
@@ -250,8 +221,8 @@ export default {
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
-            background-image: url("../../assets/images/income.png");
-            background-size: 100% 100%;
+            background: rgba(248, 229, 186, 0.23);
+            border-radius: 14px;
             .imgbox{
               align-items: center;
               .homebg{
@@ -269,27 +240,13 @@ export default {
         line-height: 20px;
       }
     }
-    .bindbox_page{
+    .feedback_page{
       width: calc(100% - 230px);
       display: flex;
+      justify-content: center;
       align-items: center;
-      .bind_left{
-        display: flex;
-        flex-direction: column;
-        .my_box{
-          font-weight: normal;
-          color: #FFFFFF;
-          line-height: 43px;
-        }
-        ._open{
-          font-weight: normal;
-          color: #FFFFFF;
-          line-height: 20px;
-        }
-      }
-      .bindimg{
-        width:80%;
-      }
+      font-weight: 600;
+      color: #FFFFFF;
     }
   }
   .content_box{
@@ -302,13 +259,13 @@ export default {
         // margin-top: 80px;
         font-weight: normal;
         color: #FFFFFF;
-        line-height: 50px;
-        width: 171px;
+        line-height: 48px;
+        width: 248px;
         display: flex;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 40px;
         color: #fff;
-        padding-left: 30px;
+        padding-left: 60px;
         cursor: pointer;
       }
       .active_li{
@@ -317,7 +274,7 @@ export default {
     }
     .main{
       width: 100%;
-      padding-left: 60px;
+      // padding-left: 60px;
     }
   }
 }

@@ -36,7 +36,7 @@
         </div>
         <div class="explain">
           <div class="radious">
-            <img src="../../assets/images/ques.png" class="ques_img" />
+            <img :src="`${$store.state.imgUrl}ques.png`" class="ques_img" />
           </div>
           <span class="txt_ font16">{{$t("message.signin.txt26")}}</span>
         </div>
@@ -52,11 +52,13 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import PassProup from '../../components/Password.vue'
 export default {
   components:{
     PassProup
   },
+  computed: { ...mapGetters(["getLogin"]) },
   data(){
     return {
       btnloding:false,
@@ -69,32 +71,32 @@ export default {
       email:'',
       list:[
         {
-          src:require('../../assets/images/register1.png'),
+          src:`${this.$store.state.imgUrl}register1.png`,
           title:'message.signin.txt3',
           explain:'message.signin.txt4'
         },
         {
-          src:require('../../assets/images/register2.png'),
+          src:`${this.$store.state.imgUrl}register2.png`,
           title:'message.signin.txt5',
           explain:'message.signin.txt6'
         },
         {
-          src:require('../../assets/images/register3.png'),
+          src:`${this.$store.state.imgUrl}register3.png`,
           title:'message.signin.txt7',
           explain:'message.signin.txt8'
         },
         {
-          src:require('../../assets/images/register4.png'),
+          src:`${this.$store.state.imgUrl}register4.png`,
           title:'message.signin.txt9',
           explain:'message.signin.txt10'
         },
         {
-          src:require('../../assets/images/register5.png'),
+          src:`${this.$store.state.imgUrl}register5.png`,
           title:'message.signin.txt11',
           explain:'message.signin.txt12'
         },
         {
-          src:require('../../assets/images/register6.png'),
+          src:`${this.$store.state.imgUrl}register6.png`,
           title:'message.signin.txt13',
           explain:'message.signin.txt14'
         },
@@ -117,6 +119,22 @@ export default {
           status:false
         }
       ]
+    }
+  },
+  watch:{
+    getLogin: {
+      handler: function (newValue) {
+        if (newValue.rememberStatus) {
+          this.user.forEach(item => {
+            item.tip_status = false
+            item.status = true
+          })
+          this.user[0].inputvalue = this.getLogin.username
+          this.user[1].inputvalue = this.getLogin.password
+        }
+      },
+      deep: true,
+      immediate: true,
     }
   },
   methods:{
@@ -185,7 +203,13 @@ export default {
           console.log('res: ', res);
           this.btnloding = false
           if(res.code == 200){
-            console.log("登录成功")
+            this.$store.dispatch("setLogin", {
+              loginStatus:true, // 登录状态
+              username:this.user[0].inputvalue,
+              password:this.user[1].inputvalue,
+              rememberStatus:this.rememberStatus
+            })
+            this.$router.push('/myaccount/information');
           }else{
             this.proupStatus = true
             this.content = 'message.tip.txt2'
@@ -193,8 +217,6 @@ export default {
         }).catch(() => {
           this.btnloding = false
         });
-        // this.$store.commit("setLogin", true);
-        // this.$router.push('/myaccount/information');
       }
     },
     forgetNumberClick(){
@@ -202,7 +224,6 @@ export default {
       this.passStatus = this.codestatus = true
     },
     sureClick(data){
-      console.log('父页面获取的参数data: ', data);
       let istrue = data.every(item => {
         return item.status == true
       })

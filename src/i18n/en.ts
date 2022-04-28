@@ -86,6 +86,12 @@ export const message = {
 
     txt59: "PARTENER",
 
+    txt65:"Sealem 游戏",
+    txt66:"非凡的游戏体验",
+    txt67:"前往游戏中心",
+    txt68:"再也不会感到无聊了！享受多种多样的游戏玩，边玩边赚钱",
+    txt69:"圣域 游戏场景",
+    txt70:"前往游戏中心",
   },
   footer:{
     txt1:"ABOUT",
@@ -250,6 +256,7 @@ export const message = {
   btn_txt1:"确认修改",
   btn_txt2:"确认找回",
   tip:{
-    txt1:'创建账户成功,请到邮箱激活账户'
+    txt1:'创建账户成功,请到邮箱激活账户',
+    txt2:'请检查账号/密码是否正确,账号是否激活'
   }
 };

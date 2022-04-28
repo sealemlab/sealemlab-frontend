@@ -1,7 +1,7 @@
 <template>
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
-      <img class="logo" src="../assets/images/logo.png" alt="" @click="toRoute('/home')" />
+      <img class="logo" :src="`${$store.state.imgUrl}logo.png`" alt="" @click="toRoute('/home')" />
       <ul :class="getIsMobile?'disply_none':''">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
           <span class="font18">{{ $t(item.label) }}</span>
@@ -10,11 +10,11 @@
     </div>
     <div class="nav_right">
       <div class="st_price">
-        <img src="../assets/images/stlogo.png" class="st_price_img" />
+        <img :src="`${$store.state.imgUrl}stlogo.png`" class="st_price_img" />
         <span class="font_price font16">$5.45</span>
       </div>
       <div class="login_box">
-        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin">
+        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
           {{$t("message.nav.txt8")}}
         </div>
         <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
@@ -25,7 +25,7 @@
       <div class="connect font16">{{ $t("message.nav.txt9") }}</div>
       <div class="lang_box" :class="getIsMobile?'disply_none':''" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
         <span>{{ language }}</span>
-        <img src="../assets/images/accrow.png" alt="" />
+        <img :src="`${$store.state.imgUrl}accrow.png`" alt="" />
         <transition name="select-lang" appear>
           <ul v-show="showLangSelect">
             <li v-for="(item, index) in langArr" :key="index" @click="selectLang(index)">{{ item }}</li>
@@ -81,6 +81,7 @@ export default {
     },
   },
   created() {
+    console.log("${$store.state.imgUrl}",this.$store.state.imgUrl)
     this.language = this.$i18n.locale == "en" ? this.langArr[0] : this.langArr[1];
   },
   methods: {
@@ -190,8 +191,6 @@ export default {
     background: #232229;
     border: 1px solid #4f4e53;
     border-radius: 8px;
-    // background: url("../assets/images/connect.png") no-repeat;
-    // background-size: 100% 100%;
     margin-right: 17px;
     font-weight: bold;
     color: #FFFFFF;

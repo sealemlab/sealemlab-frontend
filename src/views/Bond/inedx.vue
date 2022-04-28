@@ -1,7 +1,7 @@
 <template>
   <div class="bond_page">
     <div class="bond_introduce">
-      <img src="../../assets/images/bondbg.png" class="bond_bg" />
+      <img :src="`${$store.state.imgUrl}bondbg.png`" class="bond_bg" />
       <div class="txt_box">
         <span class="txt1 font45">{{$t("message.bond.txt1")}}</span>
         <span class="txt2 font16">{{$t("message.bond.txt2")}}</span>
@@ -38,7 +38,7 @@
               <span class="line_txt">{{item.title}}</span>
               <div class="line_radious">
                 <span class="line_txt">{{$t("message.bond.txt7")}}</span>
-                <img src="../../assets/images/link.png" class="link_img" />
+                <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
               </div>
             </div>
             <span class="coin_class">$ {{item.price}}</span>
@@ -65,11 +65,12 @@
         <span class="btn_txt bg_color">{{$t("message.bond.txt10")}}</span>
         <span class="txt_"></span>
         <div class="layout_box margin0">
-          <span class="insert">{{$t("message.bond.txt11")}}</span>
-          <div class="radious font12">?</div>
+          <!-- <span class="insert">{{$t("message.bond.txt11")}}</span>
+          <div class="radious font12">?</div> -->
         </div>
-        <span class="txt_">$3000000</span>
-        <span class="btn_txt">{{$t("message.bond.txt12")}}</span>
+        <span class="txt_"></span>
+        <!-- <span class="txt_">$3000000</span> -->
+        <!-- <span class="btn_txt">{{$t("message.bond.txt12")}}</span> -->
       </div>
       <!-- 表格内层标题 -->
       <div class="list_title self_calss_list font20">
@@ -171,7 +172,6 @@ export default {
       this.proupDis = this.afferentStatus = false
     },
     BondClick(data){
-      console.log('data: ', data);
       this.proupDis = true
     }
   }
