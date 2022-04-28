@@ -81,7 +81,6 @@ export default {
     },
   },
   created() {
-    console.log("${$store.state.imgUrl}",this.$store.state.imgUrl)
     this.language = this.$i18n.locale == "en" ? this.langArr[0] : this.langArr[1];
   },
   methods: {

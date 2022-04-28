@@ -64,7 +64,10 @@
           <div class="swiperbox_1">
             <swiper ref="swiper1" :options="swiperOption1">
               <swiper-slide v-for="(item, index) in tabClassArr[currentClass].classFigureArr" :key="index">
-                <img :src="item" class="people_img" />
+                <!-- <img :src="item" class="people_img" /> -->
+                <video class="video_" ref="video" loop autoplay muted>
+                  <source :src="`${item}`" type="video/mp4" />
+                </video>
               </swiper-slide>
             </swiper>
           </div>
@@ -130,10 +133,10 @@ export default {
             `${this.$store.state.imgUrl}nft_class1_skills4.png`,
           ],
           classFigureArr: [
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}suit1.mp4`,
+            `${this.$store.state.imgUrl}suit2.mp4`,
+            `${this.$store.state.imgUrl}suit3.mp4`,
+            `${this.$store.state.imgUrl}suit4.mp4`,
           ],
           classFashionArr: [
             `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
@@ -397,8 +400,6 @@ export default {
       }
     }
     .balance_txt{
-      // border-top: 1px solid #979797;
-      // padding-top: 15px;
       width: 100%;
       display: flex;
       justify-content: flex-end;
@@ -511,6 +512,12 @@ export default {
         .people_img{
           max-width: 469px;
           width: 100%;
+        }
+        .video_{
+          max-width: 469px;
+          width: 100%;
+          height: auto;
+          object-fit: cover;
         }
       }
       .swiperbox_2{

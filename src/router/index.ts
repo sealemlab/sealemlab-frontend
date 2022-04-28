@@ -33,7 +33,7 @@ const routes: Array<RouteConfig> = [
       {
         path: "blind-box",
         name: "BlindBox",
-        component: () => import("../views/Nft/components/BlindBox.vue"),
+        component: () => import("../views/Nft/components/MyBlindBox.vue"),
       },
       {
         path: "my-nft",

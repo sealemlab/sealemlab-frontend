@@ -186,6 +186,7 @@ export default {
     position: relative;
     .bond_bg{
       width: 100%;
+      min-height: 350px;
     }
     .txt_box{
       position: absolute;

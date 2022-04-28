@@ -16,6 +16,9 @@ Vue.use(VueAwesomeSwiper);
 import BtnLoading from "./components/Btnloading.vue";
 Vue.component("BtnLoading", BtnLoading);
 
+import LoadingAnmation from '@/components/loadingAnmation.vue'
+Vue.component("LoadingAnmation", LoadingAnmation);
+
 import Proup from "@/components/Proup.vue";
 Vue.component("Proup", Proup);
 

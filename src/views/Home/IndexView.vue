@@ -1,12 +1,11 @@
 <template>
   <div class="home">
     <div class="home_bgbox">
-      <!-- <img :src="`${$store.state.imgUrl}homebg.png`" class="homebg" /> -->
-      <video class="video_" ref="video" loop autoplay muted>
+      <LoadingAnmation v-if="videoStatus" ></LoadingAnmation> <!--:isshowtxt="true"-->
+      <video class="video_" ref="video" loop autoplay muted v-show="!videoStatus">
         <source :src="`${$store.state.imgUrl}sacredrealm.mp4`" type="video/mp4" />
       </video>
       <div class="content">
-        <!-- <span class="home_font font45 demo_font_color">{{ $t("message.home.txt1") }}</span> -->
         <div class="content_center">
           <div class="leftbox">
             <p class="font_1 font26 mobile_font14">{{$t("message.home.txt2")}}</p>
@@ -181,6 +180,7 @@ export default {
   },
   data(){
     return{
+      videoStatus:true,//视频加载
       gameIndex:0,//游戏场景展示对应大图的索引
       peopleIndex:0,// 人物展示对应大图的索引
       comminicateArr:[
@@ -454,6 +454,11 @@ export default {
   },
   mounted(){
     window.addEventListener("click",this.videoPlay)
+    let that = this
+    this.$refs.video.addEventListener('canplaythrough',function(){
+      console.log("加载完成")
+      that.videoStatus = false
+    });
   },
   destroyed(){
     window.removeEventListener("click",this.videoPlay)
