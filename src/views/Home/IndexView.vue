@@ -739,6 +739,7 @@ export default {
           padding-bottom: 40px;
           flex-direction: column;
           align-items: flex-start;
+          margin-right: 20px;
           .partenerbg_img{
             width: 79px;
             margin-bottom: 28px;
@@ -757,7 +758,8 @@ export default {
           }
           .content_class{
             margin-top: 25px;
-            max-width: 80%;
+            min-width: 230px;
+            min-height: 116px;
             font-weight: normal;
             color: #FFFFFF;
             line-height: 32px;

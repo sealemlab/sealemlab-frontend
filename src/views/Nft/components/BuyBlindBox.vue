@@ -16,30 +16,27 @@
       <div class="right_content">
         <p class="font20 title_txt">
           <span class="lefttxt">{{$t("message.nft.txt23")}}</span>
-          <span class="righttxt no_border">0</span>
-          <span class="unit_class"></span>
+          <span class="righttxt">0</span>
         </p>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt24")}}</span>
-          <span class="righttxt no_border">10</span>
+          <span class="righttxt no_border">{{stPrice}}</span>
           <span class="unit_class">ST</span>
         </div>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
           <div class="btns">
-            <span class="btn" @click="deleteAmount">-</span>
-            <input type="number" class="font16" v-model="amount" />
-            <span class="btn" @click="addAmount">+</span>
+            <slider :min="0" :max="10000" v-model="per"></slider>
           </div>
-          <span class="unit_class"></span>
+          <span class="unit_class">{{sliderValue}}</span>
         </div>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt26")}}</span>
-          <span class="righttxt">10</span>
+          <span class="righttxt">{{stTotal}}</span>
           <span class="unit_class">ST</span>
         </div>
         <div class="balance_txt">
-          {{$t("message.nft.txt27")}} 1.02 ST
+          {{$t("message.nft.txt27")}} 30 ST
           <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
         </div>
         <div class="btnbox font12">{{$t("message.nft.txt28")}}</div>
@@ -109,14 +106,26 @@
 
 <script>
 import { mapGetters } from "vuex";
+import slider from "./ProgressBar.vue";
 export default {
-  computed: { ...mapGetters(["isEnLang"]) },
+  components: { slider },
+  computed: {
+    ...mapGetters(["isEnLang"]),
+    per: {
+      get() {
+        return 0;
+      },
+      set(val) {
+        this.sliderValue = val
+        this.stTotal = val * this.stPrice
+      }
+    }
+  },
   data() {
     return {
-      proportion: "0/1500",
-      price: 10,
-      amount: 100,
-      totalAmount: 10,
+      stPrice:2,//st价格
+      stTotal:0,//st的总价格
+      sliderValue:0,// 拖动条value
       currentClass: 0,
       tabClassArr: [
         {
@@ -258,13 +267,6 @@ export default {
     };
   },
   watch: {
-    amount(newVal, oldVal) {
-      if (newVal && newVal <= 99999) {
-        this.amount = newVal;
-      } else {
-        this.amount = oldVal;
-      }
-    },
     currentSwiperIndex(newVal) {
       this.$refs.swiper1.swiper.slideTo(newVal);
       this.$refs.swiper2.swiper.slideTo(newVal);
@@ -319,8 +321,8 @@ export default {
     width: 50%;
     img {
       width: 100%;
-      max-width: 510px;
-      height: 400px;
+      max-width: 616px;
+      // height: 504px;
     }
   }
   .right_content{
@@ -347,6 +349,7 @@ export default {
       font-weight: bold;
       color: #ECCF83;
       line-height: 19px;
+      text-align: right;
     }
     .line_onebox{
       width: 100%;
@@ -355,48 +358,23 @@ export default {
       align-items: center;
       margin-bottom: 30px;
       .lefttxt{
-        width: 65px;
+        width: 80px;
         font-weight: 400;
         color: #FFFFFF;
         line-height: 22px;
       }
       .righttxt{
-        width: calc(100% - 100px);
+        width: calc(100% - 140px);
         text-align: center;
         font-weight: bold;
         color: #ECCF83;
         line-height: 19px;
-        border-bottom: 1px solid  #979797;
-      }
-      .no_border{
-        border: none;
       }
       .btns {
-        width: calc(100% - 100px);
+        width: calc(100% - 140px);
         display: flex;
         align-items: center;
         justify-content: center;
-        span {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          border: 1px solid #939393;
-          color: #825f35;
-        }
-        input {
-          max-width: 50px;
-          height: 100%;
-          margin: 0 10px;
-          text-align: center;
-          color: #f1b713;
-          background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
       }
     }
     .balance_txt{
