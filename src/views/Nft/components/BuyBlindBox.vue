@@ -39,15 +39,28 @@
           {{$t("message.nft.txt27")}} 30 ST
           <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
         </div>
-        <div class="btnbox font12">{{$t("message.nft.txt28")}}</div>
+        <div class="btnbox font20">{{$t("message.nft.txt28")}}</div>
       </div>
     </div>
-    <div class="describe_box">
-      <p class="font30 title_">{{$t("message.nft.txt29")}}</p>
-      <div class="package_ font16">
-        {{$t("message.nft.txt30")}}
+    <!-- 盲盒介绍 -->
+    <div class="blindbox_introduce">
+      <p class="font30 introduce_title_txt">{{$t("message.nft.txt29")}}</p>
+      <div class="introduce_content">
+        <div class="introduce_onebox">
+          <p class="title font16">{{$t("message.nft.txt32")}}</p>
+          <div class="center font12">{{$t("message.nft.txt30")}}</div>
+        </div>
+        <div class="introduce_onebox">
+          <p class="title font16">{{$t("message.nft.txt33")}}</p>
+          <div class="center font12">{{$t("message.nft.txt34")}}</div>
+        </div>
+        <div class="introduce_onebox">
+          <p class="title font16">{{$t("message.nft.txt35")}}</p>
+          <div class="center font12">{{$t("message.nft.txt36")}}</div>
+        </div>
       </div>
     </div>
+    <!-- 穿戴展示 -->
     <div class="box">
       <p class="wear_show font30">{{$t("message.nft.txt31")}}</p>
       <ul class="tab_box">
@@ -168,10 +181,10 @@ export default {
             `${this.$store.state.imgUrl}nft_class1_skills4.png`,
           ],
           classFigureArr: [
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}suit1.mp4`,
+            `${this.$store.state.imgUrl}suit2.mp4`,
+            `${this.$store.state.imgUrl}suit3.mp4`,
+            `${this.$store.state.imgUrl}suit4.mp4`,
           ],
           classFashionArr: [
             `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
@@ -194,10 +207,10 @@ export default {
             `${this.$store.state.imgUrl}nft_class1_skills4.png`,
           ],
           classFigureArr: [
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}suit1.mp4`,
+            `${this.$store.state.imgUrl}suit2.mp4`,
+            `${this.$store.state.imgUrl}suit3.mp4`,
+            `${this.$store.state.imgUrl}suit4.mp4`,
           ],
           classFashionArr: [
             `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
@@ -220,10 +233,10 @@ export default {
             `${this.$store.state.imgUrl}nft_class1_skills4.png`,
           ],
           classFigureArr: [
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
-            `${this.$store.state.imgUrl}nft_class1_figure1.png`,
+            `${this.$store.state.imgUrl}suit1.mp4`,
+            `${this.$store.state.imgUrl}suit2.mp4`,
+            `${this.$store.state.imgUrl}suit3.mp4`,
+            `${this.$store.state.imgUrl}suit4.mp4`,
           ],
           classFashionArr: [
             `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
@@ -327,6 +340,7 @@ export default {
   }
   .right_content{
     width: 405px;
+    max-height:370px;
     padding:20px;
     padding-right: 40px;
     display: flex;
@@ -408,21 +422,49 @@ export default {
     }
   }
 }
-.describe_box{
+.blindbox_introduce{
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  .title_{
+  margin-top: 100px;
+  .introduce_title_txt{
     font-weight: bold;
     color: #FFFFFF;
     line-height: 36px;
-    margin-bottom: 30px;
   }
-  .package_{
-    font-weight: 400;
-    color: #FFFFFF;
-    line-height: 32px;
+  .introduce_content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 84px;
+    .introduce_onebox{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 310px;
+      .title{
+        font-weight: bold;
+        color: #ECCF83;
+        line-height: 19px;
+      }
+      .center{
+        margin-top: 30px;
+        width: 100%;
+        min-height: 159px;
+        padding: 10px;
+        background: linear-gradient(180deg, #080808 0%, rgba(16, 15, 15, 0.54) 100%);
+        box-shadow: 0px 9px 22px 0px rgba(237, 208, 126, 0.17);
+        border-radius: 8px;
+        border: 1px solid;
+        border-image: linear-gradient(180deg, rgba(247, 234, 181, 0.44), rgba(237, 208, 126, 0)) 1 1;
+        font-weight: 400;
+        color: #FFFFFF;
+        line-height: 32px;
+      }
+    }
   }
 }
 .box {
@@ -487,15 +529,18 @@ export default {
       flex-direction: column;
       .swiperbox_1{
         width: 100%;
-        .people_img{
-          max-width: 469px;
-          width: 100%;
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // .people_img{
+        //   max-width: 469px;
+        //   width: 100%;
+        // }
         .video_{
           max-width: 469px;
-          width: 100%;
-          height: auto;
-          object-fit: cover;
+          width: 400px;
+          height: 300px;
+          object-fit: contain;
         }
       }
       .swiperbox_2{

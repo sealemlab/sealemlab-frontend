@@ -75,22 +75,22 @@ export const message = {
 
     txt54: "ROADMAP",
 
-    txt55: "sealem technology was established; the core team was established",
+    txt55: "Sealem technology was established; the core team was established",
     txt56:
-      "to carry out market research; analyze the current situation of the industry",
+      "To carry out market research; analyze the current situation of the industry",
     txt57:
-      "swap and bond research and development; preliminary setting of economic model",
-    txt58: "game team formation completed; game development",
+      "Swap and bond research and development; preliminary setting of economic model",
+    txt58: "Game team formation completed; game development",
     txt60:
-      " Social media establishment; Competitive product analysis and large-scale NFT market establishment",
+      "Social media establishment; Competitive product analysis and large-scale NFT market establishment",
     txt61:
-      " Comprehensive marketing Official website online Multi-channel publicity NFT Genesis Blind Box Pre-sale In-game beta",
+      "Comprehensive marketing Official website online Multi-channel publicity NFT Genesis Blind Box Pre-sale In-game beta",
     txt62:
-      " DAO governance open NFT Market Launched The game is online, IOS, Google store is online swap is online, more CEXs are listed",
+      "DAO governance open NFT Market Launched The game is online, IOS, Google store is online swap is online, more CEXs are listed",
     txt63:
-      " Global Guild Recruitment Game Updates New Game Release Voting Dubai Offline Guild Competition Dubai Gamefi roundtable held",
+      "Global Guild Recruitment Game Updates New Game Release Voting Dubai Offline Guild Competition Dubai Gamefi roundtable held",
     txt64:
-      " Cross-chain plan sealem v2 released he creator platform is online more marketing",
+      "Cross-chain plan sealem v2 released he creator platform is online more marketing",
 
     txt59: "PARTENER",
 
@@ -160,8 +160,12 @@ export const message = {
     txt27: "Wallet balance:",
     txt28: "Warrant /Buy",
     txt29: "Introduction to the Sacred Realm Mystery Box",
-    txt30:
-      "The Sacred Realm NFT mystery box is a 3D digital asset, and its value can be measured in terms of star rating, combat power, and rarity. NFT types mainly include clothing, weapons, rings, boots, masks, etc. Users who hold NFT can participate in Sacred Realm to get game rewards, invite new users with NFT to win token incentives, rent NFT to other users to earn commissions, give NFT to other users, interact with other Sealem lab games, etc. The four heroes in the Sacred Realm require different types of items to improve their combat effectiveness. At least two heroes need to be trained to pass PVE, PVP, GVG and other modes and levels.",
+    txt30: "圣域NFT盲盒为3D数字资产,其中每个NFT对应着圣域世界观中一件独一无二的装备,且可从星级、战斗力、稀有度等衡量其价值。NFT盲盒可随机开出不",
+    txt32: "3D数字资产",
+    txt33: "NFT盲盒优势",
+    txt34: "NFT盲盒可随机开出不同品阶、星级、战力的武器、防具、饰品、时装。",
+    txt35: "游戏私人资产",
+    txt36: "圣域NFT作为用户私人资产,用户拥有完全支配权,其中包括：用户间自由交易；在游戏中提升战斗力从而获得不菲的战利品；用户间自由租赁等。",
     txt31: "穿戴展示",
   },
   invite: {
