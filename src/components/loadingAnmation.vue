@@ -16,7 +16,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .loading_page {
-  width: 100vw;
+  width:100%;
   min-height: 400px;
   display: flex;
   flex-direction: column;

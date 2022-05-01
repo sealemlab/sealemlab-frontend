@@ -76,6 +76,15 @@ export const message = {
     txt54: "ROADMAP",
 
     txt55: "Sealem technology was established; the core team was established",
+    txt55_1: "Team establishment",
+    txt56_1: "Market research",
+    txt57_1: "Bonds and economic model",
+    txt58_1: "GameFi landing",
+    txt60_1: "Social media creation",
+    txt61_1: "full announcement & blind box pre-sale",
+    txt62_1: "Ecological construction and development",
+    txt63_1: "Global Hilem game boom",
+    txt64_1: "Multi-chain ecological construction",
     txt56:
       "To carry out market research; analyze the current situation of the industry",
     txt57:
@@ -186,11 +195,10 @@ export const message = {
     txt15: "",
   },
   bond: {
-    txt_btn: "一键购买lp",
     txt1: "Bond",
-    txt2: "The protocol acquires assets at a discount in exchange for governance tokens, and one-click access to high bond rates",
-    txt2_1:
-      "Bonds are controlled by Sealemdao, cooperate with top protocols and build a decentralized open financial platform",
+    txt2_1:"Buy LP bonds in exchanged for high-yield ST tokens",
+    txt2_2:"Safe and stable high income",
+    txt2_3:"Limited bond purchas",
     txt3: "Treasury balance",
     txt4: "Price",
     txt5: "Interest rate",

@@ -1,11 +1,20 @@
 <template>
   <div class="bond_page">
     <div class="bond_introduce">
-      <img :src="`${$store.state.imgUrl}bondbg.png`" class="bond_bg" />
+      <img :src="`${$store.state.imgUrl}newbondbg.png`" class="bond_bg" />
       <div class="txt_box">
-        <span class="txt1 font45">{{$t("message.bond.txt1")}}</span>
-        <span class="txt2 font16">{{$t("message.bond.txt2")}}</span>
-        <span class="txt2 font16">{{$t("message.bond.txt2_1")}}</span>
+        <img :src="`${$store.state.imgUrl}BOND.png`" class="bond_img" />
+        <div class="introducebox font14">
+          <div class="onebox">
+            <span class="txt1">{{$t("message.bond.txt2_1")}}</span>
+          </div>
+          <div class="onebox height_">
+            <span class="txt1">{{$t("message.bond.txt2_2")}}</span>
+          </div>
+          <div class="onebox height_">
+            <span class="txt1">{{$t("message.bond.txt2_3")}}</span>
+          </div>
+        </div>
       </div> 
     </div>
     <div class="content">
@@ -28,9 +37,7 @@
           <span class="list_font_class">{{$t("message.bond.txt4")}}</span>
           <span class="list_font_class">{{$t("message.bond.txt5")}}</span>
           <span class="list_font_class">{{$t("message.bond.txt6")}}</span>
-          <div class="list_font_class" @click="buyLp">
-            <span class="btn_txt bg_color font12">{{$t("message.bond.txt_btn")}}</span>
-          </div>
+          <div class="list_font_class"></div>
         </div>
         <div class="coin_box">
           <div class="alone_box font16" v-for="(item,index) in coinArr" :key="index">
@@ -83,9 +90,9 @@
       <div class="outbox_">
         <div class="list_title self_class_expecil font16" v-for="(item,index) in list" :key="index">
           <span class="empty_class">{{item.title}}</span>
-          <span class="empty_class">$ {{item.price}}</span>
+          <span class="empty_class">{{item.price}}</span>
           <span class="empty_class">{{item.num}}%</span>
-          <span class="empty_class">{{item.day}} day</span>
+          <span class="empty_class">$ {{item.day}}</span>
         </div>
       </div>
     </div>
@@ -147,9 +154,6 @@ export default {
     }
   },
   methods:{
-    buyLp(){
-      this.addlpDis = true
-    },
     closeLP(){
       this.addlpDis = false
     },
@@ -172,7 +176,8 @@ export default {
       this.proupDis = this.afferentStatus = false
     },
     BondClick(data){
-      this.proupDis = true
+      // this.proupDis = true
+      this.addlpDis = true
     }
   }
 };
@@ -190,16 +195,36 @@ export default {
     }
     .txt_box{
       position: absolute;
-      top: 142px;
+      top: 150px;
+      left: 0;
       width: 100%;
+      padding: 0 5vw;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      .txt1{
-        font-weight: 600;
-        color: #FFFFFF;
-        line-height: 54px;
-        margin-bottom: 37px;
+      .bond_img{
+        width: 156px;
+      }
+      .introducebox{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+        .onebox{
+          padding: 10px;
+          width: 200px;
+          height: 50px;
+          background: rgba(248, 229, 186, 0.23);
+          border-radius: 14px;
+          text-align: center;
+          .txt1{
+            font-weight: 600;
+            color: #FFFFFF;
+          }
+        }
+        .height_{
+          line-height: 30px;
+          margin-left: 15px;
+        }
       }
       .txt2{
         font-weight: 400;

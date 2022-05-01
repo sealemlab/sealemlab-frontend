@@ -11,7 +11,8 @@
     </ul>
     <div class="conten_box">
       <div class="treasure_chest_box">
-        <img :src="`${$store.state.imgUrl}bindbox.png`" alt="" />
+        <LoadingAnmation v-if="imgStatus" ></LoadingAnmation>
+        <img :src="`${$store.state.imgUrl}bindbox.png`" ref="bindboximg" v-show="!imgStatus" />
       </div>
       <div class="right_content">
         <p class="font20 title_txt">
@@ -26,7 +27,7 @@
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
           <div class="btns">
-            <slider :min="0" :max="10000" v-model="per"></slider>
+            <Slider :min="0" :max="10000" v-model="per"></Slider>
           </div>
           <span class="unit_class">{{sliderValue}}</span>
         </div>
@@ -119,9 +120,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import slider from "./ProgressBar.vue";
 export default {
-  components: { slider },
   computed: {
     ...mapGetters(["isEnLang"]),
     per: {
@@ -136,6 +135,7 @@ export default {
   },
   data() {
     return {
+      imgStatus:true,//图片加载时用loading状态
       stPrice:2,//st价格
       stTotal:0,//st的总价格
       sliderValue:0,// 拖动条value
@@ -296,13 +296,19 @@ export default {
       this.amount++;
     },
   },
+  mounted(){
+    let newImg = new Image();
+    newImg.src = this.$refs.bindboximg.src;
+    newImg.onload = () => {
+      this.imgStatus = false;
+    };
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .buy_blind_box{
   width: 100%;
-  margin-top: 50px;
 }
 .title_box {
   width: 100%;

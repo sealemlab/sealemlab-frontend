@@ -16,6 +16,9 @@ Vue.use(VueAwesomeSwiper);
 import BtnLoading from "./components/Btnloading.vue";
 Vue.component("BtnLoading", BtnLoading);
 
+import Slider from "./components/ProgressBar.vue";
+Vue.component("Slider", Slider);
+
 import LoadingAnmation from '@/components/loadingAnmation.vue'
 Vue.component("LoadingAnmation", LoadingAnmation);
 
@@ -28,6 +31,12 @@ Vue.component("Input", Input);
 import utils from "./utils/index";
 Vue.prototype.$utils = utils;
 
+Vue.directive('loading-img', async function (el, binding) {//指令名称为：real-img
+  const imgURL = binding.value;//获取图片地址
+  if (imgURL) {
+    el.setAttribute('src', imgURL);
+  }
+})
 Vue.config.productionTip = false;
 new Vue({
   router,

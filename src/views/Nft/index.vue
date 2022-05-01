@@ -72,6 +72,8 @@ export default {
     }
     .main{
       min-width: calc(100% - 171px);
+      max-width: 1200px;
+      margin-top: 50px;
     }
   }
 }

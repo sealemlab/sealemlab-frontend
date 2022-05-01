@@ -1,29 +1,37 @@
 <template>
   <div class="input_proup" v-if="addlpDis">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24">ADD&nbsp;&nbsp;&nbsp;LP</p>
-      <div class="box">
-        <span class="font20 lp_class">LP种类</span>
-        <div class="select_box font16">
-          <p class="oneselect">BNB-ST</p>
-          <p class="oneselect">BNB-ST</p>
-          <span class="triangle_calss"></span>
+      <p class="propu_title_txt font24">ST-BUSD LP BOND</p>
+      <p class="title_ font16">PAY TO BOND</p>
+      <div class="content">
+        <div class="box" v-for="(item,index) in arr" :key="index" @click="typeClick(item,index)">
+          <span class="type_ font12" :class="index == activetype?'activeClass':''">{{item.title}}</span>
+          <span class="font12 txt" v-show="item.status">{{item.title}} balance: {{item.num}}</span>
         </div>
       </div>
-      <p class="balance_txt font16">BNB balance: 10.234567</p>
-      <p class="title_ font20">BNB-ST LP PURCHASED</p>
-      <div class="content font16">
-        <p class="p1 p">10 BNB</p>
-        <p class="p2 p"><img :src="`${$store.state.imgUrl}change.png`" class="change_img" /></p>
-        <p class="p3 p">5.045789 BNB-ST LP</p>
+      <p class="title_ font16">BUSD-ST LP BONDED</p>
+      <div class="progress_box_">
+        <div class="oneline">
+          <Slider :min="0" :max="100" v-model="per" class="slider"></Slider>
+          <span class="font12 Company">{{sliderValue}} BUSD</span>
+        </div>
+        <p class="font12 balance_">BUSD balance: 10.2345</p>
       </div>
-      <div class="moneybox">
-        <div class="onebox font14">$ 500</div>
-        <div class="onebox font14">$ 500</div>
-        <div class="onebox font14">$ 500</div>
-        <div class="onebox font14">$ 500</div>
+      <div class="progress_box_">
+        <div class="oneline">
+          <Slider :min="0" :max="100" v-model="values" class="slider"></Slider>
+          <span class="font12 Company">{{sliderValue2}} BUSD</span>
+        </div>
+        <p class="font12 balance_">ST balance: 10.2345</p>
       </div>
-      <div class="main_button font16" @click="bondFun">{{$t("message.bond.txt1")}}</div>
+      <p class="title_ font16">7天预计收益</p>
+      <div class="profitbox font14">70 BUSD</div>
+      <div class="main_button font16" @click="bondFun">Approve&Add Liquidity&Bond</div>
+      <div class="tipbox font12">
+        <span>债券到期后,以ST发放本金和利息</span>
+        <span>LP tokens will be automatically staked on the bond contract.</span>
+        <span>预计收益按照当期利率调整</span>
+      </div>
       <img :src="`${$store.state.imgUrl}close.png`" class="close_img" @click.stop="closeProup"/>
     </div>
   </div>
@@ -41,7 +49,23 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["isEnLang"])
+    ...mapGetters(["isEnLang"]),
+    per: {
+      get() {
+        return 0;
+      },
+      set(val) {
+        this.sliderValue = val
+      }
+    },
+    values: {
+      get() {
+        return 0;
+      },
+      set(val) {
+        this.sliderValue2 = val
+      }
+    },
   },
   props: {
     addlpDis: {
@@ -49,7 +73,38 @@ export default {
       default: false
     }
   },
+  data(){
+    return {
+      sliderValue:0,
+      sliderValue2:0,
+      activetype:0,
+      arr:[
+        {
+          title:'BUSD-ST',
+          num:12.66,
+          status:true
+        },
+        {
+          title:'BUSD',
+          num:13,
+          status:false
+        },
+        {
+          title:'ST',
+          num:14,
+          status:false
+        }
+      ]
+    }
+  },
   methods: {
+    typeClick(item,index){
+      this.arr.forEach(item => {
+        item.status = false
+      })
+      item.status = true
+      this.activetype = index
+    },
     // 弹窗关闭
     closeProup () {
       this.$emit('closeLP')
@@ -63,10 +118,10 @@ export default {
 <style lang="scss" scoped>
 .input_proup {
   width: 100%;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
   background: rgba(0, 0, 0, 0.4);
   z-index: 99999999;
   backdrop-filter: blur(6px);
@@ -75,7 +130,9 @@ export default {
   align-items: center;
   .proup_boxs{
     position: relative;
-    width: 50vw;
+    width: 50vw; 
+    height: 100%;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,104 +144,91 @@ export default {
       color: #ECCF83;
       line-height: 29px;
     }
-    .box{
+    .title_{
+      width: 100%;
+      margin-top: 23px;
+      font-weight: 600;
+      color: #ECCF83;
+      line-height: 22px;
+    }
+    .content{
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 34px;
-      .lp_class{
-        font-weight: 600;
-        color: #ECCF83;
-        line-height: 28px;
-      }
-      .select_box{
-        position: relative;
-        width: calc(100% - 100px);
-        // border-radius: 8px;
-        border: 1px solid #373636;
-        .oneselect{
+      padding: 0 20px;
+      margin-top: 20px;
+      .box{
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        min-height: 50px;
+        .type_{
+          width: 102px;
+          display: inline-block;
+          height: 26px;
+          background: #373636;
+          box-shadow: 0px 4px 14px 0px rgba(42, 37, 30, 0.45);
+          border-radius: 5px;
           text-align: center;
-          line-height: 50px;
-          font-weight: 400;
-          color: #FFFFFF;
-          width: 100%;
-          background: #171718;
-          // box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+          line-height: 26px;
+          font-weight: 600;
+          color: #ffffff;
+          margin-bottom: 10px;
         }
-        .triangle_calss{
-          position: absolute;
-          right: 0;
-          top: 50%;
-          transform: translateX(-50%);
-          width: 0px;
-          height: 0px;
-          border: 8px solid transparent;
-          border-top-color: #ccc;
-          cursor: pointer;
+        .activeClass{
+          background: #F0D48D;
+          color: #000000;
+        }
+        .txt{
+          font-weight: 400;
+          color: #8B8484;
+          line-height: 14px;
         }
       }
     }
-    .balance_txt{
-      margin-top: 10px;
-      width: 100%;
-      text-align: right;
-      font-weight: 400;
-      color: #FFFFFF;
-      line-height: 19px;
+    .progress_box_{
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      .oneline{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 24px;
+        .slider{
+          width: 80%;
+        }
+        .Company{
+          margin-left: 10px;
+        }
+      }
+      .balance_{
+        width: 100%;
+        text-align: right;
+        font-weight: 400;
+        color: #8B8484;
+        line-height: 14px;
+        margin-top: 10px;
+      }
     }
-    .title_{
-      margin-top: 23px;
-      width: 100%;
-      font-weight: 600;
-      color: #ECCF83;
-      line-height: 28px;
-    }
-    .content{
-      margin-top: 18px;
-      padding: 10px 0;
-      width: 100%;
-      // height: 86px;
+    .profitbox{
+      width: 85%;
+      height: 38px;
       background: #171718;
       box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
       border-radius: 8px;
       border: 1px solid #373636;
-      .p{
-        width: 100%;
-        text-align: right;
-        font-weight: 400;
-        color: #FFFFFF;
-        line-height: 22px;
-      }
-      .p1{
-        padding-right: 35px;
-      }
-      .p2{
-        padding-right: 5px;
-        .change_img{
-          width: 17px;
-        }
-      }
-      .p3{
-        padding-right:35px;
-      }
-    }
-    .moneybox{
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 18px;
-      padding: 0 30px;
-      .onebox{
-        padding:5px 10px;
-        background: #373636;
-        border-radius: 16px;
-      }
+      text-align: center;
+      line-height: 36px;
+      margin-top: 10px;
+      font-weight: 600;
+      color: #F0D48D;
     }
     .main_button{
-      width: 70%;
-      height: 45px;
+      width: 75%;
+      min-height: 45px;
       margin: 48px 0 37px;
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
       box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
@@ -196,6 +240,17 @@ export default {
       font-weight: bold;
       color: #000000;
       cursor: pointer;
+    }
+    .tipbox{
+      width: 75%;
+      display: flex;
+      flex-direction: column;
+      span{
+        font-weight: 400;
+        color: #FFFFFF;
+        line-height: 14px;
+        margin-bottom: 10px;
+      }
     }
     .close_img{
       position: absolute;

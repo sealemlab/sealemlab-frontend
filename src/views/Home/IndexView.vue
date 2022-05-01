@@ -137,12 +137,18 @@
     <div class="time_axis_box">
       <div class="time_axis display_flex">
         <div class="title_txt font30">{{$t("message.home.txt54")}}</div>
-        <div class="border_"></div>
+        <!-- <div class="border_"></div> -->
         <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
           <swiper-slide v-for="(item, index) in swiperArr" :key="index">
-            <img :src="`${$store.state.imgUrl}partenerbg.png`" class="partenerbg_img" />
-            <p class="time_class font20">{{item.time}}</p>
-            <p class="content_class font16" >{{$t(item.content)}}</p>
+            <div class="timebox">
+              <p class="time_class font20">{{item.time}}</p>
+              <div class="imgs">
+                <img :src="index + 4 == activeIndex ?`${$store.state.imgUrl}partenerbg.png`:`${$store.state.imgUrl}time.png`" class="partenerbg_img" />
+                <span></span>
+              </div>
+              <p class="titletxt font18">{{$t(item.title)}}</p>
+              <p class="content_class font16" >{{$t(item.content)}}</p>
+            </div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -180,6 +186,7 @@ export default {
   },
   data(){
     return{
+      activeIndex:0,//swiper索引
       videoStatus:true,//视频加载
       gameIndex:0,//游戏场景展示对应大图的索引
       peopleIndex:0,// 人物展示对应大图的索引
@@ -339,38 +346,47 @@ export default {
       ],
       swiperArr:[
         {
+          title:'message.home.txt55_1',
           time:'2020 Q4',
           content:'message.home.txt55'
         },
         {
+          title:'message.home.txt56_1',
           time:'2021 Q1',
           content:'message.home.txt56'
         },
         {
+          title:'message.home.txt57_1',
           time:'2021 Q2',
           content:'message.home.txt57'
         },
         {
+          title:'message.home.txt58_1',
           time:'2021 Q3',
           content:'message.home.txt58'
         },
         {
+          title:'message.home.txt60_1',
           time:'2021 Q4',
           content:'message.home.txt60'
         },
         {
+          title:'message.home.txt61_1',
           time:'2022 Q1',
           content:'message.home.txt61'
         },
         {
+          title:'message.home.txt62_1',
           time:'2022 Q2',
           content:'message.home.txt62'
         },
         {
+          title:'message.home.txt63_1',
           time:'2022 Q3',
           content:'message.home.txt63'
         },
         {
+          title:'message.home.txt64_1',
           time:'2022 Q4',
           content:'message.home.txt64'
         }
@@ -378,9 +394,9 @@ export default {
       // 路线图swiper配置
       swiperOption:{
         loop: true,//循环播放
-        // mousewheel: true,//鼠标滚动
+        centeredSlides: true,
         autoplay: {
-          delay: 1000,
+          delay: 2000,
           stopOnLastSlide: false,
           disableOnInteraction: false,
         },
@@ -392,6 +408,12 @@ export default {
           bulletClass: 'my-bullet',
           bulletActiveClass: 'my-bullet-active'
         },
+        on: {
+          slideChange: () => {
+            this.activeIndex = this.$refs.mySwiper.swiper.activeIndex;
+            console.log('this.$refs.mySwiper.swiper.activeIndex: ', this.$refs.mySwiper.swiper.activeIndex);
+          },
+        }
       },
       // 团队swiper配置
       teamswiperOption: {
@@ -727,45 +749,54 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      .border_{
-        width: 100%;
-        border: 2px solid #ECCF83;
-      }
       .self_swiper{
         width:100%;
-        margin-top: -42px;
         .swiper-slide{
           display: flex;
           padding-bottom: 40px;
           flex-direction: column;
           align-items: flex-start;
-          margin-right: 20px;
-          .partenerbg_img{
-            width: 79px;
-            margin-bottom: 28px;
-          }
-          .time_class{
-            width: 118px;
-            height: 48px;
+          .timebox{
+            width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            padding-top: 20px;
-            font-weight: normal;
-            color: #000000;
-            background: url($bg_url + "partenertime.png");
-            background-size: 100% 100%;
-          }
-          .content_class{
-            margin-top: 25px;
-            min-width: 230px;
-            min-height: 116px;
-            font-weight: normal;
-            color: #FFFFFF;
-            line-height: 32px;
-            padding: 10px;
-            background: #1F1F1F;
-            box-shadow: inset 0px 0px 37px 0px #000000, inset 0px 1px 3px 0px #E9CD82;
+            .imgs{
+              position: relative;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              margin: 60px 0;
+              .partenerbg_img{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 70px;
+              }
+              span{
+                display: inline-block;
+                width: 100%;
+                border-top: 1px dashed #F7E7B2;
+              }
+            }
+            .titletxt{
+              font-weight: 800;
+              color: #FFFFFF;
+              line-height: 21px;
+            }
+            .time_class{
+              font-weight: normal;
+              color: #ffffff;
+            }
+            .content_class{
+              margin-top: 25px;
+              font-weight: normal;
+              color: #FFFFFF;
+              line-height: 32px;
+              padding: 0 10px;
+              text-align: center;
+            }
           }
         }
       }
@@ -785,12 +816,14 @@ export default {
     margin-top: 70px;
     .partener_box{
       width: 100%;
+      max-width: 1200px;
       align-items: center;
       flex-wrap: wrap;
       justify-content: space-between;
       .one_partener{
         img{
           margin-bottom: 49px;
+          cursor: pointer;
         }
         .par1{
           width: 169px;
@@ -853,7 +886,6 @@ export default {
       margin-top: 26px;
       .left{
         width: 60%;
-        // max-width: 758px;
         display: flex;
         flex-direction: column;
         .game1{
@@ -876,7 +908,6 @@ export default {
             .swiper-slide{
               display: flex;
               justify-content: center;
-              // margin-right: 22px;
               .gameswiper_img{
                 width: 147px;
               }
@@ -1203,31 +1234,6 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        .self_swiper{
-          width:100%;
-          .swiper-slide{
-            display: flex;
-            // height: 260px;
-            padding-bottom: 40px;
-            flex-direction: column;
-            align-items: flex-start;
-            .time_class{
-              font-weight: normal;
-              color: #00C1FF;
-              line-height: 26px;
-              background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            }
-            .content_class{
-              max-width: 80%;
-              font-weight: normal;
-              color: #FFFFFF;
-              line-height: 32px;
-              margin-top: 10px;
-            }
-          }
-        }
       }
     }
     .characteristic_box{
@@ -1328,20 +1334,4 @@ export default {
     }
   }
 }
-// @media screen and (min-width: 1440px) {
-//   .home{
-//     .character_introduction{
-//       .people_box{
-//         width: 30%;
-//       }
-//     }
-//     .characteristic_box{
-//       .imgbox {
-//         width: 49vw;
-//         max-width: 60vw;
-//       }
-//     }
-//   }
-// }
-
 </style>
