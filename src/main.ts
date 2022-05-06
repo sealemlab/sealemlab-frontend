@@ -16,6 +16,9 @@ Vue.use(VueAwesomeSwiper);
 import BtnLoading from "./components/Btnloading.vue";
 Vue.component("BtnLoading", BtnLoading);
 
+import FunBtn from "./components/FunctionButton.vue";
+Vue.component("FunBtn", FunBtn);
+
 import Slider from "./components/ProgressBar.vue";
 Vue.component("Slider", Slider);
 
@@ -27,6 +30,9 @@ Vue.component("Proup", Proup);
 
 import Input from "@/components/InpuptComponents.vue";
 Vue.component("Input", Input);
+
+import WalletComponents from "@/components/walletcomponents.vue";
+Vue.component("WalletComponents", WalletComponents);
 
 import utils from "./utils/index";
 Vue.prototype.$utils = utils;

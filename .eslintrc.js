@@ -10,8 +10,10 @@ module.exports = {
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": ["off"],
     "@typescript-eslint/no-this-alias": ["off"],
+    "prefer-const": "off", // 使用const
     "@typescript-eslint/ban-types": [
       "error",
       {
@@ -20,6 +22,9 @@ module.exports = {
           "{}": false
         }
       }
-    ]
+    ],
+    'no-async-promise-executor' : 'off',
+    'no-misleading-character-class' : 'off',
+    'no-useless-catch' : 'off'
   },
 };

@@ -10,7 +10,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { sb } from "sacredrealm-sdk";
 export default {
+  computed: {
+    ...mapGetters(["getAccount","getIstrue"])
+  },
   data(){
     return{
       arr:[
@@ -29,6 +34,27 @@ export default {
         {src:`${this.$store.state.imgUrl}mybox.png`},
         {src:`${this.$store.state.imgUrl}mybox.png`},
       ]
+    }
+  },
+  watch: {
+    'getIstrue': {
+      handler: function (newValue) {
+        if (newValue) {
+          this.getUserBindbox(0,10)
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
+  methods:{
+    getUserBindbox(cursor, size){//cursor:指针,从哪个地方开始获取盲盒 size:获取的盲盒数量
+      sb().tokensOfOwnerBySize(this.getAccount, cursor, size).then(res => {
+        console.log('获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针res: ', res);
+      })
+      // .catch(() => {
+        
+      // })
     }
   }
 };

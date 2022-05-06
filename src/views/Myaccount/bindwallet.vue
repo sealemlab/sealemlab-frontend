@@ -1,19 +1,42 @@
 <template>
   <div class="bind_wallet_page">
     <div class="box">
-      <div class="btn fotn18">{{$t("message.account.txt17")}}</div>
+      <div class="btn fotn18" @click="bindWallet">{{$t("message.account.txt17")}}</div>
       <p class="txt_ font16">
         {{$t("message.account.txt18")}} <br />
         {{$t("message.account.txt19")}}
       </p>
-      <p class="font24 name_">{{$t("message.account.txt20")}}</p>
-      <div class="content">
+      <p class="font24 name_" v-if="haveWallet">{{$t("message.account.txt20")}}</p>
+      <div class="content" v-if="haveWallet">
         <span class="span1 font16">0xf58168f23a5a4008732e056ca5f06f7cadf86d38</span>
         <span class="btn_small font14">{{$t("message.account.txt21")}}</span>
       </div>
     </div>
   </div>
 </template>
+<script>
+import { mapGetters } from "vuex";
+export default {
+  computed: { ...mapGetters(["getLogin","getIstrue"]) },
+  data(){
+    return{
+      haveWallet:false
+    }
+  },
+  methods:{
+    bindWallet(){
+      if(!this.getLogin){
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'请先登录'}));
+        return
+      }
+      if(!this.getIstrue){
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'请先连接钱包'}));
+        return
+      }
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .bind_wallet_page{
   width: 90%;

@@ -47,7 +47,7 @@
         <p class="font16 tip_txt" @click="registerClick">{{$t("message.signin.txt27")}}<span class="tip_login">{{$t("message.signin.txt3")}}</span></p>
       </div>
     </div>
-    <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup>
+    <!-- <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup> -->
     <PassProup :btntxt="'message.btn_txt2'" :codestatus='codestatus' :passStatus="passStatus" :title="title" @closePassProup="closePassProup" @sureClick="sureClick"></PassProup>
   </div>
 </template>
@@ -65,8 +65,8 @@ export default {
       codestatus:false,//修改密码组件的验证码是否显示
       title:"修改密码",//修改密码弹窗标题
       passStatus:false,//修改密码弹窗
-      content:'',
-      proupStatus:false,//弹窗状态
+      // content:'',
+      // proupStatus:false,//弹窗状态
       rememberStatus:false,//记住我状态
       email:'',
       list:[
@@ -138,9 +138,9 @@ export default {
     }
   },
   methods:{
-    proupClose(){
-      this.proupStatus = false
-    },
+    // proupClose(){
+    //   this.proupStatus = false
+    // },
     closePassProup(){
       this.passStatus = this.codestatus = false
     },
@@ -211,8 +211,9 @@ export default {
             })
             this.$router.push('/myaccount/information');
           }else{
-            this.proupStatus = true
-            this.content = 'message.tip.txt2'
+            // this.proupStatus = true
+            // this.content = 'message.tip.txt2'
+            this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.tip.txt2'}));
           }
         }).catch(() => {
           this.btnloding = false

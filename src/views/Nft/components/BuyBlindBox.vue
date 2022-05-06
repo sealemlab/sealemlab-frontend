@@ -11,36 +11,55 @@
     </ul>
     <div class="conten_box">
       <div class="treasure_chest_box">
-        <LoadingAnmation v-if="imgStatus" ></LoadingAnmation>
-        <img :src="`${$store.state.imgUrl}bindbox.png`" ref="bindboximg" v-show="!imgStatus" />
+        <!-- <LoadingAnmation v-if="imgStatus" ></LoadingAnmation>
+        <img :src="`${$store.state.imgUrl}bindbox.png`" ref="bindboximg" v-show="!imgStatus" /> -->
       </div>
       <div class="right_content">
         <p class="font20 title_txt">
           <span class="lefttxt">{{$t("message.nft.txt23")}}</span>
-          <span class="righttxt">0</span>
+          <BtnLoading :isloading="true" v-if="surplusNumStatus"></BtnLoading>
+          <span class="righttxt" v-else>{{boxnum}}</span>
         </p>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt24")}}</span>
-          <span class="righttxt no_border">{{stPrice}}</span>
-          <span class="unit_class">ST</span>
+          <BtnLoading :isloading="true" v-if="priceStatus"></BtnLoading>
+          <span class="righttxt no_border" v-else>{{stPrice}}</span>
+          <span class="unit_class" v-if="bindboxType == 0">HC</span>
+          <span class="unit_class" v-if="bindboxType == 1">BNB</span>
         </div>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
           <div class="btns">
-            <Slider :min="0" :max="10000" v-model="per"></Slider>
+            <Slider :min="0" :max="100" v-model="per"></Slider>
           </div>
           <span class="unit_class">{{sliderValue}}</span>
         </div>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt26")}}</span>
           <span class="righttxt">{{stTotal}}</span>
-          <span class="unit_class">ST</span>
+          <span class="unit_class" v-if="bindboxType == 0">HC</span>
+          <span class="unit_class" v-if="bindboxType == 1">BNB</span>
         </div>
         <div class="balance_txt">
-          {{$t("message.nft.txt27")}} 30 ST
+          {{$t("message.nft.txt27")}} 
+          <BtnLoading :isloading="true" v-if="balanceStatus"></BtnLoading>
+          <span v-else>{{balance}}&nbsp; </span>
+          <span v-if="bindboxType == 0">HC</span>
+          <span v-if="bindboxType == 1">BNB</span>
           <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
         </div>
-        <div class="btnbox font20">{{$t("message.nft.txt28")}}</div>
+        <div class="btnbox font20" :class="disable?'disable_bnb':''">
+          <!-- {{$t("message.nft.txt28")}} -->
+          <FunBtn
+            :isapprove="isapprove"
+            :approveloading="buy_isloading"
+            :isloading="buy_isloading"
+            :word="$t('message.nft.txt28')"
+            ref="mychild"
+            @sonapprove="sonapprove"
+            @dosomething="buyBindBox"
+          />
+        </div>
       </div>
     </div>
     <!-- 盲盒介绍 -->
@@ -62,67 +81,20 @@
       </div>
     </div>
     <!-- 穿戴展示 -->
-    <div class="box">
-      <p class="wear_show font30">{{$t("message.nft.txt31")}}</p>
-      <ul class="tab_box">
-        <li v-for="(item, index) in tabClassArr" :key="index" @click="clickTabClass(index)">
-          <img :src="item.image" alt="" />
-          <div class="font16 border_type" :class="{ active: currentClass == index }">{{ $t(item.label) }}</div>
-        </li>
-      </ul>
-      <div class="content">
-        <div class="left_content">
-          <div class="swiperbox_1">
-            <swiper ref="swiper1" :options="swiperOption1">
-              <swiper-slide v-for="(item, index) in tabClassArr[currentClass].classFigureArr" :key="index">
-                <!-- <img :src="item" class="people_img" /> -->
-                <video class="video_" ref="video" loop autoplay muted>
-                  <source :src="`${item}`" type="video/mp4" />
-                </video>
-              </swiper-slide>
-            </swiper>
-          </div>
-          <div class="swiperbox_2">
-            <swiper ref="swiper2" :options="swiperOption2">
-              <swiper-slide v-for="(item, index) in tabClassArr[currentClass].classFashionArr" :key="index">
-                <div class="img_box" :class="{ active: currentSwiperIndex == index }">
-                  <img :src="item" alt="" />
-                </div>
-              </swiper-slide>
-            </swiper>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-          </div>
-        </div>
-        <div class="right_content">
-          <ul>
-            <li class="font20">
-              {{ $t(tabClassArr[currentClass].label) }}
-            </li>
-            <li class="font16">
-              {{ $t(tabClassArr[currentClass].classIntroduce) }}
-            </li>
-            <li class="font20">
-              {{ $t(tabClassArr[currentClass].arms) }}:<span class="font16">{{ $t(tabClassArr[currentClass].skill_content) }}</span> 
-            </li>
-            <li class="font20">
-              {{ $t(tabClassArr[currentClass].skill) }}
-            </li>
-            <li>
-              <img v-for="(item, index) in tabClassArr[currentClass].skills" :key="index" :src="item" alt="" />
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <WearingShow/>
   </div>
 </template>
 
 <script>
+import WearingShow from './WearingDisplay.vue'
 import { mapGetters } from "vuex";
+import { sb,util,token,contract,erc20,getSigner } from "sacredrealm-sdk";
 export default {
+  components:{
+    WearingShow
+  },
   computed: {
-    ...mapGetters(["isEnLang"]),
+    ...mapGetters(["getAccount","getIstrue"]),
     per: {
       get() {
         return 0;
@@ -135,173 +107,172 @@ export default {
   },
   data() {
     return {
+      surplusNumStatus:true,//剩余数量loading
+      priceStatus:true,// 价格loading
+      balanceStatus:true,// 余额loading
+      disable:true,//按钮禁用
+      balance:0,//钱包余额
+      buy_isloading: false, // 按钮loading
+      isapprove: false, //是否授权
+      bindboxType:0,//默认是普通盲盒0,后期可能会有其他类型盲盒(1,2,3,4),那么此值就会变化
       imgStatus:true,//图片加载时用loading状态
-      stPrice:2,//st价格
+      payAddress:'',//支付地址
+      // isOpenWhiteList:true,//是否开启白名单
+      // isWhiteList:false,//是否在白名单
+      stPrice:0,//st价格
+      boxnum:0,//盲盒剩余数量
+      userBuyNum:0,//用户剩余购买数量(频控)
       stTotal:0,//st的总价格
       sliderValue:0,// 拖动条value
-      currentClass: 0,
-      tabClassArr: [
-        {
-          image: `${this.$store.state.imgUrl}nft_class1.png`,
-          label: "message.nft.txt8",
-          arms: "message.nft.txt12",
-          skill: "message.nft.txt13",
-          skill_content: "message.nft.txt15",
-          classIntroduce: "message.nft.txt14",
-          skills: [
-            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
-          ],
-          classFigureArr: [
-            `${this.$store.state.imgUrl}suit1.mp4`,
-            `${this.$store.state.imgUrl}suit2.mp4`,
-            `${this.$store.state.imgUrl}suit3.mp4`,
-            `${this.$store.state.imgUrl}suit4.mp4`,
-          ],
-          classFashionArr: [
-            `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion2.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion3.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion4.png`,
-          ],
-        },
-        {
-          image: `${this.$store.state.imgUrl}nft_class2.png`,
-          label: "message.nft.txt9",
-          arms: "message.nft.txt12",
-          skill: "message.nft.txt13",
-          skill_content: "message.nft.txt15_1",
-          classIntroduce: "message.nft.txt14_1",
-          skills: [
-            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
-          ],
-          classFigureArr: [
-            `${this.$store.state.imgUrl}suit1.mp4`,
-            `${this.$store.state.imgUrl}suit2.mp4`,
-            `${this.$store.state.imgUrl}suit3.mp4`,
-            `${this.$store.state.imgUrl}suit4.mp4`,
-          ],
-          classFashionArr: [
-            `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion2.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion3.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion4.png`,
-          ],
-        },
-        {
-          image: `${this.$store.state.imgUrl}nft_class3.png`,
-          label: "message.nft.txt10",
-          arms: "message.nft.txt12",
-          skill: "message.nft.txt13",
-          skill_content: "message.nft.txt15_3",
-          classIntroduce: "message.nft.txt14_3",
-          skills: [
-            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
-          ],
-          classFigureArr: [
-            `${this.$store.state.imgUrl}suit1.mp4`,
-            `${this.$store.state.imgUrl}suit2.mp4`,
-            `${this.$store.state.imgUrl}suit3.mp4`,
-            `${this.$store.state.imgUrl}suit4.mp4`,
-          ],
-          classFashionArr: [
-            `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion2.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion3.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion4.png`,
-          ],
-        },
-        {
-          image: `${this.$store.state.imgUrl}nft_class4.png`,
-          label: "message.nft.txt11",
-          arms: "message.nft.txt12",
-          skill: "message.nft.txt13",
-          skill_content: "message.nft.txt15_2",
-          classIntroduce: "message.nft.txt14_2",
-          skills: [
-            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
-          ],
-          classFigureArr: [
-            `${this.$store.state.imgUrl}suit1.mp4`,
-            `${this.$store.state.imgUrl}suit2.mp4`,
-            `${this.$store.state.imgUrl}suit3.mp4`,
-            `${this.$store.state.imgUrl}suit4.mp4`,
-          ],
-          classFashionArr: [
-            `${this.$store.state.imgUrl}nft_class1_fashion1.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion2.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion3.png`,
-            `${this.$store.state.imgUrl}nft_class1_fashion4.png`,
-          ],
-        },
-      ],
-      currentSwiperIndex: 0,
-      swiperOption1: {
-        observer: true,
-        observeParents: true,
-        grabCursor: true,
-        slideToClickedSlide: true,
-        watchSlidesVisibility: true,
-        on: {
-          slideChange: () => {
-            this.currentSwiperIndex = this.$refs.swiper1.swiper.activeIndex;
-          },
-        },
-      },
-      swiperOption2: {
-        slidesPerView: 3,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-          disabledClass: "swiper-button-disabled",
-        },
-        observer: true,
-        observeParents: true,
-        grabCursor: true,
-        slideToClickedSlide: true,
-        watchSlidesVisibility: true,
-        on: {
-          tap: () => {
-            this.currentSwiperIndex = this.$refs.swiper2.swiper.clickedIndex;
-          },
-        },
-      },
     };
   },
   watch: {
-    currentSwiperIndex(newVal) {
-      this.$refs.swiper1.swiper.slideTo(newVal);
-      this.$refs.swiper2.swiper.slideTo(newVal);
+    $route(to) {
+      this.bindboxType = to.params.boxtype
+      this.getBoxInfo(this.bindboxType)
+    },
+    'getIstrue': {
+      handler: function (newValue) {
+        if (newValue) {
+          let setIntervalOBJ = setInterval(() => {
+            if (this.payAddress) {
+              clearInterval(setIntervalOBJ);
+              this.$refs.mychild.isApproveFun(this.payAddress, token().SB).then((res) => {
+                if (res) {
+                  this.isapprove = true;
+                } else {
+                  this.isapprove = false;
+                }
+              });
+            }
+          }, 1000);
+        }
+      },
+      deep: true,
+      immediate: true,
     },
   },
   methods: {
-    clickTabClass(index) {
-      this.currentClass = index;
+    // 去授权
+    sonapprove() {
+      if (this.buy_isloading) return;
+      this.buy_isloading = true;
+      this.$refs.mychild.goApproveFun(this.payAddress, token().SB)
+        .then((res) => {
+          console.log('去授权res: ', res);
+          this.buy_isloading = false;
+          if(res){
+            this.isapprove = true;
+          }else{
+            this.isapprove = false;
+          }
+        })
     },
-    deleteAmount() {
-      this.amount--;
+    buyBindBox(){
+      console.log("买盲盒")
+      if(this.disable)return
+      if (this.buy_isloading) return;
+      if(this.sliderValue <= 0)return
+      if(this.stTotal > this.balance){ // 余额判断
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'余额不足'}));
+        return
+      }
+      if(this.sliderValue > this.userBuyNum){ // 频控判断
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'您当前时间段购买量不足'}));
+        return
+      }
+      if(this.sliderValue > this.boxnum){ // 库存判断
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'盲盒剩余数量不足'}));
+        return
+      }
+      this.buy_isloading = true
+      sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType).then(async (res) => {
+        // console.log('购买盒子res: ', res);
+        const etReceipt = await res.wait();
+        if(etReceipt.status == 1){
+          this.getBindboxNum(this.bindboxType)
+          this.getUserBalance(this.payAddress)
+          this.buy_isloading = false;
+          this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'购买成功'}));
+          this.sliderValue = "";
+          this.stTotal = 0;
+        }else{
+          this.buy_isloading = false;
+        }
+      }).catch(() => {
+        // console.log('购买盒子err: ', err);
+        this.buy_isloading = false;
+      });
     },
-    addAmount() {
-      this.amount++;
+    // 获取盲盒一系列信息
+    getBoxInfo(boxtypeInfo){
+      this.getBindboxNum(boxtypeInfo)
+      // 获取某类型的盲盒的支付代币单价
+      sb().boxTokenPrices(boxtypeInfo).then(res => {
+        // console.log('res: ', util.formatEther(res),Number(res));
+        this.stPrice = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        this.priceStatus = false
+      }).catch(() => {
+        this.priceStatus = false
+      })
+      // 获取某类型的盲盒的支付代币地址
+      sb().tokenAddrs(boxtypeInfo).then(res => {
+        console.log('获取某类型的盲盒的支付代币地址res: ', res);
+        this.payAddress = res
+        // 获取用户某代币余额
+        this.getUserBalance(res)
+      });
+      // 获取某类型的盲盒是否开启白名单
+      sb().whiteListFlags(boxtypeInfo).then(res => {
+        console.log('获取某类型的盲盒是否开启白名单:', res);
+        // this.isOpenWhiteList = res
+        // 判断某用户是否在某类型的盲盒的白名单
+        sb().getWhiteListExistence(boxtypeInfo,this.getAccount).then(res1 => {
+          console.log('判断某用户是否在某类型的盲盒的白名单:', res1);
+          // this.isWhiteList = res1
+          if(res){//为真证明开启白名单限制
+            if(!res1){
+              this.disable = true
+            }else{
+              this.disable = false
+            }
+          }else{
+            this.disable = false
+          }
+        });
+      });
+      
+      // 获取某类型的盲盒下某用户某小时剩余购买数量
+      sb().getUserHourlyBoxesLeftSupply(boxtypeInfo,this.getAccount,new Date().getTime()).then(res => {
+        console.log('获取某类型的盲盒下某用户某小时剩余购买数量:', Number(res));
+        this.userBuyNum = Number(res)
+        console.log('this.userBuyNum: ', this.userBuyNum);
+      });
     },
+    // 盲盒剩余数量
+    getBindboxNum(bindboxType){
+      // 获取某类型的盲盒的剩余可销售数量
+      sb().getBoxesLeftSupply(bindboxType).then(res => {
+        console.log('获取某类型的盲盒的剩余可销售数量:', Number(res));
+        this.boxnum = Number(res)
+        this.surplusNumStatus = false
+      }).catch(() => {
+        this.surplusNumStatus = false
+      })
+    },
+    // 获取用户余额
+    getUserBalance(data){
+      erc20(data).balanceOf(this.getAccount).then(res1 => {
+        this.balance = this.$utils.getBit(util.formatEther(res1),4)
+        this.balanceStatus = false
+      }).catch(() => {
+        this.balanceStatus = false
+      })
+    }
   },
   mounted(){
-    let newImg = new Image();
-    newImg.src = this.$refs.bindboximg.src;
-    newImg.onload = () => {
-      this.imgStatus = false;
-    };
+    this.bindboxType = this.$route.params.boxtype // 页面加载时路由不会触发监听,所以在mounted赋值
+    this.getBoxInfo(this.bindboxType)
   }
 };
 </script>
@@ -335,7 +306,8 @@ export default {
 .conten_box {
   width: 100%;
   display: flex;
-  margin: 87px 0;
+  background: url($bg_url + "bindboxbg.png") no-repeat #000;
+  background-size: contain;
   .treasure_chest_box {
     width: 50%;
     img {
@@ -351,10 +323,11 @@ export default {
     padding-right: 40px;
     display: flex;
     flex-direction: column;
-    background: rgba(16, 16, 16, 0.49);
-    box-shadow: 0px 6px 11px 0px rgba(0, 0, 0, 0.59);
-    border-radius: 25px;
-    border: 1px solid rgba(236, 207, 131, 0.5);
+    margin: 87px 0;
+    // background: rgba(16, 16, 16, 0.49);
+    // box-shadow: 0px 6px 11px 0px rgba(0, 0, 0, 0.59);
+    // border-radius: 25px;
+    // border: 1px solid rgba(236, 207, 131, 0.5);
     .title_txt{
       font-weight: 600;
       color: #ECCF83;
@@ -449,7 +422,7 @@ export default {
       flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      // align-items: center;
       max-width: 310px;
       .title{
         font-weight: bold;
@@ -457,186 +430,18 @@ export default {
         line-height: 19px;
       }
       .center{
-        margin-top: 30px;
+        margin-top: 10px;
         width: 100%;
         min-height: 159px;
-        padding: 10px;
-        background: linear-gradient(180deg, #080808 0%, rgba(16, 15, 15, 0.54) 100%);
-        box-shadow: 0px 9px 22px 0px rgba(237, 208, 126, 0.17);
-        border-radius: 8px;
-        border: 1px solid;
-        border-image: linear-gradient(180deg, rgba(247, 234, 181, 0.44), rgba(237, 208, 126, 0)) 1 1;
+        padding: 10px 0;
+        // background: linear-gradient(180deg, #080808 0%, rgba(16, 15, 15, 0.54) 100%);
+        // box-shadow: 0px 9px 22px 0px rgba(237, 208, 126, 0.17);
+        // border-radius: 8px;
+        // border: 1px solid;
+        // border-image: linear-gradient(180deg, rgba(247, 234, 181, 0.44), rgba(237, 208, 126, 0)) 1 1;
         font-weight: 400;
         color: #FFFFFF;
         line-height: 32px;
-      }
-    }
-  }
-}
-.box {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 90px;
-  .wear_show{
-    width: 100%;
-    text-align: center;
-    font-weight: 600;
-    color: #FFFFFF;
-    line-height: 42px;
-    margin-bottom: 42px;
-  }
-  .tab_box {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 100px;
-    li {
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      img {
-        width: 72px;
-      }
-      .border_type{
-        margin-top: 8px;
-        width: 133px;
-        height: 35px;
-        background: rgba(16, 16, 16, 0.49);
-        box-shadow: 0px 6px 11px 0px rgba(0, 0, 0, 0.59);
-        border-radius: 4px;
-        border: 1px solid rgba(236, 207, 131, 0.5);
-        backdrop-filter: blur(14px);
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.5);
-        text-align: center;
-        line-height: 33px;
-        &.active {
-          background: #101010;
-          box-shadow: 0px 6px 11px 0px rgba(0, 0, 0, 0.59);
-          border-radius: 4px;
-          border: 1px solid #ECCF83;
-          backdrop-filter: blur(14px);
-          color: #ffffff;
-        }
-      }
-    }
-  }
-  .content{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-top: 50px;
-    .left_content{
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-      .swiperbox_1{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        // .people_img{
-        //   max-width: 469px;
-        //   width: 100%;
-        // }
-        .video_{
-          max-width: 469px;
-          width: 400px;
-          height: 300px;
-          object-fit: contain;
-        }
-      }
-      .swiperbox_2{
-        width: 100%;
-        position: relative;
-        margin-top: 25px;
-        .img_box {
-          width: 75px;
-          height: 75px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-image: url($bg_url + "nft_class1_fashion_normal.png");
-          background-size: 100% 100%;
-          padding: 10px;
-          &.active {
-            background-image: url($bg_url + "nft_class1_fashion_active.png");
-            background-size: 100% 100%;
-          }
-          img {
-            width: 80%;
-          }
-        }
-        .swiper-slide {
-          display: flex;
-          justify-content: center;
-          width: fit-content;
-        }
-        .swiper-button-prev {
-          background-image: url($bg_url + "btn_left.png");
-          background-size: 100% auto;
-          width: 40px;
-          left: -40px;
-        }
-        .swiper-button-next {
-          background-image: url($bg_url + "btn_right.png");
-          background-size: 100% auto;
-          width: 40px;
-          right: -40px;
-        }
-        .swiper-button-disabled {
-          cursor: not-allowed;
-          opacity: 0.5;
-        }
-      }
-    }
-    .right_content{
-      width: 40%;
-      ul {
-        width: 100%;
-        height: auto;
-        padding: 39px 30px;
-        background-image: url($bg_url + "nft_bg3.png");
-        background-size: 100% 100%;
-        color: #ffffff;
-        li{
-          font-weight: 600;
-          line-height: 28px;
-          &:nth-child(1){
-            color: #ECCF83;
-          }
-          &:nth-child(2){
-            color: #FFFFFF;
-            margin-top: 14px;
-          }
-          &:nth-child(3){
-            color: #ECCF83;
-            margin-top: 40px;
-            span{
-              font-weight: 400;
-              color: #FFFFFF;
-              line-height: 22px;
-              margin-left: 10px;
-            }
-          }
-          &:nth-child(4){
-            color: #ECCF83;
-            margin-top: 40px;
-          }
-          &:nth-child(5){
-            margin-top: 17px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            img{
-              width: 42px;
-              margin-right: 30px;
-            }
-          }
-        }
       }
     }
   }

@@ -41,6 +41,7 @@
       </div>
       <div class="people_box"><img :src="`${$store.state.imgUrl}people.png`" class="people" /></div>
     </div>
+    <!-- 游戏场景轮播 -->
     <div class="characteristic_box">
       <div class="title_txt font30">{{$t("message.home.txt65")}}</div>
       <div class="add_game_txt">
@@ -50,12 +51,18 @@
       <span class="span3 font12">{{$t("message.home.txt68")}}</span>
       <div class="add_box">
         <div class="left">
-          <img :src="`${$store.state.imgUrl}game1.png`" class="game1" />
+          <div class="bottom_swiper">
+            <swiper :options="gameMaxSwiperOption" ref="gameMaxSwiper" class="gameMax_swiper">
+              <swiper-slide v-for="(item,index) in gameArr" :key="index">
+                <img :src="item.maxSrc" />
+              </swiper-slide>
+            </swiper>
+          </div>
           <span class="span4 font20">{{$t("message.home.txt69")}}</span>
           <div class="gameswiperbox">
-            <swiper ref="gamewiper" :options="gameswiperOption" class="game_swiper">
+            <swiper ref="gameswiper" :options="gameswiperOption" class="game_swiper">
               <swiper-slide v-for="(item, index) in gameArr" :key="index">
-                <img :src="item.src" class="gameswiper_img" />
+                <div class="oneimgbox" @click="gameClick(item)"><img :src="item.src" class="gameswiper_img" /></div>
               </swiper-slide>
             </swiper>
             <div class="swiper-button-prev"></div>
@@ -411,7 +418,6 @@ export default {
         on: {
           slideChange: () => {
             this.activeIndex = this.$refs.mySwiper.swiper.activeIndex;
-            console.log('this.$refs.mySwiper.swiper.activeIndex: ', this.$refs.mySwiper.swiper.activeIndex);
           },
         }
       },
@@ -423,33 +429,60 @@ export default {
           prevEl: ".swiper-button-prev",
         }
       },
+      gameArr:[
+        {
+          id:1,
+          src:`${this.$store.state.imgUrl}smallgame1.png`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame1.png`
+        },
+        {
+          id:2,
+          src:`${this.$store.state.imgUrl}smallgame2.png`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame2.png`
+        },
+        {
+          id:3,
+          src:`${this.$store.state.imgUrl}smallgame3.png`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame3.png`
+        },
+        {
+          id:4,
+          src:`${this.$store.state.imgUrl}smallgame4.png`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame4.png`
+        },
+      ],
       // 游戏场景swiper配置
       gameswiperOption: {
         slidesPerView:4,
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
-        }
+        },
+        on: {
+          tap: () => {
+            this.gameIndex = this.$refs.gameswiper.swiper.clickedIndex;
+          },
+        },
       },
-      gameArr:[
-        {
-          src:`${this.$store.state.imgUrl}smallgame1.png`,
+      // 跟着联动的swiper
+      gameMaxSwiperOption:{
+        loop:true,
+        autoplay: {
+          delay: 1900,
+          stopOnLastSlide: false,
+          disableOnInteraction: false,
         },
-        {
-          src:`${this.$store.state.imgUrl}smallgame2.png`,
+        on: {
+          slideChange: () => {
+            this.gameIndex = this.$refs.gameMaxSwiper.swiper.activeIndex;
+          },
         },
-        {
-          src:`${this.$store.state.imgUrl}smallgame2.png`,
-        },
-        {
-          src:`${this.$store.state.imgUrl}smallgame2.png`,
-        }
-      ]
+      },
     }
   },
   watch: {
     gameIndex(newVal) {
-      this.$refs.gameSwiper.swiper.slideTo(newVal);
+      this.$refs.gameswiper.swiper.slideTo(newVal);
       this.$refs.gameMaxSwiper.swiper.slideTo(newVal);
     },
   },
@@ -461,24 +494,20 @@ export default {
     bondClick(){
       this.$router.push('/bond');
     },
-    peopleClick(index){
-      this.peopleIndex = index
-    },
-    gameClick(item){
-      this.gameIndex = item.id
-    },
     showtxtFun(item){
       this.teamArr.forEach(item => {
         item.status = false
       })
       item.status = true
-    }
+    },
+    gameClick(item){
+      this.gameIndex = item.id
+    },
   },
   mounted(){
     window.addEventListener("click",this.videoPlay)
     let that = this
     this.$refs.video.addEventListener('canplaythrough',function(){
-      console.log("加载完成")
       that.videoStatus = false
     });
   },
@@ -888,15 +917,20 @@ export default {
         width: 60%;
         display: flex;
         flex-direction: column;
-        .game1{
-          max-width: 758px;
-          width: 100%;
-        }
         .span4{
           font-weight: normal;
           color: #FFFFFF;
           line-height: 23px;
           margin-top: 54px;
+        }
+        .bottom_swiper{
+          width: 100%;
+          .gameMax_swiper{
+            width: 100%;
+            img{
+              width: 100%;
+            }
+          }
         }
         .gameswiperbox{
           position: relative;
@@ -908,8 +942,13 @@ export default {
             .swiper-slide{
               display: flex;
               justify-content: center;
-              .gameswiper_img{
-                width: 147px;
+              .oneimgbox{
+                max-width: 147px;
+                padding:10px;
+                cursor: pointer;
+                .gameswiper_img{
+                  width: 100%;
+                }
               }
             }
           }

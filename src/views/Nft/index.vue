@@ -3,7 +3,8 @@
     <div class="content_box">
       <div class="display_flex menu_box">
         <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
-          {{ $t(route.label) }}
+          <img :src="route.src" class="nav_img" />
+          <span class="nav_txt">{{ $t(route.label) }}</span>
         </router-link>
       </div>
       <div class="main">
@@ -20,12 +21,11 @@ export default {
     return {
       li_index:0,
       navArr: [
-        // { label: "message.nft.txt1", link: "/nft/role" },
-        { label: "message.nft.txt2", link: "/nft/buy-blind-box" },
-        { label: "message.nft.txt3", link: "/nft/blind-box" },
-        { label: "message.nft.txt4", link: "/nft/my-nft" },
-        { label: "message.nft.txt5", link: "/nft/giving" },
-        { label: "message.nft.txt6", link: "/nft/lease" },
+        { label: "message.nft.txt2", link: "/nft/buy-blind-box/0",src:`${this.$store.state.imgUrl}nft_nav1.png` },
+        { label: "message.nft.txt3", link: "/nft/blind-box",src:`${this.$store.state.imgUrl}nft_nav2.png` },
+        { label: "message.nft.txt4", link: "/nft/my-nft",src:`${this.$store.state.imgUrl}nft_nav3.png` },
+        { label: "message.nft.txt5", link: "/nft/giving",src:`${this.$store.state.imgUrl}nft_nav4.png` },
+        { label: "message.nft.txt6", link: "/nft/lease",src:`${this.$store.state.imgUrl}nft_nav5.png` },
       ],
     };
   },
@@ -53,20 +53,29 @@ export default {
       flex-direction: column;
       margin-top: 80px;
       .a_link{
-        font-weight: normal;
-        color: #FFFFFF;
-        line-height: 40px;
         width: 171px;
         display: flex;
         align-items: center;
         margin-bottom: 60px;
         color: #fff;
-        padding-left: 68px;
+        // padding-left: 68px;
         cursor: pointer;
         text-decoration: none;
+        .nav_img{
+          width: 32px;
+        }
+        .nav_txt{
+          font-weight: normal;
+          color: #FFFFFF;
+          line-height: 40px;
+          margin-left: 5px;
+        }
         &.router-link-active {
-          background: linear-gradient(90deg, #EDD083 0%, rgba(240, 206, 117, 0) 100%);
-          border-image: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(184, 155, 91, 1)) 1 1;
+          .nav_txt{
+            color: #EDD083;
+          }
+          // background: linear-gradient(90deg, #EDD083 0%, rgba(240, 206, 117, 0) 100%);
+          // border-image: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(184, 155, 91, 1)) 1 1;
         }
       }
     }

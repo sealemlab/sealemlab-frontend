@@ -47,7 +47,7 @@
         </p>
       </div>
     </div>
-    <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup>
+    <!-- <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup> -->
   </div>
 </template>
 <script>
@@ -58,8 +58,8 @@ export default {
       IAgree:false,
       timeer:null,
       code_txt:'发送验证码',
-      content:'',
-      proupStatus:false,//弹窗状态
+      // content:'',
+      // proupStatus:false,//弹窗状态
       list:[
         {
           src:`${this.$store.state.imgUrl}register1.png`,
@@ -127,12 +127,12 @@ export default {
     igraeeClick(){
       this.IAgree = !this.IAgree
     },
-    proupClose(){
-      this.proupStatus = false
-      setTimeout(() => {
-        this.$router.push('/signin/login')
-      },500)
-    },
+    // proupClose(){
+    //   this.proupStatus = false
+    //   setTimeout(() => {
+    //     this.$router.push('/signin/login')
+    //   },500)
+    // },
     loginClick(){
       this.$router.push('/signin/login')
     },

@@ -285,4 +285,5 @@ export const message = {
     txt1: "创建账户成功,请到邮箱激活账户",
     txt2: "请检查账号/密码是否正确,账号是否激活",
   },
+  approve:'Approve'
 };

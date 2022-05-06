@@ -9,6 +9,13 @@
         <span class="mobile_nav_txt">{{ $t(item.label) }}</span>
       </div>
     </div>
+    <!-- 链接钱包弹窗 -->
+    <WalletComponents
+      @closewalletpage="walletClose"
+      @walletClick="walletClick"
+    ></WalletComponents>
+    <!-- 普通弹窗 -->
+    <Proup :proupStatus="getProupInfo.status" :content="getProupInfo.content" @closeProup="proupClose"></Proup>
   </div>
 </template>
 <script>
@@ -17,7 +24,7 @@ import FooterComponents from "@/components/FooterComponents.vue";
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["isEnLang","getIsMobile"])
+    ...mapGetters(["isEnLang","getIsMobile","getProupInfo"])
   },
   data(){
     return {
@@ -35,6 +42,16 @@ export default {
     FooterComponents,
   },
   methods: {
+    proupClose(){
+      if(this.getProupInfo.ortherDoing){
+        this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':''}));
+        setTimeout(() => {
+          this.$router.push('/signin/login')
+        },500)
+        return
+      }
+      this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':''}));
+    },
     setRem() {
       const bodyWidth = document.body.clientWidth;
       console.log('当前屏幕宽度: ', bodyWidth);
@@ -46,8 +63,22 @@ export default {
     toRoute(link) {
       if (link) this.$router.push(link);
     },
+    // 钱包关闭弹窗方法
+    walletClose() {
+      this.$store.commit("setwalletstatus", false);
+    },
+    // 链接钱包弹窗方法
+    walletClick(item) {
+      this.$utils.connectWallet("metamask").then(res => {
+        // console.log('方法返回res: ', res);
+        this.$store.commit("setwalletstatus", false);
+      })
+    },
   },
   mounted() {
+    if(localStorage.getItem('walletType')){
+      this.$utils.connectWallet(localStorage.getItem('walletType'))
+    }
     window.addEventListener("load", this.setRem);
     window.addEventListener("resize", this.setRem);
   },

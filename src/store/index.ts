@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import i18n from "../i18n/index";
 import createPersistedState from "vuex-persistedstate";
+import utils from "@/utils/index";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,15 +13,32 @@ export default new Vuex.Store({
       password:'',
       rememberStatus:false
     },
+    newWalletInfo:{
+      account:'',
+      chainID:'',
+      status:false
+    }, // 钱包信息
+    walletstatus:false,// 钱包弹窗状态
+    proupInfo:{
+      status:false,
+      content:'',
+      ortherDoing:false
+    },
+    proupStatua:false,// 普通弹窗状态
     imgUrl:process.env.NODE_ENV === 'production'?'//cdn.hashland.com/sacredTestImg/':'//cdn.hashland.com/sacredTestImg/',//图片前缀
     codeTime:60,//验证码重新发送时间
     emailReg:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,//邮箱校验
     pwReg: /^[a-zA-Z0-9]{6,16}$/ //密码校验 6-16位数字英文组合
   },
   getters: {
+    getProupInfo(state){
+      return state.proupInfo
+    },
+    // 中英文状态
     isEnLang() {
       return i18n.locale == "en";
     },
+    // 用户信息
     getLogin(state){
       return state.userInfo
     },
@@ -28,11 +46,39 @@ export default new Vuex.Store({
     getIsMobile(){
       return document.body.clientWidth <= 980
     },
+    // 获取钱包弹窗状态
+    getwalletstatus(state){
+      return state.walletstatus;
+    },
+    // 获取完整账号
+    getAccount(state) {
+      return state.newWalletInfo.account
+    },
+    // 截取过后的账号
+    getSubtringAccount(state) {
+      return utils.getSubStr(state.newWalletInfo.account,4)
+    },
+    // 获取是否已连接且网络状态正确
+    getIstrue(state) {
+      return state.newWalletInfo.status
+    },
   },
   mutations: {
+    // 普通弹窗状态
+    setProupStatus(state, data) {
+      state.proupInfo = JSON.parse(data);
+    },
     // 设置登录状态
     setLogin(state, data) {
       state.userInfo = data;
+    },
+    // 钱包链接信息
+    setnewinfo(state,data){
+      state.newWalletInfo = JSON.parse(data);
+    },
+    // 设置弹窗钱包状态
+    setwalletstatus(state,data){
+      state.walletstatus = data
     },
   },
   actions: {
