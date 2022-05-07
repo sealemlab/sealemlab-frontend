@@ -16,6 +16,8 @@
     ></WalletComponents>
     <!-- 普通弹窗 -->
     <Proup :proupStatus="getProupInfo.status" :content="getProupInfo.content" @closeProup="proupClose"></Proup>
+    <!-- 轻提示 -->
+    <Notice :noticeStatus="getNoticeInfo.status" :word="getNoticeInfo.word"></Notice>
   </div>
 </template>
 <script>
@@ -24,7 +26,7 @@ import FooterComponents from "@/components/FooterComponents.vue";
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["isEnLang","getIsMobile","getProupInfo"])
+    ...mapGetters(["isEnLang","getIsMobile","getProupInfo","getNoticeInfo"])
   },
   data(){
     return {

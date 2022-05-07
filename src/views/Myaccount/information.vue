@@ -4,10 +4,10 @@
       <div class="left_content">
         <div class="oneline" v-for="(item, index) in list" :key="index">
           <span class="font18 txt_frontend">{{ $t(item.title)}}</span>
-          <input :type="index == 0?'text':'password'" class="input font18" v-model="item.inputValue" v-if="index == 0" />
+          <input type="text" class="input font18" v-model="item.inputValue" v-if="index == 0" />
           <div class="inputbox" v-if="index == 1">
             <div class="add_eye">
-              <input type="text" class="input font18" v-model="item.inputValue" />
+              <input type="password" class="input font18" v-model="item.inputValue" />
               <img :src="`${$store.state.imgUrl}eye1.png`" class="eye_img" />
             </div>
             <div class="input_btn font14" @click="changePassword">{{$t("message.account.txt8")}}</div>
@@ -43,10 +43,14 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import PassProup from '../../components/Password.vue'
 export default {
   components:{
     PassProup
+  },
+  computed: {
+    ...mapGetters(["getLogin"])
   },
   data(){
     return {
@@ -54,10 +58,6 @@ export default {
       title:"修改密码",//修改密码弹窗标题
       passStatus:false,//修改密码弹窗
       list:[
-        // {
-        //   title:'message.account.txt4',
-        //   inputValue:''
-        // },
         {
           title:'message.account.txt5',
           inputValue:''
@@ -66,12 +66,22 @@ export default {
           title:'message.account.txt6',
           inputValue:''
         },
-        // {
-        //   title:'message.account.txt7',
-        //   inputValue:''
-        // }
       ]
     }
+  },
+  watch:{
+    // 'getLogin': {
+    //   handler: function (newValue) {
+    //     console.log('账号信息页面newValue: ', newValue);
+    //     if (newValue.loginStatus) {
+    //       this.list[0].inputValue = newValue.username
+    //     }else{
+    //       this.list[1].inputValue = newValue.password
+    //     }
+    //   },
+    //   deep: true,
+    //   immediate: true,
+    // },
   },
   methods:{
     closePassProup(){

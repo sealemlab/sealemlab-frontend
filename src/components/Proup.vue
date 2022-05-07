@@ -1,7 +1,7 @@
 <template>
   <div class="proup_page" v-if="proupStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24">提示</p>
+      <p class="propu_title_txt font24">{{$t("message.tip.txt3")}}</p>
       <div class="proup_content">
         <img :src="`${$store.state.imgUrl}success.png`" class="success_img" />
         {{$t(content)}}
@@ -11,11 +11,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
 export default {
-  computed: {
-    ...mapGetters(["isEnLang"])
-  },
   props: {
     proupStatus: {
       type: Boolean,

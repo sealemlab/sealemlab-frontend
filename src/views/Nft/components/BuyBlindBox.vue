@@ -24,28 +24,31 @@
           <span class="lefttxt">{{$t("message.nft.txt24")}}</span>
           <BtnLoading :isloading="true" v-if="priceStatus"></BtnLoading>
           <span class="righttxt no_border" v-else>{{stPrice}}</span>
-          <span class="unit_class" v-if="bindboxType == 0">HC</span>
-          <span class="unit_class" v-if="bindboxType == 1">BNB</span>
+          <span class="unit_class">ST</span>
+          <!-- <span class="unit_class" v-if="bindboxType == 0">HC</span>
+          <span class="unit_class" v-if="bindboxType == 1">BNB</span> -->
         </div>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
           <div class="btns">
-            <Slider :min="0" :max="100" v-model="per"></Slider>
+            <Slider :min="0" :max="50" v-model="per"></Slider>
           </div>
           <span class="unit_class">{{sliderValue}}</span>
         </div>
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt26")}}</span>
           <span class="righttxt">{{stTotal}}</span>
-          <span class="unit_class" v-if="bindboxType == 0">HC</span>
-          <span class="unit_class" v-if="bindboxType == 1">BNB</span>
+          <span class="unit_class">ST</span>
+          <!-- <span class="unit_class" v-if="bindboxType == 0">HC</span>
+          <span class="unit_class" v-if="bindboxType == 1">BNB</span> -->
         </div>
         <div class="balance_txt">
           {{$t("message.nft.txt27")}} 
           <BtnLoading :isloading="true" v-if="balanceStatus"></BtnLoading>
-          <span v-else>{{balance}}&nbsp; </span>
-          <span v-if="bindboxType == 0">HC</span>
-          <span v-if="bindboxType == 1">BNB</span>
+          <span v-else>&nbsp;{{balance}}&nbsp;</span>
+          <span>ST</span>
+          <!-- <span v-if="bindboxType == 0">HC</span>
+          <span v-if="bindboxType == 1">BNB</span> -->
           <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
         </div>
         <div class="btnbox font20" :class="disable?'disable_bnb':''">
@@ -124,6 +127,7 @@ export default {
       userBuyNum:0,//用户剩余购买数量(频控)
       stTotal:0,//st的总价格
       sliderValue:0,// 拖动条value
+      isdown:false,// 再次执行轻通知的动画
     };
   },
   watch: {
@@ -134,8 +138,11 @@ export default {
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
+          this.balanceStatus = true
           let setIntervalOBJ = setInterval(() => {
             if (this.payAddress) {
+              this.getUserBalance(this.payAddress)
+              this.getBindboxNum(this.bindboxType)
               clearInterval(setIntervalOBJ);
               this.$refs.mychild.isApproveFun(this.payAddress, token().SB).then((res) => {
                 if (res) {
@@ -146,6 +153,8 @@ export default {
               });
             }
           }, 1000);
+        }else{
+          this.balanceStatus = false
         }
       },
       deep: true,
@@ -169,15 +178,25 @@ export default {
         })
     },
     buyBindBox(){
-      console.log("买盲盒")
       if(this.disable)return
       if (this.buy_isloading) return;
-      if(this.sliderValue <= 0)return
+      if(this.sliderValue <= 0){
+        if(!this.isdown){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'请输入购买数量'}));
+          this.isdown = true
+          setTimeout(() => {
+            this.isdown = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
+          }, 3000);
+        }
+        return
+      }
       if(this.stTotal > this.balance){ // 余额判断
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'余额不足'}));
         return
       }
       if(this.sliderValue > this.userBuyNum){ // 频控判断
+      console.log('this.sliderValue > this.userBuyNum: ', this.sliderValue,this.userBuyNum);
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'您当前时间段购买量不足'}));
         return
       }
@@ -194,7 +213,7 @@ export default {
           this.getUserBalance(this.payAddress)
           this.buy_isloading = false;
           this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'购买成功'}));
-          this.sliderValue = "";
+          this.sliderValue = 0;
           this.stTotal = 0;
         }else{
           this.buy_isloading = false;
@@ -242,14 +261,8 @@ export default {
         });
       });
       
-      // 获取某类型的盲盒下某用户某小时剩余购买数量
-      sb().getUserHourlyBoxesLeftSupply(boxtypeInfo,this.getAccount,new Date().getTime()).then(res => {
-        console.log('获取某类型的盲盒下某用户某小时剩余购买数量:', Number(res));
-        this.userBuyNum = Number(res)
-        console.log('this.userBuyNum: ', this.userBuyNum);
-      });
     },
-    // 盲盒剩余数量
+    // 盲盒剩余数量  获取某类型的盲盒下某用户某小时剩余购买数量
     getBindboxNum(bindboxType){
       // 获取某类型的盲盒的剩余可销售数量
       sb().getBoxesLeftSupply(bindboxType).then(res => {
@@ -259,8 +272,15 @@ export default {
       }).catch(() => {
         this.surplusNumStatus = false
       })
+      
+      // 获取某类型的盲盒下某用户某小时剩余购买数量
+      sb().getUserHourlyBoxesLeftSupply(bindboxType,this.getAccount,new Date().getTime()).then(res => {
+        console.log('获取某类型的盲盒下某用户某小时剩余购买数量:', Number(res));
+        this.userBuyNum = Number(res)
+        console.log('this.userBuyNum: ', this.userBuyNum);
+      });
     },
-    // 获取用户余额
+    // 获取用户余额 
     getUserBalance(data){
       erc20(data).balanceOf(this.getAccount).then(res1 => {
         this.balance = this.$utils.getBit(util.formatEther(res1),4)

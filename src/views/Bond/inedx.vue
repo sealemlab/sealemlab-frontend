@@ -96,27 +96,27 @@
         </div>
       </div>
     </div>
-    <InputProup :afferentStatus="afferentStatus" :proupDis="proupDis" @sureclick="proupClick" @closeProup="closeProup">
+    <!-- <InputProup :afferentStatus="afferentStatus" :proupDis="proupDis" @sureclick="proupClick" @closeProup="closeProup">
       <Input slot="input_slot" @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt16")' @input="inputClick"></Input>
-    </InputProup>
+    </InputProup> -->
     <AddLp :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
   </div>
 </template>
 
 <script>
-import InputProup from './InputPopup.vue'
+// import InputProup from './InputPopup.vue'
 import AddLp from './Addlp.vue'
 export default {
   components:{
-    InputProup,
+    // InputProup,
     AddLp
   },
   data(){
     return{
       addlpDis:false,//一键购买lp弹窗状态
-      afferentStatus:false,
-      inputvalue:"",
-      proupDis:false,//弹窗变量
+      // afferentStatus:false,//input 校验状态
+      // inputvalue:"",
+      // proupDis:false,//弹窗变量
       coinArr:[
         {
           title:'ST-BNB',
@@ -157,24 +157,24 @@ export default {
     closeLP(){
       this.addlpDis = false
     },
-    blurEvent(){
-      if(!this.inputvalue)this.afferentStatus = true
-    },
-    focusEvent(){
-      this.afferentStatus = false
-    },
-    inputClick(val){
-      this.inputvalue = val
-    },
+    // blurEvent(){
+    //   if(!this.inputvalue)this.afferentStatus = true
+    // },
+    // focusEvent(){
+    //   this.afferentStatus = false
+    // },
+    // inputClick(val){
+    //   this.inputvalue = val
+    // },
     // 弹窗按钮的确认事件
-    proupClick(){
-      if(!this.inputvalue){
-        this.afferentStatus = true
-      }
-    },
-    closeProup(){
-      this.proupDis = this.afferentStatus = false
-    },
+    // proupClick(){
+    //   if(!this.inputvalue){
+    //     this.afferentStatus = true
+    //   }
+    // },
+    // closeProup(){
+    //   this.proupDis = this.afferentStatus = false
+    // },
     BondClick(data){
       // this.proupDis = true
       this.addlpDis = true

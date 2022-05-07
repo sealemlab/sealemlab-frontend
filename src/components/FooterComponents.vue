@@ -97,6 +97,7 @@ export default {
       ul {
         li {
           margin: 14px 0;
+          cursor: pointer;
           letter-spacing: 0.52px;
           &:nth-child(1) {
             font-size: 18px;

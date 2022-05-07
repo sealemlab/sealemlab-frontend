@@ -1,9 +1,13 @@
 <template>
   <div class="blind_box">
-    <p class="title_box font30">我的盲盒</p>
-    <div class="box">
+    <p class="title_box font30">{{$t("message.nft.txt37")}}</p>
+    <div class="box" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
       <div class="imgbox" v-for="(item,index) in arr" :key="index">
         <img :src="item.src" class="myboximg" />
+      </div>
+      <div class="bottom_loading font16" v-if="arr.length > 10">
+        <span v-if="loadMoreStatus">Loading...</span>
+        <span v-else-if="!loadMoreStatus">End</span>
       </div>
     </div>
   </div>
@@ -18,6 +22,8 @@ export default {
   },
   data(){
     return{
+      loadMoreStatus:true,
+      bucy: false,
       arr:[
         {src:`${this.$store.state.imgUrl}mybox.png`},
         {src:`${this.$store.state.imgUrl}mybox.png`},
@@ -33,7 +39,7 @@ export default {
         {src:`${this.$store.state.imgUrl}mybox.png`},
         {src:`${this.$store.state.imgUrl}mybox.png`},
         {src:`${this.$store.state.imgUrl}mybox.png`},
-      ]
+      ],
     }
   },
   watch: {
@@ -48,9 +54,25 @@ export default {
     },
   },
   methods:{
+    loadMore() {
+      this.busy = true;
+      console.log("加载更多")
+      if(this.loadMoreStatus) {
+        this.getUserBindbox(this.nums,10)
+        this.busy = false
+      }
+    },
     getUserBindbox(cursor, size){//cursor:指针,从哪个地方开始获取盲盒 size:获取的盲盒数量
       sb().tokensOfOwnerBySize(this.getAccount, cursor, size).then(res => {
         console.log('获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针res: ', res);
+        this.nums = res[1]
+        if(res[0].length > 0){
+          this.loadMoreStatus = true
+          this.arr = this.arr.concat(res[0])
+        }else{
+          this.loadMoreStatus = false
+        }
+        
       })
       // .catch(() => {
         
@@ -85,7 +107,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 60px;
+      margin-bottom: 30px;
       .myboximg{
         width: 100%;
         max-width: 204px;
@@ -93,5 +115,13 @@ export default {
     }
     
   }
+}
+.bottom_loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  margin-top: 60px;
 }
 </style>

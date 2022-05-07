@@ -24,6 +24,10 @@ export default new Vuex.Store({
       content:'',
       ortherDoing:false
     },
+    noticeInfo:{
+      status:false,
+      word:'',
+    },
     proupStatua:false,// 普通弹窗状态
     imgUrl:process.env.NODE_ENV === 'production'?'//cdn.hashland.com/sacredTestImg/':'//cdn.hashland.com/sacredTestImg/',//图片前缀
     codeTime:60,//验证码重新发送时间
@@ -33,6 +37,9 @@ export default new Vuex.Store({
   getters: {
     getProupInfo(state){
       return state.proupInfo
+    },
+    getNoticeInfo(state){
+      return state.noticeInfo
     },
     // 中英文状态
     isEnLang() {
@@ -64,6 +71,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    // 轻提示状态
+    setNoticeStatus(state, data) {
+      state.noticeInfo = JSON.parse(data);
+    },
     // 普通弹窗状态
     setProupStatus(state, data) {
       state.proupInfo = JSON.parse(data);

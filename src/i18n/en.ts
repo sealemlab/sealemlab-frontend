@@ -176,6 +176,9 @@ export const message = {
     txt35: "游戏私人资产",
     txt36: "圣域NFT作为用户私人资产,用户拥有完全支配权,其中包括：用户间自由交易；在游戏中提升战斗力从而获得不菲的战利品；用户间自由租赁等。",
     txt31: "穿戴展示",
+
+    txt37:"My BOX",
+    txt38:"My NFT",
   },
   invite: {
     txt1: "排名",
@@ -284,6 +287,8 @@ export const message = {
   tip: {
     txt1: "创建账户成功,请到邮箱激活账户",
     txt2: "请检查账号/密码是否正确,账号是否激活",
+    txt3:'提示',
+    txt4:'这是一条轻提示'
   },
   approve:'Approve'
 };

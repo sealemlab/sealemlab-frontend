@@ -23,7 +23,7 @@
         </div>
         <div class="swiperbox_2">
           <swiper ref="swiper2" :options="swiperOption2">
-            <swiper-slide v-for="(item, index) in tabClassArr[currentClass].classFashionArr" :key="index" @click="swiperClick(index)">
+            <swiper-slide v-for="(item, index) in tabClassArr[currentClass].classFashionArr" :key="index">
               <div class="img_box" :class="{ active: currentSwiperIndex == index }">
                 <img :src="item" alt="" />
               </div>
@@ -71,16 +71,15 @@ export default {
   },
   data() {
     return {
-      imgStatus:true,//图片加载时用loading状态
       currentClass: 0,
       tabClassArr: [
         {
           image: `${this.$store.state.imgUrl}nav_nft_zs_active.png`,
-          label: "message.nft.txt8",//战士
+          label: "message.nft.txt9",//角斗士
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",
-          skill_content: "message.nft.txt15",
-          classIntroduce: "message.nft.txt14",
+          skill_content: "message.nft.txt15_1",
+          classIntroduce: "message.nft.txt14_1",
           skills: [
             `${this.$store.state.imgUrl}nft_class1_skills1.png`,
             `${this.$store.state.imgUrl}nft_class1_skills2.png`,
@@ -102,11 +101,11 @@ export default {
         },
         {
           image: `${this.$store.state.imgUrl}nav_nft_jds_active.png`,
-          label: "message.nft.txt9",//角斗士
+          label: "message.nft.txt8",//战士
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",
-          skill_content: "message.nft.txt15_1",
-          classIntroduce: "message.nft.txt14_1",
+          skill_content: "message.nft.txt15",
+          classIntroduce: "message.nft.txt14",
           skills: [
             `${this.$store.state.imgUrl}nft_class1_skills1.png`,
             `${this.$store.state.imgUrl}nft_class1_skills2.png`,
@@ -219,30 +218,9 @@ export default {
     }
   },
   methods: {
-    swiperClick(index){
-      const videoElement = this.$refs.video.length;
-      console.log('videoElement: ', videoElement);
-      if (videoElement > 0) {
-        for (let i = 0; i < videoElement; i++) {
-          if (i == index) { //第三点 一个播放 其余的暂停  只允许一个播放 
-            this.$refs.video[i].play();
-          } else {
-            this.$refs.video[i].pause();
-          }
-        }
-      }
-    },
     clickTabClass(index) {
-      console.log('index: ', index);
       this.currentClass = index;
-    },
-  },
-  mounted(){
-    // let newImg = new Image();
-    // newImg.src = this.$refs.bindboximg.src;
-    // newImg.onload = () => {
-    //   this.imgStatus = false;
-    // };
+    }
   }
 };
 </script>

@@ -6,31 +6,68 @@
       <div class="content">
         <div class="box" v-for="(item,index) in arr" :key="index" @click="typeClick(item,index)">
           <span class="type_ font12" :class="index == activetype?'activeClass':''">{{item.title}}</span>
-          <span class="font12 txt" v-show="item.status">{{item.title}} balance: {{item.num}}</span>
         </div>
       </div>
-      <p class="title_ font16">BUSD-ST LP BONDED</p>
-      <div class="progress_box_">
-        <div class="oneline">
-          <Slider :min="0" :max="100" v-model="per" class="slider"></Slider>
-          <span class="font12 Company">{{sliderValue}} BUSD</span>
-        </div>
+      <!-- busd输入框 -->
+      <div class="inputbox">
         <p class="font12 balance_">BUSD balance: 10.2345</p>
-      </div>
-      <div class="progress_box_">
-        <div class="oneline">
-          <Slider :min="0" :max="100" v-model="values" class="slider"></Slider>
-          <span class="font12 Company">{{sliderValue2}} BUSD</span>
+        <div class="inputcontent">
+          <div class="left_content">
+            <img :src="`${$store.state.imgUrl}bnblogo.png`" class="busd_img" />
+            <span class="busd_txt font14">BUSD</span>
+          </div>
+          <div class="center_content">
+            <Input @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt16")' @input="inputClick"></Input>
+          </div>
+          <div class="max_btn font16">MAX</div>
         </div>
-        <p class="font12 balance_">ST balance: 10.2345</p>
       </div>
-      <p class="title_ font16">7天预计收益</p>
-      <div class="profitbox font14">70 BUSD</div>
+      <!-- st输入框 -->
+      <div class="inputbox">
+        <p class="font12 balance_">ST balance: 12</p>
+        <div class="inputcontent">
+          <div class="left_content">
+            <img :src="`${$store.state.imgUrl}stlogo.png`" class="busd_img" />
+            <span class="busd_txt font14">ST</span>
+          </div>
+          <div class="center_content">
+            <Input @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt16")' @input="inputClick"></Input>
+          </div>
+          <div class="max_btn font16">MAX</div>
+        </div>
+      </div>
+      <!-- 投入以及收益 -->
+      <div class="profit_box">
+        <div class="onebox">
+          <p class="font14 _txt">投入</p>
+          <div class="border_ font12">
+            <span class="span1">170</span>
+            <span class="span1">BUSD</span>
+          </div>
+        </div>
+        <div class="onebox">
+          <p class="font14 _txt">预计收益</p>
+          <div class="border_ font12">
+            <span class="span1">180</span>
+            <span class="span1">BUSD</span>
+          </div>
+        </div>
+        <div class="onebox">
+          <p class="font14 _txt">最少可领取</p>
+          <div class="border_ font12">
+            <span class="span1">190</span>
+            <span class="span1">BUSD</span>
+          </div>
+        </div>
+      </div>
       <div class="main_button font16" @click="bondFun">Approve&Add Liquidity&Bond</div>
       <div class="tipbox font12">
-        <span>债券到期后,以ST发放本金和利息</span>
-        <span>LP tokens will be automatically staked on the bond contract.</span>
-        <span>预计收益按照当期利率调整</span>
+        <p class="font14"><span>总利率</span><span>20%</span></p>
+        <p><span>基础利率</span><span>16%</span>
+        <p><span>购买债券和质押利率</span><span>1%</span>
+        <p><span>邀请利率</span><span>1%</span>
+        <p class="font14"><span>税率</span><span>1%</span></p>
+        <p>债券到期后,以ST发放本金和利息;LP tokens will be automatically staked on the bond contract;预计收益按照当期利率调整</p>
       </div>
       <img :src="`${$store.state.imgUrl}close.png`" class="close_img" @click.stop="closeProup"/>
     </div>
@@ -80,19 +117,13 @@ export default {
       activetype:0,
       arr:[
         {
-          title:'BUSD-ST',
-          num:12.66,
-          status:true
+          title:'BUSD&ST',
         },
         {
           title:'BUSD',
-          num:13,
-          status:false
         },
         {
           title:'ST',
-          num:14,
-          status:false
         }
       ]
     }
@@ -156,7 +187,6 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
       margin-top: 20px;
       .box{
         display: flex;
@@ -180,56 +210,95 @@ export default {
           background: #F0D48D;
           color: #000000;
         }
-        .txt{
-          font-weight: 400;
-          color: #8B8484;
-          line-height: 14px;
-        }
       }
     }
-    .progress_box_{
-      width: 90%;
-      display: flex;
-      flex-direction: column;
-      .oneline{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 24px;
-        .slider{
-          width: 80%;
-        }
-        .Company{
-          margin-left: 10px;
-        }
-      }
+    .inputbox{
+      width: 100%;
+      margin-bottom: 30px;
       .balance_{
         width: 100%;
         text-align: right;
         font-weight: 400;
         color: #8B8484;
         line-height: 14px;
-        margin-top: 10px;
+      }
+      .inputcontent{
+        padding-left: 14px;
+        margin-top: 8px;
+        width: 100%;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #171718;
+        box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+        border-radius: 8px;
+        border: 1px solid #373636;
+        .left_content{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .busd_img{
+            width: 17px;
+            margin-right: 5px;
+          }
+          .busd_txt{
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 20px;
+          }
+        }
+        .center_content{
+          width: 70%;
+        }
+        .max_btn{
+          width: 72px;
+          height: 38px;
+          background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+          box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+          border-radius: 8px;
+          text-align: center;
+          line-height: 38px;
+          color: #000000;
+          font-weight: bolder;
+        }
       }
     }
-    .profitbox{
-      width: 85%;
-      height: 38px;
-      background: #171718;
-      box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
-      border-radius: 8px;
-      border: 1px solid #373636;
-      text-align: center;
-      line-height: 36px;
-      margin-top: 10px;
-      font-weight: 600;
-      color: #F0D48D;
+    .profit_box{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .onebox{
+        ._txt{
+          font-weight: 600;
+          color: #FFFFFF;
+          line-height: 20px;
+        }
+        .border_{
+          margin-top: 8px;
+          min-width: 100px;
+          padding: 0 10px;
+          height: 23px;
+          background: #171718;
+          box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+          border-radius: 4px;
+          border: 1px solid #373636;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .span1{
+            font-weight: 600;
+            color: #F0D48D;
+            line-height: 14px;
+          }
+        }
+      }
     }
     .main_button{
       width: 75%;
       min-height: 45px;
-      margin: 48px 0 37px;
+      margin: 35px 0 37px;
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
       box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
       border-radius: 4px;
@@ -242,14 +311,30 @@ export default {
       cursor: pointer;
     }
     .tipbox{
-      width: 75%;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      span{
+      p{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-weight: 400;
-        color: #FFFFFF;
+        color: #A4A4A4;
         line-height: 14px;
-        margin-bottom: 10px;
+        &:nth-child(1),&:nth-last-child(2){
+          margin-bottom: 15px;
+          margin-top: 15px;
+          span{
+            font-weight: 500;
+            color: #FFFFFF;
+            line-height: 17px;
+            margin-bottom: 0;
+          }
+        }
+        span{
+          margin-bottom: 8px;
+        }
       }
     }
     .close_img{

@@ -47,7 +47,6 @@
         <p class="font16 tip_txt" @click="registerClick">{{$t("message.signin.txt27")}}<span class="tip_login">{{$t("message.signin.txt3")}}</span></p>
       </div>
     </div>
-    <!-- <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup> -->
     <PassProup :btntxt="'message.btn_txt2'" :codestatus='codestatus' :passStatus="passStatus" :title="title" @closePassProup="closePassProup" @sureClick="sureClick"></PassProup>
   </div>
 </template>
@@ -138,9 +137,6 @@ export default {
     }
   },
   methods:{
-    // proupClose(){
-    //   this.proupStatus = false
-    // },
     closePassProup(){
       this.passStatus = this.codestatus = false
     },
