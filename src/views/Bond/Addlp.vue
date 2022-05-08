@@ -1,8 +1,8 @@
 <template>
   <div class="input_proup" v-if="addlpDis">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24">ST-BUSD LP BOND</p>
-      <p class="title_ font16">PAY TO BOND</p>
+      <p class="propu_title_txt font24">{{$t("message.bond.txt20")}}</p>
+      <p class="title_ font16">{{$t("message.bond.txt21")}}</p>
       <div class="content">
         <div class="box" v-for="(item,index) in arr" :key="index" @click="typeClick(item,index)">
           <span class="type_ font12" :class="index == activetype?'activeClass':''">{{item.title}}</span>
@@ -10,28 +10,28 @@
       </div>
       <!-- busd输入框 -->
       <div class="inputbox">
-        <p class="font12 balance_">BUSD balance: 10.2345</p>
+        <p class="font12 balance_">BUSD {{$t("message.bond.txt22")}}: 10.2345</p>
         <div class="inputcontent">
           <div class="left_content">
             <img :src="`${$store.state.imgUrl}bnblogo.png`" class="busd_img" />
             <span class="busd_txt font14">BUSD</span>
           </div>
           <div class="center_content">
-            <Input @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt16")' @input="inputClick"></Input>
+            <Input @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
           </div>
           <div class="max_btn font16">MAX</div>
         </div>
       </div>
       <!-- st输入框 -->
       <div class="inputbox">
-        <p class="font12 balance_">ST balance: 12</p>
+        <p class="font12 balance_">ST {{$t("message.bond.txt22")}}: 12</p>
         <div class="inputcontent">
           <div class="left_content">
             <img :src="`${$store.state.imgUrl}stlogo.png`" class="busd_img" />
             <span class="busd_txt font14">ST</span>
           </div>
           <div class="center_content">
-            <Input @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt16")' @input="inputClick"></Input>
+            <Input @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
           </div>
           <div class="max_btn font16">MAX</div>
         </div>
@@ -39,35 +39,37 @@
       <!-- 投入以及收益 -->
       <div class="profit_box">
         <div class="onebox">
-          <p class="font14 _txt">投入</p>
+          <p class="font14 _txt">{{$t("message.bond.txt24")}}</p>
           <div class="border_ font12">
             <span class="span1">170</span>
             <span class="span1">BUSD</span>
           </div>
         </div>
         <div class="onebox">
-          <p class="font14 _txt">预计收益</p>
+          <p class="font14 _txt">{{$t("message.bond.txt25")}}</p>
           <div class="border_ font12">
             <span class="span1">180</span>
             <span class="span1">BUSD</span>
           </div>
         </div>
         <div class="onebox">
-          <p class="font14 _txt">最少可领取</p>
+          <p class="font14 _txt">{{$t("message.bond.txt26")}}</p>
           <div class="border_ font12">
             <span class="span1">190</span>
             <span class="span1">BUSD</span>
           </div>
         </div>
       </div>
-      <div class="main_button font16" @click="bondFun">Approve&Add Liquidity&Bond</div>
+      <div class="main_button font16" @click="bondFun">Approve</div>
       <div class="tipbox font12">
-        <p class="font14"><span>总利率</span><span>20%</span></p>
-        <p><span>基础利率</span><span>16%</span>
-        <p><span>购买债券和质押利率</span><span>1%</span>
-        <p><span>邀请利率</span><span>1%</span>
-        <p class="font14"><span>税率</span><span>1%</span></p>
-        <p>债券到期后,以ST发放本金和利息;LP tokens will be automatically staked on the bond contract;预计收益按照当期利率调整</p>
+        <p class="font14"><span>{{$t("message.bond.txt27")}}</span><span>20%</span></p>
+        <p><span>{{$t("message.bond.txt28")}}</span><span>16%</span>
+        <p><span>{{$t("message.bond.txt29")}}</span><span>3%</span>
+        <p><span>{{$t("message.bond.txt30")}}</span><span>1%</span>
+        <p><span>{{$t("message.bond.txt31")}}</span><span>1%</span>
+        <p class="font14"><span>{{$t("message.bond.txt32")}}</span><span>1%</span></p>
+        <p class="font16"><span>{{$t("message.bond.txt33")}}</span><span>$9000</span></p>
+        <p>{{$t("message.bond.txt34")}}</p>
       </div>
       <img :src="`${$store.state.imgUrl}close.png`" class="close_img" @click.stop="closeProup"/>
     </div>
@@ -322,15 +324,18 @@ export default {
         font-weight: 400;
         color: #A4A4A4;
         line-height: 14px;
-        &:nth-child(1),&:nth-last-child(2){
+        &:nth-child(1),&:nth-last-child(2),&:nth-last-child(3){
           margin-bottom: 15px;
-          margin-top: 15px;
+          // margin-top: 15px;
           span{
             font-weight: 500;
             color: #FFFFFF;
             line-height: 17px;
             margin-bottom: 0;
           }
+        }
+        &:nth-last-child(3){
+          margin-top: 15px;
         }
         span{
           margin-bottom: 8px;
