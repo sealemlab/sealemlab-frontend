@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import store from '../store/index'
+import store from "../store/index";
 Vue.use(VueRouter);
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location: any) {
@@ -17,7 +17,8 @@ const routes: Array<RouteConfig> = [
   {
     path: "/bond",
     name: "Bond",
-    component: () => import("../views/Bond/inedx.vue"),
+    // component: () => import("../views/Bond/inedx.vue"),
+    component: () => import("../views/Bond/index.vue"),
   },
   {
     path: "/nft",
@@ -72,7 +73,7 @@ const routes: Array<RouteConfig> = [
         path: "invite/:id",
         name: "Invite",
         component: () => import("../views/User/invite.vue"),
-      }
+      },
     ],
   },
   {
@@ -94,7 +95,7 @@ const routes: Array<RouteConfig> = [
         path: "information",
         name: "Information",
         component: () => import("../views/Myaccount/information.vue"),
-      }
+      },
     ],
   },
 ];
@@ -105,13 +106,13 @@ const router = new VueRouter({
 
 router.beforeEach((to: any, from: any, next: any) => {
   if (to.path.indexOf("/myaccount/") !== -1) {
-    if(store.state.userInfo.loginStatus){
-      next()
-    }else{
-      next('/signin/login')
+    if (store.state.userInfo.loginStatus) {
+      next();
+    } else {
+      next("/signin/login");
     }
-  }else{
-    next()
+  } else {
+    next();
   }
-})
+});
 export default router;
