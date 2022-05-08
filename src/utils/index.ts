@@ -1,4 +1,4 @@
-import {wallet, network} from "sacredrealm-sdk";
+import {wallet, network,sb} from "sacredrealm-sdk";
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
@@ -48,6 +48,65 @@ export default {
     } else {
       return "null";
     }
+  },
+  // 小数点后边有0  去掉0
+  cutZero(old: any) {
+    old = old.toString();
+    //拷贝一份 返回去掉零的新串
+    let newstr = old;
+    //循环变量 小数部分长度
+    let leng = old.length - old.indexOf(".") - 1;
+    //判断是否有效数
+    if (old.indexOf(".") > -1) {
+      //循环小数部分
+      for (let i = leng; i > 0; i--) {
+        //如果newstr末尾有0
+        if (
+          newstr.lastIndexOf("0") > -1 &&
+          newstr.substr(newstr.length - 1, 1) == "0"
+        ) {
+          let k = newstr.lastIndexOf("0");
+          //如果小数点后只有一个0 去掉小数点
+          if (newstr.charAt(k - 1) == ".") {
+            return newstr.substring(0, k - 1);
+          } else {
+            //否则 去掉一个0
+            newstr = newstr.substring(0, k);
+          }
+        } else {
+          //如果末尾没有0
+          return newstr;
+        }
+      }
+    }
+    return old;
+  },
+  // 保留小数位数---已调用cutZero函数,截取出来的小数最后有0则去掉0
+  getBit(value: any, bit = 2) {
+    if (value == 0) return 0;
+    let str = value.toString();
+    let strIndex = str.indexOf(".");
+    if (strIndex === -1) return this.cutZero(str);
+    str = str.substring(0, strIndex + bit + 1);
+    return this.cutZero(str);
+  },
+  // 一个数乘以1e18   eg:convertNormalToBigNumber('input num',18)
+  convertNormalToBigNumber(num: any, decimals = 18, fix = 0) {
+    return new BigNumber(num).multipliedBy(new BigNumber(Math.pow(10, decimals)))
+      .minus(fix)
+      .toFixed(0);
+  },
+  /**一个数除以1e18,默认保留8位小数*/
+  convertBigNumberToNormal(bigNumber:any, bit = 8,decimals = 18) {
+    let result = (new BigNumber(bigNumber).dividedBy(new BigNumber(Math.pow(10, decimals))));
+    return this.getBit(result,bit)
+  },
+  // 统计数据中相同的元素的个数  eg:arr = [0,0,0,1,1,2]  ===> {0:3,1:2,2:1}
+  getWordCnt(arr:any){ 
+    return arr.reduce(function(prev:any,next:any){ 
+      prev[next] = (prev[next] + 1) || 1; 
+      return prev; 
+    },{}); 
   },
   // 链接钱包方法封装
   connectWallet(data:string){
@@ -108,56 +167,39 @@ export default {
       })
     })
   },
-  // 小数点后边有0  去掉0
-  cutZero(old: any) {
-    old = old.toString();
-    //拷贝一份 返回去掉零的新串
-    let newstr = old;
-    //循环变量 小数部分长度
-    let leng = old.length - old.indexOf(".") - 1;
-    //判断是否有效数
-    if (old.indexOf(".") > -1) {
-      //循环小数部分
-      for (let i = leng; i > 0; i--) {
-        //如果newstr末尾有0
-        if (
-          newstr.lastIndexOf("0") > -1 &&
-          newstr.substr(newstr.length - 1, 1) == "0"
-        ) {
-          let k = newstr.lastIndexOf("0");
-          //如果小数点后只有一个0 去掉小数点
-          if (newstr.charAt(k - 1) == ".") {
-            return newstr.substring(0, k - 1);
-          } else {
-            //否则 去掉一个0
-            newstr = newstr.substring(0, k);
-          }
-        } else {
-          //如果末尾没有0
-          return newstr;
-        }
-      }
+  async newgetUserBoxInfoFun(account: string) {
+    if (sessionStorage.getItem("sb_count")) {
+      sessionStorage.removeItem("sb_count");
     }
-    return old;
-  },
-  // 保留小数位数---已调用cutZero函数,截取出来的小数最后有0则去掉0
-  getBit(value: any, bit = 2) {
-    if (value == 0) return 0;
-    let str = value.toString();
-    let strIndex = str.indexOf(".");
-    if (strIndex === -1) return this.cutZero(str);
-    str = str.substring(0, strIndex + bit + 1);
-    return this.cutZero(str);
-  },
-  // 一个数乘以1e18   eg:convertNormalToBigNumber('input num',18)
-  convertNormalToBigNumber(num: any, decimals = 18, fix = 0) {
-    return new BigNumber(num).multipliedBy(new BigNumber(Math.pow(10, decimals)))
-      .minus(fix)
-      .toFixed(0);
-  },
-  /**一个数除以1e18,默认保留8位小数*/
-  convertBigNumberToNormal(bigNumber:any, bit = 8,decimals = 18) {
-    let result = (new BigNumber(bigNumber).dividedBy(new BigNumber(Math.pow(10, decimals))));
-    return this.getBit(result,bit)
+    return new Promise((resolve) => {
+      let count = 1;
+      sb().tokensOfOwnerBySize(account, 0, 100000000).then(async (res:any) => {//0代表第一次拿数据  100000000代表用户所拥有的全部卡的id
+          if (res[0].length == 0) {
+            store.commit("setBoxInfo", JSON.stringify([]));
+            sessionStorage.setItem("setBoxInfo", JSON.stringify([]));
+            resolve(1);
+            return;
+          }
+          let boxInfoArr: any = [];
+          res[0].map(async (item: any) => {
+            let obj = {
+              boxID:0,//盲盒ID
+              type:0,//盲盒类型
+              status:false//状态
+            }
+            obj.boxID = Number(item)
+            // @ts-ignore
+            obj.type = Number(await sb().sbIdToType(item))
+            console.log('obj.type: ', obj.type);
+            boxInfoArr.push(obj)
+            if (count == res[0].length) {
+              store.commit("setBoxInfo", JSON.stringify(boxInfoArr))
+              sessionStorage.setItem("setBoxInfo", JSON.stringify(boxInfoArr))
+              resolve(count)
+            }
+            count++
+          })
+        })
+    })
   },
 };

@@ -150,7 +150,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9;
+  z-index: 1;
   width: 100%;
   height: 80px;
   background: #000000;

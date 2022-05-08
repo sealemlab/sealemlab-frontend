@@ -26,7 +26,7 @@ import FooterComponents from "@/components/FooterComponents.vue";
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["isEnLang","getIsMobile","getProupInfo","getNoticeInfo"])
+    ...mapGetters(["getIstrue","getAccount","isEnLang","getIsMobile","getProupInfo","getNoticeInfo"])
   },
   data(){
     return {
@@ -38,6 +38,20 @@ export default {
         { label: "message.nav.txt5", link: "" }
       ],
     }
+  },
+  watch: {
+    'getIstrue': {
+      handler: function (newValue) {
+        console.log('app.vue页面的监听钱包状态newValue: ', newValue);
+        if (newValue) {
+          this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
+            sessionStorage.setItem("sb_count", res)
+          })
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   components: {
     NavigationBar,

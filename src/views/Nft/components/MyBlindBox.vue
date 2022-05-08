@@ -1,59 +1,60 @@
 <template>
   <div class="blind_box">
     <p class="title_box font30">{{$t("message.nft.txt37")}}</p>
-    <div class="box" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
-      <div class="imgbox" v-for="(item,index) in arr" :key="index" @click="openBoxFun(item)">
-        <!-- <img :src="item.src" class="myboximg" /> -->
-        <span class="font16 box_style">{{item}}</span>
-      </div>
-      <div class="bottom_loading font16" v-if="arr.length > 10">
-        <span v-if="loadMoreStatus">Loading...</span>
-        <span v-else-if="!loadMoreStatus">End</span>
+    <div class="boxs_">
+      <div class="onebox" v-for="(item,index) in list" :key="index" @click="openBoxFun(item)">
+        <img :src="item.src" class="img_" />
+        <div class="line_ font14">
+          <span>{{item.title}}</span>
+          <BtnLoading :isloading="true" v-if="item.status"></BtnLoading>
+          <span v-else>{{item.num}}</span>
+          <span class="font12">打开</span>
+        </div>
       </div>
     </div>
+    <OpenNft :openStatus="openStatus" :boxtype="boxtype" @closeOpen="closeOpen"></OpenNft>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { sb, getSigner } from "sacredrealm-sdk";
+import { sb } from "sacredrealm-sdk";
+import OpenNft from './OpenBox.vue'
 export default {
   computed: {
-    ...mapGetters(["getAccount","getIstrue"])
+    ...mapGetters(["getAccount","getIstrue","getUserBoxInfo"])
+  },
+  components:{
+    OpenNft
   },
   data(){
     return{
-      loadMoreStatus:true,
-      bucy: false,
-      // arr:[
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      //   {src:`${this.$store.state.imgUrl}mybox.png`},
-      // ],
-      arr:[],
-      pageinfo:{
-        size:10,
-        num:0
-      }
+      boxtype:0,//默认展示的是哪个类型的盲盒
+      openStatus:false,// 打开盲盒详情页面状态
+      list:[
+        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'普通盲盒',status:true,type:0},
+        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'创世盲盒',status:true,type:1},
+        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'稀有盲盒',status:true,type:2},
+        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'史诗盲盒',status:true,type:3},
+      ],
+      timerll:null,
+      isdown:false
     }
   },
   watch: {
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
-          this.getUserBindbox(this.pageinfo)
-          this.watchResult()
+          this.list.forEach(item => {
+            item.status = true
+          })
+          this.getUserAllBox() // 获取用户盲盒信息
+          // this.watchResult()
+        }else{
+          this.list.forEach(item => {
+            item.num = 0
+            item.status = false
+          })
         }
       },
       deep: true,
@@ -61,44 +62,54 @@ export default {
     },
   },
   methods:{
-    loadMore() {
-      this.busy = true;
-      if(this.loadMoreStatus) {
-        this.getUserBindbox(this.pageinfo)
-        this.busy = false
-      }
-    },
-    getUserBindbox(info,isload = false){//cursor:指针,从哪个地方开始获取盲盒 size:获取的盲盒数量
-      sb().tokensOfOwnerBySize(this.getAccount, info.num, info.size).then(res => {
-        // console.log('获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针res: ', res);
-        this.pageinfo.num = res[1]
-        if(isload){
-          console.log("开完盒子后重新获取用户的盒子")
-          if(res[0].length > 0){
-            this.loadMoreStatus = true
-            this.arr = res[0]
-          }else{
-            this.loadMoreStatus = false
-          }
-        }else{
-          if(res[0].length > 0){
-            this.loadMoreStatus = true
-            this.arr = this.arr.concat(res[0])
-          }else{
-            this.loadMoreStatus = false
-          }
+    // 获取用户的所有盲盒信息
+    getUserAllBox(){
+      clearInterval(this.timerll)
+      this.timerll = setInterval(() => {
+        if(sessionStorage.getItem('sb_count')){
+          clearInterval(this.timerll)
+          this.list[0].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 0}).length
+          this.list[1].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 1}).length
+          this.list[2].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 2}).length
+          this.list[3].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 3}).length
+          this.list.forEach(item => {
+            item.status = false
+          })
         }
-      }).catch(() => {
-        this.loadMoreStatus = false
-      })
+      }, 500);
+    },
+    closeOpen(){
+      this.openStatus = false
     },
     openBoxFun(item){
       console.log('item: ', item);
-      sb().connect(getSigner()).openBoxes([item]).then(res => {
-        console.log('开盒子res: ', res);
-      }).catch(err => {
-        console.log("开盒子错误",err)
-      })
+      if(item.status){
+        if(!this.isdown){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'盲盒加载中'}));
+          this.isdown = true
+          setTimeout(() => {
+            this.isdown = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
+          }, 2500);
+        }
+      }else if(item.num == 0){
+        if(!this.isdown){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'暂无该盲盒数据'}));
+          this.isdown = true
+          setTimeout(() => {
+            this.isdown = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
+          }, 2500);
+        }
+      }else{
+        this.openStatus = true
+        this.boxtype = item.type
+      }
+      // sb().connect(getSigner()).openBoxes([item]).then(res => {
+      //   console.log('开盒子res: ', res);
+      // }).catch(err => {
+      //   console.log("开盒子错误",err)
+      // })
     },
     // 监听盲盒开奖结果
     watchResult() {
@@ -131,43 +142,50 @@ export default {
     line-height: 42px;
     margin-bottom: 60px;
   }
-  .box{
+  .boxs_{
     width: 100%;
-    max-height:400px;
-    overflow: auto;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    .imgbox{
-      cursor: pointer;
+    .onebox{
       width: 25%;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      margin-bottom: 30px;
-      .box_style{
-        width: 90%;
-        height: 160px;
-        text-align: center;
-        line-height: 160px;
-        background: rgb(247, 175, 175);
-        color: #000;
-        font-weight: bolder;
-      }
-      .myboximg{
-        width: 100%;
+      cursor: pointer;
+      .img_{
+        width: 95%;
+        min-height: 100px;
         max-width: 204px;
       }
+      .line_{
+        margin-top: 14px;
+        width: 95%;
+        height: 37px;
+        max-width: 204px;
+        padding:0 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: url($bg_url + "boxs_border.png") no-repeat;
+        background-size: cover;
+        span{
+          font-weight: 600;
+          color: #FFFFFF;
+          line-height: 20px;
+          &:last-child{
+            width: 56px;
+            height: 19px;
+            background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+            box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+            border-radius: 4px;
+            text-align: center;
+            line-height: 19px;
+            color: #000000;
+          }
+        }
+      }
     }
-    
   }
-}
-.bottom_loading {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  margin-top: 60px;
 }
 </style>

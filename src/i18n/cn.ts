@@ -131,8 +131,8 @@ export const message = {
   nft: {
     // txt1: "展示",
     txt2: "盲盒",
-    txt3: "我的盲盒",
-    txt4: "我的NFT",
+    txt3: "你的盲盒",
+    txt4: "你的NFT",
     txt5: "赠送",
     txt6: "租赁",
     txt8: "战士",
@@ -168,8 +168,8 @@ export const message = {
 
     txt31: "穿戴展示",
 
-    txt37:"我的盲盒",
-    txt38:"我的NFT",
+    txt37:"你的盲盒",
+    txt38:"你的NFT",
 
   },
   invite:{

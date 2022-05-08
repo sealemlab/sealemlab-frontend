@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    userBoxInfo:sessionStorage.getItem('setBoxInfo') || [],//用户的盲盒信息
     userInfo:{
       loginStatus:false, // 登录状态
       username:'',
@@ -23,18 +24,21 @@ export default new Vuex.Store({
       status:false,
       content:'',
       ortherDoing:false
-    },
+    },// 提示框信息
     noticeInfo:{
       status:false,
       word:'',
-    },
-    proupStatua:false,// 普通弹窗状态
+    },//轻提示信息
     imgUrl:process.env.NODE_ENV === 'production'?'//cdn.hashland.com/sacredTestImg/':'//cdn.hashland.com/sacredTestImg/',//图片前缀
     codeTime:60,//验证码重新发送时间
     emailReg:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,//邮箱校验
     pwReg: /^[a-zA-Z0-9]{6,16}$/ //密码校验 6-16位数字英文组合
   },
   getters: {
+    // 获取用户盲盒信息
+    getUserBoxInfo(state) {
+      return state.userBoxInfo
+    },
     getProupInfo(state){
       return state.proupInfo
     },
@@ -90,6 +94,10 @@ export default new Vuex.Store({
     // 设置弹窗钱包状态
     setwalletstatus(state,data){
       state.walletstatus = data
+    },
+     // 设置用户盲盒信息
+    setBoxInfo(state,data) {
+      state.userBoxInfo = data;
     },
   },
   actions: {

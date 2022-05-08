@@ -85,33 +85,5 @@ export default {
       cursor: pointer;
     }
   }
-  .layout_box{
-    position: relative;
-    width: fit-content;
-    .text_{
-      font-weight: bold;
-      color: #FFFFFF;
-      line-height: 36px;
-    }
-    .radious{
-      position: absolute;
-      right: -20px;
-      top: 2px;
-      width: 14px;
-      height: 14px;
-      border: 1px solid #A9A7A7;
-      filter: blur(0px);
-      font-weight: 400;
-      color: #A9A7A7;
-      line-height: 15px;
-      border-radius: 50%;
-      text-align: center;
-    }
-    .wallet_{
-      font-weight: 400;
-      color: #969090;
-      line-height: 16px;
-    }
-  }
 }
 </style>
