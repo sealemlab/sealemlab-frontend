@@ -1,14 +1,14 @@
 <template>
   <div class="open_box" v-if="openStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font30">打开盲盒</p>
-      <p class="propu_title_txt font16">每次最多打开5个盲盒</p>
+      <p class="propu_title_txt font30">{{$t("message.nft.txt39")}}</p>
+      <p class="propu_title_txt font16">{{$t("message.nft.txt40")}}</p>
       <!-- 全选按钮 -->
       <div class="select_content" @click="selectAllClick">
         <div class="select">
           <span class="selected" v-if="selectALLBtn || selectStatus"></span>
         </div>
-        <span class="select_ttx font16">全选/取消全选</span>
+        <span class="select_ttx font16">{{$t("message.nft.txt41")}}</span>
       </div>
       <!-- 页面展示数组 -->
       <div class="cardarr_class">
@@ -22,7 +22,7 @@
       </div>
     </div>
     <img :src="`${$store.state.imgUrl}back.png`" class="close_img" @click.stop="closeOpen"/>
-    <div class="open_btn">打开</div>
+    <div class="open_btn">{{$t("message.nft.txt42")}}</div>
   </div>
 </template>
 <script>
@@ -103,7 +103,7 @@ export default {
           this.selectALLBtn = false
         }else{
           if(!this.isdown){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多${this.selectNum}张`}));
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多 ${this.selectNum}个`}));
             this.isdown = true
             setTimeout(() => {
               this.isdown = false
@@ -151,7 +151,7 @@ export default {
           })
           this.selectedNUM = this.pageshowarr.filter(item => {return item.status == true}).length
           if(!this.isdown){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多${this.selectNum}张`}));
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多 ${this.selectNum}个`}));
             this.isdown = true
             setTimeout(() => {
               this.isdown = false

@@ -24,7 +24,7 @@
             autocomplete="new-password"
           />
           <div class="input_prompt font12">
-            <span :class="{ani_shake:item.tip_status}" v-if="item.tip_status">* {{ item.tip }}</span>
+            <span :class="{ani_shake:item.tip_status}" v-if="item.tip_status">* {{ $t(item.tip) }}</span>
           </div>
         </div>
         <div class="remember_box">
@@ -62,10 +62,8 @@ export default {
     return {
       btnloding:false,
       codestatus:false,//修改密码组件的验证码是否显示
-      title:"修改密码",//修改密码弹窗标题
+      title:"message.signin.txt34",//修改密码弹窗标题
       passStatus:false,//修改密码弹窗
-      // content:'',
-      // proupStatus:false,//弹窗状态
       rememberStatus:false,//记住我状态
       email:'',
       list:[
@@ -105,7 +103,7 @@ export default {
           title:'message.signin.txt16',
           inputvalue:'',
           placeholder:'Please enter the content',
-          tip:'邮箱不能为空',
+          tip:'message.signin.txt30',
           tip_status:false,
           status:false
         },
@@ -113,7 +111,7 @@ export default {
           title:'message.signin.txt17',
           inputvalue:'',
           placeholder:'Please enter the content',
-          tip:'密码不能为空',
+          tip:'message.signin.txt31',
           tip_status:false,
           status:false
         }
@@ -154,7 +152,7 @@ export default {
       switch(index){
         case 0:
           if (!this.$store.state.emailReg.test(this.user[index].inputvalue)){
-            this.user[index].tip = '请输入正确的邮箱'
+            this.user[index].tip = 'message.signin.txt32'
             this.user[index].tip_status = true
             this.user[index].status = false
           }else{
@@ -163,7 +161,7 @@ export default {
           break;
         case 1:
           if (!this.user[index].inputvalue){
-            this.user[index].tip = '请输入密码'
+            this.user[index].tip = 'message.signin.txt33'
             this.user[index].tip_status = true
             this.user[index].status = false
           }else{
@@ -207,8 +205,6 @@ export default {
             })
             this.$router.push('/myaccount/information');
           }else{
-            // this.proupStatus = true
-            // this.content = 'message.tip.txt2'
             this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.tip.txt2'}));
           }
         }).catch(() => {
@@ -217,7 +213,7 @@ export default {
       }
     },
     forgetNumberClick(){
-      this.title = '找回密码'
+      this.title = 'message.signin.txt35'
       this.passStatus = this.codestatus = true
     },
     sureClick(data){

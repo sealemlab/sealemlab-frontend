@@ -182,7 +182,7 @@ export default {
       if (this.buy_isloading) return;
       if(this.sliderValue <= 0){
         if(!this.isdown){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'请输入购买数量'}));
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt45'}));
           this.isdown = true
           setTimeout(() => {
             this.isdown = false
@@ -192,16 +192,16 @@ export default {
         return
       }
       if(this.stTotal > this.balance){ // 余额判断
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'余额不足'}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt49'}));
         return
       }
       if(this.sliderValue > this.userBuyNum){ // 频控判断
       console.log('this.sliderValue > this.userBuyNum: ', this.sliderValue,this.userBuyNum);
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'您当前时间段购买量不足'}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt50'}));
         return
       }
       if(this.sliderValue > this.boxnum){ // 库存判断
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'盲盒剩余数量不足'}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt51'}));
         return
       }
       this.buy_isloading = true
@@ -212,7 +212,7 @@ export default {
           this.getBindboxNum(this.bindboxType)
           this.getUserBalance(this.payAddress)
           this.buy_isloading = false;
-          this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'购买成功'}));
+          this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt52'}));
           this.sliderValue = 0;
           this.stTotal = 0;
         }else{

@@ -5,10 +5,10 @@
       <div class="onebox" v-for="(item,index) in list" :key="index" @click="openBoxFun(item)">
         <img :src="item.src" class="img_" />
         <div class="line_ font14">
-          <span>{{item.title}}</span>
+          <span>{{$t(item.title)}}</span>
           <BtnLoading :isloading="true" v-if="item.status"></BtnLoading>
           <span v-else>{{item.num}}</span>
-          <span class="font12">打开</span>
+          <span class="font12">{{$t("message.nft.txt57")}}</span>
         </div>
       </div>
     </div>
@@ -32,10 +32,10 @@ export default {
       boxtype:0,//默认展示的是哪个类型的盲盒
       openStatus:false,// 打开盲盒详情页面状态
       list:[
-        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'普通盲盒',status:true,type:0},
-        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'创世盲盒',status:true,type:1},
-        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'稀有盲盒',status:true,type:2},
-        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'史诗盲盒',status:true,type:3},
+        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'message.nft.txt53',status:true,type:0},
+        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'message.nft.txt54',status:true,type:1},
+        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'message.nft.txt55',status:true,type:2},
+        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'message.nft.txt56',status:true,type:3},
       ],
       timerll:null,
       isdown:false
@@ -85,7 +85,7 @@ export default {
       console.log('item: ', item);
       if(item.status){
         if(!this.isdown){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'盲盒加载中'}));
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt46'}));
           this.isdown = true
           setTimeout(() => {
             this.isdown = false
@@ -94,7 +94,7 @@ export default {
         }
       }else if(item.num == 0){
         if(!this.isdown){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'暂无该盲盒数据'}));
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt47'}));
           this.isdown = true
           setTimeout(() => {
             this.isdown = false
@@ -155,7 +155,7 @@ export default {
       cursor: pointer;
       .img_{
         width: 95%;
-        min-height: 100px;
+        min-height: 200px;
         max-width: 204px;
       }
       .line_{

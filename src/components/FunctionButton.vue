@@ -6,7 +6,7 @@
       <BtnLoading :isloading="approveloading"></BtnLoading>
       </div>
     <div class="connect_box" v-else @click="dosomething">
-      {{word}}
+      {{$t(word)}}
       <BtnLoading :isloading="isloading"></BtnLoading>
     </div>
   </div>

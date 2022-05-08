@@ -26,11 +26,11 @@ export default {
   methods:{
     bindWallet(){
       if(!this.getLogin){
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'请先登录'}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.account.txt32'}));
         return
       }
       if(!this.getIstrue){
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'请先连接钱包'}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.account.txt33'}));
         return
       }
     }

@@ -28,7 +28,7 @@
             </div> -->
           </div>
           <div class="input_prompt font12">
-            <span class="ani_shake" v-show="item.tip_status">* {{ item.tip }}</span>
+            <span class="ani_shake" v-show="item.tip_status">* {{ $t(item.tip) }}</span>
           </div>
         </div>
         <div class="agree_box" ref="circular" @click="igraeeClick">
@@ -47,7 +47,6 @@
         </p>
       </div>
     </div>
-    <!-- <Proup :proupStatus="proupStatus" :content="content" @closeProup="proupClose"></Proup> -->
   </div>
 </template>
 <script>
@@ -58,8 +57,6 @@ export default {
       IAgree:false,
       timeer:null,
       code_txt:'发送验证码',
-      // content:'',
-      // proupStatus:false,//弹窗状态
       list:[
         {
           src:`${this.$store.state.imgUrl}register1.png`,
@@ -97,7 +94,7 @@ export default {
           title:'message.signin.txt16',
           inputvalue:'',
           placeholder:'Please enter the email',
-          tip:'邮箱不能为空',
+          tip:'message.signin.txt30',
           tip_status:false,
           status:false
         },
@@ -105,7 +102,7 @@ export default {
           title:'message.signin.txt17',
           inputvalue:'',
           placeholder:'Please enter the password',
-          tip:'密码不能为空',
+          tip:'message.signin.txt31',
           tip_status:false,
           status:false
         },
@@ -113,7 +110,7 @@ export default {
           title:'message.signin.txt18',
           inputvalue:'',
           placeholder:'Enter again password',
-          tip:'请先输入密码',
+          tip:'message.signin.txt33',
           tip_status:false,
           status:false
         },
@@ -127,12 +124,6 @@ export default {
     igraeeClick(){
       this.IAgree = !this.IAgree
     },
-    // proupClose(){
-    //   this.proupStatus = false
-    //   setTimeout(() => {
-    //     this.$router.push('/signin/login')
-    //   },500)
-    // },
     loginClick(){
       this.$router.push('/signin/login')
     },
@@ -147,21 +138,21 @@ export default {
       switch(index){
         case 0:
           if (!this.$store.state.emailReg.test(this.user[index].inputvalue)){
-            this.checkFun(index,'邮箱不合法')
+            this.checkFun(index,'message.signin.txt36')
           }else{
             this.user[index].status = true
           }
           break;
         case 1:
           if (!this.$store.state.pwReg.test(this.user[index].inputvalue)){
-            this.checkFun(index,'密码不合法')
+            this.checkFun(index,'message.signin.txt37')
           }else{
             this.user[index].status = true
           }
           break;
         case 2:
           if (this.user[1].inputvalue !== this.user[2].inputvalue){
-            this.checkFun(index,'密码俩次输入不一样')
+            this.checkFun(index,'message.signin.txt38')
           }else{
             this.user[index].status = true
           }

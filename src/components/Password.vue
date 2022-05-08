@@ -1,7 +1,7 @@
 <template>
   <div class="pass_proup_page" v-if="passStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24">{{title}}</p>
+      <p class="propu_title_txt font24">{{$t(title)}}</p>
       <div class="proup_content" v-for="(item, index) in arr" :key="index">
         <p class="p1 font16">{{$t(item.title)}}</p>
         <input 
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="input_prompt font12">
-          <span :class="{ani_shake:item.tip_status}" v-if="item.tip_status">* {{ item.tip }}</span>
+          <span :class="{ani_shake:item.tip_status}" v-if="item.tip_status">* {{ $t(item.tip) }}</span>
         </div>
       </div>
       <div class="btn font18" @click="sureClick">
@@ -67,7 +67,7 @@ export default {
           title:'message.account.txt22',
           inputvalue:'',
           placeholder:'Please enter the content',
-          tip:'输入你的电子邮件',
+          tip:'message.account.txt22',
           tip_status:false,
           status:false
         },
@@ -77,7 +77,7 @@ export default {
           title:'message.account.txt23',
           inputvalue:'',
           placeholder:'Please enter the content',
-          tip:'请输入验证码',
+          tip:'message.account.txt23',
           tip_status:false,
           status:false
         },
@@ -86,7 +86,7 @@ export default {
           title:'message.account.txt24',
           inputvalue:'',
           placeholder:'Please enter the email',
-          tip:'输入新密码',
+          tip:'message.account.txt24',
           tip_status:false,
           status:false
         },
@@ -95,7 +95,7 @@ export default {
           title:'message.account.txt25',
           inputvalue:'',
           placeholder:'Please enter the content',
-          tip:'重新输入新密码',
+          tip:'message.account.txt25',
           tip_status:false,
           status:false
         },
@@ -106,7 +106,7 @@ export default {
           title:'message.account.txt26',
           inputvalue:'',
           placeholder:'Please enter the name',
-          tip:'输入您当前的密码',
+          tip:'message.account.txt26',
           tip_status:false,
           status:false
         },
@@ -115,7 +115,7 @@ export default {
           title:'message.account.txt24',
           inputvalue:'',
           placeholder:'Please enter the email',
-          tip:'输入新密码',
+          tip:'message.account.txt24',
           tip_status:false,
           status:false
         },
@@ -124,7 +124,7 @@ export default {
           title:'message.account.txt25',
           inputvalue:'',
           placeholder:'Please enter the content',
-          tip:'重新输入新密码',
+          tip:'message.account.txt25',
           tip_status:false,
           status:false
         },
@@ -174,7 +174,7 @@ export default {
       switch(item.id){
         case 1:
           if (!this.$store.state.emailReg.test(this.arr[index].inputvalue)){
-            this.arr[index].tip = '请输入正确的邮箱'
+            this.arr[index].tip = 'message.account.txt27'
             this.arr[index].tip_status = true
             this.arr[index].status = false
           }else{
@@ -183,7 +183,7 @@ export default {
           break;
         case 2: 
           if (this.arr[index].inputvalue.length < 6){
-            this.arr[index].tip = '请输入6位验证码'
+            this.arr[index].tip = 'message.account.txt28'
             this.arr[index].tip_status = true
             this.arr[index].status = false
           }else{
@@ -192,7 +192,7 @@ export default {
           break;
         case 3: 
           if (!this.arr[index].inputvalue){
-            this.arr[index].tip = '新密码不合法'
+            this.arr[index].tip = 'message.account.txt29'
             this.arr[index].tip_status = true
             this.arr[index].status = false
           }else{
@@ -201,7 +201,7 @@ export default {
           break;
         case 4: 
           if (this.arr[this.arr.length-2].inputvalue !== this.arr[this.arr.length-1].inputvalue){
-            this.arr[index].tip = '俩次输入密码不一致'
+            this.arr[index].tip = 'message.account.txt30'
             this.arr[index].tip_status = true
             this.arr[index].status = false
           }else{
@@ -210,7 +210,7 @@ export default {
           break;
         case 5: 
           if (this.arr[index].inputvalue){
-            this.arr[index].tip = '当前密码不正确'
+            this.arr[index].tip = 'message.account.txt31'
             this.arr[index].tip_status = true
             this.arr[index].status = false
           }else{

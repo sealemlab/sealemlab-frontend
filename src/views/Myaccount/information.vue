@@ -55,7 +55,7 @@ export default {
   data(){
     return {
       codestatus:true,
-      title:"修改密码",//修改密码弹窗标题
+      title:"message.account.txt8",//修改密码弹窗标题
       passStatus:false,//修改密码弹窗
       list:[
         {
