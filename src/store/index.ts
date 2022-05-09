@@ -22,6 +22,7 @@ export default new Vuex.Store({
     walletstatus:false,// 钱包弹窗状态
     proupInfo:{
       status:false,
+      isProgress:true,
       content:'',
       ortherDoing:false
     },// 提示框信息

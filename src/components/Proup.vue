@@ -2,9 +2,15 @@
   <div class="proup_page" v-if="proupStatus">
     <div class="proup_boxs">
       <p class="propu_title_txt font24">{{$t("message.tip.txt3")}}</p>
-      <div class="proup_content">
+      <div class="proup_content" v-if="isProgress">
         <img :src="`${$store.state.imgUrl}success.png`" class="success_img" />
         {{$t(content)}}
+      </div>
+      <div class="progress" v-else>
+        <div class="box" id="div_box">
+          <div class="load" ref="load"></div>
+        </div>
+        <span class="txt font16">{{progressTXt}}%</span>
       </div>
       <img :src="`${$store.state.imgUrl}close.png`" class="close_img" @click.stop="closeProup"/>
     </div>
@@ -20,6 +26,15 @@ export default {
     content:{
       type: String,
       default: ''
+    },
+    isProgress:{
+      type: Boolean,
+      default: true
+    },
+  },
+  data(){
+    return{
+      progressTXt:0
     }
   },
   watch:{
@@ -29,14 +44,38 @@ export default {
       }else{
         document.body.style.overflow='visible'
       }
-    }
+    },
+    isProgress(newvala){
+      if(newvala){
+        this.progressFun()
+      }else{
+        this.progressTXt = 0
+        this.$refs.load.style.width = 0
+      }
+    },
   },
   methods: {
     // 弹窗关闭
     closeProup () {
       this.$emit('closeProup')
+    },
+    progressFun(){
+      let i = 0
+      let timer = setInterval(function(){
+      if(i<100){
+          i+=1;
+          this.progressTXt = i+'%';
+          this.$refs.load.style.width = i*3+'px';
+      }
+      if(i>=100){
+        clearInterval(timer);
+      }
+    },100);
     }
-  }
+  },
+  // mounted(){
+
+  // }
 }
 </script>
 <style lang="scss" scoped>
@@ -84,6 +123,26 @@ export default {
       width: 34px;
       cursor: pointer;
     }
+  }
+}
+.progress{
+  width: 100%;
+  .box{
+    width: 100%;
+    height: 27px;
+    background: #171718;
+    box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+    border-radius: 13px;
+    .load{
+      width:0;
+      height:27px;
+      background: linear-gradient(180deg, #F2D47B 0%, #F7E9B9 52%, #F0CE75 100%);
+      border-radius: 13px;
+    }
+  }
+  .txt{
+    color: red;
+
   }
 }
 </style>

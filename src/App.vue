@@ -15,7 +15,7 @@
       @walletClick="walletClick"
     ></WalletComponents>
     <!-- 普通弹窗 -->
-    <Proup :proupStatus="getProupInfo.status" :content="getProupInfo.content" @closeProup="proupClose"></Proup>
+    <Proup :isProgress="getProupInfo.isProgress" :proupStatus="getProupInfo.status" :content="getProupInfo.content" @closeProup="proupClose"></Proup>
     <!-- 轻提示 -->
     <Notice :noticeStatus="getNoticeInfo.status" :word="getNoticeInfo.word"></Notice>
   </div>

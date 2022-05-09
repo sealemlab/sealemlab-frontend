@@ -9,7 +9,7 @@
         </div>
       </div>
       <!-- busd输入框 -->
-      <div class="inputbox">
+      <div class="inputbox" v-if="activetype == 0 || activetype == 1">
         <p class="font12 balance_">BUSD {{$t("message.bond.txt22")}}: 10.2345</p>
         <div class="inputcontent">
           <div class="left_content">
@@ -23,7 +23,7 @@
         </div>
       </div>
       <!-- st输入框 -->
-      <div class="inputbox">
+      <div class="inputbox" v-if="activetype == 0 || activetype == 2">
         <p class="font12 balance_">ST {{$t("message.bond.txt22")}}: 12</p>
         <div class="inputcontent">
           <div class="left_content">
