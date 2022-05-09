@@ -67,11 +67,12 @@ export default {
         { label: "message.nav.txt4", link: "" },
         { label: "message.nav.txt5", link: "" },
         { label: "message.nav.txt6", link: "/user/assets/0" },
-        { label: "message.nav.txt7", link: "" }
+        // { label: "message.nav.txt7", link: "" }
       ],
       showLangSelect: false,
       language: "",
       langArr: ["EN", "CN"],
+      isdown:false,
     };
   },
   computed: { ...mapGetters(["isEnLang","getLogin","getIsMobile","getSubtringAccount","getIstrue"]) },
@@ -86,15 +87,22 @@ export default {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
-      }else if (to.path.indexOf("/user/") !== -1) {
-        this.navActive = 4;
       }else if (to.path.indexOf("/signin/") !== -1) {
         this.navActive = 7;
       }else if (to.path.indexOf("/myaccount/") !== -1) {
         this.navActive = 7;
+      }else{
+        if(!this.isdown){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+          this.isdown = true
+          setTimeout(() => {
+            this.isdown = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
+          }, 3000);
+        }
       }
       // else if (to.path.indexOf("/user/") !== -1) {
-      //   this.navActive = 5;
+      //   this.navActive = 4;
       // }
     },
   },
@@ -113,7 +121,18 @@ export default {
       this.$store.commit("setnewinfo", JSON.stringify({}));
     },
     toRoute(link) {
-      if (link) this.$router.push(link);
+      if (link){
+        this.$router.push(link);
+      } else{
+        if(!this.isdown){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+          this.isdown = true
+          setTimeout(() => {
+            this.isdown = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
+          }, 2000);
+        }
+      }
     },
     loginClick(data){
       switch(data){
@@ -135,7 +154,7 @@ export default {
       this.language = this.langArr[index];
       this.$i18n.locale = this.language == "EN" ? "en" : "cn";
       this.$utils.setCookie("LANG", this.$i18n.locale);
-      location.reload();
+      // location.reload();
     },
     // 链接钱包弹窗
     commonLink() {
@@ -150,7 +169,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 9;
   width: 100%;
   height: 80px;
   background: #000000;

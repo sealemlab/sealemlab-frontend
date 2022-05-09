@@ -1,12 +1,15 @@
 <template>
   <div class="nft_page">
     <div class="content_box">
-      <div class="display_flex menu_box">
+      <!-- <img :src="route.src" class="nav_img" /> -->
+      <!-- <div class="display_flex menu_box">
         <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
-          <img :src="route.src" class="nav_img" />
           <span class="nav_txt">{{ $t(route.label) }}</span>
         </router-link>
-      </div>
+      </div> -->
+      <ul class="display_flex">
+        <li class="font24" :class="{ active_li: li_index == index }" v-for="(item,index) in navArr" :key="index" @click="liClick(item,index)">{{$t(item.label)}}</li>
+      </ul>
       <div class="main">
         <router-view />
       </div>
@@ -20,20 +23,39 @@ export default {
   data() {
     return {
       li_index:0,
+      isdown:false,
       navArr: [
         { label: "message.nft.txt2", link: "/nft/buy-blind-box/0",src:`${this.$store.state.imgUrl}nft_nav1.png` },
-        { label: "message.nft.txt3", link: "/nft/blind-box",src:`${this.$store.state.imgUrl}nft_nav2.png` },
-        { label: "message.nft.txt4", link: "/nft/my-nft",src:`${this.$store.state.imgUrl}nft_nav3.png` },
-        { label: "message.nft.txt5", link: "/nft/giving",src:`${this.$store.state.imgUrl}nft_nav4.png` },
-        { label: "message.nft.txt6", link: "/nft/lease",src:`${this.$store.state.imgUrl}nft_nav5.png` },
+        { label: "message.nft.txt3", link: "",src:`${this.$store.state.imgUrl}nft_nav2.png` },
+        { label: "message.nft.txt4", link: "",src:`${this.$store.state.imgUrl}nft_nav3.png` },
+        { label: "message.nft.txt5", link: "",src:`${this.$store.state.imgUrl}nft_nav4.png` },
+        { label: "message.nft.txt6", link: "",src:`${this.$store.state.imgUrl}nft_nav5.png` },
       ],
+      // navArr: [
+      //   { label: "message.nft.txt2", link: "/nft/buy-blind-box/0",src:`${this.$store.state.imgUrl}nft_nav1.png` },
+      //   { label: "message.nft.txt3", link: "/nft/blind-box",src:`${this.$store.state.imgUrl}nft_nav2.png` },
+      //   { label: "message.nft.txt4", link: "/nft/my-nft",src:`${this.$store.state.imgUrl}nft_nav3.png` },
+      //   { label: "message.nft.txt5", link: "/nft/giving",src:`${this.$store.state.imgUrl}nft_nav4.png` },
+      //   { label: "message.nft.txt6", link: "/nft/lease",src:`${this.$store.state.imgUrl}nft_nav5.png` },
+      // ],
     };
   },
   computed: { ...mapGetters(["isEnLang"]) },
   methods:{
     liClick(item,index){
-      this.li_index = index
-      this.$router.push(item.link)
+      if(item.link){
+        this.li_index = index
+        this.$router.push(item.link)
+      }else{
+        if(!this.isdown){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+          this.isdown = true
+          setTimeout(() => {
+            this.isdown = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
+          }, 2000);
+        }
+      }
     }
   }
 };
@@ -58,12 +80,11 @@ export default {
         align-items: center;
         margin-bottom: 60px;
         color: #fff;
-        // padding-left: 68px;
         cursor: pointer;
         text-decoration: none;
-        .nav_img{
-          width: 32px;
-        }
+        // .nav_img{
+        //   width: 32px;
+        // }
         .nav_txt{
           font-weight: normal;
           color: #FFFFFF;
@@ -74,13 +95,30 @@ export default {
           .nav_txt{
             color: #EDD083;
           }
-          // background: linear-gradient(90deg, #EDD083 0%, rgba(240, 206, 117, 0) 100%);
-          // border-image: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(184, 155, 91, 1)) 1 1;
         }
       }
     }
+    ul{
+      margin-top: 36px;
+      flex-direction: column;
+      li{
+        // margin-top: 80px;
+        font-weight: normal;
+        color: #FFFFFF;
+        line-height: 48px;
+        min-width: 120px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        color: #fff;
+        cursor: pointer;
+      }
+      .active_li{
+        color: #EDD083;
+      }
+    }
     .main{
-      min-width: calc(100% - 171px);
+      min-width: calc(100% - 120px);
       max-width: 1200px;
       margin-top: 50px;
     }

@@ -5,11 +5,12 @@
       {{$t("message.nft.txt31")}}
     </p>
     <div class="content">
-      <ul class="tab_box">
-        <li :class="{ li_class1: index == 0,li_class2: index == 1,li_class3: index == 2,li_class4: index == 3,li_active_calss:index == currentClass}" :style="{background:(index == currentClass?`url(${item.image})`:'')}" v-for="(item, index) in tabClassArr" :key="index" @click="clickTabClass(index)">
+      <div class="tab_box">
+        <div :class="{ li_class1: index == 0,li_class2: index == 1,li_class3: index == 2,li_class4: index == 3,li_active_calss:index == currentClass}" :style="{background:(index == currentClass?`url(${item.image})`:'')}" class="li" v-for="(item, index) in tabClassArr" :key="index" @click="clickTabClass(index)">
           <div class="font16 border_type">{{ $t(item.label) }}</div>
-        </li>
-      </ul>
+        </div>
+        <div class="add_introduce font16">{{$t(tabClassArr[currentClass].classIntroduce)}}</div>
+      </div>
       <div class="left_content">
         <div class="swiperbox_1">
           <swiper ref="swiper1" :options="swiperOption1">
@@ -25,7 +26,7 @@
           <swiper ref="swiper2" :options="swiperOption2">
             <swiper-slide v-for="(item, index) in tabClassArr[currentClass].classFashionArr" :key="index">
               <div class="img_box" :class="{ active: currentSwiperIndex == index }">
-                <img :src="item" alt="" />
+                <img :src="item.src" alt="" />
               </div>
             </swiper-slide>
           </swiper>
@@ -35,12 +36,12 @@
       </div>
       <div class="right_content">
         <ul>
-          <li class="font20">
+          <!-- <li class="font20">
             {{ $t(tabClassArr[currentClass].label) }}
           </li>
           <li class="font16">
             {{ $t(tabClassArr[currentClass].classIntroduce) }}
-          </li>
+          </li> -->
           <li class="font20">
             {{ $t(tabClassArr[currentClass].arms) }}:<span class="font16">{{ $t(tabClassArr[currentClass].skill_content) }}</span> 
           </li>
@@ -48,9 +49,25 @@
             {{ $t(tabClassArr[currentClass].skill) }}
           </li>
           <li>
-            <img v-for="(item, index) in tabClassArr[currentClass].skills" :key="index" :src="item" alt="" />
+            <div class="skill_img_box">
+              <img :src="item.src" :class="skillIndex == index?'addborder':''" v-for="(item, index) in tabClassArr[currentClass].skills" :key="index" @click="skillClick(index)"/>
+            </div>
+            <div class="skill_box">
+              <p>{{$t(tabClassArr[currentClass].skills[skillIndex].title)}}</p>
+              <p>{{$t(tabClassArr[currentClass].skills[skillIndex].content)}}</p>
+            </div>
           </li>
         </ul>
+        <div class="start_box font12">
+          <p>
+            <span class="font26">{{tabClassArr[currentClass].classFashionArr[currentSwiperIndex].level}}</span>
+            <img :src="`${$store.state.imgUrl}start.png`" /></p>
+          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title1)"></p>
+          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title2)"></p>
+          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title3)"></p>
+          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title4)"></p>
+          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title5)"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -71,6 +88,7 @@ export default {
   },
   data() {
     return {
+      skillIndex:0,//技能的索引
       currentClass: 0,
       tabClassArr: [
         {
@@ -81,10 +99,31 @@ export default {
           skill_content: "message.nft.txt15_1",
           classIntroduce: "message.nft.txt14_1",
           skills: [
-            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
+            {
+              src:`${this.$store.state.imgUrl}skill_jds_1.png`,
+              title:'message.nft.txt58',
+              content:'message.nft.txt59'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_jds_2.png`,
+              title:'message.nft.txt60',
+              content:'message.nft.txt61'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_jds_3.png`,
+              title:'message.nft.txt62',
+              content:'message.nft.txt63'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_jds_4.png`,
+              title:'message.nft.txt64',
+              content:'message.nft.txt65'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_jds_5.png`,
+              title:'message.nft.txt66',
+              content:'message.nft.txt67'
+            },
           ],
           classFigureArr: [
             `${this.$store.state.imgUrl}nft_zs_1.mp4`,
@@ -93,11 +132,43 @@ export default {
             `${this.$store.state.imgUrl}nft_zs_4.mp4`,
           ],
           classFashionArr: [
-            `${this.$store.state.imgUrl}nft_zs_suit_1.png`,
-            `${this.$store.state.imgUrl}nft_zs_suit_2.png`,
-            `${this.$store.state.imgUrl}nft_zs_suit_3.png`,
-            `${this.$store.state.imgUrl}nft_zs_suit_4.png`,
-          ],
+            {
+              src:`${this.$store.state.imgUrl}nft_zs_suit_1.png`,
+              level:8,
+              title1:"message.nft.txt98",
+              title2:"message.nft.txt99",
+              title3:"message.nft.txt100",
+              title4:"message.nft.txt101",
+              title5:"message.nft.txt102"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_zs_suit_2.png`,
+              level:9,
+              title1:"message.nft.txt103",
+              title2:"message.nft.txt104",
+              title3:"message.nft.txt105",
+              title4:"message.nft.txt106",
+              title5:"message.nft.txt107"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_zs_suit_3.png`,
+              level:10,
+              title1:"message.nft.txt108",
+              title2:"message.nft.txt109",
+              title3:"message.nft.txt110",
+              title4:"message.nft.txt111",
+              title5:"message.nft.txt112"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_zs_suit_4.png`,
+              level:11,
+              title1:"message.nft.txt113",
+              title2:"message.nft.txt114",
+              title3:"message.nft.txt115",
+              title4:"message.nft.txt116",
+              title5:"message.nft.txt117"
+            }
+          ]
         },
         {
           image: `${this.$store.state.imgUrl}nav_nft_jds_active.png`,
@@ -107,10 +178,31 @@ export default {
           skill_content: "message.nft.txt15",
           classIntroduce: "message.nft.txt14",
           skills: [
-            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
+            {
+              src:`${this.$store.state.imgUrl}skill_zs_1.png`,
+              title:'message.nft.txt88',
+              content:'message.nft.txt89'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_zs_2.png`,
+              title:'message.nft.txt90',
+              content:'message.nft.txt91'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_zs_3.png`,
+              title:'message.nft.txt92',
+              content:'message.nft.txt93'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_zs_4.png`,
+              title:'message.nft.txt94',
+              content:'message.nft.txt95'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_zs_5.png`,
+              title:'message.nft.txt96',
+              content:'message.nft.txt97'
+            },
           ],
           classFigureArr: [
             `${this.$store.state.imgUrl}nft_jds_1.mp4`,
@@ -119,11 +211,43 @@ export default {
             `${this.$store.state.imgUrl}nft_jds_4.mp4`,
           ],
           classFashionArr: [
-            `${this.$store.state.imgUrl}nft_jds_suit_1.png`,
-            `${this.$store.state.imgUrl}nft_jds_suit_2.png`,
-            `${this.$store.state.imgUrl}nft_jds_suit_3.png`,
-            `${this.$store.state.imgUrl}nft_jds_suit_4.png`,
-          ],
+            {
+              src:`${this.$store.state.imgUrl}nft_jds_suit_1.png`,
+              level:8,
+              title1:"message.nft.txt98",
+              title2:"message.nft.txt99",
+              title3:"message.nft.txt100",
+              title4:"message.nft.txt101",
+              title5:"message.nft.txt102"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_jds_suit_2.png`,
+              level:9,
+              title1:"message.nft.txt103",
+              title2:"message.nft.txt104",
+              title3:"message.nft.txt105",
+              title4:"message.nft.txt106",
+              title5:"message.nft.txt107"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_jds_suit_3.png`,
+              level:10,
+              title1:"message.nft.txt108",
+              title2:"message.nft.txt109",
+              title3:"message.nft.txt110",
+              title4:"message.nft.txt111",
+              title5:"message.nft.txt112"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_jds_suit_4.png`,
+              level:11,
+              title1:"message.nft.txt113",
+              title2:"message.nft.txt114",
+              title3:"message.nft.txt115",
+              title4:"message.nft.txt116",
+              title5:"message.nft.txt117"
+            }
+          ]
         },
         {
           image: `${this.$store.state.imgUrl}nav_nft_wushi_active.png`,
@@ -133,10 +257,31 @@ export default {
           skill_content: "message.nft.txt15_3",
           classIntroduce: "message.nft.txt14_3",
           skills: [
-            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
+            {
+              src:`${this.$store.state.imgUrl}skill_ws_1.png`,
+              title:'message.nft.txt78',
+              content:'message.nft.txt79'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_ws_2.png`,
+              title:'message.nft.txt80',
+              content:'message.nft.txt81'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_ws_3.png`,
+              title:'message.nft.txt82',
+              content:'message.nft.txt83'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_ws_4.png`,
+              title:'message.nft.txt84',
+              content:'message.nft.txt85'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_ws_5.png`,
+              title:'message.nft.txt86',
+              content:'message.nft.txt87'
+            },
           ],
           classFigureArr: [
             `${this.$store.state.imgUrl}nft_ws_1.mp4`,
@@ -145,10 +290,42 @@ export default {
             `${this.$store.state.imgUrl}nft_ws_4.mp4`,
           ],
           classFashionArr: [
-            `${this.$store.state.imgUrl}nft_ws_suit_1.png`,
-            `${this.$store.state.imgUrl}nft_ws_suit_2.png`,
-            `${this.$store.state.imgUrl}nft_ws_suit_3.png`,
-            `${this.$store.state.imgUrl}nft_ws_suit_4.png`,
+            {
+              src:`${this.$store.state.imgUrl}nft_ws_suit_1.png`,
+              level:8,
+              title1:"message.nft.txt98",
+              title2:"message.nft.txt99",
+              title3:"message.nft.txt100",
+              title4:"message.nft.txt101",
+              title5:"message.nft.txt102"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_ws_suit_2.png`,
+              level:9,
+              title1:"message.nft.txt103",
+              title2:"message.nft.txt104",
+              title3:"message.nft.txt105",
+              title4:"message.nft.txt106",
+              title5:"message.nft.txt107"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_ws_suit_3.png`,
+              level:10,
+              title1:"message.nft.txt108",
+              title2:"message.nft.txt109",
+              title3:"message.nft.txt110",
+              title4:"message.nft.txt111",
+              title5:"message.nft.txt112"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_ws_suit_4.png`,
+              level:11,
+              title1:"message.nft.txt113",
+              title2:"message.nft.txt114",
+              title3:"message.nft.txt115",
+              title4:"message.nft.txt116",
+              title5:"message.nft.txt117"
+            }
           ],
         },
         {
@@ -159,10 +336,31 @@ export default {
           skill_content: "message.nft.txt15_2",
           classIntroduce: "message.nft.txt14_2",
           skills: [
-            `${this.$store.state.imgUrl}nft_class1_skills1.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills2.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills3.png`,
-            `${this.$store.state.imgUrl}nft_class1_skills4.png`,
+            {
+              src:`${this.$store.state.imgUrl}skill_ck_1.png`,
+              title:'message.nft.txt68',
+              content:'message.nft.txt69'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_ck_2.png`,
+              title:'message.nft.txt70',
+              content:'message.nft.txt71'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_ck_3.png`,
+              title:'message.nft.txt72',
+              content:'message.nft.txt73'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_ck_4.png`,
+              title:'message.nft.txt74',
+              content:'message.nft.txt75'
+            },
+            {
+              src:`${this.$store.state.imgUrl}skill_ck_5.png`,
+              title:'message.nft.txt76',
+              content:'message.nft.txt77'
+            },
           ],
           classFigureArr: [
             `${this.$store.state.imgUrl}nft_cike_1.mp4`,
@@ -171,10 +369,42 @@ export default {
             `${this.$store.state.imgUrl}nft_cike_4.mp4`,
           ],
           classFashionArr: [
-            `${this.$store.state.imgUrl}nft_cike_suit_1.png`,
-            `${this.$store.state.imgUrl}nft_cike_suit_2.png`,
-            `${this.$store.state.imgUrl}nft_cike_suit_3.png`,
-            `${this.$store.state.imgUrl}nft_cike_suit_4.png`,
+            {
+              src:`${this.$store.state.imgUrl}nft_cike_suit_1.png`,
+              level:8,
+              title1:"message.nft.txt98",
+              title2:"message.nft.txt99",
+              title3:"message.nft.txt100",
+              title4:"message.nft.txt101",
+              title5:"message.nft.txt102"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_cike_suit_2.png`,
+              level:9,
+              title1:"message.nft.txt103",
+              title2:"message.nft.txt104",
+              title3:"message.nft.txt105",
+              title4:"message.nft.txt106",
+              title5:"message.nft.txt107"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_cike_suit_3.png`,
+              level:10,
+              title1:"message.nft.txt108",
+              title2:"message.nft.txt109",
+              title3:"message.nft.txt110",
+              title4:"message.nft.txt111",
+              title5:"message.nft.txt112"
+            },
+            {
+              src:`${this.$store.state.imgUrl}nft_cike_suit_4.png`,
+              level:11,
+              title1:"message.nft.txt113",
+              title2:"message.nft.txt114",
+              title3:"message.nft.txt115",
+              title4:"message.nft.txt116",
+              title5:"message.nft.txt117"
+            }
           ],
         },
       ],
@@ -220,7 +450,11 @@ export default {
   methods: {
     clickTabClass(index) {
       this.currentClass = index;
-    }
+      this.skillIndex = 0
+    },
+    skillClick(index) {
+      this.skillIndex = index;
+    },
   }
 };
 </script>
@@ -242,9 +476,16 @@ export default {
   }
   .tab_box {
     max-width: 200px;
+    max-height: 400px;
     display: flex;
     flex-direction: column;
-    li {
+    .add_introduce{
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 22px;
+      margin-top: 20px;
+    }
+    .li {
       cursor: pointer;
       display: flex;
       width: 141px;
@@ -370,16 +611,13 @@ export default {
         height: auto;
         color: #ffffff;
         li{
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           font-weight: 600;
           line-height: 28px;
           &:nth-child(1){
-            color: #ECCF83;
-          }
-          &:nth-child(2){
-            color: #FFFFFF;
-            margin-top: 14px;
-          }
-          &:nth-child(3){
             color: #ECCF83;
             margin-top: 40px;
             span{
@@ -389,18 +627,73 @@ export default {
               margin-left: 10px;
             }
           }
-          &:nth-child(4){
+          &:nth-child(2){
             color: #ECCF83;
             margin-top: 40px;
           }
-          &:nth-child(5){
+          &:nth-child(3){
             margin-top: 17px;
             width: 100%;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            .skill_img_box{
+              width: 100%;
+              display: flex;
+              align-items: center;
+              img{
+                width: 42px;
+                margin-right: 10px;
+                cursor: pointer;
+              }
+              .addborder{
+                width: 45px;
+                border: 1px solid #ECCF83;
+                border-radius: 50%;
+              }
+            }
+            .skill_box{
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              p{
+                &:nth-child(1){
+                  font-weight: 400;
+                  color: #FFFFFF;
+                  line-height: 26px;
+                  margin-top: 30px;
+                }
+                &:nth-child(2){
+                  margin-top: 30px;
+                  font-weight: 400;
+                  color: #FFFFFF;
+                  line-height: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .start_box{
+        display: flex;
+        flex-direction: column;
+        margin-top: 42px;
+        p{
+          font-weight: 400;
+          color: #FFFFFF;
+          line-height: 24px;
+          span{
+            color: #ECCF83;
+          }
+          &:nth-child(1){
+            margin-bottom: 10px;
+            span{
+              font-weight: 800;
+              color: #ECCF83;
+              line-height: 31px;
+            }
             img{
-              width: 42px;
-              margin-right: 30px;
+              width: 25px;
+              margin-left: 5px;
             }
           }
         }

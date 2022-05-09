@@ -43,10 +43,10 @@
           <span class="unit_class" v-if="bindboxType == 1">BNB</span> -->
         </div>
         <div class="balance_txt">
-          {{$t("message.nft.txt27")}} 
+          {{$t("message.nft.txt27")}}&nbsp;
           <BtnLoading :isloading="true" v-if="balanceStatus"></BtnLoading>
-          <span v-else>&nbsp;{{balance}}&nbsp;</span>
-          <span>ST</span>
+          <span v-else>{{balance}}</span>
+          <span>&nbsp;ST</span>
           <!-- <span v-if="bindboxType == 0">HC</span>
           <span v-if="bindboxType == 1">BNB</span> -->
           <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
@@ -344,11 +344,9 @@ export default {
     display: flex;
     flex-direction: column;
     margin: 87px 0;
-    // background: rgba(16, 16, 16, 0.49);
-    // box-shadow: 0px 6px 11px 0px rgba(0, 0, 0, 0.59);
-    // border-radius: 25px;
-    // border: 1px solid rgba(236, 207, 131, 0.5);
+    align-items: center;
     .title_txt{
+      width: 100%;
       font-weight: 600;
       color: #ECCF83;
       line-height: 28px;
@@ -416,7 +414,7 @@ export default {
       align-items: center;
       font-weight: 600;
       color: #000000;
-      margin-left: 35%;
+      // margin-left: 35%;
       cursor: pointer;
     }
   }

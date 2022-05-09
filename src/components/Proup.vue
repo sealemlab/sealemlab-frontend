@@ -1,14 +1,18 @@
 <template>
   <div class="proup_page" v-if="proupStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24">{{$t("message.tip.txt3")}}</p>
+      <p class="propu_title_txt font24">{{$t(title)}}</p>
       <div class="proup_content" v-if="isProgress">
         <img :src="`${$store.state.imgUrl}success.png`" class="success_img" />
         {{$t(content)}}
       </div>
       <div class="progress" v-else>
-        <div class="box" id="div_box">
-          <div class="load" ref="load"></div>
+        <p class="bscscan fotn16">
+          view on bscscan 
+          <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
+        </p>
+        <div class="box">
+          <div class="load" :style="{width}"></div>
         </div>
         <span class="txt font16">{{progressTXt}}%</span>
       </div>
@@ -31,10 +35,16 @@ export default {
       type: Boolean,
       default: true
     },
+    title:{
+      type: String,
+      default: 'message.tip.txt3'
+    },
   },
   data(){
     return{
-      progressTXt:0
+      progressTXt:0,
+      width:0,
+      timer:null
     }
   },
   watch:{
@@ -43,39 +53,39 @@ export default {
         document.body.style.overflow='hidden'
       }else{
         document.body.style.overflow='visible'
+        this.progressTXt = 0
+        this.width = 0
       }
     },
     isProgress(newvala){
-      if(newvala){
+      if(!newvala){
         this.progressFun()
-      }else{
-        this.progressTXt = 0
-        this.$refs.load.style.width = 0
       }
     },
   },
   methods: {
+    // 进度条展示
+    // this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'','isProgress':false}));
     // 弹窗关闭
     closeProup () {
       this.$emit('closeProup')
     },
     progressFun(){
+      clearInterval(this.timer)
       let i = 0
-      let timer = setInterval(function(){
-      if(i<100){
+      this.timer = setInterval(() => {
+        if(i<100){
           i+=1;
-          this.progressTXt = i+'%';
-          this.$refs.load.style.width = i*3+'px';
-      }
-      if(i>=100){
-        clearInterval(timer);
-      }
-    },100);
+          this.progressTXt = i;
+          this.width = i + '%';
+        }
+        if(i>=100){
+          this.proupStatus = false
+          clearInterval(this.timer);
+        }
+      },100)
     }
-  },
-  // mounted(){
-
-  // }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -127,6 +137,20 @@ export default {
 }
 .progress{
   width: 100%;
+  margin-top: 30px;
+  .bscscan{
+    cursor: pointer;
+    width: 100%;
+    padding-right: 20px;
+    text-align: right;
+    font-weight: 400;
+    color: #969090;
+    line-height: 19px;
+    margin-bottom: 15px;
+    .link_img{
+      width: 12px;
+    }
+  }
   .box{
     width: 100%;
     height: 27px;
@@ -141,8 +165,11 @@ export default {
     }
   }
   .txt{
-    color: red;
-
+    display: inline-block;
+    color: #F2D47B;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
   }
 }
 </style>

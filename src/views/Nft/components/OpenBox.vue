@@ -93,6 +93,8 @@ export default {
     },
     // 弹窗关闭
     closeOpen () {
+      this.selectALLBtn = false
+      this.selectedNUM = 0
       this.$emit('closeOpen')
     },
     cardClick(data,index){

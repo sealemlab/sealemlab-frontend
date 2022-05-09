@@ -83,7 +83,6 @@ export default {
     },
     openBoxFun(item){
       console.log('item: ', item);
-      // this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'','isProgress':false}));
       if(item.status){
         if(!this.isdown){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt46'}));

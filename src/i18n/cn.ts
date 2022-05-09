@@ -193,6 +193,74 @@ export const message = {
     txt56:"史诗盲盒",
     txt57:"打开",
 
+    txt58:"剑刃风暴",
+    txt59:"向前一击将敌人击退",
+    txt60:"刀锋冲击",
+    txt61:"冲锋时顺劈攻击敌人",
+    txt62:"天堂之怒",
+    txt63:"在蓄力的时候发出波动攻击",
+    txt64:"以眼还眼",
+    txt65:"增强角斗士的反击和决斗能力",
+    txt66:"朗基努斯之枪",
+    txt67:"向上方抛出刀刃产生巨大爆炸",
+
+    txt68:"暗影突袭",
+    txt69:"迅速穿透敌人并击飞他们",
+    txt70:"匕首扇",
+    txt71:"用散布的匕首攻击敌人",
+    txt72:"暗影之舞",
+    txt73:"通过将多个匕首扔向前线来攻击",
+    txt74:"暗影面纱",
+    txt75:"增强刺客的反击和决斗能力",
+    txt76:"地球爆炸",
+    txt77:"向地面制造巨大的爆炸",
+
+    txt78:"魔法风暴",
+    txt79:"向前方放出魔法阵将敌人击飞",
+    txt80:"启示",
+    txt81:"用魔法光束击倒敌人",
+    txt82:"最后的光",
+    txt83:"发出强大的魔法光束；施法时可以转动",
+    txt84:"反射",
+    txt85:"强化魔法师的反击和决斗能力",
+    txt86:"精灵之风",
+    txt87:"通过激活魔法阵制造强大的阵风",
+
+    txt88:"气爆",
+    txt89:"正面气功波攻击",
+    txt90:"报应",
+    txt91:"通过击打地面来攻击敌人",
+    txt92:"流星拳",
+    txt93:"快速冲锋并攻击敌人",
+    txt94:"反驭",
+    txt95:"增强战士的反击和决斗能力",
+    txt96:"天崩地裂",
+    txt97:"运用气的力量撞击地面，使其崩溃",
+
+    txt98:"增加普通伤害<span style='color:#ECCF83'>40%</span>",
+    txt99:"技能冷却时间减少<span style='color:#ECCF83'>4.5秒</span>",
+    txt100:"增加技能伤害<span style='color:#ECCF83'>32%</span>",
+    txt101:"增加<span style='color:#ECCF83'>16%</span>伤害",
+    txt102:"增加攻击<span style='color:#ECCF83'>1125</span>",
+    
+    
+    txt103:"增加普通伤害<span style='color:#ECCF83'>48%</span>",
+    txt104:"技能冷却时间减少<span style='color:#ECCF83'>5秒</span>",
+    txt105:"增加技能伤害<span style='color:#ECCF83'>38%</span>",
+    txt106:"增加<span style='color:#ECCF83'>19%</span>伤害",
+    txt107:"增加攻击<span style='color:#ECCF83'>1325</span>",
+
+    txt108:"增加普通伤害<span style='color:#ECCF83'>56%</span>",
+    txt109:"技能冷却时间减少<span style='color:#ECCF83'>5.2秒</span>",
+    txt110:"增加技能伤害<span style='color:#ECCF83'>44%</span>",
+    txt111:"增加<span style='color:#ECCF83'>22%</span>伤害",
+    txt112:"增加攻击<span style='color:#ECCF83'>1525</span>",
+
+    txt113:"增加普通伤害<span style='color:#ECCF83'>65%</span>",
+    txt114:"技能冷却时间减少<span style='color:#ECCF83'>5.5秒</span>",
+    txt115:"增加技能伤害<span style='color:#ECCF83'>51%</span>",
+    txt116:"增加<span style='color:#ECCF83'>26%</span>伤害",
+    txt117:"增加攻击<span style='color:#ECCF83'>1750</span>",
   },//nft页面
   invite:{
     txt1:'排名',
@@ -349,7 +417,8 @@ export const message = {
     txt1:'创建账户成功,请到邮箱激活账户',
     txt2:'请检查账号/密码是否正确,账号是否激活',
     txt3:'提示',
-    txt4:'这是一条轻提示'
+    txt4:'这是一条轻提示',
+    txt5:'敬请期待'
   },//一些提示语句,文案你看哪不合适,替换就行
   approve:'授权',
   question:{ //这个里边写那些问号的内容吧,顺延即可

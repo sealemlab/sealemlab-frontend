@@ -3,7 +3,7 @@
     <div class="home_bgbox">
       <LoadingAnmation v-if="videoStatus" ></LoadingAnmation> <!--:isshowtxt="true"-->
       <video class="video_" ref="video" loop autoplay muted v-show="!videoStatus">
-        <source :src="`${$store.state.imgUrl}sacredrealm.mp4`" type="video/mp4" />
+        <source :src="`${$store.state.imgUrl}home_sacredrealm.mp4`" type="video/mp4" />
       </video>
       <div class="content">
         <div class="content_center">
@@ -29,6 +29,19 @@
       <div class="btnbox font16 mobile_font14">
         <span>{{$t("message.home.txt7")}}</span>
         <span>{{$t("message.home.txt8")}}</span>
+      </div>
+    </div>
+    <!-- Protocol Stats -->
+    <div class="characteristic_box">
+      <div class="title_txt font30">Protocol Stats</div>
+      <div class="border_">
+        <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
+          <div class="add_top_content">
+            <img :src="item.src" class="add_img" />
+            <span class="span font20">{{item.title}}</span>
+          </div>
+          <p class="font26">$&nbsp;{{item.num}}</p>
+        </div>
       </div>
     </div>
     <!-- 希莱姆简介 -->
@@ -144,7 +157,6 @@
     <div class="time_axis_box">
       <div class="time_axis display_flex">
         <div class="title_txt font30">{{$t("message.home.txt54")}}</div>
-        <!-- <div class="border_"></div> -->
         <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
           <swiper-slide v-for="(item, index) in swiperArr" :key="index">
             <div class="timebox">
@@ -193,6 +205,14 @@ export default {
   },
   data(){
     return{
+      addArr:[
+        {src:`${this.$store.state.imgUrl}home1.png`,num:0,title:'市值'},
+        {src:`${this.$store.state.imgUrl}home2.png`,num:0,title:'国库'},
+        {src:`${this.$store.state.imgUrl}home3.png`,num:0,title:'质押'},
+        {src:`${this.$store.state.imgUrl}home4.png`,num:0,title:'当前流通量'},
+        {src:`${this.$store.state.imgUrl}home5.png`,num:0,title:'ST 价格'},
+        {src:`${this.$store.state.imgUrl}home6.png`,num:0,title:'SR价格'},
+      ],
       activeIndex:0,//swiper索引
       videoStatus:true,//视频加载
       gameIndex:0,//游戏场景展示对应大图的索引
@@ -534,6 +554,43 @@ export default {
 <style lang="scss" soped>
 .home{
   width: 100%;
+  .border_{
+    width: 100%;
+    height: 380px;
+    padding: 10px 0 10px 70px;
+    border-radius: 31px;
+    border: 1px solid #D3B96D;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .add_one_box{
+      width: 26%;
+      display: flex;
+      flex-direction: column;
+      // align-items: center;
+      .add_top_content{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        .add_img{
+          width: 32px;
+        }
+        .span{
+          font-weight: normal;
+          color: #9E9E9E;
+          line-height: 22px;
+          margin-left: 16px;
+        }
+      }
+      p{
+        font-weight: 800;
+        color: #FFFFFF;
+        line-height: 22px;
+        margin-top: 40px;
+      }
+    }
+  }
   .home_bgbox{
     position: relative;
     width: 100vw;
