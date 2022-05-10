@@ -1,3 +1,37 @@
+
+.color1{
+  color: #9D9C9C !important;
+}
+.color2{
+  color: #9F9579 !important;
+}
+.color2_opacity{
+  color: rgba(159, 149, 121, 0.77);
+}
+.color3{
+  color:#BB9F5A !important;
+}
+.color3_opacity{
+  color: rgba(187, 159, 90, 0.64);
+}
+.color4{
+  color: #F5E2A7 !important;
+}
+.color4_opacity{
+  color: rgba(245, 226, 167, 0.67);
+}
+.bg1{
+  background: #9F9579 !important;
+}
+.bg2{
+  background: #BB9F5A !important;
+}
+.bg3{
+  background: #F5E2A7 !important;
+}
+.bg4{
+  background: #9D9C9C !important;
+}
 .disable_bnb{
   color: #fff!important;
   background: #ccc !important;
@@ -15,6 +49,9 @@
 }
 .color_fff{
   color: #fff !important;
+}
+.color_000{
+  color: #000 !important;
 }
 img{
   object-fit: contain;

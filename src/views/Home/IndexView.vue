@@ -38,7 +38,7 @@
         <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
           <div class="add_top_content">
             <img :src="item.src" class="add_img" />
-            <span class="span font20">{{item.title}}</span>
+            <span class="span font20">{{$t(item.title)}}</span>
           </div>
           <p class="font26">$&nbsp;{{item.num}}</p>
         </div>
@@ -206,12 +206,12 @@ export default {
   data(){
     return{
       addArr:[
-        {src:`${this.$store.state.imgUrl}home1.png`,num:0,title:'市值'},
-        {src:`${this.$store.state.imgUrl}home2.png`,num:0,title:'国库'},
-        {src:`${this.$store.state.imgUrl}home3.png`,num:0,title:'质押'},
-        {src:`${this.$store.state.imgUrl}home4.png`,num:0,title:'当前流通量'},
-        {src:`${this.$store.state.imgUrl}home5.png`,num:0,title:'ST 价格'},
-        {src:`${this.$store.state.imgUrl}home6.png`,num:0,title:'SR价格'},
+        {src:`${this.$store.state.imgUrl}home1.png`,num:0,title:'message.home.txt71'},
+        {src:`${this.$store.state.imgUrl}home2.png`,num:0,title:'message.home.txt72'},
+        {src:`${this.$store.state.imgUrl}home3.png`,num:0,title:'message.home.txt73'},
+        {src:`${this.$store.state.imgUrl}home4.png`,num:0,title:'message.home.txt74'},
+        {src:`${this.$store.state.imgUrl}home5.png`,num:0,title:'message.home.txt75'},
+        {src:`${this.$store.state.imgUrl}home6.png`,num:0,title:'message.home.txt76'},
       ],
       activeIndex:0,//swiper索引
       videoStatus:true,//视频加载

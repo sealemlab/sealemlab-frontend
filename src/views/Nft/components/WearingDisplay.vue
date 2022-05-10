@@ -52,7 +52,7 @@
             <div class="skill_img_box">
               <img :src="item.src" :class="skillIndex == index?'addborder':''" v-for="(item, index) in tabClassArr[currentClass].skills" :key="index" @click="skillClick(index)"/>
             </div>
-            <div class="skill_box">
+            <div class="skill_box" v-if="skillIndex != -1">
               <p>{{$t(tabClassArr[currentClass].skills[skillIndex].title)}}</p>
               <p>{{$t(tabClassArr[currentClass].skills[skillIndex].content)}}</p>
             </div>
@@ -88,7 +88,7 @@ export default {
   },
   data() {
     return {
-      skillIndex:0,//技能的索引
+      skillIndex:-1,//技能的索引
       currentClass: 0,
       tabClassArr: [
         {
