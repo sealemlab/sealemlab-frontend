@@ -1,7 +1,10 @@
 <template>
   <div class="bind_wallet_page">
     <div class="box">
-      <div class="btn fotn18" @click="bindWallet">{{$t("message.account.txt17")}}</div>
+      <div class="btn fotn18" @click="bindWallet">
+        {{$t("message.account.txt17")}}
+        <BtnLoading :isloading="bindStatus"></BtnLoading>
+      </div>
       <p class="txt_ font16">
         {{$t("message.account.txt18")}} <br />
         {{$t("message.account.txt19")}}
@@ -16,23 +19,51 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { getSigner } from "sacredrealm-sdk";
 export default {
-  computed: { ...mapGetters(["getLogin","getIstrue"]) },
+  computed: { ...mapGetters(["getLogin","getIstrue","getAccount"]) },
   data(){
     return{
+      bindStatus:false,//绑定钱包状态
+      isdown:false,
       haveWallet:false
     }
   },
   methods:{
     bindWallet(){
+      if(this.bindStatus)return
       if(!this.getLogin){
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.account.txt32'}));
+        if(!this.isdown){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.account.txt32'}));
+          this.isdown = true
+          setTimeout(() => {
+            this.isdown = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
+          }, 2000);
+        }
         return
       }
       if(!this.getIstrue){
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.account.txt33'}));
+        if(!this.isdown){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.account.txt33'}));
+          this.isdown = true
+          setTimeout(() => {
+            this.isdown = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
+          }, 2000);
+        }
         return
       }
+      getSigner().signMessage('Login to Dapp').then(signature => {
+        // console.log('signature: ', signature);
+        this.$api.bindWallet({addr:this.getAccount,sign:signature}).then(res => {
+          console.log('res: ', res);
+        }).catch(() => {
+          console.log("绑定接口错误")
+        });
+      }).catch(() => {
+        console.log("签名失败")
+      })
     }
   }
 }

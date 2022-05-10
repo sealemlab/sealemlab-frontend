@@ -13,5 +13,11 @@ export default {
     return service.post(
       `${BASE_API}/user/login`,data
     );
-  }
+  },
+  // 绑定钱包
+  bindWallet: (data: any) => {
+    return service.post(
+      `${BASE_API}/user/verify`,data
+    );
+  },
 };
