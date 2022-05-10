@@ -15,7 +15,7 @@
       @walletClick="walletClick"
     ></WalletComponents>
     <!-- 普通弹窗 -->
-    <Proup :isProgress="getProupInfo.isProgress" :proupStatus="getProupInfo.status" :content="getProupInfo.content" @closeProup="proupClose"></Proup>
+    <Proup :isProgress="getProupInfo.isProgress" :proupStatus="getProupInfo.status" :content="getProupInfo.content" @closeProup="proupClose" @closetimer="proupClose"></Proup>
     <!-- 轻提示 -->
     <Notice :noticeStatus="getNoticeInfo.status" :word="getNoticeInfo.word"></Notice>
   </div>
@@ -42,7 +42,7 @@ export default {
   watch: {
     'getIstrue': {
       handler: function (newValue) {
-        console.log('app.vue页面的监听钱包状态newValue: ', newValue);
+        // console.log('app.vue页面的监听钱包状态newValue: ', newValue);
         if (newValue) {
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
             sessionStorage.setItem("sb_count", res)
@@ -66,7 +66,8 @@ export default {
         },500)
         return
       }
-      this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':''}));
+      this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}))
+      this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':'','isProgress':true,'title':'message.tip.txt3','ortherDoing':false}));
     },
     setRem() {
       const bodyWidth = document.body.clientWidth;

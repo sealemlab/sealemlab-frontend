@@ -1,6 +1,6 @@
 <template>
     <div class="slider" ref="slider">
-      <div class="process" :style="{ width }"></div>
+      <div class="process" :style="{ width }" ref="progress"></div>
       <div class="thunk" ref="trunk" :style="{ left }">
         <div class="block"></div>
         <!-- <div class="tips">
@@ -23,7 +23,7 @@
  * 
 */
 export default {
-  props: ["min", "max", "value"],
+  props: ["min", "max", "value","resetdata"],
   data () {
     return {
       slider: null, //滚动条DOM元素
@@ -31,31 +31,18 @@ export default {
       per: this.value, //当前值
     };
   },
+  watch:{
+    resetdata(newvalue){
+      console.log('省份加算了可的飞机---newvalue: ', newvalue);
+      if(newvalue){
+        this.$refs.progress.style.width = 0
+        this.$refs.trunk.style.left = 0
+      }
+    }
+  },
   //渲染到页面的时候
   mounted () {
-    this.slider = this.$refs.slider;
-    this.thunk = this.$refs.trunk;
-    var _this = this;
-    this.thunk.onmousedown = function (e) {
-      var width = parseInt(_this.width);
-      var disX = e.clientX;
-      document.onmousemove = function (e) {
-        // value, left, width
-        // 当value变化的时候，会通过计算属性修改left，width
-        // 拖拽的时候获取的新width
-        var newWidth = e.clientX - disX + width;
-        // 拖拽的时候得到新的百分比
-        var scale = newWidth / _this.slider.offsetWidth;
-        _this.per = Math.ceil((_this.max - _this.min) * scale + _this.min);
-        _this.per = Math.max(_this.per, _this.min);
-        _this.per = Math.min(_this.per, _this.max);
-        _this.$emit("input", _this.per);
-      };
-      document.onmouseup = function () {
-        document.onmousemove = document.onmouseup = null;
-      };
-      return false;
-    };
+    this.load()
   },
   computed: {
     // 设置一个百分比，提供计算slider进度宽度和trunk的left值
@@ -78,6 +65,33 @@ export default {
         );
       } else {
         return 0 + "px";
+      }
+    }
+  },
+  methods:{
+    load(){
+      this.slider = this.$refs.slider;
+      this.thunk = this.$refs.trunk;
+      var _this = this;
+      this.thunk.onmousedown = function (e) {
+        var width = parseInt(_this.width);
+        var disX = e.clientX;
+        document.onmousemove = function (e) {
+          // value, left, width
+          // 当value变化的时候，会通过计算属性修改left，width
+          // 拖拽的时候获取的新width
+          var newWidth = e.clientX - disX + width;
+          // 拖拽的时候得到新的百分比
+          var scale = newWidth / _this.slider.offsetWidth;
+          _this.per = Math.ceil((_this.max - _this.min) * scale + _this.min);
+          _this.per = Math.max(_this.per, _this.min);
+          _this.per = Math.min(_this.per, _this.max);
+          _this.$emit("input", _this.per);
+        };
+        document.onmouseup = function () {
+          document.onmousemove = document.onmouseup = null;
+        };
+        return false;
       }
     }
   }

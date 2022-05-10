@@ -1,7 +1,7 @@
 <template>
   <div class="proup_page" v-if="proupStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24">{{$t(title)}}</p>
+      <p class="propu_title_txt font24">{{getProgressInfo.title?$t(getProgressInfo.title):$t(getProupInfo.title)}}</p>
       <div class="proup_content" v-if="isProgress">
         <img :src="`${$store.state.imgUrl}success.png`" class="success_img" />
         {{$t(content)}}
@@ -21,6 +21,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: {
     proupStatus: {
@@ -34,11 +35,7 @@ export default {
     isProgress:{
       type: Boolean,
       default: true
-    },
-    title:{
-      type: String,
-      default: 'message.tip.txt3'
-    },
+    }
   },
   data(){
     return{
@@ -62,6 +59,15 @@ export default {
         this.progressFun()
       }
     },
+    getProgressInfo(newvala){
+      if(newvala.value == 100){
+        this.progressTXt = 100
+        this.width = '100%'
+      }
+    },
+  },
+  computed: { 
+    ...mapGetters(["getProgressInfo","getProupInfo"])
   },
   methods: {
     // 进度条展示
@@ -72,16 +78,22 @@ export default {
     },
     progressFun(){
       clearInterval(this.timer)
-      let i = 0
+      let num = Math.round((95 - 90) * Math.random() + 90)
       this.timer = setInterval(() => {
-        if(i<100){
-          i+=1;
-          this.progressTXt = i;
-          this.width = i + '%';
+        if(this.getProgressInfo.value < 100){
+          if(this.getProgressInfo.value >= num){
+            this.getProgressInfo.value = num
+          }else{
+            this.getProgressInfo.value += 1
+          }
+          this.progressTXt = this.getProgressInfo.value;
+          this.width = this.getProgressInfo.value + '%';
         }
-        if(i>=100){
-          this.proupStatus = false
+        if(this.getProgressInfo.value >= 100){
           clearInterval(this.timer);
+          setTimeout(() => {
+            this.$emit('closetimer')
+          },1500)
         }
       },100)
     }

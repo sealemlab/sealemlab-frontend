@@ -31,7 +31,7 @@
         <div class="line_onebox font16">
           <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
           <div class="btns">
-            <Slider :min="0" :max="50" v-model="per"></Slider>
+            <Slider :min="0" :max="50" v-model="per" :resetdata="resetdata"></Slider>
           </div>
           <span class="unit_class">{{sliderValue}}</span>
         </div>
@@ -91,7 +91,7 @@
 <script>
 import WearingShow from './WearingDisplay.vue'
 import { mapGetters } from "vuex";
-import { sb,util,token,contract,erc20,getSigner } from "sacredrealm-sdk";
+import { sb,util,token,erc20,getSigner } from "sacredrealm-sdk";
 export default {
   components:{
     WearingShow
@@ -110,6 +110,7 @@ export default {
   },
   data() {
     return {
+      resetdata:false,
       surplusNumStatus:true,//剩余数量loading
       priceStatus:true,// 价格loading
       balanceStatus:true,// 余额loading
@@ -206,21 +207,34 @@ export default {
       }
       this.buy_isloading = true
       sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType).then(async (res) => {
-        // console.log('购买盒子res: ', res);
+        // 进度条
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'购买中...'}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
+          console.log("购买成功")
           this.getBindboxNum(this.bindboxType)
           this.getUserBalance(this.payAddress)
-          this.buy_isloading = false;
-          this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt52'}));
-          this.sliderValue = 0;
-          this.stTotal = 0;
+          this.buy_isloading = false
+          this.sliderValue = 0
+          this.stTotal = 0
+          this.resetdata = true
+          setTimeout(() => {
+            this.resetdata = false
+          },1500)
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'购买成功'}));
+          setTimeout(() => {
+            this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}));
+          },1500)
         }else{
-          this.buy_isloading = false;
+          this.buy_isloading = false
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'购买失败'}));
+          setTimeout(() => {
+            this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}));
+          },1500)
         }
       }).catch(() => {
-        // console.log('购买盒子err: ', err);
-        this.buy_isloading = false;
+        // console.log('购买盒子err: ', err)
+        this.buy_isloading = false
       });
     },
     // 获取盲盒一系列信息
@@ -236,18 +250,18 @@ export default {
       })
       // 获取某类型的盲盒的支付代币地址
       sb().tokenAddrs(boxtypeInfo).then(res => {
-        console.log('获取某类型的盲盒的支付代币地址res: ', res);
+        // console.log('获取某类型的盲盒的支付代币地址res: ', res);
         this.payAddress = res
         // 获取用户某代币余额
         this.getUserBalance(res)
       });
       // 获取某类型的盲盒是否开启白名单
       sb().whiteListFlags(boxtypeInfo).then(res => {
-        console.log('获取某类型的盲盒是否开启白名单:', res);
+        // console.log('获取某类型的盲盒是否开启白名单:', res);
         // this.isOpenWhiteList = res
         // 判断某用户是否在某类型的盲盒的白名单
         sb().getWhiteListExistence(boxtypeInfo,this.getAccount).then(res1 => {
-          console.log('判断某用户是否在某类型的盲盒的白名单:', res1);
+          // console.log('判断某用户是否在某类型的盲盒的白名单:', res1);
           // this.isWhiteList = res1
           if(res){//为真证明开启白名单限制
             if(!res1){
@@ -266,7 +280,7 @@ export default {
     getBindboxNum(bindboxType){
       // 获取某类型的盲盒的剩余可销售数量
       sb().getBoxesLeftSupply(bindboxType).then(res => {
-        console.log('获取某类型的盲盒的剩余可销售数量:', Number(res));
+        // console.log('获取某类型的盲盒的剩余可销售数量:', Number(res));
         this.boxnum = Number(res)
         this.surplusNumStatus = false
       }).catch(() => {
@@ -275,9 +289,8 @@ export default {
       
       // 获取某类型的盲盒下某用户某小时剩余购买数量
       sb().getUserHourlyBoxesLeftSupply(bindboxType,this.getAccount,new Date().getTime()).then(res => {
-        console.log('获取某类型的盲盒下某用户某小时剩余购买数量:', Number(res));
+        // console.log('获取某类型的盲盒下某用户某小时剩余购买数量:', Number(res));
         this.userBuyNum = Number(res)
-        console.log('this.userBuyNum: ', this.userBuyNum);
       });
     },
     // 获取用户余额 

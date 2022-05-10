@@ -20,4 +20,10 @@ export default {
       `${BASE_API}/user/verify`,data
     );
   },
+  // 获取随机数
+  getRoundNum: (data: any) => {
+    return service.post(
+      `${BASE_API}/user/nonce`,data
+    );
+  }
 };

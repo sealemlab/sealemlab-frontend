@@ -24,7 +24,8 @@ export default new Vuex.Store({
       status:false,
       isProgress:true,
       content:'',
-      ortherDoing:false
+      title:'message.tip.txt3',
+      ortherDoing:false,
     },// 提示框信息
     noticeInfo:{
       status:false,
@@ -33,9 +34,17 @@ export default new Vuex.Store({
     imgUrl:process.env.NODE_ENV === 'production'?'//cdn.hashland.com/sacredTestImg/':'//cdn.hashland.com/sacredTestImg/',//图片前缀
     codeTime:60,//验证码重新发送时间
     emailReg:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,//邮箱校验
-    pwReg: /^[a-zA-Z0-9]{6,16}$/ //密码校验 6-16位数字英文组合
+    pwReg: /^[a-zA-Z0-9]{6,16}$/,//密码校验 6-16位数字英文组合
+    ProgressInfo:{
+      value:1,
+      title:''
+    } // 给进度条传值
   },
   getters: {
+    // 获取进度条的值
+    getProgressInfo(state) {
+      return state.ProgressInfo
+    },
     // 获取用户盲盒信息
     getUserBoxInfo(state) {
       return state.userBoxInfo
@@ -76,6 +85,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    // 设置进度条的值
+    setProgressInfo(state, data) {
+      state.ProgressInfo = JSON.parse(data);
+    },
     // 轻提示状态
     setNoticeStatus(state, data) {
       state.noticeInfo = JSON.parse(data);
@@ -104,6 +117,9 @@ export default new Vuex.Store({
   actions: {
     setLogin({commit},data){
       commit('setLogin',data)
+    },
+    setProgressInfo({commit},data){
+      commit('setProgressInfo',data)
     }
   },
   plugins: [

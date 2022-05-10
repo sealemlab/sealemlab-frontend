@@ -57,7 +57,7 @@ export default {
   methods:{
     loadMore() {
       this.busy = true;
-      console.log("加载更多")
+      // console.log("加载更多")
       if(this.loadMoreStatus) {
         this.getUserBindbox(this.nums,10)
         this.busy = false
@@ -65,7 +65,7 @@ export default {
     },
     getUserBindbox(cursor, size){//cursor:指针,从哪个地方开始获取盲盒 size:获取的盲盒数量
       sn().tokensOfOwnerBySize(this.getAccount, cursor, size).then(res => {
-        console.log('获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针res: ', res);
+        // console.log('获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针res: ', res);
         this.nums = res[1]
         if(res[0].length > 0){
           this.loadMoreStatus = true

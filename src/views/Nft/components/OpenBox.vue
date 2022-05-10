@@ -82,12 +82,12 @@ export default {
       clearInterval(this.timerll)
       this.timerll = setInterval(() => {
         if(sessionStorage.getItem('sb_count')){
-          console.log(' this.getUserBoxInfo: ',  this.getUserBoxInfo);
+          // console.log(' this.getUserBoxInfo: ',  this.getUserBoxInfo);
           clearInterval(this.timerll)
           this.pageshowarr = JSON.parse(this.getUserBoxInfo).filter(data => {
             return data.type == this.boxtype
           })
-          console.log('this.pageshowarr: ', this.pageshowarr.length);
+          // console.log('this.pageshowarr: ', this.pageshowarr.length);
         }
       }, 500);
     },
@@ -142,7 +142,7 @@ export default {
           })
           this.selectedNUM = this.pageshowarr.length
         }else{
-          console.log("全选按钮的else状态")
+          // console.log("全选按钮的else状态")
           this.pageshowarr.forEach(item =>{
             item.status = false
           })

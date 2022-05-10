@@ -118,11 +118,11 @@ export default {
         if(boxarrID){
           this.getUserBindbox(this.pageinfo,true)
         }
-        console.log('监听盲盒开奖结果: user', user)
-        console.log('监听盲盒开奖结果: boxslengths',boxslengths)
-        console.log('监听盲盒开奖结果: boxarrID', boxarrID);
-        console.log('监听盲盒开奖结果: events',events);
-        console.log('监听盲盒开奖结果: ultras',ultras);
+        // console.log('监听盲盒开奖结果: user', user)
+        // console.log('监听盲盒开奖结果: boxslengths',boxslengths)
+        // console.log('监听盲盒开奖结果: boxarrID', boxarrID);
+        // console.log('监听盲盒开奖结果: events',events);
+        // console.log('监听盲盒开奖结果: ultras',ultras);
       });
     },
   }

@@ -71,7 +71,7 @@ export default {
       ],
       showLangSelect: false,
       language: "",
-      langArr: ["EN", "CN"],
+      langArr: ["EN", "ZH"],
       isdown:false,
     };
   },
@@ -107,7 +107,7 @@ export default {
     },
   },
   created() {
-    this.language = this.$i18n.locale == "en" ? this.langArr[0] : this.langArr[1];
+    this.language = this.$i18n.locale == "EN" ? this.langArr[0] : this.langArr[1];
     wallet.onDisconnect(this.signOutFun);
   },
   methods: {
@@ -152,7 +152,7 @@ export default {
     selectLang(index) {
       if (this.language == this.langArr[index]) return (this.showLangSelect = false);
       this.language = this.langArr[index];
-      this.$i18n.locale = this.language == "EN" ? "en" : "cn";
+      this.$i18n.locale = this.language == "EN" ? "EN" : "ZH";
       this.$utils.setCookie("LANG", this.$i18n.locale);
       // location.reload();
     },

@@ -29,19 +29,19 @@
         </div>
         <div class="box">
           <div class="top">
-            <div>
-              <span>{{ $t("message.bond.txt3") }}</span>
+            <div :title='$t("message.bond.txt71")' style="cursor:pointer">
+              <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
             </div>
             <div><span>$45678956</span></div>
             <div>
-              <span class="link_icon">ST{{ $t("message.bond.txt4") }} </span>
+              <span>ST{{ $t("message.bond.txt4") }} </span>
             </div>
             <div><span>$34.78</span></div>
           </div>
           <div class="bottom">
             <ul class="list_title">
               <li>
-                <span class="has_question_icon">{{ $t("message.bond.txt1") }}</span>
+                <span>{{ $t("message.bond.txt1") }}</span>
               </li>
               <li>
                 <span>{{ $t("message.bond.txt35") }}</span>
@@ -49,8 +49,8 @@
               <li>
                 <span>{{ $t("message.bond.txt28") }}</span>
               </li>
-              <li>
-                <span>{{ $t("message.bond.txt36") }}</span>
+              <li :title='$t("message.bond.txt72")' style="cursor:pointer">
+                <span class="has_question_icon">{{ $t("message.bond.txt36") }}</span>
               </li>
               <li>
                 <span>{{ $t("message.bond.txt37") }}</span>
@@ -83,6 +83,7 @@
         </div>
       </div>
     </div>
+    <!-- 仪表盘 -->
     <div class="boxs add_top">
       <!-- 仪表盘切换 -->
       <div class="add_nav font18">
@@ -99,7 +100,7 @@
           <ul class="list_title1">
             <li>
               <ul class="list_title2">
-                <li>
+                <li :title='$t("message.bond.txt73")' style="cursor:pointer">
                   <span class="has_question_icon color1">{{ $t("message.bond.txt28") }}</span>
                 </li>
                 <li></li>
@@ -127,7 +128,7 @@
             <li>
               <!-- <ul class="list_title2 coming_soon"> -->
               <ul class="list_title2">
-                <li>
+                <li :title='$t("message.bond.txt74")' style="cursor:pointer">
                   <span class="has_question_icon color2">{{ $t("message.bond.txt30") }}</span>
                 </li>
                 <li>
@@ -160,7 +161,7 @@
             </li>
             <li>
               <ul class="list_title2">
-                <li>
+                <li :title='$t("message.bond.txt75")' style="cursor:pointer">
                   <span class="has_question_icon color3">{{ $t("message.bond.txt29") }}</span>
                 </li>
                 <li>
@@ -189,7 +190,7 @@
             </li>
             <li>
               <ul class="list_title2">
-                <li>
+                <li :title='$t("message.bond.txt76")' style="cursor:pointer">
                   <span class="has_question_icon color4">{{ $t("message.bond.txt31") }}</span>
                 </li>
                 <li>
@@ -230,12 +231,12 @@
         </div>
         <div class="box">
           <div class="top">
-            <div>
+            <div :title='$t("message.bond.txt77")' style="cursor:pointer">
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
             <div><span>34.4569 ST</span></div>
-            <div>
-              <span>{{ $t("message.bond.txt53") }} </span>
+            <div :title='$t("message.bond.txt78")' style="cursor:pointer">
+              <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
             <div><span>34.4569 ST</span></div>
             <div>
@@ -248,7 +249,7 @@
           <div class="bottom">
             <ul class="list_title">
               <li>
-                <span class="has_question_icon">{{ $t("message.bond.txt1") }}</span>
+                <span>{{ $t("message.bond.txt1") }}</span>
               </li>
               <li>
                 <span>{{ $t("message.bond.txt56") }}</span>
@@ -486,36 +487,31 @@ export default {
 .has_question_icon {
   position: relative;
   &::after {
-    content: "?";
-    text-align: center;
-    font-size: 10px;
-    font-weight: 400;
-    color: #a9a7a7;
-    line-height: 12px;
-    width: 12px;
-    height: 12px;
-    border: 1px solid #a9a7a7;
+    content: "";
+    width: 13px;
+    height: 13px;
     filter: blur(0px);
-    border-radius: 50%;
+    background: url($bg_url + "ques.png") no-repeat;
+    background-size: 100% 100%;
     position: absolute;
     right: -20px;
     top: -5px;
   }
 }
-.link_icon {
-  position: relative;
-  &::after {
-    content: "";
-    display: block;
-    width: 15px;
-    height: 15px;
-    background: url($bg_url + "link.png") no-repeat;
-    background-size: 100% 100%;
-    position: absolute;
-    top: 0;
-    right: -20px;
-  }
-}
+// .link_icon {
+//   position: relative;
+//   &::after {
+//     content: "";
+//     display: block;
+//     width: 15px;
+//     height: 15px;
+//     background: url($bg_url + "link.png") no-repeat;
+//     background-size: 100% 100%;
+//     position: absolute;
+//     top: 0;
+//     right: -20px;
+//   }
+// }
 .progressbar {
   display: inline-block;
   margin: 5px 0;

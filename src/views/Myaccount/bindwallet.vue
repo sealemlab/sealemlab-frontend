@@ -26,8 +26,22 @@ export default {
     return{
       bindStatus:false,//绑定钱包状态
       isdown:false,
-      haveWallet:false
+      haveWallet:false,
+      roundnum:'' //后台给的随机数
     }
+  },
+  watch: {
+    'getIstrue': {
+      handler: function (newValue) {
+        if (newValue) {
+          this.getAPIRoundNum()
+        }else{
+          this.roundnum = ''
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods:{
     bindWallet(){
@@ -54,16 +68,30 @@ export default {
         }
         return
       }
-      getSigner().signMessage('Login to Dapp').then(signature => {
+      getSigner().signMessage(this.roundnum).then(signature => {
         // console.log('signature: ', signature);
         this.$api.bindWallet({addr:this.getAccount,sign:signature}).then(res => {
-          console.log('res: ', res);
+          // console.log('res: ', res);
+          
         }).catch(() => {
           console.log("绑定接口错误")
         });
       }).catch(() => {
         console.log("签名失败")
       })
+    },
+    getAPIRoundNum(){
+      this.$api.getRoundNum({"addr":this.getAccount}).then(res => {
+        // console.log('获取后台给的随机数res: ', res);
+        if(res.code == 200){
+          this.roundnum = res.data
+        }else{
+          this.roundnum = ''
+        }
+      }).catch(() => {
+        this.roundnum = ''
+        // console.log("获取后台给的随机数res错误")
+      });
     }
   }
 }
