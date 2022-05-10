@@ -115,7 +115,8 @@ export const message = {
     txt73:"质押",
     txt74:"当前流通量",
     txt75:"ST 价格",
-    txt76:"SR 价格"
+    txt76:"SR 价格",
+    txt77:"Overview"
   },
   footer: {
     txt1: "ABOUT",

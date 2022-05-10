@@ -33,7 +33,7 @@
     </div>
     <!-- Protocol Stats -->
     <div class="characteristic_box">
-      <div class="title_txt font30">Protocol Stats</div>
+      <div class="title_txt font30">{{$t("message.home.txt77")}}</div>
       <div class="border_">
         <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
           <div class="add_top_content">
