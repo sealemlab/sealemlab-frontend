@@ -22,7 +22,7 @@ Vue.component("FunBtn", FunBtn);
 import Slider from "./components/ProgressBar.vue";
 Vue.component("Slider", Slider);
 
-import LoadingAnmation from '@/components/LoadingAnmation.vue'
+import LoadingAnmation from '@/components/loadingAnmation.vue'
 Vue.component("LoadingAnmation", LoadingAnmation);
 
 import RingProgress from '@/components/RingProgress.vue'
@@ -37,7 +37,7 @@ Vue.component("Notice", Notice);
 import Input from "@/components/InpuptComponents.vue";
 Vue.component("Input", Input);
 
-import WalletComponents from "@/components/Walletcomponents.vue";
+import WalletComponents from "@/components/walletcomponents.vue";
 Vue.component("WalletComponents", WalletComponents);
 
 import utils from "./utils/index";
