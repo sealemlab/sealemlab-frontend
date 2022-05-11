@@ -2,6 +2,17 @@ import {wallet, network,sb} from "sacredrealm-sdk";
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
+  // 根据浏览器语言  自动切换中英文
+  isLang() {
+    // @ts-ignore
+    const lang = (navigator.systemLanguage ? navigator.systemLanguage : navigator.language).substr(0, 2);
+    console.log('navigator.languag: ', navigator);
+    if (lang == "zh") {
+      return "ZH";
+    } else {
+      return "EN";
+    }
+  },
   // 设置cookie过期时间
   setCookie(key: string, value: any, time: any) {
     const num = new Date(new Date().getTime() + time * 60 * 1000 * 60);

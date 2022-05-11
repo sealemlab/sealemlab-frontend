@@ -22,7 +22,7 @@ import { sb } from "sacredrealm-sdk";
 import OpenNft from './OpenBox.vue'
 export default {
   computed: {
-    ...mapGetters(["getAccount","getIstrue","getUserBoxInfo"])
+    ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo"])
   },
   components:{
     OpenNft
@@ -38,7 +38,6 @@ export default {
         {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'message.nft.txt56',status:true,type:3},
       ],
       timerll:null,
-      isdown:false
     }
   },
   watch: {
@@ -84,22 +83,14 @@ export default {
     openBoxFun(item){
       console.log('item: ', item);
       if(item.status){
-        if(!this.isdown){
+        if(!this.getNoticeNum){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt46'}));
-          this.isdown = true
-          setTimeout(() => {
-            this.isdown = false
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-          }, 2500);
+          this.$store.commit("setNoticeNum",true)
         }
       }else if(item.num == 0){
-        if(!this.isdown){
+        if(!this.getNoticeNum){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt47'}));
-          this.isdown = true
-          setTimeout(() => {
-            this.isdown = false
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-          }, 2500);
+          this.$store.commit("setNoticeNum",true)
         }
       }else{
         this.openStatus = true

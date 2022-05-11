@@ -26,7 +26,7 @@ import FooterComponents from "@/components/FooterComponents.vue";
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["getIstrue","getAccount","isEnLang","getIsMobile","getProupInfo","getNoticeInfo"])
+    ...mapGetters(["getIstrue","getAccount","isEnLang","getIsMobile","getProupInfo","getNoticeInfo","getProgressInfo"])
   },
   data(){
     return {
@@ -52,6 +52,29 @@ export default {
       deep: true,
       immediate: true,
     },
+    'getNoticeInfo':{
+      handler: function (newValue) {
+        if (newValue.status) {
+          setTimeout(() => {
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
+            this.$store.commit("setNoticeNum",false)
+          }, 2500);
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    'getProgressInfo':{
+      handler: function (newValue) {
+        if (newValue.value == 100) {
+          setTimeout(() => {
+            this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}));
+          },1500)
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   components: {
     NavigationBar,
@@ -66,7 +89,7 @@ export default {
         },500)
         return
       }
-      this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}))
+      // this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}))
       this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':'','isProgress':true,'title':'message.tip.txt3','ortherDoing':false}));
     },
     setRem() {

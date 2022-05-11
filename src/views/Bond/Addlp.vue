@@ -17,7 +17,7 @@
             <span class="busd_txt font14">BUSD</span>
           </div>
           <div class="center_content">
-            <Input @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
+            <Input @blurEvent="busdBlurEvent" @focusEvent="busdFocusEvent" :placeholder='$t("message.bond.txt23")' @input="busdInputClick"></Input>
           </div>
           <div class="max_btn font16">MAX</div>
         </div>
@@ -131,6 +131,24 @@ export default {
     }
   },
   methods: {
+    busdBlurEvent(){
+      console.log("失焦")
+    },
+    busdFocusEvent(){
+      console.log("聚焦")
+    },
+    busdInputClick(){
+      console.log("input")
+    },
+    blurEvent(){
+      console.log("失焦")
+    },
+    focusEvent(){
+      console.log("聚焦")
+    },
+    inputClick(){
+      console.log("input")
+    },
     typeClick(item,index){
       this.arr.forEach(item => {
         item.status = false

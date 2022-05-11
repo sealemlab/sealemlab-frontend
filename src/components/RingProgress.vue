@@ -213,6 +213,7 @@ export default {
 
 .radial-indicator-container .content-wrap .content-number {
   cursor: pointer;
+  text-align: center
 }
 
 .radial-indicator-container .content-wrap .content-text {

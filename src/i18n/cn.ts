@@ -449,12 +449,5 @@ export const message = {
     txt4:'这是一条轻提示',
     txt5:'敬请期待'
   },//一些提示语句,文案你看哪不合适,替换就行
-  approve:'授权',
-  question:{ //这个里边写那些问号的内容吧,顺延即可
-    txt1:"",
-    txt2:"",
-    txt3:"",
-    txt4:"",
-    txt5:"",
-  }
+  approve:'授权'
 };

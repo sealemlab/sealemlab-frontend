@@ -6,7 +6,7 @@
       <div class="onebox display_flex">
         <ul v-for="(item, index) in footerArr" :key="index">
           <li class="font14 en_Regular" v-for="(ele, index1) in item.children" :key="index1">
-            {{ $t(ele) }}
+            {{ $t(ele.title) }}
           </li>
         </ul>
       </div>
@@ -26,41 +26,41 @@ export default {
         {
           id:1,
           children:[
-            "message.footer.txt1",
-            "message.footer.txt2",
-            "message.footer.txt3",
-            "message.footer.txt4",
-            "message.footer.txt5",
-            "message.footer.txt6",
+            {title:"message.footer.txt1",link:''},
+            {title:"message.footer.txt2",link:''},
+            {title:"message.footer.txt3",link:''},
+            {title:"message.footer.txt4",link:''},
+            {title:"message.footer.txt5",link:''},
+            {title:"message.footer.txt6",link:''}
           ]
         },
         {
           id:2,
           children:[
-            "message.footer.txt20",
-            "message.footer.txt7",
-            "message.footer.txt8",
-            "message.footer.txt9",
-            "message.footer.txt10",
+            {title:"message.footer.txt20",link:''},
+            {title:"message.footer.txt7",link:''},
+            {title:"message.footer.txt8",link:''},
+            {title:"message.footer.txt9",link:''},
+            {title:"message.footer.txt10",link:''}
           ]
         },
         {
           id:3,
           children:[
-            "message.footer.txt11",
-            "message.footer.txt12",
-            "message.footer.txt13",
+            {title:"message.footer.txt11",link:''},
+            {title:"message.footer.txt12",link:''},
+            {title:"message.footer.txt13",link:''}
           ]
         },
         {
           id:4,
           children:[
-            "message.footer.txt14",
-            "message.footer.txt15",
-            "message.footer.txt16",
-            "message.footer.txt17",
-            "message.footer.txt18",
-            "message.footer.txt19",
+            {title:"message.footer.txt14",link:''},
+            {title:"message.footer.txt15",link:''},
+            {title:"message.footer.txt16",link:''},
+            {title:"message.footer.txt17",link:''},
+            {title:"message.footer.txt18",link:''},
+            {title:"message.footer.txt19",link:''}
           ]
         }
       ]

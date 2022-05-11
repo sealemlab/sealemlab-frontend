@@ -128,7 +128,6 @@ export default {
       userBuyNum:0,//用户剩余购买数量(频控)
       stTotal:0,//st的总价格
       sliderValue:0,// 拖动条value
-      isdown:false,// 再次执行轻通知的动画
     };
   },
   watch: {
@@ -182,27 +181,35 @@ export default {
       if(this.disable)return
       if (this.buy_isloading) return;
       if(this.sliderValue <= 0){
-        if(!this.isdown){
+        if(!this.getNoticeNum){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt45'}));
-          this.isdown = true
-          setTimeout(() => {
-            this.isdown = false
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-          }, 3000);
+          this.$store.commit("setNoticeNum",true)
         }
         return
       }
       if(this.stTotal > this.balance){ // 余额判断
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt49'}));
+        // this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt49'}));
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt49'}));
+          this.$store.commit("setNoticeNum",true)
+        }
         return
       }
       if(this.sliderValue > this.userBuyNum){ // 频控判断
-      console.log('this.sliderValue > this.userBuyNum: ', this.sliderValue,this.userBuyNum);
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt50'}));
+        console.log('this.sliderValue > this.userBuyNum: ', this.sliderValue,this.userBuyNum);
+        // this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt50'}));
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt50'}));
+          this.$store.commit("setNoticeNum",true)
+        }
         return
       }
       if(this.sliderValue > this.boxnum){ // 库存判断
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt51'}));
+        // this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.nft.txt51'}));
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt51'}));
+          this.$store.commit("setNoticeNum",true)
+        }
         return
       }
       this.buy_isloading = true
@@ -212,25 +219,21 @@ export default {
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
           console.log("购买成功")
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'购买成功'}));
+          
           this.getBindboxNum(this.bindboxType)
           this.getUserBalance(this.payAddress)
           this.buy_isloading = false
           this.sliderValue = 0
           this.stTotal = 0
           this.resetdata = true
-          setTimeout(() => {
-            this.resetdata = false
-          },1500)
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'购买成功'}));
           setTimeout(() => {
-            this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}));
+            this.resetdata = false
           },1500)
         }else{
           this.buy_isloading = false
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'购买失败'}));
-          setTimeout(() => {
-            this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}));
-          },1500)
         }
       }).catch(() => {
         // console.log('购买盒子err: ', err)

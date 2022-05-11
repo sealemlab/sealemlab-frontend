@@ -66,16 +66,16 @@ export default {
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
         { label: "message.nav.txt5", link: "" },
-        { label: "message.nav.txt6", link: "/user/assets/0" },
+        { label: "message.nav.txt6", link: "" },
+        // { label: "message.nav.txt6", link: "/user/assets/0" },
         // { label: "message.nav.txt7", link: "" }
       ],
       showLangSelect: false,
       language: "",
       langArr: ["EN", "ZH"],
-      isdown:false,
     };
   },
-  computed: { ...mapGetters(["isEnLang","getLogin","getIsMobile","getSubtringAccount","getIstrue"]) },
+  computed: { ...mapGetters(["getNoticeNum","isEnLang","getLogin","getIsMobile","getSubtringAccount","getIstrue"]) },
   watch: {
     $route(to, from) {
       if (from.matched.length && to.matched[0].path != from.matched[0].path) {
@@ -92,13 +92,9 @@ export default {
       }else if (to.path.indexOf("/myaccount/") !== -1) {
         this.navActive = 7;
       }else{
-        if(!this.isdown){
+        if(!this.getNoticeNum){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-          this.isdown = true
-          setTimeout(() => {
-            this.isdown = false
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-          }, 3000);
+          this.$store.commit("setNoticeNum",true)
         }
       }
       // else if (to.path.indexOf("/user/") !== -1) {
@@ -124,13 +120,9 @@ export default {
       if (link){
         this.$router.push(link);
       } else{
-        if(!this.isdown){
+        if(!this.getNoticeNum){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-          this.isdown = true
-          setTimeout(() => {
-            this.isdown = false
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-          }, 2000);
+          this.$store.commit("setNoticeNum",true)
         }
       }
     },
@@ -153,7 +145,7 @@ export default {
       if (this.language == this.langArr[index]) return (this.showLangSelect = false);
       this.language = this.langArr[index];
       this.$i18n.locale = this.language == "EN" ? "EN" : "ZH";
-      this.$utils.setCookie("LANG", this.$i18n.locale);
+      // this.$utils.setCookie("LANG", this.$i18n.locale);
       // location.reload();
     },
     // 链接钱包弹窗

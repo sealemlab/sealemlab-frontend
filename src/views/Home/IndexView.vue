@@ -85,7 +85,7 @@
         <div class="left right">
           <img :src="`${$store.state.imgUrl}game2.png`" class="game2" />
           <img :src="`${$store.state.imgUrl}game3.png`" class="game2" />
-          <img :src="`${$store.state.imgUrl}game3.png`" class="game2" />
+          <img :src="`${$store.state.imgUrl}game4.png`" class="game2" />
         </div>
       </div>
     </div>

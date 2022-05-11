@@ -175,7 +175,7 @@ export const message = {
     txt25: "Quantity",
     txt26: "Total amount",
     txt27: "Balance:",
-    txt28: "Approve/Buy",
+    txt28: "Buy",
     txt29: "Introduction of Sacred Realm Mystery Box",
     txt30: "The Sacred Realm mystery box is a 3D digital asset of Unreal 4, in which each NFT corresponds to a unique piece of equipment in game, and its value can be measured in terms of levels, power, and rarity.",
     txt32: "3D digital asset",
@@ -462,13 +462,5 @@ export const message = {
     txt4:'This is a light reminder',
     txt5:'Coming soon'
   },
-  approve:'Approve',
-  
-  question:{
-    txt1:"",
-    txt2:"",
-    txt3:"",
-    txt4:"",
-    txt5:"",
-  }
+  approve:'Approve'
 };

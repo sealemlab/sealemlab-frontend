@@ -38,9 +38,14 @@ export default new Vuex.Store({
     ProgressInfo:{
       value:1,
       title:''
-    } // 给进度条传值
+    }, // 给进度条传值
+    noticeNum:false// 轻提示弹窗只弹一次
   },
   getters: {
+    // 获取是否可以再次弹起轻提示弹窗
+    getNoticeNum(state) {
+      return state.noticeNum
+    },
     // 获取进度条的值
     getProgressInfo(state) {
       return state.ProgressInfo
@@ -85,6 +90,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    // 设置轻提示弹窗弹起次数
+    setNoticeNum(state, data) {
+      state.noticeNum = data;
+    },
     // 设置进度条的值
     setProgressInfo(state, data) {
       state.ProgressInfo = JSON.parse(data);

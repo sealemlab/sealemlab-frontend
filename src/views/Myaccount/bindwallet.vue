@@ -21,11 +21,10 @@
 import { mapGetters } from "vuex";
 import { getSigner } from "sacredrealm-sdk";
 export default {
-  computed: { ...mapGetters(["getLogin","getIstrue","getAccount"]) },
+  computed: { ...mapGetters(["getNoticeNum","getLogin","getIstrue","getAccount"]) },
   data(){
     return{
       bindStatus:false,//绑定钱包状态
-      isdown:false,
       haveWallet:false,
       roundnum:'' //后台给的随机数
     }
@@ -47,24 +46,16 @@ export default {
     bindWallet(){
       if(this.bindStatus)return
       if(!this.getLogin){
-        if(!this.isdown){
+        if(!this.getNoticeNum){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.account.txt32'}));
-          this.isdown = true
-          setTimeout(() => {
-            this.isdown = false
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-          }, 2000);
+          this.$store.commit("setNoticeNum",true)
         }
         return
       }
       if(!this.getIstrue){
-        if(!this.isdown){
+        if(!this.getNoticeNum){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.account.txt33'}));
-          this.isdown = true
-          setTimeout(() => {
-            this.isdown = false
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-          }, 2000);
+          this.$store.commit("setNoticeNum",true)
         }
         return
       }

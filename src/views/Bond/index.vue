@@ -68,7 +68,7 @@
                 <span>{{ item.zl }}</span>
                 <span>{{ item.jclv }}</span>
                 <span>{{ item.fjlv }}</span>
-                <span>{{ item.lxzq }}</span>
+                <span>{{ item.lxzq }}{{$t("message.bond.txt19")}}</span>
                 <span>{{ item.djs }}</span>
                 <span>
                   <div class="progressbar"><div :style="{ width: item.gml }"></div></div>
@@ -108,7 +108,7 @@
                   <RingProgress
                     percentNum="30"
                     size="100"
-                    ranking="Lv1"
+                    ranking="Coming soon"
                     color="#9D9C9C"
                     backgroundColor="#5E5E5E"
                     fontcolor="#9D9C9C"
@@ -121,7 +121,7 @@
                   <span class="color1 font18">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color1 font18">{{ $t("message.bond.txt43") }} $300</span>
+                  <span class="color1 font18">{{ $t("message.bond.txt43") }} --</span>
                 </li>
               </ul>
             </li>
@@ -138,24 +138,24 @@
                   <RingProgress
                     :percentNum="30"
                     size="100"
-                    :ranking="'Lv7'"
+                    :ranking="'Coming soon'"
                     color="#9F9579"
                     backgroundColor="#6F6A59"
                     :fontcolor="'#9F9579'"
                   />
                 </li>
                 <li>
-                  <span class="color2 font18">{{ $t("message.bond.txt41") }}1.8%</span>
+                  <span class="color2 font18">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color2_opacity font18">{{ $t("message.bond.txt42") }}LV8 </span>
+                  <span class="color2_opacity font18">{{ $t("message.bond.txt42") }}LV2</span>
                 </li>
                 <li>
-                  <span class="color2_opacity font18">{{ $t("message.bond.txt45") }} $300</span>
+                  <span class="color2_opacity font18">{{ $t("message.bond.txt45") }} --</span>
                 </li>
                 <li>
                   <div @click="showBox =! showBox"><span>></span></div>
-                  <div v-if="showBox" class="color2_opacity">{{ $t("message.bond.txt46") }}2022/08/30</div>
+                  <div v-if="showBox" class="color2_opacity">{{ $t("message.bond.txt46") }}xxxx/xx/xx</div>
                 </li>
               </ul>
             </li>
@@ -171,20 +171,20 @@
                   <RingProgress
                     :percentNum="30"
                     size="100"
-                    :ranking="'Lv3'"
+                    :ranking="'Coming soon'"
                     color="#BB9F5A"
                     backgroundColor="#9F9579"
                     :fontcolor="'#BB9F5A'"
                   />
                 </li>
                 <li>
-                  <span class="color3 font18">{{ $t("message.bond.txt41") }}1%</span>
+                  <span class="color3 font18">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
                   <span class="color3_opacity font18">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color3_opacity font18">{{ $t("message.bond.txt47") }} $300</span>
+                  <span class="color3_opacity font18">{{ $t("message.bond.txt47") }} --</span>
                 </li>
               </ul>
             </li>
@@ -200,20 +200,20 @@
                   <RingProgress
                     :percentNum="30"
                     size="100"
-                    :ranking="'Lv4'"
+                    :ranking="'Coming soon'"
                     color="#EDD07E"
                     backgroundColor="#BB9F5A"
                     :fontcolor="'#F5E2A7'"
                   />
                 </li>
                 <li>
-                  <span class="color4 font18">{{ $t("message.bond.txt41") }}1%</span>
+                  <span class="color4 font18">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
                   <span class="color4_opacity font18">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color4_opacity font18">{{ $t("message.bond.txt49") }} $300</span>
+                  <span class="color4_opacity font18">{{ $t("message.bond.txt49") }} --</span>
                 </li>
               </ul>
             </li>
@@ -352,35 +352,35 @@ export default {
           jclv: "1%",
           fjlv: "0",
           lxzq: "14",
-          djs: "0",
+          djs: "00:00:00",
           gml: "0%",
         },
       ],
       Arr2: [
         {
           zq: "ST-BUSD",
-          gme: "$ 240",
+          gme: "0",
           jclv: "1%",
-          fjlv1: "1%",
-          fjlv2: "4%",
-          fjlv3: "2%",
-          yjklq: "$280",
-          djs: "13:11:23:45",
+          fjlv1: "0%",
+          fjlv2: "0%",
+          fjlv3: "0%",
+          yjklq: "0",
+          djs: "00:00:00",
           status:false
         },
         {
           zq: "ST-BUSD",
-          gme: "$ 240",
+          gme: "0",
           jclv: "1%",
-          fjlv1: "3%",
-          fjlv2: "0.2%",
-          fjlv3: "0.4%",
-          yjklq: "$280",
+          fjlv1: "0%",
+          fjlv2: "0%",
+          fjlv3: "0%",
+          yjklq: "0",
           djs: "待领取",
           status:false
         },
       ],
-      list1: ["$ 20*12", "$ 40*12"],
+      list1: ["$ 0*0", "$ 0*0"],
     };
   },
   methods: {
@@ -389,6 +389,7 @@ export default {
     },
     BondClick(data) {
       this.addlpDis = true;
+      console.log('this.$utils.isLang(): ', this.$utils.isLang());
     },
     showBuy(item){
       item.status = !item.status

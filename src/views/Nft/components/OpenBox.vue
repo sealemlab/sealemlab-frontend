@@ -29,7 +29,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["getAccount","getIstrue","getUserBoxInfo"]),
+    ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo"]),
     selectStatus: {
       get() {
         if(this.selectedNUM == 0){
@@ -73,7 +73,6 @@ export default {
       pageshowarr:[],//页面展示的盲盒数组
       timerll:null,
       selectNum:5,//最多选择数量
-      isdown:false,// 再次执行轻通知的动画
     }
   },
   methods: {
@@ -104,13 +103,9 @@ export default {
           this.selectedNUM--
           this.selectALLBtn = false
         }else{
-          if(!this.isdown){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多 ${this.selectNum}个`}));
-            this.isdown = true
-            setTimeout(() => {
-              this.isdown = false
-              this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-            }, 3000);
+          if(!this.getNoticeNum){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'`最多 ${this.selectNum}个'}));
+            this.$store.commit("setNoticeNum",true)
           }
         }
         return
@@ -152,13 +147,9 @@ export default {
             }
           })
           this.selectedNUM = this.pageshowarr.filter(item => {return item.status == true}).length
-          if(!this.isdown){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多 ${this.selectNum}个`}));
-            this.isdown = true
-            setTimeout(() => {
-              this.isdown = false
-              this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-            }, 3000);
+          if(!this.getNoticeNum){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'`最多 ${this.selectNum}个'}));
+            this.$store.commit("setNoticeNum",true)
           }
         }
       }

@@ -23,7 +23,6 @@ export default {
   data() {
     return {
       li_index:0,
-      isdown:false,
       navArr: [
         { label: "message.nft.txt2", link: "/nft/buy-blind-box/0",src:`${this.$store.state.imgUrl}nft_nav1.png` },
         { label: "message.nft.txt3", link: "",src:`${this.$store.state.imgUrl}nft_nav2.png` },
@@ -40,20 +39,16 @@ export default {
       // ],
     };
   },
-  computed: { ...mapGetters(["isEnLang"]) },
+  computed: { ...mapGetters(["isEnLang","getNoticeNum"]) },
   methods:{
     liClick(item,index){
       if(item.link){
         this.li_index = index
         this.$router.push(item.link)
       }else{
-        if(!this.isdown){
+        if(!this.getNoticeNum){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-          this.isdown = true
-          setTimeout(() => {
-            this.isdown = false
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-          }, 2000);
+          this.$store.commit("setNoticeNum",true)
         }
       }
     }
