@@ -4,9 +4,9 @@
     <div class="footer_content display_flex">
       <img :src="`${$store.state.imgUrl}logo.webp`" class="footer_logo" />
       <div class="onebox display_flex">
-        <ul v-for="(item, index) in footerArr" :key="index">
-          <li class="font14 en_Regular" v-for="(ele, index1) in item.children" :key="index1">
-            {{ $t(ele.title) }}
+        <ul v-for="(ele, index) in footerArr" :key="index">
+          <li class="font14 en_Regular" v-for="(item, index1) in ele.children" :key="index1">
+            <a :href="isEnLang?(item.link_en?item.link_en:item.link):item.link" target="_blank" rel="noopener noreferrer" >{{ $t(item.title) }}</a>
           </li>
         </ul>
       </div>
@@ -19,7 +19,11 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters(["isEnLang"])
+  },
   data(){
     return{
       footerArr:[
@@ -27,7 +31,9 @@ export default {
           id:1,
           children:[
             {title:"message.footer.txt1",link:''},
-            {title:"message.footer.txt2",link:''},
+            {title:"message.footer.txt2",
+            link:'https://sacred-realm.gitbook.io/zhong-wen/',
+            link_en:'https://lab-sealem.gitbook.io/sealem-lab/'},
             {title:"message.footer.txt3",link:''},
             {title:"message.footer.txt4",link:''},
             {title:"message.footer.txt5",link:''},
@@ -37,17 +43,17 @@ export default {
         {
           id:2,
           children:[
-            {title:"message.footer.txt20",link:''},
-            {title:"message.footer.txt7",link:''},
-            {title:"message.footer.txt8",link:''},
-            {title:"message.footer.txt9",link:''},
-            {title:"message.footer.txt10",link:''}
+            {title:"message.footer.txt20"},
+            {title:"message.footer.txt7",link:'https://t.me/sealemglobal'},
+            {title:"message.footer.txt8",link:'https://twitter.com/SealemLab'},
+            {title:"message.footer.txt9",link:'https://discord.gg/s747pMMBzq'},
+            {title:"message.footer.txt10",link:'https://medium.com/@sealemlab'}
           ]
         },
         {
           id:3,
           children:[
-            {title:"message.footer.txt11",link:''},
+            {title:"message.footer.txt11"},
             {title:"message.footer.txt12",link:''},
             {title:"message.footer.txt13",link:''}
           ]

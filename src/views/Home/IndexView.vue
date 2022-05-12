@@ -96,7 +96,7 @@
       <div class="box_ display_flex">
         <div class="title_txt font30 mobile_font16">{{$t("message.home.txt_characteristic")}}</div>
         <div class="imgbox display_flex">
-          <div class="add_outbox" v-for="(item, index) in spArr" :key="index">
+          <div class="add_outbox" :class="isEnLang?'en_class':''" v-for="(item, index) in spArr" :key="index">
             <div class="onebox display_flex">
               <div class="add_content">
                 <img :src="item.src" class="img_sp" />
@@ -344,8 +344,8 @@ export default {
         {txt:"message.home.txt17",src:`${this.$store.state.imgUrl}money2.webp`},
         {txt:"message.home.txt18",src:`${this.$store.state.imgUrl}money3.webp`},
         {txt:"message.home.txt19",src:`${this.$store.state.imgUrl}money4.webp`},
-        {txt:"message.home.txt20",src:`${this.$store.state.imgUrl}money2.webp`},
-        {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money2.webp`}
+        {txt:"message.home.txt20",src:`${this.$store.state.imgUrl}money5.webp`},
+        {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money6.webp`}
       ],
 
       partenerArr:[{
@@ -781,6 +781,9 @@ export default {
               margin-top: 10px;
             }
           }
+        }
+        .en_class{
+          width: 18%;
         }
       }
       .make_money{

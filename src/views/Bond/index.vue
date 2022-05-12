@@ -32,11 +32,11 @@
             <div :title='$t("message.bond.txt71")' style="cursor:pointer">
               <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
             </div>
-            <div><span>$45678956</span></div>
+            <div><span>$&nbsp;0</span></div>
             <div>
               <span>ST{{ $t("message.bond.txt4") }} </span>
             </div>
-            <div><span>$34.78</span></div>
+            <div><span>$&nbsp;0</span></div>
           </div>
           <div class="bottom">
             <ul class="list_title">
@@ -907,13 +907,13 @@ export default {
           &:nth-child(3) {
             padding: 20px 0;
           }
-          &:nth-child(4) {
-            font-weight: 600;
-          }
-          &:nth-child(5),
-          &:nth-child(6) {
-            font-weight: 400;
-          }
+          // &:nth-child(4) {
+          //   // font-weight: 600;
+          // }
+          // &:nth-child(5),
+          // &:nth-child(6) {
+          //   // font-weight: 400;
+          // }
           &:nth-child(7) {
             position: relative;
             padding-top: 30px;

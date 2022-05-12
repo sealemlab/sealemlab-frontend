@@ -50,7 +50,9 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
+  computed: { ...mapGetters(["getNoticeNum"]) },
   data(){
     return {
       btnloding:false,
@@ -200,8 +202,10 @@ export default {
           console.log('res: ', res);
           this.btnloding = false
           if(res.code == 200){
-            this.proupStatus = true
-            this.content = 'message.tip.txt1'
+            if(!this.getNoticeNum){
+              this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt1'}));
+              this.$store.commit("setNoticeNum",true)
+            }
           }
         }).catch(() => {
           this.btnloding = false

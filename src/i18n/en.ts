@@ -74,30 +74,36 @@ export const message = {
     introduce19: "Enter the crypto industry in 2018",
 
     txt54: "ROADMAP",
+
     txt55: "Sealem technology and the core team were established",
     txt55_1: "Team establishment",
     txt56_1: "Market research",
     txt57_1: "Bonds and economic model",
     txt58_1: "GameFi landing",
     txt60_1: "Social media creation",
-    txt61_1: "Full announcement & blind box pre-sale",
-    txt62_1: "Ecological construction and development",
+    txt61_1: "Announcement & blind box presale",
+    txt62_1: "Building ecology",
     txt63_1: "Global Sealem game boom",
     txt64_1: "Multi-chain ecological construction",
-    txt56:"market research; analyse the Gamefi industry",
-    txt57:"Bond R&D,setting economic model",
+    txt56:
+      "market research; analyse the Gamefi industry",
+    txt57:
+      "Bond R&D,setting economic model",
     txt58: "Game team formation completed; game development",
-    txt60:"Social media and NFT market establishment; Competitive product analysis",
-    txt61:"Comprehensive marketing,Official website online, NFT mystery Box Pre-sale,In-game beta",
-    txt62:"NFT market and the game are online,  Google store is online ,more CEXs are listed",
-    txt63:"Global Guild Recruitment,Game Updates, Dubai Offline Guild Competition, Dubai Gamefi roundtable",
-    txt64:"Cross-chain plan Sealem V2 released, creator platform is online, more marketing",
+    txt60:
+      "Social media and NFT market establishment; Competitive product analysis",
+    txt61:
+      "Comprehensive marketing,Official website online, NFT mystery Box Pre-sale,In-game beta",
+    txt62:
+      "NFT market and the game are online,  Google store is online ,more CEXs are listed",
+    txt63:
+      "Global Guild Recruitment,Game Updates, Dubai Offline Guild Competition, Dubai Gamefi roundtable",
+    txt64:
+      "Cross-chain plan Sealem V2 released, creator platform is online, more marketing",
 
-    
-    
     txt59: "PARTENER",
 
-    txt65: "Sealem game",
+    txt65: "SEALEM GAME",
     txt66: "Extraordinary gaming experience",
     txt67: "Go to Game Center",
     txt68: "Enjoy various games ，and P2E in game",
@@ -110,7 +116,7 @@ export const message = {
     txt74:"Circulating Supply",
     txt75:"ST price",
     txt76:"SR price",
-    txt77:"Overview"
+    txt77:"OVERVIEW"
   },
   footer: {
     txt1: "ABOUT",
@@ -173,7 +179,7 @@ export const message = {
     txt29: "Introduction of Sacred Realm Mystery Box",
     txt30: "The Sacred Realm mystery box is a 3D digital asset of Unreal 4, in which each NFT corresponds to a unique piece of equipment in game, and its value can be measured in terms of levels, power, and rarity.",
     txt32: "3D digital asset",
-    txt33: "NFT Mystery content",
+    txt33: "Mystery box content",
     txt34: "NFT Mystery boxes include weapons, armours, accessories, and fashions.",
     txt35: "Private Assets",
     txt36: "As users' private asset, Sacred Realm NFT has full control, including: free transactions between users; improving combat effectiveness in the game to obtain a lot of loot; free leasing between users, etc.",
@@ -326,7 +332,7 @@ export const message = {
     txt41:"Current rate:",
     txt42:"Next Level:",
     txt43:"Need the liquidity increasing",
-    txt44:"Copy to invite",
+    txt44:"To invite",
     txt45:"Need buying bond",
     txt46:"Invalid date:",
     txt47:"Need inviting to stake",

@@ -57,7 +57,7 @@ export default {
   components:{
     PassProup
   },
-  computed: { ...mapGetters(["getLogin"]) },
+  computed: { ...mapGetters(["getLogin","getNoticeNum"]) },
   data(){
     return {
       btnloding:false,
@@ -205,7 +205,10 @@ export default {
             })
             this.$router.push('/myaccount/information');
           }else{
-            this.$store.commit("setProupStatus", JSON.stringify({'status':true,'content':'message.tip.txt2'}));
+            if(!this.getNoticeNum){
+              this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt2'}));
+              this.$store.commit("setNoticeNum",true)
+            }
           }
         }).catch(() => {
           this.btnloding = false
