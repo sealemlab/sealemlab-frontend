@@ -3,7 +3,7 @@
     <div class="home_bgbox">
       <LoadingAnmation v-if="videoStatus" ></LoadingAnmation> <!--:isshowtxt="true"-->
       <video class="video_" ref="video" loop autoplay muted v-show="!videoStatus">
-        <source :src="`${$store.state.imgUrl}home_sacredrealm.mp4`" type="video/mp4" />
+        <source :src="`${$store.state.videoUrl}home_sacredrealm.mp4`" type="video/mp4" />
       </video>
       <div class="content">
         <div class="content_center">
@@ -13,6 +13,7 @@
             <div class="btnbox font20">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
+              <img :src="haveVoice?`${$store.state.imgUrl}voice.webp`:`${$store.state.imgUrl}no_voice.webp`" class="voice_img" @click="videoPlay"/>
             </div>
           </div>
           <div class="rightbox">
@@ -52,7 +53,7 @@
           <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
         </div>
       </div>
-      <div class="people_box"><img :src="`${$store.state.imgUrl}people.png`" class="people" /></div>
+      <div class="people_box"><img :src="`${$store.state.imgUrl}people.webp`" class="people" /></div>
     </div>
     <!-- 游戏场景轮播 -->
     <div class="characteristic_box">
@@ -83,9 +84,9 @@
           </div>
         </div>
         <div class="left right">
-          <img :src="`${$store.state.imgUrl}game2.png`" class="game2" />
-          <img :src="`${$store.state.imgUrl}game3.png`" class="game2" />
-          <img :src="`${$store.state.imgUrl}game4.png`" class="game2" />
+          <img :src="`${$store.state.imgUrl}game2.webp`" class="game2" />
+          <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
+          <img :src="`${$store.state.imgUrl}game4.webp`" class="game2" />
         </div>
       </div>
     </div>
@@ -132,10 +133,10 @@
                   <span class="span1 font20">{{$t(item.name)}}</span>
                   <span class="span2 font16">{{item.txt}}</span>
                   <div class="address_peopllle display_flex">
-                    <a v-if="item.LinY == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}in.png`" class="ling_ying" /></a>
-                    <a v-else :href="item.LinY" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}in.png`" class="ling_ying" /></a>
-                    <a v-if="item.twitter == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}twitter.png`" class="twitter"/></a>
-                    <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}twitter.png`" class="twitter"/></a>
+                    <a v-if="item.LinY == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" /></a>
+                    <a v-else :href="item.LinY" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" /></a>
+                    <a v-if="item.twitter == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}twitter.webp`" class="twitter"/></a>
+                    <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}twitter.webp`" class="twitter"/></a>
                   </div>
                   <span class="triangle_calss" :class="item.status?'triangle_top':'triangle_bottom'" @click="showtxtFun(item)"></span>
                   <div class="txtbox font12" v-if="item.status">
@@ -162,7 +163,7 @@
             <div class="timebox">
               <p class="time_class font20">{{item.time}}</p>
               <div class="imgs">
-                <img :src="item.id == activeIndex ?`${$store.state.imgUrl}partenerbg.png`:`${$store.state.imgUrl}time.png`" class="partenerbg_img" />
+                <img :src="item.id == activeIndex ?`${$store.state.imgUrl}partenerbg.webp`:`${$store.state.imgUrl}time.webp`" class="partenerbg_img" />
                 <span></span>
               </div>
               <p class="titletxt font18">{{$t(item.title)}}</p>
@@ -205,14 +206,15 @@ export default {
   },
   data(){
     return{
+      haveVoice:false,//声音
       swiperVisible:true,
       addArr:[
-        {src:`${this.$store.state.imgUrl}home1.png`,num:0,title:'message.home.txt71'},
-        {src:`${this.$store.state.imgUrl}home2.png`,num:0,title:'message.home.txt72'},
-        {src:`${this.$store.state.imgUrl}home3.png`,num:0,title:'message.home.txt73'},
-        {src:`${this.$store.state.imgUrl}home4.png`,num:0,title:'message.home.txt74'},
-        {src:`${this.$store.state.imgUrl}home5.png`,num:0,title:'message.home.txt75'},
-        {src:`${this.$store.state.imgUrl}home6.png`,num:0,title:'message.home.txt76'},
+        {src:`${this.$store.state.imgUrl}home1.webp`,num:0,title:'message.home.txt71'},
+        {src:`${this.$store.state.imgUrl}home2.webp`,num:0,title:'message.home.txt72'},
+        {src:`${this.$store.state.imgUrl}home3.webp`,num:0,title:'message.home.txt73'},
+        {src:`${this.$store.state.imgUrl}home4.webp`,num:0,title:'message.home.txt74'},
+        {src:`${this.$store.state.imgUrl}home5.webp`,num:0,title:'message.home.txt75'},
+        {src:`${this.$store.state.imgUrl}home6.webp`,num:0,title:'message.home.txt76'},
       ],
       activeIndex:0,//swiper索引
       videoStatus:true,//视频加载
@@ -220,57 +222,57 @@ export default {
       peopleIndex:0,// 人物展示对应大图的索引
       comminicateArr:[
         {
-          src:`${this.$store.state.imgUrl}tel_1.png`,
+          src:`${this.$store.state.imgUrl}tel_1.webp`,
           link:'https://t.me/sealemglobal'
         },
         {
-          src:`${this.$store.state.imgUrl}tel_2.png`,
+          src:`${this.$store.state.imgUrl}tel_2.webp`,
           link:'https://twitter.com/SealemLab'
         },
         {
-          src:`${this.$store.state.imgUrl}tel_3.png`,
+          src:`${this.$store.state.imgUrl}tel_3.webp`,
           link:'https://discord.gg/s747pMMBzq'
         },
         {
-          src:`${this.$store.state.imgUrl}tel_5.png`,
+          src:`${this.$store.state.imgUrl}tel_5.webp`,
           link:'https://sacred-realm.gitbook.io/zhong-wen/',
           link_en:'https://lab-sealem.gitbook.io/sealem-lab/'
         },
         {
-          src:`${this.$store.state.imgUrl}tel_4.png`,
+          src:`${this.$store.state.imgUrl}tel_4.webp`,
           link:'https://medium.com/@sealemlab'
         }
       ],
       spArr:[
         {
-          src:`${this.$store.state.imgUrl}characteristic1.png`,
+          src:`${this.$store.state.imgUrl}characteristic1.webp`,
           txt:"message.home.txt10",
           txt1:"message.home.txt11",
         },
         {
-          src:`${this.$store.state.imgUrl}characteristic2.png`,
+          src:`${this.$store.state.imgUrl}characteristic2.webp`,
           txt:'message.home.txt12',
           txt1:'message.home.txt12_1',
         },
         {
-          src:`${this.$store.state.imgUrl}characteristic3.png`,
+          src:`${this.$store.state.imgUrl}characteristic3.webp`,
           txt:'message.home.txt13',
           txt1:'message.home.txt13_1',
         },
         {
-          src:`${this.$store.state.imgUrl}characteristic4.png`,
+          src:`${this.$store.state.imgUrl}characteristic4.webp`,
           txt:'message.home.txt14',
           txt1:'message.home.txt14_1',
         },
         {
-          src:`${this.$store.state.imgUrl}characteristic5.png`,
+          src:`${this.$store.state.imgUrl}characteristic5.webp`,
           txt:'message.home.txt15',
           txt1:'message.home.txt15_1',
         }
       ],
       teamArr:[
         {
-          src:`${this.$store.state.imgUrl}ceo.png`,
+          src:`${this.$store.state.imgUrl}ceo.webp`,
           txt:'CEO',
           name:'message.home.txt48',
           status:true,
@@ -281,7 +283,7 @@ export default {
           introduce3:'message.home.introduce3',
         },
         {
-          src:`${this.$store.state.imgUrl}cto.png`,
+          src:`${this.$store.state.imgUrl}cto.webp`,
           txt:'CMO',
           name:'message.home.txt50',
           status:false,
@@ -292,7 +294,7 @@ export default {
           introduce3:'message.home.introduce6',
         },
         {
-          src:`${this.$store.state.imgUrl}cmo.png`,
+          src:`${this.$store.state.imgUrl}cmo.webp`,
           txt:'CTO',
           name:'message.home.txt49',
           status:false,
@@ -303,7 +305,7 @@ export default {
           introduce3:'message.home.introduce9',
         },
         {
-          src:`${this.$store.state.imgUrl}svp.png`,
+          src:`${this.$store.state.imgUrl}svp.webp`,
           txt:'SVP',
           name:'message.home.txt51',
           status:false,
@@ -314,7 +316,7 @@ export default {
           introduce3:'message.home.introduce12',
         },
         {
-          src:`${this.$store.state.imgUrl}founder.png`,
+          src:`${this.$store.state.imgUrl}founder.webp`,
           txt:'Co-Founder',
           name:'message.home.txt52',
           status:false,
@@ -325,7 +327,7 @@ export default {
           introduce3:'message.home.introduce15',
         },
         {
-          src:`${this.$store.state.imgUrl}founder1.png`,
+          src:`${this.$store.state.imgUrl}founder1.webp`,
           txt:'Co-Founder',
           name:'message.home.txt53',
           status:false,
@@ -338,43 +340,43 @@ export default {
         }
       ],
       makeMoneyArr:[
-        {txt:"message.home.txt16",src:`${this.$store.state.imgUrl}money1.png`},
-        {txt:"message.home.txt17",src:`${this.$store.state.imgUrl}money2.png`},
-        {txt:"message.home.txt18",src:`${this.$store.state.imgUrl}money3.png`},
-        {txt:"message.home.txt19",src:`${this.$store.state.imgUrl}money4.png`},
-        {txt:"message.home.txt20",src:`${this.$store.state.imgUrl}money2.png`},
-        {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money2.png`}
+        {txt:"message.home.txt16",src:`${this.$store.state.imgUrl}money1.webp`},
+        {txt:"message.home.txt17",src:`${this.$store.state.imgUrl}money2.webp`},
+        {txt:"message.home.txt18",src:`${this.$store.state.imgUrl}money3.webp`},
+        {txt:"message.home.txt19",src:`${this.$store.state.imgUrl}money4.webp`},
+        {txt:"message.home.txt20",src:`${this.$store.state.imgUrl}money2.webp`},
+        {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money2.webp`}
       ],
 
       partenerArr:[{
-        src:`${this.$store.state.imgUrl}partener1.png`,
+        src:`${this.$store.state.imgUrl}partener1.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener2.png`,
+        src:`${this.$store.state.imgUrl}partener2.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener3.png`,
+        src:`${this.$store.state.imgUrl}partener3.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener4.png`,
+        src:`${this.$store.state.imgUrl}partener4.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener5.png`,
+        src:`${this.$store.state.imgUrl}partener5.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener6.png`,
+        src:`${this.$store.state.imgUrl}partener6.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener7.png`,
+        src:`${this.$store.state.imgUrl}partener7.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener8.png`,
+        src:`${this.$store.state.imgUrl}partener8.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener9.png`,
+        src:`${this.$store.state.imgUrl}partener9.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener10.png`,
+        src:`${this.$store.state.imgUrl}partener10.webp`,
       }
       ],
       swiperArr:[
@@ -468,23 +470,23 @@ export default {
       gameArr:[
         {
           id:1,
-          src:`${this.$store.state.imgUrl}smallgame1.png`,
-          maxSrc:`${this.$store.state.imgUrl}maxgame1.png`
+          src:`${this.$store.state.imgUrl}smallgame1.webp`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame1.webp`
         },
         {
           id:2,
-          src:`${this.$store.state.imgUrl}smallgame2.png`,
-          maxSrc:`${this.$store.state.imgUrl}maxgame2.png`
+          src:`${this.$store.state.imgUrl}smallgame2.webp`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame2.webp`
         },
         {
           id:3,
-          src:`${this.$store.state.imgUrl}smallgame3.png`,
-          maxSrc:`${this.$store.state.imgUrl}maxgame3.png`
+          src:`${this.$store.state.imgUrl}smallgame3.webp`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame3.webp`
         },
         {
           id:4,
-          src:`${this.$store.state.imgUrl}smallgame4.png`,
-          maxSrc:`${this.$store.state.imgUrl}maxgame4.png`
+          src:`${this.$store.state.imgUrl}smallgame4.webp`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame4.webp`
         },
       ],
       // 游戏场景swiper配置
@@ -537,8 +539,13 @@ export default {
   },
   methods:{
     videoPlay() {
-      this.$refs.video.muted = false;
-      this.$refs.video.play();
+      this.haveVoice = !this.haveVoice
+      if(this.haveVoice){
+        this.$refs.video.muted = false;
+        this.$refs.video.play();
+      }else{
+        this.$refs.video.muted = true;
+      }
     },
     bondClick(){
       this.$router.push('/bond');
@@ -554,15 +561,11 @@ export default {
     },
   },
   mounted(){
-    window.addEventListener("click",this.videoPlay)
     let that = this
     this.$refs.video.addEventListener('canplaythrough',function(){
       that.videoStatus = false
     });
   },
-  destroyed(){
-    window.removeEventListener("click",this.videoPlay)
-  }
 }
 </script>
 <style>
@@ -629,9 +632,6 @@ export default {
       height: 100vh;
       object-fit: cover;
     }
-    // .homebg{
-    //   width: 100%;
-    // }
     .content{
       position: absolute;
       bottom: 5vh;
@@ -641,16 +641,6 @@ export default {
       flex-direction: column;
       align-items: center;
       padding: 0 5vw;
-      // .home_font{
-      //   font-weight: bold;
-      //   color: #FFFFFF;
-      //   line-height: 63px;
-      //   letter-spacing: 4px;
-      //   width: fit-content;
-      //   background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
-      //   -webkit-background-clip: text;
-      //   -webkit-text-fill-color: transparent;
-      // }
       .content_center{
         width: 100%;
         display: flex;
@@ -830,7 +820,7 @@ export default {
   }
   .teamboxs{
     width: 100%;
-    background: url($bg_url + "teambg.png") no-repeat #000;
+    background: url($bg_url + "teambg.webp") no-repeat #000;
     background-size: 100% 100%;
     .team_container{
       position: relative;
@@ -1124,18 +1114,19 @@ export default {
     transform: scale(1.2);
   }
   .swiper-button-prev {
-    background-image: url($bg_url + "btn_left.png");
+    background-image: url($bg_url + "btn_left.webp");
     background-size: 100% auto;
     width: 40px;
   }
   .swiper-button-next {
-    background-image: url($bg_url + "btn_right.png");
+    background-image: url($bg_url + "btn_right.webp");
     background-size: 100% auto;
     width: 40px;
   }
 }
 .btnbox{
   display: flex;
+  align-items: center;
   span{
     width: 170px;
     height: 45px;
@@ -1153,6 +1144,11 @@ export default {
       margin-right: 0;
       color: #FFFFFF;
     }
+  }
+  .voice_img{
+    cursor: pointer;
+    width: 63px;
+    margin-left: 180px;
   }
 }
 @media screen and (max-width: 980px) {
@@ -1335,7 +1331,7 @@ export default {
     .teamboxs{
       display: none;
       width: 100%;
-      background: url($bg_url + "teambg.png") no-repeat #000;
+      background: url($bg_url + "teambg.webp") no-repeat #000;
       background-size: 100% 100%;
       .team_container{
         position: relative;

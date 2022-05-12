@@ -28,7 +28,7 @@
       <div class="btn font18" @click="sureClick">
         {{$t(btntxt)}}
       </div>
-      <img :src="`${$store.state.imgUrl}passclose.png`" class="close_img" @click.stop="closePassProup"/>
+      <img :src="`${$store.state.imgUrl}passclose.webp`" class="close_img" @click.stop="closePassProup"/>
     </div>
   </div>
 </template>

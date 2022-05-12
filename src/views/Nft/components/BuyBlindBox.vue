@@ -12,7 +12,7 @@
     <div class="conten_box">
       <div class="treasure_chest_box">
         <!-- <LoadingAnmation v-if="imgStatus" ></LoadingAnmation>
-        <img :src="`${$store.state.imgUrl}bindbox.png`" ref="bindboximg" v-show="!imgStatus" /> -->
+        <img :src="`${$store.state.imgUrl}bindbox.webp`" ref="bindboximg" v-show="!imgStatus" /> -->
       </div>
       <div class="right_content">
         <p class="font20 title_txt">
@@ -49,7 +49,7 @@
           <span>&nbsp;ST</span>
           <!-- <span v-if="bindboxType == 0">HC</span>
           <span v-if="bindboxType == 1">BNB</span> -->
-          <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
+          <img :src="`${$store.state.imgUrl}link.webp`" class="link_img" />
         </div>
         <div class="btnbox font20" :class="disable?'disable_bnb':''">
           <!-- {{$t("message.nft.txt28")}} -->
@@ -343,7 +343,7 @@ export default {
 .conten_box {
   width: 100%;
   display: flex;
-  background: url($bg_url + "bindboxbg.png") no-repeat #000;
+  background: url($bg_url + "bindboxbg.webp") no-repeat #000;
   background-size: contain;
   .treasure_chest_box {
     width: 50%;

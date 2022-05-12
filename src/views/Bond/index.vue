@@ -2,9 +2,9 @@
   <div class="bond_page">
     <!-- 背景图 -->
     <div class="box1 font14">
-      <img :src="`${$store.state.imgUrl}newbondbg.png`" class="bond_bg" />
+      <img :src="`${$store.state.imgUrl}newbondbg.webp`" class="bond_bg" />
       <div>
-        <img :src="`${$store.state.imgUrl}BOND.png`" class="bond_img" />
+        <img :src="`${$store.state.imgUrl}BOND.webp`" class="bond_img" />
         <ul>
           <li>
             <div class="txt1">{{ $t("message.bond.txt2_1") }}</div>
@@ -325,14 +325,14 @@
         </div>
         <div class="content">
           <div>
-            <img :src="`${$store.state.imgUrl}champion1.png`" />
+            <img :src="`${$store.state.imgUrl}champion1.webp`" />
             <div>
               <p class="font14">{{ $t("message.bond.txt64") }}</p>
               <p class="font12">0xb2307A91...5198ef7</p>
             </div>
           </div>
           <div>
-            <img :src="`${$store.state.imgUrl}champion1.png`" />
+            <img :src="`${$store.state.imgUrl}champion1.webp`" />
             <div>
               <p class="font14">{{ $t("message.bond.txt65") }}</p>
               <p class="font12">https://sealemlab.com/?r=ajnpq</p>
@@ -523,7 +523,7 @@ export default {
     width: 13px;
     height: 13px;
     filter: blur(0px);
-    background: url($bg_url + "ques.png") no-repeat;
+    background: url($bg_url + "ques.webp") no-repeat;
     background-size: 100% 100%;
     position: absolute;
     right: -20px;
@@ -701,7 +701,7 @@ export default {
   margin-top: 80px;
   width: 100%;
   height: auto;
-  // background: url($bg_url + "newbondbg.png") no-repeat;
+  // background: url($bg_url + "newbondbg.webp") no-repeat;
   // background-size: 100% auto;
 }
 .box1 {

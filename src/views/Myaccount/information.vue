@@ -8,7 +8,7 @@
           <div class="inputbox" v-if="index == 1">
             <div class="add_eye">
               <input type="password" class="input font18" v-model="item.inputValue" />
-              <img :src="`${$store.state.imgUrl}eye1.png`" class="eye_img" />
+              <img :src="`${$store.state.imgUrl}eye1.webp`" class="eye_img" />
             </div>
             <div class="input_btn font14" @click="changePassword">{{$t("message.account.txt8")}}</div>
           </div>

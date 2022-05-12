@@ -1,7 +1,7 @@
 <template>
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
-      <img class="logo" :src="`${$store.state.imgUrl}logo.png`" alt="" @click="toRoute('/home')" />
+      <img class="logo" :src="`${$store.state.imgUrl}logo.webp`" alt="" @click="toRoute('/home')" />
       <ul :class="getIsMobile?'disply_none':''">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
           <span class="font18">{{ $t(item.label) }}</span>
@@ -10,7 +10,7 @@
     </div>
     <div class="nav_right">
       <div class="st_price">
-        <img :src="`${$store.state.imgUrl}stlogo.png`" class="st_price_img" />
+        <img :src="`${$store.state.imgUrl}stlogo.webp`" class="st_price_img" />
         <span class="font_price font16">$5.45</span>
       </div>
       <div class="login_box">
@@ -32,7 +32,7 @@
           <div class="lastbox_hover">
             <div class="hover_span1" @click.stop="signOutFun">
               <span class="span_exit">Disconnect</span>
-              <img :src="`${$store.state.imgUrl}exit.png`" class="exit_class" />
+              <img :src="`${$store.state.imgUrl}exit.webp`" class="exit_class" />
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
       <div class="connect font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div> -->
       <div class="lang_box" :class="getIsMobile?'disply_none':''" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
         <span>{{ language }}</span>
-        <img :src="`${$store.state.imgUrl}accrow.png`" alt="" />
+        <img :src="`${$store.state.imgUrl}accrow.webp`" alt="" />
         <transition name="select-lang" appear>
           <ul v-show="showLangSelect">
             <li v-for="(item, index) in langArr" :key="index" @click="selectLang(index)">{{ item }}</li>

@@ -2,7 +2,7 @@
   <div class="record_page" v-if="getwalletstatus">
     <div class="title fontsize26">{{ $t("message.nav.txt9") }}</div>
     <img
-      :src="`${$store.state.imgUrl}passclose.png`"
+      :src="`${$store.state.imgUrl}passclose.webp`"
       class="close_img"
       @click="closepage"
     />
@@ -24,19 +24,19 @@ export default {
   data(){
     return {
       walletarr:[
-        {name:'Metamask',src:`${this.$store.state.imgUrl}wallet1.png`},
-        {name:'WalletConnect',src:`${this.$store.state.imgUrl}wallet2.png`},
-        {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.png`},
-        {name:'Coin98',src:`${this.$store.state.imgUrl}wallet11.png`},
-        {name:'ONTO',src:`${this.$store.state.imgUrl}wallet5.png`},
-        {name:'TokenPocket',src:`${this.$store.state.imgUrl}wallet6.png`},
-        // {name:'TrustWallet',src:`${this.$store.state.imgUrl}wallet3.png`},
-        // {name:'SafePal Wallet',src:`${this.$store.state.imgUrl}wallet4.png`},
-        // {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.png`},
-        // {name:'MathWallet',src:`${this.$store.state.imgUrl}wallet8.png`},
-        // {name:'Onekey',src:`${this.$store.state.imgUrl}wallet9.png`},
-        // {name:'Bitpie',src:`${this.$store.state.imgUrl}wallet10.png`},
-        // {name:'Binance Chain Wallet',src:`${this.$store.state.imgUrl}wallet12.png`},
+        {name:'Metamask',src:`${this.$store.state.imgUrl}wallet1.webp`},
+        {name:'WalletConnect',src:`${this.$store.state.imgUrl}wallet2.webp`},
+        {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.webp`},
+        {name:'Coin98',src:`${this.$store.state.imgUrl}wallet11.webp`},
+        {name:'ONTO',src:`${this.$store.state.imgUrl}wallet5.webp`},
+        {name:'TokenPocket',src:`${this.$store.state.imgUrl}wallet6.webp`},
+        // {name:'TrustWallet',src:`${this.$store.state.imgUrl}wallet3.webp`},
+        // {name:'SafePal Wallet',src:`${this.$store.state.imgUrl}wallet4.webp`},
+        // {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.webp`},
+        // {name:'MathWallet',src:`${this.$store.state.imgUrl}wallet8.webp`},
+        // {name:'Onekey',src:`${this.$store.state.imgUrl}wallet9.webp`},
+        // {name:'Bitpie',src:`${this.$store.state.imgUrl}wallet10.webp`},
+        // {name:'Binance Chain Wallet',src:`${this.$store.state.imgUrl}wallet12.webp`},
       ]
     }
   },

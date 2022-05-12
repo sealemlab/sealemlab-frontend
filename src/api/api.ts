@@ -5,13 +5,13 @@ export default {
   // 注册
   registerFun: (data: any) => {
     return service.post(
-      `${BASE_API}/user/create`,data
+      `${BASE_API}/comm/create`,data
     );
   },
   // 登录
   loginFun: (data: any) => {
     return service.post(
-      `${BASE_API}/user/login`,data
+      `${BASE_API}/comm/login`,data
     );
   },
   // 绑定钱包

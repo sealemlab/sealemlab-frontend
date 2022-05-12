@@ -32,7 +32,9 @@ export default new Vuex.Store({
       status:false,
       word:'',
     },//轻提示信息
-    imgUrl:process.env.NODE_ENV === 'production'?'//cdn.hashland.com/sacredTestImg/':'//cdn.hashland.com/sacredTestImg/',//图片前缀
+    imgUrl:process.env.NODE_ENV === 'production'?'':'//cdn.hashland.com/sacredlab_assets_test/images/',//图片前缀
+    videoUrl:process.env.NODE_ENV === 'production'?'':'//cdn.hashland.com/sacredlab_assets_test/video/',//视频前缀
+    fontUrl:process.env.NODE_ENV === 'production'?'':'//cdn.hashland.com/sacredlab_assets_test/fonts/',//字体前缀
     codeTime:60,//验证码重新发送时间
     emailReg:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,//邮箱校验
     pwReg: /^[a-zA-Z0-9]{6,16}$/,//密码校验 6-16位数字英文组合

@@ -59,32 +59,32 @@ export default {
       code_txt:'发送验证码',
       list:[
         {
-          src:`${this.$store.state.imgUrl}register1.png`,
+          src:`${this.$store.state.imgUrl}register1.webp`,
           title:'message.signin.txt3',
           explain:'message.signin.txt4'
         },
         {
-          src:`${this.$store.state.imgUrl}register2.png`,
+          src:`${this.$store.state.imgUrl}register2.webp`,
           title:'message.signin.txt5',
           explain:'message.signin.txt6'
         },
         {
-          src:`${this.$store.state.imgUrl}register3.png`,
+          src:`${this.$store.state.imgUrl}register3.webp`,
           title:'message.signin.txt7',
           explain:'message.signin.txt8'
         },
         {
-          src:`${this.$store.state.imgUrl}register4.png`,
+          src:`${this.$store.state.imgUrl}register4.webp`,
           title:'message.signin.txt9',
           explain:'message.signin.txt10'
         },
         {
-          src:`${this.$store.state.imgUrl}register5.png`,
+          src:`${this.$store.state.imgUrl}register5.webp`,
           title:'message.signin.txt11',
           explain:'message.signin.txt12'
         },
         {
-          src:`${this.$store.state.imgUrl}register6.png`,
+          src:`${this.$store.state.imgUrl}register6.webp`,
           title:'message.signin.txt13',
           explain:'message.signin.txt14'
         },

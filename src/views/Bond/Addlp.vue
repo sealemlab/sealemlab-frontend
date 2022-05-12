@@ -13,7 +13,7 @@
         <p class="font12 balance_">BUSD {{$t("message.bond.txt22")}}: 10.2345</p>
         <div class="inputcontent">
           <div class="left_content">
-            <img :src="`${$store.state.imgUrl}bnblogo.png`" class="busd_img" />
+            <img :src="`${$store.state.imgUrl}busd.webp`" class="busd_img" />
             <span class="busd_txt font14">BUSD</span>
           </div>
           <div class="center_content">
@@ -27,7 +27,7 @@
         <p class="font12 balance_">ST {{$t("message.bond.txt22")}}: 12</p>
         <div class="inputcontent">
           <div class="left_content">
-            <img :src="`${$store.state.imgUrl}stlogo.png`" class="busd_img" />
+            <img :src="`${$store.state.imgUrl}stlogo.webp`" class="busd_img" />
             <span class="busd_txt font14">ST</span>
           </div>
           <div class="center_content">
@@ -71,7 +71,7 @@
         <p class="font16"><span>{{$t("message.bond.txt33")}}</span><span>$9000</span></p>
         <p>{{$t("message.bond.txt34")}}</p>
       </div>
-      <img :src="`${$store.state.imgUrl}close.png`" class="close_img" @click.stop="closeProup"/>
+      <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click.stop="closeProup"/>
     </div>
   </div>
 </template>
@@ -188,7 +188,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 20px 100px;
-    background-image: url($bg_url + "proupbg.png");
+    background-image: url($bg_url + "proupbg.webp");
     background-size: 100% 100%;
     .propu_title_txt{
       font-weight: bold;

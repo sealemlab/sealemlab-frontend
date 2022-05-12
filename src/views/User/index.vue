@@ -26,7 +26,7 @@
             <span>{{item.name3}}</span>
             <div class="address display_flex">
               <span>{{item.address}}</span>
-              <img :src="`${$store.state.imgUrl}add.png`" class="copy_img" />
+              <img :src="`${$store.state.imgUrl}add.webp`" class="copy_img" />
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
             <span class="font35">总收入</span>
             <div class="income_box display_flex font26">
               <div class="imgbox display_flex">
-                <img :src="`${$store.state.imgUrl}stlogo.png`" class="homebg" />
+                <img :src="`${$store.state.imgUrl}stlogo.webp`" class="homebg" />
                 <span>ST</span>
               </div>
               <span>100</span>
@@ -47,7 +47,7 @@
             <span class="font35">当期收入</span>
             <div class="income_box display_flex font26">
               <div class="imgbox display_flex">
-                <img :src="`${$store.state.imgUrl}srlogo.png`" class="homebg" />
+                <img :src="`${$store.state.imgUrl}srlogo.webp`" class="homebg" />
                 <span>SR</span>
               </div>
               <span>100</span>
@@ -80,14 +80,14 @@ export default {
     return {
       li_index:0,
       walletArr:[{
-        coin_logo:`${this.$store.state.imgUrl}bnblogo.png`,
+        coin_logo:`${this.$store.state.imgUrl}bnblogo.webp`,
         company:'BNB',
         name1:'钱包余额',
         num1:100,
         num1_money:100
       },
       {
-        coin_logo:`${this.$store.state.imgUrl}stlogo.png`,
+        coin_logo:`${this.$store.state.imgUrl}stlogo.webp`,
         company:'ST',
         name1:'钱包余额',
         num1:100,
@@ -99,7 +99,7 @@ export default {
         address:'0xsdf***fdhd'
       },
       {
-        coin_logo:`${this.$store.state.imgUrl}srlogo.png`,
+        coin_logo:`${this.$store.state.imgUrl}srlogo.webp`,
         company:'SR',
         explain:'Claim',
         name1:'钱包余额',
@@ -143,7 +143,7 @@ export default {
     align-items: center;
     padding: 0 70px;
     padding-top: 75px;
-    background-image: url($bg_url + "bondbg.png");
+    background-image: url($bg_url + "bondbg.webp");
     background-size: 100% 100%;
     .user_head_portrait{
       flex-direction: column;

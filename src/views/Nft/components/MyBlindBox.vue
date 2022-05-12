@@ -32,10 +32,10 @@ export default {
       boxtype:0,//默认展示的是哪个类型的盲盒
       openStatus:false,// 打开盲盒详情页面状态
       list:[
-        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'message.nft.txt53',status:true,type:0},
-        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'message.nft.txt54',status:true,type:1},
-        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'message.nft.txt55',status:true,type:2},
-        {src:`${this.$store.state.imgUrl}mybox1.png`,num:0,title:'message.nft.txt56',status:true,type:3},
+        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt53',status:true,type:0},
+        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt54',status:true,type:1},
+        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt55',status:true,type:2},
+        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt56',status:true,type:3},
       ],
       timerll:null,
     }
@@ -158,7 +158,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: url($bg_url + "boxs_border.png") no-repeat;
+        background: url($bg_url + "boxs_border.webp") no-repeat;
         background-size: cover;
         span{
           font-weight: 600;

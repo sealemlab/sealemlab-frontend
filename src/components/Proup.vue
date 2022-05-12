@@ -3,20 +3,20 @@
     <div class="proup_boxs">
       <p class="propu_title_txt font24">{{getProgressInfo.title?$t(getProgressInfo.title):$t(getProupInfo.title)}}</p>
       <div class="proup_content" v-if="isProgress">
-        <img :src="`${$store.state.imgUrl}success.png`" class="success_img" />
+        <img :src="`${$store.state.imgUrl}success.webp`" class="success_img" />
         {{$t(content)}}
       </div>
       <div class="progress" v-else>
         <p class="bscscan fotn16">
           <a :href="`${$store.state.BSC_BROWSER}${getProupInfo.link}`" target="_blank" rel="noopener noreferrer">view on bscscan</a>
-          <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
+          <img :src="`${$store.state.imgUrl}link.webp`" class="link_img" />
         </p>
         <div class="box">
           <div class="load" :style="{width}"></div>
         </div>
         <span class="txt font16">{{progressTXt}}%</span>
       </div>
-      <img :src="`${$store.state.imgUrl}close.png`" class="close_img" @click.stop="closeProup"/>
+      <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click.stop="closeProup"/>
     </div>
   </div>
 </template>
@@ -120,7 +120,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 20px 100px;
-    background-image: url($bg_url + "proupbg.png");
+    background-image: url($bg_url + "proupbg.webp");
     background-size: 100% 100%;
     .propu_title_txt{
       font-weight: bold;

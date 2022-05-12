@@ -13,7 +13,7 @@
       <!-- 页面展示数组 -->
       <div class="cardarr_class">
         <div class="onebox" v-for="(item,index) in pageshowarr" :key="index" @click="cardClick(item,index)">
-          <img :src="`${$store.state.imgUrl}mybox1.png`" class="card_picture" />
+          <img :src="`${$store.state.imgUrl}mybox1.webp`" class="card_picture" />
           <span>{{item.num}}</span>
           <div class="box_select">
             <span class="selected" v-if="item.status"></span>
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <img :src="`${$store.state.imgUrl}back.png`" class="close_img" @click.stop="closeOpen"/>
+    <img :src="`${$store.state.imgUrl}back.webp`" class="close_img" @click.stop="closeOpen"/>
     <div class="open_btn">{{$t("message.nft.txt42")}}</div>
   </div>
 </template>

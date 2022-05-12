@@ -109,19 +109,19 @@ img{
 // 字体样式
 @font-face {
   font-family: "SFCompactDisplay-Bold";
-  src: url($bg_url + "SF-Compact-Display-Bold.otf");
+  src: url($font_url + "SF-Compact-Display-Bold.otf");
 }
 @font-face {
   font-family: "SFCompactDisplay-Regular";
-  src: url($bg_url + "SF-Compact-Display-Regular.otf");
+  src: url($font_url + "SF-Compact-Display-Regular.otf");
 }
 @font-face {
   font-family: "SFCompactDisplay-Heavy";
-  src: url($bg_url + "SF-Compact-Display-Heavy.otf");
+  src: url($font_url + "SF-Compact-Display-Heavy.otf");
 }
 @font-face {
   font-family: "PingFangTC-Semibold";
-  src: url($bg_url + "FZYouHFW.TTF");
+  src: url($font_url + "FZYouHFW.TTF");
 }
 
 //英文粗体
