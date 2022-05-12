@@ -105,14 +105,21 @@
                 </li>
                 <li></li>
                 <li class="round_progressbar">
-                  <RingProgress
+                  <!-- <RingProgress
                     percentNum="30"
                     size="100"
                     ranking="Coming soon"
-                    color="#9D9C9C"
+                    color="#C7C7C7"
                     backgroundColor="#5E5E5E"
                     fontcolor="#9D9C9C"
-                  />
+                  /> -->
+                  <div class="circle-two circle_1">
+                    <div class="circle-two-l"></div>
+                    <div class="circle-two-r"></div>
+                    <div class="circle-two-mask">
+                      <div class="circle_txt color3 font18">{{$t("message.tip.txt5")}}</div>
+                    </div>
+                  </div>
                 </li>
                 <li>
                   <span class="color1 font18">{{ $t("message.bond.txt41") }}1%</span>
@@ -125,6 +132,7 @@
                 </li>
               </ul>
             </li>
+            <!-- 第二个圆 -->
             <li>
               <!-- <ul class="list_title2 coming_soon"> -->
               <ul class="list_title2">
@@ -135,14 +143,21 @@
                   <div class="btn_txt bg1">{{ $t("message.bond.txt44") }}</div>
                 </li>
                 <li class="round_progressbar">
-                  <RingProgress
+                  <!-- <RingProgress
                     :percentNum="30"
                     size="100"
                     :ranking="'Coming soon'"
-                    color="#9F9579"
+                    color="#F0E2B8"
                     backgroundColor="#6F6A59"
                     :fontcolor="'#9F9579'"
-                  />
+                  /> -->
+                  <div class="circle-two circle_2">
+                    <div class="circle-two-l"></div>
+                    <div class="circle-two-r"></div>
+                    <div class="circle-two-mask">
+                      <div class="circle_txt color3 font18">{{$t("message.tip.txt5")}}</div>
+                    </div>
+                  </div>
                 </li>
                 <li>
                   <span class="color2 font18">{{ $t("message.bond.txt41") }}0.0%</span>
@@ -159,6 +174,7 @@
                 </li>
               </ul>
             </li>
+            <!-- 第三个圆 -->
             <li>
               <ul class="list_title2">
                 <li :title='$t("message.bond.txt75")' style="cursor:pointer">
@@ -168,14 +184,21 @@
                   <div class="btn_txt bg2">{{ $t("message.bond.txt44") }}</div>
                 </li>
                 <li class="round_progressbar">
-                  <RingProgress
+                  <!-- <RingProgress
                     :percentNum="30"
                     size="100"
                     :ranking="'Coming soon'"
-                    color="#BB9F5A"
-                    backgroundColor="#9F9579"
+                    color="#FFD46A"
+                    backgroundColor="rgba(187, 159, 90, 0.45)"
                     :fontcolor="'#BB9F5A'"
-                  />
+                  /> -->
+                  <div class="circle-two circle_3">
+                    <div class="circle-two-l"></div>
+                    <div class="circle-two-r"></div>
+                    <div class="circle-two-mask">
+                      <div class="circle_txt color3 font18">{{$t("message.tip.txt5")}}</div>
+                    </div>
+                  </div>
                 </li>
                 <li>
                   <span class="color3 font18">{{ $t("message.bond.txt41") }}0.0%</span>
@@ -188,6 +211,7 @@
                 </li>
               </ul>
             </li>
+            <!-- 第四个圆 -->
             <li>
               <ul class="list_title2">
                 <li :title='$t("message.bond.txt76")' style="cursor:pointer">
@@ -197,14 +221,21 @@
                   <div class="btn_txt bg3">{{ $t("message.bond.txt48") }}</div>
                 </li>
                 <li class="round_progressbar">
-                  <RingProgress
+                  <!-- <RingProgress
                     :percentNum="30"
                     size="100"
                     :ranking="'Coming soon'"
-                    color="#EDD07E"
-                    backgroundColor="#BB9F5A"
+                    color="#FFEDBC"
+                    backgroundColor="#ECCF83"
                     :fontcolor="'#F5E2A7'"
-                  />
+                  /> -->
+                  <div class="circle-two circle_4">
+                    <div class="circle-two-l"></div>
+                    <div class="circle-two-r"></div>
+                    <div class="circle-two-mask">
+                      <div class="circle_txt color3 font18">{{$t("message.tip.txt5")}}</div>
+                    </div>
+                  </div>
                 </li>
                 <li>
                   <span class="color4 font18">{{ $t("message.bond.txt41") }}0.0%</span>
@@ -499,20 +530,6 @@ export default {
     top: -5px;
   }
 }
-// .link_icon {
-//   position: relative;
-//   &::after {
-//     content: "";
-//     display: block;
-//     width: 15px;
-//     height: 15px;
-//     background: url($bg_url + "link.png") no-repeat;
-//     background-size: 100% 100%;
-//     position: absolute;
-//     top: 0;
-//     right: -20px;
-//   }
-// }
 .progressbar {
   display: inline-block;
   margin: 5px 0;
@@ -562,7 +579,7 @@ export default {
     height: 100px;
     position: relative;
     border-radius: 50%;
-    // background: #979797;
+    // background: rgba(187, 159, 90, 0.45);
     .circle-two-l {
       width: 100%;
       height: 100%;
@@ -584,11 +601,6 @@ export default {
         animation: circle_two_l linear 2s 2s forwards;
       }
     }
-    // .type1{
-    //   &::after {
-    //     background: #BB9F5A;
-    //   }
-    // }
     .circle-two-r {
       width: 100%;
       height: 100%;
@@ -611,8 +623,8 @@ export default {
       }
     }
     .circle-two-mask {
-      width: 95%;
-      height: 95%;
+      width: 90%;
+      height: 90%;
       background: #000;
       border-radius: 50%;
       position: absolute;
@@ -621,12 +633,67 @@ export default {
       top: 0;
       right: 0;
       margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: 600;
-      line-height: 30px;
+      .circle_txt{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
+  }
+  .circle_1{
+    background: #5E5E5E;
+    .circle-two-l{
+      &::after {
+        background: #C7C7C7;
+      }
+    }
+    .circle-two-r{
+      &::after {
+        background: #C7C7C7;
+      }
+    }
+  }
+  .circle_2{
+    background: #6F6A59;
+    .circle-two-l{
+      &::after {
+        background: #F0E2B8;
+      }
+    }
+    .circle-two-r{
+      &::after {
+        background: #F0E2B8;
+      }
+    }
+  }
+  .circle_3{
+    background: rgba(187, 159, 90, 0.45);
+    .circle-two-l{
+      &::after {
+        background: #FFD46A;
+      }
+    }
+    .circle-two-r{
+      &::after {
+        background: #FFD46A;
+      }
+    }
+  }
+  .circle_4{
+    background: rgba(236, 207, 131, 0.45);
+    .circle-two-l{
+      &::after {
+        background: #FFEDBC;
+      }
+    }
+    .circle-two-r{
+      &::after {
+        background: #FFEDBC;
+      }
     }
   }
 }

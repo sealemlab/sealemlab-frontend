@@ -24,33 +24,32 @@ export default {
     return {
       li_index:0,
       navArr: [
-        { label: "message.nft.txt2", link: "/nft/buy-blind-box/0",src:`${this.$store.state.imgUrl}nft_nav1.png` },
-        { label: "message.nft.txt3", link: "",src:`${this.$store.state.imgUrl}nft_nav2.png` },
-        { label: "message.nft.txt4", link: "",src:`${this.$store.state.imgUrl}nft_nav3.png` },
-        { label: "message.nft.txt5", link: "",src:`${this.$store.state.imgUrl}nft_nav4.png` },
-        { label: "message.nft.txt6", link: "",src:`${this.$store.state.imgUrl}nft_nav5.png` },
+        { label: "message.nft.txt2", link: "/nft/buy-blind-box/0",src:`${this.$store.state.imgUrl}nft_nav1.png`,status:true},
+        { label: "message.nft.txt3", link: "/nft/blind-box",src:`${this.$store.state.imgUrl}nft_nav2.png`,status:false },
+        { label: "message.nft.txt4", link: "/nft/my-nft",src:`${this.$store.state.imgUrl}nft_nav3.png`,status:false },
+        { label: "message.nft.txt5", link: "/nft/giving",src:`${this.$store.state.imgUrl}nft_nav4.png`,status:false },
+        { label: "message.nft.txt6", link: "/nft/lease",src:`${this.$store.state.imgUrl}nft_nav5.png`,status:false },
       ],
-      // navArr: [
-      //   { label: "message.nft.txt2", link: "/nft/buy-blind-box/0",src:`${this.$store.state.imgUrl}nft_nav1.png` },
-      //   { label: "message.nft.txt3", link: "/nft/blind-box",src:`${this.$store.state.imgUrl}nft_nav2.png` },
-      //   { label: "message.nft.txt4", link: "/nft/my-nft",src:`${this.$store.state.imgUrl}nft_nav3.png` },
-      //   { label: "message.nft.txt5", link: "/nft/giving",src:`${this.$store.state.imgUrl}nft_nav4.png` },
-      //   { label: "message.nft.txt6", link: "/nft/lease",src:`${this.$store.state.imgUrl}nft_nav5.png` },
-      // ],
     };
   },
   computed: { ...mapGetters(["isEnLang","getNoticeNum"]) },
   methods:{
     liClick(item,index){
-      if(item.link){
+      if(process.env.NODE_ENV === 'production'){
+        if(item.status){
+          this.li_index = index
+          this.$router.push(item.link)
+        }else{
+          if(!this.getNoticeNum){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+            this.$store.commit("setNoticeNum",true)
+          }
+        }
+      }else{
         this.li_index = index
         this.$router.push(item.link)
-      }else{
-        if(!this.getNoticeNum){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-          this.$store.commit("setNoticeNum",true)
-        }
       }
+      
     }
   }
 };

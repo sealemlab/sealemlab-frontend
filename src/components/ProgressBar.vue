@@ -33,7 +33,7 @@ export default {
   },
   watch:{
     resetdata(newvalue){
-      console.log('省份加算了可的飞机---newvalue: ', newvalue);
+      // console.log('省份加算了可的飞机---newvalue: ', newvalue);
       if(newvalue){
         this.$refs.progress.style.width = 0
         this.$refs.trunk.style.left = 0

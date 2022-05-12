@@ -214,8 +214,9 @@ export default {
       }
       this.buy_isloading = true
       sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType).then(async (res) => {
+        console.log('gdfgdf----res: ', res);
         // 进度条
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'购买中...'}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'购买中...','link':res.hash}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
           console.log("购买成功")

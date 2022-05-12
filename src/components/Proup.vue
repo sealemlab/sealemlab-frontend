@@ -8,7 +8,7 @@
       </div>
       <div class="progress" v-else>
         <p class="bscscan fotn16">
-          view on bscscan 
+          <a :href="`${$store.state.BSC_BROWSER}${getProupInfo.link}`" target="_blank" rel="noopener noreferrer">view on bscscan</a>
           <img :src="`${$store.state.imgUrl}link.png`" class="link_img" />
         </p>
         <div class="box">

@@ -90,7 +90,7 @@ export default {
         return
       }
       // this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}))
-      this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':'','isProgress':true,'title':'message.tip.txt3','ortherDoing':false}));
+      this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':'','isProgress':true,'title':'message.tip.txt3','ortherDoing':false,'link':''}));
     },
     setRem() {
       const bodyWidth = document.body.clientWidth;

@@ -104,7 +104,7 @@ export default {
           this.selectALLBtn = false
         }else{
           if(!this.getNoticeNum){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'`最多 ${this.selectNum}个'}));
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多 ${this.selectNum}个`}));
             this.$store.commit("setNoticeNum",true)
           }
         }
@@ -148,7 +148,7 @@ export default {
           })
           this.selectedNUM = this.pageshowarr.filter(item => {return item.status == true}).length
           if(!this.getNoticeNum){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'`最多 ${this.selectNum}个'}));
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多 ${this.selectNum}个`}));
             this.$store.commit("setNoticeNum",true)
           }
         }
@@ -165,7 +165,7 @@ export default {
   left: 0;
   height: 100vh;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 2;
+  z-index: 10;
   backdrop-filter: blur(6px);
   .proup_boxs{
     position: relative;

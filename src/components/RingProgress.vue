@@ -56,7 +56,7 @@ export default {
     },
     circleSize:{ //控制环形进度条的粗细(运动的那一圈)
       type: [String, Number],
-      default: '3%'
+      default: '9%'
     },
     speed: {
       // suggest 1~3

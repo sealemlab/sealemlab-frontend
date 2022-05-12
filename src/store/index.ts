@@ -26,6 +26,7 @@ export default new Vuex.Store({
       content:'',
       title:'message.tip.txt3',
       ortherDoing:false,
+      link:''
     },// 提示框信息
     noticeInfo:{
       status:false,
@@ -39,7 +40,8 @@ export default new Vuex.Store({
       value:1,
       title:''
     }, // 给进度条传值
-    noticeNum:false// 轻提示弹窗只弹一次
+    noticeNum:false,// 轻提示弹窗只弹一次
+    BSC_BROWSER:process.env.NODE_ENV === 'production'?'https://www.bscscan.com/tx/':'https://testnet.bscscan.com/tx/'
   },
   getters: {
     // 获取是否可以再次弹起轻提示弹窗
