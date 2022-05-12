@@ -6,7 +6,7 @@ export default {
   isLang() {
     // @ts-ignore
     const lang = (navigator.systemLanguage ? navigator.systemLanguage : navigator.language).substr(0, 2);
-    console.log('navigator.languag: ', navigator);
+    // console.log('navigator.languag: ', navigator);
     if (lang == "zh") {
       return "ZH";
     } else {
@@ -201,7 +201,7 @@ export default {
             obj.boxID = Number(item)
             // @ts-ignore
             obj.type = Number(await sb().sbIdToType(item))
-            console.log('obj.type: ', obj.type);
+            // console.log('obj.type: ', obj.type);
             boxInfoArr.push(obj)
             if (count == res[0].length) {
               store.commit("setBoxInfo", JSON.stringify(boxInfoArr))

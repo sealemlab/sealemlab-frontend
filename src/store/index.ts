@@ -64,7 +64,7 @@ export default new Vuex.Store({
     },
     // 中英文状态
     isEnLang() {
-      return i18n.locale == "en";
+      return i18n.locale == "EN";
     },
     // 用户信息
     getLogin(state){

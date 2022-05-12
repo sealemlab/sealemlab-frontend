@@ -420,7 +420,7 @@ export default {
     },
     BondClick(data) {
       this.addlpDis = true;
-      console.log('this.$utils.isLang(): ', this.$utils.isLang());
+      // console.log('this.$utils.isLang(): ', this.$utils.isLang());
     },
     showBuy(item){
       item.status = !item.status

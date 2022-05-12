@@ -74,7 +74,6 @@ export const message = {
     introduce19: "Enter the crypto industry in 2018",
 
     txt54: "ROADMAP",
-
     txt55: "Sealem technology and the core team were established",
     txt55_1: "Team establishment",
     txt56_1: "Market research",
@@ -85,22 +84,17 @@ export const message = {
     txt62_1: "Ecological construction and development",
     txt63_1: "Global Sealem game boom",
     txt64_1: "Multi-chain ecological construction",
-    txt56:
-      "market research; analyse the Gamefi industry",
-    txt57:
-      "Bond R&D,setting economic model",
+    txt56:"market research; analyse the Gamefi industry",
+    txt57:"Bond R&D,setting economic model",
     txt58: "Game team formation completed; game development",
-    txt60:
-      "Social media and NFT market establishment; Competitive product analysis",
-    txt61:
-      "Comprehensive marketing,Official website online, NFT mystery Box Pre-sale,In-game beta",
-    txt62:
-      "NFT market and the game are online,  Google store is online ,more CEXs are listed",
-    txt63:
-      "Global Guild Recruitment,Game Updates, Dubai Offline Guild Competition, Dubai Gamefi roundtable",
-    txt64:
-      "Cross-chain plan Sealem V2 released, creator platform is online, more marketing",
+    txt60:"Social media and NFT market establishment; Competitive product analysis",
+    txt61:"Comprehensive marketing,Official website online, NFT mystery Box Pre-sale,In-game beta",
+    txt62:"NFT market and the game are online,  Google store is online ,more CEXs are listed",
+    txt63:"Global Guild Recruitment,Game Updates, Dubai Offline Guild Competition, Dubai Gamefi roundtable",
+    txt64:"Cross-chain plan Sealem V2 released, creator platform is online, more marketing",
 
+    
+    
     txt59: "PARTENER",
 
     txt65: "Sealem game",

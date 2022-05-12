@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="rightbox">
-            <a :href="item.link" target="_blank" rel="noopener noreferrer" v-for="(item,index) in comminicateArr" :key="index"><img :src="item.src" class="tel_img" /></a>
+            <a :href="isEnLang?(item.link_en?item.link_en:item.link):item.link" target="_blank" rel="noopener noreferrer" v-for="(item,index) in comminicateArr" :key="index"><img :src="item.src" class="tel_img" /></a>
           </div>
         </div>
       </div>
@@ -157,12 +157,12 @@
     <div class="time_axis_box">
       <div class="time_axis display_flex">
         <div class="title_txt font30">{{$t("message.home.txt54")}}</div>
-        <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
+        <swiper :options="swiperOption" ref="mySwiper" class="self_swiper" v-if='swiperVisible'>
           <swiper-slide v-for="(item, index) in swiperArr" :key="index">
             <div class="timebox">
               <p class="time_class font20">{{item.time}}</p>
               <div class="imgs">
-                <img :src="index + 4 == activeIndex ?`${$store.state.imgUrl}partenerbg.png`:`${$store.state.imgUrl}time.png`" class="partenerbg_img" />
+                <img :src="item.id == activeIndex ?`${$store.state.imgUrl}partenerbg.png`:`${$store.state.imgUrl}time.png`" class="partenerbg_img" />
                 <span></span>
               </div>
               <p class="titletxt font18">{{$t(item.title)}}</p>
@@ -205,6 +205,7 @@ export default {
   },
   data(){
     return{
+      swiperVisible:true,
       addArr:[
         {src:`${this.$store.state.imgUrl}home1.png`,num:0,title:'message.home.txt71'},
         {src:`${this.$store.state.imgUrl}home2.png`,num:0,title:'message.home.txt72'},
@@ -229,6 +230,11 @@ export default {
         {
           src:`${this.$store.state.imgUrl}tel_3.png`,
           link:'https://discord.gg/s747pMMBzq'
+        },
+        {
+          src:`${this.$store.state.imgUrl}tel_5.png`,
+          link:'https://sacred-realm.gitbook.io/zhong-wen/',
+          link_en:'https://lab-sealem.gitbook.io/sealem-lab/'
         },
         {
           src:`${this.$store.state.imgUrl}tel_4.png`,
@@ -373,46 +379,55 @@ export default {
       ],
       swiperArr:[
         {
+          id:4,
           title:'message.home.txt55_1',
           time:'2020 Q4',
           content:'message.home.txt55'
         },
         {
+          id:5,
           title:'message.home.txt56_1',
           time:'2021 Q1',
           content:'message.home.txt56'
         },
         {
+          id:6,
           title:'message.home.txt57_1',
           time:'2021 Q2',
           content:'message.home.txt57'
         },
         {
+          id:7,
           title:'message.home.txt58_1',
           time:'2021 Q3',
           content:'message.home.txt58'
         },
         {
+          id:8,
           title:'message.home.txt60_1',
           time:'2021 Q4',
           content:'message.home.txt60'
         },
         {
+          id:9,
           title:'message.home.txt61_1',
           time:'2022 Q1',
           content:'message.home.txt61'
         },
         {
+          id:10,
           title:'message.home.txt62_1',
           time:'2022 Q2',
           content:'message.home.txt62'
         },
         {
+          id:11,
           title:'message.home.txt63_1',
           time:'2022 Q3',
           content:'message.home.txt63'
         },
         {
+          id:12,
           title:'message.home.txt64_1',
           time:'2022 Q4',
           content:'message.home.txt64'
@@ -421,14 +436,14 @@ export default {
       // 路线图swiper配置
       swiperOption:{
         loop: true,//循环播放
-        centeredSlides: true,
+        centeredSlides: true, // 多个slider时居中
         autoplay: {
           delay: 2000,
           stopOnLastSlide: false,
           disableOnInteraction: false,
         },
         slidesPerView: 4,//一行显示的slider
-        freeMode: true,//	free模式，slide会根据惯性滑动且不会贴合
+        // freeMode: true,//	free模式，slide会根据惯性滑动且不会贴合
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
@@ -438,7 +453,8 @@ export default {
         on: {
           slideChange: () => {
             this.activeIndex = this.$refs.mySwiper.swiper.activeIndex;
-          },
+            // console.log('this.activeIndex: ', this.activeIndex);
+          }
         }
       },
       // 团队swiper配置
@@ -505,6 +521,19 @@ export default {
       this.$refs.gameswiper.swiper.slideTo(newVal);
       this.$refs.gameMaxSwiper.swiper.slideTo(newVal);
     },
+    'isEnLang': {
+      handler: function (newValue,oldValue) {
+        if (newValue != oldValue) {
+          this.swiperVisible = false;//通过v-if切换，重新渲染swiper
+          this.$nextTick(()=>{
+            this.swiperVisible = true;
+          });
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    
   },
   methods:{
     videoPlay() {
