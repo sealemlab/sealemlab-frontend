@@ -33,7 +33,7 @@
           {{ $t("message.account.txt10") }}
         </div>
       </div>
-      <div class="left_content right_content">
+      <div class="right_content">
         <div class="right_line font16">
           <span class="account_status">{{ $t("message.account.txt11") }}</span>
           <span class="_status">{{ $t("message.account.txt12") }}</span>
@@ -71,8 +71,8 @@ export default {
       isShowVerifyCode: false,
       isShowPassword: false,
       loginForm: {
-        mailAccount: "641160771@qq.com",
-        password: "123456",
+        mailAccount: "",
+        password: "",
         prompt1: "",
         prompt2: "",
       },
@@ -186,7 +186,9 @@ export default {
     }
     .right_content {
       width: 45%;
-      border: none;
+      display: flex;
+      flex-direction: column;
+      padding: 30px 30px;
       .right_line {
         width: 100%;
         display: flex;

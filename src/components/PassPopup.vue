@@ -107,13 +107,13 @@ export default {
   data() {
     return {
       registerForm: {
-        mailAccount: "641160771@qq.com",
+        mailAccount: "",
         prompt1: "",
-        verifyCode: "123456",
+        verifyCode: "",
         prompt2: "",
-        password: "123456",
+        password: "",
         prompt3: "",
-        password2: "123456",
+        password2: "",
         prompt4: "",
       },
       isShowPassword: false,

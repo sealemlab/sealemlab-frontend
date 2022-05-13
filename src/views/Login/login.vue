@@ -72,8 +72,8 @@ export default {
   data() {
     return {
       loginForm: {
-        mailAccount: "641160771@qq.com",
-        password: "123456",
+        mailAccount: "",
+        password: "",
         prompt1: "",
         prompt2: "",
       },
@@ -360,24 +360,24 @@ export default {
     .content {
       width: 90vw;
       background: #101010;
-      border: 2px solid #242222;
-      border-bottom: none;
-      border-right: none;
+
       margin: 0 auto;
       margin-top: 0.3rem;
       display: flex;
       flex-direction: column;
       .left_content {
+        border-right: none;
         flex: 1;
         display: flex;
         flex-direction: column;
-        border-right: 2px solid #242222;
         .onebox {
           width: 100%;
           padding: 0.18rem 0.1rem;
           display: flex;
           align-items: center;
-          border-bottom: 2px solid #242222;
+          &:last-child {
+            border-bottom: 2px solid #242222;
+          }
           .imgbox_ {
             width: 0.2rem;
             margin-right: 0.15rem;
@@ -405,7 +405,6 @@ export default {
       .right_content {
         padding: 0.23rem 0.1rem;
         align-items: center;
-        border-bottom: 2px solid #242222;
         .user_inputbox {
           width: 100%;
           display: flex;

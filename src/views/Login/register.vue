@@ -121,13 +121,13 @@ export default {
         },
       ],
       registerForm: {
-        mailAccount: "641160771@qq.com",
+        mailAccount: "",
         prompt1: "",
-        verifyCode: "123456",
+        verifyCode: "",
         prompt2: "",
-        password: "123456",
+        password: "",
         prompt3: "",
-        password2: "123456",
+        password2: "",
         prompt4: "",
       },
       isShowPassword: false,
@@ -458,8 +458,12 @@ export default {
       flex-direction: column;
       margin-top: 0.3rem;
       .left_content {
+        border-right: none;
         .onebox {
           padding: 0.18rem 0.1rem;
+          &:last-child {
+            border-bottom: 2px solid #242222;
+          }
           .imgbox_ {
             width: 0.2rem;
             margin-right: 0.15rem;
