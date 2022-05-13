@@ -41,7 +41,6 @@ export default new Vuex.Store({
     // https://cdn.sealemlab.com/sealemlab_assets_test/images/accrow.webp
     imgUrl:process.env.NODE_ENV === 'production'?'//cdn.sealemlab.com/sealemlab_assets_main/images/':'//cdn.hashland.com/sealemlab_assets_test/images/',//图片前缀
     videoUrl:process.env.NODE_ENV === 'production'?'//cdn.sealemlab.com/sealemlab_assets_main/video/':'//cdn.hashland.com/sealemlab_assets_test/video/',//视频前缀
-    fontUrl:process.env.NODE_ENV === 'production'?'//cdn.sealemlab.com/sealemlab_assets_main/fonts/':'//cdn.hashland.com/sealemlab_assets_test/fonts/',//字体前缀
     codeTime:60,//验证码重新发送时间
     emailReg:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,//邮箱校验
     pwReg: /^[a-zA-Z0-9]{6,16}$/,//密码校验 6-16位数字英文组合
