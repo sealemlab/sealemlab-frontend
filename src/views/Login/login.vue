@@ -17,9 +17,9 @@
           <p class="font16 email_txt">{{ $t("message.signin.txt16") }}</p>
           <div class="inputbox">
             <input type="text" class="font16" v-model.trim="loginForm.mailAccount" />
-            <div class="input_prompt font12" v-if="loginForm.prompt1">
-              <span>* {{ loginForm.prompt1 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="loginForm.prompt1">
+            <span>* {{ loginForm.prompt1 }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -29,9 +29,9 @@
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
-            <div class="input_prompt font12" v-if="loginForm.prompt2">
-              <span>* {{ loginForm.prompt2 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="loginForm.prompt2">
+            <span>* {{ loginForm.prompt2 }}</span>
           </div>
         </div>
         <div class="remember_box">
@@ -251,13 +251,13 @@ export default {
             color: #ffffff;
             padding: 0 15px;
           }
-          .input_prompt {
-            width: 100%;
-            color: #fb3e3e;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-          }
+        }
+        .input_prompt {
+          width: 100%;
+          color: #fb3e3e;
+          position: absolute;
+          left: 0;
+          bottom: 0;
         }
       }
       .remember_box {

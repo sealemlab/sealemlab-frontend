@@ -6,9 +6,9 @@
           <p class="font16 email_txt">{{ $t("message.account.txt5") }}</p>
           <div class="inputbox">
             <input type="text" class="font16" v-model.trim="loginForm.mailAccount" />
-            <div class="input_prompt font12" v-if="loginForm.prompt1">
-              <span>* {{ loginForm.prompt1 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="loginForm.prompt1">
+            <span>* {{ loginForm.prompt1 }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -21,9 +21,9 @@
             <div class="inputbtn font14" @click="changePassword">
               <span>{{ $t("message.account.txt8") }}</span>
             </div>
-            <div class="input_prompt font12" v-if="loginForm.prompt2">
-              <span>* {{ loginForm.prompt2 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="loginForm.prompt2">
+            <span>* {{ loginForm.prompt2 }}</span>
           </div>
         </div>
         <div class="lin_content font12">
@@ -151,13 +151,13 @@ export default {
             justify-content: center;
             margin-left: 10px;
           }
-          .input_prompt {
-            width: 100%;
-            color: #fb3e3e;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-          }
+        }
+        .input_prompt {
+          width: 100%;
+          color: #fb3e3e;
+          position: absolute;
+          left: 0;
+          bottom: 0;
         }
       }
       .lin_content {

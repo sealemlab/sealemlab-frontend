@@ -7,9 +7,9 @@
           <p class="font16 email_txt">{{ $t("message.account.txt22") }}</p>
           <div class="inputbox">
             <input type="text" class="font16" v-model.trim="registerForm.mailAccount" />
-            <div class="input_prompt font12" v-if="registerForm.prompt1">
-              <span>* {{ registerForm.prompt1 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="registerForm.prompt1">
+            <span>* {{ registerForm.prompt1 }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -21,9 +21,9 @@
               <span v-else>{{ $t("message.signin.txt39") }}</span>
               <BtnLoading :isloading="codebtnloading"></BtnLoading>
             </div>
-            <div class="input_prompt font12" v-if="registerForm.prompt2">
-              <span>* {{ registerForm.prompt2 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="registerForm.prompt2">
+            <span>* {{ registerForm.prompt2 }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -33,9 +33,9 @@
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
-            <div class="input_prompt font12" v-if="registerForm.prompt3">
-              <span>* {{ registerForm.prompt3 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="registerForm.prompt3">
+            <span>* {{ registerForm.prompt3 }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -45,9 +45,9 @@
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
-            <div class="input_prompt font12" v-if="registerForm.prompt4">
-              <span>* {{ registerForm.prompt4 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="registerForm.prompt4">
+            <span>* {{ registerForm.prompt4 }}</span>
           </div>
         </div>
         <div class="btn font18" @click="handleSubmit">{{ $t("message.signin.btn_txt2") }}</div>
@@ -58,9 +58,9 @@
           <p class="font16 email_txt">{{ $t("message.account.txt26") }}</p>
           <div class="inputbox">
             <input type="text" class="font16" v-model.trim="registerForm.mailAccount" />
-            <div class="input_prompt font12" v-if="registerForm.prompt1">
-              <span>* {{ registerForm.prompt1 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="registerForm.prompt1">
+            <span>* {{ registerForm.prompt1 }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -70,9 +70,9 @@
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
-            <div class="input_prompt font12" v-if="registerForm.prompt3">
-              <span>* {{ registerForm.prompt3 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="registerForm.prompt3">
+            <span>* {{ registerForm.prompt3 }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -82,9 +82,9 @@
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
-            <div class="input_prompt font12" v-if="registerForm.prompt4">
-              <span>* {{ registerForm.prompt4 }}</span>
-            </div>
+          </div>
+          <div class="input_prompt font12" v-if="registerForm.prompt4">
+            <span>* {{ registerForm.prompt4 }}</span>
           </div>
         </div>
         <div class="btn font18" @click="handleSubmit">{{ $t("message.signin.btn_txt1") }}</div>
@@ -246,13 +246,13 @@ export default {
           justify-content: center;
           margin-left: 10px;
         }
-        .input_prompt {
-          width: 100%;
-          color: #fb3e3e;
-          position: absolute;
-          left: 0;
-          bottom: 0;
-        }
+      }
+      .input_prompt {
+        width: 100%;
+        color: #fb3e3e;
+        position: absolute;
+        left: 0;
+        bottom: 0;
       }
     }
     .btn {
