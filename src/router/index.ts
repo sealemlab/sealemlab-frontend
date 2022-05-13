@@ -17,7 +17,6 @@ const routes: Array<RouteConfig> = [
   {
     path: "/bond",
     name: "Bond",
-    // component: () => import("../views/Bond/inedx.vue"),
     component: () => import("../views/Bond/index.vue"),
   },
   {
@@ -104,15 +103,15 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to: any, from: any, next: any) => {
-  if (to.path.indexOf("/myaccount/") !== -1) {
-    if (store.state.userInfo.loginStatus) {
-      next();
-    } else {
-      next("/signin/login");
-    }
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to: any, from: any, next: any) => {
+//   if (to.path.indexOf("/myaccount/") !== -1) {
+//     if (store.state.userInfo.loginStatus) {
+//       next();
+//     } else {
+//       next("/signin/login");
+//     }
+//   } else {
+//     next();
+//   }
+// });
 export default router;

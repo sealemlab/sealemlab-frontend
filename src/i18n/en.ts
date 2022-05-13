@@ -413,7 +413,9 @@ export const message = {
     txt36:"The email is invalid",
     txt37:"The password is invalid",
     txt38:"The passwords entered twice do not match",
-    txt39:"",
+    txt39:"Send verification code",
+    btn_txt1: "Confirm",
+    btn_txt2: "Confirm",
   },
   account: {
     txt1: "Account information",
@@ -454,8 +456,7 @@ export const message = {
     txt32:"Login fistly",
     txt33:"Connect wallet fistly",
   },
-  btn_txt1: "Confirm",
-  btn_txt2: "Confirm",
+
   tip: {
     txt1: "The account was created successfully, please go to the email to activate the account",
     txt2: "Please check whether the account/password is correct and whether the account is activated",

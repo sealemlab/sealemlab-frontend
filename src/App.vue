@@ -102,7 +102,6 @@ export default {
     },
     setRem() {
       const bodyWidth = document.body.clientWidth;
-      console.log('当前屏幕宽度: ', bodyWidth);
       const rem375 = (bodyWidth * 100) / 375;
       if (bodyWidth <= 980) {
         document.getElementsByTagName("html")[0].style.fontSize = rem375 + "px";
