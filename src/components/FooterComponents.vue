@@ -6,7 +6,8 @@
       <div class="onebox display_flex">
         <ul v-for="(ele, index) in footerArr" :key="index">
           <li class="font14 en_Regular" v-for="(item, index1) in ele.children" :key="index1">
-            <a :href="isEnLang?(item.link_en?item.link_en:item.link):item.link" target="_blank" rel="noopener noreferrer" >{{ $t(item.title) }}</a>
+            <a v-if="item.link == ''" href="javascript:;">{{ $t(item.title) }}</a>
+            <a v-else :href="isEnLang?(item.link_en?item.link_en:item.link):item.link" target="_blank" rel="noopener noreferrer" >{{ $t(item.title) }}</a>
           </li>
         </ul>
       </div>
@@ -31,12 +32,25 @@ export default {
           id:1,
           children:[
             {title:"message.footer.txt1",link:''},
-            {title:"message.footer.txt2",
-            link:'https://sacred-realm.gitbook.io/zhong-wen/',
-            link_en:'https://lab-sealem.gitbook.io/sealem-lab/'},
-            {title:"message.footer.txt3",link:''},
-            {title:"message.footer.txt4",link:''},
-            {title:"message.footer.txt5",link:''},
+            {
+              title:"message.footer.txt2",
+              link:'https://sacred-realm.gitbook.io/zhong-wen/',
+              link_en:'https://lab-sealem.gitbook.io/sealem-lab/'},
+            {
+              title:"message.footer.txt3",
+              link:'https://lab-sealem.gitbook.io/slmcn/',
+              link_en:'https://lab-sealem.gitbook.io/sealem-lab/'
+            },
+            {
+              title:"message.footer.txt4",
+              link:'https://lab-sealem.gitbook.io/slmcn/ji-chu/chang-jian-wen-ti',
+              link_en:'https://lab-sealem.gitbook.io/sealem-lab/basic/faq'
+            },
+            {
+              title:"message.footer.txt5",
+              link:'https://lab-sealem.gitbook.io/slmcn/dai-bi-jing-ji-xue/st',
+              link_en:'https://lab-sealem.gitbook.io/sealem-lab/tokenomics/st'
+            },
             {title:"message.footer.txt6",link:''}
           ]
         },

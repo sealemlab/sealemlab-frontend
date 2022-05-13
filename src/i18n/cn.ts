@@ -14,6 +14,7 @@ export const message = {
     txt10:"Home"
   },//导航栏
   home: {
+    add_txt1:'高APY',
     txt1: "新一代Defi+Gamefi协议",
     txt2: "购买债券,获得",
     txt3: "债券",
@@ -298,9 +299,9 @@ export const message = {
     txt17:"钱包余额",
     txt18:"预期收益",
     txt19:"天",
-    txt20:"ST-BUSD LP债券",
+    txt20:"ST-BUSD LP 债券",
     txt21:"支付",
-    txt22:"ST 余额",
+    txt22:"余额",
     txt23:"请输入数量",
     txt24:"投入",
     txt25:"预计收益",

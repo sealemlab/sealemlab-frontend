@@ -10,7 +10,7 @@
       </div>
       <!-- busd输入框 -->
       <div class="inputbox" v-if="activetype == 0 || activetype == 1">
-        <p class="font12 balance_">BUSD {{$t("message.bond.txt22")}}: 10.2345</p>
+        <p class="font12 balance_">BUSD {{$t("message.bond.txt22")}}: 0</p>
         <div class="inputcontent">
           <div class="left_content">
             <img :src="`${$store.state.imgUrl}busd.webp`" class="busd_img" />
@@ -24,7 +24,7 @@
       </div>
       <!-- st输入框 -->
       <div class="inputbox" v-if="activetype == 0 || activetype == 2">
-        <p class="font12 balance_">ST {{$t("message.bond.txt22")}}: 12</p>
+        <p class="font12 balance_">ST {{$t("message.bond.txt22")}}: 0</p>
         <div class="inputcontent">
           <div class="left_content">
             <img :src="`${$store.state.imgUrl}stlogo.webp`" class="busd_img" />
@@ -41,21 +41,21 @@
         <div class="onebox">
           <p class="font14 _txt">{{$t("message.bond.txt24")}}</p>
           <div class="border_ font12">
-            <span class="span1">170</span>
+            <span class="span1">0</span>
             <span class="span1">BUSD</span>
           </div>
         </div>
         <div class="onebox">
           <p class="font14 _txt">{{$t("message.bond.txt25")}}</p>
           <div class="border_ font12">
-            <span class="span1">180</span>
+            <span class="span1">0</span>
             <span class="span1">BUSD</span>
           </div>
         </div>
         <div class="onebox">
           <p class="font14 _txt">{{$t("message.bond.txt26")}}</p>
           <div class="border_ font12">
-            <span class="span1">190</span>
+            <span class="span1">0</span>
             <span class="span1">BUSD</span>
           </div>
         </div>
@@ -68,7 +68,7 @@
         <p><span>{{$t("message.bond.txt30")}}</span><span>1%</span>
         <p><span>{{$t("message.bond.txt31")}}</span><span>1%</span>
         <p class="font14"><span>{{$t("message.bond.txt32")}}</span><span>1%</span></p>
-        <p class="font16"><span>{{$t("message.bond.txt33")}}</span><span>$9000</span></p>
+        <p class="font16"><span>{{$t("message.bond.txt33")}}</span><span>$0</span></p>
         <p>{{$t("message.bond.txt34")}}</p>
       </div>
       <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click.stop="closeProup"/>

@@ -68,7 +68,7 @@
                 <span>{{ item.zl }}</span>
                 <span>{{ item.jclv }}</span>
                 <span>{{ item.fjlv }}</span>
-                <span>{{ item.lxzq }}{{$t("message.bond.txt19")}}</span>
+                <span>{{ item.lxzq }}&nbsp;{{$t("message.bond.txt19")}}</span>
                 <span>{{ item.djs }}</span>
                 <span>
                   <div class="progressbar"><div :style="{ width: item.gml }"></div></div>
@@ -378,7 +378,7 @@ export default {
       showSelect: false,
       Arr1: [
         {
-          zq: "ST-BUSD",
+          zq: "ST-BUSD LP",
           zl: "0",
           jclv: "1%",
           fjlv: "0",
@@ -389,7 +389,7 @@ export default {
       ],
       Arr2: [
         {
-          zq: "ST-BUSD",
+          zq: "ST-BUSD LP",
           gme: "0",
           jclv: "1%",
           fjlv1: "0%",
@@ -400,7 +400,7 @@ export default {
           status:false
         },
         {
-          zq: "ST-BUSD",
+          zq: "ST-BUSD LP",
           gme: "0",
           jclv: "1%",
           fjlv1: "0%",
@@ -818,6 +818,18 @@ export default {
         padding: 10px 0;
         > span {
           width: calc(100% / 8);
+          &:nth-child(2){
+            padding-left: 10px;
+          }
+          &:nth-child(3){
+            padding-left: 20px;
+          }
+          &:nth-child(4){
+            padding-left: 30px;
+          }
+          &:nth-child(5){
+            padding-left: 20px;
+          }
         }
       }
     }

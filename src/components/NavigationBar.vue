@@ -11,7 +11,7 @@
     <div class="nav_right">
       <div class="st_price">
         <img :src="`${$store.state.imgUrl}stlogo.webp`" class="st_price_img" />
-        <span class="font_price font16">$5.45</span>
+        <span class="font_price font16">$ 0.00</span>
       </div>
       <div class="login_box">
         <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">

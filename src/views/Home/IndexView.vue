@@ -9,7 +9,7 @@
         <div class="content_center">
           <div class="leftbox">
             <p class="font_1 font26 mobile_font14">{{$t("message.home.txt2")}}</p>
-            <p class="font_2 font45 demo_font_color mobile_font14">1000% APY</p>
+            <p class="font_2 font45 demo_font_color mobile_font14">{{$t("message.home.add_txt1")}}</p>
             <div class="btnbox font20">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
@@ -128,7 +128,7 @@
           <swiper ref="teamswiper" :options="teamswiperOption" class="team_swiper">
             <swiper-slide v-for="(item, index) in teamArr" :key="index">
               <div class="out_box display_flex">
-                <div class="oneteam display_flex" >
+                <div class="oneteam display_flex" @click="showtxtFun(item)">
                   <img :src="item.src" class="teaming" />
                   <span class="span1 font20">{{$t(item.name)}}</span>
                   <span class="span2 font16">{{item.txt}}</span>
@@ -138,7 +138,7 @@
                     <a v-if="item.twitter == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}twitter.webp`" class="twitter"/></a>
                     <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}twitter.webp`" class="twitter"/></a>
                   </div>
-                  <span class="triangle_calss" :class="item.status?'triangle_top':'triangle_bottom'" @click="showtxtFun(item)"></span>
+                  <span class="triangle_calss" :class="item.status?'triangle_top':'triangle_bottom'"></span>
                   <div class="txtbox font12" v-if="item.status">
                     <span>{{$t(item.introduce1)}}</span>
                     <span>{{$t(item.introduce2)}}</span>
