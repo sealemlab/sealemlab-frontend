@@ -401,7 +401,9 @@ export const message = {
     txt36:"邮箱不合法",
     txt37:"密码不合法",
     txt38:"俩次密码输入不一样",
-    txt39:"",
+    txt39:"发送验证码",
+    btn_txt1:"确认修改",
+    btn_txt2:"确认找回",
   },//登录注册
   account:{
     txt1:"账户信息",
@@ -440,8 +442,7 @@ export const message = {
     txt32:"请先登录",
     txt33:"请先连接钱包",
   },//我的账号
-  btn_txt1:"确认修改",
-  btn_txt2:"确认找回",
+
   tip:{
     txt1:'创建账户成功,请到邮箱激活账户',
     txt2:'请检查账号/密码是否正确,账号是否激活',
