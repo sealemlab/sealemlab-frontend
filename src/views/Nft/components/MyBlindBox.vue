@@ -2,7 +2,7 @@
   <div class="blind_box">
     <p class="title_box font30">{{$t("message.nft.txt37")}}</p>
     <div class="boxs_">
-      <div class="onebox" v-for="(item,index) in list" :key="index" @click="openBoxFun(item)">
+      <div class="onebox" v-for="(item,index) in list" :key="index" @click="openBox(item)">
         <img :src="item.src" class="img_" />
         <div class="line_ font14">
           <span>{{$t(item.title)}}</span>
@@ -18,7 +18,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { sb } from "sacredrealm-sdk";
 import OpenNft from './OpenBox.vue'
 export default {
   computed: {
@@ -48,12 +47,20 @@ export default {
             item.status = true
           })
           this.getUserAllBox() // 获取用户盲盒信息
-          // this.watchResult()
         }else{
           this.list.forEach(item => {
             item.num = 0
             item.status = false
           })
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    'openStatus': {
+      handler: function (newValue,oldvalue) {
+        if(!newValue && oldvalue){ //页面打开又关闭状态
+          this.getUserAllBox()
         }
       },
       deep: true,
@@ -80,7 +87,7 @@ export default {
     closeOpen(){
       this.openStatus = false
     },
-    openBoxFun(item){
+    openBox(item){
       console.log('item: ', item);
       if(item.status){
         if(!this.getNoticeNum){
@@ -101,21 +108,7 @@ export default {
       // }).catch(err => {
       //   console.log("开盒子错误",err)
       // })
-    },
-    // 监听盲盒开奖结果
-    watchResult() {
-      let filter = sb().filters.SpawnSns(this.getAccount);
-      sb().on(filter, (user, boxslengths, boxarrID, events, ultras) => {
-        if(boxarrID){
-          this.getUserBindbox(this.pageinfo,true)
-        }
-        // console.log('监听盲盒开奖结果: user', user)
-        // console.log('监听盲盒开奖结果: boxslengths',boxslengths)
-        // console.log('监听盲盒开奖结果: boxarrID', boxarrID);
-        // console.log('监听盲盒开奖结果: events',events);
-        // console.log('监听盲盒开奖结果: ultras',ultras);
-      });
-    },
+    }
   }
 };
 </script>

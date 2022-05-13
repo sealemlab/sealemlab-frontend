@@ -317,7 +317,7 @@ export const message = {
     txt25:"Estimated income",
     txt26:"Value when expired",
     txt27:"Total rate",
-    txt28:"Liquidity bond rate",
+    txt28:"Basic rate",
     txt29:"Invite to stake rate",
     txt30:"Invite to bond rate",
     txt31:"Your staking rate",
@@ -325,7 +325,7 @@ export const message = {
     txt33:"Purchased",
     txt34:"After the bond expires, the principal and interest will be claimed in ST; the payment token system will automatically form an LP and lock into the treasury; the tax rate will be reset to the initial value of 0.1% every month as the purchase volume increases",
     txt35:"Total bond",
-    txt36:"Additional rate",
+    txt36:"Extra rate",
     txt37:"Duration",
     txt38:"Countdown",
     txt39:"Ratio",
@@ -339,15 +339,15 @@ export const message = {
     txt47:"Need inviting to stake",
     txt48:"To stake",
     txt49:"Need to stake",
-    txt50:"Actual interest rate = Liquidity bond rate + Invite to buy bond rate + Invite to stake rate+ Your staking rate",
-    txt51:"The liquidity bond rate changes according to the total liquidity; each account enjoys a maximum of 30% additional interest rate; the staking interest rate changes according to the staked amount, and the level will be reduced if the staked balance is decreased. ",
+    txt50:"Actual interest rate = Basic rate + Invite to buy bond rate + Invite to stake rate+ Your staking rate",
+    txt51:"The Basic rate changes according to the total liquidity; each account enjoys a maximum of 30% additional interest rate; the staking interest rate changes according to the staked amount, and the level will be reduced if the staked balance is decreased. ",
     txt52:"Bond balance",
     txt53:"Claimable",
     txt54:"Claim all",
     txt55:"History",
     txt56:"Purchased",
-    txt57:"Additional rate",
-    txt58:"Expected to receive",
+    txt57:"Extra rate",
+    txt58:"You will get",
     txt59:"Countdown",
 
     txt60:"Investor Dashboard",
@@ -461,7 +461,8 @@ export const message = {
     txt2: "Please check whether the account/password is correct and whether the account is activated",
     txt3:'Remind',
     txt4:'This is a light reminder',
-    txt5:'Coming soon'
+    txt5:'Coming soon',
+    txt6:'请选择要开的盒子'
   },
   approve:'Approve'
 };

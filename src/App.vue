@@ -18,15 +18,22 @@
     <Proup :isProgress="getProupInfo.isProgress" :proupStatus="getProupInfo.status" :content="getProupInfo.content" @closeProup="proupClose" @closetimer="proupClose"></Proup>
     <!-- 轻提示 -->
     <Notice :noticeStatus="getNoticeInfo.status" :word="getNoticeInfo.word"></Notice>
+    <!-- 开盲盒弹窗 -->
+    <OpenProup
+      :resultStatus="getPrizeInfo.status"
+      :boxarr="getPrizeInfo.boxarr"
+      @closepage="closepageFun">
+    </OpenProup>
   </div>
 </template>
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
+import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["getIstrue","getAccount","isEnLang","getIsMobile","getProupInfo","getNoticeInfo","getProgressInfo"])
+    ...mapGetters(["getPrizeInfo","getIstrue","getAccount","isEnLang","getIsMobile","getProupInfo","getNoticeInfo","getProgressInfo"])
   },
   data(){
     return {
@@ -79,6 +86,7 @@ export default {
   components: {
     NavigationBar,
     FooterComponents,
+    OpenProup
   },
   methods: {
     proupClose(){
@@ -114,6 +122,10 @@ export default {
         this.$store.commit("setwalletstatus", false);
       })
     },
+    // 关闭开盲盒弹窗
+    closepageFun(){
+      this.$store.commit("setPrizeInfo", JSON.stringify({'status':false,'boxarr':[]}));
+    }
   },
   mounted() {
     if(localStorage.getItem('walletType')){

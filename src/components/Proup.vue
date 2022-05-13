@@ -108,7 +108,7 @@ export default {
   left: 0;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 99999999;
+  z-index: 9999;
   backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;

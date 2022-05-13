@@ -12,9 +12,9 @@
       </div>
       <!-- 页面展示数组 -->
       <div class="cardarr_class">
-        <div class="onebox" v-for="(item,index) in pageshowarr" :key="index" @click="cardClick(item,index)">
+        <div class="onebox" v-for="(item,index) in pageshowarr" :key="index" @click="cardClick(item)">
           <img :src="`${$store.state.imgUrl}mybox1.webp`" class="card_picture" />
-          <span>{{item.num}}</span>
+          <span class="boxID"># {{item.boxID}}</span>
           <div class="box_select">
             <span class="selected" v-if="item.status"></span>
           </div>
@@ -22,11 +22,15 @@
       </div>
     </div>
     <img :src="`${$store.state.imgUrl}back.webp`" class="close_img" @click.stop="closeOpen"/>
-    <div class="open_btn">{{$t("message.nft.txt42")}}</div>
+    <div class="open_btn" @click="openboxFun">
+      {{$t("message.nft.txt42")}}
+      <BtnLoading :isloading="openstatus"></BtnLoading>
+    </div>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { sb,getSigner } from "sacredrealm-sdk";
 export default {
   computed: {
     ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo"]),
@@ -61,6 +65,7 @@ export default {
       if(newvala){
         document.body.style.overflow='hidden'
         this.getUserAllBox()
+        this.watchResult()
       }else{
         document.body.style.overflow='visible'
       }
@@ -68,6 +73,7 @@ export default {
   },
   data(){
     return{
+      openstatus:false,//打开盒子按钮loading
       selectALLBtn:false,//全选按钮的状态
       selectedNUM:0,//选中的盲盒数量
       pageshowarr:[],//页面展示的盲盒数组
@@ -96,7 +102,8 @@ export default {
       this.selectedNUM = 0
       this.$emit('closeOpen')
     },
-    cardClick(data,index){
+    // 选择盒子
+    cardClick(data){
       if(this.selectedNUM >= this.selectNum){
         if(data.status){
           data.status = false
@@ -153,6 +160,53 @@ export default {
           }
         }
       }
+    },
+    // 开盒子
+    openboxFun(){
+      if(this.openstatus)return
+      let arr = []
+      this.pageshowarr.forEach(item => {
+        if(item.status){
+          arr.push(item.boxID)
+        }
+      })
+      if(arr.length == 0){
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt6'}));
+          this.$store.commit("setNoticeNum",true)
+        }
+        return
+      }
+      this.openstatus = true
+      sb().connect(getSigner()).openBoxes(arr).then(res => {
+        console.log('开盒子res: ', res);
+        // 进度条
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'开盒子中....','link':res.hash}));
+        this.openstatus = false
+      }).catch(() => {
+        console.log("开盒子错误")
+        this.openstatus = false
+      })
+    },
+    // 监听盲盒开奖结果
+    watchResult() {
+      let filter = sb().filters.SpawnSns(this.getAccount);
+      sb().on(filter, (user, boxslengths, boxarrID, events, ultras) => {
+        if(boxarrID){
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'成功'}));
+          this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
+            sessionStorage.setItem("sb_count", res)
+            this.getUserAllBox()
+          })
+        }else{
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'失败'}));
+        }
+        console.log('监听盲盒开奖结果: user', user)
+        console.log('监听盲盒开奖结果: boxslengths',boxslengths)
+        console.log('监听盲盒开奖结果: boxarrID', boxarrID);
+        console.log('监听盲盒开奖结果: events',events);
+        console.log('监听盲盒开奖结果: ultras',ultras);
+      })
     },
   }
 }
@@ -249,6 +303,12 @@ export default {
             background: #ECCF83;
           }
         }
+        .boxID{
+          position: absolute;
+          top: 10px;
+          left: 20px;
+          color: red;
+        }
       }
     }
   }
@@ -270,8 +330,9 @@ export default {
     height: 54px;
     background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
     border-radius: 4px;
-    text-align: center;
-    line-height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: 600;
     color: #000000;
   }

@@ -61,13 +61,14 @@
               <li>
                 <span>{{ $t("message.bond.txt39") }}</span>
               </li>
+              <li></li>
             </ul>
             <ul class="list_title2">
               <li v-for="(item, index) in Arr1" :key="index">
                 <span>{{ item.zq }}</span>
                 <span>{{ item.zl }}</span>
                 <span>{{ item.jclv }}</span>
-                <span>{{ item.fjlv }}</span>
+                <span><span class="color2">{{ item.fjlv1 }}</span> + <span class="color3">{{ item.fjlv2 }}</span> + <span class="color4">{{ item.fjlv3 }}</span></span>
                 <span>{{ item.lxzq }}&nbsp;{{$t("message.bond.txt19")}}</span>
                 <span>{{ item.djs }}</span>
                 <span>
@@ -163,14 +164,14 @@
                   <span class="color2 font18">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color2_opacity font18">{{ $t("message.bond.txt42") }}LV2</span>
+                  <span class="color2 font18">{{ $t("message.bond.txt42") }}LV2</span>
                 </li>
                 <li>
-                  <span class="color2_opacity font18">{{ $t("message.bond.txt45") }} --</span>
+                  <span class="color2 font18">{{ $t("message.bond.txt45") }} --</span>
                 </li>
                 <li>
                   <div @click="showBox =! showBox"><span>></span></div>
-                  <div v-if="showBox" class="color2_opacity">{{ $t("message.bond.txt46") }}xxxx/xx/xx</div>
+                  <div v-if="showBox" class="color2">{{ $t("message.bond.txt46") }} xxxx/xx/xx</div>
                 </li>
               </ul>
             </li>
@@ -204,10 +205,10 @@
                   <span class="color3 font18">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color3_opacity font18">{{ $t("message.bond.txt42") }}LV2 </span>
+                  <span class="color3 font18">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color3_opacity font18">{{ $t("message.bond.txt47") }} --</span>
+                  <span class="color3 font18">{{ $t("message.bond.txt47") }} --</span>
                 </li>
               </ul>
             </li>
@@ -241,10 +242,10 @@
                   <span class="color4 font18">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color4_opacity font18">{{ $t("message.bond.txt42") }}LV2 </span>
+                  <span class="color4 font18">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color4_opacity font18">{{ $t("message.bond.txt49") }} --</span>
+                  <span class="color4 font18">{{ $t("message.bond.txt49") }} --</span>
                 </li>
               </ul>
             </li>
@@ -265,11 +266,11 @@
             <div :title='$t("message.bond.txt77")' style="cursor:pointer">
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
-            <div><span>34.4569 ST</span></div>
+            <div><span>0 ST</span></div>
             <div :title='$t("message.bond.txt78")' style="cursor:pointer">
               <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
-            <div><span>34.4569 ST</span></div>
+            <div><span>0 ST</span></div>
             <div>
               <div class="btn_txt bg3" @click="BondClick(1)">{{ $t("message.bond.txt54") }}</div>
             </div>
@@ -381,7 +382,9 @@ export default {
           zq: "ST-BUSD LP",
           zl: "0",
           jclv: "1%",
-          fjlv: "0",
+          fjlv1: "0%",
+          fjlv2: "0%",
+          fjlv3: "0%",
           lxzq: "14",
           djs: "00:00:00",
           gml: "0%",
@@ -803,7 +806,11 @@ export default {
       line-height: 28px;
       padding: 10px 0;
       li {
-        width: calc(100% / 8);
+        // width: calc(100% / 8);
+        width: 160px;
+        &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
+          text-align: center;
+        }
       }
     }
     .list_title2 {
@@ -817,18 +824,10 @@ export default {
         align-items: center;
         padding: 10px 0;
         > span {
-          width: calc(100% / 8);
-          &:nth-child(2){
-            padding-left: 10px;
-          }
-          &:nth-child(3){
-            padding-left: 20px;
-          }
-          &:nth-child(4){
-            padding-left: 30px;
-          }
-          &:nth-child(5){
-            padding-left: 20px;
+          width: 160px;
+          // width: calc(100% / 6);
+          &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
+            text-align: center;
           }
         }
       }
@@ -1005,7 +1004,22 @@ export default {
       line-height: 28px;
       padding: 10px 0;
       li {
-        width: calc(100% / 6);
+        // width: calc(100% / 6);
+        // &:nth-child(2){
+        //   max-width: 180px;
+        // }
+        width: 160px;
+        &:nth-child(2),&:nth-child(3),&:nth-child(5){
+          text-align: center;
+        }
+        &:nth-child(4){
+          width: 200px;
+          text-align: center;
+        }
+        &:nth-child(6){
+          width: 250px;
+          text-align: center;
+        }
       }
     }
     .list_title2 {
@@ -1019,7 +1033,19 @@ export default {
         padding: 10px 0;
         > span {
           cursor: pointer;
-          width: calc(100% / 6);
+          width: 160px;
+          // width: calc(100% / 6);
+          &:nth-child(2),&:nth-child(3),&:nth-child(5){
+            text-align: center;
+          }
+          &:nth-child(4){
+            width: 200px;
+            text-align: center;
+          }
+          &:nth-child(6){
+            width: 250px;
+            text-align: center;
+          }
         }
       }
     }
