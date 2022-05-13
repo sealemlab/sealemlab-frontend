@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     prizeInfo:{
-      status:true,
+      status:false,
       boxarr:[
         {src:'https://cdn.sealemlab.com/nft/Wi/TEX_PC_Wi_Set07_Leg_Icon_03.png',}
       ]
