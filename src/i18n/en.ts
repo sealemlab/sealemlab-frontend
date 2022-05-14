@@ -12,9 +12,11 @@ export const message = {
     txt8_2: "Login",
     txt9: "Connect",
     txt10: "Home",
+    txt11:'New to crypto?',
+    txt12:'Learn more about wallets'
   },
   home: {
-    add_txt1:'高APY',
+    add_txt1:'High APY',
     txt1: "New generation DeFi + Gamefi protocol",
     txt2: "Purchase Bond, earn ",
     txt3: "Bond",

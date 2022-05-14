@@ -1,6 +1,6 @@
 <template>
   <div class="record_page" v-if="getwalletstatus">
-    <div class="title fontsize26">{{ $t("message.nav.txt9") }}</div>
+    <div class="title font26">{{ $t("message.nav.txt9") }}</div>
     <img
       :src="`${$store.state.imgUrl}passclose.webp`"
       class="close_img"
@@ -10,6 +10,12 @@
       <div class="onebox" v-for="(item, index) in walletarr" :key="index" @click="walletClick(item)">
         <span class="wallet_txt fontsize16">{{item.name}}</span>
         <img :src="item.src" class="imgcard" />
+      </div>
+      <div class="new_cry font16">
+        {{$t("message.nav.txt11")}}
+        <a href="https://en.wikipedia.org/wiki/Cryptocurrency_wallet" target="_blank" rel="noopener noreferrer" >
+          <span class="color4">{{$t("message.nav.txt12")}}</span>
+        </a>
       </div>
     </div>
   </div>
@@ -26,9 +32,9 @@ export default {
       walletarr:[
         {name:'Metamask',src:`${this.$store.state.imgUrl}wallet1.webp`},
         {name:'WalletConnect',src:`${this.$store.state.imgUrl}wallet2.webp`},
-        {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.webp`},
-        {name:'Coin98',src:`${this.$store.state.imgUrl}wallet11.webp`},
-        {name:'ONTO',src:`${this.$store.state.imgUrl}wallet5.webp`},
+        // {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.webp`},
+        // {name:'Coin98',src:`${this.$store.state.imgUrl}wallet11.webp`},
+        // {name:'ONTO',src:`${this.$store.state.imgUrl}wallet5.webp`},
         {name:'TokenPocket',src:`${this.$store.state.imgUrl}wallet6.webp`},
         // {name:'TrustWallet',src:`${this.$store.state.imgUrl}wallet3.webp`},
         // {name:'SafePal Wallet',src:`${this.$store.state.imgUrl}wallet4.webp`},
@@ -80,15 +86,16 @@ export default {
     cursor: pointer;
   }
   .boxarr {
-    width: 100%;
+    // width: 50%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // justify-content: space-between;
-    // flex-wrap: wrap;
-    padding: 0 109px;
+    padding:20px;
+    border-radius: 5px;
     max-height: 610px;
     overflow-y: auto;
+    background: #171717;
     padding-bottom: 40px;
     .onebox {
       cursor: pointer;
@@ -98,15 +105,25 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #032C5B;
+      background: rgba(63,65,71,0.5);
       border-radius: 15px;
       margin-top: 32px;
       .imgcard {
         width: 41px;
-        object-fit: contain;
       }
       .wallet_txt{
         color: #ffffff;
+      }
+    }
+    .onebox:hover{
+      background: rgba(63,65,71,1);
+    }
+    .new_cry{
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+      span{
+        cursor: pointer;
       }
     }
   }

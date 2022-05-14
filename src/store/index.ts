@@ -10,7 +10,7 @@ export default new Vuex.Store({
     prizeInfo:{
       status:false,
       boxarr:[
-        {src:'https://cdn.sealemlab.com/nft/Wi/TEX_PC_Wi_Set07_Leg_Icon_03.png',}
+        // {src:'https://cdn.sealemlab.com/nft/Wi/TEX_PC_Wi_Set07_Leg_Icon_03.png',}
       ]
     },// 开盲盒弹窗信息
     userBoxInfo:sessionStorage.getItem('setBoxInfo') || [],//用户的盲盒信息
@@ -39,8 +39,8 @@ export default new Vuex.Store({
       word:'',
     },//轻提示信息
     // https://cdn.sealemlab.com/sealemlab_assets_test/images/accrow.webp
-    imgUrl:process.env.NODE_ENV === 'production'?'//cdn.sealemlab.com/sealemlab_assets_main/images/':'//cdn.hashland.com/sealemlab_assets_test/images/',//图片前缀
-    videoUrl:process.env.NODE_ENV === 'production'?'//cdn.sealemlab.com/sealemlab_assets_main/video/':'//cdn.hashland.com/sealemlab_assets_test/video/',//视频前缀
+    imgUrl:process.env.NODE_ENV === 'production'?'//cdn.sealemlab.com/sealemlab_assets_main/images/':'//cdn.sealemlab.com/sealemlab_assets_test/images/',//图片前缀
+    videoUrl:process.env.NODE_ENV === 'production'?'//cdn.sealemlab.com/sealemlab_assets_main/video/':'//cdn.sealemlab.com/sealemlab_assets_test/video/',//视频前缀
     codeTime:60,//验证码重新发送时间
     emailReg:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,//邮箱校验
     pwReg: /^[a-zA-Z0-9]{6,16}$/,//密码校验 6-16位数字英文组合

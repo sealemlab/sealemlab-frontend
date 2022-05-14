@@ -9,22 +9,26 @@
     <div class="boxarr">
       <div class="onebox" v-for="(item, index) in boxarr" :key="index">
         <div class="out_img"><img :src="item.src" class="imgcard" /></div>
-        <img :src="`${$store.state.imgUrl}newhuxing.webp`" class="huxing_img" />
-        <!-- <div class="start">
-          <span class="span1 font24">7</span>
-          <img :src="`${$store.state.imgUrl}start.webp`" />
-        </div>
-        <div class="people_type">
-          <img :src="`${$store.state.imgUrl}busd.webp`" />
-          <img :src="`${$store.state.imgUrl}busd.webp`" />
-        </div>
-        <div class="people_type">
-          <div class="left_content">
-            <span class="">神圣的次开的头</span>
-            <span>#12312</span>
+        <div class="huxing_bg_box">
+          <img :src="`${$store.state.imgUrl}newhuxing.webp`" class="huxing_img" />
+          <div class="huxing_content">
+            <div class="start">
+              <span class="span1 font24">7</span>
+              <img :src="`${$store.state.imgUrl}start.webp`" />
+            </div>
+            <div class="people_type">
+              <img :src="`${$store.state.imgUrl}type_cike.webp`" />
+              <img :src="`${$store.state.imgUrl}type_cike.webp`" />
+            </div>
+            <div class="people_type">
+              <div class="left_content">
+                <span class="font14">神圣的次开的头</span>
+                <span class="font12">#12312</span>
+              </div>
+              <img :src="`${$store.state.imgUrl}3d.webp`" />
+            </div>
           </div>
-          <img :src="`${$store.state.imgUrl}busd.webp`" />
-        </div> -->
+        </div>
       </div>
     </div>
     <!-- <div class="Suspension_btnbox">
@@ -122,55 +126,75 @@ export default {
       flex-direction: column;
       align-items: center;
       margin-bottom: 20px;
-      padding: 0 13px 18px;
-      background: url($bg_url + 'nftbg.webp') no-repeat #000;
+      // padding: 0 13px 18px;
+      background: url($bg_url + 'nftbg.webp') no-repeat;
       background-size: 100% 100%;
       .out_img{
         width: 100%;
-        // height: 60px;
-        // padding: 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         .imgcard {
-          width: 184px;
+          // width: 184px;
           height: 184px;
         }
       }
-      .huxing_img{
+      .huxing_bg_box{
+        position: absolute;
+        bottom: 0;
+        left: 0;
         width: 100%;
-      }
-      .start{
-        margin-top: 20px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .span1{
-          font-weight: 800;
-          color: #EFB045;
-          line-height: 29px;
-          margin-right: 5px;
-          // background: liner-gradient(180deg, #F1E069 92%, #A87D30 28%, #FEF6C2 70%, #B48533 13%);
-          // -webkit-background-clip: text;
-          // -webkit-text-fill-color: transparent;
+        .huxing_img{
+          width: 100%;
         }
-        img{
-          width: 32px;
-        }
-      }
-      .people_type{
-        margin-top: 20px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        img{
-          width: 32px;
-        }
-        .left_content{
+        .huxing_content{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
           display: flex;
           flex-direction: column;
-          span{
-            font-weight: 800;
-            line-height: 30px;
+          align-items: center;
+          padding: 35px 13px 5px;
+          .start{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom:5px;
+            .span1{
+              font-weight: 800;
+              color: #EFB045;
+              line-height: 29px;
+              margin-right: 5px;
+              // background: liner-gradient(180deg, #F1E069 92%, #A87D30 28%, #FEF6C2 70%, #B48533 13%);
+              // -webkit-background-clip: text;
+              // -webkit-text-fill-color: transparent;
+            }
+            img{
+              width: 24px;
+            }
+          }
+          .people_type{
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            img{
+              width: 24px;
+            }
+            .left_content{
+              display: flex;
+              flex-direction: column;
+              span{
+                font-weight: 800;
+                line-height: 18px;
+                &:nth-child(2){
+                  margin-top: 5px;
+                }
+              }
+            }
           }
         }
       }

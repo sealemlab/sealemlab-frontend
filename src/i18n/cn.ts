@@ -11,7 +11,9 @@ export const message = {
     txt8_1: "註冊",
     txt8_2: "登录",
     txt9:"连接钱包",
-    txt10:"Home"
+    txt10:"Home",
+    txt11:'加密新手?',
+    txt12:'了解有关钱包的更多信息'
   },//导航栏
   home: {
     add_txt1:'高APY',
