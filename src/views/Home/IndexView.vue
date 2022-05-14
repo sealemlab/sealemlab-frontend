@@ -133,10 +133,16 @@
                   <span class="span1 font20">{{$t(item.name)}}</span>
                   <span class="span2 font16">{{item.txt}}</span>
                   <div class="address_peopllle display_flex">
-                    <a v-if="item.LinY == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" /></a>
-                    <a v-else :href="item.LinY" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" /></a>
+                    <!-- <a v-if="item.LinY == ''" href="javascript:;">
+                      <img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" />
+                    </a> -->
+                    <a :href="item.LinY" target="_blank" rel="noopener noreferrer" v-if="item.LinY">
+                      <img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" />
+                    </a>
                     <a v-if="item.twitter == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}twitter.webp`" class="twitter"/></a>
-                    <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}twitter.webp`" class="twitter"/></a>
+                    <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer">
+                      <img :src="`${$store.state.imgUrl}twitter.webp`" class="twitter"/>
+                    </a>
                   </div>
                   <span class="triangle_calss" :class="item.status?'triangle_top':'triangle_bottom'"></span>
                   <div class="txtbox font12" v-if="item.status">
@@ -274,10 +280,10 @@ export default {
         {
           src:`${this.$store.state.imgUrl}ceo.webp`,
           txt:'CEO',
-          name:'message.home.txt48',
+          name:'message.home.txt48', // Domlane
           status:true,
           twitter:'https://twitter.com/CryptoDomLane',
-          LinY:'',
+          // LinY:'',
           introduce1:'message.home.introduce1',
           introduce2:'message.home.introduce2',
           introduce3:'message.home.introduce3',
@@ -285,10 +291,10 @@ export default {
         {
           src:`${this.$store.state.imgUrl}cto.webp`,
           txt:'CMO',
-          name:'message.home.txt50',
+          name:'message.home.txt50', //Greer Phantomhive
           status:false,
           twitter:'https://twitter.com/PhantomhiveGem',
-          LinY:'',
+          // LinY:'',
           introduce1:'message.home.introduce4',
           introduce2:'message.home.introduce5',
           introduce3:'message.home.introduce6',
@@ -296,10 +302,10 @@ export default {
         {
           src:`${this.$store.state.imgUrl}cmo.webp`,
           txt:'CTO',
-          name:'message.home.txt49',
+          name:'message.home.txt49', //Kim Talon
           status:false,
           twitter:'https://twitter.com/TalonKim',
-          LinY:'',
+          // LinY:'',
           introduce1:'message.home.introduce7',
           introduce2:'message.home.introduce8',
           introduce3:'message.home.introduce9',
@@ -307,10 +313,10 @@ export default {
         {
           src:`${this.$store.state.imgUrl}svp.webp`,
           txt:'SVP',
-          name:'message.home.txt51',
+          name:'message.home.txt51',//Amelia Emma
           status:false,
-          twitter:'https://twitter.com/tinsley_hafen',
-          LinY:'',
+          twitter:'https://twitter.com/EmmaAmelialove',
+          LinY:'https://www.linkedin.com/in/amelia-emma-a11914234/',
           introduce1:'message.home.introduce10',
           introduce2:'message.home.introduce11',
           introduce3:'message.home.introduce12',
@@ -318,7 +324,7 @@ export default {
         {
           src:`${this.$store.state.imgUrl}founder.webp`,
           txt:'Co-Founder',
-          name:'message.home.txt52',
+          name:'message.home.txt52',// Tinsley-Hafen
           status:false,
           twitter:'https://twitter.com/HenryEvans0',
           LinY:'https://www.linkedin.cn/injobs/in/henry-evans-4b3566233',
@@ -329,10 +335,10 @@ export default {
         {
           src:`${this.$store.state.imgUrl}founder1.webp`,
           txt:'Co-Founder',
-          name:'message.home.txt53',
+          name:'message.home.txt53',//Henry Evans
           status:false,
-          twitter:'https://twitter.com/EmmaAmelialove',
-          LinY:'https://www.linkedin.com/in/amelia-emma-a11914234/',
+          twitter:'https://twitter.com/HenryEvans0',
+          LinY:'https://www.linkedin.cn/injobs/in/henry-evans-4b3566233',
           introduce1:'message.home.introduce16',
           introduce2:'message.home.introduce17',
           introduce3:'message.home.introduce18',
@@ -558,7 +564,7 @@ export default {
     },
     gameClick(item){
       this.gameIndex = item.id
-    },
+    }
   },
   mounted(){
     let that = this
@@ -1082,10 +1088,10 @@ export default {
         align-items: center;
         .ling_ying{
           width: 19px;
+          margin-right: 15px;
         }
         .twitter{
           width: 23px;
-          margin-left: 15px;
         }
       }
       .triangle_calss{

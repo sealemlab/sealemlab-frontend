@@ -170,7 +170,7 @@
                   <span class="color2 font18">{{ $t("message.bond.txt45") }} --</span>
                 </li>
                 <li>
-                  <div @click="showBox =! showBox"><span>></span></div>
+                  <div @click="showBox =! showBox"><img :src="`${$store.state.imgUrl}accrow.webp`" alt="" /></div>
                   <div v-if="showBox" class="color2">{{ $t("message.bond.txt46") }} xxxx/xx/xx</div>
                 </li>
               </ul>
@@ -366,11 +366,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import AddLp from "./Addlp.vue";
 export default {
   components: {
     AddLp,
   },
+  computed: { ...mapGetters(["getNoticeNum"]) },
   data() {
     return {
       dashboard:true,//仪表盘切换
@@ -402,17 +404,17 @@ export default {
           djs: "00:00:00",
           status:false
         },
-        {
-          zq: "ST-BUSD LP",
-          gme: "0",
-          jclv: "1%",
-          fjlv1: "0%",
-          fjlv2: "0%",
-          fjlv3: "0%",
-          yjklq: "0",
-          djs: "待领取",
-          status:false
-        },
+        // {
+        //   zq: "ST-BUSD LP",
+        //   gme: "0",
+        //   jclv: "1%",
+        //   fjlv1: "0%",
+        //   fjlv2: "0%",
+        //   fjlv3: "0%",
+        //   yjklq: "0",
+        //   djs: "待领取",
+        //   status:false
+        // },
       ],
       list1: ["$ 0*0", "$ 0*0"],
     };
@@ -422,7 +424,14 @@ export default {
       this.addlpDis = false;
     },
     BondClick(data) {
-      this.addlpDis = true;
+      if(process.env.NODE_ENV === 'production'){
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+          this.$store.commit("setNoticeNum",true)
+        }
+      }else{
+        this.addlpDis = true;
+      }
       // console.log('this.$utils.isLang(): ', this.$utils.isLang());
     },
     showBuy(item){
@@ -931,8 +940,8 @@ export default {
             div {
               &:nth-child(1) {
                 cursor: pointer;
-                font-size: 20px;
-                transform: rotate(90deg);
+                // font-size: 20px;
+                // transform: rotate(90deg);
                 position: absolute;
                 left: 50px;
                 top: 0;
