@@ -155,8 +155,8 @@
               </div>
             </swiper-slide>
           </swiper>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev-add"></div>
+          <div class="swiper-button-next-add"></div>
         </div>
       </div>
     </div>
@@ -469,8 +469,8 @@ export default {
       teamswiperOption: {
         slidesPerView: 4,
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next-add",
+          prevEl: ".swiper-button-prev-add",
         }
       },
       gameArr:[
@@ -574,7 +574,7 @@ export default {
   },
 }
 </script>
-<style>
+<style lang="scss">
 .my-bullet{
   width: 10px;
   height: 10px;
@@ -587,6 +587,28 @@ export default {
 .my-bullet-active{
   opacity: 1;
   background: #ECCF83;
+}
+.swiper-button-prev-add {
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+  background-image: url($bg_url + "btn_left.webp");
+  background-size: 100% auto;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.swiper-button-next-add {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+  background-image: url($bg_url + "btn_right.webp");
+  background-size: 100% auto;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
 </style>
 <style lang="scss" soped>
@@ -845,6 +867,7 @@ export default {
       width: 100%;
       padding: 0 45px;
       .team_swiper{
+        position: relative;
         width: 100%;
         .swiper-slide{
           display: flex;
