@@ -40,14 +40,14 @@
       <div class="walletBox font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div>
       <!-- <div class="connect font16" v-if="getIstrue">{{getSubtringAccount}}</div>
       <div class="connect font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div> -->
-      <div class="lang_box" :class="getIsMobile?'disply_none':''" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
+      <div class="lang_box" :class="getIsMobile?'disply_none':''"><!--  @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false" -->
         <span>{{ language }}</span>
-        <img :src="`${$store.state.imgUrl}accrow.webp`" alt="" />
+        <!-- <img :src="`${$store.state.imgUrl}accrow.webp`" alt="" />
         <transition name="select-lang" appear>
-          <ul v-show="showLangSelect">
+          <ul v-show="s howLangSelect">
             <li v-for="(item, index) in langArr" :key="index" @click="selectLang(index)">{{ item }}</li>
           </ul>
-        </transition>
+        </transition> -->
       </div>
     </div>
   </div>
