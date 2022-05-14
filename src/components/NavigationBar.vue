@@ -1,7 +1,7 @@
 <template>
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
-      <img class="logo" :src="`${$store.state.imgUrl}logo.png`" alt="" @click="toRoute('/home')" />
+      <img class="logo" :src="`${$store.state.imgUrl}logo.webp`" alt="" @click="toRoute('/home')" />
       <ul :class="getIsMobile?'disply_none':''">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
           <span class="font18">{{ $t(item.label) }}</span>
@@ -10,22 +10,39 @@
     </div>
     <div class="nav_right">
       <div class="st_price">
-        <img :src="`${$store.state.imgUrl}stlogo.png`" class="st_price_img" />
-        <span class="font_price font16">$5.45</span>
+        <img :src="`${$store.state.imgUrl}stlogo.webp`" class="st_price_img" />
+        <span class="font_price font16">$ 0.00</span>
       </div>
       <div class="login_box">
-        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
+        <!-- <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
           {{$t("message.nav.txt8")}}
         </div>
         <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
           <span @click="loginClick('register')">{{$t("message.nav.txt8_1")}}</span>/
           <span @click="loginClick('login')">{{$t("message.nav.txt8_2")}}</span>
+        </div> -->
+      </div>
+      <!-- 链接钱包 -->
+      <div class="walletBox font16" v-if="getIstrue">
+        <div class="connect_triangle">
+          <span class="span2">{{ getSubtringAccount }}</span>
+          <span class="connect_icon"></span>
+        </div>
+        <div class="wallet_hover">
+          <div class="lastbox_hover">
+            <div class="hover_span1" @click.stop="signOutFun">
+              <span class="span_exit">Disconnect</span>
+              <img :src="`${$store.state.imgUrl}exit.webp`" class="exit_class" />
+            </div>
+          </div>
         </div>
       </div>
-      <div class="connect font16">{{ $t("message.nav.txt9") }}</div>
+      <div class="walletBox font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div>
+      <!-- <div class="connect font16" v-if="getIstrue">{{getSubtringAccount}}</div>
+      <div class="connect font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div> -->
       <div class="lang_box" :class="getIsMobile?'disply_none':''" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
         <span>{{ language }}</span>
-        <img :src="`${$store.state.imgUrl}accrow.png`" alt="" />
+        <img :src="`${$store.state.imgUrl}accrow.webp`" alt="" />
         <transition name="select-lang" appear>
           <ul v-show="showLangSelect">
             <li v-for="(item, index) in langArr" :key="index" @click="selectLang(index)">{{ item }}</li>
@@ -38,6 +55,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import {wallet} from "sacredrealm-sdk";
 export default {
   data() {
     return {
@@ -48,15 +66,16 @@ export default {
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
         { label: "message.nav.txt5", link: "" },
-        { label: "message.nav.txt6", link: "/user/assets/0" },
-        { label: "message.nav.txt7", link: "" }
+        { label: "message.nav.txt6", link: "" },
+        // { label: "message.nav.txt6", link: "/user/assets/0" },
+        // { label: "message.nav.txt7", link: "" }
       ],
       showLangSelect: false,
       language: "",
-      langArr: ["EN", "CN"],
+      langArr: ["EN", "ZH"],
     };
   },
-  computed: { ...mapGetters(["isEnLang","getLogin","getIsMobile"]) },
+  computed: { ...mapGetters(["getNoticeNum","isEnLang","getLogin","getIsMobile","getSubtringAccount","getIstrue"]) },
   watch: {
     $route(to, from) {
       if (from.matched.length && to.matched[0].path != from.matched[0].path) {
@@ -68,24 +87,44 @@ export default {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
-      }else if (to.path.indexOf("/user/") !== -1) {
-        this.navActive = 4;
       }else if (to.path.indexOf("/signin/") !== -1) {
         this.navActive = 7;
       }else if (to.path.indexOf("/myaccount/") !== -1) {
         this.navActive = 7;
+      }else{
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+          this.$store.commit("setNoticeNum",true)
+        }
       }
       // else if (to.path.indexOf("/user/") !== -1) {
-      //   this.navActive = 5;
+      //   this.navActive = 4;
       // }
     },
   },
   created() {
-    this.language = this.$i18n.locale == "en" ? this.langArr[0] : this.langArr[1];
+    this.language = this.$i18n.locale == "EN" ? this.langArr[0] : this.langArr[1];
+    wallet.onDisconnect(this.signOutFun);
   },
   methods: {
+    // 退出钱包
+    async signOutFun() {
+      sessionStorage.removeItem("setnewinfo");
+      if (localStorage.getItem("walletType") == "walletconnect") {
+        wallet.disconnect();
+      }
+      localStorage.removeItem('walletType')
+      this.$store.commit("setnewinfo", JSON.stringify({}));
+    },
     toRoute(link) {
-      if (link) this.$router.push(link);
+      if (link){
+        this.$router.push(link);
+      } else{
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+          this.$store.commit("setNoticeNum",true)
+        }
+      }
     },
     loginClick(data){
       switch(data){
@@ -105,9 +144,13 @@ export default {
     selectLang(index) {
       if (this.language == this.langArr[index]) return (this.showLangSelect = false);
       this.language = this.langArr[index];
-      this.$i18n.locale = this.language == "EN" ? "en" : "cn";
-      this.$utils.setCookie("LANG", this.$i18n.locale);
-      location.reload();
+      this.$i18n.locale = this.language == "EN" ? "EN" : "ZH";
+      // this.$utils.setCookie("LANG", this.$i18n.locale);
+      // location.reload();
+    },
+    // 链接钱包弹窗
+    commonLink() {
+      this.$store.commit("setwalletstatus", true);
     },
   }
 };
@@ -184,16 +227,83 @@ export default {
       line-height: 19px;
     }
   }
-  .connect {
+  .walletBox {
+    position: relative;
     cursor: pointer;
-    padding: 5px 10px;
     background: #232229;
     border: 1px solid #4f4e53;
     border-radius: 8px;
     margin-right: 17px;
-    font-weight: bold;
-    color: #FFFFFF;
-    line-height: 19px;
+    padding: 5px 10px;
+    .connect_triangle {
+      width: fit-content;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .span2 {
+        color: #ffffff;
+        font-weight: bold;
+      }
+      .connect_icon {
+        border-width: 5px;
+        margin-left: 5px;
+        margin-top: 5px;
+        border-color: #ffffff;
+        border-style: dashed;
+        border-top-style: solid;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+      }
+    }
+    .wallet_hover {
+      display: none;
+    }
+  }
+  .walletBox:hover {
+    .connect_triangle {
+      .connect_icon {
+        margin-top: -5px;
+        border-top-color: transparent;
+        border-bottom-color: #ffffff;
+        border-bottom-style: solid;
+      }
+    }
+    .wallet_hover {
+      position: absolute;
+      left: 0;
+      display: flex;
+      .lastbox_hover {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        padding: 5px 10px;
+        background: #232229;
+        border-radius: 8px;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5) inset, -2px 1px 22px 0px rgba(194, 190, 190, 0.52) inset;
+        .hover_span1 {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          .span_exit {
+            color: #fff;
+          }
+          .span_exit:hover {
+            color: #fadd82;
+          }
+          .exit_class {
+            width: 18px;
+            object-fit: contain;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
   }
   .lang_box {
     cursor: pointer;

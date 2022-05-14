@@ -2,11 +2,12 @@
   <!-- 底部 -->
   <div class="footer_box display_flex">
     <div class="footer_content display_flex">
-      <img :src="`${$store.state.imgUrl}logo.png`" class="footer_logo" />
+      <img :src="`${$store.state.imgUrl}logo.webp`" class="footer_logo" />
       <div class="onebox display_flex">
-        <ul v-for="(item, index) in footerArr" :key="index">
-          <li class="font14 en_Regular" v-for="(ele, index1) in item.children" :key="index1">
-            {{ $t(ele) }}
+        <ul v-for="(ele, index) in footerArr" :key="index">
+          <li class="font14 en_Regular" v-for="(item, index1) in ele.children" :key="index1">
+            <a v-if="item.link == ''" href="javascript:;">{{ $t(item.title) }}</a>
+            <a v-else :href="isEnLang?(item.link_en?item.link_en:item.link):item.link" target="_blank" rel="noopener noreferrer" >{{ $t(item.title) }}</a>
           </li>
         </ul>
       </div>
@@ -19,48 +20,67 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters(["isEnLang"])
+  },
   data(){
     return{
       footerArr:[
         {
           id:1,
           children:[
-            "message.footer.txt1",
-            "message.footer.txt2",
-            "message.footer.txt3",
-            "message.footer.txt4",
-            "message.footer.txt5",
-            "message.footer.txt6",
+            {title:"message.footer.txt1",link:''},
+            {
+              title:"message.footer.txt2",
+              link:'https://sacred-realm.gitbook.io/zhong-wen/',
+              link_en:'https://lab-sealem.gitbook.io/sealem-lab/'},
+            {
+              title:"message.footer.txt3",
+              link:'https://lab-sealem.gitbook.io/slmcn/',
+              link_en:'https://lab-sealem.gitbook.io/sealem-lab/'
+            },
+            {
+              title:"message.footer.txt4",
+              link:'https://lab-sealem.gitbook.io/slmcn/ji-chu/chang-jian-wen-ti',
+              link_en:'https://lab-sealem.gitbook.io/sealem-lab/basic/faq'
+            },
+            {
+              title:"message.footer.txt5",
+              link:'https://lab-sealem.gitbook.io/slmcn/dai-bi-jing-ji-xue/st',
+              link_en:'https://lab-sealem.gitbook.io/sealem-lab/tokenomics/st'
+            },
+            {title:"message.footer.txt6",link:''}
           ]
         },
         {
           id:2,
           children:[
-            "message.footer.txt20",
-            "message.footer.txt7",
-            "message.footer.txt8",
-            "message.footer.txt9",
-            "message.footer.txt10",
+            {title:"message.footer.txt20"},
+            {title:"message.footer.txt7",link:'https://t.me/sealemglobal'},
+            {title:"message.footer.txt8",link:'https://twitter.com/SealemLab'},
+            {title:"message.footer.txt9",link:'https://discord.gg/s747pMMBzq'},
+            {title:"message.footer.txt10",link:'https://medium.com/@sealemlab'}
           ]
         },
         {
           id:3,
           children:[
-            "message.footer.txt11",
-            "message.footer.txt12",
-            "message.footer.txt13",
+            {title:"message.footer.txt11"},
+            {title:"message.footer.txt12",link:''},
+            {title:"message.footer.txt13",link:''}
           ]
         },
         {
           id:4,
           children:[
-            "message.footer.txt14",
-            "message.footer.txt15",
-            "message.footer.txt16",
-            "message.footer.txt17",
-            "message.footer.txt18",
-            "message.footer.txt19",
+            {title:"message.footer.txt14",link:''},
+            {title:"message.footer.txt15",link:''},
+            {title:"message.footer.txt16",link:''},
+            {title:"message.footer.txt17",link:''},
+            {title:"message.footer.txt18",link:''},
+            {title:"message.footer.txt19",link:''}
           ]
         }
       ]
@@ -75,7 +95,7 @@ export default {
   width: 100%;
   flex-direction: column;
   align-items: center;
-  background: url($bg_url + 'footerbg.png') no-repeat #000;
+  background: url($bg_url + 'footerbg.webp') no-repeat #000;
   background-size: 100% 100%;
   .footer_img {
     width: 100%;
@@ -97,6 +117,7 @@ export default {
       ul {
         li {
           margin: 14px 0;
+          cursor: pointer;
           letter-spacing: 0.52px;
           &:nth-child(1) {
             font-size: 18px;
@@ -136,7 +157,7 @@ export default {
     width: 100%;
     flex-direction: column;
     align-items: center;
-    background: url($bg_url + "footerbg.png") no-repeat #000;
+    background: url($bg_url + "footerbg.webp") no-repeat #000;
     background-size: 100% 100%;
     .footer_img {
       width: 100%;

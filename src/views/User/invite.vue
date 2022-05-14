@@ -32,13 +32,13 @@
           <div class="boxs" v-for="(item,index) in list" :key="index">
             <div class="title_onebox">
               <div class="champion_box" v-if="index == 0">
-                <img :src="`${$store.state.imgUrl}champion1.png`" class="sort1_img" />
+                <img :src="`${$store.state.imgUrl}champion1.webp`" class="sort1_img" />
               </div>
               <div class="champion_box" v-else-if="index == 1">
-                <img :src="`${$store.state.imgUrl}champion2.png`" class="sort1_img" />
+                <img :src="`${$store.state.imgUrl}champion2.webp`" class="sort1_img" />
               </div>
               <div class="champion_box" v-else-if="index == 2">
-                <img :src="`${$store.state.imgUrl}champion3.png`" class="sort1_img" />
+                <img :src="`${$store.state.imgUrl}champion3.webp`" class="sort1_img" />
               </div>
               <span class="pad_left fontsize16" v-else>{{index + 1}}</span>
             </div>

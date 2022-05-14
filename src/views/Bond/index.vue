@@ -1,0 +1,1071 @@
+<template>
+  <div class="bond_page">
+    <!-- 背景图 -->
+    <div class="box1 font14">
+      <img :src="`${$store.state.imgUrl}newbondbg.webp`" class="bond_bg" />
+      <div>
+        <img :src="`${$store.state.imgUrl}BOND.webp`" class="bond_img" />
+        <ul>
+          <li>
+            <div class="txt1">{{ $t("message.bond.txt2_1") }}</div>
+            <div class="line"></div>
+          </li>
+          <li>
+            <div class="txt1">{{ $t("message.bond.txt2_2") }}</div>
+            <div class="line"></div>
+          </li>
+          <li>
+            <div class="txt1">{{ $t("message.bond.txt2_3") }}</div>
+            <div class="line"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 债券 -->
+    <div class="boxs">
+      <div class="box2">
+        <div class="title">
+          <span>{{ $t("message.bond.txt1") }}</span>
+        </div>
+        <div class="box">
+          <div class="top">
+            <div :title='$t("message.bond.txt71")' style="cursor:pointer">
+              <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
+            </div>
+            <div><span>$&nbsp;0</span></div>
+            <div>
+              <span>ST{{ $t("message.bond.txt4") }} </span>
+            </div>
+            <div><span>$&nbsp;0</span></div>
+          </div>
+          <div class="bottom">
+            <ul class="list_title">
+              <li>
+                <span>{{ $t("message.bond.txt1") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt35") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt28") }}</span>
+              </li>
+              <li :title='$t("message.bond.txt72")' style="cursor:pointer">
+                <span class="has_question_icon">{{ $t("message.bond.txt36") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt37") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt38") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt39") }}</span>
+              </li>
+              <li></li>
+            </ul>
+            <ul class="list_title2">
+              <li v-for="(item, index) in Arr1" :key="index">
+                <span>{{ item.zq }}</span>
+                <span>{{ item.zl }}</span>
+                <span>{{ item.jclv }}</span>
+                <span><span class="color2">{{ item.fjlv1 }}</span> + <span class="color3">{{ item.fjlv2 }}</span> + <span class="color4">{{ item.fjlv3 }}</span></span>
+                <span>{{ item.lxzq }}&nbsp;{{$t("message.bond.txt19")}}</span>
+                <span>{{ item.djs }}</span>
+                <span>
+                  <div class="progressbar"><div :style="{ width: item.gml }"></div></div>
+                  {{ item.gml }}
+                </span>
+                <span>
+                  <div class="btn_txt bg3" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 仪表盘 -->
+    <div class="boxs add_top">
+      <!-- 仪表盘切换 -->
+      <div class="add_nav font18">
+        <div :class="dashboard?'bg3 color_000':''" @click="dashboard = true">{{ $t("message.bond.txt60") }}</div>
+        <div :class="dashboard?'':'bg3 color_000'"  @click="dashboard = false">{{ $t("message.bond.txt61") }}</div>
+      </div>
+      <!-- 利率 -->
+      <div class="box3" v-if="dashboard">
+        <div class="title">
+          <span>{{ $t("message.bond.txt5") }}</span>
+        </div>
+        <div class="box">
+          <div class="text1">{{ $t("message.bond.txt40") }}</div>
+          <ul class="list_title1">
+            <li>
+              <ul class="list_title2">
+                <li :title='$t("message.bond.txt73")' style="cursor:pointer">
+                  <span class="has_question_icon color1">{{ $t("message.bond.txt28") }}</span>
+                </li>
+                <li></li>
+                <li class="round_progressbar">
+                  <!-- <RingProgress
+                    percentNum="30"
+                    size="100"
+                    ranking="Coming soon"
+                    color="#C7C7C7"
+                    backgroundColor="#5E5E5E"
+                    fontcolor="#9D9C9C"
+                  /> -->
+                  <div class="circle-two circle_1">
+                    <div class="circle-two-l"></div>
+                    <div class="circle-two-r"></div>
+                    <div class="circle-two-mask">
+                      <div class="circle_txt color3 font18">{{$t("message.tip.txt5")}}</div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <span class="color1 font18">{{ $t("message.bond.txt41") }}1%</span>
+                </li>
+                <li>
+                  <span class="color1 font18">{{ $t("message.bond.txt42") }}LV2 </span>
+                </li>
+                <li>
+                  <span class="color1 font18">{{ $t("message.bond.txt43") }} --</span>
+                </li>
+              </ul>
+            </li>
+            <!-- 第二个圆 -->
+            <li>
+              <!-- <ul class="list_title2 coming_soon"> -->
+              <ul class="list_title2">
+                <li :title='$t("message.bond.txt74")' style="cursor:pointer">
+                  <span class="has_question_icon color2">{{ $t("message.bond.txt30") }}</span>
+                </li>
+                <li>
+                  <div class="btn_txt bg1">{{ $t("message.bond.txt44") }}</div>
+                </li>
+                <li class="round_progressbar">
+                  <!-- <RingProgress
+                    :percentNum="30"
+                    size="100"
+                    :ranking="'Coming soon'"
+                    color="#F0E2B8"
+                    backgroundColor="#6F6A59"
+                    :fontcolor="'#9F9579'"
+                  /> -->
+                  <div class="circle-two circle_2">
+                    <div class="circle-two-l"></div>
+                    <div class="circle-two-r"></div>
+                    <div class="circle-two-mask">
+                      <div class="circle_txt color3 font18">{{$t("message.tip.txt5")}}</div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <span class="color2 font18">{{ $t("message.bond.txt41") }}0.0%</span>
+                </li>
+                <li>
+                  <span class="color2 font18">{{ $t("message.bond.txt42") }}LV2</span>
+                </li>
+                <li>
+                  <span class="color2 font18">{{ $t("message.bond.txt45") }} --</span>
+                </li>
+                <li>
+                  <div @click="showBox =! showBox"><span>></span></div>
+                  <div v-if="showBox" class="color2">{{ $t("message.bond.txt46") }} xxxx/xx/xx</div>
+                </li>
+              </ul>
+            </li>
+            <!-- 第三个圆 -->
+            <li>
+              <ul class="list_title2">
+                <li :title='$t("message.bond.txt75")' style="cursor:pointer">
+                  <span class="has_question_icon color3">{{ $t("message.bond.txt29") }}</span>
+                </li>
+                <li>
+                  <div class="btn_txt bg2">{{ $t("message.bond.txt44") }}</div>
+                </li>
+                <li class="round_progressbar">
+                  <!-- <RingProgress
+                    :percentNum="30"
+                    size="100"
+                    :ranking="'Coming soon'"
+                    color="#FFD46A"
+                    backgroundColor="rgba(187, 159, 90, 0.45)"
+                    :fontcolor="'#BB9F5A'"
+                  /> -->
+                  <div class="circle-two circle_3">
+                    <div class="circle-two-l"></div>
+                    <div class="circle-two-r"></div>
+                    <div class="circle-two-mask">
+                      <div class="circle_txt color3 font18">{{$t("message.tip.txt5")}}</div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <span class="color3 font18">{{ $t("message.bond.txt41") }}0.0%</span>
+                </li>
+                <li>
+                  <span class="color3 font18">{{ $t("message.bond.txt42") }}LV2 </span>
+                </li>
+                <li>
+                  <span class="color3 font18">{{ $t("message.bond.txt47") }} --</span>
+                </li>
+              </ul>
+            </li>
+            <!-- 第四个圆 -->
+            <li>
+              <ul class="list_title2">
+                <li :title='$t("message.bond.txt76")' style="cursor:pointer">
+                  <span class="has_question_icon color4">{{ $t("message.bond.txt31") }}</span>
+                </li>
+                <li>
+                  <div class="btn_txt bg3">{{ $t("message.bond.txt48") }}</div>
+                </li>
+                <li class="round_progressbar">
+                  <!-- <RingProgress
+                    :percentNum="30"
+                    size="100"
+                    :ranking="'Coming soon'"
+                    color="#FFEDBC"
+                    backgroundColor="#ECCF83"
+                    :fontcolor="'#F5E2A7'"
+                  /> -->
+                  <div class="circle-two circle_4">
+                    <div class="circle-two-l"></div>
+                    <div class="circle-two-r"></div>
+                    <div class="circle-two-mask">
+                      <div class="circle_txt color3 font18">{{$t("message.tip.txt5")}}</div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <span class="color4 font18">{{ $t("message.bond.txt41") }}0.0%</span>
+                </li>
+                <li>
+                  <span class="color4 font18">{{ $t("message.bond.txt42") }}LV2 </span>
+                </li>
+                <li>
+                  <span class="color4 font18">{{ $t("message.bond.txt49") }} --</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="text2">
+            <p>{{ $t("message.bond.txt50") }}</p>
+            <p>{{ $t("message.bond.txt51") }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- 你的债券 -->
+      <div class="box4" v-if="dashboard">
+        <div class="title">
+          <span>{{ $t("message.bond.txt8") }}</span>
+        </div>
+        <div class="box">
+          <div class="top">
+            <div :title='$t("message.bond.txt77")' style="cursor:pointer">
+              <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
+            </div>
+            <div><span>0 ST</span></div>
+            <div :title='$t("message.bond.txt78")' style="cursor:pointer">
+              <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
+            </div>
+            <div><span>0 ST</span></div>
+            <div>
+              <div class="btn_txt bg3" @click="BondClick(1)">{{ $t("message.bond.txt54") }}</div>
+            </div>
+            <div class="his">
+              <span>{{ $t("message.bond.txt55") }}</span>
+            </div>
+          </div>
+          <div class="bottom">
+            <ul class="list_title">
+              <li>
+                <span>{{ $t("message.bond.txt1") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt56") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt28") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt57") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt58") }}</span>
+              </li>
+              <li>
+                <span>{{ $t("message.bond.txt59") }}</span>
+              </li>
+            </ul>
+            <ul class="list_title2">
+              <li v-for="(item, index) in Arr2" :key="index">
+                <span>{{ item.zq }}</span>
+                <span class="has_select">
+                  {{ item.gme }}
+                  <div class="small_angle" @click="showBuy(item)">＞</div>
+                  <ul class="has_select_list" v-if="item.status">
+                    <li v-for="(i, ind) in list1" :key="ind">{{ i }}</li>
+                  </ul>
+                </span>
+                <span>{{ item.jclv }}</span>
+                <span><span class="color2">{{ item.fjlv1 }}</span> + <span class="color3">{{ item.fjlv2 }}</span> + <span class="color4">{{ item.fjlv3 }}</span></span>
+                <span>{{ item.yjklq }}</span>
+                <span>{{ item.djs }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- 附属仪表盘内容 -->
+      <div class="dashboard_box" v-if="!dashboard">
+        <div class="top">
+          <span class="color_fff">{{ $t("message.bond.txt62") }}</span>
+          <span>{{ $t("message.bond.txt63") }}</span>
+        </div>
+        <div class="content">
+          <div>
+            <img :src="`${$store.state.imgUrl}champion1.webp`" />
+            <div>
+              <p class="font14">{{ $t("message.bond.txt64") }}</p>
+              <p class="font12">0xb2307A91...5198ef7</p>
+            </div>
+          </div>
+          <div>
+            <img :src="`${$store.state.imgUrl}champion1.webp`" />
+            <div>
+              <p class="font14">{{ $t("message.bond.txt65") }}</p>
+              <p class="font12">https://sealemlab.com/?r=ajnpq</p>
+            </div>
+          </div>
+        </div>
+        <p>{{ $t("message.bond.txt66") }}</p>
+        <div class="content">
+          <div class="databox">
+            <span class="font12">{{ $t("message.bond.txt67") }}</span>
+            <span class="font14">0</span>
+          </div>
+          <div class="databox">
+            <span class="font12">{{ $t("message.bond.txt68") }}</span>
+            <span class="font14">0</span>
+          </div>
+          <div class="databox">
+            <span class="font12">{{ $t("message.bond.txt69") }}</span>
+            <span class="font14">0</span>
+          </div>
+          <div class="databox">
+            <span class="font12">{{ $t("message.bond.txt70") }}</span>
+            <span class="font14">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <AddLp :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
+  </div>
+</template>
+
+<script>
+import AddLp from "./Addlp.vue";
+export default {
+  components: {
+    AddLp,
+  },
+  data() {
+    return {
+      dashboard:true,//仪表盘切换
+      showBox:false,//展示当前等级失效状态
+      addlpDis: false, //一键购买lp弹窗状态
+      showSelect: false,
+      Arr1: [
+        {
+          zq: "ST-BUSD LP",
+          zl: "0",
+          jclv: "1%",
+          fjlv1: "0%",
+          fjlv2: "0%",
+          fjlv3: "0%",
+          lxzq: "14",
+          djs: "00:00:00",
+          gml: "0%",
+        },
+      ],
+      Arr2: [
+        {
+          zq: "ST-BUSD LP",
+          gme: "0",
+          jclv: "1%",
+          fjlv1: "0%",
+          fjlv2: "0%",
+          fjlv3: "0%",
+          yjklq: "0",
+          djs: "00:00:00",
+          status:false
+        },
+        {
+          zq: "ST-BUSD LP",
+          gme: "0",
+          jclv: "1%",
+          fjlv1: "0%",
+          fjlv2: "0%",
+          fjlv3: "0%",
+          yjklq: "0",
+          djs: "待领取",
+          status:false
+        },
+      ],
+      list1: ["$ 0*0", "$ 0*0"],
+    };
+  },
+  methods: {
+    closeLP() {
+      this.addlpDis = false;
+    },
+    BondClick(data) {
+      this.addlpDis = true;
+      // console.log('this.$utils.isLang(): ', this.$utils.isLang());
+    },
+    showBuy(item){
+      item.status = !item.status
+    }
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.dashboard_box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .top{
+    width: 100%;
+    height: 130px;
+    line-height: 130px;
+    span{
+      cursor: pointer;
+      line-height: 33px;
+      font-weight: 600;
+      color: #5D5F61;
+      &:nth-child(1){
+        margin-right: 57px;
+      }
+    }
+  }
+  .content{
+    width: 100%;
+    background: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 35px 125px;
+    >div{
+      width: 40%;
+      height: 80px;
+      padding: 15px 30px;
+      display: flex;
+      align-items: flex-start;
+      background: #171718;
+      box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+      border-radius: 8px;
+      border: 1px solid #373636;
+      img{
+        width: 23px;
+        margin-right: 16px;
+      }
+      div{
+        p{
+          font-weight: 600;
+          color: #FFFFFF;
+          line-height: 22px;
+        }
+      }
+    }
+    .databox{
+      flex-direction: column;
+      margin-bottom: 48px;
+      align-items: center;
+      justify-content: space-evenly;
+      padding-bottom:0;
+    }
+  }
+  >p{
+    width: 100%;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 42px;
+    margin: 36px 0 40px;
+  }
+}
+.add_nav{
+  width: 100%;
+  border-bottom: 2px solid #242222;
+  display: flex;
+  align-items: center;
+  padding: 30px 0 50px;
+  div{
+    cursor: pointer;
+    width: 236px;
+    height: 54px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #373636;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    &:nth-child(1){
+      margin-right: 26px;
+    }
+  }
+}
+.has_question_icon {
+  position: relative;
+  &::after {
+    content: "";
+    width: 13px;
+    height: 13px;
+    filter: blur(0px);
+    background: url($bg_url + "ques.webp") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: -20px;
+    top: -5px;
+  }
+}
+.progressbar {
+  display: inline-block;
+  margin: 5px 0;
+  width: 50px;
+  height: 4px;
+  background: #787775;
+  box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+  border-radius: 2px;
+  backdrop-filter: blur(14px);
+  div {
+    height: 100%;
+    background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+    box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+    border-radius: 2px;
+    backdrop-filter: blur(14px);
+  }
+}
+.btn_txt {
+  width: 100px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 12px;
+  color: #000;
+  box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+  border-radius: 4px;
+  backdrop-filter: blur(14px);
+  margin: 0 auto;
+  cursor: pointer;
+  // &:hover {
+  //   color: #000000;
+  //   background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+  // }
+}
+.small_angle {
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+  font-size: 12px;
+  color: #a9a7a7;
+  transform: rotate(90deg);
+}
+.round_progressbar {
+  .circle-two {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border-radius: 50%;
+    // background: rgba(187, 159, 90, 0.45);
+    .circle-two-l {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      clip: rect(0, 50px, auto, 0);
+      &::after {
+        content: " ";
+        // background: #edd07e;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        clip: rect(0, 50px, auto, 0);
+        transform: rotate(-180deg);
+        animation: circle_two_l linear 2s 2s forwards;
+      }
+    }
+    .circle-two-r {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      clip: rect(0, auto, auto, 50px);
+      &::after {
+        content: " ";
+        // background: #edd07e;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        clip: rect(0, auto, auto, 50px);
+        transform: rotate(-180deg);
+        animation: circle_two_r linear 2s forwards;
+      }
+    }
+    .circle-two-mask {
+      width: 90%;
+      height: 90%;
+      background: #000;
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      top: 0;
+      right: 0;
+      margin: auto;
+      .circle_txt{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
+  }
+  .circle_1{
+    background: #5E5E5E;
+    .circle-two-l{
+      &::after {
+        background: #C7C7C7;
+      }
+    }
+    .circle-two-r{
+      &::after {
+        background: #C7C7C7;
+      }
+    }
+  }
+  .circle_2{
+    background: #6F6A59;
+    .circle-two-l{
+      &::after {
+        background: #F0E2B8;
+      }
+    }
+    .circle-two-r{
+      &::after {
+        background: #F0E2B8;
+      }
+    }
+  }
+  .circle_3{
+    background: rgba(187, 159, 90, 0.45);
+    .circle-two-l{
+      &::after {
+        background: #FFD46A;
+      }
+    }
+    .circle-two-r{
+      &::after {
+        background: #FFD46A;
+      }
+    }
+  }
+  .circle_4{
+    background: rgba(236, 207, 131, 0.45);
+    .circle-two-l{
+      &::after {
+        background: #FFEDBC;
+      }
+    }
+    .circle-two-r{
+      &::after {
+        background: #FFEDBC;
+      }
+    }
+  }
+}
+.bond_page {
+  margin-top: 80px;
+  width: 100%;
+  height: auto;
+  // background: url($bg_url + "newbondbg.webp") no-repeat;
+  // background-size: 100% auto;
+}
+.box1 {
+  width: 100%;
+  position: relative;
+  .bond_bg {
+    width: 100%;
+    min-height: 350px;
+  }
+  >div{
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    padding: 0 5vw;
+    .bond_img {
+      width: 156px;
+    }
+    ul {
+      display: flex;
+      align-items: center;
+      margin-top: 60px;
+      li {
+        width: 200px;
+        height: 60px;
+        background: rgba(163, 159, 148, 0.23);
+        border-radius: 14px;
+        text-align: center;
+        margin-right: 20px;
+        .txt1 {
+          width: 100%;
+          height: calc(100% - 4px);
+          padding: 10px;
+          font-weight: 600;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .line {
+          width: 50%;
+          height: 4px;
+          margin: 0 auto;
+          background: #f0ce75;
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+}
+.boxs {
+  width: 90vw;
+  background: #101010;
+  margin: 0 auto;
+  padding: 20px;
+  .title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 42px;
+    margin-bottom: 20px;
+  }
+  .box {
+    width: 100%;
+    height: auto;
+    background: #000000;
+    padding: 10px 0;
+  }
+}
+.add_top{
+  margin-top: 30px;
+}
+.box2 {
+  padding: 20px 0;
+  .top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #242222;
+    padding: 20px;
+    > div {
+      width: calc(100% / 4);
+      font-size: 24px;
+      font-weight: 600;
+      color: #eccf83;
+      line-height: 33px;
+    }
+  }
+  .bottom {
+    width: 100%;
+    padding: 10px 20px;
+    .list_title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 28px;
+      padding: 10px 0;
+      li {
+        // width: calc(100% / 8);
+        width: 160px;
+        &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
+          text-align: center;
+        }
+      }
+    }
+    .list_title2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #a9a7a7;
+      line-height: 22px;
+      li {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        > span {
+          width: 160px;
+          // width: calc(100% / 6);
+          &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+.box3 {
+  padding: 40px 0 20px;
+  .box {
+    padding: 40px 20px;
+    position: relative;
+  }
+  .text1 {
+    font-size: 10px;
+    font-weight: 400;
+    color: #b79d53;
+    line-height: 14px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .list_title1 {
+    display: flex;
+    justify-content: space-between;
+    > li {
+      width: 20%;
+      padding: 30px 0;
+      .list_title2 {
+        &.coming_soon {
+          .round_progressbar {
+            .circle-two {
+              background: #666363;
+              .circle-two-l {
+                &::after {
+                  background: #d6d2d2;
+                }
+              }
+              .circle-two-r {
+                &::after {
+                  background: #d6d2d2;
+                }
+              }
+              .circle-two-mask {
+                background: rgba(71, 71, 69, 1);
+                color: #8a8a8a;
+              }
+            }
+          }
+          li {
+            &:nth-child(4) {
+              color: #8a8a8a;
+            }
+            &:nth-child(5),
+            &:nth-child(6) {
+              color: #8a8a8a;
+            }
+            &:nth-child(7) {
+              div {
+                &:nth-child(1) {
+                  color: #8a8a8a;
+                }
+                &:nth-child(2) {
+                  color: #8a8a8a;
+                }
+              }
+            }
+          }
+        }
+        li {
+          margin-bottom: 10px;
+          &:nth-child(1) {
+            font-size: 24px;
+            font-weight: 600;
+            // color: #eccf83;
+            line-height: 33px;
+          }
+          &:nth-child(2) {
+            height: 25px;
+            .btn_txt {
+              width: 78px;
+              height: 25px;
+              line-height: 25px;
+              font-size: 10px;
+              margin: 0;
+            }
+          }
+          &:nth-child(3) {
+            padding: 20px 0;
+          }
+          // &:nth-child(4) {
+          //   // font-weight: 600;
+          // }
+          // &:nth-child(5),
+          // &:nth-child(6) {
+          //   // font-weight: 400;
+          // }
+          &:nth-child(7) {
+            position: relative;
+            padding-top: 30px;
+            div {
+              &:nth-child(1) {
+                cursor: pointer;
+                font-size: 20px;
+                transform: rotate(90deg);
+                position: absolute;
+                left: 50px;
+                top: 0;
+              }
+              &:nth-child(2) {
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 17px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .text2 {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    color: #909090;
+    line-height: 17px;
+  }
+}
+.box4 {
+  padding: 20px 0;
+  .box {
+    padding: 0 20px;
+  }
+  .top {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #242222;
+    padding: 40px 0;
+    > div {
+      width: calc(100% / 5);
+      font-size: 24px;
+      font-weight: 600;
+      color: #eccf83;
+      line-height: 33px;
+    }
+    .his {
+      width: fit-content;
+      font-size: 12px;
+      font-weight: 400;
+      color: #a9a7a7;
+      line-height: 17px;
+      position: absolute;
+      right: 0;
+      top: 10px;
+      cursor: pointer;
+      &:hover {
+        color: #eccf83;
+      }
+    }
+  }
+  .bottom {
+    width: 100%;
+    padding: 10px 0;
+    .list_title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 28px;
+      padding: 10px 0;
+      li {
+        // width: calc(100% / 6);
+        // &:nth-child(2){
+        //   max-width: 180px;
+        // }
+        width: 160px;
+        &:nth-child(2),&:nth-child(3),&:nth-child(5){
+          text-align: center;
+        }
+        &:nth-child(4){
+          width: 200px;
+          text-align: center;
+        }
+        &:nth-child(6){
+          width: 250px;
+          text-align: center;
+        }
+      }
+    }
+    .list_title2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #a9a7a7;
+      line-height: 22px;
+      li {
+        width: 100%;
+        display: flex;
+        padding: 10px 0;
+        > span {
+          cursor: pointer;
+          width: 160px;
+          // width: calc(100% / 6);
+          &:nth-child(2),&:nth-child(3),&:nth-child(5){
+            text-align: center;
+          }
+          &:nth-child(4){
+            width: 200px;
+            text-align: center;
+          }
+          &:nth-child(6){
+            width: 250px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes circle_two_l {
+  0% {
+    transform: rotate(-180deg);
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+@keyframes circle_two_r {
+  0% {
+    transform: rotate(-180deg);
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+</style>

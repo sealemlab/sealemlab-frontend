@@ -1,29 +1,85 @@
+.color1 {
+  color: #9d9c9c !important;
+}
+.color2 {
+  color: #9f9579 !important;
+}
+.color2_opacity {
+  color: rgba(159, 149, 121, 0.77);
+}
+.color3 {
+  color: #bb9f5a !important;
+}
+.color3_opacity {
+  color: rgba(187, 159, 90, 0.64);
+}
+.color4 {
+  color: #f5e2a7 !important;
+}
+.color4_opacity {
+  color: rgba(245, 226, 167, 0.67);
+}
+.bg1 {
+  background: #9f9579 !important;
+}
+.bg2 {
+  background: #bb9f5a !important;
+}
+.bg3 {
+  background: #f5e2a7 !important;
+}
+.bg4 {
+  background: #9d9c9c !important;
+}
+.disable_bnb {
+  color: #fff !important;
+  background: #ccc !important;
+  cursor: not-allowed !important;
+  border-radius: 25px;
+}
 .display_flex {
   display: flex;
 }
 .margin_right0 {
   margin-right: 0 !important;
 }
-.margin0{
+.margin0 {
   margin: 0 !important;
 }
-.color_fff{
+.color_fff {
   color: #fff !important;
 }
-img{
+.color_000 {
+  color: #000 !important;
+}
+img {
   object-fit: contain;
 }
-.disply_none{
+.disply_none {
   display: none !important;
 }
-.input_prompt {
-  width: 100%;
-  min-height: 20px;
-  color: #fb3e3e;
-  margin-top: 10px;
+.eye {
+  width: 50px;
+  height: 100%;
+  div {
+    cursor: pointer;
+    width: 30px;
+    height: 100%;
+    margin: 0 auto;
+    background-image: url($bg_url + "eye1.webp");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    &.active {
+      background-image: url($bg_url + "eye2.webp");
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
 }
 // 左右来回上下抖动 (input校验)
-.ani_shake{
+.ani_shake {
   // animation-name: shock;
   // animation-duration: .1s; //规定完成动画所花费的时间，以秒或毫秒计
   // animation-timing-function: linear; //规定动画的速度曲线。
@@ -41,11 +97,11 @@ img{
   100% {
     margin-left: 5px;
     margin-right: 0px;
-    margin-top: 5px	;
+    margin-top: 5px;
   }
 }
 // 左右来回抖动  (没有同意协议抖动)
-.animation_move{
+.animation_move {
   animation: move 0.1s linear 0s 3 normal;
 }
 @keyframes move {
@@ -58,27 +114,27 @@ img{
     margin-right: 0px;
   }
 }
-.demo_font_color{
-  background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+.demo_font_color {
+  background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 // 字体样式
 @font-face {
   font-family: "SFCompactDisplay-Bold";
-  src: url($bg_url + "SF-Compact-Display-Bold.otf");
+  src: url($font_url + "SF-Compact-Display-Bold.otf");
 }
 @font-face {
   font-family: "SFCompactDisplay-Regular";
-  src: url($bg_url + "SF-Compact-Display-Regular.otf");
+  src: url($font_url + "SF-Compact-Display-Regular.otf");
 }
 @font-face {
   font-family: "SFCompactDisplay-Heavy";
-  src: url($bg_url + "SF-Compact-Display-Heavy.otf");
+  src: url($font_url + "SF-Compact-Display-Heavy.otf");
 }
 @font-face {
   font-family: "PingFangTC-Semibold";
-  src: url($bg_url + "FZYouHFW.TTF");
+  src: url($font_url + "FZYouHFW.TTF");
 }
 
 //英文粗体
@@ -144,7 +200,7 @@ img{
     font-size: 0.34rem;
   }
   .mobile_font30 {
-    font-size: 0.30rem;
+    font-size: 0.3rem;
   }
   .mobile_font28 {
     font-size: 0.28rem;
@@ -156,7 +212,7 @@ img{
     font-size: 0.22rem;
   }
   .mobile_font20 {
-    font-size: 0.20rem;
+    font-size: 0.2rem;
   }
   .mobile_font18 {
     font-size: 0.18rem;

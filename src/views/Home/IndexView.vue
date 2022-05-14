@@ -3,20 +3,21 @@
     <div class="home_bgbox">
       <LoadingAnmation v-if="videoStatus" ></LoadingAnmation> <!--:isshowtxt="true"-->
       <video class="video_" ref="video" loop autoplay muted v-show="!videoStatus">
-        <source :src="`${$store.state.imgUrl}sacredrealm.mp4`" type="video/mp4" />
+        <source :src="`${$store.state.videoUrl}home_sacredrealm.mp4`" type="video/mp4" />
       </video>
       <div class="content">
         <div class="content_center">
           <div class="leftbox">
             <p class="font_1 font26 mobile_font14">{{$t("message.home.txt2")}}</p>
-            <p class="font_2 font45 demo_font_color mobile_font14">1000% APY</p>
+            <p class="font_2 font45 demo_font_color mobile_font14">{{$t("message.home.add_txt1")}}</p>
             <div class="btnbox font20">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
+              <img :src="haveVoice?`${$store.state.imgUrl}voice.webp`:`${$store.state.imgUrl}no_voice.webp`" class="voice_img" @click="videoPlay"/>
             </div>
           </div>
           <div class="rightbox">
-            <a :href="item.link" target="_blank" rel="noopener noreferrer" v-for="(item,index) in comminicateArr" :key="index"><img :src="item.src" class="tel_img" /></a>
+            <a :href="isEnLang?(item.link_en?item.link_en:item.link):item.link" target="_blank" rel="noopener noreferrer" v-for="(item,index) in comminicateArr" :key="index"><img :src="item.src" class="tel_img" /></a>
           </div>
         </div>
       </div>
@@ -31,6 +32,19 @@
         <span>{{$t("message.home.txt8")}}</span>
       </div>
     </div>
+    <!-- Protocol Stats -->
+    <div class="characteristic_box">
+      <div class="title_txt font30">{{$t("message.home.txt77")}}</div>
+      <div class="border_">
+        <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
+          <div class="add_top_content">
+            <img :src="item.src" class="add_img" />
+            <span class="span font20">{{$t(item.title)}}</span>
+          </div>
+          <p class="font26">$&nbsp;{{item.num}}</p>
+        </div>
+      </div>
+    </div>
     <!-- 希莱姆简介 -->
     <div class="character_introduction">
       <div class="right_box display_flex">
@@ -39,8 +53,9 @@
           <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
         </div>
       </div>
-      <div class="people_box"><img :src="`${$store.state.imgUrl}people.png`" class="people" /></div>
+      <div class="people_box"><img :src="`${$store.state.imgUrl}people.webp`" class="people" /></div>
     </div>
+    <!-- 游戏场景轮播 -->
     <div class="characteristic_box">
       <div class="title_txt font30">{{$t("message.home.txt65")}}</div>
       <div class="add_game_txt">
@@ -50,12 +65,18 @@
       <span class="span3 font12">{{$t("message.home.txt68")}}</span>
       <div class="add_box">
         <div class="left">
-          <img :src="`${$store.state.imgUrl}game1.png`" class="game1" />
+          <div class="bottom_swiper">
+            <swiper :options="gameMaxSwiperOption" ref="gameMaxSwiper" class="gameMax_swiper">
+              <swiper-slide v-for="(item,index) in gameArr" :key="index">
+                <img :src="item.maxSrc" />
+              </swiper-slide>
+            </swiper>
+          </div>
           <span class="span4 font20">{{$t("message.home.txt69")}}</span>
           <div class="gameswiperbox">
-            <swiper ref="gamewiper" :options="gameswiperOption" class="game_swiper">
+            <swiper ref="gameswiper" :options="gameswiperOption" class="game_swiper">
               <swiper-slide v-for="(item, index) in gameArr" :key="index">
-                <img :src="item.src" class="gameswiper_img" />
+                <div class="oneimgbox" @click="gameClick(item)"><img :src="item.src" class="gameswiper_img" /></div>
               </swiper-slide>
             </swiper>
             <div class="swiper-button-prev"></div>
@@ -63,9 +84,9 @@
           </div>
         </div>
         <div class="left right">
-          <img :src="`${$store.state.imgUrl}game2.png`" class="game2" />
-          <img :src="`${$store.state.imgUrl}game3.png`" class="game2" />
-          <img :src="`${$store.state.imgUrl}game3.png`" class="game2" />
+          <img :src="`${$store.state.imgUrl}game2.webp`" class="game2" />
+          <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
+          <img :src="`${$store.state.imgUrl}game4.webp`" class="game2" />
         </div>
       </div>
     </div>
@@ -75,7 +96,7 @@
       <div class="box_ display_flex">
         <div class="title_txt font30 mobile_font16">{{$t("message.home.txt_characteristic")}}</div>
         <div class="imgbox display_flex">
-          <div class="add_outbox" v-for="(item, index) in spArr" :key="index">
+          <div class="add_outbox" :class="isEnLang?'en_class':''" v-for="(item, index) in spArr" :key="index">
             <div class="onebox display_flex">
               <div class="add_content">
                 <img :src="item.src" class="img_sp" />
@@ -107,17 +128,17 @@
           <swiper ref="teamswiper" :options="teamswiperOption" class="team_swiper">
             <swiper-slide v-for="(item, index) in teamArr" :key="index">
               <div class="out_box display_flex">
-                <div class="oneteam display_flex" >
+                <div class="oneteam display_flex" @click="showtxtFun(item)">
                   <img :src="item.src" class="teaming" />
                   <span class="span1 font20">{{$t(item.name)}}</span>
                   <span class="span2 font16">{{item.txt}}</span>
                   <div class="address_peopllle display_flex">
-                    <a v-if="item.LinY == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}in.png`" class="ling_ying" /></a>
-                    <a v-else :href="item.LinY" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}in.png`" class="ling_ying" /></a>
-                    <a v-if="item.twitter == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}twitter.png`" class="twitter"/></a>
-                    <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}twitter.png`" class="twitter"/></a>
+                    <a v-if="item.LinY == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" /></a>
+                    <a v-else :href="item.LinY" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" /></a>
+                    <a v-if="item.twitter == ''" href="javascript:;"><img :src="`${$store.state.imgUrl}twitter.webp`" class="twitter"/></a>
+                    <a v-else :href="item.twitter" target="_blank" rel="noopener noreferrer"><img :src="`${$store.state.imgUrl}twitter.webp`" class="twitter"/></a>
                   </div>
-                  <span class="triangle_calss" :class="item.status?'triangle_top':'triangle_bottom'" @click="showtxtFun(item)"></span>
+                  <span class="triangle_calss" :class="item.status?'triangle_top':'triangle_bottom'"></span>
                   <div class="txtbox font12" v-if="item.status">
                     <span>{{$t(item.introduce1)}}</span>
                     <span>{{$t(item.introduce2)}}</span>
@@ -137,12 +158,17 @@
     <div class="time_axis_box">
       <div class="time_axis display_flex">
         <div class="title_txt font30">{{$t("message.home.txt54")}}</div>
-        <div class="border_"></div>
-        <swiper :options="swiperOption" ref="mySwiper" class="self_swiper">
+        <swiper :options="swiperOption" ref="mySwiper" class="self_swiper" v-if='swiperVisible'>
           <swiper-slide v-for="(item, index) in swiperArr" :key="index">
-            <img :src="`${$store.state.imgUrl}partenerbg.png`" class="partenerbg_img" />
-            <p class="time_class font20">{{item.time}}</p>
-            <p class="content_class font16" >{{$t(item.content)}}</p>
+            <div class="timebox">
+              <p class="time_class font20">{{item.time}}</p>
+              <div class="imgs">
+                <img :src="item.id == activeIndex ?`${$store.state.imgUrl}partenerbg.webp`:`${$store.state.imgUrl}time.webp`" class="partenerbg_img" />
+                <span></span>
+              </div>
+              <p class="titletxt font18">{{$t(item.title)}}</p>
+              <p class="content_class font16" >{{$t(item.content)}}</p>
+            </div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -180,57 +206,73 @@ export default {
   },
   data(){
     return{
+      haveVoice:false,//声音
+      swiperVisible:true,
+      addArr:[
+        {src:`${this.$store.state.imgUrl}home1.webp`,num:0,title:'message.home.txt71'},
+        {src:`${this.$store.state.imgUrl}home2.webp`,num:0,title:'message.home.txt72'},
+        {src:`${this.$store.state.imgUrl}home3.webp`,num:0,title:'message.home.txt73'},
+        {src:`${this.$store.state.imgUrl}home4.webp`,num:0,title:'message.home.txt74'},
+        {src:`${this.$store.state.imgUrl}home5.webp`,num:0,title:'message.home.txt75'},
+        {src:`${this.$store.state.imgUrl}home6.webp`,num:0,title:'message.home.txt76'},
+      ],
+      activeIndex:0,//swiper索引
       videoStatus:true,//视频加载
       gameIndex:0,//游戏场景展示对应大图的索引
       peopleIndex:0,// 人物展示对应大图的索引
       comminicateArr:[
         {
-          src:`${this.$store.state.imgUrl}tel_1.png`,
+          src:`${this.$store.state.imgUrl}tel_1.webp`,
           link:'https://t.me/sealemglobal'
         },
         {
-          src:`${this.$store.state.imgUrl}tel_2.png`,
+          src:`${this.$store.state.imgUrl}tel_2.webp`,
           link:'https://twitter.com/SealemLab'
         },
         {
-          src:`${this.$store.state.imgUrl}tel_3.png`,
+          src:`${this.$store.state.imgUrl}tel_3.webp`,
           link:'https://discord.gg/s747pMMBzq'
         },
         {
-          src:`${this.$store.state.imgUrl}tel_4.png`,
+          src:`${this.$store.state.imgUrl}tel_5.webp`,
+          link:'https://sacred-realm.gitbook.io/zhong-wen/',
+          link_en:'https://lab-sealem.gitbook.io/sealem-lab/'
+        },
+        {
+          src:`${this.$store.state.imgUrl}tel_4.webp`,
           link:'https://medium.com/@sealemlab'
         }
       ],
       spArr:[
         {
-          src:`${this.$store.state.imgUrl}characteristic1.png`,
+          src:`${this.$store.state.imgUrl}characteristic1.webp`,
           txt:"message.home.txt10",
           txt1:"message.home.txt11",
         },
         {
-          src:`${this.$store.state.imgUrl}characteristic2.png`,
+          src:`${this.$store.state.imgUrl}characteristic2.webp`,
           txt:'message.home.txt12',
           txt1:'message.home.txt12_1',
         },
         {
-          src:`${this.$store.state.imgUrl}characteristic3.png`,
+          src:`${this.$store.state.imgUrl}characteristic3.webp`,
           txt:'message.home.txt13',
           txt1:'message.home.txt13_1',
         },
         {
-          src:`${this.$store.state.imgUrl}characteristic4.png`,
+          src:`${this.$store.state.imgUrl}characteristic4.webp`,
           txt:'message.home.txt14',
           txt1:'message.home.txt14_1',
         },
         {
-          src:`${this.$store.state.imgUrl}characteristic5.png`,
+          src:`${this.$store.state.imgUrl}characteristic5.webp`,
           txt:'message.home.txt15',
           txt1:'message.home.txt15_1',
         }
       ],
       teamArr:[
         {
-          src:`${this.$store.state.imgUrl}ceo.png`,
+          src:`${this.$store.state.imgUrl}ceo.webp`,
           txt:'CEO',
           name:'message.home.txt48',
           status:true,
@@ -241,7 +283,7 @@ export default {
           introduce3:'message.home.introduce3',
         },
         {
-          src:`${this.$store.state.imgUrl}cto.png`,
+          src:`${this.$store.state.imgUrl}cto.webp`,
           txt:'CMO',
           name:'message.home.txt50',
           status:false,
@@ -252,7 +294,7 @@ export default {
           introduce3:'message.home.introduce6',
         },
         {
-          src:`${this.$store.state.imgUrl}cmo.png`,
+          src:`${this.$store.state.imgUrl}cmo.webp`,
           txt:'CTO',
           name:'message.home.txt49',
           status:false,
@@ -263,7 +305,7 @@ export default {
           introduce3:'message.home.introduce9',
         },
         {
-          src:`${this.$store.state.imgUrl}svp.png`,
+          src:`${this.$store.state.imgUrl}svp.webp`,
           txt:'SVP',
           name:'message.home.txt51',
           status:false,
@@ -274,7 +316,7 @@ export default {
           introduce3:'message.home.introduce12',
         },
         {
-          src:`${this.$store.state.imgUrl}founder.png`,
+          src:`${this.$store.state.imgUrl}founder.webp`,
           txt:'Co-Founder',
           name:'message.home.txt52',
           status:false,
@@ -285,7 +327,7 @@ export default {
           introduce3:'message.home.introduce15',
         },
         {
-          src:`${this.$store.state.imgUrl}founder1.png`,
+          src:`${this.$store.state.imgUrl}founder1.webp`,
           txt:'Co-Founder',
           name:'message.home.txt53',
           status:false,
@@ -298,79 +340,97 @@ export default {
         }
       ],
       makeMoneyArr:[
-        {txt:"message.home.txt16",src:`${this.$store.state.imgUrl}money1.png`},
-        {txt:"message.home.txt17",src:`${this.$store.state.imgUrl}money2.png`},
-        {txt:"message.home.txt18",src:`${this.$store.state.imgUrl}money3.png`},
-        {txt:"message.home.txt19",src:`${this.$store.state.imgUrl}money4.png`},
-        {txt:"message.home.txt20",src:`${this.$store.state.imgUrl}money2.png`},
-        {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money2.png`}
+        {txt:"message.home.txt16",src:`${this.$store.state.imgUrl}money1.webp`},
+        {txt:"message.home.txt17",src:`${this.$store.state.imgUrl}money2.webp`},
+        {txt:"message.home.txt18",src:`${this.$store.state.imgUrl}money3.webp`},
+        {txt:"message.home.txt19",src:`${this.$store.state.imgUrl}money4.webp`},
+        {txt:"message.home.txt20",src:`${this.$store.state.imgUrl}money5.webp`},
+        {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money6.webp`}
       ],
 
       partenerArr:[{
-        src:`${this.$store.state.imgUrl}partener1.png`,
+        src:`${this.$store.state.imgUrl}partener1.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener2.png`,
+        src:`${this.$store.state.imgUrl}partener2.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener3.png`,
+        src:`${this.$store.state.imgUrl}partener3.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener4.png`,
+        src:`${this.$store.state.imgUrl}partener4.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener5.png`,
+        src:`${this.$store.state.imgUrl}partener5.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener6.png`,
+        src:`${this.$store.state.imgUrl}partener6.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener7.png`,
+        src:`${this.$store.state.imgUrl}partener7.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener8.png`,
+        src:`${this.$store.state.imgUrl}partener8.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener9.png`,
+        src:`${this.$store.state.imgUrl}partener9.webp`,
       },
       {
-        src:`${this.$store.state.imgUrl}partener10.png`,
+        src:`${this.$store.state.imgUrl}partener10.webp`,
       }
       ],
       swiperArr:[
         {
+          id:4,
+          title:'message.home.txt55_1',
           time:'2020 Q4',
           content:'message.home.txt55'
         },
         {
+          id:5,
+          title:'message.home.txt56_1',
           time:'2021 Q1',
           content:'message.home.txt56'
         },
         {
+          id:6,
+          title:'message.home.txt57_1',
           time:'2021 Q2',
           content:'message.home.txt57'
         },
         {
+          id:7,
+          title:'message.home.txt58_1',
           time:'2021 Q3',
           content:'message.home.txt58'
         },
         {
+          id:8,
+          title:'message.home.txt60_1',
           time:'2021 Q4',
           content:'message.home.txt60'
         },
         {
+          id:9,
+          title:'message.home.txt61_1',
           time:'2022 Q1',
           content:'message.home.txt61'
         },
         {
+          id:10,
+          title:'message.home.txt62_1',
           time:'2022 Q2',
           content:'message.home.txt62'
         },
         {
+          id:11,
+          title:'message.home.txt63_1',
           time:'2022 Q3',
           content:'message.home.txt63'
         },
         {
+          id:12,
+          title:'message.home.txt64_1',
           time:'2022 Q4',
           content:'message.home.txt64'
         }
@@ -378,20 +438,26 @@ export default {
       // 路线图swiper配置
       swiperOption:{
         loop: true,//循环播放
-        // mousewheel: true,//鼠标滚动
+        centeredSlides: true, // 多个slider时居中
         autoplay: {
-          delay: 1000,
+          delay: 2000,
           stopOnLastSlide: false,
           disableOnInteraction: false,
         },
         slidesPerView: 4,//一行显示的slider
-        freeMode: true,//	free模式，slide会根据惯性滑动且不会贴合
+        // freeMode: true,//	free模式，slide会根据惯性滑动且不会贴合
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
           bulletClass: 'my-bullet',
           bulletActiveClass: 'my-bullet-active'
         },
+        on: {
+          slideChange: () => {
+            this.activeIndex = this.$refs.mySwiper.swiper.activeIndex;
+            // console.log('this.activeIndex: ', this.activeIndex);
+          }
+        }
       },
       // 团队swiper配置
       teamswiperOption: {
@@ -401,68 +467,105 @@ export default {
           prevEl: ".swiper-button-prev",
         }
       },
+      gameArr:[
+        {
+          id:1,
+          src:`${this.$store.state.imgUrl}smallgame1.webp`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame1.webp`
+        },
+        {
+          id:2,
+          src:`${this.$store.state.imgUrl}smallgame2.webp`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame2.webp`
+        },
+        {
+          id:3,
+          src:`${this.$store.state.imgUrl}smallgame3.webp`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame3.webp`
+        },
+        {
+          id:4,
+          src:`${this.$store.state.imgUrl}smallgame4.webp`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame4.webp`
+        },
+      ],
       // 游戏场景swiper配置
       gameswiperOption: {
         slidesPerView:4,
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
-        }
+        },
+        on: {
+          tap: () => {
+            this.gameIndex = this.$refs.gameswiper.swiper.clickedIndex;
+          },
+        },
       },
-      gameArr:[
-        {
-          src:`${this.$store.state.imgUrl}smallgame1.png`,
+      // 跟着联动的swiper
+      gameMaxSwiperOption:{
+        loop:true,
+        autoplay: {
+          delay: 1900,
+          stopOnLastSlide: false,
+          disableOnInteraction: false,
         },
-        {
-          src:`${this.$store.state.imgUrl}smallgame2.png`,
+        on: {
+          slideChange: () => {
+            this.gameIndex = this.$refs.gameMaxSwiper.swiper.activeIndex;
+          },
         },
-        {
-          src:`${this.$store.state.imgUrl}smallgame2.png`,
-        },
-        {
-          src:`${this.$store.state.imgUrl}smallgame2.png`,
-        }
-      ]
+      },
     }
   },
   watch: {
     gameIndex(newVal) {
-      this.$refs.gameSwiper.swiper.slideTo(newVal);
+      this.$refs.gameswiper.swiper.slideTo(newVal);
       this.$refs.gameMaxSwiper.swiper.slideTo(newVal);
     },
+    'isEnLang': {
+      handler: function (newValue,oldValue) {
+        if (newValue != oldValue) {
+          this.swiperVisible = false;//通过v-if切换，重新渲染swiper
+          this.$nextTick(()=>{
+            this.swiperVisible = true;
+          });
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    
   },
   methods:{
     videoPlay() {
-      this.$refs.video.muted = false;
-      this.$refs.video.play();
+      this.haveVoice = !this.haveVoice
+      if(this.haveVoice){
+        this.$refs.video.muted = false;
+        this.$refs.video.play();
+      }else{
+        this.$refs.video.muted = true;
+      }
     },
     bondClick(){
       this.$router.push('/bond');
-    },
-    peopleClick(index){
-      this.peopleIndex = index
-    },
-    gameClick(item){
-      this.gameIndex = item.id
     },
     showtxtFun(item){
       this.teamArr.forEach(item => {
         item.status = false
       })
       item.status = true
-    }
+    },
+    gameClick(item){
+      this.gameIndex = item.id
+    },
   },
   mounted(){
-    window.addEventListener("click",this.videoPlay)
     let that = this
     this.$refs.video.addEventListener('canplaythrough',function(){
-      console.log("加载完成")
       that.videoStatus = false
     });
   },
-  destroyed(){
-    window.removeEventListener("click",this.videoPlay)
-  }
 }
 </script>
 <style>
@@ -483,6 +586,43 @@ export default {
 <style lang="scss" soped>
 .home{
   width: 100%;
+  .border_{
+    width: 100%;
+    height: 380px;
+    padding: 10px 0 10px 70px;
+    border-radius: 31px;
+    border: 1px solid #D3B96D;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .add_one_box{
+      width: 26%;
+      display: flex;
+      flex-direction: column;
+      // align-items: center;
+      .add_top_content{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        .add_img{
+          width: 32px;
+        }
+        .span{
+          font-weight: normal;
+          color: #9E9E9E;
+          line-height: 22px;
+          margin-left: 16px;
+        }
+      }
+      p{
+        font-weight: 800;
+        color: #FFFFFF;
+        line-height: 22px;
+        margin-top: 40px;
+      }
+    }
+  }
   .home_bgbox{
     position: relative;
     width: 100vw;
@@ -492,9 +632,6 @@ export default {
       height: 100vh;
       object-fit: cover;
     }
-    // .homebg{
-    //   width: 100%;
-    // }
     .content{
       position: absolute;
       bottom: 5vh;
@@ -504,16 +641,6 @@ export default {
       flex-direction: column;
       align-items: center;
       padding: 0 5vw;
-      // .home_font{
-      //   font-weight: bold;
-      //   color: #FFFFFF;
-      //   line-height: 63px;
-      //   letter-spacing: 4px;
-      //   width: fit-content;
-      //   background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
-      //   -webkit-background-clip: text;
-      //   -webkit-text-fill-color: transparent;
-      // }
       .content_center{
         width: 100%;
         display: flex;
@@ -655,6 +782,9 @@ export default {
             }
           }
         }
+        .en_class{
+          width: 18%;
+        }
       }
       .make_money{
         width: 100%;
@@ -693,7 +823,7 @@ export default {
   }
   .teamboxs{
     width: 100%;
-    background: url($bg_url + "teambg.png") no-repeat #000;
+    background: url($bg_url + "teambg.webp") no-repeat #000;
     background-size: 100% 100%;
     .team_container{
       position: relative;
@@ -727,45 +857,54 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      .border_{
-        width: 100%;
-        border: 2px solid #ECCF83;
-      }
       .self_swiper{
         width:100%;
-        margin-top: -42px;
         .swiper-slide{
           display: flex;
           padding-bottom: 40px;
           flex-direction: column;
           align-items: flex-start;
-          margin-right: 20px;
-          .partenerbg_img{
-            width: 79px;
-            margin-bottom: 28px;
-          }
-          .time_class{
-            width: 118px;
-            height: 48px;
+          .timebox{
+            width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            padding-top: 20px;
-            font-weight: normal;
-            color: #000000;
-            background: url($bg_url + "partenertime.png");
-            background-size: 100% 100%;
-          }
-          .content_class{
-            margin-top: 25px;
-            min-width: 230px;
-            min-height: 116px;
-            font-weight: normal;
-            color: #FFFFFF;
-            line-height: 32px;
-            padding: 10px;
-            background: #1F1F1F;
-            box-shadow: inset 0px 0px 37px 0px #000000, inset 0px 1px 3px 0px #E9CD82;
+            .imgs{
+              position: relative;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              margin: 60px 0;
+              .partenerbg_img{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 70px;
+              }
+              span{
+                display: inline-block;
+                width: 100%;
+                border-top: 1px dashed #F7E7B2;
+              }
+            }
+            .titletxt{
+              font-weight: 800;
+              color: #FFFFFF;
+              line-height: 21px;
+            }
+            .time_class{
+              font-weight: normal;
+              color: #ffffff;
+            }
+            .content_class{
+              margin-top: 25px;
+              font-weight: normal;
+              color: #FFFFFF;
+              line-height: 32px;
+              padding: 0 10px;
+              text-align: center;
+            }
           }
         }
       }
@@ -785,12 +924,14 @@ export default {
     margin-top: 70px;
     .partener_box{
       width: 100%;
+      max-width: 1200px;
       align-items: center;
       flex-wrap: wrap;
       justify-content: space-between;
       .one_partener{
         img{
           margin-bottom: 49px;
+          cursor: pointer;
         }
         .par1{
           width: 169px;
@@ -853,18 +994,22 @@ export default {
       margin-top: 26px;
       .left{
         width: 60%;
-        // max-width: 758px;
         display: flex;
         flex-direction: column;
-        .game1{
-          max-width: 758px;
-          width: 100%;
-        }
         .span4{
           font-weight: normal;
           color: #FFFFFF;
           line-height: 23px;
           margin-top: 54px;
+        }
+        .bottom_swiper{
+          width: 100%;
+          .gameMax_swiper{
+            width: 100%;
+            img{
+              width: 100%;
+            }
+          }
         }
         .gameswiperbox{
           position: relative;
@@ -876,9 +1021,13 @@ export default {
             .swiper-slide{
               display: flex;
               justify-content: center;
-              // margin-right: 22px;
-              .gameswiper_img{
-                width: 147px;
+              .oneimgbox{
+                max-width: 147px;
+                padding:10px;
+                cursor: pointer;
+                .gameswiper_img{
+                  width: 100%;
+                }
               }
             }
           }
@@ -968,18 +1117,19 @@ export default {
     transform: scale(1.2);
   }
   .swiper-button-prev {
-    background-image: url($bg_url + "btn_left.png");
+    background-image: url($bg_url + "btn_left.webp");
     background-size: 100% auto;
     width: 40px;
   }
   .swiper-button-next {
-    background-image: url($bg_url + "btn_right.png");
+    background-image: url($bg_url + "btn_right.webp");
     background-size: 100% auto;
     width: 40px;
   }
 }
 .btnbox{
   display: flex;
+  align-items: center;
   span{
     width: 170px;
     height: 45px;
@@ -997,6 +1147,11 @@ export default {
       margin-right: 0;
       color: #FFFFFF;
     }
+  }
+  .voice_img{
+    cursor: pointer;
+    width: 63px;
+    margin-left: 180px;
   }
 }
 @media screen and (max-width: 980px) {
@@ -1179,7 +1334,7 @@ export default {
     .teamboxs{
       display: none;
       width: 100%;
-      background: url($bg_url + "teambg.png") no-repeat #000;
+      background: url($bg_url + "teambg.webp") no-repeat #000;
       background-size: 100% 100%;
       .team_container{
         position: relative;
@@ -1203,31 +1358,6 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        .self_swiper{
-          width:100%;
-          .swiper-slide{
-            display: flex;
-            // height: 260px;
-            padding-bottom: 40px;
-            flex-direction: column;
-            align-items: flex-start;
-            .time_class{
-              font-weight: normal;
-              color: #00C1FF;
-              line-height: 26px;
-              background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            }
-            .content_class{
-              max-width: 80%;
-              font-weight: normal;
-              color: #FFFFFF;
-              line-height: 32px;
-              margin-top: 10px;
-            }
-          }
-        }
       }
     }
     .characteristic_box{
@@ -1328,20 +1458,4 @@ export default {
     }
   }
 }
-// @media screen and (min-width: 1440px) {
-//   .home{
-//     .character_introduction{
-//       .people_box{
-//         width: 30%;
-//       }
-//     }
-//     .characteristic_box{
-//       .imgbox {
-//         width: 49vw;
-//         max-width: 60vw;
-//       }
-//     }
-//   }
-// }
-
 </style>

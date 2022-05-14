@@ -1,20 +1,175 @@
 <template>
   <div class="blind_box">
-    盲盒
+    <p class="title_box font30">{{$t("message.nft.txt37")}}</p>
+    <div class="boxs_">
+      <div class="onebox" v-for="(item,index) in list" :key="index" @click="openBox(item)">
+        <img :src="item.src" class="img_" />
+        <div class="line_ font14">
+          <span>{{$t(item.title)}}</span>
+          <BtnLoading :isloading="true" v-if="item.status"></BtnLoading>
+          <span v-else>{{item.num}}</span>
+          <span class="font12">{{$t("message.nft.txt57")}}</span>
+        </div>
+      </div>
+    </div>
+    <OpenNft :openStatus="openStatus" :boxtype="boxtype" @closeOpen="closeOpen"></OpenNft>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+import OpenNft from './OpenBox.vue'
+export default {
+  computed: {
+    ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo"])
+  },
+  components:{
+    OpenNft
+  },
+  data(){
+    return{
+      boxtype:0,//默认展示的是哪个类型的盲盒
+      openStatus:false,// 打开盲盒详情页面状态
+      list:[
+        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt53',status:true,type:0},
+        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt54',status:true,type:1},
+        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt55',status:true,type:2},
+        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt56',status:true,type:3},
+      ],
+      timerll:null,
+    }
+  },
+  watch: {
+    'getIstrue': {
+      handler: function (newValue) {
+        if (newValue) {
+          this.list.forEach(item => {
+            item.status = true
+          })
+          this.getUserAllBox() // 获取用户盲盒信息
+        }else{
+          this.list.forEach(item => {
+            item.num = 0
+            item.status = false
+          })
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    'openStatus': {
+      handler: function (newValue,oldvalue) {
+        if(!newValue && oldvalue){ //页面打开又关闭状态
+          this.getUserAllBox()
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
+  methods:{
+    // 获取用户的所有盲盒信息
+    getUserAllBox(){
+      clearInterval(this.timerll)
+      this.timerll = setInterval(() => {
+        if(sessionStorage.getItem('sb_count')){
+          clearInterval(this.timerll)
+          this.list[0].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 0}).length
+          this.list[1].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 1}).length
+          this.list[2].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 2}).length
+          this.list[3].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 3}).length
+          this.list.forEach(item => {
+            item.status = false
+          })
+        }
+      }, 500);
+    },
+    closeOpen(){
+      this.openStatus = false
+    },
+    openBox(item){
+      console.log('item: ', item);
+      if(item.status){
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt46'}));
+          this.$store.commit("setNoticeNum",true)
+        }
+      }else if(item.num == 0){
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.nft.txt47'}));
+          this.$store.commit("setNoticeNum",true)
+        }
+      }else{
+        this.openStatus = true
+        this.boxtype = item.type
+      }
+      // sb().connect(getSigner()).openBoxes([item]).then(res => {
+      //   console.log('开盒子res: ', res);
+      // }).catch(err => {
+      //   console.log("开盒子错误",err)
+      // })
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 .blind_box {
   width: 100%;
-  height: 100vh;
   position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  .title_box{
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 42px;
+    margin-bottom: 60px;
+  }
+  .boxs_{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    .onebox{
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      .img_{
+        width: 95%;
+        min-height: 200px;
+        max-width: 204px;
+      }
+      .line_{
+        margin-top: 14px;
+        width: 95%;
+        height: 37px;
+        max-width: 204px;
+        padding:0 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: url($bg_url + "boxs_border.webp") no-repeat;
+        background-size: cover;
+        span{
+          font-weight: 600;
+          color: #FFFFFF;
+          line-height: 20px;
+          &:last-child{
+            width: 56px;
+            height: 19px;
+            background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+            box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+            border-radius: 4px;
+            text-align: center;
+            line-height: 19px;
+            color: #000000;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
