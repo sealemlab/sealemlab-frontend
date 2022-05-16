@@ -104,7 +104,7 @@ export const message = {
     txt64:
       "Cross-chain plan Sealem V2 released, creator platform is online, more marketing",
 
-    txt59: "PARTENER",
+    txt59: "PARTNER",
 
     txt65: "SEALEM GAME",
     txt66: "Extraordinary gaming experience",
