@@ -118,8 +118,11 @@ export default {
     },
     toRoute(link,index) {
       if (link){
-        if(process.env.NODE_ENV === 'production' && index != 4){
-          this.$router.push(link);
+        if(process.env.NODE_ENV === 'production' && index == 4){
+          if(!this.getNoticeNum){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+            this.$store.commit("setNoticeNum",true)
+          }
           return
         }
         this.$router.push(link);
