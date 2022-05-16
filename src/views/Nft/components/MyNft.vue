@@ -13,7 +13,10 @@
                 <img :src="`${$store.state.imgUrl}start.webp`" />
               </div>
               <div class="people_type">
-                <img :src="`${$store.state.imgUrl}type_cike.webp`" />
+                <img :src="`${$store.state.imgUrl}type_jds.webp`" v-if="item.type == 1"/>
+                <img :src="`${$store.state.imgUrl}type_cike.webp`" v-if="item.type == 2"/>
+                <img :src="`${$store.state.imgUrl}type_wushi.webp`" v-if="item.type == 3"/>
+                <img :src="`${$store.state.imgUrl}type_zs.webp`" v-if="item.type == 4"/>
                 <img :src="`${$store.state.imgUrl}type_cike.webp`" />
               </div>
               <div class="people_type">
@@ -27,50 +30,78 @@
           </div>
         </div>
       </div>
-      <div class="bottom_loading font16" v-if="nftArr.length > 10">
+      <div class="bottom_loading font16" v-if="nftArr.length > 9">
         <span v-if="loadMoreStatus">Loading...</span>
         <span v-else-if="!loadMoreStatus">End</span>
       </div>
+    </div>
+    <div class="loading_box_content" v-if="nftArr.length == 0">
+      <LoadingAnmation></LoadingAnmation>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { sn, getSourceUrl } from "sacredrealm-sdk";
+import { sn } from "sacredrealm-sdk";
 export default {
   computed: {
     ...mapGetters(["getAccount","getIstrue"])
   },
   data(){
     return{
+      isOneLoading:false,//第一次是否加载
       loadMoreStatus:true,
-      bucy: false,
+      busy: false, // 为true则第一次不执行loadmore
       nftArr:[],
-      // userAllNft:0,// 用户拥有的总装备数
     }
   },
-  
   watch: {
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
           this.getAllUserNftInfo(res => {
             console.log('回调函数--用户拥有的总装备数:res: ', res);
+            this.nftArr = []
             let arr = JSON.parse(localStorage.getItem('nftInfo'))
-            // console.log('获取的缓存中的arr: ', arr);
             if(!arr ){
-              this.getUserBindbox(0)
-              this.loadMoreStatus = true
+              console.log("缓存不存在情况")
+              this.$utils.getUserBindbox(this.getAccount,0).then(res1 => {
+                console.log('缓存不存在情况res: ', res1);
+                if(res1.length > 0){
+                  this.loadMoreStatus = true
+                  this.isOneLoading = true
+                  this.busy = false
+                  this.nftArr = this.nftArr.concat(res1)
+                  localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
+                }
+              })
               return
             }
             if(arr.length < res){
-              this.getUserBindbox(arr.length)
-              this.loadMoreStatus = true
+              console.log("缓存小于用户数据")
+              this.$utils.getUserBindbox(this.getAccount,arr.length).then(res2 => {
+                console.log('缓存小于用户数据res: ', res2);
+                if(res2.length > 0){
+                  this.loadMoreStatus = true
+                  this.isOneLoading = true
+                  this.busy = false
+                  this.nftArr = this.nftArr.concat(res2)
+                  localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
+                }
+              })
             }else{
+              console.log("缓存数据等于用户数据")
               this.nftArr = JSON.parse(localStorage.getItem('nftInfo'))
+              this.isOneLoading = false
+              this.loadMoreStatus = false
             }
           })
+        }else{
+          this.isOneLoading = false
+          this.loadMoreStatus = true
+          this.busy =  false
+          this.nftArr = []
         }
       },
       deep: true,
@@ -80,56 +111,26 @@ export default {
   methods:{
     loadMore() {
       this.busy = true;
-      if(this.loadMoreStatus) {
-        this.getUserBindbox(this.nftArr.length)
-        this.busy = false
+      if(this.loadMoreStatus && this.isOneLoading) {
+        // console.log("loadmore加载更多")
+        this.$utils.getUserBindbox(this.getAccount,this.nftArr.length).then(res2 => {
+          if(res2.length > 0){
+            this.loadMoreStatus = true
+            this.isOneLoading = true
+            this.busy = false
+            this.nftArr = this.nftArr.concat(res2)
+            localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
+          }else{
+            this.loadMoreStatus = false
+            this.isOneLoading = false
+            this.busy = true
+          }
+          console.log('loadmore加载更多res: ', res2);
+        })
       }
     },
-    getUserBindbox(cursor, size = 10){//获取某用户基于指针（从0开始）和数量的装备ID数组，以及最后一个数据的指针
-      console.log('每次要加载的数据抬头cursor: ', cursor);
-      sn().tokensOfOwnerBySize(this.getAccount, cursor, size).then(res => {
-        // console.log('获取某用户基于指针（从0开始）和数量的装备ID数组，以及最后一个数据的指针res: ', res);
-        console.log('下一次数据页码:',Number(res[1]))
-        if(res[0].length > 0){
-          let count = 1;
-          let orther_arr = []
-          res[0].map(item => {
-          let obj = {
-            id:'',
-            src:'',
-            type:'',//职业
-            start:'',//星级
-            power:'',//战力
-            position:'',//部位
-            suit:'',//套装
-            status:false//状态
-          }
-          obj.id = Number(item)
-          sn().getDatas(Number(item), 'attr').then(res => {
-            // console.log('getDatas-----res: ', res);
-            obj.start = Number(res[0])
-            obj.power = Number(res[1])
-            obj.type = Number(res[2])
-            obj.position = Number(res[3])
-            obj.suit =  Number(res[4])
-            obj.src = getSourceUrl(res) + '.png'
-          })
-          orther_arr.push(obj)
-          if (count == res[0].length) {
-            this.loadMoreStatus = true
-            this.nftArr = this.nftArr.concat(orther_arr)
-            localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
-            // console.log('this.nftArr: ', this.nftArr);
-          }
-          count++
-        })
-        }else{
-          this.loadMoreStatus = false
-        }
-      })
-    },
     nftFun(item){
-      console.log('item: ', item);
+      // console.log('item: ', item);
       // sn().getDatas(129, 'attr').then(res => {
       //   console.log('getDatas-----res: ', res);
       //   let aa = getSourceUrl(res)
@@ -155,21 +156,28 @@ export default {
   flex-direction: column;
   align-items: center;
   .title_nft{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     font-weight: 600;
     color: #FFFFFF;
     line-height: 42px;
-    margin-bottom: 60px;
+    // margin-bottom: 60px;
   }
   .box{
+    margin-top: 60px;
     width: 100%;
-    max-height: 100vh;
+    max-height: 630px;
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    padding-bottom: 20px;
     .out_box{
       width: 20%;
       padding: 10px;
+      cursor: pointer;
       .onebox {
         position: relative;
         max-width: 204px;
@@ -207,7 +215,7 @@ export default {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 35px 13px 5px;
+            padding: 35px 13px 10px;
             .start{
               width: 100%;
               display: flex;
@@ -252,6 +260,13 @@ export default {
         }
       }
     }
+  }
+  .loading_box_content{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 .bottom_loading {

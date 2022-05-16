@@ -1,7 +1,6 @@
 <template>
   <div class="nft_page">
     <div class="content_box">
-      <!-- <img :src="route.src" class="nav_img" /> -->
       <!-- <div class="display_flex menu_box">
         <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
           <span class="nav_txt">{{ $t(route.label) }}</span>
@@ -76,9 +75,6 @@ export default {
         color: #fff;
         cursor: pointer;
         text-decoration: none;
-        // .nav_img{
-        //   width: 32px;
-        // }
         .nav_txt{
           font-weight: normal;
           color: #FFFFFF;

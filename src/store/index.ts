@@ -9,9 +9,7 @@ export default new Vuex.Store({
   state: {
     prizeInfo:{
       status:false,
-      boxarr:[
-        // {src:'https://cdn.sealemlab.com/nft/Wi/TEX_PC_Wi_Set07_Leg_Icon_03.png',}
-      ]
+      boxarr:[]
     },// 开盲盒弹窗信息
     userBoxInfo:sessionStorage.getItem('setBoxInfo') || [],//用户的盲盒信息
     userInfo:{
@@ -106,7 +104,7 @@ export default new Vuex.Store({
   mutations: {
     // 设置开盲盒弹窗信息
     setPrizeInfo(state, data) {
-      state.prizeInfo = data;
+      state.prizeInfo = JSON.parse(data);
     },
     // 设置轻提示弹窗弹起次数
     setNoticeNum(state, data) {
@@ -147,7 +145,11 @@ export default new Vuex.Store({
     },
     setProgressInfo({commit},data){
       commit('setProgressInfo',data)
-    }
+    },
+    // 设置开盲盒弹窗信息
+    setPrizeInfo({commit},data) {
+      commit('setPrizeInfo',data)
+    },
   },
   plugins: [
     createPersistedState({

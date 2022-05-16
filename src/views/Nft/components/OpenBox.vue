@@ -193,6 +193,12 @@ export default {
       let filter = sb().filters.SpawnSns(this.getAccount);
       sb().on(filter, (user, boxslengths, boxarrID, events, ultras) => {
         if(boxarrID){
+          this.$utils.ProcessingFunction(boxarrID).then(res => {
+            console.log('监听盲盒开奖结果De ---ProcessingFunction: ', res);
+            if(res.length > 0){
+              this.$store.dispatch("setPrizeInfo", JSON.stringify({'status':true,'boxarr':res}));
+            }
+          })
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'成功'}));
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
             sessionStorage.setItem("sb_count", res)
