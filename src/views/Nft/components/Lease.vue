@@ -1,6 +1,6 @@
 <template>
   <div class="lease_page">
-    租赁(暂未开发)
+    NoData
   </div>
 </template>
 

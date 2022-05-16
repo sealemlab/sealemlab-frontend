@@ -82,7 +82,7 @@ export default {
             item.status = false
           })
         }
-      }, 500);
+      },1000);
     },
     closeOpen(){
       this.openStatus = false
@@ -157,6 +157,9 @@ export default {
           font-weight: 600;
           color: #FFFFFF;
           line-height: 20px;
+          &:nth-child(1){
+            max-width: 100px;
+          }
           &:last-child{
             width: 56px;
             height: 19px;

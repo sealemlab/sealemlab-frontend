@@ -51,6 +51,7 @@ export default {
       handler: function (newValue) {
         // console.log('app.vue页面的监听钱包状态newValue: ', newValue);
         if (newValue) {
+          // console.log("app的就爱你听账号")
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
             sessionStorage.setItem("sb_count", res)
           })
@@ -81,7 +82,7 @@ export default {
       },
       deep: true,
       immediate: true,
-    },
+    }
   },
   components: {
     NavigationBar,

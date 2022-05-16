@@ -13,7 +13,7 @@
           <img :src="`${$store.state.imgUrl}newhuxing.webp`" class="huxing_img" />
           <div class="huxing_content">
             <div class="start">
-              <span class="span1 font24">7</span>
+              <span class="span1 font24">{{item.start}}</span>
               <img :src="`${$store.state.imgUrl}start.webp`" />
             </div>
             <div class="people_type">
@@ -23,7 +23,7 @@
             <div class="people_type">
               <div class="left_content">
                 <span class="font14">神圣的次开的头</span>
-                <span class="font12">#12312</span>
+                <span class="font12"># {{item.id}}</span>
               </div>
               <img :src="`${$store.state.imgUrl}3d.webp`" />
             </div>
@@ -58,6 +58,7 @@ export default {
       handler: function (newValue) {
         if(newValue){
           document.body.style.overflow='hidden'
+        console.log('boxarr: ', this.boxarr);
         }else{
           document.body.style.overflow='visible'
         }
@@ -111,9 +112,11 @@ export default {
   }
   .boxarr {
     width: 100%;
+    padding: 0 5vw;
+    margin-top: 80px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     max-height: 738px;
     overflow-y: auto;
@@ -155,7 +158,7 @@ export default {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 35px 13px 5px;
+          padding: 40px 13px 5px;
           .start{
             width: 100%;
             display: flex;
