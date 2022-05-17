@@ -16,7 +16,7 @@
           <swiper ref="swiper1" :options="swiperOption1">
             <swiper-slide v-for="(item, index) in tabClassArr[currentClass].classFigureArr" :key="index">
               <div class="video_bg_box">
-                <img :src="`${$store.state.imgUrl}mp4bg.webp`" class="video_bgimg" />
+                <img :src="`${$store.state.imgUrl}mp4bg5.webp`" class="video_bgimg" />
                 <video :src="`${item}`" class="video_" ref="video" loop autoplay muted></video>
               </div>
             </swiper-slide>
@@ -36,12 +36,6 @@
       </div>
       <div class="right_content">
         <ul>
-          <!-- <li class="font20">
-            {{ $t(tabClassArr[currentClass].label) }}
-          </li>
-          <li class="font16">
-            {{ $t(tabClassArr[currentClass].classIntroduce) }}
-          </li> -->
           <li class="font20">
             {{ $t(tabClassArr[currentClass].arms) }}:<span class="font16">{{ $t(tabClassArr[currentClass].skill_content) }}</span> 
           </li>
@@ -60,13 +54,22 @@
         </ul>
         <div class="start_box font12">
           <p>
-            <span class="font26">{{tabClassArr[currentClass].classFashionArr[currentSwiperIndex].level}}</span>
+            <span class="font26">11</span>
             <img :src="`${$store.state.imgUrl}start.webp`" /></p>
-          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title1)"></p>
+          <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title6)}}</p>
+          <p>{{$t("message.nft.txt127")}}</p>
+          <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title8)}}</p>
+          <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title9)}}</p>
+          <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title10)}}</p>
+          <p>{{$t("message.nft.txt131")}}</p>
+          <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title12)}}</p>
+          <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title13)}}</p>
+          <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title14)}}</p>
+          <!-- <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title1)"></p>
           <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title2)"></p>
           <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title3)"></p>
           <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title4)"></p>
-          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title5)"></p>
+          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title5)"></p> -->
         </div>
       </div>
     </div>
@@ -126,47 +129,51 @@ export default {
             },
           ],
           classFigureArr: [
-            `${this.$store.state.videoUrl}nft_zs_1.mp4`,
-            `${this.$store.state.videoUrl}nft_zs_2.mp4`,
-            `${this.$store.state.videoUrl}nft_zs_3.mp4`,
-            `${this.$store.state.videoUrl}nft_zs_4.mp4`,
+            `${this.$store.state.videoUrl}PC_Gl_Set11_Total_Icon_01.mp4`,
+            `${this.$store.state.videoUrl}PC_Gl_Set11_Total_Icon_02.mp4`,
+            `${this.$store.state.videoUrl}PC_Gl_Set11_Total_Icon_03.mp4`,
+            `${this.$store.state.videoUrl}PC_Gl_Set11_Total_Icon_04.mp4`,
           ],
           classFashionArr: [
             {
-              src:`${this.$store.state.imgUrl}nft_zs_suit_1.webp`,
-              level:8,
-              title1:"message.nft.txt98",
-              title2:"message.nft.txt99",
-              title3:"message.nft.txt100",
-              title4:"message.nft.txt101",
-              title5:"message.nft.txt102"
+              src:`${this.$store.state.imgUrl}PC_Gl_Set11_Total_Icon_01.webp`,
+              title6:"message.nft.txt126",
+              title8:"message.nft.txt128", 
+              title9:"message.nft.txt129",
+              title10:"message.nft.txt130",
+              title12:"message.nft.txt132",
+              title13:"message.nft.txt133",
+              title14:"message.nft.txt134"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_zs_suit_2.webp`,
-              level:9,
-              title1:"message.nft.txt103",
-              title2:"message.nft.txt104",
-              title3:"message.nft.txt105",
-              title4:"message.nft.txt106",
-              title5:"message.nft.txt107"
+              src:`${this.$store.state.imgUrl}PC_Gl_Set11_Total_Icon_02.webp`,
+              title6:"message.nft.txt98",
+              title8:"message.nft.txt101", 
+              title9:"message.nft.txt102",
+              title10:"message.nft.txt103",
+              title12:"message.nft.txt105",
+              title13:"message.nft.txt106",
+              title14:"message.nft.txt107"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_zs_suit_3.webp`,
-              level:10,
-              title1:"message.nft.txt108",
-              title2:"message.nft.txt109",
-              title3:"message.nft.txt110",
-              title4:"message.nft.txt111",
-              title5:"message.nft.txt112"
+              src:`${this.$store.state.imgUrl}PC_Gl_Set11_Total_Icon_03.webp`,
+              title6:"message.nft.txt108",
+              title8:"message.nft.txt110", 
+              title9:"message.nft.txt111",
+              title10:"message.nft.txt112",
+              title12:"message.nft.txt114",
+              title13:"message.nft.txt115",
+              title14:"message.nft.txt116"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_zs_suit_4.webp`,
-              level:11,
-              title1:"message.nft.txt113",
-              title2:"message.nft.txt114",
-              title3:"message.nft.txt115",
-              title4:"message.nft.txt116",
-              title5:"message.nft.txt117"
+              src:`${this.$store.state.imgUrl}PC_Gl_Set11_Total_Icon_04.webp`,
+              title6:"message.nft.txt117",
+              title8:"message.nft.txt119", 
+              title9:"message.nft.txt120",
+              title10:"message.nft.txt121",
+              title12:"message.nft.txt123",
+              title13:"message.nft.txt124",
+              title14:"message.nft.txt125"
             }
           ]
         },
@@ -205,47 +212,51 @@ export default {
             },
           ],
           classFigureArr: [
-            `${this.$store.state.videoUrl}nft_jds_1.mp4`,
-            `${this.$store.state.videoUrl}nft_jds_2.mp4`,
-            `${this.$store.state.videoUrl}nft_jds_3.mp4`,
-            `${this.$store.state.videoUrl}nft_jds_4.mp4`,
+            `${this.$store.state.videoUrl}PC_Fi_Set11_Total_Icon_01.mp4`,
+            `${this.$store.state.videoUrl}PC_Fi_Set11_Total_Icon_02.mp4`,
+            `${this.$store.state.videoUrl}PC_Fi_Set11_Total_Icon_03.mp4`,
+            `${this.$store.state.videoUrl}PC_Fi_Set11_Total_Icon_04.mp4`,
           ],
           classFashionArr: [
             {
-              src:`${this.$store.state.imgUrl}nft_jds_suit_1.webp`,
-              level:8,
-              title1:"message.nft.txt98",
-              title2:"message.nft.txt99",
-              title3:"message.nft.txt100",
-              title4:"message.nft.txt101",
-              title5:"message.nft.txt102"
+              src:`${this.$store.state.imgUrl}PC_Fi_Set11_Total_Icon_01.webp`,
+              title6:"message.nft.txt126",
+              title8:"message.nft.txt128", 
+              title9:"message.nft.txt129",
+              title10:"message.nft.txt130",
+              title12:"message.nft.txt132",
+              title13:"message.nft.txt133",
+              title14:"message.nft.txt134"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_jds_suit_2.webp`,
-              level:9,
-              title1:"message.nft.txt103",
-              title2:"message.nft.txt104",
-              title3:"message.nft.txt105",
-              title4:"message.nft.txt106",
-              title5:"message.nft.txt107"
+              src:`${this.$store.state.imgUrl}PC_Fi_Set11_Total_Icon_02.webp`,
+              title6:"message.nft.txt189",
+              title8:"message.nft.txt191", 
+              title9:"message.nft.txt192",
+              title10:"message.nft.txt193",
+              title12:"message.nft.txt195",
+              title13:"message.nft.txt196",
+              title14:"message.nft.txt197"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_jds_suit_3.webp`,
-              level:10,
-              title1:"message.nft.txt108",
-              title2:"message.nft.txt109",
-              title3:"message.nft.txt110",
-              title4:"message.nft.txt111",
-              title5:"message.nft.txt112"
+              src:`${this.$store.state.imgUrl}PC_Fi_Set11_Total_Icon_03.webp`,
+              title6:"message.nft.txt198",
+              title8:"message.nft.txt200", 
+              title9:"message.nft.txt201",
+              title10:"message.nft.txt202",
+              title12:"message.nft.txt204",
+              title13:"message.nft.txt205",
+              title14:"message.nft.txt206"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_jds_suit_4.webp`,
-              level:11,
-              title1:"message.nft.txt113",
-              title2:"message.nft.txt114",
-              title3:"message.nft.txt115",
-              title4:"message.nft.txt116",
-              title5:"message.nft.txt117"
+              src:`${this.$store.state.imgUrl}PC_Fi_Set11_Total_Icon_04.webp`,
+              title6:"message.nft.txt207",
+              title8:"message.nft.txt209", 
+              title9:"message.nft.txt210",
+              title10:"message.nft.txt211",
+              title12:"message.nft.txt213",
+              title13:"message.nft.txt214",
+              title14:"message.nft.txt215"
             }
           ]
         },
@@ -284,47 +295,51 @@ export default {
             },
           ],
           classFigureArr: [
-            `${this.$store.state.videoUrl}nft_ws_1.mp4`,
-            `${this.$store.state.videoUrl}nft_ws_2.mp4`,
-            `${this.$store.state.videoUrl}nft_ws_3.mp4`,
-            `${this.$store.state.videoUrl}nft_ws_4.mp4`,
+            `${this.$store.state.videoUrl}PC_Wi_Set11_Total_Icon_01.mp4`,
+            `${this.$store.state.videoUrl}PC_Wi_Set11_Total_Icon_02.mp4`,
+            `${this.$store.state.videoUrl}PC_Wi_Set11_Total_Icon_03.mp4`,
+            `${this.$store.state.videoUrl}PC_Wi_Set11_Total_Icon_04.mp4`,
           ],
           classFashionArr: [
             {
-              src:`${this.$store.state.imgUrl}nft_ws_suit_1.webp`,
-              level:8,
-              title1:"message.nft.txt98",
-              title2:"message.nft.txt99",
-              title3:"message.nft.txt100",
-              title4:"message.nft.txt101",
-              title5:"message.nft.txt102"
+              src:`${this.$store.state.imgUrl}PC_Wi_Set11_Total_Icon_01.webp`,
+              title6:"message.nft.txt126",
+              title8:"message.nft.txt128", 
+              title9:"message.nft.txt129",
+              title10:"message.nft.txt130",
+              title12:"message.nft.txt132",
+              title13:"message.nft.txt133",
+              title14:"message.nft.txt134"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_ws_suit_2.webp`,
-              level:9,
-              title1:"message.nft.txt103",
-              title2:"message.nft.txt104",
-              title3:"message.nft.txt105",
-              title4:"message.nft.txt106",
-              title5:"message.nft.txt107"
+              src:`${this.$store.state.imgUrl}PC_Wi_Set11_Total_Icon_02.webp`,
+              title6:"message.nft.txt135",
+              title8:"message.nft.txt137", 
+              title9:"message.nft.txt138",
+              title10:"message.nft.txt139",
+              title12:"message.nft.txt141",
+              title13:"message.nft.txt142",
+              title14:"message.nft.txt143"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_ws_suit_3.webp`,
-              level:10,
-              title1:"message.nft.txt108",
-              title2:"message.nft.txt109",
-              title3:"message.nft.txt110",
-              title4:"message.nft.txt111",
-              title5:"message.nft.txt112"
+              src:`${this.$store.state.imgUrl}PC_Wi_Set11_Total_Icon_03.webp`,
+              title6:"message.nft.txt144",
+              title8:"message.nft.txt146", 
+              title9:"message.nft.txt147",
+              title10:"message.nft.txt148",
+              title12:"message.nft.txt150",
+              title13:"message.nft.txt151",
+              title14:"message.nft.txt152"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_ws_suit_4.webp`,
-              level:11,
-              title1:"message.nft.txt113",
-              title2:"message.nft.txt114",
-              title3:"message.nft.txt115",
-              title4:"message.nft.txt116",
-              title5:"message.nft.txt117"
+              src:`${this.$store.state.imgUrl}PC_Wi_Set11_Total_Icon_04.webp`,
+              title6:"message.nft.txt153",
+              title8:"message.nft.txt155", 
+              title9:"message.nft.txt156",
+              title10:"message.nft.txt157",
+              title12:"message.nft.txt159",
+              title13:"message.nft.txt160",
+              title14:"message.nft.txt161"
             }
           ],
         },
@@ -363,47 +378,51 @@ export default {
             },
           ],
           classFigureArr: [
-            `${this.$store.state.videoUrl}nft_cike_1.mp4`,
-            `${this.$store.state.videoUrl}nft_cike_2.mp4`,
-            `${this.$store.state.videoUrl}nft_cike_3.mp4`,
-            `${this.$store.state.videoUrl}nft_cike_4.mp4`,
+            `${this.$store.state.videoUrl}PC_As_Set11_Total_Icon_01.mp4`,
+            `${this.$store.state.videoUrl}PC_As_Set11_Total_Icon_02.mp4`,
+            `${this.$store.state.videoUrl}PC_As_Set11_Total_Icon_03.mp4`,
+            `${this.$store.state.videoUrl}PC_As_Set11_Total_Icon_04.mp4`,
           ],
           classFashionArr: [
             {
-              src:`${this.$store.state.imgUrl}nft_cike_suit_1.webp`,
-              level:8,
-              title1:"message.nft.txt98",
-              title2:"message.nft.txt99",
-              title3:"message.nft.txt100",
-              title4:"message.nft.txt101",
-              title5:"message.nft.txt102"
+              src:`${this.$store.state.imgUrl}PC_As_Set11_Total_Icon_01.webp`,
+              title6:"message.nft.txt126",
+              title8:"message.nft.txt128", 
+              title9:"message.nft.txt129",
+              title10:"message.nft.txt130",
+              title12:"message.nft.txt132",
+              title13:"message.nft.txt133",
+              title14:"message.nft.txt134"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_cike_suit_2.webp`,
-              level:9,
-              title1:"message.nft.txt103",
-              title2:"message.nft.txt104",
-              title3:"message.nft.txt105",
-              title4:"message.nft.txt106",
-              title5:"message.nft.txt107"
+              src:`${this.$store.state.imgUrl}PC_As_Set11_Total_Icon_02.webp`,
+              title6:"message.nft.txt162",
+              title8:"message.nft.txt164", 
+              title9:"message.nft.txt165",
+              title10:"message.nft.txt166",
+              title12:"message.nft.txt168",
+              title13:"message.nft.txt169",
+              title14:"message.nft.txt170"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_cike_suit_3.webp`,
-              level:10,
-              title1:"message.nft.txt108",
-              title2:"message.nft.txt109",
-              title3:"message.nft.txt110",
-              title4:"message.nft.txt111",
-              title5:"message.nft.txt112"
+              src:`${this.$store.state.imgUrl}PC_As_Set11_Total_Icon_03.webp`,
+              title6:"message.nft.txt171",
+              title8:"message.nft.txt173", 
+              title9:"message.nft.txt174",
+              title10:"message.nft.txt175",
+              title12:"message.nft.txt177",
+              title13:"message.nft.txt178",
+              title14:"message.nft.txt179"
             },
             {
-              src:`${this.$store.state.imgUrl}nft_cike_suit_4.webp`,
-              level:11,
-              title1:"message.nft.txt113",
-              title2:"message.nft.txt114",
-              title3:"message.nft.txt115",
-              title4:"message.nft.txt116",
-              title5:"message.nft.txt117"
+              src:`${this.$store.state.imgUrl}PC_As_Set11_Total_Icon_04.webp`,
+              title6:"message.nft.txt180",
+              title8:"message.nft.txt182", 
+              title9:"message.nft.txt183",
+              title10:"message.nft.txt184",
+              title12:"message.nft.txt186",
+              title13:"message.nft.txt187",
+              title14:"message.nft.txt188"
             }
           ],
         },
@@ -555,6 +574,7 @@ export default {
               width: 100%;
               height: 100%;
               object-fit: contain;
+              border-radius: 100px;
             }
           }
         }
@@ -619,7 +639,7 @@ export default {
           line-height: 28px;
           &:nth-child(1){
             color: #ECCF83;
-            margin-top: 40px;
+            margin-top: 20px;
             span{
               font-weight: 400;
               color: #FFFFFF;
@@ -629,7 +649,7 @@ export default {
           }
           &:nth-child(2){
             color: #ECCF83;
-            margin-top: 40px;
+            margin-top: 15px;
           }
           &:nth-child(3){
             margin-top: 17px;
@@ -660,10 +680,10 @@ export default {
                   font-weight: 400;
                   color: #FFFFFF;
                   line-height: 26px;
-                  margin-top: 30px;
+                  margin-top: 15px;
                 }
                 &:nth-child(2){
-                  margin-top: 30px;
+                  margin-top: 5px;
                   font-weight: 400;
                   color: #FFFFFF;
                   line-height: 20px;
@@ -676,7 +696,7 @@ export default {
       .start_box{
         display: flex;
         flex-direction: column;
-        margin-top: 42px;
+        margin-top: 15px;
         p{
           font-weight: 400;
           color: #FFFFFF;

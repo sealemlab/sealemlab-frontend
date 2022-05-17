@@ -6,22 +6,58 @@
         <div class="onebox" >
           <div class="out_img"><img :src="item.src" class="imgcard" /></div>
           <div class="huxing_bg_box">
-            <img :src="`${$store.state.imgUrl}newhuxing.webp`" class="huxing_img" />
+            <img :src="`${$store.state.imgUrl}huxing6.webp`" class="huxing_img" />
             <div class="huxing_content">
               <div class="start">
                 <span class="span1 font24">{{item.start}}</span>
                 <img :src="`${$store.state.imgUrl}start.webp`" />
               </div>
               <div class="people_type">
-                <img :src="`${$store.state.imgUrl}type_jds.webp`" v-if="item.type == 1"/>
-                <img :src="`${$store.state.imgUrl}type_cike.webp`" v-if="item.type == 2"/>
-                <img :src="`${$store.state.imgUrl}type_wushi.webp`" v-if="item.type == 3"/>
-                <img :src="`${$store.state.imgUrl}type_zs.webp`" v-if="item.type == 4"/>
-                <img :src="`${$store.state.imgUrl}type_cike.webp`" />
+                <div class="leftimgbox" v-if="item.type == 1">
+                  <img :src="`${$store.state.imgUrl}type_jds.webp`" />
+                  <span class="font12">{{$t("message.nft.txt9")}}</span>
+                </div>
+                <div class="leftimgbox" v-if="item.type == 2">
+                  <img :src="`${$store.state.imgUrl}type_cike.webp`"/>
+                  <span class="font12">{{$t("message.nft.txt11")}}</span>
+                </div>
+                <div class="leftimgbox" v-if="item.type == 3">
+                  <img :src="`${$store.state.imgUrl}type_wushi.webp`"/>
+                  <span class="font12">{{$t("message.nft.txt10")}}</span>
+                </div>
+                <div class="leftimgbox" v-if="item.type == 4">
+                  <img :src="`${$store.state.imgUrl}type_zs.webp`"/>
+                  <span class="font12">{{$t("message.nft.txt8")}}</span>
+                </div>
+                <div class="leftimgbox">
+                  <img :src="`${$store.state.imgUrl}power1.webp`" v-if=" item.power <= 20"/>
+                  <img :src="`${$store.state.imgUrl}power2.webp`" v-else-if=" item.power <= 40 && item.power >20"/>
+                  <img :src="`${$store.state.imgUrl}power3.webp`" v-else-if=" item.power <= 60 && item.power >40"/>
+                  <img :src="`${$store.state.imgUrl}power4.webp`" v-else-if=" item.power <= 80 && item.power >60"/>
+                  <img :src="`${$store.state.imgUrl}power5.webp`" v-else-if=" item.power <= 100 && item.power >80"/>
+                  <span class="font12">{{item.power}}</span>
+                </div>
               </div>
               <div class="people_type">
                 <div class="left_content">
-                  <span class="font14">神圣的次开的头</span>
+                  <span class="font14">
+                    <span v-if="item.suit == 1">神圣</span>
+                    <span v-if="item.suit == 2">神秘</span>
+                    <span v-if="item.suit == 3">钢铁</span>
+                    <span v-if="item.suit == 4">沉默</span>
+                    <span v-if="item.type == 1">{{$t("message.nft.txt9")}}</span>
+                    <span v-if="item.type == 2">{{$t("message.nft.txt11")}}</span>
+                    <span v-if="item.type == 3">{{$t("message.nft.txt10")}}</span>
+                    <span v-if="item.type == 4">{{$t("message.nft.txt8")}}</span>
+                    <span v-if="item.position == 1">武器</span>
+                    <span v-if="item.position == 2">头</span>
+                    <span v-if="item.position == 3">胸</span>
+                    <span v-if="item.position == 4">手</span>
+                    <span v-if="item.position == 5">脚</span>
+                    <span v-if="item.position == 6">腰带</span>
+                    <span v-if="item.position == 7">项链</span>
+                    <span v-if="item.position == 8">戒指</span>
+                  </span>
                   <span class="font12"># {{item.id}}</span>
                 </div>
                 <img :src="`${$store.state.imgUrl}3d.webp`" />
@@ -35,8 +71,11 @@
         <span v-else-if="!loadMoreStatus">End</span>
       </div>
     </div>
-    <div class="loading_box_content" v-if="nftArr.length == 0">
+    <div class="loading_box_content" v-if="nftArr.length == 0 && getIstrue">
       <LoadingAnmation></LoadingAnmation>
+    </div>
+    <div class="loading_box_content" v-if="nftArr.length == 0 && !getIstrue">
+      NoData
     </div>
   </div>
 </template>
@@ -130,7 +169,7 @@ export default {
       }
     },
     nftFun(item){
-      // console.log('item: ', item);
+      console.log('装备信息item: ', item);
       // sn().getDatas(129, 'attr').then(res => {
       //   console.log('getDatas-----res: ', res);
       //   let aa = getSourceUrl(res)
@@ -187,15 +226,14 @@ export default {
         flex-direction: column;
         align-items: center;
         margin-bottom: 20px;
-        background: url($bg_url + 'nftbg.webp') no-repeat;
-        background-size: 100% 100%;
+        background: url($bg_url + 'nftbg6.webp') no-repeat;
+        background-size: contain;
         .out_img{
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
           .imgcard {
-            // width: 184px;
             height: 184px;
           }
         }
@@ -215,8 +253,10 @@ export default {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 35px 13px 10px;
+            padding: 49px 13px 10px;
             .start{
+              position: absolute;
+              top: 34px;
               width: 100%;
               display: flex;
               justify-content: center;
@@ -227,9 +267,6 @@ export default {
                 color: #EFB045;
                 line-height: 29px;
                 margin-right: 5px;
-                // background: liner-gradient(180deg, #F1E069 92%, #A87D30 28%, #FEF6C2 70%, #B48533 13%);
-                // -webkit-background-clip: text;
-                // -webkit-text-fill-color: transparent;
               }
               img{
                 width: 24px;
@@ -241,9 +278,6 @@ export default {
               display: flex;
               justify-content: space-between;
               align-items: center;
-              img{
-                width: 24px;
-              }
               .left_content{
                 display: flex;
                 flex-direction: column;
@@ -254,6 +288,14 @@ export default {
                     margin-top: 5px;
                   }
                 }
+              }
+              .leftimgbox{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              }
+              img{
+                width: 24px;
               }
             }
           }
