@@ -5,16 +5,13 @@
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt5") }}</p>
           <div class="inputbox">
-            <input type="text" class="font16" v-model.trim="loginForm.mailAccount" />
-          </div>
-          <div class="input_prompt font12" v-if="loginForm.prompt1">
-            <span>* {{ loginForm.prompt1 }}</span>
+            <input disabled type="text" class="font16" v-model.trim="getLogin.mailAccount" />
           </div>
         </div>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt6") }}</p>
           <div class="inputbox">
-            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="loginForm.password" />
+            <input disabled :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="getLogin.password" />
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
@@ -22,15 +19,13 @@
               <span>{{ $t("message.account.txt8") }}</span>
             </div>
           </div>
-          <div class="input_prompt font12" v-if="loginForm.prompt2">
-            <span>* {{ loginForm.prompt2 }}</span>
-          </div>
         </div>
         <div class="lin_content font12">
           {{ $t("message.account.txt9") }}
         </div>
-        <div class="btn font18">
+        <div class="btn font18" @click="updateInformation">
           {{ $t("message.account.txt10") }}
+          <BtnLoading :isloading="loginbtnloading"></BtnLoading>
         </div>
       </div>
       <div class="right_content">
@@ -44,11 +39,13 @@
         </div>
         <div class="right_line font16">
           <span class="account_status">{{ $t("message.account.txt15") }}</span>
-          <span class="_status">2017-08-08</span>
+          <span class="_status">{{ getLogin.activationTime }}</span>
         </div>
         <div class="right_line font16">
           <span class="account_status">{{ $t("message.account.txt16") }}</span>
-          <span class="_status">2017-08-08 20:24:10 记录..</span>
+          <pre class="_status">
+            {{ getLogin.lastLogin.indexOf("T") !== -1 ? getLogin.lastLogin.replace("T", "\n") : "" }}
+          </pre>
         </div>
       </div>
     </div>
@@ -59,27 +56,40 @@
 import PassPopup from "../../components/PassPopup.vue";
 import { mapGetters } from "vuex";
 export default {
-  components: {
-    PassPopup,
-  },
-  computed: {
-    ...mapGetters(["getLogin"]),
-  },
+  components: { PassPopup },
+  computed: { ...mapGetters(["getLogin"]) },
   data() {
     return {
       isShowPassPopup: false,
       isShowVerifyCode: false,
-      isShowPassword: false,
-      loginForm: {
-        mailAccount: "",
-        password: "",
-        prompt1: "",
-        prompt2: "",
-      },
+      isShowPassword: true,
+      loginbtnloading: false,
     };
   },
-
   methods: {
+    /**更新信息 */
+    updateInformation() {
+      if (this.loginbtnloading) return;
+      this.loginbtnloading = true;
+      this.$api
+        .accountLogin({ email: this.getLogin.mailAccount, password: this.getLogin.password })
+        .then((res) => {
+          this.loginbtnloading = false;
+          if (res.code === 200) {
+            // console.log(res.msg);
+            this.$store.state.userInfo.activationTime = res.data.activationTime;
+            this.$store.state.userInfo.addr = res.data.addr;
+            this.$store.state.userInfo.token = res.data.token;
+            this.$store.state.userInfo.lastLogin = res.data.lastLogin;
+          } else if (res.code === 4000) {
+            // console.log(res.msg);
+          }
+          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+        })
+        .catch(() => {
+          this.loginbtnloading = false;
+        });
+    },
     changePassword() {
       this.isShowPassPopup = true;
     },
@@ -192,13 +202,17 @@ export default {
       .right_line {
         width: 100%;
         display: flex;
-        align-items: center;
         margin-bottom: 79px;
         .account_status {
           font-weight: 600;
           color: #eccf83;
           line-height: 22px;
           min-width: 100px;
+        }
+        pre {
+          white-space: pre-line;
+          word-break: break-all;
+          word-wrap: break-word;
         }
         ._status {
           font-weight: 400;

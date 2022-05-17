@@ -2,7 +2,7 @@
   <div class="user_center_page">
     <div class="user_info display_flex">
       <div class="user_head_portrait display_flex">
-        <span class="font20 user_name">{{getLogin.username?getLogin.username:'暂未登录'}}</span>
+        <span class="font20 user_name">{{getLogin.mailAccount?getLogin.mailAccount:'暂未登录'}}</span>
         <div class="invitation_code font16">邀请链接:21233443535353</div>
       </div>
       <div class="content display_flex" v-if="li_index == 0">

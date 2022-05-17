@@ -6,90 +6,98 @@
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt22") }}</p>
           <div class="inputbox">
-            <input type="text" class="font16" v-model.trim="registerForm.mailAccount" />
+            <input type="text" class="font16" v-model.trim="forgetPassForm.mailAccount" />
           </div>
-          <div class="input_prompt font12" v-if="registerForm.prompt1">
-            <span>* {{ registerForm.prompt1 }}</span>
+          <div class="input_prompt font12" v-if="forgetPassForm.prompt1">
+            <span>* {{ $t(forgetPassForm.prompt1) }}</span>
           </div>
         </div>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt23") }}</p>
           <div class="inputbox">
-            <input type="text" class="font16" v-model.trim="registerForm.verifyCode" />
-            <div class="verification font14" @click="registerGetCode">
+            <input type="text" class="font16" v-model.trim="forgetPassForm.verifyCode" />
+            <div class="verification font14" @click="sendEmail()">
               <span v-if="showCountdown">{{ minutes + " : " + seconds }}</span>
               <span v-else>{{ $t("message.signin.txt39") }}</span>
               <BtnLoading :isloading="codebtnloading"></BtnLoading>
             </div>
           </div>
-          <div class="input_prompt font12" v-if="registerForm.prompt2">
-            <span>* {{ registerForm.prompt2 }}</span>
+          <div class="input_prompt font12" v-if="forgetPassForm.prompt2">
+            <span>* {{ $t(forgetPassForm.prompt2) }}</span>
           </div>
         </div>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt24") }}</p>
           <div class="inputbox">
-            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="registerForm.password" />
+            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="forgetPassForm.password" />
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
           </div>
-          <div class="input_prompt font12" v-if="registerForm.prompt3">
-            <span>* {{ registerForm.prompt3 }}</span>
+          <div class="input_prompt font12" v-if="forgetPassForm.prompt3">
+            <span>* {{ $t(forgetPassForm.prompt3) }}</span>
           </div>
         </div>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt25") }}</p>
           <div class="inputbox">
-            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="registerForm.password2" />
+            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="forgetPassForm.password2" />
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
           </div>
-          <div class="input_prompt font12" v-if="registerForm.prompt4">
-            <span>* {{ registerForm.prompt4 }}</span>
+          <div class="input_prompt font12" v-if="forgetPassForm.prompt4">
+            <span>* {{ $t(forgetPassForm.prompt4) }}</span>
           </div>
         </div>
-        <div class="btn font18" @click="handleSubmit">{{ $t("message.signin.btn_txt2") }}</div>
+        <div class="btn font18" @click="handleSubmit1()">
+          {{ $t("message.signin.btn_txt2") }}
+          <BtnLoading :isloading="submitloading"></BtnLoading>
+        </div>
       </template>
       <template v-else>
         <p class="propu_title_txt font24">{{ $t("message.signin.txt34") }}</p>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt26") }}</p>
           <div class="inputbox">
-            <input type="text" class="font16" v-model.trim="registerForm.mailAccount" />
+            <input disabled :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="changePassForm.oldPass" />
+            <div class="eye">
+              <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
+            </div>
           </div>
-          <div class="input_prompt font12" v-if="registerForm.prompt1">
-            <span>* {{ registerForm.prompt1 }}</span>
+          <div class="input_prompt font12" v-if="changePassForm.prompt1">
+            <span>* {{ $t(changePassForm.prompt1) }}</span>
           </div>
         </div>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt24") }}</p>
           <div class="inputbox">
-            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="registerForm.password" />
+            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="changePassForm.newPass" />
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
           </div>
-          <div class="input_prompt font12" v-if="registerForm.prompt3">
-            <span>* {{ registerForm.prompt3 }}</span>
+          <div class="input_prompt font12" v-if="changePassForm.prompt2">
+            <span>* {{ $t(changePassForm.prompt2) }}</span>
           </div>
         </div>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt25") }}</p>
           <div class="inputbox">
-            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="registerForm.password2" />
+            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="changePassForm.newPass2" />
             <div class="eye">
               <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
             </div>
           </div>
-          <div class="input_prompt font12" v-if="registerForm.prompt4">
-            <span>* {{ registerForm.prompt4 }}</span>
+          <div class="input_prompt font12" v-if="changePassForm.prompt3">
+            <span>* {{ $t(changePassForm.prompt3) }}</span>
           </div>
         </div>
-        <div class="btn font18" @click="handleSubmit">{{ $t("message.signin.btn_txt1") }}</div>
+        <div class="btn font18" @click="handleSubmit2()">
+          {{ $t("message.signin.btn_txt1") }}
+          <BtnLoading :isloading="submitloading"></BtnLoading>
+        </div>
       </template>
-
       <img :src="`${$store.state.imgUrl}passclose.webp`" class="close_img" @click.stop="closePassPopup" />
     </div>
   </div>
@@ -97,6 +105,7 @@
 <script>
 const mailReg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/; // 邮箱输入校验
 const pwReg = /^[a-zA-Z0-9]{6,16}$/; // 6-16位数字英文组合
+import { mapGetters } from "vuex";
 export default {
   props: {
     isShowVerifyCode: {
@@ -104,9 +113,10 @@ export default {
       default: false,
     },
   },
+  computed: { ...mapGetters(["getLogin"]) },
   data() {
     return {
-      registerForm: {
+      forgetPassForm: {
         mailAccount: "",
         prompt1: "",
         verifyCode: "",
@@ -116,53 +126,185 @@ export default {
         password2: "",
         prompt4: "",
       },
-      isShowPassword: false,
+      changePassForm: {
+        mailAccount: "",
+        oldPass: "",
+        prompt1: "",
+        newPass: "",
+        prompt2: "",
+        newPass2: "",
+        prompt3: "",
+      },
+      isShowPassword: true,
       codebtnloading: false,
+      submitloading: false,
       showCountdown: false,
       minutes: 0,
       seconds: 0,
     };
   },
 
+  created() {
+    this.forgetPassForm.mailAccount = this.getLogin.mailAccount;
+
+    this.changePassForm.mailAccount = this.getLogin.mailAccount;
+    this.changePassForm.oldPass = this.getLogin.password;
+  },
+
   methods: {
-    /**注册获取验证码 */
-    registerGetCode() {
+    /**发送找回密码验证码 fpvc   forgetPassVerifyCode */
+    sendEmail() {
       if (this.codebtnloading || this.showCountdown) return;
-      if (!this.registerForm.mailAccount) return (this.registerForm.prompt1 = "Enter email"); // 填写邮箱
-      if (!mailReg.test(this.registerForm.mailAccount)) return (this.registerForm.prompt1 = "Invalid email"); // 邮箱不合法
-      this.registerForm.prompt1 = "";
-      if (localStorage.getItem("SealemLabRegisterGetCode")) {
-        const end = JSON.parse(localStorage.getItem("SealemLabRegisterGetCode"));
+      if (!this.forgetPassForm.mailAccount) return (this.forgetPassForm.prompt1 = "message.signin.txt30"); // 填写邮箱
+      if (!mailReg.test(this.forgetPassForm.mailAccount)) return (this.forgetPassForm.prompt1 = "message.signin.txt31"); // 邮箱不合法
+      this.forgetPassForm.prompt1 = "";
+      if (localStorage.getItem(`fpvc${this.forgetPassForm.mailAccount}`)) {
+        const end = JSON.parse(localStorage.getItem(`fpvc${this.forgetPassForm.mailAccount}`));
         const msec = end - Date.parse(new Date());
         if (msec <= 0) {
-          localStorage.removeItem("SealemLabRegisterGetCode");
-          this.registerGetCode();
+          localStorage.removeItem(`fpvc${this.forgetPassForm.mailAccount}`);
+          this.sendEmail();
         } else {
           this.showCountdown = true;
-          this.countdownFun("register", end);
+          this.countdownFun(end);
         }
       } else {
         this.codebtnloading = true;
-        // const url = `codeType=register&mailAccount=${this.registerForm.mailAccount}`;
-        // this.$api
-        //   .gameMailCode(url)
-        //   .then((res) => {
-        //     this.codebtnloading = false;
-        //     if (res.data.result === "SUCCESS") {
-        //       this.showCountdown = true;
-        //       const end = Date.parse(new Date()) + 10 * 60 * 1000;
-        //       localStorage.setItem("SealemLabRegisterGetCode", JSON.stringify(end));
-        //       this.countdownFun("register", end);
-        //     }
-        //     this.$common.selectLang(res.data.msg, res.data.msg, this);
-        //   })
-        //   .catch(() => {
-        //     this.codebtnloading = false;
-        //   });
+        this.$api
+          .accountSendEmail({ email: this.forgetPassForm.mailAccount, method: "2" })
+          .then((res) => {
+            this.codebtnloading = false;
+            if (res.code === 200) {
+              this.showCountdown = true;
+              const end = Date.parse(new Date()) + 3 * 60 * 1000;
+              localStorage.setItem(`fpvc${this.forgetPassForm.mailAccount}`, JSON.stringify(end));
+              this.countdownFun(end);
+              // console.log(res.msg);
+            } else if (res.code === 4000) {
+              // console.log(res.msg);
+            }
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+          })
+          .catch(() => {
+            this.codebtnloading = false;
+          });
       }
     },
-    handleSubmit() {
-      this.$parent.isShowPassPopup = false;
+    /**Retrieve password */
+    handleSubmit1() {
+      console.log("Retrieve passwords");
+      if (this.submitloading) return;
+      if (!this.forgetPassForm.mailAccount) return (this.forgetPassForm.prompt1 = "message.signin.txt30"); // 填写邮箱
+      if (!mailReg.test(this.forgetPassForm.mailAccount)) return (this.forgetPassForm.prompt1 = "message.signin.txt31"); // 邮箱不合法
+      this.forgetPassForm.prompt1 = "";
+      if (!this.forgetPassForm.verifyCode) return (this.forgetPassForm.prompt2 = "message.signin.txt32"); // 填写验证码
+      this.forgetPassForm.prompt2 = "";
+      if (!this.forgetPassForm.password) return (this.forgetPassForm.prompt3 = "message.signin.txt33"); // 填写密码
+      if (!pwReg.test(this.forgetPassForm.password)) return (this.forgetPassForm.prompt3 = "message.signin.txt37"); // 6-16位数字英文组合
+      this.forgetPassForm.prompt3 = "";
+      if (!this.forgetPassForm.password2) return (this.forgetPassForm.prompt4 = "message.signin.txt36"); // 再次填写密码
+      if (!pwReg.test(this.forgetPassForm.password2)) return (this.forgetPassForm.prompt4 = "message.signin.txt37"); // 6-16位数字英文组合
+      if (this.forgetPassForm.password2 !== this.forgetPassForm.password)
+        return (this.forgetPassForm.prompt3 = this.forgetPassForm.prompt4 = "message.signin.txt38"); // 密码校验不通过
+      this.forgetPassForm.prompt3 = "";
+      this.forgetPassForm.prompt4 = "";
+      this.$api
+        .accountForget({ email: this.forgetPassForm.mailAccount, newPwd: this.forgetPassForm.password, code: this.forgetPassForm.verifyCode })
+        .then((res) => {
+          this.submitloading = false;
+          this.showCountdown = false;
+          localStorage.removeItem(`fpvc${this.forgetPassForm.mailAccount}`);
+          if (res.code === 200) {
+            // console.log(res.msg);
+            this.resetUserInfo();
+            this.closePassPopup();
+          } else if (res.code === 4000) {
+            // console.log(res.msg);
+          }
+          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+        })
+        .catch(() => {
+          this.submitloading = false;
+        });
+    },
+    /**Change passwords */
+    handleSubmit2() {
+      console.log("Change passwords");
+      if (this.submitloading) return;
+      if (!this.changePassForm.oldPass) return (this.changePassForm.prompt1 = "message.signin.txt33"); // 填写密码
+      if (!pwReg.test(this.changePassForm.oldPass)) return (this.changePassForm.prompt1 = "message.signin.txt37"); // 6-16位数字英文组合
+      if (!this.changePassForm.newPass) return (this.changePassForm.prompt2 = "message.signin.txt33"); // 填写密码
+      if (!pwReg.test(this.changePassForm.newPass)) return (this.changePassForm.prompt2 = "message.signin.txt37"); // 6-16位数字英文组合
+      if (!this.changePassForm.newPass2) return (this.changePassForm.prompt3 = "message.signin.txt33"); // 填写密码
+      if (!pwReg.test(this.changePassForm.newPass2)) return (this.changePassForm.prompt3 = "message.signin.txt37"); // 6-16位数字英文组合
+      if (this.changePassForm.newPass !== this.changePassForm.newPass2)
+        return (this.changePassForm.prompt2 = this.changePassForm.prompt3 = "message.signin.txt38"); // 密码校验不通过
+      this.changePassForm.prompt2 = "";
+      this.changePassForm.prompt3 = "";
+      this.submitloading = true;
+      this.$api
+        .accountUpdate(
+          { email: this.changePassForm.mailAccount, newPwd: this.changePassForm.newPass },
+          { headers: { Authorization: "Bearer " + this.getLogin.token } },
+        )
+        .then((res) => {
+          this.submitloading = false;
+          if (res.code === 200) {
+            // console.log(res.msg);
+            this.resetUserInfo();
+            this.closePassPopup();
+            this.$router.push("/signin/login");
+          } else if (res.code === 4000) {
+            // console.log(res.msg);
+          }
+          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+        })
+        .catch(() => {
+          this.submitloading = false;
+        });
+    },
+    /**倒计时 */
+    countdownFun(end) {
+      const msec = end - Date.parse(new Date());
+      if (msec <= 0) {
+        this.removeItemGetCode();
+      } else {
+        // let day = parseInt(msec / 1000 / 60 / 60 / 24);
+        // let hr = parseInt((msec / 1000 / 60 / 60) % 24);
+        let min = parseInt((msec / 1000 / 60) % 60);
+        let sec = parseInt((msec / 1000) % 60);
+        // this.day = day;
+        // this.hr = hr > 9 ? hr : "0" + hr;
+        this.minutes = min > 9 ? min : "0" + min;
+        this.seconds = sec > 9 ? sec : "0" + sec;
+        if (min >= 0 && sec >= 0) {
+          if (min == 0 && sec == 0) {
+            this.removeItemGetCode();
+          } else {
+            setTimeout(() => {
+              this.countdownFun(JSON.parse(localStorage.getItem(`fpvc${this.forgetPassForm.mailAccount}`)));
+            }, 1000);
+          }
+        }
+      }
+    },
+    /**倒计时结束移除 */
+    removeItemGetCode() {
+      localStorage.removeItem(`fpvc${this.forgetPassForm.mailAccount}`);
+      this.showCountdown = false;
+    },
+    /**重置用户信息 */
+    resetUserInfo() {
+      this.$store.commit("setLogin", {
+        loginStatus: false,
+        rememberStatus: false,
+        mailAccount: "",
+        password: "",
+        token: "",
+        activationTime: "",
+        lastLogin: "",
+        addr: "",
+      });
     },
     // 弹窗关闭
     closePassPopup() {
