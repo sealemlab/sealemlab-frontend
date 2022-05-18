@@ -60,7 +60,7 @@
                   </span>
                   <span class="font12"># {{item.id}}</span>
                 </div>
-                <img :src="`${$store.state.imgUrl}3d.webp`" />
+                <img :src="`${$store.state.imgUrl}new3d.webp`" />
               </div>
             </div>
           </div>

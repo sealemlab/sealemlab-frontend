@@ -65,7 +65,7 @@
                   </span>
                   <span class="font12"># {{item.id}}</span>
                 </div>
-                <img :src="`${$store.state.imgUrl}3d.webp`" />
+                <img :src="`${$store.state.imgUrl}new3d.webp`" />
               </div>
             </div>
           </div>
@@ -159,15 +159,10 @@ export default {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    // max-height: 738px;
-    // overflow-y: auto;
     padding-bottom: 132px;
     .out_box_one{
       width: 20%;
       padding: 10px;
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
       .onebox {
         position: relative;
         width: 204px;
@@ -209,7 +204,6 @@ export default {
               position: absolute;
               top: 34px;
               width: 100%;
-              width: 100%;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -219,9 +213,6 @@ export default {
                 color: #EFB045;
                 line-height: 29px;
                 margin-right: 5px;
-                // background: liner-gradient(180deg, #F1E069 92%, #A87D30 28%, #FEF6C2 70%, #B48533 13%);
-                // -webkit-background-clip: text;
-                // -webkit-text-fill-color: transparent;
               }
               img{
                 width: 24px;

@@ -207,6 +207,8 @@ export default {
         }else{
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'失败'}));
         }
+        this.selectedNUM = 0
+        this.selectALLBtn = false
         console.log('监听盲盒开奖结果: user', user)
         console.log('监听盲盒开奖结果: boxslengths',boxslengths)
         console.log('监听盲盒开奖结果: boxarrID', boxarrID);
