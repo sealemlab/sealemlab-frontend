@@ -219,7 +219,7 @@ export default {
             }
           }, 1000);
         }else{
-          this.balanceStatus = false
+          this.balanceStatus = this.allLoading = false
         }
       },
       deep: true,
