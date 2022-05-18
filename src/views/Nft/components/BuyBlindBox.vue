@@ -65,6 +65,66 @@
         </div>
       </div>
     </div>
+    <!-- 盲盒概率 -->
+    <div class="blindbox_introduce">
+      <p class="font30 introduce_title_txt">{{$t("message.nft.txt216")}}</p>
+      <div class="box_probability font20">
+        <div class="top_one_line">
+          <div class="small_box">
+            <span>{{$t("message.nft.txt217")}}</span><span class="specil_span">{{$t("message.nft.txt218")}}</span>
+          </div>
+          <div class="small_box">
+            <p><span>4</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>5</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>6</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>7</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>8</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>9</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+        </div>
+        <div class="top_one_line">
+          <div class="small_box_specil">
+            <span>{{$t("message.nft.txt219")}}</span><span class="specil_span">{{$t("message.nft.txt218")}}</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power1.webp`" class="power_img" /><span class="specil_span">{{$t("message.nft.txt220")}}</span></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power2.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt221")}}</span></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power3.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt222")}}</span></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power4.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt223")}}</span></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power5.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt224")}}</span></p>
+            <span>0</span>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- 盲盒介绍 -->
     <div class="blindbox_introduce">
       <p class="font30 introduce_title_txt">{{$t("message.nft.txt29")}}</p>
@@ -219,6 +279,9 @@ export default {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'购买中...','link':res.hash}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
+          this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
+            sessionStorage.setItem("sb_count", res)
+          })
           console.log("购买成功")
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'购买成功'}));
           
@@ -477,6 +540,56 @@ export default {
         font-weight: 400;
         color: #FFFFFF;
         line-height: 32px;
+      }
+    }
+  }
+  .box_probability{
+    width: 100%;
+    height: 296px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 31px;
+    border: 1px solid #D3B96D;
+    margin-top: 23px;
+    padding: 30px;
+    .top_one_line{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .small_box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img{
+            width: 18px;
+          }
+          .power_img{
+            margin-top: 15px;
+            margin-right: 5px;
+          }
+        }
+      }
+      .small_box_specil{
+        display: flex;
+        flex-direction: column;
+      }
+      span{
+        font-weight: 600;
+        color: #EDD07E;
+        line-height: 28px;
+        &:nth-child(2){
+          margin-top: 10px;
+          color: #FFFFFF;
+        }
+      }
+      .specil_span{
+        color: #EDD07E !important;
       }
     }
   }

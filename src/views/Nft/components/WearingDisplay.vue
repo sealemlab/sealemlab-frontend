@@ -30,8 +30,8 @@
               </div>
             </swiper-slide>
           </swiper>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <!-- <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div> -->
         </div>
       </div>
       <div class="right_content">
@@ -442,11 +442,11 @@ export default {
       },
       swiperOption2: {
         slidesPerView: 4,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-          disabledClass: "swiper-button-disabled",
-        },
+        // navigation: {
+        //   nextEl: ".swiper-button-next",
+        //   prevEl: ".swiper-button-prev",
+        //   disabledClass: "swiper-button-disabled",
+        // },
         observer: true,
         observeParents: true,
         grabCursor: true,

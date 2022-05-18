@@ -78,9 +78,10 @@ export default {
   computed: { ...mapGetters(["getNoticeNum","isEnLang","getLogin","getIsMobile","getSubtringAccount","getIstrue"]) },
   watch: {
     $route(to, from) {
-      if (from.matched.length && to.matched[0].path != from.matched[0].path) {
-        window.scrollTo(0, 0);
-      }
+      window.scrollTo(0, 0);
+      // if (from.matched.length && to.matched[0].path != from.matched[0].path) {
+      //   window.scrollTo(0, 0);
+      // }
       if (to.path == "/home") {
         this.navActive = -1;
       }else if (to.path == '/bond') {

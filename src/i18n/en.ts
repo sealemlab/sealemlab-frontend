@@ -363,6 +363,17 @@ export const message = {
     txt213:"2 set:Increase chi blast dmg 26% ",
     txt214:"3 set:Decrease skill cooldown 6.6 Second",
     txt215:"Introduction:The Conquerors silence set is designed for the brave who desires to dominate the arena. It contains enough power to handle every situation when you are challenging. Wear it to become the king of the arena！",
+  
+    txt216:"Mystery box Distribution",
+    txt217:"Star",
+    txt218:"Ratio",
+    txt219:"Rarity",
+    txt220:"Normal",
+    txt221:"Medium",
+    txt222:"Rare",
+    txt223:"Epic",
+    txt224:"Legend",
+
   },
   bond: {
     txt1: "Bond",

@@ -71,11 +71,15 @@
         <span v-else-if="!loadMoreStatus">End</span>
       </div>
     </div>
-    <div class="loading_box_content" v-if="nftArr.length == 0 && getIstrue">
+    <div class="loading_box_content" v-if="nftArr.length == 0 && getIstrue && loadMoreStatus">
       <LoadingAnmation></LoadingAnmation>
     </div>
-    <div class="loading_box_content" v-if="nftArr.length == 0 && !getIstrue">
+    <div class="loading_box_content" v-else-if="nftArr.length == 0 || !getIstrue">
       NoData
+    </div>
+    <div class="video_proup" v-if="videoStatus">
+      <video class="video_" :src="videoSrc" loop autoplay muted controls></video>
+      <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click="closeProup"/>
     </div>
   </div>
 </template>
@@ -93,6 +97,8 @@ export default {
       loadMoreStatus:true,
       busy: false, // 为true则第一次不执行loadmore
       nftArr:[],
+      videoStatus:false,
+      videoSrc:'',
     }
   },
   watch: {
@@ -113,6 +119,10 @@ export default {
                   this.busy = false
                   this.nftArr = this.nftArr.concat(res1)
                   localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
+                }else{
+                  this.loadMoreStatus = false
+                  this.isOneLoading = false
+                  this.busy = true
                 }
               })
               return
@@ -146,6 +156,13 @@ export default {
       deep: true,
       immediate: true,
     },
+    'videoStatus'(newvala){
+      if(newvala){
+        document.body.style.overflow='hidden'
+      }else{
+        document.body.style.overflow='visible'
+      }
+    },
   },
   methods:{
     loadMore() {
@@ -170,11 +187,8 @@ export default {
     },
     nftFun(item){
       console.log('装备信息item: ', item);
-      // sn().getDatas(129, 'attr').then(res => {
-      //   console.log('getDatas-----res: ', res);
-      //   let aa = getSourceUrl(res)
-      //   console.log('aa: ', aa);
-      // })
+      this.videoStatus = true
+      this.videoSrc = item.videoSrc
     },
     getAllUserNftInfo(calback){
       sn().tokensOfOwnerBySize(this.getAccount, 0, 100000000).then(res => {
@@ -182,6 +196,9 @@ export default {
         // this.userAllNft = res[1]
         calback(Number(res[1]))
       })
+    },
+    closeProup(){
+      this.videoStatus = false
     }
   }
 };
@@ -317,5 +334,29 @@ export default {
   justify-content: center;
   align-items: center;
   color: #ffffff;
+}
+.video_proup{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 88;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  .video_{
+    height: 90%;
+    object-fit: cover;
+  }
+  .close_img{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 34px;
+    cursor: pointer;
+  }
 }
 </style>

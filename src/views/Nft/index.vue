@@ -89,17 +89,19 @@ export default {
       }
     }
     ul{
-      margin-top: 36px;
+      position: fixed;
+      top: 116px;
+      left: 5vw;
+      background: rgba(0,0,0,0.5);
       flex-direction: column;
       li{
-        // margin-top: 80px;
         font-weight: normal;
         color: #FFFFFF;
         line-height: 48px;
         min-width: 120px;
         display: flex;
         align-items: center;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         color: #fff;
         cursor: pointer;
       }
@@ -108,9 +110,10 @@ export default {
       }
     }
     .main{
-      min-width: calc(100% - 120px);
+      width: 100vw;
       max-width: 1200px;
       margin-top: 50px;
+      padding-left: 120px;
     }
   }
 }
