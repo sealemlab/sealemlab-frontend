@@ -130,7 +130,7 @@ export default {
         password2: "",
         prompt4: "",
       },
-      isShowPassword: true,
+      isShowPassword: false,
       registerbtnloading: false,
       igraeeFlag: false,
       codebtnloading: false,
@@ -140,7 +140,6 @@ export default {
     };
   },
   methods: {
-    /**注册获取验证码 rvc  registerVerifyCode */
     sendEmail() {
       if (this.codebtnloading || this.showCountdown) return;
       if (!this.registerForm.mailAccount) return (this.registerForm.prompt1 = "message.signin.txt30"); // 填写邮箱
@@ -161,16 +160,13 @@ export default {
         this.$api
           .accountSendEmail({ email: this.registerForm.mailAccount, method: "1" })
           .then((res) => {
-            this.codebtnloading = false;
             if (res.code === 200) {
-              // console.log(res.msg);
               this.showCountdown = true;
-              const end = Date.parse(new Date()) + 3 * 60 * 1000;
+              const end = Date.parse(new Date()) + 10 * 60 * 1000; // 10分钟
               localStorage.setItem(`rvc${this.registerForm.mailAccount}`, JSON.stringify(end));
               this.countdownFun(end);
-            } else if (res.code === 4000) {
-              // console.log(res.msg);
             }
+            this.codebtnloading = false;
             this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
           })
           .catch(() => {
@@ -178,7 +174,6 @@ export default {
           });
       }
     },
-    /**注册 */
     registerFun() {
       if (this.registerbtnloading) return;
       if (!this.registerForm.mailAccount) return (this.registerForm.prompt1 = "message.signin.txt30"); // 填写邮箱
@@ -207,21 +202,17 @@ export default {
         .accountRegister({ email: this.registerForm.mailAccount, password: this.registerForm.password, code: this.registerForm.verifyCode })
         .then((res) => {
           this.registerbtnloading = false;
-          this.showCountdown = false; // 倒计时结束
+          this.showCountdown = false;
           localStorage.removeItem(`rvc${this.registerForm.mailAccount}`);
-          if (res.code === 200) {
-            // console.log(res.msg);
-            this.toLogin();
-          } else if (res.code === 4000) {
-            // console.log(res.msg);
-          }
           this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+          if (res.code === 200) {
+            this.toLogin();
+          }
         })
         .catch(() => {
           this.registerbtnloading = false;
         });
     },
-    /**倒计时 */
     countdownFun(end) {
       const msec = end - Date.parse(new Date());
       if (msec <= 0) {
@@ -246,12 +237,10 @@ export default {
         }
       }
     },
-    /**倒计时结束移除 */
     removeItemGetCode() {
       localStorage.removeItem(`rvc${this.registerForm.mailAccount}`);
       this.showCountdown = false;
     },
-    /**协议 */
     igraeeTheTreaty() {
       window.location.href = `${this.$store.state.htmlUrl}SealemLab_protocol.html`;
       // https://cdn.sealemlab.com/sealemlab_assets_test/htmls/SealemLab_protocol.html?lang=zh

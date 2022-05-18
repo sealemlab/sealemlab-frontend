@@ -135,7 +135,7 @@ export default {
         newPass2: "",
         prompt3: "",
       },
-      isShowPassword: true,
+      isShowPassword: false,
       codebtnloading: false,
       submitloading: false,
       showCountdown: false,
@@ -152,7 +152,6 @@ export default {
   },
 
   methods: {
-    /**发送找回密码验证码 fpvc   forgetPassVerifyCode */
     sendEmail() {
       if (this.codebtnloading || this.showCountdown) return;
       if (!this.forgetPassForm.mailAccount) return (this.forgetPassForm.prompt1 = "message.signin.txt30"); // 填写邮箱
@@ -173,16 +172,13 @@ export default {
         this.$api
           .accountSendEmail({ email: this.forgetPassForm.mailAccount, method: "2" })
           .then((res) => {
-            this.codebtnloading = false;
             if (res.code === 200) {
               this.showCountdown = true;
-              const end = Date.parse(new Date()) + 3 * 60 * 1000;
+              const end = Date.parse(new Date()) + 10 * 60 * 1000; // 10分钟
               localStorage.setItem(`fpvc${this.forgetPassForm.mailAccount}`, JSON.stringify(end));
               this.countdownFun(end);
-              // console.log(res.msg);
-            } else if (res.code === 4000) {
-              // console.log(res.msg);
             }
+            this.codebtnloading = false;
             this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
           })
           .catch(() => {
@@ -190,7 +186,6 @@ export default {
           });
       }
     },
-    /**Retrieve password */
     handleSubmit1() {
       console.log("Retrieve passwords");
       if (this.submitloading) return;
@@ -214,20 +209,16 @@ export default {
           this.submitloading = false;
           this.showCountdown = false;
           localStorage.removeItem(`fpvc${this.forgetPassForm.mailAccount}`);
+          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
           if (res.code === 200) {
-            // console.log(res.msg);
             this.resetUserInfo();
             this.closePassPopup();
-          } else if (res.code === 4000) {
-            // console.log(res.msg);
           }
-          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
         })
         .catch(() => {
           this.submitloading = false;
         });
     },
-    /**Change passwords */
     handleSubmit2() {
       console.log("Change passwords");
       if (this.submitloading) return;
@@ -248,22 +239,18 @@ export default {
           { headers: { Authorization: "Bearer " + this.getLogin.token } },
         )
         .then((res) => {
-          this.submitloading = false;
           if (res.code === 200) {
-            // console.log(res.msg);
             this.resetUserInfo();
             this.closePassPopup();
             this.$router.push("/signin/login");
-          } else if (res.code === 4000) {
-            // console.log(res.msg);
           }
+          this.submitloading = false;
           this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
         })
         .catch(() => {
           this.submitloading = false;
         });
     },
-    /**倒计时 */
     countdownFun(end) {
       const msec = end - Date.parse(new Date());
       if (msec <= 0) {
@@ -288,12 +275,10 @@ export default {
         }
       }
     },
-    /**倒计时结束移除 */
     removeItemGetCode() {
       localStorage.removeItem(`fpvc${this.forgetPassForm.mailAccount}`);
       this.showCountdown = false;
     },
-    /**重置用户信息 */
     resetUserInfo() {
       this.$store.commit("setLogin", {
         loginStatus: false,
@@ -306,7 +291,6 @@ export default {
         addr: "",
       });
     },
-    // 弹窗关闭
     closePassPopup() {
       this.$parent.isShowPassPopup = false;
     },

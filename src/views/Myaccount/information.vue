@@ -62,27 +62,23 @@ export default {
     return {
       isShowPassPopup: false,
       isShowVerifyCode: false,
-      isShowPassword: true,
+      isShowPassword: false,
       loginbtnloading: false,
     };
   },
   methods: {
-    /**更新信息 */
     updateInformation() {
       if (this.loginbtnloading) return;
       this.loginbtnloading = true;
       this.$api
-        .accountLogin({ email: this.getLogin.mailAccount, password: this.getLogin.password })
+        .accountUpdateInfo({ email: this.getLogin.mailAccount, password: this.getLogin.password })
         .then((res) => {
           this.loginbtnloading = false;
           if (res.code === 200) {
-            // console.log(res.msg);
             this.$store.state.userInfo.activationTime = res.data.activationTime;
             this.$store.state.userInfo.addr = res.data.addr;
             this.$store.state.userInfo.token = res.data.token;
             this.$store.state.userInfo.lastLogin = res.data.lastLogin;
-          } else if (res.code === 4000) {
-            // console.log(res.msg);
           }
           this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
         })
@@ -100,12 +96,11 @@ export default {
 .information_page {
   width: 95%;
   margin: 0 auto;
-  margin-top: 67px;
+  padding: 80px 0;
   .box {
     width: 100%;
     display: flex;
     background: #101010;
-    // border: 2px solid #242222;
     .left_content {
       width: 55%;
       display: flex;

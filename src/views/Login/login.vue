@@ -107,11 +107,11 @@ export default {
         prompt1: "",
         prompt2: "",
       },
-      rememberStatus: false, //记住我状态
+      rememberStatus: false,
       loginbtnloading: false,
-      isShowPassword: true,
+      isShowPassword: false,
       isShowPassPopup: false,
-      isShowVerifyCode: false, //修改密码组件的验证码是否显示
+      isShowVerifyCode: false,
     };
   },
   created() {
@@ -120,7 +120,6 @@ export default {
     this.rememberStatus = this.getLogin.rememberStatus;
   },
   methods: {
-    /**登录 */
     loginFun() {
       if (this.loginbtnloading) return;
       if (!this.loginForm.mailAccount) return (this.loginForm.prompt1 = "message.signin.txt30"); // 填写邮箱
@@ -133,9 +132,7 @@ export default {
       this.$api
         .accountLogin({ email: this.loginForm.mailAccount, password: this.loginForm.password })
         .then((res) => {
-          this.loginbtnloading = false;
           if (res.code === 200) {
-            // "登录成功";
             this.$store.commit("setLogin", {
               loginStatus: true,
               rememberStatus: this.rememberStatus,
@@ -147,9 +144,8 @@ export default {
               addr: res.data.addr,
             });
             this.$router.push("/myaccount/information");
-          } else if (res.code === 4000) {
-            // "登录失败";
           }
+          this.loginbtnloading = false;
           this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
         })
         .catch(() => {
