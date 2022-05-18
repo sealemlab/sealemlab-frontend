@@ -1,4 +1,4 @@
-import {wallet, network,sb} from "sacredrealm-sdk";
+import {wallet, network,sb,sn,getSourceUrl} from "sacredrealm-sdk";
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
@@ -149,6 +149,8 @@ export default {
           resolve(obj)
         }else{
           obj.account = res[0]
+          localStorage.removeItem('nftInfo')
+          console.log("切换账号")
           if(obj.chainID == net.chainId){
             obj.status = true
             store.commit("setnewinfo",  JSON.stringify(obj))
@@ -178,6 +180,7 @@ export default {
       })
     })
   },
+  // 获取用户的盲盒信息
   async newgetUserBoxInfoFun(account: string) {
     if (sessionStorage.getItem("sb_count")) {
       sessionStorage.removeItem("sb_count");
@@ -213,4 +216,56 @@ export default {
         })
     })
   },
+  // 获取用户的装备信息
+  getUserBindbox(account:string,cursor:number, size = 10){//获取某用户基于指针（从0开始）和数量的装备ID数组，以及最后一个数据的指针
+    return new Promise((resolve) => { 
+      sn().tokensOfOwnerBySize(account, cursor, size).then(res => {
+        // console.log("公共函数:获取用户的装备信息:",res)
+        if(res[0].length > 0){
+          this.ProcessingFunction(res[0]).then(data => {
+            resolve(data)
+          })
+        }else{
+          resolve([])
+        }
+      })
+    })
+  },
+  // 处理函数
+  ProcessingFunction(arr:any){
+    // console.log("处理函数接收到的参数:",arr.length)
+    return new Promise((resolve) => {
+      let count = 1;
+      let orther_arr:any = []
+      arr.map(async (item:any) => {
+        let obj = {
+          id:-1,
+          src:'',
+          type:-1,//职业
+          start:-1,//星级
+          power:-1,//战力
+          position:-1,//部位
+          suit:-1,//套装
+          videoSrc:'',//
+          status:false//状态
+        }
+        obj.id = Number(item)
+        // console.log("公共函数:处理函数:",obj)
+        let fun_arr:any = await sn().getDatas(Number(item), 'attr')
+        obj.start = Number(fun_arr[0])
+        obj.power = Number(fun_arr[1])
+        obj.type = Number(fun_arr[2])
+        obj.position = Number(fun_arr[3])
+        obj.suit =  Number(fun_arr[4])
+        obj.src = getSourceUrl(fun_arr) + '.png'
+        obj.videoSrc = getSourceUrl(fun_arr) + '.mp4'
+        orther_arr.push(obj)
+        // console.log("公共函数:处理函数:",orther_arr)
+        if (count == arr.length) {
+          resolve(orther_arr)
+        }
+        count++
+      })
+    })
+  }
 };

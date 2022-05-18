@@ -54,6 +54,7 @@
         <div class="btnbox font20" :class="disable?'disable_bnb':''">
           <!-- {{$t("message.nft.txt28")}} -->
           <FunBtn
+            :allLoading="allLoading"
             :isapprove="isapprove"
             :approveloading="buy_isloading"
             :isloading="buy_isloading"
@@ -62,6 +63,66 @@
             @sonapprove="sonapprove"
             @dosomething="buyBindBox"
           />
+        </div>
+      </div>
+    </div>
+    <!-- 盲盒概率 -->
+    <div class="blindbox_introduce">
+      <p class="font30 introduce_title_txt">{{$t("message.nft.txt216")}}</p>
+      <div class="box_probability font20">
+        <div class="top_one_line">
+          <div class="small_box">
+            <span>{{$t("message.nft.txt217")}}</span><span class="specil_span">{{$t("message.nft.txt218")}}</span>
+          </div>
+          <div class="small_box">
+            <p><span>4</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>5</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>6</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>7</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>8</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><span>9</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>0</span>
+          </div>
+        </div>
+        <div class="top_one_line">
+          <div class="small_box_specil">
+            <span>{{$t("message.nft.txt219")}}</span><span class="specil_span">{{$t("message.nft.txt218")}}</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power1.webp`" class="power_img" /><span class="specil_span">{{$t("message.nft.txt220")}}</span></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power2.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt221")}}</span></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power3.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt222")}}</span></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power4.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt223")}}</span></p>
+            <span>0</span>
+          </div>
+          <div class="small_box">
+            <p><img :src="`${$store.state.imgUrl}power5.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt224")}}</span></p>
+            <span>0</span>
+          </div>
         </div>
       </div>
     </div>
@@ -110,6 +171,7 @@ export default {
   },
   data() {
     return {
+      allLoading:true,// 授权/操作按钮在没有进行判断之前,全部转圈圈状态
       resetdata:false,
       surplusNumStatus:true,//剩余数量loading
       priceStatus:true,// 价格loading
@@ -138,7 +200,9 @@ export default {
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
+          this.allLoading = true
           this.balanceStatus = true
+          this.getBtnStatus(this.bindboxType)
           let setIntervalOBJ = setInterval(() => {
             if (this.payAddress) {
               this.getUserBalance(this.payAddress)
@@ -150,11 +214,12 @@ export default {
                 } else {
                   this.isapprove = false;
                 }
+                this.allLoading = false
               });
             }
           }, 1000);
         }else{
-          this.balanceStatus = false
+          this.balanceStatus = this.allLoading = false
         }
       },
       deep: true,
@@ -175,6 +240,7 @@ export default {
           }else{
             this.isapprove = false;
           }
+          this.allLoading = false
         })
     },
     buyBindBox(){
@@ -219,6 +285,9 @@ export default {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'购买中...','link':res.hash}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
+          this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
+            sessionStorage.setItem("sb_count", res)
+          })
           console.log("购买成功")
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'购买成功'}));
           
@@ -259,26 +328,8 @@ export default {
         // 获取用户某代币余额
         this.getUserBalance(res)
       });
-      // 获取某类型的盲盒是否开启白名单
-      sb().whiteListFlags(boxtypeInfo).then(res => {
-        // console.log('获取某类型的盲盒是否开启白名单:', res);
-        // this.isOpenWhiteList = res
-        // 判断某用户是否在某类型的盲盒的白名单
-        sb().getWhiteListExistence(boxtypeInfo,this.getAccount).then(res1 => {
-          // console.log('判断某用户是否在某类型的盲盒的白名单:', res1);
-          // this.isWhiteList = res1
-          if(res){//为真证明开启白名单限制
-            if(!res1){
-              this.disable = true
-            }else{
-              this.disable = false
-            }
-          }else{
-            this.disable = false
-          }
-        });
-      });
       
+      this.getBtnStatus(boxtypeInfo)
     },
     // 盲盒剩余数量  获取某类型的盲盒下某用户某小时剩余购买数量
     getBindboxNum(bindboxType){
@@ -305,6 +356,28 @@ export default {
       }).catch(() => {
         this.balanceStatus = false
       })
+    },
+    //判断按钮是否禁用
+    getBtnStatus(boxtypeInfo){
+      // 获取某类型的盲盒是否开启白名单
+      sb().whiteListFlags(boxtypeInfo).then(res => {
+        // console.log('获取某类型的盲盒是否开启白名单:', res);
+        // this.isOpenWhiteList = res
+        // 判断某用户是否在某类型的盲盒的白名单
+        sb().getWhiteListExistence(boxtypeInfo,this.getAccount).then(res1 => {
+          // console.log('判断某用户是否在某类型的盲盒的白名单:', res1);
+          // this.isWhiteList = res1
+          if(res){//为真证明开启白名单限制
+            if(!res1){
+              this.disable = true
+            }else{
+              this.disable = false
+            }
+          }else{
+            this.disable = false
+          }
+        });
+      });
     }
   },
   mounted(){
@@ -477,6 +550,56 @@ export default {
         font-weight: 400;
         color: #FFFFFF;
         line-height: 32px;
+      }
+    }
+  }
+  .box_probability{
+    width: 100%;
+    height: 296px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 31px;
+    border: 1px solid #D3B96D;
+    margin-top: 23px;
+    padding: 30px;
+    .top_one_line{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .small_box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img{
+            width: 18px;
+          }
+          .power_img{
+            margin-top: 15px;
+            margin-right: 5px;
+          }
+        }
+      }
+      .small_box_specil{
+        display: flex;
+        flex-direction: column;
+      }
+      span{
+        font-weight: 600;
+        color: #EDD07E;
+        line-height: 28px;
+        &:nth-child(2){
+          margin-top: 10px;
+          color: #FFFFFF;
+        }
+      }
+      .specil_span{
+        color: #EDD07E !important;
       }
     }
   }

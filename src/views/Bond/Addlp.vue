@@ -63,10 +63,10 @@
       <div class="main_button font16" @click="bondFun">Approve</div>
       <div class="tipbox font12">
         <p class="font14"><span>{{$t("message.bond.txt27")}}</span><span>20%</span></p>
-        <p><span>{{$t("message.bond.txt28")}}</span><span>16%</span>
-        <p><span>{{$t("message.bond.txt29")}}</span><span>3%</span>
-        <p><span>{{$t("message.bond.txt30")}}</span><span>1%</span>
-        <p><span>{{$t("message.bond.txt31")}}</span><span>1%</span>
+        <p class="color1"><span>{{$t("message.bond.txt28")}}</span><span>16%</span>
+        <p class="color2"><span>{{$t("message.bond.txt30")}}</span><span>1%</span>
+        <p class="color3"><span>{{$t("message.bond.txt29")}}</span><span>3%</span>
+        <p class="color4"><span>{{$t("message.bond.txt31")}}</span><span>1%</span>
         <p class="font14"><span>{{$t("message.bond.txt32")}}</span><span>1%</span></p>
         <p class="font16"><span>{{$t("message.bond.txt33")}}</span><span>$0</span></p>
         <p>{{$t("message.bond.txt34")}}</p>

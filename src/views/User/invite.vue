@@ -1,31 +1,22 @@
 <template>
   <div class="invite_page" :class="isEnLang?'en_Bold':'cn_lang'">
     <div class="title_box display_flex">
-      <div class="onebox display_flex" >
-        <span class="font26 demo_font_color">邀请总数</span>
-        <span class="font26">10</span>
-      </div>
-      <div class="onebox display_flex">
-        <span class="font26 demo_font_color">邀请奖励</span>
-        <span class="font26">10323</span>
-      </div>
-      <div class="btn_box display_flex font20">
-        <!-- 现在邀请 -->
-      </div>
+      <span class="font26">{{$t("message.user.txt15")}}</span>
+      <span class="font26 _txt">10</span>
     </div>
     <div class="ranking demo_font_color">
-      <p class="font26">邀请排行榜</p>
+      <p class="font26">{{$t("message.user.txt16")}}</p>
       <div class="listbox">
         <div class="topline">
-          <div class="title_onebox fontsize18">{{ $t("message.invite.txt1") }}</div>
+          <div class="title_onebox fontsize18">{{ $t("message.user.txt1") }}</div>
           <div class="onebox">
-            <div class="insertbox1 fontsize18">{{ $t("message.invite.txt2") }}</div>
+            <div class="insertbox1 fontsize18">{{ $t("message.user.txt2") }}</div>
           </div>
           <div class="onebox">
-            <div class="insertbox1 fontsize18">{{ $t("message.invite.txt3") }}</div>
+            <div class="insertbox1 fontsize18">{{ $t("message.user.txt3") }}</div>
           </div>
           <div class="onebox">
-            <div class="insertbox2 fontsize18">{{ $t("message.invite.txt4") }}</div>
+            <div class="insertbox2 fontsize18">{{ $t("message.user.txt4") }}</div>
           </div>
         </div>
         <div class="bottomline">
@@ -100,18 +91,8 @@ export default {
   .title_box{
     width: 100%;
     align-items: center;
-    justify-content:space-between;
-    .onebox{
-      min-height: 100px;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .btn_box{
-      padding:0 40px;
-      line-height: 50px;
-      background:linear-gradient(#A07F3C,#F9DC8C);
-      cursor: pointer;
+    ._txt{
+      margin-left: 10px;
     }
   }
   .ranking{

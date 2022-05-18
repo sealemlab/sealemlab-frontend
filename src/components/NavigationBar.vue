@@ -2,8 +2,8 @@
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
       <img class="logo" :src="`${$store.state.imgUrl}logo.webp`" alt="" @click="toRoute('/home')" />
-      <ul :class="getIsMobile ? 'disply_none' : ''">
-        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
+      <ul :class="getIsMobile?'disply_none':''">
+        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link,index)">
           <span class="font18">{{ $t(item.label) }}</span>
         </li>
       </ul>
@@ -67,8 +67,8 @@ export default {
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
         { label: "message.nav.txt5", link: "" },
-        { label: "message.nav.txt6", link: "" },
-        // { label: "message.nav.txt6", link: "/user/assets/0" },
+        // { label: "message.nav.txt6", link: "" },
+        { label: "message.nav.txt6", link: "/user/assets/0" },
         // { label: "message.nav.txt7", link: "" }
       ],
       showLangSelect: false,
@@ -79,9 +79,10 @@ export default {
   computed: { ...mapGetters(["getNoticeNum", "isEnLang", "getLogin", "getIsMobile", "getSubtringAccount", "getIstrue"]) },
   watch: {
     $route(to, from) {
-      if (from.matched.length && to.matched[0].path != from.matched[0].path) {
-        window.scrollTo(0, 0);
-      }
+      window.scrollTo(0, 0);
+      // if (from.matched.length && to.matched[0].path != from.matched[0].path) {
+      //   window.scrollTo(0, 0);
+      // }
       if (to.path == "/home") {
         this.navActive = -1;
       } else if (to.path == "/bond") {
@@ -90,10 +91,13 @@ export default {
         this.navActive = 1;
       } else if (to.path.indexOf("/signin/") !== -1 || to.path.indexOf("/myaccount/") !== -1) {
         this.navActive = 7;
-      } else {
-        if (!this.getNoticeNum) {
-          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-          this.$store.commit("setNoticeNum", true);
+      }else if (to.path.indexOf("/user/") !== -1) {
+        this.navActive = 4;
+      }
+      else{
+        if(!this.getNoticeNum){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+          this.$store.commit("setNoticeNum",true)
         }
       }
     },
@@ -112,8 +116,15 @@ export default {
       localStorage.removeItem("walletType");
       this.$store.commit("setnewinfo", JSON.stringify({}));
     },
-    toRoute(link) {
-      if (link) {
+    toRoute(link,index) {
+      if (link){
+        if(process.env.NODE_ENV === 'production' && index == 4){
+          if(!this.getNoticeNum){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+            this.$store.commit("setNoticeNum",true)
+          }
+          return
+        }
         this.$router.push(link);
       } else {
         if (!this.getNoticeNum) {

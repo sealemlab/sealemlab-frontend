@@ -424,15 +424,7 @@ export default {
       this.addlpDis = false;
     },
     BondClick(data) {
-      if(process.env.NODE_ENV === 'production'){
-        if(!this.getNoticeNum){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-          this.$store.commit("setNoticeNum",true)
-        }
-      }else{
-        this.addlpDis = true;
-      }
-      // console.log('this.$utils.isLang(): ', this.$utils.isLang());
+      this.addlpDis = true
     },
     showBuy(item){
       item.status = !item.status

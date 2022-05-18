@@ -1,6 +1,6 @@
 <template>
   <div class="giving_page">
-    赠送(暂未开发)
+    NoData
   </div>
 </template>
 

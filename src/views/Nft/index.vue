@@ -1,7 +1,6 @@
 <template>
   <div class="nft_page">
     <div class="content_box">
-      <!-- <img :src="route.src" class="nav_img" /> -->
       <!-- <div class="display_flex menu_box">
         <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
           <span class="nav_txt">{{ $t(route.label) }}</span>
@@ -76,9 +75,6 @@ export default {
         color: #fff;
         cursor: pointer;
         text-decoration: none;
-        // .nav_img{
-        //   width: 32px;
-        // }
         .nav_txt{
           font-weight: normal;
           color: #FFFFFF;
@@ -93,17 +89,19 @@ export default {
       }
     }
     ul{
-      margin-top: 36px;
+      position: fixed;
+      top: 116px;
+      left: 5vw;
+      background: rgba(0,0,0,0.5);
       flex-direction: column;
       li{
-        // margin-top: 80px;
         font-weight: normal;
         color: #FFFFFF;
         line-height: 48px;
         min-width: 120px;
         display: flex;
         align-items: center;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         color: #fff;
         cursor: pointer;
       }
@@ -112,9 +110,10 @@ export default {
       }
     }
     .main{
-      min-width: calc(100% - 120px);
+      width: 100vw;
       max-width: 1200px;
       margin-top: 50px;
+      padding-left: 120px;
     }
   }
 }

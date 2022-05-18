@@ -1,13 +1,16 @@
 <template>
   <div class="btn_page">
-    <div class="connect_box" v-if="!getIstrue" @click="commonLink">Connect</div>
-    <div class="connect_box" v-else-if="!isapprove" @click="sonapprove">
-      {{$t("message.approve")}}
-      <BtnLoading :isloading="approveloading"></BtnLoading>
+    <BtnLoading :isloading="true" v-if="allLoading"></BtnLoading>
+    <div v-else>
+      <div class="connect_box" v-if="!getIstrue" @click="commonLink">Connect</div>
+      <div class="connect_box" v-else-if="!isapprove" @click="sonapprove">
+        {{$t("message.approve")}}
+        <BtnLoading :isloading="approveloading"></BtnLoading>
       </div>
-    <div class="connect_box" v-else @click="dosomething">
-      {{$t(word)}}
-      <BtnLoading :isloading="isloading"></BtnLoading>
+      <div class="connect_box" v-else @click="dosomething">
+        {{$t(word)}}
+        <BtnLoading :isloading="isloading"></BtnLoading>
+      </div>
     </div>
   </div>
 </template>
@@ -23,6 +26,10 @@ export default {
     isloading:{
       type: Boolean,
       default: false // 授权成功以后的操作按钮loading
+    },
+    allLoading:{
+      type: Boolean,
+      default: true // 按钮内容未进行判断前  先loading
     },
     approveloading:{
       type: Boolean,
@@ -89,6 +96,9 @@ export default {
 .btn_page{
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .connect_box {
     width: 100%;
     height: 100%;

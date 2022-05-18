@@ -3,12 +3,12 @@
     <NavigationBar />
     <router-view />
     <FooterComponents />
-    <div class="mobile_nav">
+    <!-- <div class="mobile_nav">
       <div class="mobile_onebox" v-for="(item, index) in navArr" :key="index" @click="toRoute(item.link)">
         <div class="box"></div>
         <span class="mobile_nav_txt">{{ $t(item.label) }}</span>
       </div>
-    </div>
+    </div> -->
     <!-- 链接钱包弹窗 -->
     <WalletComponents
       @closewalletpage="walletClose"
@@ -51,6 +51,7 @@ export default {
       handler: function (newValue) {
         // console.log('app.vue页面的监听钱包状态newValue: ', newValue);
         if (newValue) {
+          // console.log("app的就爱你听账号")
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
             sessionStorage.setItem("sb_count", res)
           })
@@ -81,7 +82,7 @@ export default {
       },
       deep: true,
       immediate: true,
-    },
+    }
   },
   components: {
     NavigationBar,
@@ -143,42 +144,42 @@ export default {
   background: #000000;
 }
 @media screen and (min-width: 981px) {
-  .mobile_nav{
-    display: none;
-  }
+  // .mobile_nav{
+  //   display: none;
+  // }
 }
 @media screen and (max-width: 980px) {
   #app{
     padding-bottom: 1.1rem;
   }
-  .mobile_nav{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 96px;
-    background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
-    padding: 0 0.2rem;
-    .mobile_onebox{
-      max-width: 20%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .box{
-        width: 20px;
-        height: 20px;
-        background: blue;
-      }
-      .mobile_nav_txt{
-        font-weight: 600;
-        color: #ECCF83;
-        line-height: 0.14rem;
-        margin-top: 0.1rem;
-      }
-    }
-  }
+  // .mobile_nav{
+  //   position: fixed;
+  //   bottom: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   height: 96px;
+  //   background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+  //   padding: 0 0.2rem;
+  //   .mobile_onebox{
+  //     max-width: 20%;
+  //     display: flex;
+  //     flex-direction: column;
+  //     align-items: center;
+  //     .box{
+  //       width: 20px;
+  //       height: 20px;
+  //       background: blue;
+  //     }
+  //     .mobile_nav_txt{
+  //       font-weight: 600;
+  //       color: #ECCF83;
+  //       line-height: 0.14rem;
+  //       margin-top: 0.1rem;
+  //     }
+  //   }
+  // }
 }
 </style>
