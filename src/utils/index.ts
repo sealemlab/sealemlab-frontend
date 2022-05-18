@@ -246,6 +246,7 @@ export default {
           power:-1,//战力
           position:-1,//部位
           suit:-1,//套装
+          videoSrc:'',//
           status:false//状态
         }
         obj.id = Number(item)
@@ -257,6 +258,7 @@ export default {
         obj.position = Number(fun_arr[3])
         obj.suit =  Number(fun_arr[4])
         obj.src = getSourceUrl(fun_arr) + '.png'
+        obj.videoSrc = getSourceUrl(fun_arr) + '.mp4'
         orther_arr.push(obj)
         // console.log("公共函数:处理函数:",orther_arr)
         if (count == arr.length) {

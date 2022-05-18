@@ -119,40 +119,51 @@ img {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-// 字体样式
+// 英文---粗体
 @font-face {
   font-family: "SFCompactDisplay-Bold";
   src: url($font_url + "SF-Compact-Display-Bold.otf");
 }
+.en_Bold {
+  font-family: "SFCompactDisplay-Bold" !important;
+}
+
+// 英文---常规体
 @font-face {
   font-family: "SFCompactDisplay-Regular";
   src: url($font_url + "SF-Compact-Display-Regular.otf");
 }
+.en_Regular {
+  font-family: "SFCompactDisplay-Regular" !important;
+}
+
+// 英文---特黑体
 @font-face {
   font-family: "SFCompactDisplay-Heavy";
   src: url($font_url + "SF-Compact-Display-Heavy.otf");
 }
+.en_special {
+  font-family: "SFCompactDisplay-Heavy" !important;
+}
+
+// 英文---中黑体
+@font-face {
+  font-family: "SFCompactDisplay-Medium";
+  src: url($font_url + "SF-Compact-Display-Medium.otf");
+}
+.en_medium {
+  font-family: "SFCompactDisplay-Medium" !important;
+}
+
+// 中文
 @font-face {
   font-family: "PingFangTC-Semibold";
   src: url($font_url + "FZYouHFW.TTF");
 }
-
-//英文粗体
-.en_Bold {
-  font-family: "SFCompactDisplay-Bold" !important;
-}
-//英文细体
-.en_Regular {
-  font-family: "SFCompactDisplay-Regular" !important;
-}
-// 英文特殊字体
-.en_special {
-  font-family: "SFCompactDisplay-Heavy" !important;
-}
-// 中文
 .cn_lang {
   font-family: "PingFangTC-Semibold" !important;
 }
+
 @media screen and (min-width: 981px) {
   // 大标题字号
   .font45 {
