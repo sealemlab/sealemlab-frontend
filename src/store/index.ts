@@ -7,98 +7,108 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    prizeInfo:{
-      status:false,
-      boxarr:[]
-    },// 开盲盒弹窗信息
-    userBoxInfo:sessionStorage.getItem('setBoxInfo') || [],//用户的盲盒信息
-    userInfo:{
-      loginStatus:false, // 登录状态
-      username:'',
-      password:'',
-      rememberStatus:false
+    prizeInfo: {
+      status: false,
+      boxarr: [],
+    }, // 开盲盒弹窗信息
+    userBoxInfo: sessionStorage.getItem("setBoxInfo") || [], //用户的盲盒信息
+    userInfo: {
+      loginStatus: false, // 登录状态
+      rememberStatus: false,
+      mailAccount: "",
+      password: "",
+      token: "",
+      activationTime: "",
+      lastLogin: "",
+      addr: "",
     },
-    newWalletInfo:{
-      account:'',
-      chainID:'',
-      status:false
+    newWalletInfo: {
+      account: "",
+      chainID: "",
+      status: false,
     }, // 钱包信息
-    walletstatus:false,// 钱包弹窗状态
-    proupInfo:{
-      status:false,
-      isProgress:true,
-      content:'',
-      title:'message.tip.txt3',
-      ortherDoing:false,
-      link:''
-    },// 提示框信息
-    noticeInfo:{
-      status:false,
-      word:'',
-    },//轻提示信息
+    walletstatus: false, // 钱包弹窗状态
+    proupInfo: {
+      status: false,
+      isProgress: true,
+      content: "",
+      title: "message.tip.txt3",
+      ortherDoing: false,
+      link: "",
+    }, // 提示框信息
+    noticeInfo: {
+      status: false,
+      word: "",
+    }, //轻提示信息
     // https://cdn.sealemlab.com/sealemlab_assets_test/images/accrow.webp
-    imgUrl:process.env.NODE_ENV === 'production'?'//cdn.sealemlab.com/sealemlab_assets_main/images/':'//cdn.sealemlab.com/sealemlab_assets_test/images/',//图片前缀
-    videoUrl:process.env.NODE_ENV === 'production'?'//cdn.sealemlab.com/sealemlab_assets_main/video/':'//cdn.sealemlab.com/sealemlab_assets_test/video/',//视频前缀
-    codeTime:60,//验证码重新发送时间
-    emailReg:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,//邮箱校验
-    pwReg: /^[a-zA-Z0-9]{6,16}$/,//密码校验 6-16位数字英文组合
-    ProgressInfo:{
-      value:1,
-      title:''
+    imgUrl:
+      process.env.NODE_ENV === "production"
+        ? "//cdn.sealemlab.com/sealemlab_assets_main/images/"
+        : "//cdn.sealemlab.com/sealemlab_assets_test/images/", //图片前缀
+    videoUrl:
+      process.env.NODE_ENV === "production" ? "//cdn.sealemlab.com/sealemlab_assets_main/video/" : "//cdn.sealemlab.com/sealemlab_assets_test/video/", //视频前缀
+    htmlUrl:
+      process.env.NODE_ENV === "production" ? "//cdn.sealemlab.com/sealemlab_assets_main/htmls/" : "//cdn.sealemlab.com/sealemlab_assets_test/htmls/", //图片前缀
+    codeTime: 60, //验证码重新发送时间
+    emailReg: /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/, //邮箱校验
+    pwReg: /^[a-zA-Z0-9]{6,16}$/, //密码校验 6-16位数字英文组合
+    ProgressInfo: {
+      value: 1,
+      title: "",
     }, // 给进度条传值
-    noticeNum:false,// 轻提示弹窗只弹一次
-    BSC_BROWSER:process.env.NODE_ENV === 'production'?'https://www.bscscan.com/tx/':'https://testnet.bscscan.com/tx/'
+    noticeNum: false, // 轻提示弹窗只弹一次
+    BSC_BROWSER: process.env.NODE_ENV === "production" ? "https://www.bscscan.com/tx/" : "https://testnet.bscscan.com/tx/",
   },
   getters: {
     // 获取开盲盒弹窗信息
     getPrizeInfo(state) {
-      return state.prizeInfo
+      return state.prizeInfo;
     },
     // 获取是否可以再次弹起轻提示弹窗
     getNoticeNum(state) {
-      return state.noticeNum
+      return state.noticeNum;
     },
     // 获取进度条的值
     getProgressInfo(state) {
-      return state.ProgressInfo
+      return state.ProgressInfo;
     },
     // 获取用户盲盒信息
     getUserBoxInfo(state) {
-      return state.userBoxInfo
+      return state.userBoxInfo;
     },
-    getProupInfo(state){
-      return state.proupInfo
+    getProupInfo(state) {
+      return state.proupInfo;
     },
-    getNoticeInfo(state){
-      return state.noticeInfo
+    getNoticeInfo(state) {
+      return state.noticeInfo;
     },
     // 中英文状态
     isEnLang() {
       return i18n.locale == "EN";
     },
     // 用户信息
-    getLogin(state){
-      return state.userInfo
+    getLogin(state) {
+      return state.userInfo;
     },
     // 是否是移动端
-    getIsMobile(){
-      return document.body.clientWidth <= 980
+    getIsMobile() {
+      return document.body.clientWidth <= 980;
     },
     // 获取钱包弹窗状态
-    getwalletstatus(state){
+    getwalletstatus(state) {
       return state.walletstatus;
     },
     // 获取完整账号
     getAccount(state) {
-      return state.newWalletInfo.account
+      return state.newWalletInfo.account;
     },
     // 截取过后的账号
     getSubtringAccount(state) {
-      return utils.getSubStr(state.newWalletInfo.account,4)
+      return utils.getSubStr(state.newWalletInfo.account, 4);
     },
     // 获取是否已连接且网络状态正确
     getIstrue(state) {
-      return state.newWalletInfo.status
+      return state.newWalletInfo.status;
     },
   },
   mutations: {
@@ -127,24 +137,24 @@ export default new Vuex.Store({
       state.userInfo = data;
     },
     // 钱包链接信息
-    setnewinfo(state,data){
+    setnewinfo(state, data) {
       state.newWalletInfo = JSON.parse(data);
     },
     // 设置弹窗钱包状态
-    setwalletstatus(state,data){
-      state.walletstatus = data
+    setwalletstatus(state, data) {
+      state.walletstatus = data;
     },
-     // 设置用户盲盒信息
-    setBoxInfo(state,data) {
+    // 设置用户盲盒信息
+    setBoxInfo(state, data) {
       state.userBoxInfo = data;
     },
   },
   actions: {
-    setLogin({commit},data){
-      commit('setLogin',data)
+    setLogin({ commit }, data) {
+      commit("setLogin", data);
     },
-    setProgressInfo({commit},data){
-      commit('setProgressInfo',data)
+    setProgressInfo({ commit }, data) {
+      commit("setProgressInfo", data);
     },
     // 设置开盲盒弹窗信息
     setPrizeInfo({commit},data) {

@@ -263,14 +263,14 @@ export default {
       sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType).then(async (res) => {
         console.log('gdfgdf----res: ', res);
         // 进度条
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.txt8','link':res.hash}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
             sessionStorage.setItem("sb_count", res)
           })
           console.log("购买成功")
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt7'}));
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
           
           this.getBindboxNum(this.bindboxType)
           this.getUserBalance(this.payAddress)
@@ -278,13 +278,13 @@ export default {
           this.sliderValue = 0
           this.stTotal = 0
           this.resetdata = true
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.txt7'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           setTimeout(() => {
             this.resetdata = false
           },1500)
         }else{
           this.buy_isloading = false
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.txt9'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
         }
       }).catch(() => {
         // console.log('购买盒子err: ', err)

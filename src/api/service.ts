@@ -1,35 +1,42 @@
 import axios from "axios";
-import qs from 'qs'
-const service = axios.create();
+import qs from "qs";
+const service = axios.create({
+  // baseURL: process.env.VUE_APP_BASE_API,
+  // withCredentials: true
+});
+service.defaults.withCredentials = true; //让ajax携带cookie
 service.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 service.interceptors.request.use(
-  config => {
+  (config) => {
     return config;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 service.interceptors.response.use(
-  response => {
+  (response) => {
     if (response.status == 200) {
       return response.data;
     } else {
       return response;
     }
   },
-  error => {
+  (error) => {
     return Promise.resolve(error.response);
-  }
+  },
 );
 export default {
-  get(url: string, data?:{}) {
+  get(url: string, data?: {}) {
     return new Promise((resolve, reject) => {
-      service.get(url, { params: data }).then(res => {
-        resolve(res);
-      }).catch(err => {
-        reject(err);
-      });
+      service
+        .get(url, { params: data })
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   },
   /**
@@ -37,13 +44,35 @@ export default {
    *post请求的请求头设置:service.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
    * 参数形式应为.post(url, qs.stringify(data))  注:qs直接引用,安装axios时已自带
    */
-  post(url: string, data?:{}) {
+  post(url: string, data?: {}) {
     return new Promise((resolve, reject) => {
-      service.post(url, qs.stringify(data)).then(res => {
-        resolve(res);
-      }).catch(err => {
-        reject(err);
-      });
+      service
+        .post(url, qs.stringify(data))
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
-  }
+  },
+  /**
+   * post + headers
+   * @param {String} url [请求的url地址]
+   * @param {any} data [请求时携带的参数]
+   * @param {any} headers [请求时携带的headers]
+   * @returns
+   */
+  postAndHeaders(url: string, data: any, headers: any) {
+    return new Promise((resolve, reject) => {
+      service
+        .post(url, qs.stringify(data), headers)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
 };
