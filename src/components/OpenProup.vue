@@ -202,7 +202,7 @@ export default {
             padding: 49px 13px 10px;
             .start{
               position: absolute;
-              top: 34px;
+              top: 41px;
               width: 100%;
               display: flex;
               justify-content: center;

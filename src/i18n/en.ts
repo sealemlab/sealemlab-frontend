@@ -374,6 +374,194 @@ export const message = {
     txt223:"Epic",
     txt224:"Legend",
 
+     // 战士的所有套装
+     type1:{
+      // 神圣
+      suit1:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      // 神秘
+      suit2:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      // 钢铁
+      suit3:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      //沉默
+      suit4:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      }
+    },
+    // 角斗士的所有套装
+    type2:{
+      // 神圣
+      suit1:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      // 神秘
+      suit2:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      // 钢铁
+      suit3:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      //沉默
+      suit4:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      }
+    },
+    // 巫师的所有套装
+    type3:{
+      // 神圣
+      suit1:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      // 神秘
+      suit2:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      // 钢铁
+      suit3:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      //沉默
+      suit4:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      }
+    },
+    // 刺客的所有套装
+    type4:{
+      // 神圣
+      suit1:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      // 神秘
+      suit2:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      // 钢铁
+      suit3:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      },
+      //沉默
+      suit4:{
+        position1:'武器',
+        position2:'头',
+        position3:'胸',
+        position4:'手',
+        position5:'脚',
+        position6:'腰带',
+        position7:'项链',
+        position8:'戒指',
+      }
+    }
   },
   bond: {
     txt1: "Bond",
@@ -573,7 +761,12 @@ export const message = {
     txt3:'Remind',
     txt4:'This is a light reminder',
     txt5:'Coming soon',
-    txt6:'请选择要开的盒子'
+    txt6:'请选择要开的盒子',
+    txt7:'成功',
+    txt8:'购买中...',
+    txt9:'失败',
+    txt10:'最多5个',
+    txt11:'开盒子中....',
   },
   approve:'Approve'
 };

@@ -74,54 +74,21 @@
           <div class="small_box">
             <span>{{$t("message.nft.txt217")}}</span><span class="specil_span">{{$t("message.nft.txt218")}}</span>
           </div>
-          <div class="small_box">
-            <p><span>4</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
-            <span>0</span>
-          </div>
-          <div class="small_box">
-            <p><span>5</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
-            <span>0</span>
-          </div>
-          <div class="small_box">
-            <p><span>6</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
-            <span>0</span>
-          </div>
-          <div class="small_box">
-            <p><span>7</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
-            <span>0</span>
-          </div>
-          <div class="small_box">
-            <p><span>8</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
-            <span>0</span>
-          </div>
-          <div class="small_box">
-            <p><span>9</span><img :src="`${$store.state.imgUrl}start.webp`" /></p>
-            <span>0</span>
+          <div class="small_box" v-for="(item,index) in probabilityArr1" :key="index">
+            <p><span>{{item.lv}}</span>
+            <img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>{{item.num}}</span>
           </div>
         </div>
         <div class="top_one_line">
-          <div class="small_box_specil">
-            <span>{{$t("message.nft.txt219")}}</span><span class="specil_span">{{$t("message.nft.txt218")}}</span>
-          </div>
           <div class="small_box">
-            <p><img :src="`${$store.state.imgUrl}power1.webp`" class="power_img" /><span class="specil_span">{{$t("message.nft.txt220")}}</span></p>
-            <span>0</span>
+            <span>{{$t("message.nft.txt219")}}</span>
+            <span class="specil_span">{{$t("message.nft.txt218")}}</span>
           </div>
-          <div class="small_box">
-            <p><img :src="`${$store.state.imgUrl}power2.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt221")}}</span></p>
-            <span>0</span>
-          </div>
-          <div class="small_box">
-            <p><img :src="`${$store.state.imgUrl}power3.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt222")}}</span></p>
-            <span>0</span>
-          </div>
-          <div class="small_box">
-            <p><img :src="`${$store.state.imgUrl}power4.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt223")}}</span></p>
-            <span>0</span>
-          </div>
-          <div class="small_box">
-            <p><img :src="`${$store.state.imgUrl}power5.webp`" class="power_img"/><span class="specil_span">{{$t("message.nft.txt224")}}</span></p>
-            <span>0</span>
+          <div class="small_box" v-for="(item,index) in probabilityArr2" :key="index">
+            <p><img :src="`${$store.state.imgUrl}power1.webp`" class="power_img" />
+            <span class="specil_span">{{$t(item.lv)}}</span></p>
+            <span>{{item.num}}</span>
           </div>
         </div>
       </div>
@@ -171,6 +138,20 @@ export default {
   },
   data() {
     return {
+      probabilityArr1:[
+        {lv:4,num:'40%'},
+        {lv:5,num:'32%'},
+        {lv:6,num:'24%'},
+        {lv:7,num:'3.6%'},
+        {lv:8,num:'0.4%'}
+      ],
+      probabilityArr2:[
+        {lv:"message.nft.txt220",num:'50%'},
+        {lv:"message.nft.txt221",num:'30%'},
+        {lv:"message.nft.txt222",num:'10%'},
+        {lv:"message.nft.txt223",num:'6%'},
+        {lv:"message.nft.txt224",num:'4%'}
+      ],
       allLoading:true,// 授权/操作按钮在没有进行判断之前,全部转圈圈状态
       resetdata:false,
       surplusNumStatus:true,//剩余数量loading
@@ -219,7 +200,7 @@ export default {
             }
           }, 1000);
         }else{
-          this.balanceStatus = this.allLoading = false
+          this.balanceStatus = this.allLoading = this.disable = false
         }
       },
       deep: true,
@@ -282,14 +263,14 @@ export default {
       sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType).then(async (res) => {
         console.log('gdfgdf----res: ', res);
         // 进度条
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'购买中...','link':res.hash}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.txt8','link':res.hash}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
             sessionStorage.setItem("sb_count", res)
           })
           console.log("购买成功")
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'购买成功'}));
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt7'}));
           
           this.getBindboxNum(this.bindboxType)
           this.getUserBalance(this.payAddress)
@@ -297,13 +278,13 @@ export default {
           this.sliderValue = 0
           this.stTotal = 0
           this.resetdata = true
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'购买成功'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.txt7'}));
           setTimeout(() => {
             this.resetdata = false
           },1500)
         }else{
           this.buy_isloading = false
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'购买失败'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.txt9'}));
         }
       }).catch(() => {
         // console.log('购买盒子err: ', err)
@@ -459,7 +440,7 @@ export default {
       align-items: center;
       margin-bottom: 30px;
       .lefttxt{
-        width: 80px;
+        width: 110px;
         font-weight: 400;
         color: #FFFFFF;
         line-height: 22px;
@@ -504,7 +485,6 @@ export default {
       align-items: center;
       font-weight: 600;
       color: #000000;
-      // margin-left: 35%;
       cursor: pointer;
     }
   }
@@ -542,11 +522,6 @@ export default {
         width: 100%;
         min-height: 159px;
         padding: 10px 0;
-        // background: linear-gradient(180deg, #080808 0%, rgba(16, 15, 15, 0.54) 100%);
-        // box-shadow: 0px 9px 22px 0px rgba(237, 208, 126, 0.17);
-        // border-radius: 8px;
-        // border: 1px solid;
-        // border-image: linear-gradient(180deg, rgba(247, 234, 181, 0.44), rgba(237, 208, 126, 0)) 1 1;
         font-weight: 400;
         color: #FFFFFF;
         line-height: 32px;
@@ -572,22 +547,23 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        &:nth-child(1){
+          align-items: flex-start;
+        }
         p{
           display: flex;
           justify-content: center;
           align-items: center;
           img{
             width: 18px;
+            margin-left: 5px;
           }
           .power_img{
             margin-top: 15px;
             margin-right: 5px;
+            margin-left: 0;
           }
         }
-      }
-      .small_box_specil{
-        display: flex;
-        flex-direction: column;
       }
       span{
         font-weight: 600;

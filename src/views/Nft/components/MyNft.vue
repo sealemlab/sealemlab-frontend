@@ -238,7 +238,7 @@ export default {
         position: relative;
         max-width: 204px;
         width: 100%;
-        height: 288px;
+        height: 292px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -273,7 +273,7 @@ export default {
             padding: 49px 13px 10px;
             .start{
               position: absolute;
-              top: 34px;
+              top: 38px;
               width: 100%;
               display: flex;
               justify-content: center;
@@ -290,7 +290,7 @@ export default {
               }
             }
             .people_type{
-              margin-top: 10px;
+              margin-top: 5px;
               width: 100%;
               display: flex;
               justify-content: space-between;
@@ -300,9 +300,9 @@ export default {
                 flex-direction: column;
                 span{
                   font-weight: 800;
-                  line-height: 18px;
+                  line-height: 14px;
                   &:nth-child(2){
-                    margin-top: 5px;
+                    margin-top: 8px;
                   }
                 }
               }
