@@ -31,7 +31,7 @@ export default {
         // {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.webp`},
         // {name:'Coin98',src:`${this.$store.state.imgUrl}wallet11.webp`},
         // {name:'ONTO',src:`${this.$store.state.imgUrl}wallet5.webp`},
-        { name: "TokenPocket", src: `${this.$store.state.imgUrl}wallet6.webp` },
+        // { name: "TokenPocket", src: `${this.$store.state.imgUrl}wallet6.webp` },
         // {name:'TrustWallet',src:`${this.$store.state.imgUrl}wallet3.webp`},
         // {name:'SafePal Wallet',src:`${this.$store.state.imgUrl}wallet4.webp`},
         // {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.webp`},

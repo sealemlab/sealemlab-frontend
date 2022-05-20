@@ -121,7 +121,7 @@
       </div>
     </div>
     <!-- 团队 -->
-    <div class="teamboxs">
+    <!-- <div class="teamboxs">
       <div class="team_container display_flex">
         <div class="title_txt font30">{{$t("message.home.txt47")}}</div>
         <div class="teamswiper">
@@ -133,9 +133,6 @@
                   <span class="span1 font20">{{$t(item.name)}}</span>
                   <span class="span2 font16">{{item.txt}}</span>
                   <div class="address_peopllle display_flex">
-                    <!-- <a v-if="item.LinY == ''" href="javascript:;">
-                      <img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" />
-                    </a> -->
                     <a :href="item.LinY" target="_blank" rel="noopener noreferrer" v-if="item.LinY">
                       <img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" />
                     </a>
@@ -159,7 +156,7 @@
           <div class="swiper-button-next-add"></div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- 时间轴 -->
     <div class="time_axis_box">
       <div class="time_axis display_flex">

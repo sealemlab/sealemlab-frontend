@@ -91,9 +91,16 @@ export default {
   watch: {
     'getIstrue': {
       handler: function (newValue) {
+        console.log('是否链接newValue: ', newValue);
         if (newValue) {
           this.getAllUserNftInfo(res => {
             console.log('回调函数--用户拥有的总装备数:res: ', res);
+            if(res == 0){
+              this.nftArr = []
+              this.isOneLoading = false
+              this.loadMoreStatus = false
+              return
+            }
             let arr = JSON.parse(localStorage.getItem('nftInfo'))
             if(!arr ){
               console.log("缓存不存在情况")
@@ -128,13 +135,15 @@ export default {
       }
     },
     'getAccountStatus': {
-      handler: function (newValue,oldvalue) {
+      handler: function (newValue) {
+        console.log('账号撞他:newValue: ', newValue);
         if(newValue > 0){
           localStorage.removeItem('nftInfo')
           this.nftArr = []
+          this.loadMoreStatus = true
+          this.isOneLoading = false
+          this.busy = false
         }
-        console.log('切换账号oldvalue: ', oldvalue);
-        console.log('切换账号newValue: ', newValue);
       },
       deep: true,
       immediate: true,
