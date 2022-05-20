@@ -76,7 +76,7 @@ import { mapGetters } from "vuex";
 import { sn } from "sacredrealm-sdk";
 export default {
   computed: {
-    ...mapGetters(["getAccount","getIstrue"])
+    ...mapGetters(["getAccount","getIstrue","getAccountStatus"])
   },
   data(){
     return{
@@ -94,38 +94,15 @@ export default {
         if (newValue) {
           this.getAllUserNftInfo(res => {
             console.log('回调函数--用户拥有的总装备数:res: ', res);
-            this.nftArr = []
             let arr = JSON.parse(localStorage.getItem('nftInfo'))
             if(!arr ){
               console.log("缓存不存在情况")
-              this.$utils.getUserBindbox(this.getAccount,0).then(res1 => {
-                console.log('缓存不存在情况res: ', res1);
-                if(res1.length > 0){
-                  this.loadMoreStatus = true
-                  this.isOneLoading = true
-                  this.busy = false
-                  this.nftArr = this.nftArr.concat(res1)
-                  localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
-                }else{
-                  this.loadMoreStatus = false
-                  this.isOneLoading = false
-                  this.busy = true
-                }
-              })
+              this.getUtilsFun()
               return
             }
             if(arr.length < res){
-              console.log("缓存小于用户数据")
-              this.$utils.getUserBindbox(this.getAccount,arr.length).then(res2 => {
-                console.log('缓存小于用户数据res: ', res2);
-                if(res2.length > 0){
-                  this.loadMoreStatus = true
-                  this.isOneLoading = true
-                  this.busy = false
-                  this.nftArr = this.nftArr.concat(res2)
-                  localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
-                }
-              })
+              console.log("缓存小于用户数据--此时获取的缓存数据的长度:",arr.length)
+              this.getUtilsFun()
             }else{
               console.log("缓存数据等于用户数据")
               this.nftArr = JSON.parse(localStorage.getItem('nftInfo'))
@@ -150,26 +127,25 @@ export default {
         document.body.style.overflow='visible'
       }
     },
+    'getAccountStatus': {
+      handler: function (newValue,oldvalue) {
+        if(newValue > 0){
+          localStorage.removeItem('nftInfo')
+          this.nftArr = []
+        }
+        console.log('切换账号oldvalue: ', oldvalue);
+        console.log('切换账号newValue: ', newValue);
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods:{
     loadMore() {
       this.busy = true;
       if(this.loadMoreStatus && this.isOneLoading) {
         // console.log("loadmore加载更多")
-        this.$utils.getUserBindbox(this.getAccount,this.nftArr.length).then(res2 => {
-          if(res2.length > 0){
-            this.loadMoreStatus = true
-            this.isOneLoading = true
-            this.busy = false
-            this.nftArr = this.nftArr.concat(res2)
-            localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
-          }else{
-            this.loadMoreStatus = false
-            this.isOneLoading = false
-            this.busy = true
-          }
-          console.log('loadmore加载更多res: ', res2);
-        })
+        this.getUtilsFun(this.nftArr.length)
       }
     },
     nftFun(item){
@@ -186,6 +162,22 @@ export default {
     },
     closeProup(){
       this.videoStatus = false
+    },
+    getUtilsFun(size = 0){
+      this.$utils.getUserBindbox(this.getAccount,size).then(res => {
+        console.log('此次加载数据的页数:%s使用公共方法获取到的数据:res: ',size,res);
+        if(res.length > 0){
+          this.loadMoreStatus = true
+          this.isOneLoading = true
+          this.busy = false
+          this.nftArr = this.nftArr.concat(res)
+          localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
+        }else{
+          this.loadMoreStatus = false
+          this.isOneLoading = false
+          this.busy = true
+        }
+      })
     }
   }
 };

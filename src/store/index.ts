@@ -26,6 +26,7 @@ export default new Vuex.Store({
       account: "",
       chainID: "",
       status: false,
+      changeAccount:0
     }, // 钱包信息
     walletstatus: false, // 钱包弹窗状态
     proupInfo: {
@@ -109,6 +110,9 @@ export default new Vuex.Store({
     // 获取是否已连接且网络状态正确
     getIstrue(state) {
       return state.newWalletInfo.status;
+    },
+    getAccountStatus(state) {
+      return state.newWalletInfo.changeAccount;
     },
   },
   mutations: {

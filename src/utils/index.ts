@@ -125,7 +125,8 @@ export default {
       let obj = {
         account:'',
         chainID:'',
-        status:false
+        status:false,
+        changeAccount:0,// 切换账号变量
       }
       let acc = await wallet.getAccount(data); //链接钱包
       obj.account = acc[0]
@@ -144,13 +145,14 @@ export default {
         if(res.length == 0){
           obj.account = ''
           obj.status = false
+          obj.changeAccount = ++obj.changeAccount
           store.commit("setnewinfo",  JSON.stringify(obj))
           sessionStorage.setItem("setnewinfo",JSON.stringify(obj))
           resolve(obj)
         }else{
           obj.account = res[0]
-          localStorage.removeItem('nftInfo')
-          console.log("切换账号")
+          obj.changeAccount = ++obj.changeAccount
+          // console.log("切换账号")
           if(obj.chainID == net.chainId){
             obj.status = true
             store.commit("setnewinfo",  JSON.stringify(obj))
