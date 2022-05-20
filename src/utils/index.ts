@@ -1,4 +1,4 @@
-import {wallet, network,sb,sn,getSourceUrl} from "sacredrealm-sdk";
+import {wallet, network,sb,sn,getSourceUrl} from "sealemlab-sdk";
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
@@ -221,7 +221,7 @@ export default {
   // 获取用户的装备信息
   getUserBindbox(account:string,cursor:number, size = 10){//获取某用户基于指针（从0开始）和数量的装备ID数组，以及最后一个数据的指针
     return new Promise((resolve) => { 
-      sn().tokensOfOwnerBySize(account, cursor, size).then(res => {
+      sn().tokensOfOwnerBySize(account, cursor, size).then((res:any) => {
         // console.log("公共函数:获取用户的装备信息:",res)
         if(res[0].length > 0){
           this.ProcessingFunction(res[0]).then(data => {

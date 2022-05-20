@@ -119,7 +119,7 @@
 <script>
 import WearingShow from './WearingDisplay.vue'
 import { mapGetters } from "vuex";
-import { sb,util,token,erc20,getSigner } from "sacredrealm-sdk";
+import { sb,util,token,erc20,getSigner } from "sealemlab-sdk";
 export default {
   components:{
     WearingShow

@@ -30,7 +30,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { sb,getSigner } from "sacredrealm-sdk";
+import { sb,getSigner } from "sealemlab-sdk";
 export default {
   computed: {
     ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo"]),

@@ -73,7 +73,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { sn } from "sacredrealm-sdk";
+import { sn } from "sealemlab-sdk";
 export default {
   computed: {
     ...mapGetters(["getAccount","getIstrue","getAccountStatus"])

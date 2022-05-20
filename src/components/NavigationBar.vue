@@ -56,7 +56,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { wallet } from "sacredrealm-sdk";
+import { wallet } from "sealemlab-sdk";
 export default {
   data() {
     return {

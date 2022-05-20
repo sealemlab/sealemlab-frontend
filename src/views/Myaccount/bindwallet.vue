@@ -23,7 +23,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { getSigner } from "sacredrealm-sdk";
+import { getSigner } from "sealemlab-sdk";
 export default {
   computed: { ...mapGetters(["getNoticeNum", "getLogin", "getIstrue", "getAccount"]) },
   data() {

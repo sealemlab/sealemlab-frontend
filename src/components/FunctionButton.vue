@@ -16,7 +16,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { erc20, getSigner } from 'sacredrealm-sdk';
+import { erc20, getSigner } from 'sealemlab-sdk';
 export default {
   props: {
     word: {
