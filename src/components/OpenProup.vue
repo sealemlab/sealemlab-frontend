@@ -7,7 +7,7 @@
       @click="closepage"
     />
     <div class="boxarr">
-      <div class="out_box_one" v-for="(item, index) in boxarr" :key="index">
+      <div class="out_box_one" v-for="(item, index) in boxarr" :key="index" @click="nftFun(item)">
         <div class="onebox">
           <div class="out_img"><img :src="item.src" class="imgcard" /></div>
           <div class="huxing_bg_box">
@@ -45,27 +45,14 @@
               </div>
               <div class="people_type">
                 <div class="left_content">
-                  <span class="font14">
-                    <span v-if="item.suit == 1">神圣</span>
-                    <span v-if="item.suit == 2">神秘</span>
-                    <span v-if="item.suit == 3">钢铁</span>
-                    <span v-if="item.suit == 4">沉默</span>
-                    <span v-if="item.type == 1">{{$t("message.nft.txt9")}}</span>
-                    <span v-if="item.type == 2">{{$t("message.nft.txt11")}}</span>
-                    <span v-if="item.type == 3">{{$t("message.nft.txt10")}}</span>
-                    <span v-if="item.type == 4">{{$t("message.nft.txt8")}}</span>
-                    <span v-if="item.position == 1">武器</span>
-                    <span v-if="item.position == 2">头</span>
-                    <span v-if="item.position == 3">胸</span>
-                    <span v-if="item.position == 4">手</span>
-                    <span v-if="item.position == 5">脚</span>
-                    <span v-if="item.position == 6">腰带</span>
-                    <span v-if="item.position == 7">项链</span>
-                    <span v-if="item.position == 8">戒指</span>
+                  <span class="font14 scale_box">
+                    {{$t(`message.nft.type${item.type}.suit${item.suit}.position${item.position}`)}}
                   </span>
-                  <span class="font12"># {{item.id}}</span>
+                  <div class="box_3d">
+                    <span class="font12"># {{item.id}}</span>
+                    <img :src="`${$store.state.imgUrl}new3d.webp`" />
+                  </div>
                 </div>
-                <img :src="`${$store.state.imgUrl}new3d.webp`" />
               </div>
             </div>
           </div>
@@ -78,6 +65,10 @@
         确认
       </div>
     </div> -->
+    <div class="video_proup" v-if="videoStatus">
+      <video class="video_" :src="videoSrc" loop autoplay muted controls></video>
+      <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click="closeProup"/>
+    </div>
   </div>
 </template>
 
@@ -92,6 +83,12 @@ export default {
     boxarr: {
       type: Array,
       default: function () { return [] }
+    }
+  },
+  data(){
+    return{
+      videoStatus:false,
+      videoSrc:'',
     }
   },
   watch:{
@@ -112,12 +109,19 @@ export default {
     ...mapGetters(["getIsMobile"])
   },
   methods: {
+    nftFun(item){
+      this.videoStatus = true
+      this.videoSrc = item.videoSrc
+    },
     // 弹窗关闭
     closepage () {
       this.$emit('closepage')
     },
     winbtnsure () {
       this.$emit('winbtnsure')
+    },
+    closeProup(){
+      this.videoStatus = false
     }
   }
 }
@@ -165,6 +169,7 @@ export default {
       padding: 10px;
       .onebox {
         position: relative;
+        cursor: pointer;
         width: 204px;
         height: 292px;
         display: flex;
@@ -219,7 +224,7 @@ export default {
               }
             }
             .people_type{
-              margin-top: 10px;
+              margin-top: 7px;
               width: 100%;
               display: flex;
               justify-content: space-between;
@@ -233,13 +238,26 @@ export default {
                 align-items: center;
               }
               .left_content{
+                width: 100%;
                 display: flex;
                 flex-direction: column;
-                span{
+                .scale_box{
+                  white-space:nowrap;
+                  zoom:0.8;
                   font-weight: 800;
-                  line-height: 18px;
-                  &:nth-child(2){
-                    margin-top: 5px;
+                  line-height: 14px;
+                }
+                .box_3d{
+                  margin-top: 5px;
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  span{
+                    font-weight: 800;
+                    line-height: 14px;
+                    transform: scale(0.83);
+                    zoom:0.8;
                   }
                 }
               }
@@ -282,6 +300,30 @@ export default {
       cursor: pointer;
       margin-top: 14px;
     }
+  }
+}
+.video_proup{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 88;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  .video_{
+    height: 90%;
+    object-fit: cover;
+  }
+  .close_img{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 34px;
+    cursor: pointer;
   }
 }
 @media screen and (max-width: 980px) {

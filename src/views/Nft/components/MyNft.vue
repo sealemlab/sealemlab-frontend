@@ -2,8 +2,8 @@
   <div class="my_nft">
     <p class="title_nft font30">{{$t("message.nft.txt38")}}</p>
     <div class="box" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
-      <div class="out_box" v-for="(item, index) in nftArr" :key="index" @click="nftFun(item)">
-        <div class="onebox" >
+      <div class="out_box_one" v-for="(item, index) in nftArr" :key="index" @click="nftFun(item)">
+        <div class="onebox">
           <div class="out_img"><img :src="item.src" class="imgcard" /></div>
           <div class="huxing_bg_box">
             <img :src="`${$store.state.imgUrl}huxing6.webp`" class="huxing_img" />
@@ -40,27 +40,14 @@
               </div>
               <div class="people_type">
                 <div class="left_content">
-                  <span class="font14">
-                    <span v-if="item.suit == 1">神圣</span>
-                    <span v-if="item.suit == 2">神秘</span>
-                    <span v-if="item.suit == 3">钢铁</span>
-                    <span v-if="item.suit == 4">沉默</span>
-                    <span v-if="item.type == 1">{{$t("message.nft.txt9")}}</span>
-                    <span v-if="item.type == 2">{{$t("message.nft.txt11")}}</span>
-                    <span v-if="item.type == 3">{{$t("message.nft.txt10")}}</span>
-                    <span v-if="item.type == 4">{{$t("message.nft.txt8")}}</span>
-                    <span v-if="item.position == 1">武器</span>
-                    <span v-if="item.position == 2">头</span>
-                    <span v-if="item.position == 3">胸</span>
-                    <span v-if="item.position == 4">手</span>
-                    <span v-if="item.position == 5">脚</span>
-                    <span v-if="item.position == 6">腰带</span>
-                    <span v-if="item.position == 7">项链</span>
-                    <span v-if="item.position == 8">戒指</span>
+                  <span class="font14 scale_box">
+                    {{$t(`message.nft.type${item.type}.suit${item.suit}.position${item.position}`)}}
                   </span>
-                  <span class="font12"># {{item.id}}</span>
+                  <div class="box_3d">
+                    <span class="font12"># {{item.id}}</span>
+                    <img :src="`${$store.state.imgUrl}new3d.webp`" />
+                  </div>
                 </div>
-                <img :src="`${$store.state.imgUrl}new3d.webp`" />
               </div>
             </div>
           </div>
@@ -230,19 +217,19 @@ export default {
     flex-wrap: wrap;
     align-items: center;
     padding-bottom: 20px;
-    .out_box{
+    .out_box_one{
       width: 20%;
-      padding: 10px;
-      cursor: pointer;
+      padding: 10px 5px;
       .onebox {
         position: relative;
-        max-width: 204px;
+        cursor: pointer;
         width: 100%;
         height: 292px;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-bottom: 20px;
+        // padding: 0 13px 18px;
         background: url($bg_url + 'nftbg6.webp') no-repeat;
         background-size: contain;
         .out_img{
@@ -273,7 +260,7 @@ export default {
             padding: 49px 13px 10px;
             .start{
               position: absolute;
-              top: 38px;
+              top: 41px;
               width: 100%;
               display: flex;
               justify-content: center;
@@ -290,29 +277,42 @@ export default {
               }
             }
             .people_type{
-              margin-top: 5px;
+              margin-top: 7px;
               width: 100%;
               display: flex;
               justify-content: space-between;
               align-items: center;
-              .left_content{
-                display: flex;
-                flex-direction: column;
-                span{
-                  font-weight: 800;
-                  line-height: 14px;
-                  &:nth-child(2){
-                    margin-top: 8px;
-                  }
-                }
+              img{
+                width: 24px;
               }
               .leftimgbox{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
               }
-              img{
-                width: 24px;
+              .left_content{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                .scale_box{
+                  white-space:nowrap;
+                  zoom:0.8;
+                  font-weight: 800;
+                  line-height: 14px;
+                }
+                .box_3d{
+                  margin-top: 5px;
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  span{
+                    font-weight: 800;
+                    line-height: 14px;
+                    transform: scale(0.83);
+                    zoom:0.8;
+                  }
+                }
               }
             }
           }

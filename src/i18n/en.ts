@@ -280,12 +280,12 @@ export const message = {
 
     txt126: "Sacred light set",
     txt127: "Armor suit attribute:",
-    txt128: "2set:Increase normal dmg 65%",
-    txt129: "3set:Tag cooldown time decrease 5.5Second",
-    txt130: "4set:Increase skill dmg 51%",
+    txt128: "2 set:Increase normal dmg 65%",
+    txt129: "3 set:Tag cooldown time decrease 5.5Second",
+    txt130: "4 set:Increase skill dmg 51%",
     txt131: "Jewelry set attribute:",
-    txt132: "2set:Increase dmg 26%",
-    txt133: "3set:Increase atk 1,750",
+    txt132: "2 set:Increase dmg 26%",
+    txt133: "3 set:Increase atk 1,750",
     txt134:
       "Introduction:The sacred light set was originally worn by the temple guards. When guarding the temple of the sacred realm, it was bathed in the blood of angels. After the battle, the guards were pleasantly surprised to find that every part of the armor overflowed with divine breath. These divine breath is always present and revives the life of the guard, giving soldiers more power to use their skills.",
 
@@ -379,193 +379,189 @@ export const message = {
     txt222: "Rare",
     txt223: "Epic",
     txt224: "Legend",
-
-    // 战士的所有套装
-    type1:{
-      // 神圣
-      suit1:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+    
+    "type1": {
+      "suit1": {
+        "name": "Sacred light set",
+        "position1": "Blade of the sacred light",
+        "position2": "Helm of the sacred light",
+        "position3": "Plate of the sacred light",
+        "position4": "Gauntlet of the sacred light",
+        "position5": "Boots of the sacred light",
+        "position6": "Belt of the sacred light",
+        "position7": "Necklace of the sacred light",
+        "position8": "Ring of the sacred light"
       },
-      // 神秘
-      suit2:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit2": {
+        "name": "Ancient mysteries set",
+        "position1": "Ancient blade of mysteries",
+        "position2": "Ancient helm of mysteries",
+        "position3": "Ancient plate of mysteries",
+        "position4": "Ancient gauntlet of mysteries",
+        "position5": "Ancient boots of mysteries",
+        "position6": "Ancient belt of mysteries",
+        "position7": "Ancient necklace of mysteries",
+        "position8": "Ancient ring of mysteries"
       },
-      // 钢铁
-      suit3:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit3": {
+        "name": "Gladiators iron set",
+        "position1": "Gladiators iron blade",
+        "position2": "Gladiators iron helm",
+        "position3": "Gladiators iron plate",
+        "position4": "Gladiators iron gauntlet",
+        "position5": "Gladiators iron boots",
+        "position6": "Gladiators iron belt",
+        "position7": "Gladiators iron necklace",
+        "position8": "Gladiators iron ring"
       },
-      //沉默
-      suit4:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit4": {
+        "name": "Conquerors silence set",
+        "position1": "Conquerors blade of silence",
+        "position2": "Conquerors helm of silence",
+        "position3": "Conquerors plate of silence",
+        "position4": "Conquerors gauntlet of silence",
+        "position5": "Conquerors boots of silence",
+        "position6": "Conquerors belt of silence",
+        "position7": "Conquerors necklace of silence",
+        "position8": "Conquerors ring of silence"
       }
     },
-    // 角斗士的所有套装
-    type2:{
-      // 神圣
-      suit1:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+    "type2": {
+      "suit1": {
+        "name": "Sacred light set",
+        "position1": "Dagger of the sacred light",
+        "position2": "Helm of the sacred light",
+        "position3": "Plate of the sacred light",
+        "position4": "Gauntlet of the sacred light",
+        "position5": "Boots of the sacred light",
+        "position6": "Belt of the sacred light",
+        "position7": "Necklace of the sacred light",
+        "position8": "Ring of the sacred light"
       },
-      // 神秘
-      suit2:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit2": {
+        "name": "Ancient mysteries set",
+        "position1": "Ancient dagger of mysteries",
+        "position2": "Ancient helm of mysteries",
+        "position3": "Ancient plate of mysteries",
+        "position4": "Ancient gauntlet of mysteries",
+        "position5": "Ancient boots of mysteries",
+        "position6": "Ancient belt of mysteries",
+        "position7": "Ancient necklace of mysteries",
+        "position8": "Ancient ring of mysteries"
       },
-      // 钢铁
-      suit3:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit3": {
+        "name": "Assassins iron set",
+        "position1": "Assassins iron dagger",
+        "position2": "Assassins iron helm",
+        "position3": "Assassins iron plate",
+        "position4": "Assassins iron gauntlet",
+        "position5": "Assassins iron boots",
+        "position6": "Assassins iron belt",
+        "position7": "Assassins iron necklace",
+        "position8": "Assassins iron ring"
       },
-      //沉默
-      suit4:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit4": {
+        "name": "Conquerors silence set",
+        "position1": "Conquerors dagger of silence",
+        "position2": "Conquerors helm of silence",
+        "position3": "Conquerors plate of silence",
+        "position4": "Conquerors gauntlet of silence",
+        "position5": "Conquerors boots of silence",
+        "position6": "Conquerors belt of silence",
+        "position7": "Conquerors necklace of silence",
+        "position8": "Conquerors ring of silence"
       }
     },
-    // 巫师的所有套装
-    type3:{
-      // 神圣
-      suit1:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+    "type3": {
+      "suit1": {
+        "name": "Sacred light set",
+        "position1": "Circle of the sacred light",
+        "position2": "Helm of the sacred light",
+        "position3": "Plate of the sacred light",
+        "position4": "Gauntlet of the sacred light",
+        "position5": "Boots of the sacred light",
+        "position6": "Belt of the sacred light",
+        "position7": "Necklace of the sacred light",
+        "position8": "Ring of the sacred light"
       },
-      // 神秘
-      suit2:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit2": {
+        "name": "Ancient mysteries set",
+        "position1": "Ancient circle of mysteries",
+        "position2": "Ancient helm of mysteries",
+        "position3": "Ancient plate of mysteries",
+        "position4": "Ancient gauntlet of mysteries",
+        "position5": "Ancient boots of mysteries",
+        "position6": "Ancient belt of mysteries",
+        "position7": "Ancient necklace of mysteries",
+        "position8": "Ancient ring of mysteries"
       },
-      // 钢铁
-      suit3:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit3": {
+        "name": "Wizards iron set",
+        "position1": "Wizards iron circle",
+        "position2": "Wizards iron helm",
+        "position3": "Wizards iron plate",
+        "position4": "Wizards iron gauntlet",
+        "position5": "Wizards iron boots",
+        "position6": "Wizards iron belt",
+        "position7": "Wizards iron necklace",
+        "position8": "Wizards iron ring"
       },
-      //沉默
-      suit4:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit4": {
+        "name": "Conquerors silence set",
+        "position1": "Conquerors circle of silence",
+        "position2": "Conquerors helm of silence",
+        "position3": "Conquerors plate of silence",
+        "position4": "Conquerors gauntlet of silence",
+        "position5": "Conquerors boots of silence",
+        "position6": "Conquerors belt of silence",
+        "position7": "Conquerors necklace of silence",
+        "position8": "Conquerors ring of silence"
       }
     },
-    // 刺客的所有套装
-    type4:{
-      // 神圣
-      suit1:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+    "type4": {
+      "suit1": {
+        "name": "Sacred light set",
+        "position1": "Fist of the sacred light",
+        "position2": "Helm of the sacred light",
+        "position3": "Plate of the sacred light",
+        "position4": "Gauntlet of the sacred light",
+        "position5": "Boots of the sacred light",
+        "position6": "Belt of the sacred light",
+        "position7": "Necklace of the sacred light",
+        "position8": "Ring of the sacred light"
       },
-      // 神秘
-      suit2:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit2": {
+        "name": "Ancient mysteries set",
+        "position1": "Ancient fist of mysteries",
+        "position2": "Ancient helm of mysteries",
+        "position3": "Ancient plate of mysteries",
+        "position4": "Ancient gauntlet of mysteries",
+        "position5": "Ancient boots of mysteries",
+        "position6": "Ancient belt of mysteries",
+        "position7": "Ancient necklace of mysteries",
+        "position8": "Ancient ring of mysteries"
       },
-      // 钢铁
-      suit3:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit3": {
+        "name": "Fighters iron set",
+        "position1": "Fighters iron fist",
+        "position2": "Fighters iron helm",
+        "position3": "Fighters iron plate",
+        "position4": "Fighters iron gauntlet",
+        "position5": "Fighters iron boots",
+        "position6": "Fighters iron belt",
+        "position7": "Fighters iron necklace",
+        "position8": "Fighters iron ring"
       },
-      //沉默
-      suit4:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit4": {
+        "name": "Conquerors silence set",
+        "position1": "Conquerors fist of silence",
+        "position2": "Conquerors helm of silence",
+        "position3": "Conquerors plate of silence",
+        "position4": "Conquerors gauntlet of silence",
+        "position5": "Conquerors boots of silence",
+        "position6": "Conquerors belt of silence",
+        "position7": "Conquerors necklace of silence",
+        "position8": "Conquerors ring of silence"
       }
     }
   },
@@ -767,18 +763,18 @@ export const message = {
     txt3: "Remind",
     txt4: "This is a light reminder",
     txt5: "Coming soon",
-    txt6: "请选择要开的盒子",
+    txt6: "Please select the box to open",
     txt7: "Login successfully",
     txt8: "Login failed",
     txt9: "Information updated successfully",
     txt10: "Information update failed",
     txt11: "Registration success",
     txt12: "Registration failed",
-    self_txt7:'成功',
-    self_txt8:'购买中...',
-    self_txt9:'失败',
-    self_txt10:'最多5个',
-    self_txt11:'开盒子中....',
+    self_txt7:'Success',
+    self_txt8:'Buying...',
+    self_txt9:'Failed',
+    self_txt10:'Up to 5',
+    self_txt11:'Opening...',
   },
   approve: "Approve",
 };

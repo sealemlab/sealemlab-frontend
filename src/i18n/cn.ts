@@ -379,191 +379,191 @@ export const message = {
     txt224: "传奇",
 
     // 战士的所有套装
-    type1:{
-      // 神圣
-      suit1:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+    "type1": {
+      "suit1": {
+        "name": "神聖之光套裝",
+        "position1": "神聖之光巨劍",
+        "position2": "神聖之光頭盔",
+        "position3": "神聖之光鎧甲",
+        "position4": "神聖之光手套",
+        "position5": "神聖之光靴子",
+        "position6": "神聖之光腰帶",
+        "position7": "神聖之光項鏈",
+        "position8": "神聖之光戒指"
       },
-      // 神秘
-      suit2:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit2": {
+        "name": "神秘遠古套裝",
+        "position1": "神秘遠古巨劍",
+        "position2": "神秘遠古頭盔",
+        "position3": "神秘遠古鎧甲",
+        "position4": "神秘遠古手套",
+        "position5": "神秘遠古靴子",
+        "position6": "神秘遠古腰帶",
+        "position7": "神秘遠古項鏈",
+        "position8": "神秘遠古戒指"
       },
-      // 钢铁
-      suit3:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit3": {
+        "name": "鋼鐵角鬥士套裝",
+        "position1": "鋼鐵角鬥士巨劍",
+        "position2": "鋼鐵角鬥士頭盔",
+        "position3": "鋼鐵角鬥士鎧甲",
+        "position4": "鋼鐵角鬥士手套",
+        "position5": "鋼鐵角鬥士靴子",
+        "position6": "鋼鐵角鬥士腰帶",
+        "position7": "鋼鐵角鬥士項鏈",
+        "position8": "鋼鐵角鬥士戒指"
       },
-      //沉默
-      suit4:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit4": {
+        "name": "沉默征服者套裝",
+        "position1": "沉默征服者巨劍",
+        "position2": "沉默征服者頭盔",
+        "position3": "沉默征服者鎧甲",
+        "position4": "沉默征服者手套",
+        "position5": "沉默征服者靴子",
+        "position6": "沉默征服者腰帶",
+        "position7": "沉默征服者項鏈",
+        "position8": "沉默征服者戒指"
       }
     },
     // 角斗士的所有套装
-    type2:{
-      // 神圣
-      suit1:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+    "type2": {
+      "suit1": {
+        "name": "神聖之光套裝",
+        "position1": "神聖之光匕首",
+        "position2": "神聖之光頭盔",
+        "position3": "神聖之光鎧甲",
+        "position4": "神聖之光手套",
+        "position5": "神聖之光靴子",
+        "position6": "神聖之光腰帶",
+        "position7": "神聖之光項鏈",
+        "position8": "神聖之光戒指"
       },
-      // 神秘
-      suit2:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit2": {
+        "name": "神秘遠古套裝",
+        "position1": "神秘遠古匕首",
+        "position2": "神秘遠古頭盔",
+        "position3": "神秘遠古鎧甲",
+        "position4": "神秘遠古手套",
+        "position5": "神秘遠古靴子",
+        "position6": "神秘遠古腰帶",
+        "position7": "神秘遠古項鏈",
+        "position8": "神秘遠古戒指"
       },
-      // 钢铁
-      suit3:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit3": {
+        "name": "鋼鐵刺客套裝",
+        "position1": "鋼鐵刺客匕首",
+        "position2": "鋼鐵刺客頭盔",
+        "position3": "鋼鐵刺客鎧甲",
+        "position4": "鋼鐵刺客手套",
+        "position5": "鋼鐵刺客靴子",
+        "position6": "鋼鐵刺客腰帶",
+        "position7": "鋼鐵刺客項鏈",
+        "position8": "鋼鐵刺客戒指"
       },
-      //沉默
-      suit4:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit4": {
+        "name": "沉默征服者套裝",
+        "position1": "沉默征服者匕首",
+        "position2": "沉默征服者頭盔",
+        "position3": "沉默征服者鎧甲",
+        "position4": "沉默征服者手套",
+        "position5": "沉默征服者靴子",
+        "position6": "沉默征服者腰帶",
+        "position7": "沉默征服者項鏈",
+        "position8": "沉默征服者戒指"
       }
     },
     // 巫师的所有套装
-    type3:{
-      // 神圣
-      suit1:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+    "type3": {
+      "suit1": {
+        "name": "神聖之光套裝",
+        "position1": "神聖之光法環",
+        "position2": "神聖之光頭盔",
+        "position3": "神聖之光鎧甲",
+        "position4": "神聖之光手套",
+        "position5": "神聖之光靴子",
+        "position6": "神聖之光腰帶",
+        "position7": "神聖之光項鏈",
+        "position8": "神聖之光戒指"
       },
-      // 神秘
-      suit2:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit2": {
+        "name": "神秘遠古套裝",
+        "position1": "神秘遠古法環",
+        "position2": "神秘遠古頭盔",
+        "position3": "神秘遠古鎧甲",
+        "position4": "神秘遠古手套",
+        "position5": "神秘遠古靴子",
+        "position6": "神秘遠古腰帶",
+        "position7": "神秘遠古項鏈",
+        "position8": "神秘遠古戒指"
       },
-      // 钢铁
-      suit3:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit3": {
+        "name": "鋼鐵魔法師套裝",
+        "position1": "鋼鐵魔法師法環",
+        "position2": "鋼鐵魔法師頭盔",
+        "position3": "鋼鐵魔法師鎧甲",
+        "position4": "鋼鐵魔法師手套",
+        "position5": "鋼鐵魔法師靴子",
+        "position6": "鋼鐵魔法師腰帶",
+        "position7": "鋼鐵魔法師項鏈",
+        "position8": "鋼鐵魔法師戒指"
       },
-      //沉默
-      suit4:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit4": {
+        "name": "沉默征服者套裝",
+        "position1": "沉默征服者法環",
+        "position2": "沉默征服者頭盔",
+        "position3": "沉默征服者鎧甲",
+        "position4": "沉默征服者手套",
+        "position5": "沉默征服者靴子",
+        "position6": "沉默征服者腰帶",
+        "position7": "沉默征服者項鏈",
+        "position8": "沉默征服者戒指"
       }
     },
     // 刺客的所有套装
-    type4:{
-      // 神圣
-      suit1:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+    "type4": {
+      "suit1": {
+        "name": "神聖之光套裝",
+        "position1": "神聖之光拳套",
+        "position2": "神聖之光頭盔",
+        "position3": "神聖之光鎧甲",
+        "position4": "神聖之光手套",
+        "position5": "神聖之光靴子",
+        "position6": "神聖之光腰帶",
+        "position7": "神聖之光項鏈",
+        "position8": "神聖之光戒指"
       },
-      // 神秘
-      suit2:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit2": {
+        "name": "神秘遠古套裝",
+        "position1": "神秘遠古拳套",
+        "position2": "神秘遠古頭盔",
+        "position3": "神秘遠古鎧甲",
+        "position4": "神秘遠古手套",
+        "position5": "神秘遠古靴子",
+        "position6": "神秘遠古腰帶",
+        "position7": "神秘遠古項鏈",
+        "position8": "神秘遠古戒指"
       },
-      // 钢铁
-      suit3:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit3": {
+        "name": "鋼鐵格鬥家套裝",
+        "position1": "鋼鐵格鬥家拳套",
+        "position2": "鋼鐵格鬥家頭盔",
+        "position3": "鋼鐵格鬥家鎧甲",
+        "position4": "鋼鐵格鬥家手套",
+        "position5": "鋼鐵格鬥家靴子",
+        "position6": "鋼鐵格鬥家腰帶",
+        "position7": "鋼鐵格鬥家項鏈",
+        "position8": "鋼鐵格鬥家戒指"
       },
-      //沉默
-      suit4:{
-        position1:'武器',
-        position2:'头',
-        position3:'胸',
-        position4:'手',
-        position5:'脚',
-        position6:'腰带',
-        position7:'项链',
-        position8:'戒指',
+      "suit4": {
+        "name": "沉默征服者套裝",
+        "position1": "沉默征服者拳套",
+        "position2": "沉默征服者頭盔",
+        "position3": "沉默征服者鎧甲",
+        "position4": "沉默征服者手套",
+        "position5": "沉默征服者靴子",
+        "position6": "沉默征服者腰帶",
+        "position7": "沉默征服者項鏈",
+        "position8": "沉默征服者戒指"
       }
     }
   }, //nft页面

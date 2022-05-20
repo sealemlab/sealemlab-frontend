@@ -1,14 +1,14 @@
 <template>
   <div class="nft_page">
     <div class="content_box">
-      <!-- <div class="display_flex menu_box">
+      <div class="display_flex menu_box">
         <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
           <span class="nav_txt">{{ $t(route.label) }}</span>
         </router-link>
-      </div> -->
-      <ul class="display_flex">
+      </div>
+      <!-- <ul class="display_flex">
         <li class="font24" :class="{ active_li: li_index == index }" v-for="(item,index) in navArr" :key="index" @click="liClick(item,index)">{{$t(item.label)}}</li>
-      </ul>
+      </ul> -->
       <div class="main">
         <router-view />
       </div>
@@ -65,13 +65,17 @@ export default {
     margin: 0 auto;
     display: flex;
     .menu_box{
+      position: fixed;
+      top: 116px;
+      left: 5vw;
+      background: rgba(0,0,0,0.5);
       flex-direction: column;
-      margin-top: 80px;
+      // margin-top: 80px;
       .a_link{
-        width: 171px;
+        min-width: 120px;
         display: flex;
         align-items: center;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
         color: #fff;
         cursor: pointer;
         text-decoration: none;
