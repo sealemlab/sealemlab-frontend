@@ -126,10 +126,11 @@ export default {
         account:'',
         chainID:'',
         status:false,
-        changeAccount:0,// 切换账号变量
+        changeAccount:-1,// 切换账号变量
       }
       let acc = await wallet.getAccount(data); //链接钱包
       obj.account = acc[0]
+      obj.changeAccount = 0
       obj.chainID = await wallet.getChainId(); // 连接网络
       let net = network(); // 获取sdk返回的当前的环境
       if(obj.chainID == net.chainId){
@@ -145,7 +146,7 @@ export default {
         if(res.length == 0){
           obj.account = ''
           obj.status = false
-          obj.changeAccount = ++obj.changeAccount
+          obj.changeAccount = -1
           store.commit("setnewinfo",  JSON.stringify(obj))
           sessionStorage.setItem("setnewinfo",JSON.stringify(obj))
           resolve(obj)
@@ -269,5 +270,14 @@ export default {
         count++
       })
     })
-  }
+  },
+  // 函数防抖
+  antiShakeFun(callback:any,delay:number){
+    // @ts-ignore
+    clearTimeout(store.state.timer);  
+    // @ts-ignore
+    store.state.timer = setTimeout(()=>{
+      callback()
+    },delay);
+  },
 };

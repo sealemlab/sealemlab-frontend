@@ -85,14 +85,27 @@ export default {
       busy: false, // 为true则第一次不执行loadmore
       nftArr:[],
       videoStatus:false,
-      videoSrc:'',
+      videoSrc:''
     }
   },
   watch: {
-    'getIstrue': {
+    'videoStatus'(newvala){
+      if(newvala){
+        document.body.style.overflow='hidden'
+      }else{
+        document.body.style.overflow='visible'
+      }
+    },
+    'getAccountStatus': {
       handler: function (newValue) {
-        console.log('是否链接newValue: ', newValue);
-        if (newValue) {
+        if(newValue == -1 || newValue == undefined){
+          console.log("还未连接钱包 ||  已退出钱包")
+          this.isOneLoading = false
+          this.loadMoreStatus = true
+          this.busy =  false
+          this.nftArr = []
+        }else if(newValue == 0){
+          console.log("已连接钱包")
           this.getAllUserNftInfo(res => {
             console.log('回调函数--用户拥有的总装备数:res: ', res);
             if(res == 0){
@@ -117,32 +130,39 @@ export default {
               this.loadMoreStatus = false
             }
           })
-        }else{
-          this.isOneLoading = false
-          this.loadMoreStatus = true
-          this.busy =  false
-          this.nftArr = []
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
-    'videoStatus'(newvala){
-      if(newvala){
-        document.body.style.overflow='hidden'
-      }else{
-        document.body.style.overflow='visible'
-      }
-    },
-    'getAccountStatus': {
-      handler: function (newValue) {
-        console.log('账号撞他:newValue: ', newValue);
-        if(newValue > 0){
+        }else if(newValue > 0){
+          console.log("切换账号")
           localStorage.removeItem('nftInfo')
           this.nftArr = []
           this.loadMoreStatus = true
           this.isOneLoading = false
           this.busy = false
+          this.$utils.antiShakeFun(() => {
+            this.getAllUserNftInfo(res => {
+              console.log('回调函数--用户拥有的总装备数:res: ', res);
+              if(res == 0){
+                this.nftArr = []
+                this.isOneLoading = false
+                this.loadMoreStatus = false
+                return
+              }
+              let arr = JSON.parse(localStorage.getItem('nftInfo'))
+              if(!arr ){
+                console.log("缓存不存在情况")
+                this.getUtilsFun()
+                return
+              }
+              if(arr.length < res){
+                console.log("缓存小于用户数据--此时获取的缓存数据的长度:",arr.length)
+                this.getUtilsFun()
+              }else{
+                console.log("缓存数据等于用户数据")
+                this.nftArr = JSON.parse(localStorage.getItem('nftInfo'))
+                this.isOneLoading = false
+                this.loadMoreStatus = false
+              }
+            })
+          },3000)
         }
       },
       deep: true,

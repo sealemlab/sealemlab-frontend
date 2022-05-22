@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    antiShakeTimer:null,// 函数防抖定时器对象
     prizeInfo: {
       status: false,
       boxarr: [],
@@ -26,7 +27,7 @@ export default new Vuex.Store({
       account: "",
       chainID: "",
       status: false,
-      changeAccount:0
+      changeAccount:-1
     }, // 钱包信息
     walletstatus: false, // 钱包弹窗状态
     proupInfo: {

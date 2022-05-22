@@ -76,26 +76,35 @@ export const message = {
     introduce18: "Over five years of game project development experience",
     introduce19: "Enter the crypto industry in 2018",
 
-    txt54: "ROADMAP",
+    txt54: "Sealem Roadmap",
 
-    txt55: "Sealem technology and the core team were established",
-    txt55_1: "Team establishment",
-    txt56_1: "Market research",
-    txt57_1: "Bonds and economic model",
-    txt58_1: "GameFi landing",
-    txt60_1: "Social media creation",
-    txt61_1: "Announcement & blind box presale",
-    txt62_1: "Building ecology",
-    txt63_1: "Global Sealem game boom",
-    txt64_1: "Multi-chain ecological construction",
-    txt56: "market research; analyse the Gamefi industry",
-    txt57: "Bond R&D,setting economic model",
-    txt58: "Game team formation completed; game development",
-    txt60: "Social media and NFT market establishment; Competitive product analysis",
-    txt61: "Comprehensive marketing,Official website online, NFT mystery Box Pre-sale,In-game beta",
-    txt62: "NFT market and the game are online,  Google store is online ,more CEXs are listed",
-    txt63: "Global Guild Recruitment,Game Updates, Dubai Offline Guild Competition, Dubai Gamefi roundtable",
-    txt64: "Cross-chain plan Sealem V2 released, creator platform is online, more marketing",
+    txt55_1: "Team Establishment",
+    txt55: " Sealem Technology established; Core team established",
+    txt56_1: "Market Research",
+    txt56: "Start market research; Analyze the current situation of the GameFi industry",
+    txt57_1: "Social Media",
+    txt57: "Social Media establishment.(Bonds and Economics) Swap and bond research and development; Preliminary setting of platform economics(Landing GameFi ) The game team formed; Game development",
+
+    txt58_1: "Comprehensive Marketing & Mysterious box pre-sale",
+    txt58: "Comprehensive marketing.NFT Genesis sale.ST token public sale.Launch Bond V1.Competitive product analysis and NFT market construction",
+    
+    txt60_1: "The construction and development of ecosystem",
+    txt60: "Competitive product analysis and NFT market construction.First game listed.More functions released to build the Sealem ecosystem",
+    
+    txt61_1: "Multi-chain ecological construction",
+    txt61: "List on strategic partner CEX.Cross-chain plan Sealem V2 released.Sealem DAO launch. The vote of new game",
+
+    txt62_1: "The booming global Sealem game",
+    txt62: "Global Game Guild Recruitment.Dubai Offline Guild Competition.Dubai Gamefi Metaverse establishment",
+    
+    txt63_1: "Virtual Reality Metaverse Display",
+    txt63: "Expand technical team.Sealem Metaverse Construction.Fan meeting",
+
+    txt64_1: "New agreement released",
+    txt64: "Sealem V3 released.The creator platform is online.More marketing",
+
+    add_txt65_1: "Link to reality",
+    add_txt65: "Launch of Sealem credit card.Start swap function.Create a creator protection fund",
 
     txt59: "PARTNER",
 
@@ -775,6 +784,7 @@ export const message = {
     self_txt9:'Failed',
     self_txt10:'Up to 5',
     self_txt11:'Opening...',
+    self_txt12:'Open blind box result'
   },
   approve: "Approve",
 };

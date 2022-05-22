@@ -1,6 +1,6 @@
 <template>
   <div class="record_page" v-if="resultStatus">
-    <div class="title font26">开盲盒结果</div>
+    <div class="title font26">{{$t('message.tip.self_txt12')}}</div>
     <img
       :src="`${$store.state.imgUrl}close.webp`"
       class="close_img"

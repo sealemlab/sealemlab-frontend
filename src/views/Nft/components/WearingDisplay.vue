@@ -698,6 +698,8 @@ export default {
         flex-direction: column;
         margin-top: 15px;
         p{
+          display: flex;
+          align-items: center;
           font-weight: 400;
           color: #FFFFFF;
           line-height: 24px;
