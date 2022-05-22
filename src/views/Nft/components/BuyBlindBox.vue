@@ -58,7 +58,7 @@
             :isapprove="isapprove"
             :approveloading="buy_isloading"
             :isloading="buy_isloading"
-            :word="$t('message.nft.txt28')"
+            :word="'message.nft.txt28'"
             ref="mychild"
             @sonapprove="sonapprove"
             @dosomething="buyBindBox"
@@ -225,6 +225,7 @@ export default {
         })
     },
     buyBindBox(){
+      console.log("购买方法",this.disable)
       if(this.disable)return
       if (this.buy_isloading) return;
       if(this.sliderValue <= 0){
@@ -260,8 +261,8 @@ export default {
         return
       }
       this.buy_isloading = true
+      console.log('this.sliderValue,this.bindboxType: ', this.sliderValue,this.bindboxType);
       sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType).then(async (res) => {
-        console.log('gdfgdf----res: ', res);
         // 进度条
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
         const etReceipt = await res.wait();
@@ -286,8 +287,8 @@ export default {
           this.buy_isloading = false
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
         }
-      }).catch(() => {
-        // console.log('购买盒子err: ', err)
+      }).catch(err => {
+        console.log('购买盒子err: ', err)
         this.buy_isloading = false
       });
     },
