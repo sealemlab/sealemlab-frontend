@@ -1,7 +1,7 @@
 <template>
   <div class="buy_blind_box">
     <ul class="title_box">
-      <li class="font45 box_txt">{{$t("message.nft.txt20")}}</li>
+      <li class="font45 box_txt mobile_font18">{{$t("message.nft.txt20")}}</li>
       <li class="font16">
         {{$t("message.nft.txt21")}}
       </li>
@@ -11,16 +11,15 @@
     </ul>
     <div class="conten_box">
       <div class="treasure_chest_box">
-        <!-- <LoadingAnmation v-if="imgStatus" ></LoadingAnmation>
-        <img :src="`${$store.state.imgUrl}bindbox.webp`" ref="bindboximg" v-show="!imgStatus" /> -->
+        <!-- <img :src="`${$store.state.imgUrl}bindboxbg.webp`" class="mobile_img" /> -->
       </div>
       <div class="right_content">
-        <p class="font20 title_txt">
+        <p class="font20 title_txt mobile_font16">
           <span class="lefttxt">{{$t("message.nft.txt23")}}</span>
           <BtnLoading :isloading="true" v-if="surplusNumStatus"></BtnLoading>
           <span class="righttxt" v-else>{{boxnum}}</span>
         </p>
-        <div class="line_onebox font16">
+        <div class="line_onebox font16 mobile_font14">
           <span class="lefttxt">{{$t("message.nft.txt24")}}</span>
           <BtnLoading :isloading="true" v-if="priceStatus"></BtnLoading>
           <span class="righttxt no_border" v-else>{{stPrice}}</span>
@@ -28,14 +27,14 @@
           <!-- <span class="unit_class" v-if="bindboxType == 0">HC</span>
           <span class="unit_class" v-if="bindboxType == 1">BNB</span> -->
         </div>
-        <div class="line_onebox font16">
+        <div class="line_onebox font16 mobile_font14">
           <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
           <div class="btns">
             <Slider :min="0" :max="50" v-model="per" :resetdata="resetdata"></Slider>
           </div>
           <span class="unit_class">{{sliderValue}}</span>
         </div>
-        <div class="line_onebox font16">
+        <div class="line_onebox font16 mobile_font14">
           <span class="lefttxt">{{$t("message.nft.txt26")}}</span>
           <span class="righttxt">{{stTotal}}</span>
           <span class="unit_class">ST</span>
@@ -51,7 +50,7 @@
           <span v-if="bindboxType == 1">BNB</span> -->
           <img :src="`${$store.state.imgUrl}link.webp`" class="link_img" />
         </div>
-        <div class="btnbox font20" :class="disable?'disable_bnb':''">
+        <div class="btnbox font20 mobile_font16" :class="disable?'disable_bnb':''">
           <!-- {{$t("message.nft.txt28")}} -->
           <FunBtn
             :allLoading="allLoading"
@@ -68,7 +67,7 @@
     </div>
     <!-- 盲盒概率 -->
     <div class="blindbox_introduce">
-      <p class="font30 introduce_title_txt">{{$t("message.nft.txt216")}}</p>
+      <p class="font30 introduce_title_txt mobile_font18">{{$t("message.nft.txt216")}}</p>
       <div class="box_probability font20">
         <div class="top_one_line">
           <div class="small_box">
@@ -86,16 +85,20 @@
             <span class="specil_span">{{$t("message.nft.txt218")}}</span>
           </div>
           <div class="small_box" v-for="(item,index) in probabilityArr2" :key="index">
-            <p><img :src="`${$store.state.imgUrl}power1.webp`" class="power_img" />
+            <p><img :src="`${$store.state.imgUrl}power${index+1}.webp`" class="power_img" />
             <span class="specil_span">{{$t(item.lv)}}</span></p>
             <span>{{item.num}}</span>
           </div>
         </div>
       </div>
+      <!-- 盲盒概率--移动端 -->
+      <div class="mobile_box_probability">
+
+      </div>
     </div>
     <!-- 盲盒介绍 -->
     <div class="blindbox_introduce">
-      <p class="font30 introduce_title_txt">{{$t("message.nft.txt29")}}</p>
+      <p class="font30 introduce_title_txt mobile_font18">{{$t("message.nft.txt29")}}</p>
       <div class="introduce_content">
         <div class="introduce_onebox">
           <p class="title font16">{{$t("message.nft.txt32")}}</p>
@@ -164,8 +167,6 @@ export default {
       bindboxType:0,//默认是普通盲盒0,后期可能会有其他类型盲盒(1,2,3,4),那么此值就会变化
       imgStatus:true,//图片加载时用loading状态
       payAddress:'',//支付地址
-      // isOpenWhiteList:true,//是否开启白名单
-      // isWhiteList:false,//是否在白名单
       stPrice:0,//st价格
       boxnum:0,//盲盒剩余数量
       userBuyNum:0,//用户剩余购买数量(频控)
@@ -402,10 +403,8 @@ export default {
   background-size: contain;
   .treasure_chest_box {
     width: 50%;
-    img {
-      width: 100%;
-      max-width: 616px;
-      // height: 504px;
+    .mobile_img{
+      display: none;
     }
   }
   .right_content{
@@ -578,6 +577,174 @@ export default {
       .specil_span{
         color: #EDD07E !important;
       }
+    }
+  }
+  .mobile_box_probability{
+    display: none;
+  }
+}
+@media screen and (max-width: 980px) {
+  .title_box {
+    width: 100%;
+    li {
+      &:nth-child(1) {
+        font-weight: bold;
+        color: #FFFFFF;
+        line-height: 0.2rem;
+      }
+      &:nth-child(2) {
+        font-weight: 400;
+        color: #FFFFFF;
+        line-height: 0.2rem;
+        margin-top: 0.2rem;
+      }
+      &:nth-child(3) {
+        font-weight: 400;
+        color: #FFFFFF;
+        line-height: 0.2rem;
+      }
+    }
+  }
+  .conten_box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    // background-image:none;
+    // background-size: contain;
+    .treasure_chest_box {
+      width: 100%;
+      .mobile_img{
+        display: flex;
+        width: 100%;
+      }
+    }
+    .right_content{
+      width: 100%;
+      max-height:3.7rem;
+      padding:0.2rem;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      margin-top: 2rem;
+      align-items: center;
+      .title_txt{
+        width: 100%;
+        font-weight: 600;
+        color: #ECCF83;
+        line-height: 28px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .unit_class{
+        min-width: 20px;
+        font-weight: bold;
+        color: #ECCF83;
+        line-height: 19px;
+        text-align: right;
+      }
+      .line_onebox{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        .lefttxt{
+          width: 110px;
+          font-weight: 400;
+          color: #FFFFFF;
+          line-height: 22px;
+        }
+        .righttxt{
+          width: calc(100% - 140px);
+          text-align: center;
+          font-weight: bold;
+          color: #ECCF83;
+          line-height: 19px;
+        }
+        .btns {
+          width: calc(100% - 140px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      .balance_txt{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        font-weight: 400;
+        color: #9B9995;
+        line-height: 14px;
+        .link_img{
+          width:15px;
+          margin-left: 15px;
+        }
+      }
+      .btnbox{
+        margin-top: 34px;
+        width: 163px;
+        height: 48px;
+        background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+        box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+        border-radius: 4px;
+        backdrop-filter: blur(14px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        color: #000000;
+        cursor: pointer;
+      }
+    }
+  }
+  .blindbox_introduce{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:0;
+    .introduce_title_txt{
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 0.25rem;
+    }
+    .introduce_content{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.25rem;
+      .introduce_onebox{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        margin-bottom: 0.1rem;
+        .title{
+          font-weight: bold;
+          color: #ECCF83;
+          line-height: 0.2rem;
+        }
+        .center{
+          margin-top: 0.1rem;
+          width: 100%;
+          min-height: 0.1rem;
+          padding: 0;
+          font-weight: 500;
+          color: #DBDADA;
+          line-height: 0.2rem;
+        }
+      }
+    }
+    .box_probability{
+      display: none;
+    }
+    .mobile_box_probability{
+      display: none;
     }
   }
 }

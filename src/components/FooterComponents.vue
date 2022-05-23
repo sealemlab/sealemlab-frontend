@@ -65,14 +65,6 @@ export default {
           ]
         },
         {
-          id:3,
-          children:[
-            {title:"message.footer.txt11"},
-            {title:"message.footer.txt12",link:'https://github.com/sealemlab'},
-            {title:"message.footer.txt13",link:''}
-          ]
-        },
-        {
           id:4,
           children:[
             {title:"message.footer.txt14",link:''},
@@ -82,7 +74,16 @@ export default {
             {title:"message.footer.txt18",link:''},
             {title:"message.footer.txt19",link:''}
           ]
-        }
+        },
+        {
+          id:3,
+          children:[
+            {title:"message.footer.txt11"},
+            {title:"message.footer.txt12",link:'https://github.com/sealemlab'},
+            {title:"message.footer.txt13",link:''}
+          ]
+        },
+        
       ]
     }
   }
@@ -164,8 +165,9 @@ export default {
     }
     .footer_content {
       width: 100%;
-      align-items: center;
-      justify-content: space-around;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
       margin: 0.2rem 0;
       padding: 0 0.2rem;
       .footer_logo {
@@ -173,8 +175,10 @@ export default {
       }
       .onebox {
         width: inherit;
-        justify-content: space-around;
+        justify-content: space-between;
+        flex-wrap: wrap;
         ul {
+          width: 50%;
           li {
             margin: 14px 0;
             letter-spacing: 0.52px;

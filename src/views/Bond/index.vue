@@ -705,8 +705,6 @@ export default {
   margin-top: 80px;
   width: 100%;
   height: auto;
-  // background: url($bg_url + "newbondbg.webp") no-repeat;
-  // background-size: 100% auto;
 }
 .box1 {
   width: 100%;
@@ -1067,6 +1065,61 @@ export default {
   }
   100% {
     transform: rotate(-90deg);
+  }
+}
+@media screen and (max-width: 980px) {
+  .bond_page {
+    margin-top: 0;
+    width: 100%;
+    height: auto;
+  }
+  .box1 {
+    width: 100%;
+    position: relative;
+    .bond_bg {
+      width: 100%;
+      min-height: 350px;
+    }
+    >div{
+      position: absolute;
+      top: 1.5rem;
+      left: 0;
+      width: 100%;
+      padding: 0 0.2rem;
+      .bond_img {
+        width: 156px;
+      }
+      ul {
+        display: flex;
+        align-items: center;
+        margin-top: 60px;
+        li {
+          width: 200px;
+          height: 60px;
+          background: rgba(163, 159, 148, 0.23);
+          border-radius: 14px;
+          text-align: center;
+          margin-right: 20px;
+          .txt1 {
+            width: 100%;
+            height: calc(100% - 4px);
+            padding: 10px;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .line {
+            width: 50%;
+            height: 4px;
+            margin: 0 auto;
+            background: #f0ce75;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
   }
 }
 </style>

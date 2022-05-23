@@ -6,9 +6,6 @@
           <span class="nav_txt">{{ $t(route.label) }}</span>
         </router-link>
       </div>
-      <!-- <ul class="display_flex">
-        <li class="font24" :class="{ active_li: li_index == index }" v-for="(item,index) in navArr" :key="index" @click="liClick(item,index)">{{$t(item.label)}}</li>
-      </ul> -->
       <div class="main">
         <router-view />
       </div>
@@ -91,33 +88,56 @@ export default {
         }
       }
     }
-    // ul{
-    //   position: fixed;
-    //   top: 116px;
-    //   left: 5vw;
-    //   background: rgba(0,0,0,0.5);
-    //   flex-direction: column;
-    //   li{
-    //     font-weight: normal;
-    //     color: #FFFFFF;
-    //     line-height: 48px;
-    //     min-width: 120px;
-    //     display: flex;
-    //     align-items: center;
-    //     margin-bottom: 30px;
-    //     color: #fff;
-    //     cursor: pointer;
-    //   }
-    //   .active_li{
-    //     color: #EDD083;
-    //   }
-    // }
     .main{
       width: 100vw;
       max-width: 1200px;
       margin: 0 auto;
       margin-top: 50px;
       padding-left: 120px;
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .nft_page{
+    width: 100%;
+    min-height: calc(100vh - 1rem);
+    .content_box{
+      padding-top: 0.8rem;
+      .menu_box{
+        position: fixed;
+        top: 0.8rem;
+        left: 0.2rem;
+        background: transparent;
+        flex-direction: row;
+        background: rgba(0,0,0,0.5);
+        .a_link{
+          min-width: 0.8rem;
+          display: flex;
+          align-items: center;
+          margin-bottom: 0;
+          color: #fff;
+          cursor: pointer;
+          text-decoration: none;
+          .nav_txt{
+            font-weight: normal;
+            color: #FFFFFF;
+            line-height: 40px;
+            margin-left: 0;
+          }
+          &.router-link-active {
+            .nav_txt{
+              color: #EDD083;
+            }
+          }
+        }
+      }
+      .main{
+        width: 100vw;
+        max-width: 100%;
+        margin: 0 auto;
+        margin-top: 0.5rem;
+        padding-left: 0;
+      }
     }
   }
 }

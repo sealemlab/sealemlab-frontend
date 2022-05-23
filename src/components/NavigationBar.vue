@@ -372,7 +372,7 @@ export default {
     .logo {
       width: auto;
       height: 0.3rem;
-      margin-right: 0.2rem;
+      margin-right: 0;
     }
   }
   .nav_right {
@@ -387,7 +387,7 @@ export default {
       }
     }
     .login_box {
-      margin: 0 0.3rem 0;
+      margin: 0 0.1rem;
       .font_login {
         font-weight: bold;
         line-height: 0.14rem;
@@ -397,8 +397,38 @@ export default {
       cursor: pointer;
       padding: 0.05rem 0.15rem;
       border-radius: 0.08rem;
-      margin-right: 0.1rem;
+      margin-right: 0;
       line-height: 0.12rem;
+    }
+    .walletBox {
+      position: relative;
+      cursor: pointer;
+      background: #232229;
+      border: 1px solid #4f4e53;
+      border-radius: 0.08rem;
+      margin-right: 0;
+      padding: 0.05rem 0.1rem;
+      .connect_triangle {
+        width: fit-content;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .span2 {
+          color: #ffffff;
+          font-weight: bold;
+        }
+        .connect_icon {
+          border-width: 5px;
+          margin-left: 5px;
+          margin-top: 5px;
+          border-color: #ffffff;
+          border-style: dashed;
+          border-top-style: solid;
+          border-left-color: transparent;
+          border-right-color: transparent;
+          border-bottom-color: transparent;
+        }
+      }
     }
   }
 }

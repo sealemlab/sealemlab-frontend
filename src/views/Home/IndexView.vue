@@ -8,9 +8,9 @@
       <div class="content">
         <div class="content_center">
           <div class="leftbox">
-            <p class="font_1 font26 mobile_font14">{{$t("message.home.txt2")}}</p>
-            <p class="font_2 font45 demo_font_color mobile_font14">{{$t("message.home.add_txt1")}}</p>
-            <div class="btnbox font20">
+            <p class="font_1 font26 mobile_font18">{{$t("message.home.txt2")}}</p>
+            <p class="font_2 font45 demo_font_color mobile_font34">{{$t("message.home.add_txt1")}}</p>
+            <div class="btnbox font20 mobile_font16">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
               <img :src="haveVoice?`${$store.state.imgUrl}voice.webp`:`${$store.state.imgUrl}no_voice.webp`" class="voice_img" @click="videoPlay"/>
@@ -24,17 +24,17 @@
     </div>
     <div class="content_footer">
       <div class="left">
-        <span class="font30">{{$t("message.home.txt5")}}</span>
-        <span class="font30 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
+        <span class="font30 mobile_font16">{{$t("message.home.txt5")}}</span>
+        <span class="font30 mobile_font16 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
       </div>
-      <div class="btnbox font16 mobile_font14">
+      <div class="btnbox font16 mobile_font16">
         <span>{{$t("message.home.txt7")}}</span>
         <span>{{$t("message.home.txt8")}}</span>
       </div>
     </div>
     <!-- Protocol Stats -->
     <div class="characteristic_box">
-      <div class="title_txt font30">{{$t("message.home.txt77")}}</div>
+      <div class="title_txt font30 mobile_font18">{{$t("message.home.txt77")}}</div>
       <div class="border_">
         <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
           <div class="add_top_content">
@@ -50,6 +50,7 @@
       <div class="right_box display_flex">
         <div class="fontbox">
           <span class="font30 span_title mobile_font18">{{$t("message.home.txt9")}}</span>
+          <div class="mobile_addimg"><img :src="`${$store.state.imgUrl}people.webp`" class="people" /></div>
           <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
         </div>
       </div>
@@ -57,9 +58,9 @@
     </div>
     <!-- 游戏场景轮播 -->
     <div class="characteristic_box">
-      <div class="title_txt font30">{{$t("message.home.txt65")}}</div>
+      <div class="title_txt font30 mobile_font18">{{$t("message.home.txt65")}}</div>
       <div class="add_game_txt">
-        <span class="span1 font20">{{$t("message.home.txt66")}}</span>
+        <span class="span1 font20 mobile_font14">{{$t("message.home.txt66")}}</span>
         <span class="span2 font16">{{$t("message.home.txt67")}}</span>
       </div>
       <span class="span3 font12">{{$t("message.home.txt68")}}</span>
@@ -79,8 +80,8 @@
                 <div class="oneimgbox" @click="gameClick(item)"><img :src="item.src" class="gameswiper_img" /></div>
               </swiper-slide>
             </swiper>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <!-- <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div> -->
           </div>
         </div>
         <div class="left right">
@@ -94,7 +95,7 @@
     <div class="content_">
       <!-- 特点 -->
       <div class="box_ display_flex">
-        <div class="title_txt font30 mobile_font16">{{$t("message.home.txt_characteristic")}}</div>
+        <div class="title_txt font30 mobile_font18">{{$t("message.home.txt_characteristic")}}</div>
         <div class="imgbox display_flex">
           <div class="add_outbox" :class="isEnLang?'en_class':''" v-for="(item, index) in spArr" :key="index">
             <div class="onebox display_flex">
@@ -108,8 +109,8 @@
         </div>
       </div>
       <!-- 在圣域怎么赚钱 -->
-      <div class="box_ make_money_people display_flex">
-        <div class="title_txt font30">{{$t("message.home.txt_makemoney")}}</div>
+      <div class="box_ display_flex">
+        <div class="title_txt font30 mobile_font18">{{$t("message.home.txt_makemoney")}}</div>
         <div class="make_money">
           <div class="make_box" v-for="(item, index) in makeMoneyArr" :key="index">
             <div class="make_one">
@@ -501,10 +502,10 @@ export default {
       // 游戏场景swiper配置
       gameswiperOption: {
         slidesPerView:4,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
+        // navigation: {
+        //   nextEl: ".swiper-button-next",
+        //   prevEl: ".swiper-button-prev",
+        // },
         on: {
           tap: () => {
             this.gameIndex = this.$refs.gameswiper.swiper.clickedIndex;
@@ -659,7 +660,7 @@ export default {
     width: 100vw;
     height: 100vh;
     .video_{
-      min-width: 100vw;
+      width: 100vw;
       height: 100vh;
       object-fit: cover;
     }
@@ -753,11 +754,11 @@ export default {
           font-weight: 400;
           line-height: 22px;
         }
+        .mobile_addimg{
+          display: none;
+        }
       }
     }
-  }
-  .margintop{
-    margin-top: 200px;
   }
   .content_{
     width: 100%;
@@ -1047,7 +1048,7 @@ export default {
           position: relative;
           width: 100%;
           margin-top: 26px;
-          padding: 0 58px;
+          // padding: 0 58px;
           .game_swiper{
             width: 100%;
             .swiper-slide{
@@ -1148,16 +1149,16 @@ export default {
   .make_box:hover{
     transform: scale(1.2);
   }
-  .swiper-button-prev {
-    background-image: url($bg_url + "btn_left.webp");
-    background-size: 100% auto;
-    width: 40px;
-  }
-  .swiper-button-next {
-    background-image: url($bg_url + "btn_right.webp");
-    background-size: 100% auto;
-    width: 40px;
-  }
+  // .swiper-button-prev {
+  //   background-image: url($bg_url + "btn_left.webp");
+  //   background-size: 100% auto;
+  //   width: 40px;
+  // }
+  // .swiper-button-next {
+  //   background-image: url($bg_url + "btn_right.webp");
+  //   background-size: 100% auto;
+  //   width: 40px;
+  // }
 }
 .btnbox{
   display: flex;
@@ -1189,16 +1190,59 @@ export default {
 @media screen and (max-width: 980px) {
   .home{
     padding-top: 0.8rem;
-    .home_bgbox{
-      .content{
-        position: absolute;
-        top: 1rem;
-        left: 0%;
+    .border_{
+      width: 100%;
+      height: auto;
+      padding: 0.25rem 0.2rem;
+      padding-bottom: 0;
+      border-radius: 0.08rem;
+      border: 1px solid #D3B96D;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .add_one_box{
         width: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        padding: 0 0.2rem;
+        margin-bottom: 0.25rem;
+        .add_top_content{
+          width: auto;
+          display: flex;
+          align-items: center;
+          .add_img{
+            width: 0.15rem;
+          }
+          .span{
+            font-weight: normal;
+            color: #9E9E9E;
+            line-height: 0.22rem;
+            margin-left: 0.15rem;
+          }
+        }
+        p{
+          font-weight: 800;
+          color: #FFFFFF;
+          line-height: 0.22rem;
+          margin-top: 0;
+        }
+      }
+    }
+    .home_bgbox{
+      height: 50vh;
+      min-height:50vh;
+      .video_{
+        height: 50vh;
+        object-fit: cover;
+      }
+      .content{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
         .content_center{
           width: 100%;
           display: flex;
@@ -1216,60 +1260,64 @@ export default {
             .font_2{
               font-weight: bolder;
               color: #FFFFFF;
-              line-height: 0.16rem;
+              line-height: 0.49rem;
               margin: 0.05rem 0 0.2rem 0;
             }
           }
           .rightbox{
+            position: absolute;
+            right: 0;
+            top: 44%;
             display: flex;
             align-items: center;
             .tel_img{
-              width: 0.1rem;
-              margin-right: 0.13rem;
+              width: 0.2rem;
+              margin-right: 0.1rem;
             }
           }
         }
-        .content_footer{
+      }
+    }
+    .content_footer{
+      width: 100%;
+      height: auto;
+      padding:0;
+      margin-top: 0.48rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .left{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        span{
           width: 100%;
-          height: 1.2rem;
-          padding: 0.2rem 0.1rem;
-          margin-top: 0.48rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          .left{
-            display: flex;
-            flex-direction: column;
-            .margin_top{
-              margin-top: 10px;
-            }
+          padding: 0 0.2rem;
+          &:nth-child(1){
+            margin-bottom: 20px;
           }
         }
       }
     }
     .character_introduction{
       width: 100%;
-      padding: 0 0.3rem;
+      padding: 0 0.2rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       .people_box{
-        width: 100%;
-        .people{
-          width: 100%;
-          max-width:100%;
-        }
+        display: none;
       }
       .right_box{
         width: 100%;
         flex-direction: column;
         align-items: center;
         position: relative;
+        padding-top: 0.5rem;
         .fontbox{
           display: flex;
           flex-direction: column;
-          align-items: center;
           .title_txt{
             text-align: left;
             font-weight: bold;
@@ -1277,15 +1325,23 @@ export default {
             margin: 0.82rem 0 0.17rem 0;
           }
           .txt_content{
+            max-width: 100%;
             width:100%;
             font-weight: 400;
-            line-height: 0.14rem;
+            line-height: 0.18rem;
+            color: #DBDADA;
+          }
+          .mobile_addimg{
+            display: block;
+            width: 100%;
+            margin-bottom: 0.2rem;
+            .people{
+              width: 100%;
+              max-width:100%;
+            }
           }
         }
       }
-    }
-    .margintop{
-      margin-top: 2rem;
     }
     .title_txt{
       width: 100%;
@@ -1304,59 +1360,77 @@ export default {
       .box_{
         .imgbox{
           width: 100%;
-          flex-wrap: wrap;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 0.6rem;
-          .onebox{
-            flex-direction: column;
+          flex-wrap: wrap;
+          margin-bottom: 0.3rem;
+          .add_outbox{
+            width: 50%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
             border-right:none;
-            padding:0 10px;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.4rem;
             &:nth-child(1){
-              padding-left: 0;
+              justify-content: flex-start;
             }
-            .img_sp{
-              width: .38rem;
-            }
-            .txt{
-              font-weight: bold;
-              color: #FFFFFF;
-              line-height: 12px;
-              margin: 10px 0;
-            }
-            .txt1{
-              font-weight: 400;
-              max-width: 100%;
+            .onebox{
+              flex-direction: column;
+              align-items: center;
+              &:nth-child(1){
+                padding-left: 0;
+              }
+              .add_content{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                .img_sp{
+                  width: 0.16rem;
+                }
+                .txt{
+                  font-weight: 600;
+                  color: #FFFFFF;
+                  line-height: 22px;
+                  margin-left: 8px;
+                }
+              }
+              .txt1{
+                font-weight: 400;
+                margin-top: 0.1rem;
+                max-width: 1.37rem;
+              }
             }
           }
         }
         .make_money{
           width: 100%;
           display: flex;
-          justify-content: space-between;
-          flex-wrap: wrap;
+          flex-direction: column;
+          justify-content: flex-start;
+          flex-wrap: nowrap;
           .make_box{
             padding: 1px;
-            margin-bottom: 44px;
-            width: 30%;
-            min-height: 92px;
+            margin-bottom: 0.15rem;
+            width: 100%;
             cursor: pointer;
             transition: all 0.3s;
             background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
             .make_one{
               display: flex;
-              flex-direction: column;
+              flex-direction: row;
               align-items: center;
-              justify-content: center;
+              justify-content: flex-start;
               width: 100%;
-              height: 100%;
+              min-height: 0.4rem;
               padding: 0 10px;
               background: #000;
               ._span{
                 font-weight: 400;
                 color: #FFFFFF;
                 line-height: 22px;
+              }
+              .money_1{
+                width: 0.16rem;
               }
             }        
           }
@@ -1380,7 +1454,6 @@ export default {
       }
     }
     .time_axis_box{
-      display: none;
       width: 100%;
       background: #1F1F1F;
       .time_axis{
@@ -1404,16 +1477,117 @@ export default {
         align-items: center;
         .one_partener{
           .par1{
-            width: 0.55rem;
+            width: 0.73rem;
           }
           .par2{
-            width: 0.55rem;
+            width: 0.89rem;
           }
           .par3{
-            width: 0.55rem;
+            width: 0.94rem;
           }
           .par4{
-            width: 0.55rem;
+            width: 0.86rem;
+          }
+          .par5{
+            width: 0.88rem;
+          }
+          .par6{
+            width: 0.72rem;
+          }
+          .par7{
+            width: 0.67rem;
+          }
+          .par8{
+            width: 0.73rem;
+          }
+          .par9{
+            width: 0.93rem;
+          }
+          .par10{
+            width: 0.93rem;
+          }
+        }
+      }
+      .add_game_txt{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0.2rem 0 0.1rem;
+        .span1{
+          font-weight: 500;
+          color: #DBDADA;
+          line-height: 0.16rem;
+          margin-right: 0;
+          white-space:nowrap;
+        }
+        .span2{
+          font-weight: 400;
+          color: #ECCF83;
+          line-height: 0.12rem;
+          white-space:nowrap;
+          transform: scale(0.75);
+          zoom:0.8;
+        }
+      }
+      .add_box{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.35rem;
+        flex-direction: column;
+        .left{
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          .span4{
+            font-weight: 600;
+            color: #DBDADA;
+            line-height: 0.17rem;
+            margin-top: 0.1rem;
+          }
+          .bottom_swiper{
+            width: 100%;
+            .gameMax_swiper{
+              width: 100%;
+              img{
+                width: 100%;
+              }
+            }
+          }
+          .gameswiperbox{
+            position: relative;
+            width: 100%;
+            margin-top: 0.1rem;
+            // padding: 0 58px;
+            .game_swiper{
+              width: 100%;
+              .swiper-slide{
+                display: flex;
+                justify-content: center;
+                .oneimgbox{
+                  max-width: 2rem;
+                  width: 1.5rem;
+                  padding:0.1rem;
+                  cursor: pointer;
+                  .gameswiper_img{
+                    width: 100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .right{
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items:center;
+          justify-content: space-between;
+          .game2{
+            max-width: 33%;
+            width: 30%;
+            margin-bottom: 0;
           }
         }
       }
@@ -1472,21 +1646,29 @@ export default {
   }
   .btnbox{
     span{
-      width: 0.97rem;
-      height: 0.29rem;
-      background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+      width: 1.55rem;
+      height: 0.4rem;
+      background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
       border-radius: 0.04rem;
       border: 1px solid #ECCF83;
       text-align: center;
-      line-height: 0.29rem;
+      line-height: 0.4rem;
       margin-right: 0.13rem;
+      font-weight: bold;
       cursor: pointer;
-      &.active{
-        background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
-      }
+      color: #000000;
       &:nth-child(2){
+        border: 1px solid #ECCF83;
+        background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
         margin-right: 0;
+        color: #FFFFFF;
       }
+    }
+    .voice_img{
+      display: none;
+      cursor: pointer;
+      width: 63px;
+      margin-left: 180px;
     }
   }
 }

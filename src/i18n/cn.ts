@@ -14,6 +14,7 @@ export const message = {
     txt10: "Home",
     txt11: "加密新手?",
     txt12: "了解有关钱包的更多信息",
+    txt13:"更多"
   }, //导航栏
   home: {
     add_txt1: "高APY",
