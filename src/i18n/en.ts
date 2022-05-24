@@ -14,6 +14,7 @@ export const message = {
     txt10: "Home",
     txt11: "New to crypto?",
     txt12: "Learn more about wallets",
+    txt13:"More"
   },
   home: {
     add_txt1: "High APY",

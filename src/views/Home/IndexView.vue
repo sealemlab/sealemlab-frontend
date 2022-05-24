@@ -171,11 +171,26 @@
                 <span></span>
               </div>
               <p class="titletxt font18">{{$t(item.title)}}</p>
-              <p class="content_class font16" >{{$t(item.content)}}</p>
+              <p class="content_class font16">{{$t(item.content)}}</p>
             </div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
+        <div class="mobile_time_axis">
+          <div class="one_all_box" v-for="(item, index) in swiperArr" :key="index">
+            <div class="left">
+              <img :src="`${$store.state.imgUrl}time.webp`" />
+              <span></span>
+            </div>
+            <div class="right">
+              <span class="span mobile_font14">{{item.time}}</span>
+              <div class="bottom">
+                <span class="b_titl mobile_font14">{{$t(item.title)}}</span>
+                <span class="b_content">{{$t(item.content)}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- 合作者 -->
@@ -941,6 +956,9 @@ export default {
           }
         }
       }
+      .mobile_time_axis{
+        display: none;
+      }
     }
   }
   .title_txt{
@@ -1463,6 +1481,77 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        .self_swiper{
+          display: none;
+        }
+        .mobile_time_axis{
+          width: 100%;
+          max-height: 4rem;
+          overflow: auto;
+          display: flex;
+          flex-direction: column;
+          .one_all_box{
+            width: 100%;
+            display: flex;
+            .left{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              img{
+                width: 0.4rem;
+                margin: -0.14rem 0;
+              }
+              span{
+                // margin-top: -0.12rem;
+                display: inline-block;
+                // width: 1px;
+                height: 1.8rem;
+                border: 0.01rem dashed #F3DC97;
+                border-radius: 0.2rem;
+              }
+            }
+            .right{
+              display: flex;
+              flex-direction: column;
+              .span{
+                display: inline-block;
+                padding:0.1rem 0.2rem;
+                max-width: 1.1rem;
+                background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+                box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.39);
+                border-radius: 0.05rem;
+                border: 1px solid rgba(68, 67, 67, 0.47);
+                font-weight: bold;
+                color: #DBDADA;
+                line-height: 0.16rem;
+              }
+              .bottom{
+                display: flex;
+                flex-direction: column;
+                margin-top: 0.1rem;
+                padding: 0.1rem;
+                width:100%;
+                min-width: 3rem;
+                min-height: 0.9rem;
+                background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+                box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+                border-radius: 0.08rem;
+                border: 1px solid rgba(68, 67, 67, 0.47);
+                .b_title{
+                  font-weight: bold;
+                  color: #DBDADA;
+                  line-height: 0.16rem;
+                }
+                .b_content{
+                  font-weight: 400;
+                  color: #DBDADA;
+                  line-height: 0.14rem;
+                  margin-top: 0.05rem;
+                }
+              }
+            }
+          }
+        }
       }
     }
     .characteristic_box{
