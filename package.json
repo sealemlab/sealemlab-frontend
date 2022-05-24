@@ -10,6 +10,9 @@
     "publish": "npm run build && rimraf -- prod && cpr -- dist prod"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/vue-fontawesome": "^2.0.6",
     "axios": "^0.26.1",
     "bignumber.js": "^9.0.1",
     "core-js": "^3.6.5",

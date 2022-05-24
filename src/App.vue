@@ -4,9 +4,34 @@
     <router-view />
     <FooterComponents />
     <div class="mobile_nav">
-      <div class="mobile_onebox" v-for="(item, index) in navArr" :key="index" @click="toRoute(item.link)">
-        <div class="box"></div>
+      <div class="mobile_onebox" v-for="(item, index) in navArr" :key="index" @click="toRoute(item,index)">
+        <div class="box" v-if="index == 0">
+          <font-awesome-icon :icon="['fas', 'house']"></font-awesome-icon>
+        </div>
+        <div class="box" v-if="index == 1">
+          <font-awesome-icon :icon="['fas', 'globe']"></font-awesome-icon>
+        </div>
+        <div class="box" v-if="index == 2">
+          <font-awesome-icon :icon="['fas', 'globe']"></font-awesome-icon>
+        </div>
+        <div class="box" v-if="index == 3">
+          <font-awesome-icon :icon="['fas', 'globe']"></font-awesome-icon>
+        </div>
+        <div class="box" v-if="index == 4">
+          <font-awesome-icon :icon="['fas', 'house']"></font-awesome-icon>
+        </div>
         <span class="mobile_nav_txt">{{ $t(item.label) }}</span>
+      </div>
+    </div>
+    <div class="mobile_proup" v-if="isShowMore" @click="isShowMore = false">
+      <div class="content">
+        <span @click="routeFun('Market')">Market</span>
+        <span @click="routeFun('Game')">Game</span>
+        <span @click="routeFun('User')">User center</span>
+        <span @click="routeFun('WhitePaper')">WhitePaper</span>
+        <p>
+          <span>EN</span>
+        </p>
       </div>
     </div>
     <!-- 链接钱包弹窗 -->
@@ -42,8 +67,9 @@ export default {
         { label: "message.nav.txt1", link: "/bond" },
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
-        { label: "message.nav.txt13", link: "" }
+        { label: "message.nav.txt13", link: ""}
       ],
+      isShowMore:false,
     }
   },
   watch: {
@@ -82,7 +108,14 @@ export default {
       },
       deep: true,
       immediate: true,
-    }
+    },
+    'isShowMore'(newvala){
+      if(newvala){
+        document.body.style.overflow='hidden'
+      }else{
+        document.body.style.overflow='visible'
+      }
+    },
   },
   components: {
     NavigationBar,
@@ -113,8 +146,33 @@ export default {
         document.getElementsByTagName("html")[0].style.fontSize = rem375 + "px";
       }
     },
-    toRoute(link) {
-      if (link) this.$router.push(link);
+    toRoute(item,index) {
+      console.log('item,index: ', item,index);
+      if (item.link) this.$router.push(item.link);
+      if(index == this.navArr.length - 1){
+        this.isShowMore = true
+      }else{
+        this.isShowMore = false
+      }
+    },
+    routeFun(data){
+      this.isShowMore = false
+      switch(data){
+        case 'Market':
+          // this.$router.push('')
+          break;
+        case 'Game':
+          // this.$router.push('')
+          break;
+        case 'User':
+          this.$router.push('/user/assets/0')
+          break;
+        case 'WhitePaper':
+          // this.$router.push('')
+          break;
+        default:
+          break;
+      }
     },
     // 钱包关闭弹窗方法
     walletClose() {
@@ -149,7 +207,7 @@ export default {
   background: #000000;
 }
 @media screen and (min-width: 981px) {
-  .mobile_nav{
+  .mobile_nav,.mobile_proup{
     display: none;
   }
 }
@@ -175,15 +233,43 @@ export default {
       flex-direction: column;
       align-items: center;
       .box{
-        width: 20px;
-        height: 20px;
-        background: blue;
+        width: 0.24rem;
+        height: 0.21rem;
+        font-size: 0.2rem;
       }
       .mobile_nav_txt{
         font-weight: 600;
         color: #ECCF83;
         line-height: 0.14rem;
         margin-top: 0.1rem;
+      }
+    }
+  }
+  .mobile_proup{
+    position: fixed;
+    bottom: 0.6rem;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    .content{
+      width: 1.48rem;
+      height: 2.05rem;
+      background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: flex-end;
+      padding-right: 0.26rem;
+      span{
+        font-weight: 600;
+        color: #ECCF83;
+        line-height: 14px;
       }
     }
   }

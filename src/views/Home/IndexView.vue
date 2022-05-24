@@ -176,6 +176,20 @@
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
+        <div class="mobile_time_axis">
+          <!-- <swiper :options="mobileSwiperOption" ref="mobileMySwiper" class="self_mobileSwiper" v-if='mobileSwiperVisible'>
+            <swiper-slide v-for="(item, index) in swiperArr" :key="index">
+              <div class="mobile_box">
+                <span>我是时间</span>
+                <div class="mobile_content">
+                  <span>标题</span>
+                  <span>内容</span>
+                </div>
+              </div>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper> -->
+        </div>
       </div>
     </div>
     <!-- 合作者 -->
@@ -941,6 +955,9 @@ export default {
           }
         }
       }
+      .mobile_time_axis{
+        display: none;
+      }
     }
   }
   .title_txt{
@@ -1454,15 +1471,13 @@ export default {
       }
     }
     .time_axis_box{
-      width: 100%;
-      background: #1F1F1F;
       .time_axis{
-        width: 90vw;
-        margin: 0 auto;
-        padding-top: 60px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        .self_swiper{
+          display: none;
+        }
+        .mobile_time_axis{
+          width: 100;
+        }
       }
     }
     .characteristic_box{

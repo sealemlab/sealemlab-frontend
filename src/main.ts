@@ -6,6 +6,22 @@ import i18n from "./i18n/index";
 import "./style/reset.scss";
 import "./style/global.scss";
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { 
+  faHouse,
+  faGlobe
+  // faHexagonVerticalNft,
+  // faSquareKanban,
+  // faMessageDots
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(
+  faHouse,
+  faGlobe
+);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 import api from "./api/api";
 Vue.prototype.$api = api;
 
