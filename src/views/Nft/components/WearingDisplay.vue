@@ -747,6 +747,7 @@ export default {
       .add_out_{
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         .li {
           cursor: pointer;
           display: flex;
@@ -792,14 +793,15 @@ export default {
       display: flex;
       flex-direction: column;
       margin-top: 50px;
-      background:url($bg_url + "swiper_bg1.webp") no-repeat #000;
-      // background-size: 100% 100%;
-      background-size: cover;
+      background-image: none;
       .left_content{
         width:100%;
+        min-height: 5.26rem;
         display: flex;
         flex-direction: column;
         align-items: center;
+        background:url($bg_url + "mobile_swiper_bg1.webp") no-repeat #000;
+        background-size: 100% 100%;
         .swiperbox_1{
           width: 100%;
           display: flex;
@@ -829,21 +831,20 @@ export default {
               }
             }
           }
-          
         }
         .swiperbox_2{
           width: 100%;
           position: relative;
-          margin-top: 130px;
+          margin-top: 1rem;
           .img_box {
-            width: 75px;
-            height: 75px;
+            width: 0.6rem;
+            height: 0.6rem;
             display: flex;
             align-items: center;
             justify-content: center;
             background-image: url($bg_url + "nft_class1_fashion_normal.webp");
             background-size: 100% 100%;
-            padding: 10px;
+            padding: 0.1rem;
             &.active {
               background-image: url($bg_url + "nft_class1_fashion_active.webp");
               background-size: 100% 100%;
@@ -857,22 +858,22 @@ export default {
             justify-content: center;
             width: fit-content;
           }
-          .swiper-button-prev {
-            background-image: url($bg_url + "btn_left.webp");
-            background-size: 100% auto;
-            width: 40px;
-            left: -40px;
-          }
-          .swiper-button-next {
-            background-image: url($bg_url + "btn_right.webp");
-            background-size: 100% auto;
-            width: 40px;
-            right: -40px;
-          }
-          .swiper-button-disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
-          }
+          // .swiper-button-prev {
+          //   background-image: url($bg_url + "btn_left.webp");
+          //   background-size: 100% auto;
+          //   width: 40px;
+          //   left: -40px;
+          // }
+          // .swiper-button-next {
+          //   background-image: url($bg_url + "btn_right.webp");
+          //   background-size: 100% auto;
+          //   width: 40px;
+          //   right: -40px;
+          // }
+          // .swiper-button-disabled {
+          //   cursor: not-allowed;
+          //   opacity: 0.5;
+          // }
         }
       }
       .right_content{
@@ -884,26 +885,26 @@ export default {
           li{
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             font-weight: 600;
-            line-height: 28px;
+            line-height: 0.28rem;
             &:nth-child(1){
               color: #ECCF83;
-              margin-top: 20px;
+              margin-top: 0.2rem;
               span{
                 font-weight: 400;
                 color: #FFFFFF;
-                line-height: 22px;
-                margin-left: 10px;
+                line-height: 0.22rem;
+                margin-left: 0.1rem;
               }
             }
             &:nth-child(2){
               color: #ECCF83;
-              margin-top: 15px;
+              margin-top: 0.15rem;
             }
             &:nth-child(3){
-              margin-top: 17px;
+              margin-top: 0.17rem;
               width: 100%;
               display: flex;
               flex-direction: column;
@@ -912,12 +913,12 @@ export default {
                 display: flex;
                 align-items: center;
                 img{
-                  width: 42px;
-                  margin-right: 10px;
+                  width: 0.42rem;
+                  margin-right: 0.1rem;
                   cursor: pointer;
                 }
                 .addborder{
-                  width: 45px;
+                  width: 0.45rem;
                   border: 1px solid #ECCF83;
                   border-radius: 50%;
                 }
@@ -930,14 +931,14 @@ export default {
                   &:nth-child(1){
                     font-weight: 400;
                     color: #FFFFFF;
-                    line-height: 26px;
-                    margin-top: 15px;
+                    line-height: 0.26rem;
+                    margin-top: 0.15rem;
                   }
                   &:nth-child(2){
-                    margin-top: 5px;
+                    margin-top: 0.05rem;
                     font-weight: 400;
                     color: #FFFFFF;
-                    line-height: 20px;
+                    line-height: 0.2rem;
                   }
                 }
               }
@@ -947,26 +948,26 @@ export default {
         .start_box{
           display: flex;
           flex-direction: column;
-          margin-top: 15px;
+          margin-top: 0.15rem;
           p{
             display: flex;
             align-items: center;
             font-weight: 400;
             color: #FFFFFF;
-            line-height: 24px;
+            line-height: 0.24rem;
             span{
               color: #ECCF83;
             }
             &:nth-child(1){
-              margin-bottom: 10px;
+              margin-bottom: 0.1rem;
               span{
                 font-weight: 800;
                 color: #ECCF83;
-                line-height: 31px;
+                line-height: 0.31rem;
               }
               img{
-                width: 25px;
-                margin-left: 5px;
+                width: 0.25rem;
+                margin-left: 0.05rem;
               }
             }
           }

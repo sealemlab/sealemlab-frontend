@@ -93,7 +93,32 @@
       </div>
       <!-- 盲盒概率--移动端 -->
       <div class="mobile_box_probability">
-
+        <div class="oneline">
+          <span class="mobile_font14">{{$t("message.nft.txt217")}}</span>
+          <p v-for="(item,index) in probabilityArr1" :key="index">
+            <span>{{item.lv}}</span>
+            <img :src="`${$store.state.imgUrl}start.webp`" />
+          </p>
+        </div>
+        <div class="oneline">
+          <span class="mobile_font14">{{$t("message.nft.txt218")}}</span>
+          <p v-for="(item,index) in probabilityArr1" :key="index">
+            <span>{{item.num}}</span>
+          </p>
+        </div>
+        <div class="oneline">
+          <span class="mobile_font14">{{$t("message.nft.txt219")}}</span>
+          <p v-for="(item,index) in probabilityArr2" :key="index">
+            <img :src="`${$store.state.imgUrl}power${index + 1}.webp`" class="power_img" />
+            <span>{{$t(item.lv)}}</span>
+          </p>
+        </div>
+        <div class="oneline">
+          <span class="mobile_font14">{{$t("message.nft.txt218")}}</span>
+          <p v-for="(item,index) in probabilityArr2" :key="index">
+            <span>{{item.num}}</span>
+          </p>
+        </div>
       </div>
     </div>
     <!-- 盲盒介绍 -->
@@ -710,6 +735,7 @@ export default {
       font-weight: 600;
       color: #FFFFFF;
       line-height: 0.25rem;
+      text-align: center;
     }
     .introduce_content{
       width: 100%;
@@ -744,7 +770,36 @@ export default {
       display: none;
     }
     .mobile_box_probability{
-      display: none;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 0.12rem;
+      border: 1px solid #D3B96D;
+      margin: 0.23rem 0;
+      padding: 0.2rem;
+      .oneline{
+        display: flex;
+        flex-direction: column;
+        span{
+          font-weight: 600;
+          color: #EDD07E;
+          line-height: 0.28rem;
+        }
+        p{
+          width: fit-content;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img{
+            width: 0.13rem;
+            margin-left: 0.03rem;
+          }
+          .power_img{
+            margin-left: 0;
+            margin-right: 0.03rem;
+          }
+        }
+      }
     }
   }
 }

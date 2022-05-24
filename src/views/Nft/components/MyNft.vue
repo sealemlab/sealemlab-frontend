@@ -1,6 +1,6 @@
 <template>
   <div class="my_nft">
-    <p class="title_nft font30">{{$t("message.nft.txt38")}}</p>
+    <p class="title_nft font30 mobile_font18">{{$t("message.nft.txt38")}}</p>
     <div class="box" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
       <div class="out_box_one" v-for="(item, index) in nftArr" :key="index" @click="nftFun(item)">
         <div class="onebox">
@@ -378,6 +378,151 @@ export default {
     right: 30px;
     width: 34px;
     cursor: pointer;
+  }
+}
+@media screen and (max-width: 980px) {
+  .my_nft {
+    .title_nft{
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 0.21rem;
+    }
+    .box{
+      margin-top: 0.32rem;
+      width: 100%;
+      max-height: 6.3rem;
+      overflow: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding-bottom: 0.2rem;
+      .out_box_one{
+        width: 50%;
+        padding: 0.1rem 0.05rem;
+        .onebox {
+          position: relative;
+          cursor: pointer;
+          width: 100%;
+          height: 2.92rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 0.2rem;
+          background: url($bg_url + 'nftbg6.webp') no-repeat;
+          background-size: contain;
+          .out_img{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .imgcard {
+              height: 1.84rem;
+            }
+          }
+          .huxing_bg_box{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            .huxing_img{
+              width: 100%;
+            }
+            .huxing_content{
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              padding: 0.21rem 0.13rem 0.1rem;
+              .start{
+                position: absolute;
+                top: 0.27rem;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom:0.05rem;
+                .span1{
+                  font-weight: 800;
+                  color: #EFB045;
+                  line-height: 0.29rem;
+                  margin-right: 0.05rem;
+                }
+                img{
+                  width: 0.24rem;
+                }
+              }
+              .people_type{
+                margin-top: 0.07rem;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                img{
+                  width: 0.24rem;
+                }
+                .leftimgbox{
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                }
+                .left_content{
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  .scale_box{
+                    white-space:nowrap;
+                    zoom:0.8;
+                    font-weight: 800;
+                    line-height: 0.14rem;
+                  }
+                  .box_3d{
+                    margin-top: 0.05rem;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    span{
+                      font-weight: 800;
+                      line-height: 0.14rem;
+                      transform: scale(0.83);
+                      zoom:0.8;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .loading_box_content{
+      width: 100%;
+      height: 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .video_proup{
+    z-index: 100;
+    .video_{
+      height: 80%;
+      object-fit: cover;
+    }
+    .close_img{
+      position: absolute;
+      top: 0.2rem;
+      right: 0.2rem;
+      width: 0.28rem;
+      cursor: pointer;
+    }
   }
 }
 </style>

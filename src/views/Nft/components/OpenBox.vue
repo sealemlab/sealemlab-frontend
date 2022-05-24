@@ -1,7 +1,7 @@
 <template>
   <div class="open_box" v-if="openStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font30">{{$t("message.nft.txt39")}}</p>
+      <p class="propu_title_txt font30 mobile_font18">{{$t("message.nft.txt39")}}</p>
       <p class="propu_title_txt font16">{{$t("message.nft.txt40")}}</p>
       <!-- 全选按钮 -->
       <div class="select_content" @click="selectAllClick">
@@ -14,7 +14,7 @@
       <div class="cardarr_class">
         <div class="onebox" v-for="(item,index) in pageshowarr" :key="index" @click="cardClick(item)">
           <img :src="`${$store.state.imgUrl}mybox1.webp`" class="card_picture" />
-          <span class="boxID"># {{item.boxID}}</span>
+          <!-- <span class="boxID"># {{item.boxID}}</span> -->
           <div class="box_select">
             <span class="selected" v-if="item.status"></span>
           </div>
@@ -22,7 +22,7 @@
       </div>
     </div>
     <img :src="`${$store.state.imgUrl}back.webp`" class="close_img" @click.stop="closeOpen"/>
-    <div class="open_btn" @click="openboxFun">
+    <div class="open_btn mobile_font14" @click="openboxFun">
       {{$t("message.nft.txt42")}}
       <BtnLoading :isloading="openstatus"></BtnLoading>
     </div>
@@ -343,6 +343,127 @@ export default {
     align-items: center;
     font-weight: 600;
     color: #000000;
+  }
+}
+@media screen and (max-width: 980px) {
+  .open_box {
+    z-index: 100;
+    backdrop-filter: blur(6px);
+    .proup_boxs{
+      position: relative;
+      width: 100%;
+      padding-top: 0.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .propu_title_txt{
+        width: 100%;
+        text-align: center;
+        font-weight: 600;
+        color: #FFFFFF;
+        line-height: 0.42rem;
+      }
+      .select_content{
+        width: 100%;
+        padding-right: 5vw;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        cursor: pointer;
+        .select{
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          border: 1px solid #ECCF83;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .selected{
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ECCF83;
+          }
+        }
+        .select_ttx{
+          color: #FFFFFF;
+          margin-left: 5px;
+        }
+      }
+      .cardarr_class{
+        width: 90vw;
+        margin: 0 auto;
+        max-height: calc(100%-2rem);
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 0.2rem;
+        max-height: 6rem;
+        padding-bottom: 1.4rem;
+        .onebox{
+          position: relative;
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          cursor: pointer;
+          margin-bottom: 0.2rem;
+          .card_picture{
+            width: 90%;
+            max-width: 2.04rem;
+          }
+          .box_select{
+            position: absolute;
+            right: 0.1rem;
+            top: 0.04rem;
+            width: 0.18rem;
+            height: 0.18rem;
+            border-radius: 50%;
+            border: 1px solid #ECCF83;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .selected{
+              width: 0.08rem;
+              height: 0.08rem;
+              border-radius: 50%;
+              background: #ECCF83;
+            }
+          }
+          // .boxID{
+          //   position: absolute;
+          //   top: 10px;
+          //   left: 20px;
+          //   color: red;
+          // }
+        }
+      }
+    }
+    .close_img{
+      position: absolute;
+      top: 0.3rem;
+      left: 0.2rem;
+      width: 0.25rem;
+      cursor: pointer;
+    }
+    .open_btn{
+      cursor: pointer;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      z-index: 8;
+      transform: translateX(-50%);
+      width: 330px;
+      height: 54px;
+      background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      color: #000000;
+    }
   }
 }
 </style>

@@ -68,7 +68,7 @@
             {{ $t("message.signin.txt20") }}<span class="span" @click.stop="igraeeTheTreaty">{{ $t("message.signin.txt21") }}</span>
           </div>
         </div>
-        <div class="btn_box font18" @click="registerFun">
+        <div class="btn_box font18 mobile_font16" @click="registerFun">
           {{ $t("message.signin.txt1") }}
           <BtnLoading :isloading="registerbtnloading"></BtnLoading>
         </div>
@@ -438,6 +438,12 @@ export default {
       line-height: 0.2rem;
       margin-bottom: 0.15rem;
     }
+    .subtitle_txt {
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 0.28rem;
+      text-align: center;
+    }
     .content {
       flex-direction: column;
       margin-top: 0.3rem;
@@ -452,10 +458,136 @@ export default {
             width: 0.2rem;
             margin-right: 0.15rem;
           }
+          .right_txt {
+            span {
+              &:nth-child(1) {
+                line-height: 0.3rem;
+              }
+              &:nth-child(2) {
+                font-weight: 400;
+                color: #eccf83;
+                line-height: 0.22rem;
+                margin-top: 0.1rem;
+              }
+            }
+          }
         }
       }
       .right_content {
         padding: 0.23rem 0.1rem;
+        .user_inputbox {
+          width: 100%;
+          height: 100px;
+          position: relative;
+          padding: 0.1rem 0 0.1rem 0;
+          .email_txt {
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 0.22rem;
+            margin-bottom: 0.1rem;
+          }
+          .inputbox {
+            width: 100%;
+            height: 0.35rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            .eye {
+              position: absolute;
+              right: 0;
+            }
+            input {
+              width: 100%;
+              height: 100%;
+              background: #171718;
+              box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+              border-radius: 0.08rem;
+              border: 1px solid #373636;
+              color: #ffffff;
+              padding: 0 0.15rem;
+            }
+            .verification {
+              cursor: pointer;
+              min-width: fit-content;
+              padding: 0 0.1rem;
+              height: 100%;
+              color: #000000;
+              font-weight: 600;
+              background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+              border-radius: 0.08rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-left: 0.1rem;
+            }
+          }
+          .input_prompt {
+            width: 100%;
+            color: #fb3e3e;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+          }
+        }
+        .agree_box {
+          width: 100%;
+          height: 0.5rem;
+          margin-bottom: 0.2rem;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          .circular_ {
+            width: 0.24rem;
+            height: 0.24rem;
+            border-radius: 50%;
+            background: #d8d8d8;
+            border: 1px solid #979797;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .sure_box {
+              width: 60%;
+              height: 60%;
+              border-radius: 50%;
+              background: #101010;
+            }
+          }
+          .agree_txt {
+            margin-left: 0.1rem;
+            font-weight: 400;
+            color: #ffffff;
+            line-height: 0.22rem;
+            .span {
+              color: #eccf83;
+              margin-left: 0.05rem;
+            }
+          }
+        }
+        .btn_box {
+          cursor: pointer;
+          width: 100%;
+          height: 0.5rem;
+          background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+          border-radius: 0.04rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 600;
+          color: #000000;
+        }
+        .tip_txt {
+          text-align: center;
+          cursor: pointer;
+          font-weight: 400;
+          color: #969090;
+          line-height: 0.17rem;
+          margin-top: 0.2rem;
+          .tip_login {
+            color: #eccf83;
+            margin: 0 0.05rem;
+          }
+        }
       }
     }
   }

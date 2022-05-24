@@ -17,7 +17,8 @@ export default {
 <style lang="scss" scoped>
 .loading_page {
   width:100%;
-  min-height: 400px;
+  height: 100%;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;

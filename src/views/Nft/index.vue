@@ -106,12 +106,15 @@ export default {
       .menu_box{
         position: fixed;
         top: 0.8rem;
-        left: 0.2rem;
-        background: transparent;
+        left: 0;
+        width: 100%;
+        z-index: 15;
+        padding: 0 0.2rem;
         flex-direction: row;
+        justify-content: space-between;
         background: rgba(0,0,0,0.5);
         .a_link{
-          min-width: 0.8rem;
+          min-width: 0.2rem;
           display: flex;
           align-items: center;
           margin-bottom: 0;

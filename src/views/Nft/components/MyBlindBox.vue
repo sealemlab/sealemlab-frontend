@@ -1,6 +1,6 @@
 <template>
   <div class="blind_box">
-    <p class="title_box font30">{{$t("message.nft.txt37")}}</p>
+    <p class="title_box font30 mobile_font18">{{$t("message.nft.txt37")}}</p>
     <div class="boxs_">
       <div class="onebox" v-for="(item,index) in list" :key="index" @click="openBox(item)">
         <img :src="item.src" class="img_" />
@@ -170,6 +170,65 @@ export default {
             text-align: center;
             line-height: 19px;
             color: #000000;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .blind_box {
+    .title_box{
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 0.21rem;
+      margin-bottom: 0.32rem;
+    }
+    .boxs_{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      .onebox{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        .img_{
+          width: 95%;
+          min-height: 2rem;
+          max-width: 2.04rem;
+        }
+        .line_{
+          margin-top: 0.14rem;
+          width: 95%;
+          height: 0.37rem;
+          max-width: 2.04rem;
+          padding:0 0.08rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: url($bg_url + "boxs_border.webp") no-repeat;
+          background-size: cover;
+          span{
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 0.2rem;
+            &:nth-child(1){
+              max-width:0.8rem;
+            }
+            &:last-child{
+              width: 0.46rem;
+              height: 0.19rem;
+              background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+              box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+              border-radius: 0.04rem;
+              text-align: center;
+              line-height: 0.19rem;
+              color: #000000;
+            }
           }
         }
       }

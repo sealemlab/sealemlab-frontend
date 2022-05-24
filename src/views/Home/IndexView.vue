@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home_bgbox">
-      <LoadingAnmation v-if="videoStatus" ></LoadingAnmation> <!--:isshowtxt="true"-->
+      <LoadingAnmation v-if="videoStatus"></LoadingAnmation>
       <video class="video_" ref="video" loop autoplay muted v-show="!videoStatus">
         <source :src="`${$store.state.videoUrl}home_sacredrealm.mp4`" type="video/mp4" />
       </video>
