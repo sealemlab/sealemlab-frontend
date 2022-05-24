@@ -86,7 +86,7 @@
             <span class="specil_span">{{$t("message.nft.txt218")}}</span>
           </div>
           <div class="small_box" v-for="(item,index) in probabilityArr2" :key="index">
-            <p><img :src="`${$store.state.imgUrl}power1.webp`" class="power_img" />
+            <p><img :src="`${$store.state.imgUrl}power${index + 1}.webp`" class="power_img" />
             <span class="specil_span">{{$t(item.lv)}}</span></p>
             <span>{{item.num}}</span>
           </div>
