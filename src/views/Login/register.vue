@@ -288,7 +288,8 @@ export default {
           border-bottom: none;
         }
         .imgbox_ {
-          width: 60px;
+          width: 70px;
+          min-width: 70px;
           margin-right: 20px;
           img {
             width: 100%;
