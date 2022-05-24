@@ -121,7 +121,7 @@
       </div>
     </div>
     <!-- 团队 -->
-    <div class="teamboxs">
+    <!-- <div class="teamboxs">
       <div class="team_container display_flex">
         <div class="title_txt font30">{{$t("message.home.txt47")}}</div>
         <div class="teamswiper">
@@ -133,9 +133,6 @@
                   <span class="span1 font20">{{$t(item.name)}}</span>
                   <span class="span2 font16">{{item.txt}}</span>
                   <div class="address_peopllle display_flex">
-                    <!-- <a v-if="item.LinY == ''" href="javascript:;">
-                      <img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" />
-                    </a> -->
                     <a :href="item.LinY" target="_blank" rel="noopener noreferrer" v-if="item.LinY">
                       <img :src="`${$store.state.imgUrl}in.webp`" class="ling_ying" />
                     </a>
@@ -159,7 +156,7 @@
           <div class="swiper-button-next-add"></div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- 时间轴 -->
     <div class="time_axis_box">
       <div class="time_axis display_flex">
@@ -389,56 +386,62 @@ export default {
         {
           id:4,
           title:'message.home.txt55_1',
-          time:'2020 Q4',
+          time:'2021 Q3',
           content:'message.home.txt55'
         },
         {
           id:5,
           title:'message.home.txt56_1',
-          time:'2021 Q1',
+          time:'2021 Q4',
           content:'message.home.txt56'
         },
         {
           id:6,
           title:'message.home.txt57_1',
-          time:'2021 Q2',
+          time:'2022 Q1',
           content:'message.home.txt57'
         },
         {
           id:7,
           title:'message.home.txt58_1',
-          time:'2021 Q3',
+          time:'2022 Q2',
           content:'message.home.txt58'
         },
         {
           id:8,
           title:'message.home.txt60_1',
-          time:'2021 Q4',
+          time:'2022 Q3',
           content:'message.home.txt60'
         },
         {
           id:9,
           title:'message.home.txt61_1',
-          time:'2022 Q1',
+          time:'2022 Q4',
           content:'message.home.txt61'
         },
         {
           id:10,
           title:'message.home.txt62_1',
-          time:'2022 Q2',
+          time:'2023 Q1',
           content:'message.home.txt62'
         },
         {
           id:11,
           title:'message.home.txt63_1',
-          time:'2022 Q3',
+          time:'2023 Q2',
           content:'message.home.txt63'
         },
         {
           id:12,
           title:'message.home.txt64_1',
-          time:'2022 Q4',
+          time:'2023 Q3',
           content:'message.home.txt64'
+        },
+        {
+          id:13,
+          title:'message.home.add_txt65_1',
+          time:'2023 Q4',
+          content:'message.home.add_txt65'
         }
       ],
       // 路线图swiper配置

@@ -2,28 +2,28 @@ import service from "./service";
 
 const BASE_API = process.env.VUE_APP_BASE_API;
 export default {
-  // 注册
-  registerFun: (data: any) => {
-    return service.post(
-      `${BASE_API}/comm/create`,data
-    );
+  accountRegister: (data: any) => {
+    return service.post(`${BASE_API}comm/create`, data);
   },
-  // 登录
-  loginFun: (data: any) => {
-    return service.post(
-      `${BASE_API}/comm/login`,data
-    );
+  accountSendEmail: (data: any) => {
+    return service.post(`${BASE_API}comm/sendEmail`, data);
   },
-  // 绑定钱包
-  bindWallet: (data: any) => {
-    return service.post(
-      `${BASE_API}/user/verify`,data
-    );
+  accountLogin: (data: any) => {
+    return service.post(`${BASE_API}comm/login`, data);
   },
-  // 获取随机数
-  getRoundNum: (data: any) => {
-    return service.post(
-      `${BASE_API}/user/nonce`,data
-    );
-  }
+  accountUpdateInfo: (data: any) => {
+    return service.post(`${BASE_API}comm/updateInfo`, data);
+  },
+  accountForget: (data: any) => {
+    return service.post(`${BASE_API}comm/forget`, data);
+  },
+  accountUpdate: (data: any, headers: any) => {
+    return service.postAndHeaders(`${BASE_API}api/user/update`, data, headers);
+  },
+  getUserNonce: (data: any, headers: any) => {
+    return service.postAndHeaders(`${BASE_API}api/user/nonce`, data, headers);
+  },
+  bindWallet: (data: any, headers: any) => {
+    return service.postAndHeaders(`${BASE_API}api/user/verify`, data, headers);
+  },
 };

@@ -1,19 +1,22 @@
 <template>
-  <div class="btn_page">
-    <div class="connect_box" v-if="!getIstrue" @click="commonLink">Connect</div>
-    <div class="connect_box" v-else-if="!isapprove" @click="sonapprove">
-      {{$t("message.approve")}}
-      <BtnLoading :isloading="approveloading"></BtnLoading>
+  <div class="btn_page" @click="childenBtnFun">
+    <BtnLoading :isloading="true" v-if="allLoading"></BtnLoading>
+    <div v-else>
+      <div class="connect_box" v-if="!getIstrue">Connect</div>
+      <div class="connect_box" v-else-if="!isapprove">
+        {{$t("message.approve")}}
+        <BtnLoading :isloading="approveloading"></BtnLoading>
       </div>
-    <div class="connect_box" v-else @click="dosomething">
-      {{$t(word)}}
-      <BtnLoading :isloading="isloading"></BtnLoading>
+      <div class="connect_box" v-else>
+        {{$t(word)}}
+        <BtnLoading :isloading="isloading"></BtnLoading>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { erc20, getSigner } from 'sacredrealm-sdk';
+import { erc20, getSigner } from 'sealemlab-sdk';
 export default {
   props: {
     word: {
@@ -23,6 +26,10 @@ export default {
     isloading:{
       type: Boolean,
       default: false // 授权成功以后的操作按钮loading
+    },
+    allLoading:{
+      type: Boolean,
+      default: true // 按钮内容未进行判断前  先loading
     },
     approveloading:{
       type: Boolean,
@@ -37,9 +44,14 @@ export default {
     ...mapGetters(["getIstrue","getAccount"])
   },
   methods:{
-    // 链接钱包方法
-    commonLink() {
-      this.$store.commit("setwalletstatus", true);
+    childenBtnFun(){
+      if(!this.getIstrue){
+        this.$store.commit("setwalletstatus", true);
+      }else if(!this.isapprove){
+        this.$emit('sonapprove')
+      }else{
+        this.$emit('dosomething')
+      }
     },
     /**
      * 判断是否授权 type(代币地址):可以传token.st或者也可以直接传合约地址
@@ -73,14 +85,6 @@ export default {
             resolve(false)
           })
         })
-    },
-    // 授权完按钮的操作
-    dosomething(){
-      this.$emit('dosomething')
-    },
-    // 授权按钮的操作
-    sonapprove(){
-      this.$emit('sonapprove')
     }
   }
 }
@@ -89,6 +93,9 @@ export default {
 .btn_page{
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .connect_box {
     width: 100%;
     height: 100%;

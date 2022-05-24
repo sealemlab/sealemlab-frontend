@@ -30,7 +30,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { sb,getSigner } from "sacredrealm-sdk";
+import { sb,getSigner } from "sealemlab-sdk";
 export default {
   computed: {
     ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo"]),
@@ -111,7 +111,7 @@ export default {
           this.selectALLBtn = false
         }else{
           if(!this.getNoticeNum){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多 ${this.selectNum}个`}));
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`message.tip.self_txt10`}));
             this.$store.commit("setNoticeNum",true)
           }
         }
@@ -155,7 +155,7 @@ export default {
           })
           this.selectedNUM = this.pageshowarr.filter(item => {return item.status == true}).length
           if(!this.getNoticeNum){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`最多 ${this.selectNum}个`}));
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`message.tip.self_txt10`}));
             this.$store.commit("setNoticeNum",true)
           }
         }
@@ -181,7 +181,7 @@ export default {
       sb().connect(getSigner()).openBoxes(arr).then(res => {
         console.log('开盒子res: ', res);
         // 进度条
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'开盒子中....','link':res.hash}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt11','link':res.hash}));
         this.openstatus = false
       }).catch(() => {
         console.log("开盒子错误")
@@ -199,14 +199,16 @@ export default {
               this.$store.dispatch("setPrizeInfo", JSON.stringify({'status':true,'boxarr':res}));
             }
           })
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'成功'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
             sessionStorage.setItem("sb_count", res)
             this.getUserAllBox()
           })
         }else{
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'失败'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
         }
+        this.selectedNUM = 0
+        this.selectALLBtn = false
         console.log('监听盲盒开奖结果: user', user)
         console.log('监听盲盒开奖结果: boxslengths',boxslengths)
         console.log('监听盲盒开奖结果: boxarrID', boxarrID);

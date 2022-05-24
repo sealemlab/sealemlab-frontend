@@ -1,31 +1,59 @@
 <template>
   <div class="record_page" v-if="resultStatus">
-    <div class="title font26">开盲盒结果</div>
+    <div class="title font26">{{$t('message.tip.self_txt12')}}</div>
     <img
       :src="`${$store.state.imgUrl}close.webp`"
       class="close_img"
       @click="closepage"
     />
     <div class="boxarr">
-      <div class="onebox" v-for="(item, index) in boxarr" :key="index">
-        <div class="out_img"><img :src="item.src" class="imgcard" /></div>
-        <div class="huxing_bg_box">
-          <img :src="`${$store.state.imgUrl}newhuxing.webp`" class="huxing_img" />
-          <div class="huxing_content">
-            <div class="start">
-              <span class="span1 font24">{{item.start}}</span>
-              <img :src="`${$store.state.imgUrl}start.webp`" />
-            </div>
-            <div class="people_type">
-              <img :src="`${$store.state.imgUrl}type_cike.webp`" />
-              <img :src="`${$store.state.imgUrl}type_cike.webp`" />
-            </div>
-            <div class="people_type">
-              <div class="left_content">
-                <span class="font14">神圣的次开的头</span>
-                <span class="font12"># {{item.id}}</span>
+      <div class="out_box_one" v-for="(item, index) in boxarr" :key="index" @click="nftFun(item)">
+        <div class="onebox">
+          <div class="out_img"><img :src="item.src" class="imgcard" /></div>
+          <div class="huxing_bg_box">
+            <img :src="`${$store.state.imgUrl}huxing6.webp`" class="huxing_img" />
+            <div class="huxing_content">
+              <div class="start">
+                <span class="span1 font24">{{item.start}}</span>
+                <img :src="`${$store.state.imgUrl}start.webp`" />
               </div>
-              <img :src="`${$store.state.imgUrl}3d.webp`" />
+              <div class="people_type">
+                <div class="leftimgbox" v-if="item.type == 1">
+                  <img :src="`${$store.state.imgUrl}type_jds.webp`" />
+                  <span class="font12">{{$t("message.nft.txt9")}}</span>
+                </div>
+                <div class="leftimgbox" v-if="item.type == 2">
+                  <img :src="`${$store.state.imgUrl}type_cike.webp`"/>
+                  <span class="font12">{{$t("message.nft.txt11")}}</span>
+                </div>
+                <div class="leftimgbox" v-if="item.type == 3">
+                  <img :src="`${$store.state.imgUrl}type_wushi.webp`"/>
+                  <span class="font12">{{$t("message.nft.txt10")}}</span>
+                </div>
+                <div class="leftimgbox" v-if="item.type == 4">
+                  <img :src="`${$store.state.imgUrl}type_zs.webp`"/>
+                  <span class="font12">{{$t("message.nft.txt8")}}</span>
+                </div>
+                <div class="leftimgbox">
+                  <img :src="`${$store.state.imgUrl}power1.webp`" v-if=" item.power <= 20"/>
+                  <img :src="`${$store.state.imgUrl}power2.webp`" v-else-if=" item.power <= 40 && item.power >20"/>
+                  <img :src="`${$store.state.imgUrl}power3.webp`" v-else-if=" item.power <= 60 && item.power >40"/>
+                  <img :src="`${$store.state.imgUrl}power4.webp`" v-else-if=" item.power <= 80 && item.power >60"/>
+                  <img :src="`${$store.state.imgUrl}power5.webp`" v-else-if=" item.power <= 100 && item.power >80"/>
+                  <span class="font12">{{item.power}}</span>
+                </div>
+              </div>
+              <div class="people_type">
+                <div class="left_content">
+                  <span class="font14 scale_box">
+                    {{$t(`message.nft.type${item.type}.suit${item.suit}.position${item.position}`)}}
+                  </span>
+                  <div class="box_3d">
+                    <span class="font12"># {{item.id}}</span>
+                    <img :src="`${$store.state.imgUrl}new3d.webp`" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -37,6 +65,10 @@
         确认
       </div>
     </div> -->
+    <div class="video_proup" v-if="videoStatus">
+      <video class="video_" :src="videoSrc" loop autoplay muted controls></video>
+      <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click="closeProup"/>
+    </div>
   </div>
 </template>
 
@@ -51,6 +83,12 @@ export default {
     boxarr: {
       type: Array,
       default: function () { return [] }
+    }
+  },
+  data(){
+    return{
+      videoStatus:false,
+      videoSrc:'',
     }
   },
   watch:{
@@ -71,12 +109,19 @@ export default {
     ...mapGetters(["getIsMobile"])
   },
   methods: {
+    nftFun(item){
+      this.videoStatus = true
+      this.videoSrc = item.videoSrc
+    },
     // 弹窗关闭
     closepage () {
       this.$emit('closepage')
     },
     winbtnsure () {
       this.$emit('winbtnsure')
+    },
+    closeProup(){
+      this.videoStatus = false
     }
   }
 }
@@ -116,85 +161,104 @@ export default {
     margin-top: 80px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
-    max-height: 738px;
-    overflow-y: auto;
     padding-bottom: 132px;
-    .onebox {
-      position: relative;
-      width: 204px;
-      height: 288px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 20px;
-      // padding: 0 13px 18px;
-      background: url($bg_url + 'nftbg.webp') no-repeat;
-      background-size: 100% 100%;
-      .out_img{
-        width: 100%;
+    .out_box_one{
+      width: 20%;
+      padding: 10px;
+      .onebox {
+        position: relative;
+        cursor: pointer;
+        width: 204px;
+        height: 292px;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        .imgcard {
-          // width: 184px;
-          height: 184px;
-        }
-      }
-      .huxing_bg_box{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        .huxing_img{
-          width: 100%;
-        }
-        .huxing_content{
-          position: absolute;
-          top: 0;
-          left: 0;
+        margin-bottom: 20px;
+        // padding: 0 13px 18px;
+        background: url($bg_url + 'nftbg6.webp') no-repeat;
+        background-size: contain;
+        .out_img{
           width: 100%;
           display: flex;
-          flex-direction: column;
           align-items: center;
-          padding: 40px 13px 5px;
-          .start{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom:5px;
-            .span1{
-              font-weight: 800;
-              color: #EFB045;
-              line-height: 29px;
-              margin-right: 5px;
-              // background: liner-gradient(180deg, #F1E069 92%, #A87D30 28%, #FEF6C2 70%, #B48533 13%);
-              // -webkit-background-clip: text;
-              // -webkit-text-fill-color: transparent;
-            }
-            img{
-              width: 24px;
-            }
+          justify-content: center;
+          .imgcard {
+            height: 184px;
           }
-          .people_type{
-            margin-top: 10px;
+        }
+        .huxing_bg_box{
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          .huxing_img{
+            width: 100%;
+          }
+          .huxing_content{
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            img{
-              width: 24px;
-            }
-            .left_content{
+            padding: 49px 13px 10px;
+            .start{
+              position: absolute;
+              top: 41px;
+              width: 100%;
               display: flex;
-              flex-direction: column;
-              span{
+              justify-content: center;
+              align-items: center;
+              margin-bottom:5px;
+              .span1{
                 font-weight: 800;
-                line-height: 18px;
-                &:nth-child(2){
+                color: #EFB045;
+                line-height: 29px;
+                margin-right: 5px;
+              }
+              img{
+                width: 24px;
+              }
+            }
+            .people_type{
+              margin-top: 7px;
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              img{
+                width: 24px;
+              }
+              .leftimgbox{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              }
+              .left_content{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                .scale_box{
+                  white-space:nowrap;
+                  zoom:0.8;
+                  font-weight: 800;
+                  line-height: 14px;
+                }
+                .box_3d{
                   margin-top: 5px;
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  span{
+                    font-weight: 800;
+                    line-height: 14px;
+                    transform: scale(0.83);
+                    zoom:0.8;
+                  }
                 }
               }
             }
@@ -236,6 +300,30 @@ export default {
       cursor: pointer;
       margin-top: 14px;
     }
+  }
+}
+.video_proup{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 88;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  .video_{
+    height: 90%;
+    object-fit: cover;
+  }
+  .close_img{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 34px;
+    cursor: pointer;
   }
 }
 @media screen and (max-width: 980px) {

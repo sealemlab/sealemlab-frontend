@@ -54,14 +54,42 @@
         <div class="btnbox font20" :class="disable?'disable_bnb':''">
           <!-- {{$t("message.nft.txt28")}} -->
           <FunBtn
+            :allLoading="allLoading"
             :isapprove="isapprove"
             :approveloading="buy_isloading"
             :isloading="buy_isloading"
-            :word="$t('message.nft.txt28')"
+            :word="'message.nft.txt28'"
             ref="mychild"
             @sonapprove="sonapprove"
             @dosomething="buyBindBox"
           />
+        </div>
+      </div>
+    </div>
+    <!-- 盲盒概率 -->
+    <div class="blindbox_introduce">
+      <p class="font30 introduce_title_txt">{{$t("message.nft.txt216")}}</p>
+      <div class="box_probability font20">
+        <div class="top_one_line">
+          <div class="small_box">
+            <span>{{$t("message.nft.txt217")}}</span><span class="specil_span">{{$t("message.nft.txt218")}}</span>
+          </div>
+          <div class="small_box" v-for="(item,index) in probabilityArr1" :key="index">
+            <p><span>{{item.lv}}</span>
+            <img :src="`${$store.state.imgUrl}start.webp`" /></p>
+            <span>{{item.num}}</span>
+          </div>
+        </div>
+        <div class="top_one_line">
+          <div class="small_box">
+            <span>{{$t("message.nft.txt219")}}</span>
+            <span class="specil_span">{{$t("message.nft.txt218")}}</span>
+          </div>
+          <div class="small_box" v-for="(item,index) in probabilityArr2" :key="index">
+            <p><img :src="`${$store.state.imgUrl}power1.webp`" class="power_img" />
+            <span class="specil_span">{{$t(item.lv)}}</span></p>
+            <span>{{item.num}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -91,7 +119,7 @@
 <script>
 import WearingShow from './WearingDisplay.vue'
 import { mapGetters } from "vuex";
-import { sb,util,token,erc20,getSigner } from "sacredrealm-sdk";
+import { sb,util,token,erc20,getSigner } from "sealemlab-sdk";
 export default {
   components:{
     WearingShow
@@ -110,6 +138,21 @@ export default {
   },
   data() {
     return {
+      probabilityArr1:[
+        {lv:4,num:'40%'},
+        {lv:5,num:'32%'},
+        {lv:6,num:'24%'},
+        {lv:7,num:'3.6%'},
+        {lv:8,num:'0.4%'}
+      ],
+      probabilityArr2:[
+        {lv:"message.nft.txt220",num:'50%'},
+        {lv:"message.nft.txt221",num:'30%'},
+        {lv:"message.nft.txt222",num:'10%'},
+        {lv:"message.nft.txt223",num:'6%'},
+        {lv:"message.nft.txt224",num:'4%'}
+      ],
+      allLoading:true,// 授权/操作按钮在没有进行判断之前,全部转圈圈状态
       resetdata:false,
       surplusNumStatus:true,//剩余数量loading
       priceStatus:true,// 价格loading
@@ -138,7 +181,9 @@ export default {
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
+          this.allLoading = true
           this.balanceStatus = true
+          this.getBtnStatus(this.bindboxType)
           let setIntervalOBJ = setInterval(() => {
             if (this.payAddress) {
               this.getUserBalance(this.payAddress)
@@ -150,11 +195,12 @@ export default {
                 } else {
                   this.isapprove = false;
                 }
+                this.allLoading = false
               });
             }
           }, 1000);
         }else{
-          this.balanceStatus = false
+          this.balanceStatus = this.allLoading = this.disable = false
         }
       },
       deep: true,
@@ -175,9 +221,11 @@ export default {
           }else{
             this.isapprove = false;
           }
+          this.allLoading = false
         })
     },
     buyBindBox(){
+      console.log("购买方法",this.disable)
       if(this.disable)return
       if (this.buy_isloading) return;
       if(this.sliderValue <= 0){
@@ -213,14 +261,17 @@ export default {
         return
       }
       this.buy_isloading = true
+      console.log('this.sliderValue,this.bindboxType: ', this.sliderValue,this.bindboxType);
       sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType).then(async (res) => {
-        console.log('gdfgdf----res: ', res);
         // 进度条
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'购买中...','link':res.hash}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
+          this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
+            sessionStorage.setItem("sb_count", res)
+          })
           console.log("购买成功")
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'购买成功'}));
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
           
           this.getBindboxNum(this.bindboxType)
           this.getUserBalance(this.payAddress)
@@ -228,16 +279,16 @@ export default {
           this.sliderValue = 0
           this.stTotal = 0
           this.resetdata = true
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'购买成功'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           setTimeout(() => {
             this.resetdata = false
           },1500)
         }else{
           this.buy_isloading = false
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'购买失败'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
         }
-      }).catch(() => {
-        // console.log('购买盒子err: ', err)
+      }).catch(err => {
+        console.log('购买盒子err: ', err)
         this.buy_isloading = false
       });
     },
@@ -259,26 +310,8 @@ export default {
         // 获取用户某代币余额
         this.getUserBalance(res)
       });
-      // 获取某类型的盲盒是否开启白名单
-      sb().whiteListFlags(boxtypeInfo).then(res => {
-        // console.log('获取某类型的盲盒是否开启白名单:', res);
-        // this.isOpenWhiteList = res
-        // 判断某用户是否在某类型的盲盒的白名单
-        sb().getWhiteListExistence(boxtypeInfo,this.getAccount).then(res1 => {
-          // console.log('判断某用户是否在某类型的盲盒的白名单:', res1);
-          // this.isWhiteList = res1
-          if(res){//为真证明开启白名单限制
-            if(!res1){
-              this.disable = true
-            }else{
-              this.disable = false
-            }
-          }else{
-            this.disable = false
-          }
-        });
-      });
       
+      this.getBtnStatus(boxtypeInfo)
     },
     // 盲盒剩余数量  获取某类型的盲盒下某用户某小时剩余购买数量
     getBindboxNum(bindboxType){
@@ -305,6 +338,28 @@ export default {
       }).catch(() => {
         this.balanceStatus = false
       })
+    },
+    //判断按钮是否禁用
+    getBtnStatus(boxtypeInfo){
+      // 获取某类型的盲盒是否开启白名单
+      sb().whiteListFlags(boxtypeInfo).then(res => {
+        // console.log('获取某类型的盲盒是否开启白名单:', res);
+        // this.isOpenWhiteList = res
+        // 判断某用户是否在某类型的盲盒的白名单
+        sb().getWhiteListExistence(boxtypeInfo,this.getAccount).then(res1 => {
+          // console.log('判断某用户是否在某类型的盲盒的白名单:', res1);
+          // this.isWhiteList = res1
+          if(res){//为真证明开启白名单限制
+            if(!res1){
+              this.disable = true
+            }else{
+              this.disable = false
+            }
+          }else{
+            this.disable = false
+          }
+        });
+      });
     }
   },
   mounted(){
@@ -386,7 +441,7 @@ export default {
       align-items: center;
       margin-bottom: 30px;
       .lefttxt{
-        width: 80px;
+        width: 110px;
         font-weight: 400;
         color: #FFFFFF;
         line-height: 22px;
@@ -431,7 +486,6 @@ export default {
       align-items: center;
       font-weight: 600;
       color: #000000;
-      // margin-left: 35%;
       cursor: pointer;
     }
   }
@@ -469,14 +523,60 @@ export default {
         width: 100%;
         min-height: 159px;
         padding: 10px 0;
-        // background: linear-gradient(180deg, #080808 0%, rgba(16, 15, 15, 0.54) 100%);
-        // box-shadow: 0px 9px 22px 0px rgba(237, 208, 126, 0.17);
-        // border-radius: 8px;
-        // border: 1px solid;
-        // border-image: linear-gradient(180deg, rgba(247, 234, 181, 0.44), rgba(237, 208, 126, 0)) 1 1;
         font-weight: 400;
         color: #FFFFFF;
         line-height: 32px;
+      }
+    }
+  }
+  .box_probability{
+    width: 100%;
+    height: 296px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 31px;
+    border: 1px solid #D3B96D;
+    margin-top: 23px;
+    padding: 30px;
+    .top_one_line{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .small_box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &:nth-child(1){
+          align-items: flex-start;
+        }
+        p{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img{
+            width: 18px;
+            margin-left: 5px;
+          }
+          .power_img{
+            margin-top: 15px;
+            margin-right: 5px;
+            margin-left: 0;
+          }
+        }
+      }
+      span{
+        font-weight: 600;
+        color: #EDD07E;
+        line-height: 28px;
+        &:nth-child(2){
+          margin-top: 10px;
+          color: #FFFFFF;
+        }
+      }
+      .specil_span{
+        color: #EDD07E !important;
       }
     }
   }

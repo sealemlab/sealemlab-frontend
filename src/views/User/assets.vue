@@ -3,12 +3,12 @@
     <div class="box display_flex">
       <div class="title_box display_flex">
         <div class="address_box display_flex">
-          <span class="font26">10 NFT</span>
-          <span class="font16 margin_top">合约:0x77749fc693……053</span>
+          <span class="font26">0 NFT</span>
+          <span class="font16 margin_top">{{$t("message.user.txt7")}}:0x*********</span>
         </div>
-        <div class="add_buybtn font14">购买/出售</div>
+        <div class="add_buybtn font14">{{$t("message.user.txt17")}}</div>
         <div class="menu display_flex">
-          <div class="onebox font14" :class="{ activeMenu: menuIndex == index }" v-for="(item, index) in menuArr" :key="index" @click="menuClick(item,index)">{{item.title}}</div>
+          <div class="onebox font14" :class="{ activeMenu: menuIndex == index }" v-for="(item, index) in menuArr" :key="index" @click="menuClick(item,index)">{{$t(item.title)}}</div>
         </div>
       </div>
       <div class="content display_flex">
@@ -36,10 +36,10 @@ export default {
       title:'购买盲盒',
       menuIndex:0,
       menuArr:[
-        {title:'全部'},
-        {title:'出售'},
-        {title:'租赁'},
-        {title:'普通'},
+        {title:'message.user.txt18'},
+        {title:'message.user.txt19'},
+        {title:'message.user.txt20'},
+        {title:'message.user.txt21'},
       ],
       imgArr:[
         {

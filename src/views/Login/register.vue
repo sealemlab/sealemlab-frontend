@@ -19,21 +19,21 @@
             <input type="text" class="font16" v-model.trim="registerForm.mailAccount" />
           </div>
           <div class="input_prompt font12" v-if="registerForm.prompt1">
-            <span>* {{ registerForm.prompt1 }}</span>
+            <span>* {{ $t(registerForm.prompt1) }}</span>
           </div>
         </div>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.signin.txt19") }}</p>
           <div class="inputbox">
             <input type="text" class="font16" v-model.trim="registerForm.verifyCode" />
-            <div class="verification font14" @click="registerGetCode">
+            <div class="verification font14" @click="sendEmail()">
               <span v-if="showCountdown">{{ minutes + " : " + seconds }}</span>
               <span v-else>{{ $t("message.signin.txt39") }}</span>
               <BtnLoading :isloading="codebtnloading"></BtnLoading>
             </div>
           </div>
           <div class="input_prompt font12" v-if="registerForm.prompt2">
-            <span>* {{ registerForm.prompt2 }}</span>
+            <span>* {{ $t(registerForm.prompt2) }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="input_prompt font12" v-if="registerForm.prompt3">
-            <span>* {{ registerForm.prompt3 }}</span>
+            <span>* {{ $t(registerForm.prompt3) }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -57,7 +57,7 @@
             </div>
           </div>
           <div class="input_prompt font12" v-if="registerForm.prompt4">
-            <span>* {{ registerForm.prompt4 }}</span>
+            <span>* {{ $t(registerForm.prompt4) }}</span>
           </div>
         </div>
         <div class="agree_box" ref="circular" @click="igraeeFlag = !igraeeFlag">
@@ -140,21 +140,54 @@ export default {
     };
   },
   methods: {
-    /**注册 */
+    sendEmail() {
+      if (this.codebtnloading || this.showCountdown) return;
+      if (!this.registerForm.mailAccount) return (this.registerForm.prompt1 = "message.signin.txt30"); // 填写邮箱
+      if (!mailReg.test(this.registerForm.mailAccount)) return (this.registerForm.prompt1 = "message.signin.txt31"); // 邮箱不合法
+      this.registerForm.prompt1 = "";
+      if (localStorage.getItem(`rvc${this.registerForm.mailAccount}`)) {
+        const end = JSON.parse(localStorage.getItem(`rvc${this.registerForm.mailAccount}`));
+        const msec = end - Date.parse(new Date());
+        if (msec <= 0) {
+          localStorage.removeItem(`rvc${this.registerForm.mailAccount}`);
+          this.sendEmail();
+        } else {
+          this.showCountdown = true;
+          this.countdownFun(end);
+        }
+      } else {
+        this.codebtnloading = true;
+        this.$api
+          .accountSendEmail({ email: this.registerForm.mailAccount, method: "1" })
+          .then((res) => {
+            if (res.code === 200) {
+              this.showCountdown = true;
+              const end = Date.parse(new Date()) + 10 * 60 * 1000; // 10分钟
+              localStorage.setItem(`rvc${this.registerForm.mailAccount}`, JSON.stringify(end));
+              this.countdownFun(end);
+            }
+            this.codebtnloading = false;
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+          })
+          .catch(() => {
+            this.codebtnloading = false;
+          });
+      }
+    },
     registerFun() {
       if (this.registerbtnloading) return;
-      if (!this.registerForm.mailAccount) return (this.registerForm.prompt1 = "Enter email"); // 填写邮箱
-      if (!mailReg.test(this.registerForm.mailAccount)) return (this.registerForm.prompt1 = "Invalid email"); // 邮箱不合法
+      if (!this.registerForm.mailAccount) return (this.registerForm.prompt1 = "message.signin.txt30"); // 填写邮箱
+      if (!mailReg.test(this.registerForm.mailAccount)) return (this.registerForm.prompt1 = "message.signin.txt31"); // 邮箱不合法
       this.registerForm.prompt1 = "";
-      if (!this.registerForm.verifyCode) return (this.registerForm.prompt2 = "Enter verification code"); // 填写验证码
+      if (!this.registerForm.verifyCode) return (this.registerForm.prompt2 = "message.signin.txt32"); // 填写验证码
       this.registerForm.prompt2 = "";
-      if (!this.registerForm.password) return (this.registerForm.prompt3 = "Enter password"); // 填写密码
-      if (!pwReg.test(this.registerForm.password)) return (this.registerForm.prompt3 = "6-16 letters and numbers"); // 6-16位数字英文组合
+      if (!this.registerForm.password) return (this.registerForm.prompt3 = "message.signin.txt33"); // 填写密码
+      if (!pwReg.test(this.registerForm.password)) return (this.registerForm.prompt3 = "message.signin.txt37"); // 6-16位数字英文组合
       this.registerForm.prompt3 = "";
-      if (!this.registerForm.password2) return (this.registerForm.prompt4 = "Repeat password"); // 再次填写密码
-      if (!pwReg.test(this.registerForm.password2)) return (this.registerForm.prompt4 = "6-16 letters and numbers"); // 6-16位数字英文组合
+      if (!this.registerForm.password2) return (this.registerForm.prompt4 = "message.signin.txt36"); // 再次填写密码
+      if (!pwReg.test(this.registerForm.password2)) return (this.registerForm.prompt4 = "message.signin.txt37"); // 6-16位数字英文组合
       if (this.registerForm.password2 !== this.registerForm.password)
-        return (this.registerForm.prompt3 = this.registerForm.prompt4 = "Password verification failed"); // 密码校验不通过
+        return (this.registerForm.prompt3 = this.registerForm.prompt4 = "message.signin.txt38"); // 密码校验不通过
       this.registerForm.prompt3 = "";
       this.registerForm.prompt4 = "";
       if (!this.igraeeFlag) {
@@ -162,68 +195,28 @@ export default {
         setTimeout(() => {
           this.$refs.circular.classList.remove("animation_move");
         }, 300);
+        return;
       }
       this.registerbtnloading = true;
-      // const url = `mailAccount=${this.registerForm.mailAccount}&password=${this.registerForm.password}&verifyCode=${this.registerForm.verifyCode}`;
-      // this.$api
-      //   .gameMailRegister(url)
-      //   .then((res) => {
-      //     this.registerbtnloading = false;
-      //     this.showCountdown = false; // console.log("倒计时结束");
-      //     localStorage.removeItem("SealemLabRegisterGetCode");
-      //     if (res.data.result === "SUCCESS") {
-      //       this.firstAutoLogin(res.data.mailAccount, res.data.token);
-      //     } else if (res.data.result === "FAIL") {
-      //       this.$common.selectLang(res.data.msg, res.data.msg, this);
-      //     }
-      //   })
-      //   .catch(() => {
-      //     this.registerbtnloading = false;
-      //   });
+      this.$api
+        .accountRegister({ email: this.registerForm.mailAccount, password: this.registerForm.password, code: this.registerForm.verifyCode })
+        .then((res) => {
+          this.registerbtnloading = false;
+          this.showCountdown = false;
+          localStorage.removeItem(`rvc${this.registerForm.mailAccount}`);
+          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+          if (res.code === 200) {
+            this.toLogin();
+          }
+        })
+        .catch(() => {
+          this.registerbtnloading = false;
+        });
     },
-    /**注册获取验证码 */
-    registerGetCode() {
-      if (this.codebtnloading || this.showCountdown) return;
-      if (!this.registerForm.mailAccount) return (this.registerForm.prompt1 = "Enter email"); // 填写邮箱
-      if (!mailReg.test(this.registerForm.mailAccount)) return (this.registerForm.prompt1 = "Invalid email"); // 邮箱不合法
-      this.registerForm.prompt1 = "";
-      if (localStorage.getItem("SealemLabRegisterGetCode")) {
-        const end = JSON.parse(localStorage.getItem("SealemLabRegisterGetCode"));
-        const msec = end - Date.parse(new Date());
-        if (msec <= 0) {
-          localStorage.removeItem("SealemLabRegisterGetCode");
-          this.registerGetCode();
-        } else {
-          this.showCountdown = true;
-          this.countdownFun("register", end);
-        }
-      } else {
-        this.codebtnloading = true;
-        // const url = `codeType=register&mailAccount=${this.registerForm.mailAccount}`;
-        // this.$api
-        //   .gameMailCode(url)
-        //   .then((res) => {
-        //     this.codebtnloading = false;
-        //     if (res.data.result === "SUCCESS") {
-        //       this.showCountdown = true;
-        //       const end = Date.parse(new Date()) + 10 * 60 * 1000;
-        //       localStorage.setItem("SealemLabRegisterGetCode", JSON.stringify(end));
-        //       this.countdownFun("register", end);
-        //     }
-        //     this.$common.selectLang(res.data.msg, res.data.msg, this);
-        //   })
-        //   .catch(() => {
-        //     this.codebtnloading = false;
-        //   });
-      }
-    },
-
-    /**倒计时 */
-    countdownFun(type, end) {
+    countdownFun(end) {
       const msec = end - Date.parse(new Date());
-      // if (msec < 0) return;
       if (msec <= 0) {
-        this.removeItemGetCode(type);
+        this.removeItemGetCode();
       } else {
         // let day = parseInt(msec / 1000 / 60 / 60 / 24);
         // let hr = parseInt((msec / 1000 / 60 / 60) % 24);
@@ -235,31 +228,22 @@ export default {
         this.seconds = sec > 9 ? sec : "0" + sec;
         if (min >= 0 && sec >= 0) {
           if (min == 0 && sec == 0) {
-            this.removeItemGetCode(type);
+            this.removeItemGetCode();
           } else {
             setTimeout(() => {
-              if (type == "register") {
-                this.countdownFun(type, JSON.parse(localStorage.getItem("SealemLabRegisterGetCode")));
-              } else if (type == "passwordReset") {
-                this.countdownFun(type, JSON.parse(localStorage.getItem("SealemLabResetGetCode")));
-              }
+              this.countdownFun(JSON.parse(localStorage.getItem(`rvc${this.registerForm.mailAccount}`)));
             }, 1000);
           }
         }
       }
     },
-    /**倒计时结束移除 */
-    removeItemGetCode(type) {
-      if (type == "register") {
-        localStorage.removeItem("SealemLabRegisterGetCode");
-        this.showCountdown = false;
-      } else if (type == "passwordReset") {
-        localStorage.removeItem("SealemLabResetGetCode");
-        this.showCountdown = false;
-      }
+    removeItemGetCode() {
+      localStorage.removeItem(`rvc${this.registerForm.mailAccount}`);
+      this.showCountdown = false;
     },
     igraeeTheTreaty() {
-      console.log("协议点击,跳转链接");
+      window.location.href = `${this.$store.state.htmlUrl}SealemLab_protocol.html`;
+      // https://cdn.sealemlab.com/sealemlab_assets_test/htmls/SealemLab_protocol.html?lang=zh
     },
     toLogin() {
       this.$router.push("/signin/login");
@@ -304,7 +288,8 @@ export default {
           border-bottom: none;
         }
         .imgbox_ {
-          width: 60px;
+          width: 70px;
+          min-width: 70px;
           margin-right: 20px;
           img {
             width: 100%;

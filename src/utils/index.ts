@@ -1,4 +1,4 @@
-import {wallet, network,sb,sn,getSourceUrl} from "sacredrealm-sdk";
+import {wallet, network,sb,sn,getSourceUrl} from "sealemlab-sdk";
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
@@ -125,10 +125,12 @@ export default {
       let obj = {
         account:'',
         chainID:'',
-        status:false
+        status:false,
+        changeAccount:-1,// 切换账号变量
       }
       let acc = await wallet.getAccount(data); //链接钱包
       obj.account = acc[0]
+      obj.changeAccount = 0
       obj.chainID = await wallet.getChainId(); // 连接网络
       let net = network(); // 获取sdk返回的当前的环境
       if(obj.chainID == net.chainId){
@@ -144,13 +146,14 @@ export default {
         if(res.length == 0){
           obj.account = ''
           obj.status = false
+          obj.changeAccount = -1
           store.commit("setnewinfo",  JSON.stringify(obj))
           sessionStorage.setItem("setnewinfo",JSON.stringify(obj))
           resolve(obj)
         }else{
           obj.account = res[0]
-          localStorage.removeItem('nftInfo')
-          console.log("切换账号")
+          obj.changeAccount = ++obj.changeAccount
+          // console.log("切换账号")
           if(obj.chainID == net.chainId){
             obj.status = true
             store.commit("setnewinfo",  JSON.stringify(obj))
@@ -219,7 +222,7 @@ export default {
   // 获取用户的装备信息
   getUserBindbox(account:string,cursor:number, size = 10){//获取某用户基于指针（从0开始）和数量的装备ID数组，以及最后一个数据的指针
     return new Promise((resolve) => { 
-      sn().tokensOfOwnerBySize(account, cursor, size).then(res => {
+      sn().tokensOfOwnerBySize(account, cursor, size).then((res:any) => {
         // console.log("公共函数:获取用户的装备信息:",res)
         if(res[0].length > 0){
           this.ProcessingFunction(res[0]).then(data => {
@@ -246,6 +249,7 @@ export default {
           power:-1,//战力
           position:-1,//部位
           suit:-1,//套装
+          videoSrc:'',//
           status:false//状态
         }
         obj.id = Number(item)
@@ -257,6 +261,7 @@ export default {
         obj.position = Number(fun_arr[3])
         obj.suit =  Number(fun_arr[4])
         obj.src = getSourceUrl(fun_arr) + '.png'
+        obj.videoSrc = getSourceUrl(fun_arr) + '.mp4'
         orther_arr.push(obj)
         // console.log("公共函数:处理函数:",orther_arr)
         if (count == arr.length) {
@@ -265,5 +270,14 @@ export default {
         count++
       })
     })
-  }
+  },
+  // 函数防抖
+  antiShakeFun(callback:any,delay:number){
+    // @ts-ignore
+    clearTimeout(store.state.timer);  
+    // @ts-ignore
+    store.state.timer = setTimeout(()=>{
+      callback()
+    },delay);
+  },
 };

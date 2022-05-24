@@ -19,7 +19,7 @@
             <input type="text" class="font16" v-model.trim="loginForm.mailAccount" />
           </div>
           <div class="input_prompt font12" v-if="loginForm.prompt1">
-            <span>* {{ loginForm.prompt1 }}</span>
+            <span>* {{ $t(loginForm.prompt1) }}</span>
           </div>
         </div>
         <div class="user_inputbox">
@@ -31,12 +31,12 @@
             </div>
           </div>
           <div class="input_prompt font12" v-if="loginForm.prompt2">
-            <span>* {{ loginForm.prompt2 }}</span>
+            <span>* {{ $t(loginForm.prompt2) }}</span>
           </div>
         </div>
         <div class="remember_box">
           <div class="_check" @click="rememberStatus = !rememberStatus">
-            <div class="checkbox"><span class="correct font22" v-if="rememberStatus"></span></div>
+            <div class="checkbox"><span class="correct font22" v-show="rememberStatus"></span></div>
             <span class="font16 account">{{ $t("message.signin.txt28") }}</span>
           </div>
           <span class="font16 forget" @click="toForgetPassword">{{ $t("message.signin.txt29") }}</span>
@@ -65,24 +65,10 @@ const pwReg = /^[a-zA-Z0-9]{6,16}$/; // 6-16位数字英文组合
 import { mapGetters } from "vuex";
 import PassPopup from "../../components/PassPopup.vue";
 export default {
-  components: {
-    PassPopup,
-  },
-  computed: { ...mapGetters(["getLogin", "getNoticeNum"]) },
+  components: { PassPopup },
+  computed: { ...mapGetters(["getLogin", "setLogin"]) },
   data() {
     return {
-      loginForm: {
-        mailAccount: "",
-        password: "",
-        prompt1: "",
-        prompt2: "",
-      },
-      rememberStatus: false, //记住我状态
-      loginbtnloading: false,
-      isShowPassword: false,
-      isShowPassPopup: false,
-      isShowVerifyCode: false, //修改密码组件的验证码是否显示
-
       list: [
         {
           src: `${this.$store.state.imgUrl}register1.webp`,
@@ -115,35 +101,56 @@ export default {
           explain: "message.signin.txt14",
         },
       ],
+      loginForm: {
+        mailAccount: "",
+        password: "",
+        prompt1: "",
+        prompt2: "",
+      },
+      rememberStatus: false,
+      loginbtnloading: false,
+      isShowPassword: false,
+      isShowPassPopup: false,
+      isShowVerifyCode: false,
     };
   },
-
+  created() {
+    this.loginForm.mailAccount = this.getLogin.mailAccount;
+    this.loginForm.password = this.getLogin.password;
+    this.rememberStatus = this.getLogin.rememberStatus;
+  },
   methods: {
     loginFun() {
       if (this.loginbtnloading) return;
-      if (!this.loginForm.mailAccount) return (this.loginForm.prompt1 = "Enter email"); // 填写邮箱
-      if (!mailReg.test(this.loginForm.mailAccount)) return (this.loginForm.prompt1 = "Invalid email"); // 邮箱不合法
+      if (!this.loginForm.mailAccount) return (this.loginForm.prompt1 = "message.signin.txt30"); // 填写邮箱
+      if (!mailReg.test(this.loginForm.mailAccount)) return (this.loginForm.prompt1 = "message.signin.txt31"); // 邮箱不合法
       this.loginForm.prompt1 = "";
-      if (!this.loginForm.password) return (this.loginForm.prompt2 = "Enter password"); // 填写密码
-      if (!pwReg.test(this.loginForm.password)) return (this.loginForm.prompt2 = "6-16 letters and numbers"); // 6-16位数字英文组合
+      if (!this.loginForm.password) return (this.loginForm.prompt2 = "message.signin.txt33"); // 填写密码
+      if (!pwReg.test(this.loginForm.password)) return (this.loginForm.prompt2 = "message.signin.txt37"); // 6-16位数字英文组合
       this.loginForm.prompt2 = "";
       this.loginbtnloading = true;
-      this.$router.push("/myaccount/information");
-      // const url = `mailAccount=${this.loginForm.mailAccount}&password=${this.loginForm.password}`;
-      // this.$api
-      //   .gameMailLogin(url)
-      //   .then((res) => {
-      //     this.loginbtnloading = false;
-      //     if (res.data.result === "SUCCESS") {
-      //       localStorage.setItem("hashlandGameFiInfo", JSON.stringify(res.data));
-      //       this.loginRegisterSucc(res.data.mailAccount);
-      //     } else if (res.data.result === "FAIL") {
-      //       this.$common.selectLang(res.data.msg, res.data.msg, this);
-      //     }
-      //   })
-      //   .catch(() => {
-      //     this.loginbtnloading = false;
-      //   });
+      this.$api
+        .accountLogin({ email: this.loginForm.mailAccount, password: this.loginForm.password })
+        .then((res) => {
+          if (res.code === 200) {
+            this.$store.commit("setLogin", {
+              loginStatus: true,
+              rememberStatus: this.rememberStatus,
+              mailAccount: this.loginForm.mailAccount,
+              password: this.loginForm.password,
+              token: res.data.token,
+              activationTime: res.data.activationTime,
+              lastLogin: res.data.lastLogin,
+              addr: res.data.addr,
+            });
+            this.$router.push("/myaccount/information");
+          }
+          this.loginbtnloading = false;
+          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+        })
+        .catch(() => {
+          this.loginbtnloading = false;
+        });
     },
     toRegister() {
       this.$router.push("/signin/register");
@@ -191,7 +198,8 @@ export default {
           border-bottom: none;
         }
         .imgbox_ {
-          width: 60px;
+          width: 70px;
+          min-width: 70px;
           margin-right: 20px;
           img {
             width: 100%;

@@ -78,7 +78,7 @@ export default {
     },
     progressFun(){
       clearInterval(this.timer)
-      let num = Math.round((95 - 90) * Math.random() + 90)
+      let num = Math.round((99 - 90) * Math.random() + 90)
       this.timer = setInterval(() => {
         if(this.getProgressInfo.value < 100){
           if(this.getProgressInfo.value >= num){

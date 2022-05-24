@@ -14,13 +14,13 @@
         <span class="font_price font16">$ 0.00</span>
       </div>
       <div class="login_box">
-        <!-- <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
-          {{$t("message.nav.txt8")}}
+        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
+          {{ $t("message.nav.txt8") }}
         </div>
         <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
-          <span @click="loginClick('register')">{{$t("message.nav.txt8_1")}}</span>/
-          <span @click="loginClick('login')">{{$t("message.nav.txt8_2")}}</span>
-        </div> -->
+          <span @click="loginClick('register')">{{ $t("message.nav.txt8_1") }}</span> /
+          <span @click="loginClick('login')">{{ $t("message.nav.txt8_2") }}</span>
+        </div>
       </div>
       <!-- 链接钱包 -->
       <div class="walletBox font16" v-if="getIstrue">
@@ -40,7 +40,8 @@
       <div class="walletBox font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div>
       <!-- <div class="connect font16" v-if="getIstrue">{{getSubtringAccount}}</div>
       <div class="connect font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div> -->
-      <div class="lang_box" :class="getIsMobile?'disply_none':''"><!--  @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false" -->
+      <div class="lang_box" :class="getIsMobile ? 'disply_none' : ''">
+        <!--  @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false" -->
         <span>{{ language }}</span>
         <!-- <img :src="`${$store.state.imgUrl}accrow.webp`" alt="" />
         <transition name="select-lang" appear>
@@ -55,7 +56,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import {wallet} from "sacredrealm-sdk";
+import { wallet } from "sealemlab-sdk";
 export default {
   data() {
     return {
@@ -75,21 +76,20 @@ export default {
       langArr: ["EN", "ZH"],
     };
   },
-  computed: { ...mapGetters(["getNoticeNum","isEnLang","getLogin","getIsMobile","getSubtringAccount","getIstrue"]) },
+  computed: { ...mapGetters(["getNoticeNum", "isEnLang", "getLogin", "getIsMobile", "getSubtringAccount", "getIstrue"]) },
   watch: {
     $route(to, from) {
-      if (from.matched.length && to.matched[0].path != from.matched[0].path) {
-        window.scrollTo(0, 0);
-      }
+      window.scrollTo(0, 0);
+      // if (from.matched.length && to.matched[0].path != from.matched[0].path) {
+      //   window.scrollTo(0, 0);
+      // }
       if (to.path == "/home") {
         this.navActive = -1;
-      }else if (to.path == '/bond') {
+      } else if (to.path == "/bond") {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
-      }else if (to.path.indexOf("/signin/") !== -1) {
-        this.navActive = 7;
-      }else if (to.path.indexOf("/myaccount/") !== -1) {
+      } else if (to.path.indexOf("/signin/") !== -1 || to.path.indexOf("/myaccount/") !== -1) {
         this.navActive = 7;
       }else if (to.path.indexOf("/user/") !== -1) {
         this.navActive = 4;
@@ -113,7 +113,7 @@ export default {
       if (localStorage.getItem("walletType") == "walletconnect") {
         wallet.disconnect();
       }
-      localStorage.removeItem('walletType')
+      localStorage.removeItem("walletType");
       this.$store.commit("setnewinfo", JSON.stringify({}));
     },
     toRoute(link,index) {
@@ -126,23 +126,23 @@ export default {
           return
         }
         this.$router.push(link);
-      } else{
-        if(!this.getNoticeNum){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-          this.$store.commit("setNoticeNum",true)
+      } else {
+        if (!this.getNoticeNum) {
+          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+          this.$store.commit("setNoticeNum", true);
         }
       }
     },
-    loginClick(data){
-      switch(data){
-        case 'myaccout':
-          this.$router.push('/myaccount/information');
+    loginClick(data) {
+      switch (data) {
+        case "myaccout":
+          this.$router.push("/myaccount/information");
           break;
-        case 'register':
-          this.$router.push('/signin/register');
+        case "register":
+          this.$router.push("/signin/register");
           break;
-        case 'login':
-          this.$router.push('/signin/login');
+        case "login":
+          this.$router.push("/signin/login");
           break;
         default:
           break;
@@ -159,7 +159,7 @@ export default {
     commonLink() {
       this.$store.commit("setwalletstatus", true);
     },
-  }
+  },
 };
 </script>
 
@@ -203,33 +203,33 @@ export default {
   -webkit-text-fill-color: transparent;
   span {
     background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-    -webkit-background-clip: text ;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 }
 .nav_right {
   display: flex;
   align-items: center;
-  .st_price{
+  .st_price {
     display: flex;
     align-items: center;
-    .st_price_img{
+    .st_price_img {
       width: 32px;
     }
-    .font_price{
+    .font_price {
       font-weight: bold;
-      color: #F0C682;
+      color: #f0c682;
       line-height: 19px;
       margin-left: 10px;
     }
   }
-  .login_box{
+  .login_box {
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     margin: 0 23px 0 53px;
-    .font_login{
+    .font_login {
       font-weight: bold;
       line-height: 19px;
     }
@@ -362,11 +362,11 @@ export default {
   transform: scaleY(1);
 }
 @media screen and (max-width: 980px) {
-  .nav{
+  .nav {
     padding: 0 0.2rem;
-    background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+    background: linear-gradient(180deg, #1b1919 0%, #000000 100%);
     border-radius: 0px 0px 17px 17px;
-    border: 1px solid #ECCF83;
+    border: 1px solid #eccf83;
   }
   .nav_left {
     .logo {
@@ -377,18 +377,18 @@ export default {
   }
   .nav_right {
     justify-content: space-between;
-    .st_price{
-      .st_price_img{
+    .st_price {
+      .st_price_img {
         width: 0.19rem;
       }
-      .font_price{
+      .font_price {
         line-height: 0.14rem;
         margin-left: 0.1rem;
       }
     }
-    .login_box{
+    .login_box {
       margin: 0 0.3rem 0;
-      .font_login{
+      .font_login {
         font-weight: bold;
         line-height: 0.14rem;
       }

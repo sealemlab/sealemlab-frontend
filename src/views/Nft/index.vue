@@ -1,14 +1,14 @@
 <template>
   <div class="nft_page">
     <div class="content_box">
-      <!-- <div class="display_flex menu_box">
+      <div class="display_flex menu_box">
         <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
           <span class="nav_txt">{{ $t(route.label) }}</span>
         </router-link>
-      </div> -->
-      <ul class="display_flex">
+      </div>
+      <!-- <ul class="display_flex">
         <li class="font24" :class="{ active_li: li_index == index }" v-for="(item,index) in navArr" :key="index" @click="liClick(item,index)">{{$t(item.label)}}</li>
-      </ul>
+      </ul> -->
       <div class="main">
         <router-view />
       </div>
@@ -65,10 +65,13 @@ export default {
     margin: 0 auto;
     display: flex;
     .menu_box{
+      position: fixed;
+      top: 116px;
+      left: 5vw;
+      background: rgba(0,0,0,0.5);
       flex-direction: column;
-      margin-top: 80px;
       .a_link{
-        width: 171px;
+        min-width: 120px;
         display: flex;
         align-items: center;
         margin-bottom: 60px;
@@ -88,29 +91,33 @@ export default {
         }
       }
     }
-    ul{
-      margin-top: 36px;
-      flex-direction: column;
-      li{
-        // margin-top: 80px;
-        font-weight: normal;
-        color: #FFFFFF;
-        line-height: 48px;
-        min-width: 120px;
-        display: flex;
-        align-items: center;
-        margin-bottom: 40px;
-        color: #fff;
-        cursor: pointer;
-      }
-      .active_li{
-        color: #EDD083;
-      }
-    }
+    // ul{
+    //   position: fixed;
+    //   top: 116px;
+    //   left: 5vw;
+    //   background: rgba(0,0,0,0.5);
+    //   flex-direction: column;
+    //   li{
+    //     font-weight: normal;
+    //     color: #FFFFFF;
+    //     line-height: 48px;
+    //     min-width: 120px;
+    //     display: flex;
+    //     align-items: center;
+    //     margin-bottom: 30px;
+    //     color: #fff;
+    //     cursor: pointer;
+    //   }
+    //   .active_li{
+    //     color: #EDD083;
+    //   }
+    // }
     .main{
-      min-width: calc(100% - 120px);
+      width: 100vw;
       max-width: 1200px;
+      margin: 0 auto;
       margin-top: 50px;
+      padding-left: 120px;
     }
   }
 }
