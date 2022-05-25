@@ -384,7 +384,7 @@ export default {
         {
           zq: "ST-BUSD LP",
           zl: "0",
-          jclv: "1%",
+          jclv: "5%",
           fjlv1: "0%",
           fjlv2: "0%",
           fjlv3: "0%",
@@ -397,7 +397,7 @@ export default {
         {
           zq: "ST-BUSD LP",
           gme: "0",
-          jclv: "1%",
+          jclv: "5%",
           fjlv1: "0%",
           fjlv2: "0%",
           fjlv3: "0%",
@@ -857,7 +857,7 @@ export default {
     display: flex;
     justify-content: space-between;
     > li {
-      width: 20%;
+      width: 23%;
       padding: 30px 0;
       .list_title2 {
         &.coming_soon {
