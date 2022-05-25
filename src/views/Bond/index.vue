@@ -171,8 +171,8 @@
                   <span class="color2 font18">{{ $t("message.bond.txt45") }} --</span>
                 </li>
                 <li>
-                  <div @click="showBox =! showBox"><img :src="`${$store.state.imgUrl}accrow.webp`" alt="" /></div>
-                  <div v-if="showBox" class="color2">{{ $t("message.bond.txt46") }} xxxx/xx/xx</div>
+                  <!-- <div @click="showBox =! showBox"><img :src="`${$store.state.imgUrl}accrow.webp`" alt="" /></div>
+                  <div v-if="showBox" class="color2">{{ $t("message.bond.txt46") }} xxxx/xx/xx</div> -->
                 </li>
               </ul>
             </li>
@@ -1072,6 +1072,20 @@ export default {
   }
 }
 @media screen and (max-width: 980px) {
+  .has_question_icon {
+    position: relative;
+    &::after {
+      content: "";
+      width: 13px;
+      height: 13px;
+      filter: blur(0px);
+      background: url($bg_url + "ques.webp") no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      right: -0.12rem;
+      top: -0.05rem;
+    }
+  }
   .bond_page {
     margin-top: 0;
     padding-top: 0.8rem;
@@ -1097,6 +1111,7 @@ export default {
     background: #101010;
     margin: 0 auto;
     padding: 0.1rem;
+    margin-top: -0.4rem;
     .title {
       font-weight: 600;
       color: #ffffff;
@@ -1115,7 +1130,7 @@ export default {
     position: relative;
     .bond_bg {
       width: 100%;
-      min-height: 1.27rem;
+      min-height: 2rem;
     }
     >div{
       position: absolute;
@@ -1129,7 +1144,7 @@ export default {
       ul {
         display: flex;
         align-items: center;
-        margin-top: 0.1rem;
+        margin-top: 0.2rem;
         li {
           width: auto;
           height: 0.28rem;
@@ -1186,7 +1201,7 @@ export default {
       display: flex;
       justify-content: space-between;
       padding: 0.1rem 0.2rem;
-      padding-bottom: 0.5rem;
+      padding-bottom: 0.9rem;
       .list_title {
         width: 100%;
         display: flex;
@@ -1229,7 +1244,7 @@ export default {
       .add_btn_txt{
         display: block;
         position: absolute;
-        bottom: 0.1rem;
+        bottom: 0.5rem;
         left: 50%;
         transform:translateX(-50%);
         width: 80%;
@@ -1287,9 +1302,12 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      margin: 0.25rem 0;
       > li {
         width: 50%;
-        padding: 0.3rem 0;
+        padding:0;
+        display: flex;
+        justify-content: flex-end;
         .list_title2 {
           &.coming_soon {
             .round_progressbar {
@@ -1375,11 +1393,11 @@ export default {
     }
     .text2 {
       width: 100%;
-      text-align: center;
-      font-size: 12px;
+      text-align: left;
+      font-size: 0.12rem;
       font-weight: 400;
       color: #909090;
-      line-height: 17px;
+      line-height: 0.17rem;
     }
   }
   .box4 {
@@ -1438,7 +1456,7 @@ export default {
         font-weight: 600;
         color: #ffffff;
         line-height: 0.28rem;
-        padding: 0.1rem 0;
+        padding:0;
         li {
           width: auto;
           &:nth-child(2),&:nth-child(3),&:nth-child(5){

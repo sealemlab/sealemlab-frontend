@@ -123,11 +123,11 @@ export default {
       this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':'','isProgress':true,'title':'message.tip.txt3','ortherDoing':false,'link':''}));
     },
     setRem() {
-      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-        console.log("移动端")
-      }else{
-        console.log("pc端")
-      }
+      // if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+      //   console.log("移动端")
+      // }else{
+      //   console.log("pc端")
+      // }
       const bodyWidth = document.body.clientWidth;
       const rem375 = (bodyWidth * 100) / 375;
       if (bodyWidth <= 980) {
