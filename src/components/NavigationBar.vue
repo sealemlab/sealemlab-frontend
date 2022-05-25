@@ -2,7 +2,7 @@
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
       <img class="logo" :src="`${$store.state.imgUrl}logo.webp`" alt="" @click="toRoute('/home')" />
-      <ul :class="getIsMobile?'disply_none':''">
+      <ul class="mobile_none">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link,index)">
           <span class="font18">{{ $t(item.label) }}</span>
         </li>
@@ -14,13 +14,13 @@
         <span class="font_price font16">$ 0.00</span>
       </div>
       <div class="login_box">
-        <!-- <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
+        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
           {{ $t("message.nav.txt8") }}
         </div>
         <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
           <span @click="loginClick('register')">{{ $t("message.nav.txt8_1") }}</span> /
           <span @click="loginClick('login')">{{ $t("message.nav.txt8_2") }}</span>
-        </div> -->
+        </div>
       </div>
       <!-- 链接钱包 -->
       <div class="walletBox font16" v-if="getIstrue">
@@ -40,7 +40,7 @@
       <div class="walletBox font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div>
       <!-- <div class="connect font16" v-if="getIstrue">{{getSubtringAccount}}</div>
       <div class="connect font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div> -->
-      <div class="lang_box" :class="getIsMobile ? 'disply_none' : ''">
+      <div class="lang_box mobile_lang">
         <!--  @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false" -->
         <span>{{ language }}</span>
         <!-- <img :src="`${$store.state.imgUrl}accrow.webp`" alt="" />
@@ -76,7 +76,7 @@ export default {
       langArr: ["EN", "ZH"],
     };
   },
-  computed: { ...mapGetters(["getNoticeNum", "isEnLang", "getLogin", "getIsMobile", "getSubtringAccount", "getIstrue"]) },
+  computed: { ...mapGetters(["getNoticeNum", "isEnLang", "getLogin", "getSubtringAccount", "getIstrue"]) },
   watch: {
     $route(to, from) {
       window.scrollTo(0, 0);
@@ -374,6 +374,9 @@ export default {
       height: 0.3rem;
       margin-right: 0;
     }
+    .mobile_none{
+      display: none;
+    }
   }
   .nav_right {
     justify-content: space-between;
@@ -429,6 +432,9 @@ export default {
           border-bottom-color: transparent;
         }
       }
+    }
+    .mobile_lang{
+      display: none;
     }
   }
 }

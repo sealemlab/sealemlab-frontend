@@ -7,7 +7,7 @@
     <div class="content">
       <div class="tab_box">
         <div class="add_out_">
-          <div :class="{ li_class1: index == 0,li_class2: index == 1,li_class3: index == 2,li_class4: index == 3,li_active_calss:index == currentClass}" :style="{background:(index == currentClass?`url(${item.image}) no-repeat #000 contain`:'')}" class="li" v-for="(item, index) in tabClassArr" :key="index" @click="clickTabClass(index)">
+          <div :class="{ li_class1: index == 0,li_class2: index == 1,li_class3: index == 2,li_class4: index == 3,li_active_calss:index == currentClass}" :style="{backgroundImage:(index == currentClass?`url(${item.image})`:'')}" class="li" v-for="(item, index) in tabClassArr" :key="index" @click="clickTabClass(index)">
             <div class="font16 border_type">{{ $t(item.label) }}</div>
           </div>
         </div>
