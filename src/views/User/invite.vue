@@ -1,22 +1,22 @@
 <template>
   <div class="invite_page" :class="isEnLang?'en_Bold':'cn_lang'">
     <div class="title_box display_flex">
-      <span class="font26">{{$t("message.user.txt15")}}</span>
-      <span class="font26 _txt">10</span>
+      <span class="font26 mobile_font16">{{$t("message.user.txt15")}}</span>
+      <span class="font26 _txt mobile_font16">10</span>
     </div>
     <div class="ranking demo_font_color">
-      <p class="font26">{{$t("message.user.txt16")}}</p>
+      <p class="font26 mobile_font16">{{$t("message.user.txt16")}}</p>
       <div class="listbox">
         <div class="topline">
-          <div class="title_onebox fontsize18">{{ $t("message.user.txt1") }}</div>
+          <div class="title_onebox font18">{{ $t("message.user.txt1") }}</div>
           <div class="onebox">
-            <div class="insertbox1 fontsize18">{{ $t("message.user.txt2") }}</div>
+            <div class="insertbox1 font18">{{ $t("message.user.txt2") }}</div>
           </div>
           <div class="onebox">
-            <div class="insertbox1 fontsize18">{{ $t("message.user.txt3") }}</div>
+            <div class="insertbox1 font18">{{ $t("message.user.txt3") }}</div>
           </div>
           <div class="onebox">
-            <div class="insertbox2 fontsize18">{{ $t("message.user.txt4") }}</div>
+            <div class="insertbox2 font18">{{ $t("message.user.txt4") }}</div>
           </div>
         </div>
         <div class="bottomline">
@@ -31,16 +31,16 @@
               <div class="champion_box" v-else-if="index == 2">
                 <img :src="`${$store.state.imgUrl}champion3.webp`" class="sort1_img" />
               </div>
-              <span class="pad_left fontsize16" v-else>{{index + 1}}</span>
+              <span class="pad_left font16" v-else>{{index + 1}}</span>
             </div>
             <div class="onebox">
-              <div class="insertbox1 fontsize16">{{item.address}}</div>
+              <div class="insertbox1 font16">{{item.address}}</div>
             </div>
             <div class="onebox">
-              <div class="insertbox1 fontsize16">{{item.num}}</div>
+              <div class="insertbox1 font16">{{item.num}}</div>
             </div>
             <div class="onebox">
-              <div class="insertbox2 fontsize16">{{item.reward}}</div>
+              <div class="insertbox2 font16">{{item.reward}}</div>
             </div>
           </div>
         </div>
@@ -109,6 +109,7 @@ export default {
         align-items: center;
         justify-content: space-between;
         margin-bottom: 30px;
+        font-weight:bold;
         .onebox{
           flex: 1;
           .insertbox1{
@@ -166,6 +167,23 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .invite_page{
+    width: 100%;
+    .title_box{
+      justify-content: space-between;
+    }
+    .ranking{
+      margin-top: 0;
+      .listbox{
+        margin-top: 0;
+      }
+      p{
+        margin: 0.4rem 0;
       }
     }
   }
