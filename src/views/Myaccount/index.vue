@@ -1,7 +1,7 @@
 <template>
-  <div class="nft_page">
+  <div class="account_page">
     <div class="content_box">
-      <div class="display_flex menu_box">
+      <div class="display_flex menu_box" :class="getmobileInfo.direction == 'top'?'menShow':'menDis'">
         <router-link class="a_link font18" @click.native="liClick(index)" v-for="(route, index) in navArr" :key="index" :to="route.link">
           {{ $t(route.label) }}
         </router-link>
@@ -26,7 +26,7 @@ export default {
       ],
     };
   },
-  computed: { ...mapGetters(["isEnLang"]) },
+  computed: { ...mapGetters(["isEnLang","getmobileInfo"]) },
   methods: {
     liClick(index) {
       if (index == 2) {
@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nft_page {
+.account_page {
   width: 100%;
   min-height: calc(100vh - 400px);
   .content_box {
@@ -76,18 +76,57 @@ export default {
         display: flex;
         align-items: center;
         margin-bottom: 60px;
-        color: #fff;
         padding-left: 68px;
         cursor: pointer;
         text-decoration: none;
         &.router-link-active {
-          background: linear-gradient(90deg, #edd083 0%, rgba(240, 206, 117, 0) 100%);
-          border-image: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(184, 155, 91, 1)) 1 1;
+          color: #EDD083;
+          // background: linear-gradient(90deg, #edd083 0%, rgba(240, 206, 117, 0) 100%);
+          // border-image: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(184, 155, 91, 1)) 1 1;
         }
       }
     }
     .main {
       min-width: calc(100% - 171px);
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .account_page{
+    width: 100%;
+    min-height: calc(100vh - 1rem);
+    .content_box{
+      padding-top: 0.8rem;
+      .menu_box{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 15;
+        padding: 0 0.2rem;
+        flex-direction: row;
+        justify-content: space-between;
+        background: rgba(0,0,0,0.5);
+        .a_link{
+          width: auto;
+          min-width: 0.2rem;
+          display: flex;
+          align-items: center;
+          margin-bottom: 0;
+          padding-left: 0;
+          color: #fff;
+          cursor: pointer;
+          text-decoration: none;
+          font-weight: normal;
+          line-height: 0.4rem;
+        }
+      }
+      .main{
+        width: 100vw;
+        max-width: 100%;
+        margin: 0 auto;
+        margin-top: 0.5rem;
+      }
     }
   }
 }

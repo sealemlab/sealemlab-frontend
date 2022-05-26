@@ -3,7 +3,7 @@
     <span class="font30 establish_txt mobile_font16">{{ $t("message.signin.txt24") }}</span>
     <span class="font26 subtitle_txt">{{ $t("message.signin.txt25") }}</span>
     <div class="content">
-      <div class="left_content">
+      <div class="left_content pc_box">
         <div class="onebox" v-for="(item, index) in list" :key="index">
           <div class="imgbox_"><img :src="item.src" /></div>
           <div class="right_txt">
@@ -54,6 +54,15 @@
         <p class="font16 tip_txt" @click="toRegister">
           {{ $t("message.signin.txt27") }}<span class="tip_login">{{ $t("message.signin.txt3") }}</span>
         </p>
+      </div>
+      <div class="left_content mobile_box">
+        <div class="onebox" v-for="(item, index) in list" :key="index">
+          <div class="imgbox_"><img :src="item.src" /></div>
+          <div class="right_txt">
+            <span class="font22 mobile_font14">{{ $t(item.title) }}</span>
+            <span class="font16">{{ $t(item.explain) }}</span>
+          </div>
+        </div>
       </div>
     </div>
     <PassPopup v-if="isShowPassPopup" :isShowVerifyCode="isShowVerifyCode"></PassPopup>
@@ -351,6 +360,12 @@ export default {
         }
       }
     }
+    .pc_box{
+      display: block;
+    }
+    .mobile_box{
+      display: none;
+    }
   }
 }
 @media screen and (max-width: 980px) {
@@ -521,6 +536,12 @@ export default {
             margin: 0 0.05rem;
           }
         }
+      }
+      .pc_box{
+        display: none;
+      }
+      .mobile_box{
+        display: block;
       }
     }
   }

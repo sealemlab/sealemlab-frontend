@@ -10,15 +10,37 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { 
   faHouse,
-  faGlobe
-  // faHexagonVerticalNft,
-  // faSquareKanban,
-  // faMessageDots
+  faGlobe,
+  faBoxesPacking,
+  faBuildingFlag,
+  faCoins,
+  faRegistered,
+  // faGamepadModern,
+  faCircleDollarToSlot,
+  // faSauareVirus,
+  faGem,
+  // faCoinFront,
+  
+  // faSquareDollar,
+  faMoneyBill,
+  faFileInvoiceDollar,
+  faDice,
+  // faTreasureChest,
+  // faMelon,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
   faHouse,
-  faGlobe
+  faGlobe,
+  faBoxesPacking,
+  faBuildingFlag,
+  faCoins,
+  faRegistered,
+  faCircleDollarToSlot,
+  faGem,
+  faMoneyBill,
+  faFileInvoiceDollar,
+  faDice,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

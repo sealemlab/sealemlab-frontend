@@ -9,7 +9,7 @@
         <div class="content_center">
           <div class="leftbox">
             <p class="font_1 font26 mobile_font18">{{$t("message.home.txt2")}}</p>
-            <p class="font_2 font45 demo_font_color mobile_font34">{{$t("message.home.add_txt1")}}</p>
+            <p class="font_2 demo_font_color font45 mobile_font34">{{$t("message.home.add_txt1")}}</p>
             <div class="btnbox font20 mobile_font16">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
@@ -23,9 +23,9 @@
       </div>
     </div>
     <div class="content_footer">
-      <div class="left">
+      <div class="left" :class="isEnLang?'en_Regular':'cn_lang'">
         <span class="font30 mobile_font16">{{$t("message.home.txt5")}}</span>
-        <span class="font30 mobile_font16 margin_top" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.home.txt6")}}</span>
+        <span class="font30 mobile_font16 margin_top">{{$t("message.home.txt6")}}</span>
       </div>
       <div class="btnbox font16 mobile_font16">
         <span>{{$t("message.home.txt7")}}</span>
@@ -38,7 +38,8 @@
       <div class="border_">
         <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
           <div class="add_top_content">
-            <img :src="item.src" class="add_img" />
+            <!-- <img :src="item.src" class="add_img" /> -->
+            <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
             <span class="span font20">{{$t(item.title)}}</span>
           </div>
           <p class="font26">$&nbsp;{{item.num}}</p>
@@ -73,6 +74,20 @@
               </swiper-slide>
             </swiper>
           </div>
+          <div class="left right mobile_game_box">
+            <div class="before_box">
+              <img :src="`${$store.state.imgUrl}game2.webp`" class="game2" />
+              <span>{{$t("message.tip.txt5")}}</span>
+            </div>
+            <div class="before_box">
+              <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
+              <span>{{$t("message.tip.txt5")}}</span>
+            </div>
+            <div class="before_box">
+              <img :src="`${$store.state.imgUrl}game4.webp`" class="game2" />
+              <span>{{$t("message.tip.txt5")}}</span>
+            </div>
+          </div>
           <span class="span4 font20">{{$t("message.home.txt69")}}</span>
           <div class="gameswiperbox">
             <swiper ref="gameswiper" :options="gameswiperOption" class="game_swiper">
@@ -84,7 +99,7 @@
             <div class="swiper-button-next"></div> -->
           </div>
         </div>
-        <div class="left right">
+        <div class="left right pc_box">
           <img :src="`${$store.state.imgUrl}game2.webp`" class="game2" />
           <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
           <img :src="`${$store.state.imgUrl}game4.webp`" class="game2" />
@@ -100,7 +115,8 @@
           <div class="add_outbox" :class="isEnLang?'en_class':''" v-for="(item, index) in spArr" :key="index">
             <div class="onebox display_flex">
               <div class="add_content">
-                <img :src="item.src" class="img_sp" />
+                <!-- <img :src="item.src" class="img_sp" /> -->
+                <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
                 <span class="txt font20 mobile_font14">{{$t(item.txt)}}</span>
               </div>
               <span class="txt1 font14" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt1)}}</span>
@@ -114,7 +130,8 @@
         <div class="make_money">
           <div class="make_box" v-for="(item, index) in makeMoneyArr" :key="index">
             <div class="make_one">
-              <img :src="item.src" class="money_1" />
+              <!-- <img :src="item.src" class="money_1" /> -->
+              <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
               <span class="_span font16" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt)}}</span>
             </div>
           </div>
@@ -228,12 +245,12 @@ export default {
       haveVoice:false,//声音
       swiperVisible:true,
       addArr:[
-        {src:`${this.$store.state.imgUrl}home1.webp`,num:0,title:'message.home.txt71'},
-        {src:`${this.$store.state.imgUrl}home2.webp`,num:0,title:'message.home.txt72'},
-        {src:`${this.$store.state.imgUrl}home3.webp`,num:0,title:'message.home.txt73'},
-        {src:`${this.$store.state.imgUrl}home4.webp`,num:0,title:'message.home.txt74'},
-        {src:`${this.$store.state.imgUrl}home5.webp`,num:0,title:'message.home.txt75'},
-        {src:`${this.$store.state.imgUrl}home6.webp`,num:0,title:'message.home.txt76'},
+        {src:`${this.$store.state.imgUrl}home1.webp`,num:0,title:'message.home.txt71',icon:'boxes-packing'},
+        {src:`${this.$store.state.imgUrl}home2.webp`,num:0,title:'message.home.txt72',icon:'building-flag'},
+        {src:`${this.$store.state.imgUrl}home3.webp`,num:0,title:'message.home.txt73',icon:'coins'},
+        {src:`${this.$store.state.imgUrl}home4.webp`,num:0,title:'message.home.txt74',icon:'boxes'},
+        {src:`${this.$store.state.imgUrl}home5.webp`,num:0,title:'message.home.txt75',icon:'boxes'},
+        {src:`${this.$store.state.imgUrl}home6.webp`,num:0,title:'message.home.txt76',icon:'registered'},
       ],
       activeIndex:0,//swiper索引
       videoStatus:true,//视频加载
@@ -264,26 +281,31 @@ export default {
       ],
       spArr:[
         {
+          icon:'',
           src:`${this.$store.state.imgUrl}characteristic1.webp`,
           txt:"message.home.txt10",
           txt1:"message.home.txt11",
         },
         {
+          icon:'circle-dollar-to-slot',
           src:`${this.$store.state.imgUrl}characteristic2.webp`,
           txt:'message.home.txt12',
           txt1:'message.home.txt12_1',
         },
         {
+          icon:'',
           src:`${this.$store.state.imgUrl}characteristic3.webp`,
           txt:'message.home.txt13',
           txt1:'message.home.txt13_1',
         },
         {
+          icon:'gem',
           src:`${this.$store.state.imgUrl}characteristic4.webp`,
           txt:'message.home.txt14',
           txt1:'message.home.txt14_1',
         },
         {
+          icon:'',
           src:`${this.$store.state.imgUrl}characteristic5.webp`,
           txt:'message.home.txt15',
           txt1:'message.home.txt15_1',
@@ -359,14 +381,13 @@ export default {
         }
       ],
       makeMoneyArr:[
-        {txt:"message.home.txt16",src:`${this.$store.state.imgUrl}money1.webp`},
-        {txt:"message.home.txt17",src:`${this.$store.state.imgUrl}money2.webp`},
-        {txt:"message.home.txt18",src:`${this.$store.state.imgUrl}money3.webp`},
-        {txt:"message.home.txt19",src:`${this.$store.state.imgUrl}money4.webp`},
-        {txt:"message.home.txt20",src:`${this.$store.state.imgUrl}money5.webp`},
-        {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money6.webp`}
+        {txt:"message.home.txt16",src:`${this.$store.state.imgUrl}money1.webp`,icon:''},
+        {txt:"message.home.txt17",src:`${this.$store.state.imgUrl}money2.webp`,icon:'money-bill'},
+        {txt:"message.home.txt18",src:`${this.$store.state.imgUrl}money3.webp`,icon:'file-invoice-dollar'},
+        {txt:"message.home.txt19",src:`${this.$store.state.imgUrl}money4.webp`,icon:'dice'},
+        {txt:"message.home.txt20",src:`${this.$store.state.imgUrl}money5.webp`,icon:''},
+        {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money6.webp`,icon:''}
       ],
-
       partenerArr:[{
         src:`${this.$store.state.imgUrl}partener1.webp`,
       },
@@ -703,9 +724,9 @@ export default {
             line-height: 22px;
           }
           .font_2{
-            font-weight: bolder;
+            font-weight: bold;
             color: #FFFFFF;
-            line-height: 54px;
+            line-height: 22px;
             margin: 13px 0 28px 0;
           }
         }
@@ -781,7 +802,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #1F1F1F;
+    background: linear-gradient(133deg, #0C0C0C 0%, #0B0A0A 100%);
     margin-top: 30px;
     .box_{
       width: 90vw;
@@ -813,6 +834,7 @@ export default {
               width: 100%;
               display: flex;
               align-items: center;
+              color: #D4BA76;
               .img_sp{
                 width: 49px;
               }
@@ -839,13 +861,13 @@ export default {
         justify-content: space-between;
         flex-wrap: wrap;
         .make_box{
-          padding: 1px;
+          // padding: 1px;
           margin-bottom: 44px;
           width: 30%;
           cursor: pointer;
           transition: all 0.3s;
-          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-          border-radius: 8px;
+          // background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          // border-radius: 8px;
           .make_one{
             display: flex;
             align-items: center;
@@ -853,15 +875,19 @@ export default {
             width: 100%;
             padding:10px;
             background: #000;
+            background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+            box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
+            border-radius: 2px;
+            border: 1px solid rgba(68, 67, 67, 0.47);
             padding-left: 26px;
             .money_1{
               width: 61px;
-              margin-right: 21px;
             }
             ._span{
               font-weight: 400;
               color: #FFFFFF;
               line-height: 22px;
+              margin-left: 21px;
             }
           }        
         }
@@ -1089,11 +1115,29 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        .game2{
+        .before_box{
+          position: relative;
           max-width: 404px;
           width: 100%;
           margin-bottom: 37px;
+          .game2{
+            width: 100%;
+          }
+          span{
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            font-weight: normal;
+            color: #FFFFFF;
+            line-height: 11px;
+            white-space:nowrap;
+          }
         }
+      }
+      .mobile_game_box{
+        display: none;
       }
     }
   }
@@ -1213,8 +1257,10 @@ export default {
       height: auto;
       padding: 0.25rem 0.2rem;
       padding-bottom: 0;
+      background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+      box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
       border-radius: 0.08rem;
-      border: 1px solid #D3B96D;
+      border: 1px solid rgba(68, 67, 67, 0.47);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1254,7 +1300,8 @@ export default {
       min-height:50vh;
       .video_{
         height: 50vh;
-        object-fit: cover;
+        object-fit: contain;
+        margin-top: -0.56rem;
       }
       .content{
         position: absolute;
@@ -1297,9 +1344,14 @@ export default {
       }
     }
     .content_footer{
-      width: 100%;
+      width: 90vw;
+      margin: 0 auto;
       height: auto;
-      padding:0;
+      background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+      box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
+      border-radius: 0.08rem;
+      border: 1px solid rgba(68, 67, 67, 0.47);
+      padding:0.2rem 0.08rem;
       margin-top: 0.48rem;
       display: flex;
       flex-direction: column;
@@ -1310,10 +1362,13 @@ export default {
         margin-bottom: 30px;
         span{
           width: 100%;
-          padding: 0 0.2rem;
+          padding:0;
           &:nth-child(1){
-            margin-bottom: 20px;
+            margin-bottom: 0.2rem;
           }
+        }
+        .margin_top{
+          margin-top: 0;
         }
       }
     }
@@ -1336,6 +1391,11 @@ export default {
         .fontbox{
           display: flex;
           flex-direction: column;
+          background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+          box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
+          border-radius: 0.08rem;
+          border: 1px solid rgba(68, 67, 67, 0.47);
+          padding: 0.2rem 0.08rem;
           .title_txt{
             text-align: left;
             font-weight: bold;
@@ -1373,7 +1433,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: #1F1F1F;
+      background: linear-gradient(133deg, #0C0C0C 0%, #0B0A0A 100%);
       margin-top: 0.3rem;
       .box_{
         .imgbox{
@@ -1382,6 +1442,10 @@ export default {
           align-items: center;
           flex-wrap: wrap;
           margin-bottom: 0.3rem;
+          background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+          box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
+          border-radius: 0.08rem;
+          border: 1px solid rgba(68, 67, 67, 0.47);
           .add_outbox{
             width: 50%;
             display: flex;
@@ -1389,15 +1453,16 @@ export default {
             align-items: center;
             border-right:none;
             margin-bottom: 0.4rem;
-            &:nth-child(1){
-              justify-content: flex-start;
-            }
+            padding: 0.2rem 0.08rem;
+            // &:nth-child(1){
+            //   justify-content: flex-start;
+            // }
             .onebox{
               flex-direction: column;
               align-items: center;
-              &:nth-child(1){
-                padding-left: 0;
-              }
+              // &:nth-child(1){
+              //   padding-left: 0;
+              // }
               .add_content{
                 width: 100%;
                 display: flex;
@@ -1427,12 +1492,12 @@ export default {
           justify-content: flex-start;
           flex-wrap: nowrap;
           .make_box{
-            padding: 1px;
+            // padding: 1px;
             margin-bottom: 0.15rem;
             width: 100%;
             cursor: pointer;
             transition: all 0.3s;
-            background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+            // background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
             .make_one{
               display: flex;
               flex-direction: row;
@@ -1440,8 +1505,8 @@ export default {
               justify-content: flex-start;
               width: 100%;
               min-height: 0.4rem;
-              padding: 0 10px;
-              background: #000;
+              padding: 0 0.1rem;
+              // background: #000;
               ._span{
                 font-weight: 400;
                 color: #FFFFFF;
@@ -1472,6 +1537,7 @@ export default {
       }
     }
     .time_axis_box{
+      background: transparent;
       .time_axis{
         width: 90vw;
         margin: 0 auto;
@@ -1483,11 +1549,17 @@ export default {
           display: none;
         }
         .mobile_time_axis{
-          width: 100%;
+          // width: 100%;
           max-height: 4rem;
           overflow: auto;
           display: flex;
           flex-direction: column;
+          background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+          box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
+          border-radius: 0.08rem;
+          border: 1px solid rgba(68, 67, 67, 0.47);
+          padding:0.2rem 0;
+          padding-right: 0.08rem;
           .one_all_box{
             width: 100%;
             display: flex;
@@ -1558,6 +1630,11 @@ export default {
       flex-direction: column;
       align-items: center;
       margin-top: 0.4rem;
+      background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+      box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
+      border-radius: 0.08rem;
+      border: 1px solid rgba(68, 67, 67, 0.47);
+      padding: 0.2rem 0.08rem;
       .partener_box{
         width: 100%;
         justify-content: space-between;
@@ -1671,11 +1748,31 @@ export default {
           flex-direction: row;
           align-items:center;
           justify-content: space-between;
-          .game2{
+          .before_box{
+            position: relative;
             max-width: 33%;
             width: 30%;
             margin-bottom: 0;
+            .game2{
+              width: 100%;
+            }
+            span{
+              position: absolute;
+              bottom: 0.05rem;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 0.12rem;
+              font-weight: normal;
+              color: #FFFFFF;
+              line-height: 0.11rem;
+            }
           }
+        }
+        .pc_box{
+          display: none;
+        }
+        .mobile_game_box{
+          margin-top: 0.2rem;
         }
       }
     }

@@ -100,6 +100,38 @@ img {
     margin-top: 5px;
   }
 }
+// 移动端导航栏显示隐藏
+@keyframes showMen{
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+@keyframes DisMen{
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+.menDis{
+  display: none !important;
+  animation: DisMen 0.5s linear !important;
+}
+.menShow{
+  display: flex !important;
+  animation: showMen 0.5s linear !important;
+}
 // 左右来回抖动  (没有同意协议抖动)
 .animation_move {
   animation: move 0.1s linear 0s 3 normal;
@@ -204,6 +236,12 @@ img {
   }
 }
 @media screen and (max-width: 980px) {
+  .eye {
+    width: 0.5rem;
+    div {
+      width: 0.15rem;
+    }
+  }
   .mobile_font45 {
     font-size: 0.45rem;
   }

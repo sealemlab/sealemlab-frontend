@@ -1,7 +1,7 @@
 <template>
-  <div class="nft_page">
+  <div class="nft_page" >
     <div class="content_box">
-      <div class="display_flex menu_box">
+      <div class="display_flex menu_box" :class="getmobileInfo.direction == 'top'?'menShow':'menDis'">
         <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
           <span class="nav_txt">{{ $t(route.label) }}</span>
         </router-link>
@@ -28,7 +28,7 @@ export default {
       ],
     };
   },
-  computed: { ...mapGetters(["isEnLang","getNoticeNum"]) },
+  computed: { ...mapGetters(["isEnLang","getNoticeNum","getmobileInfo"]) },
   methods:{
     liClick(item,index){
       if(process.env.NODE_ENV === 'production'){
@@ -46,7 +46,7 @@ export default {
         this.$router.push(item.link)
       }
       
-    }
+    },
   }
 };
 </script>

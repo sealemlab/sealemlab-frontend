@@ -3,7 +3,7 @@
     <span class="font30 establish_txt mobile_font16">{{ $t("message.signin.txt1") }}</span>
     <span class="font26 subtitle_txt">{{ $t("message.signin.txt2") }}</span>
     <div class="content">
-      <div class="left_content">
+      <div class="left_content pc_box">
         <div class="onebox" v-for="(item, index) in list" :key="index">
           <div class="imgbox_"><img :src="item.src" /></div>
           <div class="right_txt">
@@ -76,6 +76,15 @@
           {{ $t("message.signin.txt22") }}
           <span class="tip_login">{{ $t("message.signin.txt23") }}</span>
         </p>
+      </div>
+      <div class="left_content mobile_box">
+        <div class="onebox" v-for="(item, index) in list" :key="index">
+          <div class="imgbox_"><img :src="item.src" /></div>
+          <div class="right_txt">
+            <span class="font22 mobile_font14">{{ $t(item.title) }}</span>
+            <span class="font16">{{ $t(item.explain) }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -275,6 +284,7 @@ export default {
     margin-top: 73px;
     display: flex;
     .left_content {
+      display: block;
       flex: 1;
       border-right: 2px solid #242222;
       .onebox {
@@ -429,6 +439,12 @@ export default {
           margin: 0 5px;
         }
       }
+    }
+    .pc_box{
+      display: block;
+    }
+    .mobile_box{
+      display: none;
     }
   }
 }
@@ -589,6 +605,12 @@ export default {
             margin: 0 0.05rem;
           }
         }
+      }
+      .pc_box{
+        display: none;
+      }
+      .mobile_box{
+        display: block;
       }
     }
   }

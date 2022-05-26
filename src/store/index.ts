@@ -60,8 +60,15 @@ export default new Vuex.Store({
     }, // 给进度条传值
     noticeNum: false, // 轻提示弹窗只弹一次
     BSC_BROWSER: process.env.NODE_ENV === "production" ? "https://www.bscscan.com/tx/" : "https://testnet.bscscan.com/tx/",
+    mobileInfo:{
+      direction:'top',//默认上滑(true)
+    }
   },
   getters: {
+    // 获取移动端当前滑动方向
+    getmobileInfo(state) {
+      return state.mobileInfo;
+    },
     // 获取开盲盒弹窗信息
     getPrizeInfo(state) {
       return state.prizeInfo;
@@ -117,6 +124,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    // 设置移动端上滑下滑
+    setMoblieTouch(state, data){
+      state.mobileInfo = JSON.parse(data);
+    },
     // 设置开盲盒弹窗信息
     setPrizeInfo(state, data) {
       state.prizeInfo = JSON.parse(data);

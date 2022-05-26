@@ -273,7 +273,7 @@
             </div>
             <div><span>0 ST</span></div>
             <div>
-              <div class="btn_txt bg3 mobile_btn_es" @click="BondClick(1)">{{ $t("message.bond.txt54") }}</div>
+              <div class="btn_txt bg3 mobile_btn_es">{{ $t("message.bond.txt54") }}</div>
             </div>
             <div class="his">
               <span>{{ $t("message.bond.txt55") }}</span>
@@ -286,6 +286,7 @@
               </li>
               <li>
                 <span>{{ $t("message.bond.txt56") }}</span>
+                <div v-if="domHeight"></div>
               </li>
               <li>
                 <span>{{ $t("message.bond.txt28") }}</span>
@@ -418,6 +419,7 @@ export default {
         // },
       ],
       list1: ["$ 0*0", "$ 0*0"],
+      domHeight:false
     };
   },
   methods: {
@@ -429,6 +431,7 @@ export default {
     },
     showBuy(item){
       item.status = !item.status
+      this.domHeight = item.status
     }
   },
 };
@@ -1007,11 +1010,12 @@ export default {
       line-height: 28px;
       padding: 10px 0;
       li {
-        // width: calc(100% / 6);
-        // &:nth-child(2){
-        //   max-width: 180px;
-        // }
         width: 160px;
+        &:nth-child(2){
+          >div{
+            display: none;
+          }
+        }
         &:nth-child(2),&:nth-child(3),&:nth-child(5){
           text-align: center;
         }
@@ -1459,6 +1463,12 @@ export default {
         padding:0;
         li {
           width: auto;
+          &:nth-child(2){
+            >div{
+              display: block;
+              height: 0.6rem;
+            }
+          }
           &:nth-child(2),&:nth-child(3),&:nth-child(5){
             text-align: left;
           }

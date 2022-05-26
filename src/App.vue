@@ -1,34 +1,34 @@
 <template>
-  <div id="app" :class="isEnLang?'en_Bold':'cn_lang'">
+  <div id="app" :class="isEnLang?'en_Bold':'cn_lang'" @touchstart="handleTouchstart" @touchend="handleTouchend">
     <NavigationBar />
     <router-view />
     <FooterComponents />
     <div class="mobile_nav">
       <div class="mobile_onebox" v-for="(item, index) in navArr" :key="index" @click="toRoute(item,index)">
-        <div class="box" v-if="index == 0">
+        <div class="box" :class="item.status?'box_color':''" v-if="index == 0">
           <font-awesome-icon :icon="['fas', 'house']"></font-awesome-icon>
         </div>
-        <div class="box" v-if="index == 1">
+        <div class="box" :class="item.status?'box_color':''" v-if="index == 1">
           <font-awesome-icon :icon="['fas', 'globe']"></font-awesome-icon>
         </div>
         <div class="box" v-if="index == 2">
           <svg t="1653450038515" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3252" width="32" height="32">
-            <path d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z" p-id="3253" fill="#ECCF83"></path>
+            <path d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z" p-id="3253" :fill="item.status?'#ECCF83':'#ffffff'"></path>
           </svg>
         </div>
         <div class="box" v-if="index == 3">
           <svg t="1653452552652" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4246" width="32" height="32">
-            <path d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z" p-id="4247" fill="#ECCF83"></path>
+            <path d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z" p-id="4247" :fill="item.status?'#ECCF83':'#ffffff'"></path>
           </svg>
         </div>
         <div class="box" v-if="index == 4">
           <svg t="1653452811702" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6215" width="32" height="32">
-            <path d="M227.14123 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C321.728492 456.087573 279.288914 413.647995 227.14123 413.647995z" p-id="6216" fill="#ECCF83"></path>
-            <path d="M510.903016 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C605.490278 456.087573 563.051723 413.647995 510.903016 413.647995z" p-id="6217" fill="#ECCF83"></path>
-            <path d="M794.665825 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C889.253086 456.087573 846.813508 413.647995 794.665825 413.647995z" p-id="6218" fill="#ECCF83"></path>
+            <path d="M227.14123 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C321.728492 456.087573 279.288914 413.647995 227.14123 413.647995z" p-id="6216" :fill="item.status?'#ECCF83':'#ffffff'"></path>
+            <path d="M510.903016 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C605.490278 456.087573 563.051723 413.647995 510.903016 413.647995z" p-id="6217" :fill="item.status?'#ECCF83':'#ffffff'"></path>
+            <path d="M794.665825 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C889.253086 456.087573 846.813508 413.647995 794.665825 413.647995z" p-id="6218" :fill="item.status?'#ECCF83':'#ffffff'"></path>
           </svg>
         </div>
-        <span class="mobile_nav_txt">{{ $t(item.label) }}</span>
+        <span class="mobile_nav_txt" :class="item.status?'box_color':''">{{ $t(item.label) }}</span>
       </div>
     </div>
     <div class="mobile_proup" v-if="isShowMore" @click="isShowMore = false">
@@ -36,7 +36,6 @@
         <span @click="routeFun('Market')">Market</span>
         <span @click="routeFun('Game')">Game</span>
         <span @click="routeFun('User')">User center</span>
-        <span @click="routeFun('WhitePaper')">WhitePaper</span>
         <p>
           <span>EN</span>
         </p>
@@ -64,28 +63,30 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
 import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
+import { faSlash } from '@fortawesome/free-solid-svg-icons';
 export default {
   computed: {
-    ...mapGetters(["getPrizeInfo","getIstrue","getAccount","isEnLang","getIsMobile","getProupInfo","getNoticeInfo","getProgressInfo"])
+    ...mapGetters(["getPrizeInfo","getIstrue","getAccount","isEnLang","getProupInfo","getNoticeInfo","getProgressInfo"])
   },
   data(){
     return {
       navArr: [
-        { label: "message.nav.txt10", link: "/home" },
-        { label: "message.nav.txt1", link: "/bond" },
-        { label: "message.nav.txt3", link: "/nft" },
-        { label: "message.nav.txt4", link: "" },
-        { label: "message.nav.txt13", link: ""}
+        { label: "message.nav.txt10", link: "/home",status:true },
+        { label: "message.nav.txt1", link: "/bond",status:false },
+        { label: "message.nav.txt3", link: "/nft",status:false },
+        { label: "message.nav.txt4", link: "",status:false },
+        { label: "message.nav.txt13", link: "",status:false}
       ],
       isShowMore:false,
+      // startX:0,
+      startY:0,
+      startTime:null,
     }
   },
   watch: {
     'getIstrue': {
       handler: function (newValue) {
-        // console.log('app.vue页面的监听钱包状态newValue: ', newValue);
         if (newValue) {
-          // console.log("app的就爱你听账号")
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
             sessionStorage.setItem("sb_count", res)
           })
@@ -156,29 +157,45 @@ export default {
     },
     toRoute(item,index) {
       console.log('item,index: ', item,index);
-      if (item.link) this.$router.push(item.link);
-      if(index == this.navArr.length - 1){
-        this.isShowMore = true
+      if (item.link){
+        this.navArr.forEach(item => {
+          item.status = false
+        })
+        item.status = true
+        this.$router.push(item.link);
       }else{
-        this.isShowMore = false
+        if(index == this.navArr.length - 1){
+          this.navArr.forEach(item => {
+            item.status = false
+          })
+          item.status = true
+          this.isShowMore = true
+        }else{
+          this.isShowMore = false
+          if(!this.getNoticeNum){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+            this.$store.commit("setNoticeNum",true)
+          }
+        }
       }
     },
     routeFun(data){
       this.isShowMore = false
       switch(data){
-        case 'Market':
-          // this.$router.push('')
-          break;
-        case 'Game':
-          // this.$router.push('')
-          break;
+        // case 'Market':
+        //   // this.$router.push('')
+        //   break;
+        // case 'Game':
+        //   // this.$router.push('')
+        //   break;
         case 'User':
           this.$router.push('/user/assets/0')
           break;
-        case 'WhitePaper':
-          // this.$router.push('')
-          break;
         default:
+          if(!this.getNoticeNum){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
+            this.$store.commit("setNoticeNum",true)
+          }
           break;
       }
     },
@@ -196,6 +213,36 @@ export default {
     // 关闭开盲盒弹窗
     closepageFun(){
       this.$store.commit("setPrizeInfo", JSON.stringify({'status':false,'boxarr':[]}));
+    },
+    //屏幕滑动 //手指按下屏幕
+    handleTouchstart(event){
+      this.startTime = Date.now()
+      // this.startX = event.changedTouches[0].clientX
+      this.startY = event.changedTouches[0].clientY
+    },
+    //手指离开屏幕
+    handleTouchend(event){
+      const endTime = Date.now()
+      // const endX = event.changedTouches[0].clientX
+      const endY = event.changedTouches[0].clientY
+      //判断按下的时长
+      if(endTime - this.startTime > 2000){
+        console.log("时间大于2秒")
+        return
+      }
+      //滑动的方向
+      let direction = endY -this.startY > 0 ?"top":"bottom";
+      console.log('endY -this.startY: ', endY,this.startY);
+      //用户做了合法的滑动操作
+      // console.log('方向'+direction)
+      if(direction==='bottom'){
+        console.log("下滑")
+        this.$store.commit("setMoblieTouch",JSON.stringify({direction:'bottom'}))
+      }
+      if(direction==='top'){
+        console.log("上滑")
+        this.$store.commit("setMoblieTouch",JSON.stringify({direction:'top'}))
+      }
     }
   },
   mounted() {
@@ -212,7 +259,8 @@ export default {
 #app {
   width: 100vw;
   min-height: 100vh;
-  background: #000000;
+  // background: #000000;
+  background: linear-gradient(133deg, #0C0C0C 0%, #0B0A0A 100%);
 }
 @media screen and (min-width: 981px) {
   .mobile_nav,.mobile_proup{
@@ -246,12 +294,14 @@ export default {
         justify-content: center;
         align-items: center;
         font-size: 0.25rem;
-        color: #ECCF83;
       }
       .mobile_nav_txt{
         font-weight: 600;
-        color: #ECCF83;
+        color: #ffffff;
         line-height: 0.14rem;
+      }
+      .box_color{
+        color: #ECCF83;
       }
     }
   }
