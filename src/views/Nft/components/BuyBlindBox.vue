@@ -103,7 +103,7 @@
         <div class="oneline">
           <span class="mobile_font14">{{$t("message.nft.txt218")}}</span>
           <p v-for="(item,index) in probabilityArr1" :key="index">
-            <span>{{item.num}}</span>
+            <span class="color_fff">{{item.num}}</span>
           </p>
         </div>
         <div class="oneline">
@@ -116,7 +116,7 @@
         <div class="oneline">
           <span class="mobile_font14">{{$t("message.nft.txt218")}}</span>
           <p v-for="(item,index) in probabilityArr2" :key="index">
-            <span>{{item.num}}</span>
+            <span class="color_fff">{{item.num}}</span>
           </p>
         </div>
       </div>
