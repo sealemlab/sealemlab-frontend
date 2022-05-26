@@ -215,7 +215,7 @@ export default {
 
 <style lang="scss" scoped>
 .gamebox {
-  width: 1100px;
+  width: 100%;
   height: auto;
 }
 .box1 {
@@ -224,8 +224,8 @@ export default {
   flex-wrap: wrap;
   > div {
     width: 50%;
-    padding-right: 1rem;
-    padding-bottom: 1rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
     display: flex;
     justify-content: space-between;
     font-size: 30px;

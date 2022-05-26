@@ -8,7 +8,9 @@
       </ul>
     </div>
     <div class="main">
-      <router-view />
+      <div class="main_content">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
@@ -92,8 +94,10 @@ export default {
 }
 .main {
   width: 100vw;
-  padding-left: 15rem;
-  padding-top: 2rem;
+  padding: 2rem 5vw;
+  .main_content {
+    padding-left: 12rem;
+  }
 }
 @media screen and (max-width: 980px) {
   .page {
@@ -123,6 +127,9 @@ export default {
   .main {
     width: 100vw;
     padding: 0 5vw;
+    .main_content {
+      padding-left: 0;
+    }
   }
 }
 </style>
