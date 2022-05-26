@@ -67,7 +67,7 @@ export default {
   display: block;
 }
 .gamebox {
-  width: 960px;
+  width: 100%;
   height: auto;
 }
 .game_title {
