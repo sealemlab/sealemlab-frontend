@@ -3,7 +3,7 @@
     <div class="nav_left">
       <img class="logo" :src="`${$store.state.imgUrl}logo.webp`" alt="" @click="toRoute('/home')" />
       <ul class="mobile_none">
-        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link,index)">
+        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link, index)">
           <span class="font18">{{ $t(item.label) }}</span>
         </li>
       </ul>
@@ -66,7 +66,7 @@ export default {
         // { label: "message.nav.txt2", link: "" },
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
-        { label: "message.nav.txt5", link: "" },
+        { label: "message.nav.txt5", link: "/game" },
         // { label: "message.nav.txt6", link: "" },
         { label: "message.nav.txt6", link: "/user/assets/0" },
         // { label: "message.nav.txt7", link: "" }
@@ -89,15 +89,20 @@ export default {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
+      }
+      // else if (to.path.indexOf("/market/") !== -1) {
+      //   this.navActive = 2;
+      // }
+      else if (to.path.indexOf("/game/") !== -1) {
+        this.navActive = 3;
+      } else if (to.path.indexOf("/user/") !== -1) {
+        this.navActive = 4;
       } else if (to.path.indexOf("/signin/") !== -1 || to.path.indexOf("/myaccount/") !== -1) {
         this.navActive = 7;
-      }else if (to.path.indexOf("/user/") !== -1) {
-        this.navActive = 4;
-      }
-      else{
-        if(!this.getNoticeNum){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-          this.$store.commit("setNoticeNum",true)
+      } else {
+        if (!this.getNoticeNum) {
+          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+          this.$store.commit("setNoticeNum", true);
         }
       }
     },
@@ -116,14 +121,14 @@ export default {
       localStorage.removeItem("walletType");
       this.$store.commit("setnewinfo", JSON.stringify({}));
     },
-    toRoute(link,index) {
-      if (link){
-        if(process.env.NODE_ENV === 'production' && index == 4){
-          if(!this.getNoticeNum){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-            this.$store.commit("setNoticeNum",true)
+    toRoute(link, index) {
+      if (link) {
+        if (process.env.NODE_ENV === "production" && index == 4) {
+          if (!this.getNoticeNum) {
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+            this.$store.commit("setNoticeNum", true);
           }
-          return
+          return;
         }
         this.$router.push(link);
       } else {
@@ -374,7 +379,7 @@ export default {
       height: 0.3rem;
       margin-right: 0;
     }
-    .mobile_none{
+    .mobile_none {
       display: none;
     }
   }
@@ -433,7 +438,7 @@ export default {
         }
       }
     }
-    .mobile_lang{
+    .mobile_lang {
       display: none;
     }
   }
