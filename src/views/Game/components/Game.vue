@@ -30,7 +30,7 @@
       <div class="title mobile">PSYCHE</div>
       <img :src="`${$store.state.imgUrl}game4.webp`" alt="" />
       <div class="content">
-        <div class="title mobile">PSYCHE</div>
+        <div class="title pc">PSYCHE</div>
         <div class="textbox">
           <div>
             <p>Type</p>
