@@ -1472,8 +1472,6 @@ export default {
       }
     }
     .time_axis_box{
-      width: 100%;
-      background: #1F1F1F;
       .time_axis{
         width: 90vw;
         margin: 0 auto;
