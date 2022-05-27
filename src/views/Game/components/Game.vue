@@ -71,8 +71,10 @@ export default {
   height: auto;
 }
 .game_title {
-  font-size: 45px;
-  font-weight: 600;
+  font-size: 32px;
+  font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
+  font-weight: 800;
+  color: #ced3d9;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -89,9 +91,10 @@ export default {
     height: auto;
   }
   .title {
-    font-size: 30px;
-    font-weight: bold;
+    font-size: 24px;
+    font-family: SFCompactDisplay-Bold, SFCompactDisplay;
     color: #f1d17d;
+    font-weight: bold;
     margin-bottom: 1rem;
   }
   .content {
@@ -105,12 +108,15 @@ export default {
         margin-bottom: 1.5rem;
         P {
           &:nth-child(1) {
-            font-size: 26px;
+            font-family: SFCompactDisplay-Bold, SFCompactDisplay;
+            font-size: 24px;
             font-weight: bold;
             margin-bottom: 0.5rem;
           }
           &:nth-child(2) {
-            font-size: 20px;
+            font-family: SFCompactDisplay-Medium, SFCompactDisplay;
+            font-size: 16px;
+            color: #8f8e8e;
             font-weight: 500;
           }
         }
@@ -122,13 +128,14 @@ export default {
       justify-content: space-between;
       .btn {
         cursor: pointer;
-        width: 10rem;
+        width: 11rem;
         height: 2.5rem;
         background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
         border-radius: 4px;
         backdrop-filter: blur(14px);
-        font-size: 14px;
-        font-weight: bold;
+        font-size: 16px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
         color: #000000;
         display: flex;
         align-items: center;

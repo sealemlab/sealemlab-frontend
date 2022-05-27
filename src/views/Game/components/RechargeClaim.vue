@@ -229,18 +229,22 @@ export default {
     padding-bottom: 2rem;
     display: flex;
     justify-content: space-between;
-    font-size: 30px;
+    font-size: 32px;
+    font-family: SFCompactDisplay-Bold, SFCompactDisplay;
     font-weight: bold;
+    color: #ced3d9;
   }
   .content {
     display: flex;
     align-items: center;
     .inputbox {
-      width: 150px;
-      height: 35px;
+      width: 8rem;
+      height: 2rem;
       position: relative;
       font-size: 18px;
+      font-family: SFCompactDisplay-Bold, SFCompactDisplay;
       font-weight: bold;
+      color: #ced3d9;
       margin-right: 1rem;
       > div {
         width: fit-content;
@@ -265,16 +269,17 @@ export default {
         border: 1px solid #373636;
         padding: 0 15px;
         padding-left: 4rem;
-        color: #ffffff;
         font-size: 18px;
+        font-family: SFCompactDisplay-Bold, SFCompactDisplay;
         font-weight: bold;
+        color: #ced3d9;
         text-align: right;
       }
     }
     .btn {
       cursor: pointer;
-      width: 110px;
-      height: 35px;
+      width: 6rem;
+      height: 2rem;
       background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
       box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
       border-radius: 4px;
@@ -282,7 +287,8 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 16px;
+      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
       color: #000000;
     }
@@ -292,31 +298,27 @@ export default {
   border-bottom: 2px solid #242222;
   padding: 2rem 0;
   .box2_title {
-    font-size: 30px;
-    font-weight: bold;
+    font-size: 32px;
+    font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
+    font-weight: 800;
+    color: #ced3d9;
     margin-bottom: 1rem;
   }
   .btns {
     display: flex;
     align-items: center;
     div {
-      width: 236px;
-      height: 54px;
-      background: #373636;
-      border-radius: 4px;
-      backdrop-filter: blur(14px);
-      font-size: 18px;
-      font-weight: 600;
-      color: #ffffff;
-      margin-right: 2rem;
+      font-size: 24px;
+      font-family: SFCompactDisplay-Bold, SFCompactDisplay;
+      font-weight: bold;
+      color: #ced3d9;
+      margin-right: 8rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       &.active {
-        color: #000000;
-        background: #eccf83;
-        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+        color: #edd07e;
       }
     }
   }
@@ -353,15 +355,20 @@ export default {
       text-align: center;
       th {
         width: 25%;
-        padding: 1rem 0;
+        height: 3rem;
+        line-height: 3rem;
         font-size: 24px;
+        font-family: SFCompactDisplay-Bold, SFCompactDisplay;
         font-weight: bold;
+        color: #ced3d9;
       }
       td {
         width: 25%;
         padding: 0.5rem 0;
         font-size: 16px;
+        font-family: SFCompactDisplay-Medium, SFCompactDisplay;
         font-weight: 500;
+        color: #ced3d9;
         div {
           display: flex;
           align-items: center;

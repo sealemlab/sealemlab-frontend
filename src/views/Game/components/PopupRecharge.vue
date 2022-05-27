@@ -1,7 +1,7 @@
 <template>
   <div class="popup">
     <div class="inset">
-      <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click="closePopup" />
+      <div class="close_img" @click="closePopup"></div>
       <div class="content">
         <div class="title">Recharge</div>
         <div class="box">
@@ -61,21 +61,29 @@ export default {
   justify-content: center;
 }
 .inset {
-  padding: 2rem 5rem;
+  padding: 1rem 5rem;
   background: url($bg_url + "proupbg.webp") no-repeat;
   background-size: 100% 100%;
   position: relative;
   .close_img {
-    width: 2rem;
     cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    background: url($bg_url + "passclose.webp") no-repeat;
+    background-size: 100% 100%;
     position: absolute;
     top: 1rem;
     right: 3rem;
+    &:hover {
+      background: url($bg_url + "close.webp") no-repeat;
+      background-size: 100% 100%;
+    }
   }
   .content {
     .title {
       text-align: center;
       font-size: 24px;
+      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
       color: #eccf83;
       margin-bottom: 2rem;
@@ -84,11 +92,11 @@ export default {
       margin-bottom: 2rem;
       .title {
         text-align: left;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
       }
       .inputbox {
-        width: 465px;
-        height: 50px;
+        width: 25rem;
+        height: 2.5rem;
         position: relative;
         input {
           width: 100%;
@@ -99,8 +107,9 @@ export default {
           border: 1px solid #373636;
           padding: 0 5rem;
           font-size: 16px;
+          font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
-          color: #ffffff;
+          color: #8f8e8e;
         }
         .sr {
           width: fit-content;
@@ -110,6 +119,10 @@ export default {
           position: absolute;
           left: 1rem;
           top: 0;
+          font-size: 16px;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #ced3d9;
           img {
             width: 23px;
             height: 23px;
@@ -117,13 +130,14 @@ export default {
           }
         }
         .inputbtn {
-          width: 90px;
-          height: 50px;
+          width: 5rem;
+          height: 100%;
           background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
           box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
           border-radius: 8px;
           backdrop-filter: blur(14px);
           font-size: 22px;
+          font-family: SFCompactDisplay-Bold, SFCompactDisplay;
           font-weight: bold;
           color: #000000;
           position: absolute;
@@ -136,8 +150,9 @@ export default {
         }
         .tip {
           font-size: 12px;
+          font-family: SFCompactDisplay-Semibold, SFCompactDisplay;
           font-weight: 600;
-          color: #a4a4a4;
+          color: #ced3d9;
           position: absolute;
           top: -1rem;
           right: 0;
@@ -149,7 +164,9 @@ export default {
         align-items: center;
         justify-content: space-between;
         font-size: 16px;
+        font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
+        color: #ced3d9;
         span {
           &:hover {
             color: #eccf83;
@@ -158,12 +175,13 @@ export default {
       }
       .btn {
         margin: 0 auto;
-        width: 330px;
-        height: 48px;
+        width: 18rem;
+        height: 2.5rem;
         background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
         border-radius: 4px;
         backdrop-filter: blur(14px);
         font-size: 18px;
+        font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #000000;
         display: flex;

@@ -87,7 +87,9 @@ export default {
       line-height: 3rem;
       text-align: center;
       font-size: 18px;
+      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
+      color: #ced3d9;
       margin: 2rem 0;
       cursor: pointer;
       &.active {
@@ -137,4 +139,23 @@ export default {
     }
   }
 }
+
+// .fontSize {
+//   font-size: 18px;
+//   font-size: 1rem;
+//   font-size: 32px;
+//   font-size: 2rem;
+//   font-size: 24px;
+//   font-size: 1.33rem;
+//   font-size: 16px;
+//   font-size: 0.88rem;
+//   font-size: 26px;
+//   font-size: 1.44rem;
+//   font-size: 20px;
+//   font-size: 1.11rem;
+//   font-size: 14px;
+//   font-size: 0.77rem;
+//   font-size: 12px;
+//   font-size: 0.66rem;
+// }
 </style>
