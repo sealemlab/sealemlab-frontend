@@ -2,7 +2,7 @@
   <div class="page">
     <div class="menu" v-if="isShowMenu">
       <ul>
-        <li v-for="(item, index) in navArr" :key="index" @click="liClick(item, index)" :class="{ active: index == liIndex }">
+        <li v-for="(item, index) in navArr" :key="index" @click="liClick(item)" :class="{ active: index == liIndex }">
           {{ item.label }}
         </li>
       </ul>
@@ -30,18 +30,22 @@ export default {
       isShowMenu: true,
     };
   },
-  created() {
+  watch: {
+    $route(to) {
+      this.navArr.forEach((element, index) => {
+        if (to.path == element.link) this.liIndex = index;
+      });
+    },
+  },
+  mounted() {
     this.navArr.forEach((element, index) => {
       if (this.$route.path == element.link) this.liIndex = index;
     });
-  },
-  mounted() {
     window.addEventListener("scroll", this.scrolling);
   },
   methods: {
-    liClick(item, index) {
+    liClick(item) {
       if (item.status) {
-        this.liIndex = index;
         this.$router.push(item.link);
       } else {
         if (!this.getNoticeNum) {
@@ -84,8 +88,7 @@ export default {
       font-weight: 600;
       margin: 2rem 0;
       cursor: pointer;
-      &.active,
-      &:hover {
+      &.active {
         background: url($bg_url + "boxs_border.webp") no-repeat;
         background-size: 100% 100%;
       }

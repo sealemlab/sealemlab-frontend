@@ -17,7 +17,7 @@
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
             </div>
-            <input type="number" value="123" />
+            <input type="number" value="123" disabled />
           </div>
           <div class="btn" @click="openRecharge">Recharge</div>
         </div>
@@ -30,18 +30,19 @@
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
             </div>
-            <input type="number" value="123" />
+            <input type="number" value="123" disabled />
           </div>
-          <div class="btn">Apply/In</div>
-          <!-- Review/Claim -->
+          <div class="btn">Apply</div>
+          <!-- In Review -->
+          <!-- Claim -->
         </div>
       </div>
     </div>
     <div class="box2">
       <div class="box2_title">Recharge/Claim History</div>
       <div class="btns">
-        <div @click="isShowRechargeList = true">Recharge</div>
-        <div @click="isShowRechargeList = false" class="active">Claim</div>
+        <div @click="isShowRechargeList = true" :class="{ active: isShowRechargeList }">Recharge</div>
+        <div @click="isShowRechargeList = false" :class="{ active: !isShowRechargeList }">Claim</div>
       </div>
     </div>
     <div class="box3">
@@ -229,10 +230,7 @@ export default {
     display: flex;
     justify-content: space-between;
     font-size: 30px;
-    font-family: SFCompactDisplay-Bold, SFCompactDisplay;
     font-weight: bold;
-    color: #ffffff;
-    line-height: 36px;
   }
   .content {
     display: flex;
@@ -315,7 +313,6 @@ export default {
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      &:hover,
       &.active {
         color: #000000;
         background: #eccf83;
