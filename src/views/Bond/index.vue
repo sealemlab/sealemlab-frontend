@@ -76,11 +76,11 @@
                   {{ item.gml }}
                 </span>
                 <span>
-                  <div class="btn_txt mobile_btn bg3" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
+                  <div class="btn_txt mobile_btn bg3" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
                 </span>
               </li>
             </ul>
-            <div class="add_btn_txt bg3" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
+            <div class="add_btn_txt bg3" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
           </div>
         </div>
       </div>
@@ -142,7 +142,7 @@
                   <span class="has_question_icon color2 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt30") }}</span>
                 </li>
                 <li>
-                  <div class="btn_txt bg1">{{ $t("message.bond.txt44") }}</div>
+                  <div class="btn_txt bg1" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt44") }}</div>
                 </li>
                 <li class="round_progressbar">
                   <!-- <RingProgress
@@ -183,7 +183,7 @@
                   <span class="has_question_icon color3 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt29") }}</span>
                 </li>
                 <li>
-                  <div class="btn_txt bg2">{{ $t("message.bond.txt44") }}</div>
+                  <div class="btn_txt bg2" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt44") }}</div>
                 </li>
                 <li class="round_progressbar">
                   <!-- <RingProgress
@@ -220,7 +220,7 @@
                   <span class="has_question_icon color4 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt31") }}</span>
                 </li>
                 <li>
-                  <div class="btn_txt bg3">{{ $t("message.bond.txt48") }}</div>
+                  <div class="btn_txt bg3" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt48") }}</div>
                 </li>
                 <li class="round_progressbar">
                   <!-- <RingProgress
@@ -273,9 +273,9 @@
             </div>
             <div><span>0 ST</span></div>
             <div>
-              <div class="btn_txt bg3 mobile_btn_es">{{ $t("message.bond.txt54") }}</div>
+              <div class="btn_txt bg3 mobile_btn_es" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt54") }}</div>
             </div>
-            <div class="his">
+            <div class="his font14">
               <span>{{ $t("message.bond.txt55") }}</span>
             </div>
           </div>
@@ -322,7 +322,7 @@
       </div>
       <!-- 附属仪表盘内容 -->
       <div class="dashboard_box" v-if="!dashboard">
-        <div class="top">
+        <div class="top font32" :class="isEnLang?'en_heavy':''">
           <span class="color_fff">{{ $t("message.bond.txt62") }}</span>
           <span>{{ $t("message.bond.txt63") }}</span>
         </div>
@@ -330,35 +330,35 @@
           <div>
             <img :src="`${$store.state.imgUrl}champion1.webp`" />
             <div>
-              <p class="font14 ">{{ $t("message.bond.txt64") }}</p>
-              <p class="font12">0xb2307A91...5198ef7</p>
+              <p class="font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt64") }}</p>
+              <p class="font12" :class="isEnLang?'en_medium':''">0xb2307A91...5198ef7</p>
             </div>
           </div>
           <div>
             <img :src="`${$store.state.imgUrl}champion1.webp`" />
             <div>
-              <p class="font14">{{ $t("message.bond.txt65") }}</p>
-              <p class="font12">https://sealemlab.com/?r=ajnpq</p>
+              <p class="font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt65") }}</p>
+              <p class="font12" :class="isEnLang?'en_medium':''">https://sealemlab.com/?r=ajnpq</p>
             </div>
           </div>
         </div>
-        <p class="mobile_font16">{{ $t("message.bond.txt66") }}</p>
+        <p class="mobile_font16 font32" :class="isEnLang?'en_heavy':''">{{ $t("message.bond.txt66") }}</p>
         <div class="content">
           <div class="databox">
-            <span class="font12">{{ $t("message.bond.txt67") }}</span>
-            <span class="font14">0</span>
+            <span class="font14">{{ $t("message.bond.txt67") }}</span>
+            <span class="font35" :class="isEnLang?'en_medium':''">0</span>
           </div>
           <div class="databox">
-            <span class="font12">{{ $t("message.bond.txt68") }}</span>
-            <span class="font14">0</span>
+            <span class="font14">{{ $t("message.bond.txt68") }}</span>
+            <span class="font35" :class="isEnLang?'en_medium':''">0</span>
           </div>
           <div class="databox">
-            <span class="font12">{{ $t("message.bond.txt69") }}</span>
-            <span class="font14">0</span>
+            <span class="font14">{{ $t("message.bond.txt69") }}</span>
+            <span class="font35" :class="isEnLang?'en_medium':''">0</span>
           </div>
           <div class="databox">
-            <span class="font12">{{ $t("message.bond.txt70") }}</span>
-            <span class="font14">0</span>
+            <span class="font14">{{ $t("message.bond.txt70") }}</span>
+            <span class="font35" :class="isEnLang?'en_medium':''">0</span>
           </div>
         </div>
       </div>
@@ -481,7 +481,7 @@ export default {
       div{
         p{
           font-weight: 600;
-          color: #FFFFFF;
+          color: #CED3D9;
           line-height: 22px;
         }
       }
@@ -497,7 +497,7 @@ export default {
   >p{
     width: 100%;
     font-weight: 600;
-    color: #FFFFFF;
+    color: #CED3D9;
     line-height: 42px;
     margin: 36px 0 40px;
   }

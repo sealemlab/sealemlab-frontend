@@ -897,7 +897,7 @@ export default {
             display: flex;
             align-items: center;
             width: 100%;
-            min-height: 68px;
+            min-height: 83px;
             padding:10px;
             background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
             box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
