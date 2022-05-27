@@ -38,10 +38,10 @@
       </div>
       <div class="right_content">
         <ul>
-          <li class="font20">
+          <li class="font20" :class="isEnLang?'en_Bold':''">
             {{ $t(tabClassArr[currentClass].arms) }}:<span class="font16">{{ $t(tabClassArr[currentClass].skill_content) }}</span> 
           </li>
-          <li class="font20">
+          <li class="font20" :class="isEnLang?'en_Bold':''">
             {{ $t(tabClassArr[currentClass].skill) }}
           </li>
           <li>
@@ -58,20 +58,16 @@
           <p>
             <span class="font26">11</span>
             <img :src="`${$store.state.imgUrl}start.webp`" /></p>
-          <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title6)}}</p>
-          <p>{{$t("message.nft.txt127")}}</p>
+          <p class="font26" :class="isEnLang?'en_Bold':''">{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title6)}}</p>
+          <p class="font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt127")}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title8)}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title9)}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title10)}}</p>
-          <p>{{$t("message.nft.txt131")}}</p>
+          <p class="font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt131")}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title12)}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title13)}}</p>
+          <p class="font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt225")}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title14)}}</p>
-          <!-- <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title1)"></p>
-          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title2)"></p>
-          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title3)"></p>
-          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title4)"></p>
-          <p v-html="$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title5)"></p> -->
         </div>
       </div>
     </div>
@@ -620,7 +616,10 @@ export default {
       }
     }
     .right_content{
-      // width: 20%;
+      background: rgba(248, 229, 186, 0.06);
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
+      padding: 10px;
       ul {
         width: 100%;
         height: auto;
@@ -695,14 +694,17 @@ export default {
         p{
           display: flex;
           align-items: center;
-          font-weight: 400;
-          color: #FFFFFF;
-          line-height: 24px;
+          font-weight: 500;
+          color: #8F8E8E;
+          line-height: 15px;
           span{
             color: #ECCF83;
           }
-          &:nth-child(1){
+          &:nth-child(1),&:nth-child(2){
             margin-bottom: 10px;
+            font-weight: 800;
+            color: #ECCF83;
+            line-height: 31px;
             span{
               font-weight: 800;
               color: #ECCF83;
@@ -712,6 +714,11 @@ export default {
               width: 25px;
               margin-left: 5px;
             }
+          }
+          &:nth-child(3),&:nth-child(7),&:nth-child(10){
+            font-weight: bold;
+            color: #CED3D9;
+            line-height: 26px;
           }
         }
       }

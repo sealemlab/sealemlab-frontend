@@ -7,7 +7,7 @@
       </video>
       <div class="content">
         <div class="content_center">
-          <div class="leftbox">
+          <div class="leftbox" :class="isEnLang?'en_Bold':''">
             <p class="font_1 font26 mobile_font18">{{$t("message.home.txt2")}}</p>
             <p class="font_2 demo_font_color font45 mobile_font34">{{$t("message.home.add_txt1")}}</p>
             <div class="btnbox font20 mobile_font16">
@@ -23,56 +23,84 @@
       <img :src="haveVoice?`${$store.state.imgUrl}new_voice.webp`:`${$store.state.imgUrl}new_no_voice.webp`" class="voice_img" @click="videoPlay"/>
     </div>
     <div class="content_footer">
-      <div class="left" :class="isEnLang?'en_Regular':'cn_lang'">
+      <div class="left" :class="isEnLang?'en_medium':''">
         <span class="font30 mobile_font16">{{$t("message.home.txt5")}}</span>
         <span class="font30 mobile_font16 margin_top">{{$t("message.home.txt6")}}</span>
       </div>
-      <div class="btnbox font16 mobile_font16">
+      <div class="btnbox font20 mobile_font16">
         <span>{{$t("message.home.txt7")}}</span>
         <span>{{$t("message.home.txt8")}}</span>
       </div>
     </div>
     <!-- Protocol Stats -->
     <div class="characteristic_box">
-      <div class="title_txt font30 mobile_font18">{{$t("message.home.txt77")}}</div>
+      <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt77")}}</div>
       <div class="border_">
         <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
           <div class="add_top_content">
             <!-- <img :src="item.src" class="add_img" /> -->
             <font-awesome-icon :icon="['fas',item.icon]" v-if="index != 3"></font-awesome-icon>
             <svg t="1653632268746" v-else class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3026" width="32" height="32"><path d="M512 96C282.624 96 96 282.624 96 512s186.624 416 416 416 416-186.624 416-416S741.376 96 512 96z m0 64c194.08 0 352 157.92 352 352s-157.92 352-352 352S160 706.08 160 512 317.92 160 512 160z m81.44 143.552L470.08 426.88l126.88 126.944 40.128-40.128-87.296-86.944 43.552-43.552 126.944 126.912-126.944 126.88-18.24-18.176-39.648 40.064 57.888 57.856L800 510.24l-206.56-206.688z m-162.816 3.584L224 513.76l206.624 206.624 123.264-123.584-126.88-126.912-40.128 40.128 87.296 86.912-43.744 43.712-126.88-126.88 126.88-126.944 18.24 18.24 39.84-39.808-57.888-58.112z" p-id="3027" fill="#9E9E9E"></path></svg>
-            <span class="span font20">{{$t(item.title)}}</span>
+            <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
           </div>
-          <p class="font26">$&nbsp;{{item.num}}</p>
+          <p class="font35" :class="isEnLang?'en_heavy':''">$&nbsp;{{item.num}}</p>
         </div>
       </div>
     </div>
     <!-- 希莱姆简介 -->
     <div class="character_introduction">
-      <div class="title_txt font30 mobile_font18">{{$t("message.home.txt9")}}</div>
+      <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt9")}}</div>
       <div class="right_box">
-        <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
+        <span class="txt_content font16" :class="isEnLang?'en_medium':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
       </div>
-      <!-- <div class="people_box"><img :src="`${$store.state.imgUrl}people.webp`" class="people" /></div> -->
+      <div class="people_box">
+        <img :src="`${$store.state.imgUrl}new_people.webp`" class="people" />
+      </div>
     </div>
     <!-- 游戏场景轮播 -->
     <div class="characteristic_box">
-      <div class="title_txt font30 mobile_font18">{{$t("message.home.txt65")}}</div>
-      <div class="add_game_txt">
-        <span class="span1 font20 mobile_font14">{{$t("message.home.txt66")}}</span>
-        <span class="span2 font16">{{$t("message.home.txt67")}}</span>
-      </div>
-      <span class="span3 font12">{{$t("message.home.txt68")}}</span>
-      <div class="add_box">
-        <div class="left">
-          <div class="bottom_swiper">
-            <swiper :options="gameMaxSwiperOption" ref="gameMaxSwiper" class="gameMax_swiper">
-              <swiper-slide v-for="(item,index) in gameArr" :key="index">
-                <img :src="item.maxSrc" />
-              </swiper-slide>
-            </swiper>
+      <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt65")}}</div>
+      <div class="gamebox">
+        <div class="add_game_txt">
+          <span class="span1 font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{$t("message.home.txt66")}}</span>
+          <span class="span2 font16" :class="isEnLang?'en_medium':''">{{$t("message.home.txt67")}}</span>
+        </div>
+        <span class="span3 font12" :class="isEnLang?'en_medium':''">{{$t("message.home.txt68")}}</span>
+        <div class="add_box">
+          <div class="left">
+            <div class="bottom_swiper">
+              <swiper :options="gameMaxSwiperOption" ref="gameMaxSwiper" class="gameMax_swiper">
+                <swiper-slide v-for="(item,index) in gameArr" :key="index">
+                  <img :src="item.maxSrc" />
+                </swiper-slide>
+              </swiper>
+            </div>
+            <div class="left right mobile_game_box" :class="isEnLang?'en_medium':''">
+              <div class="before_box">
+                <img :src="`${$store.state.imgUrl}game2.webp`" class="game2" />
+                <span>{{$t("message.tip.txt5")}}</span>
+              </div>
+              <div class="before_box">
+                <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
+                <span>{{$t("message.tip.txt5")}}</span>
+              </div>
+              <div class="before_box">
+                <img :src="`${$store.state.imgUrl}game4.webp`" class="game2" />
+                <span>{{$t("message.tip.txt5")}}</span>
+              </div>
+            </div>
+            <span class="span4 font24" :class="isEnLang?'en_Bold':''">{{$t("message.home.txt69")}}</span>
+            <div class="gameswiperbox">
+              <swiper ref="gameswiper" :options="gameswiperOption" class="game_swiper">
+                <swiper-slide v-for="(item, index) in gameArr" :key="index">
+                  <div class="oneimgbox" @click="gameClick(item)"><img :src="item.src" class="gameswiper_img" /></div>
+                </swiper-slide>
+              </swiper>
+              <!-- <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div> -->
+            </div>
           </div>
-          <div class="left right mobile_game_box">
+          <div class="left right pc_box font16" :class="isEnLang?'en_medium':''">
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}game2.webp`" class="game2" />
               <span>{{$t("message.tip.txt5")}}</span>
@@ -86,30 +114,6 @@
               <span>{{$t("message.tip.txt5")}}</span>
             </div>
           </div>
-          <span class="span4 font20">{{$t("message.home.txt69")}}</span>
-          <div class="gameswiperbox">
-            <swiper ref="gameswiper" :options="gameswiperOption" class="game_swiper">
-              <swiper-slide v-for="(item, index) in gameArr" :key="index">
-                <div class="oneimgbox" @click="gameClick(item)"><img :src="item.src" class="gameswiper_img" /></div>
-              </swiper-slide>
-            </swiper>
-            <!-- <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div> -->
-          </div>
-        </div>
-        <div class="left right pc_box">
-          <div class="before_box">
-            <img :src="`${$store.state.imgUrl}game2.webp`" class="game2" />
-            <span>{{$t("message.tip.txt5")}}</span>
-          </div>
-          <div class="before_box">
-            <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
-            <span>{{$t("message.tip.txt5")}}</span>
-          </div>
-          <div class="before_box">
-            <img :src="`${$store.state.imgUrl}game4.webp`" class="game2" />
-            <span>{{$t("message.tip.txt5")}}</span>
-          </div>
         </div>
       </div>
     </div>
@@ -117,29 +121,29 @@
     <div class="content_">
       <!-- 特点 -->
       <div class="box_ display_flex">
-        <div class="title_txt font30 mobile_font18">{{$t("message.home.txt_characteristic")}}</div>
+        <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt_characteristic")}}</div>
         <div class="imgbox display_flex">
           <div class="add_outbox" :class="isEnLang?'en_class':''" v-for="(item, index) in spArr" :key="index">
             <div class="onebox display_flex">
               <div class="add_content">
                 <!-- <img :src="item.src" class="img_sp" /> -->
                 <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
-                <span class="txt font20 mobile_font14">{{$t(item.txt)}}</span>
+                <span class="txt font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{$t(item.txt)}}</span>
               </div>
-              <span class="txt1 font14" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt1)}}</span>
+              <span class="txt1 font16" :class="isEnLang?'en_medium':''">{{$t(item.txt1)}}</span>
             </div>
           </div>
         </div>
       </div>
       <!-- 在圣域怎么赚钱 -->
       <div class="box_ display_flex">
-        <div class="title_txt font30 mobile_font18">{{$t("message.home.txt_makemoney")}}</div>
+        <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt_makemoney")}}</div>
         <div class="make_money">
           <div class="make_box" v-for="(item, index) in makeMoneyArr" :key="index">
             <div class="make_one">
               <!-- <img :src="item.src" class="money_1" /> -->
               <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
-              <span class="_span font16" :class="isEnLang?'en_Regular':'cn_lang'">{{$t(item.txt)}}</span>
+              <span class="_span font16" :class="isEnLang?'en_medium':''">{{$t(item.txt)}}</span>
             </div>
           </div>
         </div>
@@ -148,7 +152,7 @@
     <!-- 团队 -->
     <!-- <div class="teamboxs">
       <div class="team_container display_flex">
-        <div class="title_txt font30">{{$t("message.home.txt47")}}</div>
+        <div class="title_txt font32" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt47")}}</div>
         <div class="teamswiper">
           <swiper ref="teamswiper" :options="teamswiperOption" class="team_swiper">
             <swiper-slide v-for="(item, index) in teamArr" :key="index">
@@ -185,20 +189,22 @@
     <!-- 时间轴 -->
     <div class="time_axis_box">
       <div class="time_axis display_flex">
-        <div class="title_txt font30">{{$t("message.home.txt54")}}</div>
+        <div class="title_txt font32" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt54")}}</div>
         <swiper :options="swiperOption" ref="mySwiper" class="self_swiper" v-if='swiperVisible'>
           <swiper-slide v-for="(item, index) in swiperArr" :key="index">
             <div class="timebox">
-              <p class="time_class font20">{{item.time}}</p>
+              <p class="time_class font20" :class="isEnLang?'en_Bold':''">{{item.time}}</p>
               <div class="imgs">
                 <img :src="item.id == activeIndex ?`${$store.state.imgUrl}partenerbg.webp`:`${$store.state.imgUrl}time.webp`" class="partenerbg_img" />
                 <span></span>
               </div>
-              <p class="titletxt font18">{{$t(item.title)}}</p>
-              <p class="content_class font16">{{$t(item.content)}}</p>
+              <div class="contentbox_">
+                <p class="titletxt font20" :class="isEnLang?'en_Bold':''">{{$t(item.title)}}</p>
+                <p class="content_class font12" :class="isEnLang?'en_medium':''">{{$t(item.content)}}</p>
+              </div>
             </div>
           </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
+          <!-- <div class="swiper-pagination" slot="pagination"></div> -->
         </swiper>
         <div class="mobile_time_axis">
           <div class="one_all_box" v-for="(item, index) in swiperArr" :key="index">
@@ -209,8 +215,8 @@
             <div class="right">
               <span class="span mobile_font14">{{item.time}}</span>
               <div class="bottom">
-                <span class="b_titl mobile_font14">{{$t(item.title)}}</span>
-                <span class="b_content">{{$t(item.content)}}</span>
+                <span class="b_titl mobile_font14" :class="isEnLang?'en_Bold':''">{{$t(item.title)}}</span>
+                <span class="b_content" :class="isEnLang?'en_medium':''">{{$t(item.content)}}</span>
               </div>
             </div>
           </div>
@@ -219,22 +225,24 @@
     </div>
     <!-- 合作者 -->
     <div class="characteristic_box display_flex">
-      <div class="title_txt font30">{{$t("message.home.txt59")}}</div>
-      <div class="partener_box display_flex">
-        <div class="one_partener display_flex" v-for="(item, index) in partenerArr" :key="index">
-          <img :src="item.src" 
-          :class="{par1:index == 0,
-          par2:index == 1,
-          par3:index == 2,
-          par4:index == 3,
-          par5:index == 4,
-          par6:index == 5,
-          par7:index == 6,
-          par8:index == 7,
-          par9:index == 8,
-          par10:index == 9
-          }"
-          />
+      <div class="title_txt font32" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt59")}}</div>
+      <div class="gamebox">
+        <div class="partener_box display_flex">
+          <div class="one_partener display_flex" v-for="(item, index) in partenerArr" :key="index">
+            <img :src="item.src" 
+              :class="{par1:index == 0,
+              par2:index == 1,
+              par3:index == 2,
+              par4:index == 3,
+              par5:index == 4,
+              par6:index == 5,
+              par7:index == 6,
+              par8:index == 7,
+              par9:index == 8,
+              par10:index == 9
+              }"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -686,17 +694,17 @@ export default {
           width: 32px;
         }
         .span{
-          font-weight: normal;
-          color: #9E9E9E;
+          font-weight: 500;
           line-height: 22px;
+          color: #CED3D9;
           margin-left: 16px;
         }
       }
       p{
         font-weight: 800;
         color: #CED3D9;
-        line-height: 22px;
-        margin-top: 40px;
+        line-height: 41px;
+        margin-top: 25px;
       }
     }
   }
@@ -735,7 +743,6 @@ export default {
           .font_2{
             font-weight: bold;
             color: #FFFFFF;
-            line-height: 22px;
             margin: 13px 0 28px 0;
           }
         }
@@ -754,7 +761,7 @@ export default {
     width: 90vw;
     margin: 0 auto;
     height: 146px;
-    margin-top: 50px;
+    margin-top: 22px;
     display: flex;;
     justify-content: space-between;
     align-items: center;
@@ -766,22 +773,28 @@ export default {
     .left{
       display: flex;
       flex-direction: column;
+      font-weight: 500;
+      color: #CED3D9;
+      line-height: 36px;
       .margin_top{
         margin-top: 10px;
       }
     }
   }
   .character_introduction{
+    position: relative;
     width: 90vw;
-    margin: 0 auto; 
+    margin: 0 auto;
     margin-top: 145px;
     display: flex;
     flex-direction: column;
     .people_box{
-      width: 50%;
+      position: absolute;
+      right: 0;
+      top: -87px;
+      width: 520px;
       .people{
         width: 100%;
-        max-width: 480px;
       }
     }
     .right_box{
@@ -794,23 +807,22 @@ export default {
       .txt_content{
         max-width: 600px;
         display: inline-block;
+        line-height: 29px;
         font-weight: 500;
         color: #CED3D9;
-        line-height: 29px;
       }
     }
   }
   .content_{
     width: 100%;
-    padding-top: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background: linear-gradient(133deg, #0C0C0C 0%, #0B0A0A 100%);
-    margin-top: 30px;
     .box_{
       width: 90vw;
       margin: 0 auto;
+      margin-top: 124px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -818,7 +830,12 @@ export default {
         width: 100%;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 100px;
+        // margin-bottom: 100px;
+        background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+        border-radius: 12px;
+        border: 1px solid rgba(68, 67, 67, 0.47);
+        padding: 50px 5px 50px 20px;
         .add_outbox{
           width: 20%;
           display: flex;
@@ -827,6 +844,9 @@ export default {
           border-right:1px solid #D4BA76;
           &:nth-child(1){
             justify-content: flex-start;
+          }
+          &:last-child{
+            border: none;
           }
           .onebox{
             flex-direction: column;
@@ -843,14 +863,16 @@ export default {
                 width: 49px;
               }
               .txt{
-                font-weight: 600;
-                color: #FFFFFF;
+                font-weight: bold;
+                color: #CED3D9;
                 line-height: 22px;
                 margin-left: 8px;
               }
             }
             .txt1{
-              font-weight: 400;
+              font-weight: 500;
+              color: #8F8E8E;
+              line-height: 24px;
               margin-top: 10px;
             }
           }
@@ -865,20 +887,18 @@ export default {
         justify-content: space-between;
         flex-wrap: wrap;
         .make_box{
-          // padding: 1px;
-          margin-bottom: 44px;
           width: 30%;
           cursor: pointer;
           transition: all 0.3s;
-          // background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
-          // border-radius: 8px;
+          &:nth-child(1),&:nth-child(2),&:nth-child(3){
+            margin-bottom: 51px;
+          }
           .make_one{
             display: flex;
             align-items: center;
-            border-radius: 8px;
             width: 100%;
+            min-height: 68px;
             padding:10px;
-            background: #000;
             background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
             box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
             border-radius: 2px;
@@ -888,9 +908,9 @@ export default {
               width: 61px;
             }
             ._span{
-              font-weight: 400;
-              color: #FFFFFF;
-              line-height: 22px;
+              font-weight: 500;
+              color: #CED3D9;
+              line-height: 31px;
               margin-left: 21px;
             }
           }        
@@ -926,12 +946,11 @@ export default {
     }
   }
   .time_axis_box{
+    margin-top: 145px;
     width: 100%;
-    background: #1F1F1F;
     .time_axis{
       width: 90vw;
       margin: 0 auto;
-      padding-top: 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -966,23 +985,39 @@ export default {
                 border-top: 1px dashed #F7E7B2;
               }
             }
-            .titletxt{
-              font-weight: 800;
-              color: #FFFFFF;
-              line-height: 21px;
-            }
             .time_class{
-              font-weight: normal;
-              color: #ffffff;
+              padding: 0 80px;
+              height: 57px;
+              line-height: 57px;
+              background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+              box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+              border-radius: 8px;
+              border: 1px solid rgba(68, 67, 67, 0.47);
+              font-weight: bold;
+              color: #CED3D9;
+              line-height: 57px;
             }
-            .content_class{
-              margin-top: 25px;
-              font-weight: normal;
-              color: #FFFFFF;
-              line-height: 32px;
-              padding: 0 10px;
-              text-align: center;
+            .contentbox_{
+              max-width: 244px;
+              min-height: 210px;
+              background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+              box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+              border-radius: 8px;
+              border: 1px solid rgba(68, 67, 67, 0.47);
+              padding: 10px;
+              .titletxt{
+                font-weight: bold;
+                color: #CED3D9;
+                line-height: 24px;
+              }
+              .content_class{
+                margin-top: 22px;
+                font-weight: 500;
+                color: #8F8E8E;
+                line-height: 14px;
+              }
             }
+            
           }
         }
       }
@@ -993,155 +1028,167 @@ export default {
   }
   .title_txt{
     width: 100%;
-    font-weight: bold;
-    line-height: 36px;
-    margin-bottom: 68px;
+    font-weight: 800;
+    color: #CED3D9;
+    margin-bottom:29px;
+    line-height: 38px;
   }
   .characteristic_box{
     width: 90vw;
     margin: 0 auto;
+    margin-top: 145px;
     flex-direction: column;
     align-items: center;
-    margin-top: 70px;
-    .partener_box{
-      width: 100%;
-      max-width: 1200px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      .one_partener{
-        img{
-          margin-bottom: 49px;
-          cursor: pointer;
-        }
-        .par1{
-          width: 169px;
-        }
-        .par2{
-          width: 208px;
-        }
-        .par3{
-          width: 222px;
-        }
-        .par4{
-          width: 235px;
-        }
-        .par5{
-          width: 207px;
-        }
-        .par6{
-          width: 169px;
-        }
-        .par7{
-          width: 159px;
-        }
-        .par8{
-          width: 173px;
-        }
-        .par9{
-          width: 220px;
-        }
-        .par10{
-          width: 220px;
-        }
-      }
-    }
-    .add_game_txt{
+    .gamebox{
       width: 100%;
       display: flex;
-      align-items: center;
-      margin-top: 68px;
-      .span1{
-        font-weight: normal;
-        color: #FFFFFF;
-        line-height: 23px;
-        margin-right: 16px;
-      }
-      .span2{
-        font-weight: normal;
-        color: #ECCF83;
-        line-height: 18px;
-      }
-    }
-    .span3{
-      font-weight: normal;
-      color: #9E9E9E;
-      line-height: 14px;
-    }
-    .add_box{
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      margin-top: 26px;
-      .left{
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-        .span4{
-          font-weight: normal;
-          color: #FFFFFF;
-          line-height: 23px;
-          margin-top: 54px;
-        }
-        .bottom_swiper{
-          width: 100%;
-          .gameMax_swiper{
-            width: 100%;
-            img{
-              width: 100%;
-            }
+      flex-direction: column;
+      background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+      box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+      border-radius: 12px;
+      border: 1px solid rgba(68, 67, 67, 0.47);
+      padding: 0 20px;
+      .partener_box{
+        width: 100%;
+        max-width: 1200px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        .one_partener{
+          width: 25%;
+          img{
+            margin-bottom: 49px;
+            cursor: pointer;
+          }
+          .par1{
+            width: 182px;
+          }
+          .par2{
+            width: 208px;
+          }
+          .par3{
+            width: 222px;
+          }
+          .par4{
+            width: 235px;
+          }
+          .par5{
+            width: 207px;
+          }
+          .par6{
+            width: 169px;
+          }
+          .par7{
+            width: 159px;
+          }
+          .par8{
+            width: 194px;
+          }
+          .par9{
+            width: 220px;
+          }
+          .par10{
+            width: 249px;
           }
         }
-        .gameswiperbox{
-          position: relative;
-          width: 100%;
-          margin-top: 26px;
-          // padding: 0 58px;
-          .game_swiper{
+      }
+      .add_game_txt{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+        .span1{
+          font-weight: bold;
+          color: #CED3D9;
+          line-height: 29px;
+          margin-right: 16px;
+        }
+        .span2{
+          font-weight: 500;
+          color: #ECCF83;
+          line-height: 19px;
+        }
+      }
+      .span3{
+        font-weight: 500;
+        color: #8F8E8E;
+        line-height: 19px;
+        margin-top: 16px;
+      }
+      .add_box{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 26px;
+        .left{
+          width: 60%;
+          display: flex;
+          flex-direction: column;
+          .span4{
+            font-weight: bold;
+            color: #CED3D9;
+            line-height: 29px;
+            margin-top: 54px;
+          }
+          .bottom_swiper{
             width: 100%;
-            .swiper-slide{
-              display: flex;
-              justify-content: center;
-              .oneimgbox{
-                max-width: 147px;
-                padding:10px;
-                cursor: pointer;
-                .gameswiper_img{
-                  width: 100%;
+            .gameMax_swiper{
+              width: 100%;
+              img{
+                width: 100%;
+              }
+            }
+          }
+          .gameswiperbox{
+            position: relative;
+            width: 100%;
+            margin-top:54px;
+            .game_swiper{
+              width: 100%;
+              .swiper-slide{
+                display: flex;
+                justify-content: center;
+                .oneimgbox{
+                  max-width: 147px;
+                  padding:10px;
+                  cursor: pointer;
+                  .gameswiper_img{
+                    width: 100%;
+                  }
                 }
               }
             }
           }
         }
-      }
-      .right{
-        width: 40%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        .before_box{
-          position: relative;
-          max-width: 404px;
-          width: 100%;
-          margin-bottom: 37px;
-          .game2{
+        .right{
+          width: 40%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          .before_box{
+            position: relative;
+            max-width: 404px;
             width: 100%;
-          }
-          span{
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
-            font-weight: normal;
-            color: #FFFFFF;
-            line-height: 11px;
-            white-space:nowrap;
+            margin-bottom: 37px;
+            .game2{
+              width: 100%;
+            }
+            span{
+              position: absolute;
+              bottom: 10px;
+              right: 10px;
+              // transform: translateX(-50%);
+              font-weight: 500;
+              color: #CED3D9;
+              line-height: 19px;
+              white-space:nowrap;
+            }
           }
         }
-      }
-      .mobile_game_box{
-        display: none;
+        .mobile_game_box{
+          display: none;
+        }
       }
     }
   }
@@ -1239,12 +1286,17 @@ export default {
     line-height: 43px;
     margin-right: 43px;
     cursor: pointer;
-    color: #000000;
+    font-weight: bold;
+    color: #0E0D0D;
     &:nth-child(2){
-      border: 1px solid #ECCF83;
-      background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+      background: linear-gradient(180deg, #211F1F 0%, #0A0A0A 100%);
+      box-shadow: 0px 8px 6px 0px rgba(0, 0, 0, 0.28);
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(14px);
       margin-right: 0;
-      color: #FFFFFF;
+      font-weight: bold;
+      color: #CED3D9;
     }
   }
 }

@@ -7,14 +7,14 @@
         <div class="onebox" v-for="(item, index) in list" :key="index">
           <div class="imgbox_"><img :src="item.src" /></div>
           <div class="right_txt">
-            <span class="font22 mobile_font14">{{ $t(item.title) }}</span>
-            <span class="font16">{{ $t(item.explain) }}</span>
+            <span class="font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t(item.title) }}</span>
+            <span class="font16" :class="isEnLang?'en_medium':''">{{ $t(item.explain) }}</span>
           </div>
         </div>
       </div>
       <div class="right_content">
         <div class="user_inputbox">
-          <p class="font16 email_txt">{{ $t("message.signin.txt16") }}</p>
+          <p class="font16 email_txt" :class="isEnLang?'en_Bold':''">{{ $t("message.signin.txt16") }}</p>
           <div class="inputbox">
             <input type="text" class="font16" v-model.trim="loginForm.mailAccount" />
           </div>
@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="user_inputbox">
-          <p class="font16 email_txt">{{ $t("message.signin.txt17") }}</p>
+          <p class="font16 email_txt" :class="isEnLang?'en_Bold':''">{{ $t("message.signin.txt17") }}</p>
           <div class="inputbox">
             <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="loginForm.password" />
             <div class="eye">
@@ -59,8 +59,8 @@
         <div class="onebox" v-for="(item, index) in list" :key="index">
           <div class="imgbox_"><img :src="item.src" /></div>
           <div class="right_txt">
-            <span class="font22 mobile_font14">{{ $t(item.title) }}</span>
-            <span class="font16">{{ $t(item.explain) }}</span>
+            <span class="font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t(item.title) }}</span>
+            <span class="font16" :class="isEnLang?'en_medium':''">{{ $t(item.explain) }}</span>
           </div>
         </div>
       </div>
@@ -220,12 +220,12 @@ export default {
           span {
             &:nth-child(1) {
               font-weight: 600;
-              color: #eccf83;
+              color: #CED3D9;
               line-height: 30px;
             }
             &:nth-child(2) {
               font-weight: 400;
-              color: #eccf83;
+              color: #CED3D9;
               line-height: 22px;
               margin-top: 8px;
             }

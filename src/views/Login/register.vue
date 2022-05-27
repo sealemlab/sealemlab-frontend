@@ -7,8 +7,8 @@
         <div class="onebox" v-for="(item, index) in list" :key="index">
           <div class="imgbox_"><img :src="item.src" /></div>
           <div class="right_txt">
-            <span class="font22 mobile_font14">{{ $t(item.title) }}</span>
-            <span class="font16">{{ $t(item.explain) }}</span>
+            <span class="font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t(item.title) }}</span>
+            <span class="font16" :class="isEnLang?'en_medium':''">{{ $t(item.explain) }}</span>
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
           <div class="circular_">
             <span class="sure_box" v-if="igraeeFlag"></span>
           </div>
-          <div class="agree_txt">
+          <div class="agree_txt font16" :class="isEnLang?'en_medium':''">
             {{ $t("message.signin.txt20") }}<span class="span" @click.stop="igraeeTheTreaty">{{ $t("message.signin.txt21") }}</span>
           </div>
         </div>
@@ -81,8 +81,8 @@
         <div class="onebox" v-for="(item, index) in list" :key="index">
           <div class="imgbox_"><img :src="item.src" /></div>
           <div class="right_txt">
-            <span class="font22 mobile_font14">{{ $t(item.title) }}</span>
-            <span class="font16">{{ $t(item.explain) }}</span>
+            <span class="font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t(item.title) }}</span>
+            <span class="font16" :class="isEnLang?'en_medium':''">{{ $t(item.explain) }}</span>
           </div>
         </div>
       </div>
@@ -311,12 +311,12 @@ export default {
           span {
             &:nth-child(1) {
               font-weight: 600;
-              color: #eccf83;
+              color: #CED3D9;
               line-height: 30px;
             }
             &:nth-child(2) {
               font-weight: 400;
-              color: #eccf83;
+              color: #CED3D9;
               line-height: 22px;
               margin-top: 8px;
             }

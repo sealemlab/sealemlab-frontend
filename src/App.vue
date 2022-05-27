@@ -1,61 +1,107 @@
 <template>
-  <div id="app" :class="isEnLang?'en_Bold':'cn_lang'" @touchstart="handleTouchstart" @touchend="handleTouchend">
+  <div id="app" :class="isEnLang ? 'en_Regular' : 'cn_lang'" @touchstart="handleTouchstart" @touchend="handleTouchend">
     <NavigationBar />
     <router-view />
     <FooterComponents />
     <div class="mobile_nav">
-      <div class="mobile_onebox" v-for="(item, index) in navArr" :key="index" @click="toRoute(item,index)">
-        <div class="box" :class="item.status?'box_color':''" v-if="index == 0">
+      <div class="mobile_onebox" v-for="(item, index) in navArr" :key="index" @click="toRoute(item, index)">
+        <div class="box" :class="item.status ? 'box_color' : ''" v-if="index == 0">
           <font-awesome-icon :icon="['fas', 'house']"></font-awesome-icon>
         </div>
-        <div class="box" :class="item.status?'box_color':''" v-if="index == 1">
+        <div class="box" :class="item.status ? 'box_color' : ''" v-if="index == 1">
           <font-awesome-icon :icon="['fas', 'globe']"></font-awesome-icon>
         </div>
         <div class="box" v-if="index == 2">
-          <svg t="1653450038515" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3252" width="32" height="32">
-            <path d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z" p-id="3253" :fill="item.status?'#ECCF83':'#ffffff'"></path>
+          <svg
+            t="1653450038515"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="3252"
+            width="32"
+            height="32"
+          >
+            <path
+              d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z"
+              p-id="3253"
+              :fill="item.status ? '#ECCF83' : '#ffffff'"
+            ></path>
           </svg>
         </div>
         <div class="box" v-if="index == 3">
-          <svg t="1653452552652" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4246" width="32" height="32">
-            <path d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z" p-id="4247" :fill="item.status?'#ECCF83':'#ffffff'"></path>
+          <svg
+            t="1653452552652"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="4246"
+            width="32"
+            height="32"
+          >
+            <path
+              d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z"
+              p-id="4247"
+              :fill="item.status ? '#ECCF83' : '#ffffff'"
+            ></path>
           </svg>
         </div>
         <div class="box" v-if="index == 4">
-          <svg t="1653452811702" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6215" width="32" height="32">
-            <path d="M227.14123 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C321.728492 456.087573 279.288914 413.647995 227.14123 413.647995z" p-id="6216" :fill="item.status?'#ECCF83':'#ffffff'"></path>
-            <path d="M510.903016 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C605.490278 456.087573 563.051723 413.647995 510.903016 413.647995z" p-id="6217" :fill="item.status?'#ECCF83':'#ffffff'"></path>
-            <path d="M794.665825 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C889.253086 456.087573 846.813508 413.647995 794.665825 413.647995z" p-id="6218" :fill="item.status?'#ECCF83':'#ffffff'"></path>
+          <svg
+            t="1653452811702"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="6215"
+            width="32"
+            height="32"
+          >
+            <path
+              d="M227.14123 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C321.728492 456.087573 279.288914 413.647995 227.14123 413.647995z"
+              p-id="6216"
+              :fill="item.status ? '#ECCF83' : '#ffffff'"
+            ></path>
+            <path
+              d="M510.903016 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C605.490278 456.087573 563.051723 413.647995 510.903016 413.647995z"
+              p-id="6217"
+              :fill="item.status ? '#ECCF83' : '#ffffff'"
+            ></path>
+            <path
+              d="M794.665825 413.647995c-52.14973 0-94.587262 42.439578-94.587262 94.587262 0 52.14973 42.437531 94.587262 94.587262 94.587262 52.147684 0 94.587262-42.437531 94.587262-94.587262C889.253086 456.087573 846.813508 413.647995 794.665825 413.647995z"
+              p-id="6218"
+              :fill="item.status ? '#ECCF83' : '#ffffff'"
+            ></path>
           </svg>
         </div>
-        <span class="mobile_nav_txt" :class="item.status?'box_color':''">{{ $t(item.label) }}</span>
+        <span class="mobile_nav_txt" :class="item.status ? 'box_color' : ''">{{ $t(item.label) }}</span>
       </div>
     </div>
     <div class="mobile_proup" v-if="isShowMore" @click="isShowMore = false">
       <div class="content">
-        <span @click="routeFun('Market')">Market</span>
-        <span @click="routeFun('Game')">Game</span>
-        <span @click="routeFun('User')">User center</span>
+        <span @click="routeFun('Market')">{{$t("message.nav.txt4")}}</span>
+        <span @click="routeFun('Game')">{{$t("message.nav.txt5")}}</span>
+        <span @click="routeFun('User')">{{$t("message.nav.txt6")}}</span>
         <p>
           <span>EN</span>
         </p>
       </div>
     </div>
     <!-- 链接钱包弹窗 -->
-    <WalletComponents
-      @closewalletpage="walletClose"
-      @walletClick="walletClick"
-    ></WalletComponents>
+    <WalletComponents @closewalletpage="walletClose" @walletClick="walletClick"></WalletComponents>
     <!-- 普通弹窗 -->
-    <Proup :isProgress="getProupInfo.isProgress" :proupStatus="getProupInfo.status" :content="getProupInfo.content" @closeProup="proupClose" @closetimer="proupClose"></Proup>
+    <Proup
+      :isProgress="getProupInfo.isProgress"
+      :proupStatus="getProupInfo.status"
+      :content="getProupInfo.content"
+      @closeProup="proupClose"
+      @closetimer="proupClose"
+    ></Proup>
     <!-- 轻提示 -->
     <Notice :noticeStatus="getNoticeInfo.status" :word="getNoticeInfo.word"></Notice>
     <!-- 开盲盒弹窗 -->
-    <OpenProup
-      :resultStatus="getPrizeInfo.status"
-      :boxarr="getPrizeInfo.boxarr"
-      @closepage="closepageFun">
-    </OpenProup>
+    <OpenProup :resultStatus="getPrizeInfo.status" :boxarr="getPrizeInfo.boxarr" @closepage="closepageFun"> </OpenProup>
   </div>
 </template>
 <script>
@@ -63,85 +109,88 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
 import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
-import { faSlash } from '@fortawesome/free-solid-svg-icons';
+import { faSlash } from "@fortawesome/free-solid-svg-icons";
 export default {
   computed: {
-    ...mapGetters(["getPrizeInfo","getIstrue","getAccount","isEnLang","getProupInfo","getNoticeInfo","getProgressInfo"])
+    ...mapGetters(["getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
   },
-  data(){
+  data() {
     return {
       navArr: [
-        { label: "message.nav.txt10", link: "/home",status:true },
-        { label: "message.nav.txt1", link: "/bond",status:false },
-        { label: "message.nav.txt3", link: "/nft",status:false },
-        { label: "message.nav.txt4", link: "",status:false },
-        { label: "message.nav.txt13", link: "",status:false}
+        { label: "message.nav.txt10", link: "/home", status: true },
+        { label: "message.nav.txt1", link: "/bond", status: false },
+        { label: "message.nav.txt3", link: "/nft", status: false },
+        { label: "message.nav.txt4", link: "", status: false },
+        { label: "message.nav.txt13", link: "", status: false },
       ],
-      isShowMore:false,
+      isShowMore: false,
       // startX:0,
-      startY:0,
-      startTime:null,
-    }
+      startY: 0,
+      startTime: null,
+    };
   },
   watch: {
-    'getIstrue': {
+    getIstrue: {
       handler: function (newValue) {
         if (newValue) {
-          this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
-            sessionStorage.setItem("sb_count", res)
-          })
+          this.$utils.newgetUserBoxInfoFun(this.getAccount).then((res) => {
+            sessionStorage.setItem("sb_count", res);
+          });
         }
       },
       deep: true,
       immediate: true,
     },
-    'getNoticeInfo':{
+    getNoticeInfo: {
       handler: function (newValue) {
         if (newValue.status) {
           setTimeout(() => {
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':false,'word':''}));
-            this.$store.commit("setNoticeNum",false)
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: false, word: "" }));
+            this.$store.commit("setNoticeNum", false);
           }, 2500);
         }
       },
       deep: true,
       immediate: true,
     },
-    'getProgressInfo':{
+    getProgressInfo: {
       handler: function (newValue) {
         if (newValue.value == 100) {
           setTimeout(() => {
-            this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}));
-          },1500)
+            this.$store.dispatch("setProgressInfo", JSON.stringify({ value: 1, title: "" }));
+          }, 1500);
         }
       },
       deep: true,
       immediate: true,
     },
-    'isShowMore'(newvala){
-      if(newvala){
-        document.body.style.overflow='hidden'
-      }else{
-        document.body.style.overflow='visible'
+    isShowMore(newvala) {
+      if (newvala) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "visible";
       }
     },
   },
   components: {
     NavigationBar,
     FooterComponents,
-    OpenProup
+    OpenProup,
   },
   methods: {
-    proupClose(){
-      if(this.getProupInfo.ortherDoing){
-        this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':''}));
+    proupClose() {
+      if (this.getProupInfo.ortherDoing) {
+        this.$store.commit("setProupStatus", JSON.stringify({ status: false, content: "" }));
         setTimeout(() => {
-          this.$router.push('/signin/login')
-        },500)
-        return
+          this.$router.push("/signin/login");
+        }, 500);
+        return;
       }
       // this.$store.dispatch("setProgressInfo", JSON.stringify({'value':1,'title':''}))
-      this.$store.commit("setProupStatus", JSON.stringify({'status':false,'content':'','isProgress':true,'title':'message.tip.txt3','ortherDoing':false,'link':''}));
+      this.$store.commit(
+        "setProupStatus",
+        JSON.stringify({ status: false, content: "", isProgress: true, title: "message.tip.txt3", ortherDoing: false, link: "" }),
+      );
     },
     setRem() {
       // if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
@@ -155,46 +204,46 @@ export default {
         document.getElementsByTagName("html")[0].style.fontSize = rem375 + "px";
       }
     },
-    toRoute(item,index) {
-      console.log('item,index: ', item,index);
-      if (item.link){
-        this.navArr.forEach(item => {
-          item.status = false
-        })
-        item.status = true
+    toRoute(item, index) {
+      console.log("item,index: ", item, index);
+      if (item.link) {
+        this.navArr.forEach((item) => {
+          item.status = false;
+        });
+        item.status = true;
         this.$router.push(item.link);
-      }else{
-        if(index == this.navArr.length - 1){
-          this.navArr.forEach(item => {
-            item.status = false
-          })
-          item.status = true
-          this.isShowMore = true
-        }else{
-          this.isShowMore = false
-          if(!this.getNoticeNum){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-            this.$store.commit("setNoticeNum",true)
+      } else {
+        if (index == this.navArr.length - 1) {
+          this.navArr.forEach((item) => {
+            item.status = false;
+          });
+          item.status = true;
+          this.isShowMore = true;
+        } else {
+          this.isShowMore = false;
+          if (!this.getNoticeNum) {
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+            this.$store.commit("setNoticeNum", true);
           }
         }
       }
     },
-    routeFun(data){
-      this.isShowMore = false
-      switch(data){
+    routeFun(data) {
+      this.isShowMore = false;
+      switch (data) {
         // case 'Market':
         //   // this.$router.push('')
         //   break;
-        // case 'Game':
-        //   // this.$router.push('')
-        //   break;
-        case 'User':
-          this.$router.push('/user/assets/0')
+        case "Game":
+          this.$router.push("/game/game");
+          break;
+        case "User":
+          this.$router.push("/user/assets/0");
           break;
         default:
-          if(!this.getNoticeNum){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-            this.$store.commit("setNoticeNum",true)
+          if (!this.getNoticeNum) {
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+            this.$store.commit("setNoticeNum", true);
           }
           break;
       }
@@ -205,49 +254,49 @@ export default {
     },
     // 链接钱包弹窗方法
     walletClick(item) {
-      this.$utils.connectWallet("metamask").then(res => {
+      this.$utils.connectWallet("metamask").then((res) => {
         // console.log('方法返回res: ', res);
         this.$store.commit("setwalletstatus", false);
-      })
+      });
     },
     // 关闭开盲盒弹窗
-    closepageFun(){
-      this.$store.commit("setPrizeInfo", JSON.stringify({'status':false,'boxarr':[]}));
+    closepageFun() {
+      this.$store.commit("setPrizeInfo", JSON.stringify({ status: false, boxarr: [] }));
     },
     //屏幕滑动 //手指按下屏幕
-    handleTouchstart(event){
-      this.startTime = Date.now()
+    handleTouchstart(event) {
+      this.startTime = Date.now();
       // this.startX = event.changedTouches[0].clientX
-      this.startY = event.changedTouches[0].clientY
+      this.startY = event.changedTouches[0].clientY;
     },
     //手指离开屏幕
-    handleTouchend(event){
-      const endTime = Date.now()
+    handleTouchend(event) {
+      const endTime = Date.now();
       // const endX = event.changedTouches[0].clientX
-      const endY = event.changedTouches[0].clientY
+      const endY = event.changedTouches[0].clientY;
       //判断按下的时长
-      if(endTime - this.startTime > 2000){
-        console.log("时间大于2秒")
-        return
+      if (endTime - this.startTime > 2000) {
+        console.log("时间大于2秒");
+        return;
       }
       //滑动的方向
-      let direction = endY -this.startY > 0 ?"top":"bottom";
-      console.log('endY -this.startY: ', endY,this.startY);
+      let direction = endY - this.startY > 0 ? "top" : "bottom";
+      console.log("endY -this.startY: ", endY, this.startY);
       //用户做了合法的滑动操作
       // console.log('方向'+direction)
-      if(direction==='bottom'){
-        console.log("下滑")
-        this.$store.commit("setMoblieTouch",JSON.stringify({direction:'bottom'}))
+      if (direction === "bottom") {
+        console.log("下滑");
+        this.$store.commit("setMoblieTouch", JSON.stringify({ direction: "bottom" }));
       }
-      if(direction==='top'){
-        console.log("上滑")
-        this.$store.commit("setMoblieTouch",JSON.stringify({direction:'top'}))
+      if (direction === "top") {
+        console.log("上滑");
+        this.$store.commit("setMoblieTouch", JSON.stringify({ direction: "top" }));
       }
-    }
+    },
   },
   mounted() {
-    if(localStorage.getItem('walletType')){
-      this.$utils.connectWallet(localStorage.getItem('walletType'))
+    if (localStorage.getItem("walletType")) {
+      this.$utils.connectWallet(localStorage.getItem("walletType"));
     }
     window.addEventListener("load", this.setRem);
     window.addEventListener("resize", this.setRem);
@@ -257,21 +306,22 @@ export default {
 
 <style lang="scss">
 #app {
-  width: 100vw;
+  width:calc(100vw - 5px);
   min-height: 100vh;
-  // background: #000000;
+  overflow-x: hidden;
   background: linear-gradient(132deg, #0E0E0E 0%, #0B0A0A 100%);
 }
 @media screen and (min-width: 981px) {
-  .mobile_nav,.mobile_proup{
+  .mobile_nav,
+  .mobile_proup {
     display: none;
   }
 }
 @media screen and (max-width: 980px) {
-  #app{
+  #app {
     padding-bottom: 1.1rem;
   }
-  .mobile_nav{
+  .mobile_nav {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -281,31 +331,31 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 0.7rem;
-    background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+    background: linear-gradient(180deg, #1b1919 0%, #000000 100%);
     padding: 0 0.2rem;
-    .mobile_onebox{
+    .mobile_onebox {
       max-width: 20%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      .box{
+      .box {
         height: 0.4rem;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 0.25rem;
       }
-      .mobile_nav_txt{
+      .mobile_nav_txt {
         font-weight: 600;
         color: #ffffff;
         line-height: 0.14rem;
       }
-      .box_color{
-        color: #ECCF83;
+      .box_color {
+        color: #eccf83;
       }
     }
   }
-  .mobile_proup{
+  .mobile_proup {
     position: fixed;
     bottom: 0.6rem;
     left: 0;
@@ -317,18 +367,18 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    .content{
+    .content {
       width: 1.48rem;
       height: 2.05rem;
-      background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+      background: linear-gradient(180deg, #1b1919 0%, #000000 100%);
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
       align-items: flex-end;
       padding-right: 0.26rem;
-      span{
+      span {
         font-weight: 600;
-        color: #ECCF83;
+        color: #eccf83;
         line-height: 14px;
       }
     }

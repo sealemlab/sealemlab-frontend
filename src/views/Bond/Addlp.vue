@@ -1,18 +1,18 @@
 <template>
   <div class="input_proup" v-if="addlpDis">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24 mobile_font18">{{$t("message.bond.txt20")}}</p>
+      <p class="propu_title_txt font24 mobile_font18" :class="isEnLang?'en_Bold':''">{{$t("message.bond.txt20")}}</p>
       <div class="add_overflow_box">
-        <p class="title_ font16 mobile_font14">{{$t("message.bond.txt21")}}</p>
-        <div class="content">
+        <p class="title_ font14 mobile_font14" :class="isEnLang?'en_Bold':''">{{$t("message.bond.txt21")}}</p>
+        <div class="content" :class="isEnLang?'en_medium':''">
           <div class="box" v-for="(item,index) in arr" :key="index" @click="typeClick(item,index)">
             <span class="type_ font12" :class="index == activetype?'activeClass':''">{{item.title}}</span>
           </div>
         </div>
         <!-- busd输入框 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 1">
-          <p class="font12 balance_">BUSD {{$t("message.bond.txt22")}}: 0</p>
-          <div class="inputcontent">
+          <p class="font12 balance_" :class="isEnLang?'en_medium':''">BUSD {{$t("message.bond.txt22")}}: 0</p>
+          <div class="inputcontent" :class="isEnLang?'en_Bold':''">
             <div class="left_content">
               <img :src="`${$store.state.imgUrl}busd.webp`" class="busd_img" />
               <span class="busd_txt font14">BUSD</span>
@@ -25,8 +25,8 @@
         </div>
         <!-- st输入框 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 2">
-          <p class="font12 balance_">ST {{$t("message.bond.txt22")}}: 0</p>
-          <div class="inputcontent">
+          <p class="font12 balance_" :class="isEnLang?'en_medium':''">ST {{$t("message.bond.txt22")}}: 0</p>
+          <div class="inputcontent" :class="isEnLang?'en_Bold':''">
             <div class="left_content">
               <img :src="`${$store.state.imgUrl}stlogo.webp`" class="busd_img" />
               <span class="busd_txt font14">ST</span>
@@ -40,36 +40,36 @@
         <!-- 投入以及收益 -->
         <div class="profit_box">
           <div class="onebox">
-            <p class="font14 _txt">{{$t("message.bond.txt24")}}</p>
-            <div class="border_ font12">
+            <p class="font14 _txt" :class="isEnLang?'en_Bold':''">{{$t("message.bond.txt24")}}</p>
+            <div class="border_ font12" :class="isEnLang?'en_medium':''">
               <span class="span1">0</span>
               <span class="span1">BUSD</span>
             </div>
           </div>
           <div class="onebox">
-            <p class="font14 _txt">{{$t("message.bond.txt25")}}</p>
-            <div class="border_ font12">
+            <p class="font14 _txt" :class="isEnLang?'en_Bold':''">{{$t("message.bond.txt25")}}</p>
+            <div class="border_ font12" :class="isEnLang?'en_medium':''">
               <span class="span1">0</span>
               <span class="span1">BUSD</span>
             </div>
           </div>
           <div class="onebox">
-            <p class="font14 _txt">{{$t("message.bond.txt26")}}</p>
-            <div class="border_ font12">
+            <p class="font14 _txt" :class="isEnLang?'en_Bold':''">{{$t("message.bond.txt26")}}</p>
+            <div class="border_ font12" :class="isEnLang?'en_medium':''">
               <span class="span1">0</span>
               <span class="span1">BUSD</span>
             </div>
           </div>
         </div>
         <div class="main_button font16" @click="bondFun">Approve</div>
-        <div class="tipbox font12">
-          <p class="font14"><span>{{$t("message.bond.txt27")}}</span><span>20%</span></p>
+        <div class="tipbox font12" :class="isEnLang?'en_medium':''">
+          <p class="font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt27")}}</span><span>20%</span></p>
           <p class="color1"><span>{{$t("message.bond.txt28")}}</span><span>16%</span>
           <p class="color2"><span>{{$t("message.bond.txt30")}}</span><span>1%</span>
           <p class="color3"><span>{{$t("message.bond.txt29")}}</span><span>3%</span>
           <p class="color4"><span>{{$t("message.bond.txt31")}}</span><span>1%</span>
-          <p class="font14"><span>{{$t("message.bond.txt32")}}</span><span>1%</span></p>
-          <p class="font16"><span>{{$t("message.bond.txt33")}}</span><span>$0</span></p>
+          <p class="font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt32")}}</span><span>1%</span></p>
+          <p class="font16" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt33")}}</span><span>$0</span></p>
           <p>{{$t("message.bond.txt34")}}</p>
         </div>
       </div>
@@ -182,13 +182,11 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.add_overflow_box{
-  height: 90%;
-  overflow: auto;
-}
 .proup_boxs{
   position: relative;
-  width: 50vw; 
+  width: 50vw;
+  height: 90%;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -204,9 +202,9 @@ export default {
   .title_{
     width: 100%;
     margin-top: 23px;
-    font-weight: 600;
+    font-weight: bold;
     color: #ECCF83;
-    line-height: 22px;
+    line-height: 16px;
   }
   .content{
     width: 100%;
@@ -373,6 +371,10 @@ export default {
     width: 34px;
     cursor: pointer;
   }
+}
+.add_overflow_box{
+  height: 90%;
+  overflow: auto;
 }
 @media screen and (max-width: 980px) {
   .proup_boxs{
@@ -565,5 +567,9 @@ export default {
       cursor: pointer;
     }
   }
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 </style>

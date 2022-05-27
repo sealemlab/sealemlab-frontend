@@ -132,6 +132,11 @@ img {
   display: flex !important;
   animation: showMen 0.5s linear !important;
 }
+.demo_font_color {
+  background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 // 左右来回抖动  (没有同意协议抖动)
 .animation_move {
   animation: move 0.1s linear 0s 3 normal;
@@ -145,11 +150,6 @@ img {
     margin-left: 15px;
     margin-right: 0px;
   }
-}
-.demo_font_color {
-  background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 // 英文---粗体
 @font-face {
@@ -174,7 +174,7 @@ img {
   font-family: "SFCompactDisplay-Heavy";
   src: url($font_url + "SF-Compact-Display-Heavy.otf");
 }
-.en_special {
+.en_heavy {
   font-family: "SFCompactDisplay-Heavy" !important;
 }
 
@@ -205,6 +205,10 @@ img {
   .font34 {
     font-size: 34px;
   }
+  // banner 标题 eg:token
+  .font32 {
+    font-size: 32px;
+  }
   .font30 {
     font-size: 30px;
   }
@@ -214,6 +218,9 @@ img {
   }
   .font26 {
     font-size: 26px;
+  }
+  .font24 {
+    font-size: 24px;
   }
   .font22 {
     font-size: 22px;

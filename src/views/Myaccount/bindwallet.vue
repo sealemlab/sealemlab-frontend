@@ -2,9 +2,9 @@
   <div class="bind_wallet_page">
     <div class="box">
       <template v-if="getLogin.addr">
-        <p class="font24 name_">{{ $t("message.account.txt20") }}</p>
+        <p class="font24 name_" :class="isEnLang?'en_Bold':''">{{ $t("message.account.txt20") }}</p>
         <div class="content">
-          <span class="span1 font16">{{ getLogin.addr }}</span>
+          <span class="span1 font16" :class="isEnLang?'en_medium':''">{{ getLogin.addr }}</span>
           <!-- <span class="btn_small font14">{{ $t("message.account.txt21") }}</span> -->
         </div>
       </template>

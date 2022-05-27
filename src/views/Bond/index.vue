@@ -1,11 +1,11 @@
 <template>
   <div class="bond_page">
     <!-- 背景图 -->
-    <div class="box1 font14">
+    <div class="box1 font16">
       <img :src="`${$store.state.imgUrl}newbondbg.webp`" class="bond_bg" />
       <div>
         <img :src="`${$store.state.imgUrl}BOND.webp`" class="bond_img" />
-        <ul>
+        <ul :class="isEnLang?'en_medium':''">
           <li>
             <div class="txt1">{{ $t("message.bond.txt2_1") }}</div>
             <div class="line"></div>
@@ -24,11 +24,11 @@
     <!-- 债券 -->
     <div class="boxs">
       <div class="box2">
-        <div class="title mobile_font16">
+        <div class="title mobile_font16 font32" :class="isEnLang?'en_heavy':''">
           <span>{{ $t("message.bond.txt1") }}</span>
         </div>
         <div class="box">
-          <div class="top mobile_font14">
+          <div class="top mobile_font14 font24" :class="isEnLang?'en_Bold':''">
             <div :title='$t("message.bond.txt71")' style="cursor:pointer">
               <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
             </div>
@@ -39,7 +39,7 @@
             <div><span>$&nbsp;0</span></div>
           </div>
           <div class="bottom">
-            <ul class="list_title font20">
+            <ul class="list_title font20" :class="isEnLang?'en_Bold':''">
               <li>
                 <span>{{ $t("message.bond.txt1") }}</span>
               </li>
@@ -63,7 +63,7 @@
               </li>
               <li></li>
             </ul>
-            <ul class="list_title2 font16">
+            <ul class="list_title2 font16" :class="isEnLang?'en_medium':''">
               <li v-for="(item, index) in Arr1" :key="index">
                 <span>{{ item.zq }}</span>
                 <span>{{ item.zl }}</span>
@@ -88,13 +88,13 @@
     <!-- 仪表盘 -->
     <div class="boxs add_top">
       <!-- 仪表盘切换 -->
-      <div class="add_nav font18">
-        <div :class="dashboard?'bg3 color_000':''" @click="dashboard = true">{{ $t("message.bond.txt60") }}</div>
-        <div :class="dashboard?'':'bg3 color_000'"  @click="dashboard = false">{{ $t("message.bond.txt61") }}</div>
+      <div class="add_nav font32" :class="isEnLang?'en_heavy':''">
+        <div :class="dashboard?'color3':''" @click="dashboard = true">{{ $t("message.bond.txt60") }}</div>
+        <div :class="dashboard?'':'color3'"  @click="dashboard = false">{{ $t("message.bond.txt61") }}</div>
       </div>
       <!-- 利率 -->
       <div class="box3" v-if="dashboard">
-        <div class="title font30 mobile_font16">
+        <div class="title font32 mobile_font16" :class="isEnLang?'en_heavy':''">
           <span>{{ $t("message.bond.txt5") }}</span>
         </div>
         <div class="box">
@@ -103,7 +103,7 @@
             <li>
               <ul class="list_title2">
                 <li :title='$t("message.bond.txt73")' style="cursor:pointer">
-                  <span class="has_question_icon color1">{{ $t("message.bond.txt28") }}</span>
+                  <span class="has_question_icon color1 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt28") }}</span>
                 </li>
                 <li></li>
                 <li class="round_progressbar">
@@ -124,13 +124,13 @@
                   </div>
                 </li>
                 <li>
-                  <span class="color1 font18">{{ $t("message.bond.txt41") }}1%</span>
+                  <span class="color1 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}1%</span>
                 </li>
                 <li>
-                  <span class="color1 font18">{{ $t("message.bond.txt42") }}LV2 </span>
+                  <span class="color1 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color1 font18">{{ $t("message.bond.txt43") }} --</span>
+                  <span class="color1 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt43") }} --</span>
                 </li>
               </ul>
             </li>
@@ -139,7 +139,7 @@
               <!-- <ul class="list_title2 coming_soon"> -->
               <ul class="list_title2">
                 <li :title='$t("message.bond.txt74")' style="cursor:pointer">
-                  <span class="has_question_icon color2">{{ $t("message.bond.txt30") }}</span>
+                  <span class="has_question_icon color2 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt30") }}</span>
                 </li>
                 <li>
                   <div class="btn_txt bg1">{{ $t("message.bond.txt44") }}</div>
@@ -162,13 +162,13 @@
                   </div>
                 </li>
                 <li>
-                  <span class="color2 font18">{{ $t("message.bond.txt41") }}0.0%</span>
+                  <span class="color2 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color2 font18">{{ $t("message.bond.txt42") }}LV2</span>
+                  <span class="color2 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2</span>
                 </li>
                 <li>
-                  <span class="color2 font18">{{ $t("message.bond.txt45") }} --</span>
+                  <span class="color2 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt45") }} --</span>
                 </li>
                 <li>
                   <!-- <div @click="showBox =! showBox"><img :src="`${$store.state.imgUrl}accrow.webp`" alt="" /></div>
@@ -180,7 +180,7 @@
             <li>
               <ul class="list_title2">
                 <li :title='$t("message.bond.txt75")' style="cursor:pointer">
-                  <span class="has_question_icon color3">{{ $t("message.bond.txt29") }}</span>
+                  <span class="has_question_icon color3 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt29") }}</span>
                 </li>
                 <li>
                   <div class="btn_txt bg2">{{ $t("message.bond.txt44") }}</div>
@@ -203,13 +203,13 @@
                   </div>
                 </li>
                 <li>
-                  <span class="color3 font18">{{ $t("message.bond.txt41") }}0.0%</span>
+                  <span class="color3 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color3 font18">{{ $t("message.bond.txt42") }}LV2 </span>
+                  <span class="color3 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color3 font18">{{ $t("message.bond.txt47") }} --</span>
+                  <span class="color3 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt47") }} --</span>
                 </li>
               </ul>
             </li>
@@ -217,7 +217,7 @@
             <li>
               <ul class="list_title2">
                 <li :title='$t("message.bond.txt76")' style="cursor:pointer">
-                  <span class="has_question_icon color4">{{ $t("message.bond.txt31") }}</span>
+                  <span class="has_question_icon color4 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt31") }}</span>
                 </li>
                 <li>
                   <div class="btn_txt bg3">{{ $t("message.bond.txt48") }}</div>
@@ -240,18 +240,18 @@
                   </div>
                 </li>
                 <li>
-                  <span class="color4 font18">{{ $t("message.bond.txt41") }}0.0%</span>
+                  <span class="color4 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color4 font18">{{ $t("message.bond.txt42") }}LV2 </span>
+                  <span class="color4 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color4 font18">{{ $t("message.bond.txt49") }} --</span>
+                  <span class="color4 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt49") }} --</span>
                 </li>
               </ul>
             </li>
           </ul>
-          <div class="text2">
+          <div class="text2 font12" :class="isEnLang?'en_medium':''">
             <p>{{ $t("message.bond.txt50") }}</p>
             <p>{{ $t("message.bond.txt51") }}</p>
           </div>
@@ -259,11 +259,11 @@
       </div>
       <!-- 你的债券 -->
       <div class="box4" v-if="dashboard">
-        <div class="title mobile_font16">
+        <div class="title mobile_font16 font32" :class="isEnLang?'en_heavy':''">
           <span>{{ $t("message.bond.txt8") }}</span>
         </div>
         <div class="box">
-          <div class="top">
+          <div class="top font24" :class="isEnLang?'en_Bold':''">
             <div :title='$t("message.bond.txt77")' style="cursor:pointer">
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
@@ -280,7 +280,7 @@
             </div>
           </div>
           <div class="bottom">
-            <ul class="list_title">
+            <ul class="list_title font20" :class="isEnLang?'en_Bold':''">
               <li>
                 <span>{{ $t("message.bond.txt1") }}</span>
               </li>
@@ -301,7 +301,7 @@
                 <span>{{ $t("message.bond.txt59") }}</span>
               </li>
             </ul>
-            <ul class="list_title2">
+            <ul class="list_title2 font16" :class="isEnLang?'en_medium':''">
               <li v-for="(item, index) in Arr2" :key="index">
                 <span>{{ item.zq }}</span>
                 <span class="has_select">
@@ -374,7 +374,7 @@ export default {
   components: {
     AddLp,
   },
-  computed: { ...mapGetters(["getNoticeNum"]) },
+  computed: { ...mapGetters(["getNoticeNum","isEnLang"]) },
   data() {
     return {
       dashboard:true,//仪表盘切换
@@ -510,11 +510,11 @@ export default {
   padding: 30px 0 50px;
   div{
     cursor: pointer;
-    width: 236px;
+    // width: 236px;
+    padding: 0 10px;
     height: 54px;
     font-weight: 600;
-    color: #ffffff;
-    background: #373636;
+    color: #CED3D9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -724,14 +724,14 @@ export default {
     width: 100%;
     padding: 0 5vw;
     .bond_img {
-      width: 156px;
+      width: 117px;
     }
     ul {
       display: flex;
       align-items: center;
       margin-top: 60px;
       li {
-        width: 200px;
+        width: 243px;
         height: 60px;
         background: rgba(163, 159, 148, 0.23);
         border-radius: 14px;
@@ -790,7 +790,6 @@ export default {
     padding: 20px;
     > div {
       width: calc(100% / 4);
-      font-size: 24px;
       font-weight: 600;
       color: #eccf83;
       line-height: 33px;
@@ -803,13 +802,11 @@ export default {
       width: 100%;
       display: flex;
       align-items: center;
-      font-size: 20px;
       font-weight: 600;
       color: #ffffff;
       line-height: 28px;
       padding: 10px 0;
       li {
-        // width: calc(100% / 8);
         width: 160px;
         &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
           text-align: center;
@@ -817,7 +814,6 @@ export default {
       }
     }
     .list_title2 {
-      font-size: 16px;
       font-weight: 600;
       color: #a9a7a7;
       line-height: 22px;
@@ -828,7 +824,6 @@ export default {
         padding: 10px 0;
         > span {
           width: 160px;
-          // width: calc(100% / 6);
           &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
             text-align: center;
           }
@@ -906,9 +901,7 @@ export default {
         li {
           margin-bottom: 10px;
           &:nth-child(1) {
-            font-size: 24px;
             font-weight: 600;
-            // color: #eccf83;
             line-height: 33px;
           }
           &:nth-child(2) {
@@ -957,7 +950,6 @@ export default {
   .text2 {
     width: 100%;
     text-align: center;
-    font-size: 12px;
     font-weight: 400;
     color: #909090;
     line-height: 17px;
@@ -977,14 +969,12 @@ export default {
     padding: 40px 0;
     > div {
       width: calc(100% / 5);
-      font-size: 24px;
       font-weight: 600;
       color: #eccf83;
       line-height: 33px;
     }
     .his {
       width: fit-content;
-      font-size: 12px;
       font-weight: 400;
       color: #a9a7a7;
       line-height: 17px;
@@ -1004,7 +994,6 @@ export default {
       width: 100%;
       display: flex;
       align-items: center;
-      font-size: 20px;
       font-weight: 600;
       color: #ffffff;
       line-height: 28px;
@@ -1030,7 +1019,6 @@ export default {
       }
     }
     .list_title2 {
-      font-size: 16px;
       font-weight: 600;
       color: #a9a7a7;
       line-height: 22px;
@@ -1041,7 +1029,6 @@ export default {
         > span {
           cursor: pointer;
           width: 160px;
-          // width: calc(100% / 6);
           &:nth-child(2),&:nth-child(3),&:nth-child(5){
             text-align: center;
           }

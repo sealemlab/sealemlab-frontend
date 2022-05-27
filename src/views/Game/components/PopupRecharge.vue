@@ -27,7 +27,8 @@
           </div>
         </div>
         <div class="box">
-          <div class="btn">Approve/Recharge</div>
+          <div class="btn">Approve</div>
+          <!-- Recharge -->
         </div>
       </div>
     </div>
