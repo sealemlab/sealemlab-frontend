@@ -408,7 +408,7 @@ export default {
       align-items: center;
       .inputbox {
         width: 1.2rem;
-        height: 0.35rem;
+        height: 0.3rem;
         font-size: 14px;
         margin-right: 0.1rem;
         > div {
@@ -427,7 +427,7 @@ export default {
       }
       .btn {
         width: 0.7rem;
-        height: 0.35rem;
+        height: 0.3rem;
         font-size: 12px;
       }
     }
@@ -441,10 +441,8 @@ export default {
     }
     .btns {
       div {
-        width: 1.5rem;
-        height: 0.35rem;
         font-size: 14px;
-        margin-right: 0.2rem;
+        margin-right: 0.5rem;
       }
     }
   }
@@ -457,6 +455,8 @@ export default {
       }
       tr {
         th {
+          height: 0.4rem;
+          line-height: 0.4rem;
           padding: 0.1rem 0;
           font-size: 18px;
         }

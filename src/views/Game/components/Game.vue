@@ -164,12 +164,13 @@ export default {
     margin-bottom: 0.4rem;
     margin-top: 0.6rem;
     font-size: 26px;
+    font-family: SFCompactDisplay-Bold, SFCompactDisplay;
     font-weight: bold;
     text-align: left;
   }
   .boxin {
     display: block;
-    padding: 2vw;
+    padding: 5vw;
     margin-bottom: 0.5rem;
     > img {
       width: 100%;
@@ -201,8 +202,10 @@ export default {
       .btnbox {
         .btn {
           width: 1.2rem;
-          height: 0.35rem;
+          height: 0.3rem;
           font-size: 12px;
+          font-family: SFCompactDisplay-Bold, SFCompactDisplay;
+          font-weight: bold;
         }
       }
     }
