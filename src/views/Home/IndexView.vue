@@ -13,7 +13,6 @@
             <div class="btnbox font20 mobile_font16">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
-              <img :src="haveVoice?`${$store.state.imgUrl}voice.webp`:`${$store.state.imgUrl}no_voice.webp`" class="voice_img" @click="videoPlay"/>
             </div>
           </div>
           <div class="rightbox">
@@ -21,6 +20,7 @@
           </div>
         </div>
       </div>
+      <img :src="haveVoice?`${$store.state.imgUrl}new_voice.webp`:`${$store.state.imgUrl}new_no_voice.webp`" class="voice_img" @click="videoPlay"/>
     </div>
     <div class="content_footer">
       <div class="left" :class="isEnLang?'en_Regular':'cn_lang'">
@@ -39,7 +39,8 @@
         <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
           <div class="add_top_content">
             <!-- <img :src="item.src" class="add_img" /> -->
-            <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
+            <font-awesome-icon :icon="['fas',item.icon]" v-if="index != 3"></font-awesome-icon>
+            <svg t="1653632268746" v-else class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3026" width="32" height="32"><path d="M512 96C282.624 96 96 282.624 96 512s186.624 416 416 416 416-186.624 416-416S741.376 96 512 96z m0 64c194.08 0 352 157.92 352 352s-157.92 352-352 352S160 706.08 160 512 317.92 160 512 160z m81.44 143.552L470.08 426.88l126.88 126.944 40.128-40.128-87.296-86.944 43.552-43.552 126.944 126.912-126.944 126.88-18.24-18.176-39.648 40.064 57.888 57.856L800 510.24l-206.56-206.688z m-162.816 3.584L224 513.76l206.624 206.624 123.264-123.584-126.88-126.912-40.128 40.128 87.296 86.912-43.744 43.712-126.88-126.88 126.88-126.944 18.24 18.24 39.84-39.808-57.888-58.112z" p-id="3027" fill="#9E9E9E"></path></svg>
             <span class="span font20">{{$t(item.title)}}</span>
           </div>
           <p class="font26">$&nbsp;{{item.num}}</p>
@@ -48,14 +49,11 @@
     </div>
     <!-- 希莱姆简介 -->
     <div class="character_introduction">
-      <div class="right_box display_flex">
-        <div class="fontbox">
-          <span class="font30 span_title mobile_font18">{{$t("message.home.txt9")}}</span>
-          <div class="mobile_addimg"><img :src="`${$store.state.imgUrl}people.webp`" class="people" /></div>
-          <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
-        </div>
+      <div class="title_txt font30 mobile_font18">{{$t("message.home.txt9")}}</div>
+      <div class="right_box">
+        <span class="txt_content font16" :class="isEnLang?'en_Regular':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
       </div>
-      <div class="people_box"><img :src="`${$store.state.imgUrl}people.webp`" class="people" /></div>
+      <!-- <div class="people_box"><img :src="`${$store.state.imgUrl}people.webp`" class="people" /></div> -->
     </div>
     <!-- 游戏场景轮播 -->
     <div class="characteristic_box">
@@ -100,9 +98,18 @@
           </div>
         </div>
         <div class="left right pc_box">
-          <img :src="`${$store.state.imgUrl}game2.webp`" class="game2" />
-          <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
-          <img :src="`${$store.state.imgUrl}game4.webp`" class="game2" />
+          <div class="before_box">
+            <img :src="`${$store.state.imgUrl}game2.webp`" class="game2" />
+            <span>{{$t("message.tip.txt5")}}</span>
+          </div>
+          <div class="before_box">
+            <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
+            <span>{{$t("message.tip.txt5")}}</span>
+          </div>
+          <div class="before_box">
+            <img :src="`${$store.state.imgUrl}game4.webp`" class="game2" />
+            <span>{{$t("message.tip.txt5")}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -657,9 +664,11 @@ export default {
   .border_{
     width: 100%;
     height: 380px;
-    padding: 10px 0 10px 70px;
-    border-radius: 31px;
-    border: 1px solid #D3B96D;
+    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+    border-radius: 12px;
+    border: 1px solid rgba(68, 67, 67, 0.47);
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -668,11 +677,11 @@ export default {
       width: 26%;
       display: flex;
       flex-direction: column;
-      // align-items: center;
       .add_top_content{
         width: 100%;
         display: flex;
         align-items: center;
+        color: #9E9E9E;
         .add_img{
           width: 32px;
         }
@@ -685,7 +694,7 @@ export default {
       }
       p{
         font-weight: 800;
-        color: #FFFFFF;
+        color: #CED3D9;
         line-height: 22px;
         margin-top: 40px;
       }
@@ -749,6 +758,11 @@ export default {
     display: flex;;
     justify-content: space-between;
     align-items: center;
+    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+    border-radius: 12px;
+    border: 1px solid rgba(68, 67, 67, 0.47);
+    padding: 0 20px;
     .left{
       display: flex;
       flex-direction: column;
@@ -759,11 +773,10 @@ export default {
   }
   .character_introduction{
     width: 90vw;
-    margin: 0 auto;
-    // margin-top: 70px;
+    margin: 0 auto; 
+    margin-top: 145px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     .people_box{
       width: 50%;
       .people{
@@ -772,27 +785,18 @@ export default {
       }
     }
     .right_box{
-      width: 50%;
-      flex-direction: column;
-      position: relative;
-      padding-top: 150px;
-      .fontbox{
-        display: flex;
-        flex-direction: column;
-        .span_title{
-          font-weight: normal;
-          color: #FFFFFF;
-          line-height: 34px;
-          margin-bottom: 30px;
-        }
-        .txt_content{
-          max-width: 500px;
-          font-weight: 400;
-          line-height: 22px;
-        }
-        .mobile_addimg{
-          display: none;
-        }
+      width:100%;
+      background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+      box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+      border-radius: 12px;
+      border: 1px solid rgba(68, 67, 67, 0.47);
+      padding:77px 20px 101px;
+      .txt_content{
+        max-width: 600px;
+        display: inline-block;
+        font-weight: 500;
+        color: #CED3D9;
+        line-height: 29px;
       }
     }
   }
@@ -1243,11 +1247,13 @@ export default {
       color: #FFFFFF;
     }
   }
-  .voice_img{
-    cursor: pointer;
-    width: 63px;
-    margin-left: 180px;
-  }
+}
+.voice_img{
+  position: absolute;
+  right: 5vw;
+  top: 100px;
+  cursor: pointer;
+  width: 75px;
 }
 @media screen and (max-width: 980px) {
   .home{

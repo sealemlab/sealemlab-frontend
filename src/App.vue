@@ -260,7 +260,7 @@ export default {
   width: 100vw;
   min-height: 100vh;
   // background: #000000;
-  background: linear-gradient(133deg, #0C0C0C 0%, #0B0A0A 100%);
+  background: linear-gradient(132deg, #0E0E0E 0%, #0B0A0A 100%);
 }
 @media screen and (min-width: 981px) {
   .mobile_nav,.mobile_proup{
