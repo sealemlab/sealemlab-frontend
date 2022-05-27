@@ -197,8 +197,7 @@ export default {
     padding: 0.2rem 0.3rem;
     .close_img {
       width: 0.2rem;
-      cursor: pointer;
-      position: absolute;
+      height: 0.2rem;
       top: 0.2rem;
       right: 0.2rem;
     }
