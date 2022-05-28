@@ -2,15 +2,15 @@
   <div class="gamebox">
     <div class="box1">
       <div>
-        <div class="label">Account</div>
+        <div class="label">{{ $t("message.gamepage.text16") }}</div>
         <div class="content">muyihf@163.com</div>
       </div>
       <div>
-        <div class="label">Binding Adress</div>
+        <div class="label">{{ $t("message.gamepage.text17") }}</div>
         <div class="content">0x45...6789</div>
       </div>
       <div>
-        <div class="label">Wallet Balance</div>
+        <div class="label">{{ $t("message.gamepage.text18") }}</div>
         <div class="content">
           <div class="inputbox">
             <div>
@@ -19,11 +19,11 @@
             </div>
             <input type="number" value="123" disabled />
           </div>
-          <div class="btn" @click="openRecharge">Recharge</div>
+          <div class="btn" @click="openRecharge">{{ $t("message.gamepage.text19") }}</div>
         </div>
       </div>
       <div>
-        <div class="label">Claimable</div>
+        <div class="label">{{ $t("message.gamepage.text20") }}</div>
         <div class="content">
           <div class="inputbox">
             <div>
@@ -32,14 +32,14 @@
             </div>
             <input type="number" value="123" disabled />
           </div>
-          <div class="btn">Apply</div>
-          <!-- In Review -->
-          <!-- Claim -->
+          <div class="btn">{{ $t("message.gamepage.text21") }}</div>
+          <!-- {{ $t("message.gamepage.text22") }} -->
+          <!-- {{ $t("message.gamepage.text13") }} -->
         </div>
       </div>
     </div>
     <div class="box2">
-      <div class="box2_title">Recharge/Claim History</div>
+      <div class="box2_title">{{ $t("message.gamepage.text24") }}</div>
       <div class="btns">
         <div @click="isShowRechargeList = true" :class="{ active: isShowRechargeList }">Recharge</div>
         <div @click="isShowRechargeList = false" :class="{ active: !isShowRechargeList }">Claim</div>
@@ -49,10 +49,10 @@
       <table v-if="isShowRechargeList">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Quantity</th>
-            <th>Status</th>
-            <th>Tx</th>
+            <th>{{ $t("message.gamepage.text25") }}</th>
+            <th>{{ $t("message.gamepage.text26") }}</th>
+            <th>{{ $t("message.gamepage.text27") }}</th>
+            <th>{{ $t("message.gamepage.text28") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +61,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Succeeded</td>
+            <td>{{ $t("message.gamepage.text29") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -71,7 +71,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Succeeded</td>
+            <td>{{ $t("message.gamepage.text29") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -81,7 +81,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Succeeded</td>
+            <td>{{ $t("message.gamepage.text29") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -91,7 +91,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Succeeded</td>
+            <td>{{ $t("message.gamepage.text29") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -101,10 +101,10 @@
       <table v-else>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Quantity</th>
-            <th>Status</th>
-            <th>Tx</th>
+            <th>{{ $t("message.gamepage.text25") }}</th>
+            <th>{{ $t("message.gamepage.text26") }}</th>
+            <th>{{ $t("message.gamepage.text27") }}</th>
+            <th>{{ $t("message.gamepage.text28") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -113,7 +113,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Failed</td>
+            <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -123,7 +123,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Failed</td>
+            <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -133,7 +133,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Failed</td>
+            <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -143,7 +143,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Failed</td>
+            <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -153,7 +153,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Failed</td>
+            <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -163,7 +163,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Failed</td>
+            <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -173,7 +173,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Failed</td>
+            <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
@@ -183,7 +183,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
             </td>
-            <td>Failed</td>
+            <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
