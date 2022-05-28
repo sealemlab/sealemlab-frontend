@@ -8,8 +8,8 @@
       <div class="content">
         <div class="content_center">
           <div class="leftbox" :class="isEnLang?'en_Bold':''">
-            <p class="font_1 font26 mobile_font18">{{$t("message.home.txt2")}}</p>
-            <p class="font_2 demo_font_color font45 mobile_font34">{{$t("message.home.add_txt1")}}</p>
+            <p class="font_1 font26 mobile_font16">{{$t("message.home.txt2")}}</p>
+            <p class="font_2 demo_font_color font45 mobile_font28" :class="isEnLang?'en_heavy':''">{{$t("message.home.add_txt1")}}</p>
             <div class="btnbox font20 mobile_font16">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span>{{$t("message.home.txt4")}}</span>
@@ -27,7 +27,7 @@
         <span class="font30 mobile_font16">{{$t("message.home.txt5")}}</span>
         <span class="font30 mobile_font16 margin_top">{{$t("message.home.txt6")}}</span>
       </div>
-      <div class="btnbox font20 mobile_font16">
+      <div class="btnbox font20 mobile_font16" :class="isEnLang?'en_Bold':''">
         <span>{{$t("message.home.txt7")}}</span>
         <span>{{$t("message.home.txt8")}}</span>
       </div>
@@ -39,8 +39,11 @@
         <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
           <div class="add_top_content">
             <!-- <img :src="item.src" class="add_img" /> -->
-            <font-awesome-icon :icon="['fas',item.icon]" v-if="index != 3"></font-awesome-icon>
-            <svg t="1653632268746" v-else class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3026" width="32" height="32"><path d="M512 96C282.624 96 96 282.624 96 512s186.624 416 416 416 416-186.624 416-416S741.376 96 512 96z m0 64c194.08 0 352 157.92 352 352s-157.92 352-352 352S160 706.08 160 512 317.92 160 512 160z m81.44 143.552L470.08 426.88l126.88 126.944 40.128-40.128-87.296-86.944 43.552-43.552 126.944 126.912-126.944 126.88-18.24-18.176-39.648 40.064 57.888 57.856L800 510.24l-206.56-206.688z m-162.816 3.584L224 513.76l206.624 206.624 123.264-123.584-126.88-126.912-40.128 40.128 87.296 86.912-43.744 43.712-126.88-126.88 126.88-126.944 18.24 18.24 39.84-39.808-57.888-58.112z" p-id="3027" fill="#9E9E9E"></path></svg>
+            <div class="iconbox">
+              <font-awesome-icon :icon="['fas',item.icon]" v-if="index != 3 || index == 4 "></font-awesome-icon>
+              <svg t="1653721794550" v-if="index == 3" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2162" width="16" height="16"><path d="M409.714286 773.714286l154.857143-154.857143-159.428571-159.428571-50.285714 50.285714 109.714286 109.142857-54.857143 54.857143-159.428571-159.428571 159.428571-159.428571 22.857143 22.857143 49.714286-49.714286-72.571429-73.142857-259.428571 259.428571zm204.571429-4.571429l259.428571-259.428571-259.428571-259.428571-154.857143 154.857143 159.428571 159.428571 50.285714-50.285714-109.714286-109.142857 54.857143-54.857143 159.428571 159.428571-159.428571 159.428571-22.857143-22.857143-49.714286 50.285714zm409.714286-257.142857q0 104-40.571429 198.857143t-109.142857 163.428571-163.428571 109.142857-198.857143 40.571429-198.857143-40.571429-163.428571-109.142857-109.142857-163.428571-40.571429-198.857143 40.571429-198.857143 109.142857-163.428571 163.428571-109.142857 198.857143-40.571429 198.857143 40.571429 163.428571 109.142857 109.142857 163.428571 40.571429 198.857143z" p-id="2163" fill="#9E9E9E"></path></svg>
+              <svg t="1653721184598" v-if="index == 4" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3417" width="16" height="16"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m22.3 665.2l0.2 31.7c0 4.4-3.6 8.1-8 8.1h-28.4c-4.4 0-8-3.6-8-8v-31.4C401.3 723 359.5 672.4 355 617.4c-0.4-4.7 3.3-8.7 8-8.7h46.2c3.9 0 7.3 2.8 7.9 6.6 5.1 31.7 29.8 55.4 74.1 61.3V533.9l-24.7-6.3c-52.3-12.5-102.1-45.1-102.1-112.7 0-72.9 55.4-112.1 126.2-119v-33c0-4.4 3.6-8 8-8h28.1c4.4 0 8 3.6 8 8v32.7c68.5 6.9 119.9 46.9 125.9 109.2 0.5 4.7-3.2 8.8-8 8.8h-44.9c-4 0-7.4-3-7.9-6.9-4-29.2-27.4-53-65.5-58.2v134.3l25.4 5.9c64.8 16 108.9 47 108.9 116.4 0 75.3-56 117.3-134.3 124.1zM426.6 410.3c0 25.4 15.7 45.1 49.5 57.3 4.7 1.9 9.4 3.4 15 5v-124c-36.9 4.7-64.5 25.4-64.5 61.7z m116.5 135.2c-2.8-0.6-5.6-1.3-8.8-2.2V677c42.6-3.8 72-27.2 72-66.4 0-30.7-15.9-50.7-63.2-65.1z" p-id="3418" fill="#9E9E9E"></path></svg>
+            </div>
             <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
           </div>
           <p class="font35" :class="isEnLang?'en_heavy':''">$&nbsp;{{item.num}}</p>
@@ -51,6 +54,9 @@
     <div class="character_introduction">
       <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt9")}}</div>
       <div class="right_box">
+        <div class="mobile_people_box">
+          <img :src="`${$store.state.imgUrl}new_people.webp`" class="people" />
+        </div>
         <span class="txt_content font16" :class="isEnLang?'en_medium':'cn_lang'">{{ $t("message.home.txt9_1")}}</span>
       </div>
       <div class="people_box">
@@ -127,7 +133,10 @@
             <div class="onebox display_flex">
               <div class="add_content">
                 <!-- <img :src="item.src" class="img_sp" /> -->
-                <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
+                <svg t="1653722205715" v-if="index == 0" class="icon" viewBox="0 0 1281 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2643" width="16" height="16"><path d="M1278.7257 634l-56-364c-16-102-92-184-190-206C774.7257 6 506.7257 6 248.7257 64 148.7257 86 74.7257 168 58.7257 270L2.7257 634c-22 148 92 282 240 282 94 0 178-52 218-136l28-56h304l28 56c40 84 124 136 216 136h2c148 0 262-134 240-282z m-130 136c-28 32-68 50-112 50-54 0-104-30-130-82l-36-74c-12-22-34-36-58-36H468.7257c-24 0-48 14-58 36l-36 74c-26 52-76 82-132 82-42 0-82-18-110-50-28-34-42-78-34-122l54-362c10-64 56-114 118-128 244-56 496-56 740 0 62 14 108 64 118 128l54 362c6 44-6 88-34 122zM800.7257 436c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z m-304-80h-64v-64c0-26-22-48-48-48s-48 22-48 48v64h-64c-26 0-48 22-48 48s22 48 48 48h64v64c0 26 22 48 48 48s48-22 48-48v-64h64c26 0 48-22 48-48s-22-48-48-48z m432-112c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z" p-id="2644" fill="#D4BA76"></path></svg>
+                <svg t="1653723405535" v-if="index == 4 " class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3050" width="16" height="16"><path d="M512 256C299.946667 256 85.333333 321.962667 85.333333 448v170.666667C85.333333 744.704 299.946667 810.666667 512 810.666667s426.666667-65.962667 426.666667-192v-170.666667C938.666667 321.962667 724.053333 256 512 256z m-341.333333 362.666667v-51.072a426.197333 426.197333 0 0 0 85.333333 36.693333v80.256c-55.978667-21.930667-85.333333-48.042667-85.333333-65.877333z m512 6.314666v84.096c-36.992 7.637333-79.658667 13.226667-128 15.274667v-85.333333a928 928 0 0 0 128-14.037334z m-213.333334 99.413334a801.621333 801.621333 0 0 1-128-15.274667v-84.096c40.917333 7.424 84.138667 12.245333 128 14.08v85.290667z m298.666667-39.850667v-80.256a423.722667 423.722667 0 0 0 85.333333-36.693333V618.666667c0 17.834667-29.312 43.946667-85.333333 65.877333zM512 554.666667c-220.885333 0-341.333333-70.442667-341.333333-106.666667S291.114667 341.333333 512 341.333333s341.333333 70.442667 341.333333 106.666667-120.448 106.666667-341.333333 106.666667z" p-id="3051" fill="#D4BA76"></path></svg>
+                <svg t="1653724967297" v-if="index == 2 " class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="57047" width="16" height="16"><path d="M512 0C441.6 0 373.76 14.08 309.12 42.24c-22.4 9.6-33.28 36.48-23.04 58.88 9.6 22.4 36.48 33.28 58.88 23.04 53.12-23.04 108.8-34.56 167.04-34.56 232.96 0 422.4 189.44 422.4 422.4s-189.44 422.4-422.4 422.4-422.4-189.44-422.4-422.4c0-51.2 8.96-101.12 26.88-148.48 8.96-23.04-3.2-49.28-26.24-57.6-23.04-8.96-49.28 3.2-57.6 26.24C10.88 389.76 0 449.92 0 512c0 282.24 229.76 512 512 512s512-229.76 512-512S794.24 0 512 0z" p-id="57048" fill="#D4BA76"></path><path d="M512.64 849.28c44.8 0 89.6-8.96 133.12-26.88 23.04-9.6 33.92-35.84 24.32-58.24-9.6-23.04-35.84-33.92-58.24-24.32-33.28 13.44-65.28 20.48-98.56 20.48-136.32 0-247.04-110.72-247.04-247.04s110.72-247.04 247.04-247.04 247.04 110.72 247.04 247.04c0 29.44-5.76 59.52-16 87.68-8.32 23.04 3.2 49.28 26.24 57.6 23.04 8.32 49.28-3.2 57.6-26.24 14.08-37.76 21.12-78.72 21.12-118.4 0-185.6-151.04-336.64-336.64-336.64S176 327.04 176 512.64s151.04 336.64 336.64 336.64z" p-id="57049" fill="#D4BA76"></path><path d="M363.52 512c0 81.92 67.2 149.12 149.12 149.12 81.28 0 148.48-66.56 149.12-149.12 0-81.92-67.2-149.12-149.12-149.12S363.52 430.08 363.52 512z m208.64-0.64c-0.64 33.28-26.88 60.16-59.52 60.16-32.64 0-59.52-26.88-59.52-59.52 0-32.64 26.88-59.52 59.52-59.52s59.52 26.88 59.52 58.88z" p-id="57050" fill="#D4BA76"></path></svg>
+                <font-awesome-icon v-else :icon="['fas',item.icon]"></font-awesome-icon>
                 <span class="txt font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{$t(item.txt)}}</span>
               </div>
               <span class="txt1 font16" :class="isEnLang?'en_medium':''">{{$t(item.txt1)}}</span>
@@ -142,7 +151,12 @@
           <div class="make_box" v-for="(item, index) in makeMoneyArr" :key="index">
             <div class="make_one">
               <!-- <img :src="item.src" class="money_1" /> -->
-              <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
+              <div class="add_make_icon">
+                <svg t="1653721184598" v-if="index == 0" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3417" width="16" height="16"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m22.3 665.2l0.2 31.7c0 4.4-3.6 8.1-8 8.1h-28.4c-4.4 0-8-3.6-8-8v-31.4C401.3 723 359.5 672.4 355 617.4c-0.4-4.7 3.3-8.7 8-8.7h46.2c3.9 0 7.3 2.8 7.9 6.6 5.1 31.7 29.8 55.4 74.1 61.3V533.9l-24.7-6.3c-52.3-12.5-102.1-45.1-102.1-112.7 0-72.9 55.4-112.1 126.2-119v-33c0-4.4 3.6-8 8-8h28.1c4.4 0 8 3.6 8 8v32.7c68.5 6.9 119.9 46.9 125.9 109.2 0.5 4.7-3.2 8.8-8 8.8h-44.9c-4 0-7.4-3-7.9-6.9-4-29.2-27.4-53-65.5-58.2v134.3l25.4 5.9c64.8 16 108.9 47 108.9 116.4 0 75.3-56 117.3-134.3 124.1zM426.6 410.3c0 25.4 15.7 45.1 49.5 57.3 4.7 1.9 9.4 3.4 15 5v-124c-36.9 4.7-64.5 25.4-64.5 61.7z m116.5 135.2c-2.8-0.6-5.6-1.3-8.8-2.2V677c42.6-3.8 72-27.2 72-66.4 0-30.7-15.9-50.7-63.2-65.1z" p-id="3418" fill="#DBDADA"></path></svg>
+                <svg t="1653723586792" v-if="index == 5" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4129" width="16" height="16"><path d="M819.2 102.4V0H204.8v102.4H0v153.6a256 256 0 0 0 221.184 252.416 307.2 307.2 0 0 0 239.616 204.8V921.6H307.2v102.4h409.6v-102.4h-153.6v-209.408a307.2 307.2 0 0 0 239.616-204.8A256 256 0 0 0 1024 256V102.4zM102.4 256V204.8h102.4v196.096A153.6 153.6 0 0 1 102.4 256z m819.2 0a153.6 153.6 0 0 1-102.4 144.896V204.8h102.4z" p-id="4130" fill="#DBDADA"></path></svg>
+                <svg t="1653723989071" v-if="index == 4" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6467" width="16" height="16"><path d="M213.333333 170.666667h597.333334a128 128 0 0 1 128 128v170.666666h-298.666667v-42.666666H384v42.666666H85.333333V298.666667a128 128 0 0 1 128-128m256 298.666666h85.333334v85.333334h-85.333334v-85.333334m-384 42.666667h298.666667v42.666667l85.333333 85.333333h85.333334l85.333333-85.333333v-42.666667h298.666667v341.333333H85.333333v-341.333333z" fill="#DBDADA" p-id="6468"></path></svg>
+                <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
+              </div>
               <span class="_span font16" :class="isEnLang?'en_medium':''">{{$t(item.txt)}}</span>
             </div>
           </div>
@@ -152,7 +166,7 @@
     <!-- 团队 -->
     <!-- <div class="teamboxs">
       <div class="team_container display_flex">
-        <div class="title_txt font32" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt47")}}</div>
+        <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt47")}}</div>
         <div class="teamswiper">
           <swiper ref="teamswiper" :options="teamswiperOption" class="team_swiper">
             <swiper-slide v-for="(item, index) in teamArr" :key="index">
@@ -189,7 +203,7 @@
     <!-- 时间轴 -->
     <div class="time_axis_box">
       <div class="time_axis display_flex">
-        <div class="title_txt font32" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt54")}}</div>
+        <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt54")}}</div>
         <swiper :options="swiperOption" ref="mySwiper" class="self_swiper" v-if='swiperVisible'>
           <swiper-slide v-for="(item, index) in swiperArr" :key="index">
             <div class="timebox">
@@ -225,7 +239,7 @@
     </div>
     <!-- 合作者 -->
     <div class="characteristic_box display_flex">
-      <div class="title_txt font32" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt59")}}</div>
+      <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt59")}}</div>
       <div class="gamebox">
         <div class="partener_box display_flex">
           <div class="one_partener display_flex" v-for="(item, index) in partenerArr" :key="index">
@@ -693,6 +707,13 @@ export default {
         .add_img{
           width: 32px;
         }
+        .iconbox{
+          width: 20px;
+          height: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
         .span{
           font-weight: 500;
           line-height: 22px;
@@ -804,6 +825,9 @@ export default {
       border-radius: 12px;
       border: 1px solid rgba(68, 67, 67, 0.47);
       padding:77px 20px 101px;
+      .mobile_people_box{
+        display: none;
+      }
       .txt_content{
         max-width: 600px;
         display: inline-block;
@@ -906,6 +930,13 @@ export default {
             padding-left: 26px;
             .money_1{
               width: 61px;
+            }
+            .add_make_icon{
+              width: 18px;
+              height: 18px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
             }
             ._span{
               font-weight: 500;
@@ -1417,7 +1448,10 @@ export default {
       .left{
         display: flex;
         flex-direction: column;
-        margin-bottom: 30px;
+        margin-bottom: 0.3rem;
+        font-weight: 500;
+        color: #CED3D9;
+        line-height: 0.18rem;
         span{
           width: 100%;
           padding:0;
@@ -1437,6 +1471,7 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      margin-top: 0.52rem;
       .people_box{
         display: none;
       }
@@ -1445,7 +1480,7 @@ export default {
         flex-direction: column;
         align-items: center;
         position: relative;
-        padding-top: 0.5rem;
+        padding: 0.2rem;
         .fontbox{
           display: flex;
           flex-direction: column;
@@ -1477,6 +1512,14 @@ export default {
             }
           }
         }
+        .mobile_people_box{
+          display: block;
+          margin-top: -0.5rem;
+          margin-bottom: 0.2rem;
+          img{
+            width: 100%;
+          }
+        }
       }
     }
     .title_txt{
@@ -1487,34 +1530,31 @@ export default {
     }
     .content_{
       width: 100%;
-      padding-top: 0.4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       background: linear-gradient(133deg, #0C0C0C 0%, #0B0A0A 100%);
-      margin-top: 0.3rem;
       .box_{
+        margin-top: 0.52rem;
         .imgbox{
           width: 100%;
           justify-content: space-between;
           align-items: center;
           flex-wrap: wrap;
-          margin-bottom: 0.3rem;
+          margin-bottom:0;
           background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
           box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
           border-radius: 0.08rem;
           border: 1px solid rgba(68, 67, 67, 0.47);
+          padding: 0.2rem 0.08rem 0;
           .add_outbox{
             width: 50%;
             display: flex;
             justify-content: flex-start;
             align-items: center;
             border-right:none;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.2rem;
             padding: 0.2rem 0.08rem;
-            // &:nth-child(1){
-            //   justify-content: flex-start;
-            // }
             .onebox{
               flex-direction: column;
               align-items: center;
@@ -1550,12 +1590,13 @@ export default {
           justify-content: flex-start;
           flex-wrap: nowrap;
           .make_box{
-            // padding: 1px;
             margin-bottom: 0.15rem;
             width: 100%;
             cursor: pointer;
             transition: all 0.3s;
-            // background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+            &:nth-child(1),&:nth-child(2),&:nth-child(3){
+              margin-bottom: 0.15rem;
+            }
             .make_one{
               display: flex;
               flex-direction: row;
@@ -1567,8 +1608,9 @@ export default {
               // background: #000;
               ._span{
                 font-weight: 400;
-                color: #FFFFFF;
+                color: #DBDADA;
                 line-height: 22px;
+                margin-left: 0.05rem;
               }
               .money_1{
                 width: 0.16rem;
@@ -1596,10 +1638,10 @@ export default {
     }
     .time_axis_box{
       background: transparent;
+      margin-top: 0.52rem;
       .time_axis{
         width: 90vw;
         margin: 0 auto;
-        padding-top: 60px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1607,7 +1649,6 @@ export default {
           display: none;
         }
         .mobile_time_axis{
-          // width: 100%;
           max-height: 4rem;
           overflow: auto;
           display: flex;
@@ -1630,9 +1671,7 @@ export default {
                 margin: -0.14rem 0;
               }
               span{
-                // margin-top: -0.12rem;
                 display: inline-block;
-                // width: 1px;
                 height: 1.8rem;
                 border: 0.01rem dashed #F3DC97;
                 border-radius: 0.2rem;
@@ -1672,7 +1711,7 @@ export default {
                 }
                 .b_content{
                   font-weight: 400;
-                  color: #DBDADA;
+                  color: #8F8E8E;
                   line-height: 0.14rem;
                   margin-top: 0.05rem;
                 }
@@ -1687,150 +1726,154 @@ export default {
       margin: 0 auto;
       flex-direction: column;
       align-items: center;
-      margin-top: 0.4rem;
-      background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
-      box-shadow: 0px 12px 10px 0px rgba(0, 0, 0, 0.39);
-      border-radius: 0.08rem;
-      border: 1px solid rgba(68, 67, 67, 0.47);
-      padding: 0.2rem 0.08rem;
-      .partener_box{
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-        .one_partener{
-          .par1{
-            width: 0.73rem;
-          }
-          .par2{
-            width: 0.89rem;
-          }
-          .par3{
-            width: 0.94rem;
-          }
-          .par4{
-            width: 0.86rem;
-          }
-          .par5{
-            width: 0.88rem;
-          }
-          .par6{
-            width: 0.72rem;
-          }
-          .par7{
-            width: 0.67rem;
-          }
-          .par8{
-            width: 0.73rem;
-          }
-          .par9{
-            width: 0.93rem;
-          }
-          .par10{
-            width: 0.93rem;
-          }
-        }
-      }
-      .add_game_txt{
+      margin-top: 0.52rem;
+      .gamebox{
         width: 100%;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 0.2rem 0 0.1rem;
-        .span1{
-          font-weight: 500;
-          color: #DBDADA;
-          line-height: 0.16rem;
-          margin-right: 0;
-          white-space:nowrap;
-        }
-        .span2{
-          font-weight: 400;
-          color: #ECCF83;
-          line-height: 0.12rem;
-          white-space:nowrap;
-          transform: scale(0.75);
-          zoom:0.8;
-        }
-      }
-      .add_box{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-top: 0.35rem;
         flex-direction: column;
-        .left{
+        background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+        border-radius: 0.08rem;
+        border: 1px solid rgba(68, 67, 67, 0.47);
+        padding: 0 0.08rem;
+        .partener_box{
           width: 100%;
-          display: flex;
-          flex-direction: column;
-          .span4{
-            font-weight: 600;
-            color: #DBDADA;
-            line-height: 0.17rem;
-            margin-top: 0.1rem;
-          }
-          .bottom_swiper{
-            width: 100%;
-            .gameMax_swiper{
-              width: 100%;
-              img{
-                width: 100%;
-              }
+          align-items: center;
+          .one_partener{
+            width: 33%;
+            .par1{
+              width: 0.73rem;
+            }
+            .par2{
+              width: 0.89rem;
+            }
+            .par3{
+              width: 0.94rem;
+            }
+            .par4{
+              width: 0.86rem;
+            }
+            .par5{
+              width: 0.88rem;
+            }
+            .par6{
+              width: 0.72rem;
+            }
+            .par7{
+              width: 0.67rem;
+            }
+            .par8{
+              width: 0.73rem;
+            }
+            .par9{
+              width: 0.93rem;
+            }
+            .par10{
+              width: 0.93rem;
             }
           }
-          .gameswiperbox{
-            position: relative;
+        }
+        .add_game_txt{
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 0.2rem 0 0.1rem;
+          .span1{
+            font-weight: 500;
+            color: #DBDADA;
+            line-height: 0.16rem;
+            margin-right: 0;
+            white-space:nowrap;
+          }
+          .span2{
+            font-weight: 400;
+            color: #ECCF83;
+            line-height: 0.12rem;
+            white-space:nowrap;
+            transform: scale(0.75);
+            zoom:0.8;
+          }
+        }
+        .add_box{
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          margin-top: 0.35rem;
+          flex-direction: column;
+          .left{
             width: 100%;
-            margin-top: 0.1rem;
-            // padding: 0 58px;
-            .game_swiper{
+            display: flex;
+            flex-direction: column;
+            .span4{
+              font-weight: 600;
+              color: #DBDADA;
+              line-height: 0.17rem;
+              margin-top: 0.1rem;
+            }
+            .bottom_swiper{
               width: 100%;
-              .swiper-slide{
-                display: flex;
-                justify-content: center;
-                .oneimgbox{
-                  max-width: 2rem;
-                  width: 1.5rem;
-                  padding:0.1rem;
-                  cursor: pointer;
-                  .gameswiper_img{
-                    width: 100%;
+              .gameMax_swiper{
+                width: 100%;
+                img{
+                  width: 100%;
+                }
+              }
+            }
+            .gameswiperbox{
+              position: relative;
+              width: 100%;
+              margin-top: 0.1rem;
+              // padding: 0 58px;
+              .game_swiper{
+                width: 100%;
+                .swiper-slide{
+                  display: flex;
+                  justify-content: center;
+                  .oneimgbox{
+                    max-width: 2rem;
+                    width: 1.5rem;
+                    padding:0.1rem;
+                    cursor: pointer;
+                    .gameswiper_img{
+                      width: 100%;
+                    }
                   }
                 }
               }
             }
           }
-        }
-        .right{
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          align-items:center;
-          justify-content: space-between;
-          .before_box{
-            position: relative;
-            max-width: 33%;
-            width: 30%;
-            margin-bottom: 0;
-            .game2{
-              width: 100%;
-            }
-            span{
-              position: absolute;
-              bottom: 0.05rem;
-              left: 50%;
-              transform: translateX(-50%);
-              font-size: 0.12rem;
-              font-weight: normal;
-              color: #FFFFFF;
-              line-height: 0.11rem;
+          .right{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items:center;
+            justify-content: space-between;
+            .before_box{
+              position: relative;
+              max-width: 33%;
+              width: 30%;
+              margin-bottom: 0;
+              .game2{
+                width: 100%;
+              }
+              span{
+                position: absolute;
+                bottom: 0.05rem;
+                right: 0;
+                font-size: 0.12rem;
+                font-weight: normal;
+                color: #FFFFFF;
+                line-height: 0.11rem;
+              }
             }
           }
-        }
-        .pc_box{
-          display: none;
-        }
-        .mobile_game_box{
-          margin-top: 0.2rem;
+          .pc_box{
+            display: none;
+          }
+          .mobile_game_box{
+            margin-top: 0.2rem;
+          }
         }
       }
     }
@@ -1912,6 +1955,13 @@ export default {
       width: 63px;
       margin-left: 180px;
     }
+  }
+  .voice_img{
+    position: absolute;
+    right: 5vw;
+    top: 0.09rem;
+    cursor: pointer;
+    width: 0.47rem;
   }
 }
 </style>

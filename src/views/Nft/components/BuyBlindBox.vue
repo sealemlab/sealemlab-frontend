@@ -1,7 +1,7 @@
 <template>
   <div class="buy_blind_box">
     <ul class="title_box">
-      <li class="font45 box_txt mobile_font18">{{$t("message.nft.txt20")}}</li>
+      <li class="font45 box_txt mobile_font20" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt20")}}</li>
       <li class="font16">
         {{$t("message.nft.txt21")}}
       </li>
@@ -103,7 +103,7 @@
         <div class="oneline">
           <span class="mobile_font14">{{$t("message.nft.txt218")}}</span>
           <p v-for="(item,index) in probabilityArr1" :key="index">
-            <span class="color_fff">{{item.num}}</span>
+            <span class="color_ced">{{item.num}}</span>
           </p>
         </div>
         <div class="oneline">
@@ -116,7 +116,7 @@
         <div class="oneline">
           <span class="mobile_font14">{{$t("message.nft.txt218")}}</span>
           <p v-for="(item,index) in probabilityArr2" :key="index">
-            <span class="color_fff">{{item.num}}</span>
+            <span class="color_ced">{{item.num}}</span>
           </p>
         </div>
       </div>
@@ -617,20 +617,23 @@ export default {
     width: 100%;
     li {
       &:nth-child(1) {
+        text-align: left;
         font-weight: bold;
         color: #FFFFFF;
         line-height: 0.2rem;
       }
       &:nth-child(2) {
         font-weight: 400;
-        color: #FFFFFF;
+        color: #CED3D9;
         line-height: 0.2rem;
         margin-top: 0.2rem;
+        text-align: left;
       }
       &:nth-child(3) {
         font-weight: 400;
-        color: #FFFFFF;
+        color: #CED3D9;
         line-height: 0.2rem;
+        text-align: left;
       }
     }
   }
@@ -638,8 +641,6 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    // background-image:none;
-    // background-size: contain;
     .treasure_chest_box {
       width: 100%;
       .mobile_img{
@@ -737,9 +738,11 @@ export default {
     margin-top:0;
     .introduce_title_txt{
       font-weight: 600;
-      color: #FFFFFF;
+      color: #CED3D9;
       line-height: 0.25rem;
       text-align: center;
+      text-align: left;
+      width: 100%;
     }
     .introduce_content{
       width: 100%;

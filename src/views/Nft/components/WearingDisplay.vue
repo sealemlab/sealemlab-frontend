@@ -38,10 +38,10 @@
       </div>
       <div class="right_content">
         <ul>
-          <li class="font20" :class="isEnLang?'en_Bold':''">
+          <li class="font20 mobile_font16" :class="isEnLang?'en_Bold':''">
             {{ $t(tabClassArr[currentClass].arms) }}:<span class="font16">{{ $t(tabClassArr[currentClass].skill_content) }}</span> 
           </li>
-          <li class="font20" :class="isEnLang?'en_Bold':''">
+          <li class="font20 mobile_font16" :class="isEnLang?'en_Bold':''">
             {{ $t(tabClassArr[currentClass].skill) }}
           </li>
           <li>
@@ -56,17 +56,17 @@
         </ul>
         <div class="start_box font12">
           <p>
-            <span class="font26">11</span>
+            <span class="font26 mobile_font18">11</span>
             <img :src="`${$store.state.imgUrl}start.webp`" /></p>
-          <p class="font26" :class="isEnLang?'en_Bold':''">{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title6)}}</p>
-          <p class="font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt127")}}</p>
+          <p class="font26 mobile_font18" :class="isEnLang?'en_Bold':''">{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title6)}}</p>
+          <p class="font16 mobile_font14" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt127")}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title8)}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title9)}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title10)}}</p>
-          <p class="font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt131")}}</p>
+          <p class="font16 mobile_font14" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt131")}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title12)}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title13)}}</p>
-          <p class="font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt225")}}</p>
+          <p class="font16 mobile_font14" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt225")}}</p>
           <p>{{$t(tabClassArr[currentClass].classFashionArr[currentSwiperIndex].title14)}}</p>
         </div>
       </div>
@@ -735,9 +735,9 @@ export default {
       width: 100%;
       margin-bottom: 0.28rem;
       padding: 0;
-      text-align: center;
+      text-align: left;
       font-weight: bold;
-      color: #FFFFFF;
+      color: #CED3D9;
       line-height: 0.21rem;
     }
     .tab_box {
@@ -747,7 +747,7 @@ export default {
       flex-direction: column;
       .add_introduce{
         font-weight: 400;
-        color: #FFFFFF;
+        color: #CED3D9;
         line-height: 22px;
         margin-top: 20px;
       }
@@ -884,11 +884,13 @@ export default {
         }
       }
       .right_content{
-        // width: 20%;
+        background: rgba(248, 229, 186, 0.15);
+        padding: 0.1rem;
+        margin-top: 0.15rem;
         ul {
           width: 100%;
           height: auto;
-          color: #ffffff;
+          // color: #ffffff;
           li{
             width: 100%;
             display: flex;
@@ -898,10 +900,10 @@ export default {
             line-height: 0.28rem;
             &:nth-child(1){
               color: #ECCF83;
-              margin-top: 0.2rem;
+              margin-top: 0;
               span{
                 font-weight: 400;
-                color: #FFFFFF;
+                // color: #FFFFFF;
                 line-height: 0.22rem;
                 margin-left: 0.1rem;
               }
@@ -937,14 +939,14 @@ export default {
                 p{
                   &:nth-child(1){
                     font-weight: 400;
-                    color: #FFFFFF;
+                    // color: #FFFFFF;
                     line-height: 0.26rem;
                     margin-top: 0.15rem;
                   }
                   &:nth-child(2){
                     margin-top: 0.05rem;
                     font-weight: 400;
-                    color: #FFFFFF;
+                    // color: #FFFFFF;
                     line-height: 0.2rem;
                   }
                 }
@@ -959,23 +961,32 @@ export default {
           p{
             display: flex;
             align-items: center;
-            font-weight: 400;
-            color: #FFFFFF;
-            line-height: 0.24rem;
+            font-weight: 500;
+            color: #8F8E8E;
+            line-height: 0.15rem;
             span{
               color: #ECCF83;
             }
-            &:nth-child(1){
+            &:nth-child(1),&:nth-child(2){
               margin-bottom: 0.1rem;
+              font-weight: 800;
+              color: #ECCF83;
+              line-height: 0.3rem;
               span{
                 font-weight: 800;
                 color: #ECCF83;
-                line-height: 0.31rem;
+                line-height: 0.3rem;
               }
               img{
                 width: 0.25rem;
-                margin-left: 0.05rem;
+                margin-left: 5px;
               }
+            }
+            &:nth-child(3),&:nth-child(7),&:nth-child(10){
+              font-weight: bold;
+              color: #CED3D9;
+              line-height: 0.26rem;
+              margin-top: 0.08rem;
             }
           }
         }

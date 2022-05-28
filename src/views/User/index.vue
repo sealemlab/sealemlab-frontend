@@ -16,8 +16,8 @@
             </div>
             <div class="outbox_add">
               <div class="onelin display_flex font16">
-                <span>{{$t(item.name1)}}</span>
-                <span>{{item.num1}}(≈${{item.num1_money}})</span>
+                <span class="mobile_font16">{{$t(item.name1)}}</span>
+                <span class="mobile_font16">{{item.num1}}(≈${{item.num1_money}})</span>
               </div>
               <div class="onelin display_flex font16" v-if="item.name3">
                 <span>{{$t(item.name3)}}</span>

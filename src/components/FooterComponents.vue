@@ -120,6 +120,7 @@ export default {
           margin: 14px 0;
           cursor: pointer;
           letter-spacing: 0.52px;
+          color: #DBDADA;
           &:nth-child(1) {
             font-size: 18px;
             font-family: TrajanPro-Bold, TrajanPro;

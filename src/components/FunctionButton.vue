@@ -1,7 +1,7 @@
 <template>
-  <div class="btn_page" @click="childenBtnFun">
+  <div class="btn_page mobile_font16" :class="isEnLang?'en_Bold':''" @click="childenBtnFun">
     <BtnLoading :isloading="true" v-if="allLoading"></BtnLoading>
-    <div v-else>
+    <div v-else >
       <div class="connect_box" v-if="!getIstrue">Connect</div>
       <div class="connect_box" v-else-if="!isapprove">
         {{$t("message.approve")}}
@@ -41,7 +41,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getIstrue","getAccount"])
+    ...mapGetters(["getIstrue","getAccount","isEnLang"])
   },
   methods:{
     childenBtnFun(){

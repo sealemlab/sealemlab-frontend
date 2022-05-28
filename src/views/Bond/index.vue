@@ -24,7 +24,7 @@
     <!-- 债券 -->
     <div class="boxs">
       <div class="box2">
-        <div class="title mobile_font16 font32" :class="isEnLang?'en_heavy':''">
+        <div class="title mobile_font20 font32" :class="isEnLang?'en_heavy':''">
           <span>{{ $t("message.bond.txt1") }}</span>
         </div>
         <div class="box">
@@ -80,7 +80,7 @@
                 </span>
               </li>
             </ul>
-            <div class="add_btn_txt bg3" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
+            <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@
     <!-- 仪表盘 -->
     <div class="boxs add_top">
       <!-- 仪表盘切换 -->
-      <div class="add_nav font32" :class="isEnLang?'en_heavy':''">
+      <div class="add_nav font32 mobile_font16" :class="isEnLang?'en_heavy':''">
         <div :class="dashboard?'color3':''" @click="dashboard = true">{{ $t("message.bond.txt60") }}</div>
         <div :class="dashboard?'':'color3'"  @click="dashboard = false">{{ $t("message.bond.txt61") }}</div>
       </div>
@@ -259,7 +259,7 @@
       </div>
       <!-- 你的债券 -->
       <div class="box4" v-if="dashboard">
-        <div class="title mobile_font16 font32" :class="isEnLang?'en_heavy':''">
+        <div class="title mobile_font20 font32" :class="isEnLang?'en_heavy':''">
           <span>{{ $t("message.bond.txt8") }}</span>
         </div>
         <div class="box">
@@ -322,22 +322,32 @@
       </div>
       <!-- 附属仪表盘内容 -->
       <div class="dashboard_box" v-if="!dashboard">
-        <div class="top font32" :class="isEnLang?'en_heavy':''">
+        <div class="top font32 mobile_font16" :class="isEnLang?'en_heavy':''">
           <span class="color_fff">{{ $t("message.bond.txt62") }}</span>
           <span>{{ $t("message.bond.txt63") }}</span>
         </div>
         <div class="content">
           <div>
-            <img :src="`${$store.state.imgUrl}champion1.webp`" />
+            <div class="iconbox_">
+              <svg t="1653724466948" class="icon" viewBox="0 0 1107 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="36756" width="16" height="16">
+                <path d="M563.323289 661.336738a330.663562 330.663562 0 1 0-330.531877-330.663562 331.190306 331.190306 0 0 0 330.531877 330.663562z" fill="#ffffff" p-id="36757"></path>
+                <path d="M1106.528066 975.53955c-16.724123-134.319727-137.611877-293.001365-273.38015-373.066457a381.889419 381.889419 0 0 1-539.912627-0.65843C157.335331 679.246035 18.274908 834.635523 0.365611 975.53955a42.797952 42.797952 0 0 0 37.26714 48.065392h1031.628175A43.061324 43.061324 0 0 0 1106.528066 975.53955z" fill="#ffffff" p-id="36758"></path>
+              </svg>
+            </div>
             <div>
-              <p class="font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt64") }}</p>
+              <p class="font18 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt64") }}</p>
               <p class="font12" :class="isEnLang?'en_medium':''">0xb2307A91...5198ef7</p>
             </div>
           </div>
           <div>
-            <img :src="`${$store.state.imgUrl}champion1.webp`" />
+            <div class="iconbox_">
+              <svg t="1653724606480" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8184" width="16" height="16">
+                <path d="M599.552 696.832l-1.024 1.024c-1.024 1.024-61.952 50.176-93.696 75.776-41.472 33.28-93.184 48.64-145.92 43.008s-100.352-31.232-133.632-72.704c-69.12-84.992-55.808-210.944 29.696-279.552l99.328-80.896-46.08-57.344-99.328 80.896c-116.736 94.72-134.656 266.752-39.936 383.488 45.568 56.32 111.104 91.648 183.296 99.328 9.728 1.024 19.456 1.536 29.184 1.536 62.464 0 121.856-20.992 171.008-60.928l94.208-76.288-45.568-56.32-1.536-1.024zM856.064 232.96c-94.208-116.224-266.24-134.656-383.488-39.936l-90.112 73.216 46.08 57.344 90.112-73.216c84.992-69.12 210.944-55.808 279.552 29.696 69.12 85.504 55.808 210.944-29.696 279.552l-95.744 77.312-1.024 1.024 46.08 57.344 96.768-78.336c56.832-46.08 92.16-111.104 99.84-183.808 8.192-72.192-12.8-143.36-58.368-200.192z" p-id="8185"  fill="#ffffff"></path>
+                <path d="M388.096 667.648l305.664-254.464 1.024-1.024-47.616-56.32-305.664 254.976-1.024 0.512z" p-id="8186" fill="#ffffff"></path>
+              </svg>
+            </div>
             <div>
-              <p class="font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt65") }}</p>
+              <p class="font18 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt65") }}</p>
               <p class="font12" :class="isEnLang?'en_medium':''">https://sealemlab.com/?r=ajnpq</p>
             </div>
           </div>
@@ -346,19 +356,19 @@
         <div class="content">
           <div class="databox">
             <span class="font14">{{ $t("message.bond.txt67") }}</span>
-            <span class="font35" :class="isEnLang?'en_medium':''">0</span>
+            <span class="font35 mobile_font22" :class="isEnLang?'en_Bold':''">0</span>
           </div>
           <div class="databox">
             <span class="font14">{{ $t("message.bond.txt68") }}</span>
-            <span class="font35" :class="isEnLang?'en_medium':''">0</span>
+            <span class="font35 mobile_font22" :class="isEnLang?'en_Bold':''">0</span>
           </div>
           <div class="databox">
             <span class="font14">{{ $t("message.bond.txt69") }}</span>
-            <span class="font35" :class="isEnLang?'en_medium':''">0</span>
+            <span class="font35 mobile_font22"  :class="isEnLang?'en_Bold':''">0</span>
           </div>
           <div class="databox">
             <span class="font14">{{ $t("message.bond.txt70") }}</span>
-            <span class="font35" :class="isEnLang?'en_medium':''">0</span>
+            <span class="font35 mobile_font22" :class="isEnLang?'en_Bold':''">0</span>
           </div>
         </div>
       </div>
@@ -474,10 +484,17 @@ export default {
       box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
       border-radius: 8px;
       border: 1px solid #373636;
-      img{
-        width: 23px;
+      .iconbox_{
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
         margin-right: 16px;
       }
+      // img{
+      //   width: 23px;
+      //   margin-right: 16px;
+      // }
       div{
         p{
           font-weight: 600;
@@ -528,10 +545,10 @@ export default {
   position: relative;
   &::after {
     content: "";
-    width: 13px;
+    width: 16px;
     height: 13px;
     filter: blur(0px);
-    background: url($bg_url + "ques.webp") no-repeat;
+    background: url($bg_url + "ques_new.webp") no-repeat;
     background-size: 100% 100%;
     position: absolute;
     right: -20px;
@@ -1070,7 +1087,7 @@ export default {
       width: 13px;
       height: 13px;
       filter: blur(0px);
-      background: url($bg_url + "ques.webp") no-repeat;
+      background: url($bg_url + "ques_new.webp") no-repeat;
       background-size: 100% 100%;
       position: absolute;
       right: -0.12rem;
@@ -1134,33 +1151,31 @@ export default {
       }
       ul {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
         margin-top: 0.2rem;
         li {
           width: auto;
-          height: 0.28rem;
-          background: rgba(163, 159, 148, 0.23);
-          border-radius: 0.07rem;
+          padding: 0.05rem;
+          height: auto;
+          background: rgba(248, 229, 186, 0.06);
+          border-radius: 0.04rem;
+          backdrop-filter: blur(14px);
           text-align: center;
-          margin-right: 0.1rem;
+          margin-right: 0;
+          margin-bottom: 0.05rem;
           .txt1 {
             width: 100%;
             height: auto;
-            padding: 0.05rem;
+            padding:0;
             font-weight: 600;
             color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: scale(0.8);
-            zoom: 0.65;
           }
           .line {
-            width: 50%;
-            height: 0.02rem;
-            margin: 0 auto;
-            background: #f0ce75;
-            border-radius: 0.02rem;
+            display: none;
           }
         }
       }
@@ -1200,7 +1215,7 @@ export default {
         align-items: flex-start;
         font-weight: 600;
         font-size: 0.14rem;
-        color: #ffffff;
+        color: #CED3D9;
         line-height: 0.34rem;
         padding: 0.1rem 0;
         li {
@@ -1243,7 +1258,6 @@ export default {
         line-height: 0.4rem;
         text-align: center;
         font-weight: 600;
-        font-size: 0.12rem;
         color: #000;
         box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
         border-radius: 0.04rem;
@@ -1259,17 +1273,17 @@ export default {
     padding: 0.2rem 0;
     div{
       cursor: pointer;
-      width: 1.43rem;
+      width:auto;
       height: 0.33rem;
+      padding: 0;
       font-weight: 600;
       color: #ffffff;
-      background: #373636;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 0.04rem;
       &:nth-child(1){
-        margin-right: 0.2rem;
+        margin-right: 0.1rem;
       }
     }
   }
@@ -1445,7 +1459,7 @@ export default {
         align-items: flex-start;
         font-size: 0.14rem;
         font-weight: 600;
-        color: #ffffff;
+        color: #CED3D9;
         line-height: 0.28rem;
         padding:0;
         li {
@@ -1538,15 +1552,26 @@ export default {
         border-radius: 8px;
         border: 1px solid #373636;
         margin-bottom: 0.2rem;
-        img{
-          width: 0.2rem;
+        // img{
+        //   width: 0.2rem;
+        //   margin-right: 0.1rem;
+        // }
+        .iconbox_{
+          width: 0.16rem;
+          height: 0.16rem;
+          display: flex;
+          align-items: center;
           margin-right: 0.1rem;
+          margin-top: 0.03rem;
         }
         div{
           p{
             font-weight: 600;
             color: #FFFFFF;
             line-height: 22px;
+            &:nth-child(2){
+              color: #CED3D9;
+            }
           }
         }
       }

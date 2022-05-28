@@ -6,10 +6,10 @@
       </div>
       <div class="title_box display_flex">
         <div class="address_box display_flex">
-          <span class="font26 mobile_font16">0 NFT</span>
-          <span class="font16 margin_top">{{$t("message.user.txt7")}}:0x*********</span>
+          <span class="font32 mobile_font16" :class="isEnLang?'en_Bold':''">0 NFT</span>
+          <span class="font16 margin_top" :class="isEnLang?'en_Bold':''">{{$t("message.user.txt7")}}:0x*********</span>
         </div>
-        <div class="add_buybtn font16" :class="isEnLang?'en_Bold':''">{{$t("message.user.txt17")}}</div>
+        <div class="add_buybtn font16" :class="isEnLang?'en_medium':''">{{$t("message.user.txt17")}}</div>
         <div class="menu display_flex">
           <div class="onebox font14" :class="{ activeMenu: menuIndex == index }" v-for="(item, index) in menuArr" :key="index" @click="menuClick(item,index)">{{$t(item.title)}}</div>
         </div>

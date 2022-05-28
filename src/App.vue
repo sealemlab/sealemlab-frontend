@@ -12,22 +12,7 @@
           <font-awesome-icon :icon="['fas', 'globe']"></font-awesome-icon>
         </div>
         <div class="box" v-if="index == 2">
-          <svg
-            t="1653450038515"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="3252"
-            width="32"
-            height="32"
-          >
-            <path
-              d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z"
-              p-id="3253"
-              :fill="item.status ? '#ECCF83' : '#ffffff'"
-            ></path>
-          </svg>
+          <svg t="1653723717313" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5662" width="32" height="32"><path d="M561.92 28.7744a99.84 99.84 0 0 0-99.84 0l-343.552 198.3488a99.84 99.84 0 0 0-49.9712 86.528v396.6976c0 35.6864 19.0464 68.608 49.92 86.4768l343.6032 198.3488a99.84 99.84 0 0 0 99.84 0l343.552-198.3488a99.84 99.84 0 0 0 49.9712-86.4768V313.6a99.84 99.84 0 0 0-49.92-86.4768L561.92 28.7744z m-66.56 57.6512a33.28 33.28 0 0 1 33.28 0l343.552 198.3488a33.28 33.28 0 0 1 16.6912 28.8256v396.8a33.28 33.28 0 0 1-16.64 28.7744l-343.6032 198.3488a33.28 33.28 0 0 1-33.28 0l-343.552-198.3488a33.28 33.28 0 0 1-16.6912-28.8256V313.6a33.28 33.28 0 0 1 16.64-28.8256l343.6032-198.3488z m-137.6768 562.176a34.1504 34.1504 0 0 0 63.1296-17.9712v-238.08a34.1504 34.1504 0 1 0-68.2496 0v118.3232L267.9296 374.528A34.1504 34.1504 0 0 0 204.8 392.5504v238.08a34.1504 34.1504 0 1 0 68.2496 0v-118.3744l84.6336 136.3456z m144.0768 16.128a34.1504 34.1504 0 0 1-34.0992-34.1504V392.5504c0-18.8928 15.2576-34.1504 34.0992-34.1504h94.72a34.1504 34.1504 0 1 1 0 68.2496h-60.5696v50.7904h60.5184a34.1504 34.1504 0 1 1 0 68.2496h-60.5184v84.9408a34.1504 34.1504 0 0 1-34.1504 34.0992z m223.9488-238.08h-33.4848a34.1504 34.1504 0 1 1 0-68.2496H827.4944a34.1504 34.1504 0 1 1 0 68.2496h-33.4848v203.9296a34.0992 34.0992 0 1 1-68.3008 0V426.6496z" p-id="5663" :fill="item.status ? '#ECCF83' : '#ffffff'"></path></svg>
         </div>
         <div class="box" v-if="index == 3">
           <svg
@@ -109,7 +94,6 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
 import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
-import { faSlash } from "@fortawesome/free-solid-svg-icons";
 export default {
   computed: {
     ...mapGetters(["getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
@@ -120,7 +104,7 @@ export default {
         { label: "message.nav.txt10", link: "/home", status: true },
         { label: "message.nav.txt1", link: "/bond", status: false },
         { label: "message.nav.txt3", link: "/nft", status: false },
-        { label: "message.nav.txt4", link: "", status: false },
+        { label: "message.nav.txt2", link: "", status: false },
         { label: "message.nav.txt13", link: "", status: false },
       ],
       isShowMore: false,
@@ -319,7 +303,8 @@ export default {
 }
 @media screen and (max-width: 980px) {
   #app {
-    padding-bottom: 1.1rem;
+ width: 100%;
+     padding-bottom: 1.1rem;
   }
   .mobile_nav {
     position: fixed;
