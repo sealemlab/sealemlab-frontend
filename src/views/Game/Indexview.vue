@@ -3,7 +3,7 @@
     <div class="menu" v-if="isShowMenu">
       <ul>
         <li v-for="(item, index) in navArr" :key="index" @click="liClick(item)" :class="{ active: index == liIndex }">
-          {{ item.label }}
+          {{ $t(item.label) }}
         </li>
       </ul>
     </div>
@@ -22,10 +22,10 @@ export default {
     return {
       liIndex: 0,
       navArr: [
-        { label: "Game", link: "/game/game", status: true },
-        { label: "Recharge/Claim", link: "/game/rechargeclaim", status: true },
-        { label: "Game data", link: "/game/gamedata", status: false },
-        { label: "Updation", link: "/game/updation", status: false },
+        { label: "message.gamepage.text1", link: "/game/game", status: true },
+        { label: "message.gamepage.text2", link: "/game/rechargeclaim", status: true },
+        { label: "message.gamepage.text3", link: "/game/gamedata", status: false },
+        { label: "message.gamepage.text4", link: "/game/updation", status: false },
       ],
       oldScrollTop: 0,
       isShowMenu: true,

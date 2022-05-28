@@ -1,52 +1,52 @@
 <template>
   <div class="gamebox">
-    <div class="game_title">Play for Fun and toEarn</div>
+    <div class="game_title">{{ $t("message.gamepage.text5") }}</div>
     <div class="boxin">
-      <div class="title mobile">Sacred Realm</div>
+      <div class="title mobile">{{ $t("message.gamepage.text6") }}</div>
       <img :src="`${$store.state.imgUrl}maxgame1.webp`" alt="" />
       <div class="content">
-        <div class="title pc">Sacred Realm</div>
+        <div class="title pc">{{ $t("message.gamepage.text6") }}</div>
         <div class="textbox">
           <div>
-            <p>Type</p>
-            <p>MORPG</p>
+            <p>{{ $t("message.gamepage.text7") }}</p>
+            <p>{{ $t("message.gamepage.text8") }}</p>
           </div>
           <div>
-            <p>Developer</p>
-            <p>Sealemlab</p>
+            <p>{{ $t("message.gamepage.text9") }}</p>
+            <p>{{ $t("message.gamepage.text10") }}</p>
           </div>
           <div>
-            <p>Status</p>
-            <p>Developing</p>
+            <p>{{ $t("message.gamepage.text11") }}</p>
+            <p>{{ $t("message.gamepage.text12") }}</p>
           </div>
         </div>
         <div class="btnbox">
-          <div class="btn">Enter</div>
-          <div class="btn">Download</div>
+          <div class="btn">{{ $t("message.gamepage.text13") }}</div>
+          <div class="btn">{{ $t("message.gamepage.text14") }}</div>
         </div>
       </div>
     </div>
     <div class="boxin">
-      <div class="title mobile">PSYCHE</div>
+      <div class="title mobile">{{ $t("message.gamepage.text15") }}</div>
       <img :src="`${$store.state.imgUrl}game4.webp`" alt="" />
       <div class="content">
-        <div class="title pc">PSYCHE</div>
+        <div class="title pc">{{ $t("message.gamepage.text15") }}</div>
         <div class="textbox">
           <div>
-            <p>Type</p>
-            <p>MORPG</p>
+            <p>{{ $t("message.gamepage.text7") }}</p>
+            <p>{{ $t("message.gamepage.text8") }}</p>
           </div>
           <div>
-            <p>Developer</p>
-            <p>Sealemlab</p>
+            <p>{{ $t("message.gamepage.text9") }}</p>
+            <p>{{ $t("message.gamepage.text10") }}</p>
           </div>
           <div>
-            <p>Status</p>
-            <p>Developing</p>
+            <p>{{ $t("message.gamepage.text11") }}</p>
+            <p>{{ $t("message.gamepage.text12") }}</p>
           </div>
         </div>
         <div class="btnbox">
-          <div class="btn comingsoon">Coming soon</div>
+          <div class="btn comingsoon">{{ $t("message.tip.txt5") }}</div>
         </div>
       </div>
     </div>

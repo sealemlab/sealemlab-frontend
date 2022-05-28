@@ -3,21 +3,21 @@
     <div class="inset">
       <div class="close_img" @click="closePopup"></div>
       <div class="content">
-        <div class="title">Recharge</div>
+        <div class="title">{{ $t("message.gamepage.text19") }}</div>
         <div class="box">
-          <div class="title">Amount</div>
+          <div class="title">{{ $t("message.gamepage.text31") }}</div>
           <div class="inputbox">
-            <input type="number" value="" placeholder="Enter the amount to recharge" />
+            <input type="number" value="" :placeholder="$t('message.gamepage.text32')" />
             <div class="sr">
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
             </div>
-            <div class="inputbtn">Max</div>
-            <div class="tip">Balance: 345678 SR</div>
+            <div class="inputbtn">{{ $t("message.gamepage.text33") }}</div>
+            <div class="tip">{{ $t("message.gamepage.text34") }}: 345678 SR</div>
           </div>
         </div>
         <div class="box">
-          <div class="title">Shortcut</div>
+          <div class="title">{{ $t("message.gamepage.text35") }}</div>
           <div class="list">
             <span>30000</span>
             <span>60000</span>
@@ -27,8 +27,8 @@
           </div>
         </div>
         <div class="box">
-          <div class="btn">Approve</div>
-          <!-- Recharge -->
+          <div class="btn">{{ $t("message.gamepage.text36") }}</div>
+          <!-- {{ $t("message.gamepage.text19") }} -->
         </div>
       </div>
     </div>
