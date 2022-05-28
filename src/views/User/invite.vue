@@ -1,25 +1,25 @@
 <template>
   <div class="invite_page" :class="isEnLang?'en_Bold':'cn_lang'">
-    <div class="title_box display_flex">
-      <span class="font26 mobile_font16">{{$t("message.user.txt15")}}</span>
-      <span class="font26 _txt mobile_font16">10</span>
+    <div class="title_box display_flex font32" :class="isEnLang?'en_heavy':''">
+      <span class="mobile_font16">{{$t("message.user.txt15")}}</span>
+      <span class="_txt mobile_font16">10</span>
     </div>
-    <div class="ranking demo_font_color">
-      <p class="font26 mobile_font16">{{$t("message.user.txt16")}}</p>
+    <div class="ranking">
+      <p class="font32 mobile_font16" :class="isEnLang?'en_heavy':''">{{$t("message.user.txt16")}}</p>
       <div class="listbox">
-        <div class="topline">
-          <div class="title_onebox font18">{{ $t("message.user.txt1") }}</div>
+        <div class="topline font24">
+          <div class="title_onebox">{{ $t("message.user.txt1") }}</div>
           <div class="onebox">
-            <div class="insertbox1 font18">{{ $t("message.user.txt2") }}</div>
+            <div class="insertbox1">{{ $t("message.user.txt2") }}</div>
           </div>
           <div class="onebox">
-            <div class="insertbox1 font18">{{ $t("message.user.txt3") }}</div>
+            <div class="insertbox1">{{ $t("message.user.txt3") }}</div>
           </div>
           <div class="onebox">
-            <div class="insertbox2 font18">{{ $t("message.user.txt4") }}</div>
+            <div class="insertbox2">{{ $t("message.user.txt4") }}</div>
           </div>
         </div>
-        <div class="bottomline">
+        <div class="bottomline font16" :class="isEnLang?'en_medium':''">
           <div class="boxs" v-for="(item,index) in list" :key="index">
             <div class="title_onebox">
               <div class="champion_box" v-if="index == 0">
@@ -31,16 +31,16 @@
               <div class="champion_box" v-else-if="index == 2">
                 <img :src="`${$store.state.imgUrl}champion3.webp`" class="sort1_img" />
               </div>
-              <span class="pad_left font16" v-else>{{index + 1}}</span>
+              <span class="pad_left" v-else>{{index + 1}}</span>
             </div>
             <div class="onebox">
-              <div class="insertbox1 font16">{{item.address}}</div>
+              <div class="insertbox1">{{item.address}}</div>
             </div>
             <div class="onebox">
-              <div class="insertbox1 font16">{{item.num}}</div>
+              <div class="insertbox1">{{item.num}}</div>
             </div>
             <div class="onebox">
-              <div class="insertbox2 font16">{{item.reward}}</div>
+              <div class="insertbox2">{{item.reward}}</div>
             </div>
           </div>
         </div>

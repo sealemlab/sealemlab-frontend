@@ -2,7 +2,7 @@
   <!-- 底部 -->
   <div class="footer_box display_flex">
     <div class="footer_content display_flex">
-      <img :src="`${$store.state.imgUrl}logo.webp`" class="footer_logo" />
+      <img :src="`${$store.state.imgUrl}new_logo.webp`" class="footer_logo" />
       <div class="onebox display_flex">
         <ul v-for="(ele, index) in footerArr" :key="index">
           <li class="font14 en_Regular" v-for="(item, index1) in ele.children" :key="index1">

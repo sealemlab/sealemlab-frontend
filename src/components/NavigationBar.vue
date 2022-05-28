@@ -1,7 +1,7 @@
 <template>
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
-      <img class="logo" :src="`${$store.state.imgUrl}logo.webp`" alt="" @click="toRoute('/home')" />
+      <img class="logo" :src="`${$store.state.imgUrl}new_logo.webp`" alt="" @click="toRoute('/home')" />
       <ul class="mobile_none">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link, index)">
           <span class="font18">{{ $t(item.label) }}</span>
@@ -187,7 +187,7 @@ export default {
   align-items: center;
   .logo {
     width: auto;
-    height: 62px;
+    height: 63px;
     margin-right: 14px;
     cursor: pointer;
   }

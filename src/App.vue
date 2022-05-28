@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="isEnLang ? 'en_Bold' : 'cn_lang'" @touchstart="handleTouchstart" @touchend="handleTouchend">
+  <div id="app" :class="isEnLang ? 'en_Regular' : 'cn_lang'" @touchstart="handleTouchstart" @touchend="handleTouchend">
     <NavigationBar />
     <router-view />
     <FooterComponents />
@@ -80,9 +80,9 @@
     </div>
     <div class="mobile_proup" v-if="isShowMore" @click="isShowMore = false">
       <div class="content">
-        <span @click="routeFun('Market')">Market</span>
-        <span @click="routeFun('Game')">Game</span>
-        <span @click="routeFun('User')">User center</span>
+        <span @click="routeFun('Market')">{{$t("message.nav.txt4")}}</span>
+        <span @click="routeFun('Game')">{{$t("message.nav.txt5")}}</span>
+        <span @click="routeFun('User')">{{$t("message.nav.txt6")}}</span>
         <p>
           <span>EN</span>
         </p>
@@ -306,10 +306,10 @@ export default {
 
 <style lang="scss">
 #app {
-  width: 100vw;
+  width:calc(100vw - 5px);
   min-height: 100vh;
-  // background: #000000;
-  background: linear-gradient(133deg, #0c0c0c 0%, #0b0a0a 100%);
+  overflow-x: hidden;
+  background: linear-gradient(132deg, #0E0E0E 0%, #0B0A0A 100%);
 }
 @media screen and (min-width: 981px) {
   .mobile_nav,

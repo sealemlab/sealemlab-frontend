@@ -269,7 +269,7 @@ export const message = {
     txt105: "2 set:Increase heaven's fury dmg 51%",
     txt106: "3 set:Increase crit dmg 48%",
     txt107:
-      "Introduction: The suit came from the hands of great craftsmen and senior mages in the ancient holy city. After casting, the mages enchant them with divine power. After thousands of years, the surface of the equipment still emits a faint magical luster, which can add high damage to the wearer's skill attacks.",
+      "The suit came from the hands of great craftsmen and senior mages in the ancient holy city. After casting, the mages enchant them with divine power. After thousands of years, the surface of the equipment still emits a faint magical luster, which can add high damage to the wearer's skill attacks.",
 
     txt108: "Iron set",
     txt110: "2 set:Crit chance resist 51%",
@@ -278,7 +278,7 @@ export const message = {
     txt114: "2 set:Increase blade blast dmg 26%",
     txt115: "3 set:Dmg decrease 38%",
     txt116:
-      "Introduction: The equipment is made of steel, thick and powerful, providing perfect protection for every part of the wearer, and the appearance makes the enemy almost lose the desire to attack. After wearing it, you can easily pass the dungeon challenge.",
+      "The equipment is made of steel, thick and powerful, providing perfect protection for every part of the wearer, and the appearance makes the enemy almost lose the desire to attack. After wearing it, you can easily pass the dungeon challenge.",
 
     txt117: "Conquerors silence set",
     txt119: "2 set:Increase boss dmg 26%",
@@ -287,7 +287,7 @@ export const message = {
     txt123: "2 set:Increase blade slam dmg 26%",
     txt124: "3 set:Decrease skill cooldown 6.6 Second",
     txt125:
-      "Introduction: The Conquerors silence set is designed for the brave who desires to dominate the arena. It contains enough power to handle every situation when you are challenging. Wear it to become the king of the arena！",
+      "The Conquerors silence set is designed for the brave who desires to dominate the arena. It contains enough power to handle every situation when you are challenging. Wear it to become the king of the arena！",
 
     txt126: "Sacred light set",
     txt127: "Armor suit attribute: ",
@@ -298,7 +298,7 @@ export const message = {
     txt132: "2 set:Increase dmg 26%",
     txt133: "3 set:Increase atk 1,750",
     txt134:
-      "Introduction: The sacred light set was originally worn by the temple guards. When guarding the temple of the sacred realm, it was bathed in the blood of angels. After the battle, the guards were pleasantly surprised to find that every part of the armor overflowed with divine breath. These divine breath is always present and revives the life of the guard, giving soldiers more power to use their skills.",
+      "The sacred light set was originally worn by the temple guards. When guarding the temple of the sacred realm, it was bathed in the blood of angels. After the battle, the guards were pleasantly surprised to find that every part of the armor overflowed with divine breath. These divine breath is always present and revives the life of the guard, giving soldiers more power to use their skills.",
 
     txt135: "Ancient mysteries set",
     txt137: "2 set:Increase move speed 26%",
@@ -307,7 +307,7 @@ export const message = {
     txt141: "2 set:Increase beam of light dmg 51%",
     txt142: "3 set:Increase crit dmg 48%",
     txt143:
-      "Introduction: The suit came from the hands of great craftsmen and senior mages in the ancient holy city. After casting, the mages enchant them with divine power. After thousands of years , the surface of the equipment still emits a faint magical luster, which can add high damage to the wearer's skill attacks.",
+      "The suit came from the hands of great craftsmen and senior mages in the ancient holy city. After casting, the mages enchant them with divine power. After thousands of years , the surface of the equipment still emits a faint magical luster, which can add high damage to the wearer's skill attacks.",
 
     txt144: "Iron set",
     txt146: "2 set:Crit chance resist 51%",
@@ -316,7 +316,7 @@ export const message = {
     txt150: "2 set:Increase revelation dmg 26%",
     txt151: "3 set:Dmg decrease 38%",
     txt152:
-      "Introduction: The equipment is made of steel, thick and powerful, providing perfect protection for every part of the wearer, and the appearance makes the enemy almost lose the desire to attack. After wearing it, you can easily pass the dungeon challenge.",
+      "The equipment is made of steel, thick and powerful, providing perfect protection for every part of the wearer, and the appearance makes the enemy almost lose the desire to attack. After wearing it, you can easily pass the dungeon challenge.",
 
     txt153: "Conquerors silence set",
     txt155: "2 set:Increase boss dmg 26%",
@@ -325,7 +325,7 @@ export const message = {
     txt159: "2 set:Increase tempest dmg 26%",
     txt160: "3 set:Decrease skill cooldown 6.6 Second",
     txt161:
-      "Introduction:The Conquerors silence set is designed for the brave who desires to dominate the arena. It contains enough power to handle every situation when you are challenging. Wear it to become the king of the arena！",
+      "The Conquerors silence set is designed for the brave who desires to dominate the arena. It contains enough power to handle every situation when you are challenging. Wear it to become the king of the arena！",
 
     txt162: "Ancient mysteries set",
     txt164: "2 set:Increase move speed 26%",
@@ -334,7 +334,7 @@ export const message = {
     txt168: "2 set:Increase shadow dance dmg 51%",
     txt169: "3 set:Increase crit dmg 48%",
     txt170:
-      "Introduction:The suit came from the hands of great craftsmen and senior mages in the ancient holy city. After casting, the mages enchant them with divine power. After thousands of years , the surface of the equipment still emits a faint magical luster, which can add high damage to the wearer's skill attacks.",
+      "The suit came from the hands of great craftsmen and senior mages in the ancient holy city. After casting, the mages enchant them with divine power. After thousands of years , the surface of the equipment still emits a faint magical luster, which can add high damage to the wearer's skill attacks.",
 
     txt171: "Iron set",
     txt173: "2 set:Crit chance resist 51%",
@@ -343,7 +343,7 @@ export const message = {
     txt177: "2 set:Increase dagger fan dmg 26%",
     txt178: "3 set:Dmg decrease 38%",
     txt179:
-      "Introduction:The equipment is made of steel, thick and powerful, providing perfect protection for every part of the wearer, and the appearance makes the enemy almost lose the desire to attack. After wearing it, you can easily pass the dungeon challenge.",
+      "The equipment is made of steel, thick and powerful, providing perfect protection for every part of the wearer, and the appearance makes the enemy almost lose the desire to attack. After wearing it, you can easily pass the dungeon challenge.",
 
     txt180: "Conquerors silence set",
     txt182: "2 set:Increase boss dmg 26%",
@@ -352,7 +352,7 @@ export const message = {
     txt186: "2 set:Increase shadow strike dmg 26% ",
     txt187: "3 set:Decrease skill cooldown 6.6 Second",
     txt188:
-      "Introduction:The Conquerors silence set is designed for the brave who desires to dominate the arena. It contains enough power to handle every situation when you are challenging. Wear it to become the king of the arena！",
+      "The Conquerors silence set is designed for the brave who desires to dominate the arena. It contains enough power to handle every situation when you are challenging. Wear it to become the king of the arena！",
 
     txt189: "Ancient mysteries set",
     txt191: "2 set:Increase move speed 26% ",
@@ -361,7 +361,7 @@ export const message = {
     txt195: "2 set:Increase rain of fist dmg 51%",
     txt196: "3 set:Increase crit dmg 48%",
     txt197:
-      "Introduction:The suit came from the hands of great craftsmen and senior mages in the ancient holy city. After casting, the mages enchant them with divine power. After thousands of years , the surface of the equipment still emits a faint magical luster, which can add high damage to the wearer's skill attacks.",
+      "The suit came from the hands of great craftsmen and senior mages in the ancient holy city. After casting, the mages enchant them with divine power. After thousands of years , the surface of the equipment still emits a faint magical luster, which can add high damage to the wearer's skill attacks.",
 
     txt198: "Iron set",
     txt200: "2 set:Crit chance resist 51% ",
@@ -370,7 +370,7 @@ export const message = {
     txt204: "2 set:Increase retribution dmg 26% ",
     txt205: "3 set:Dmg decrease 38%",
     txt206:
-      "Introduction:The equipment is made of steel, thick and powerful, providing perfect protection for every part of the wearer, and the appearance makes the enemy almost lose the desire to attack. After wearing it, you can easily pass the dungeon challenge.",
+      "The equipment is made of steel, thick and powerful, providing perfect protection for every part of the wearer, and the appearance makes the enemy almost lose the desire to attack. After wearing it, you can easily pass the dungeon challenge.",
 
     txt207: "Conquerors silence set",
     txt209: "2 set:Increase boss dmg 26%",
@@ -379,7 +379,7 @@ export const message = {
     txt213: "2 set:Increase chi blast dmg 26% ",
     txt214: "3 set:Decrease skill cooldown 6.6 Second",
     txt215:
-      "Introduction:The Conquerors silence set is designed for the brave who desires to dominate the arena. It contains enough power to handle every situation when you are challenging. Wear it to become the king of the arena！",
+      "The Conquerors silence set is designed for the brave who desires to dominate the arena. It contains enough power to handle every situation when you are challenging. Wear it to become the king of the arena！",
 
     txt216: "Mystery Box Distribution",
     txt217: "Star",
@@ -390,6 +390,8 @@ export const message = {
     txt222: "Rare",
     txt223: "Epic",
     txt224: "Legend",
+
+    txt225: "Introduction:",
 
     type1: {
       suit1: {

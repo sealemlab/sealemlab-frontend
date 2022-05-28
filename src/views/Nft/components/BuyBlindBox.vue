@@ -68,7 +68,7 @@
     <!-- 盲盒概率 -->
     <div class="blindbox_introduce">
       <p class="font30 introduce_title_txt mobile_font18">{{$t("message.nft.txt216")}}</p>
-      <div class="box_probability font20">
+      <div class="box_probability font20" :class="isEnLang?'en_Bold':''">
         <div class="top_one_line">
           <div class="small_box">
             <span>{{$t("message.nft.txt217")}}</span><span class="specil_span">{{$t("message.nft.txt218")}}</span>
@@ -92,7 +92,7 @@
         </div>
       </div>
       <!-- 盲盒概率--移动端 -->
-      <div class="mobile_box_probability">
+      <div class="mobile_box_probability" :class="isEnLang?'en_Bold':''">
         <div class="oneline">
           <span class="mobile_font14">{{$t("message.nft.txt217")}}</span>
           <p v-for="(item,index) in probabilityArr1" :key="index">
@@ -531,11 +531,15 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin-top: 84px;
+    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+    border-radius: 12px;
+    border: 1px solid rgba(68, 67, 67, 0.47);
+    padding:20px;
     .introduce_onebox{
       flex: 1;
       display: flex;
       flex-direction: column;
-      // align-items: center;
       max-width: 310px;
       .title{
         font-weight: bold;

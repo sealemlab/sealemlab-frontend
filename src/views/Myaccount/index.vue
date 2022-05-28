@@ -58,6 +58,7 @@ export default {
 <style lang="scss" scoped>
 .account_page {
   width: 100%;
+  background: #000;
   min-height: calc(100vh - 400px);
   .content_box {
     width: 90vw;
@@ -76,7 +77,6 @@ export default {
         display: flex;
         align-items: center;
         margin-bottom: 60px;
-        padding-left: 68px;
         cursor: pointer;
         text-decoration: none;
         &.router-link-active {
@@ -113,7 +113,6 @@ export default {
           display: flex;
           align-items: center;
           margin-bottom: 0;
-          padding-left: 0;
           color: #fff;
           cursor: pointer;
           text-decoration: none;

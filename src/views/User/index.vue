@@ -3,7 +3,7 @@
     <div class="user_info display_flex">
       <div class="user_head_portrait display_flex">
         <span class="font20 user_name">xxxx@xx.xx</span>
-        <div class="invitation_code font16">{{ $t("message.user.txt5") }}</div>
+        <div class="invitation_code font16" :class="isEnLang?'en_Bold':''">{{ $t("message.user.txt5") }}</div>
       </div>
       <div class="content display_flex" v-if="li_index == 0">
         <div class="outbox" v-for="(item, index) in walletArr" :key="index">
@@ -32,19 +32,19 @@
         </div>
       </div>
       <div class="invite_content content display_flex" v-if="li_index == 1">
-        <div class="invite_title display_flex">
+        <div class="invite_title display_flex font20" :class="isEnLang?'en_Bold':''">
           <div class="left display_flex">
-            <span class="font35 c">{{$t("message.user.txt11")}}</span>
+            <span class="font24 mobile_font14">{{$t("message.user.txt11")}}</span>
             <div class="income_box display_flex font26">
               <div class="imgbox display_flex">
                 <img :src="`${$store.state.imgUrl}stlogo.webp`" class="homebg" />
-                <span>ST</span>
+                <span >ST</span>
               </div>
               <span>100</span>
             </div>
           </div>
           <div class="left display_flex">
-            <span class="font35 mobile_font14">{{$t("message.user.txt12")}}</span>
+            <span class="font24 mobile_font14">{{$t("message.user.txt12")}}</span>
             <div class="income_box display_flex font26">
               <div class="imgbox display_flex">
                 <img :src="`${$store.state.imgUrl}srlogo.webp`" class="homebg" />
@@ -56,7 +56,7 @@
         </div>
         <p class="message font16" :class="isEnLang?'en_Regular':'cn_lang'">{{$t("message.user.txt13")}}</p>
       </div>
-      <div class="feedback_page font30" v-if="li_index == 2">
+      <div class="feedback_page" :class="isEnLang?'en_medium':''" v-if="li_index == 2">
         <span class="font30">{{$t("message.user.txt10")}}</span>
         <span class="font24">{{$t("message.user.txt14")}}</span>
       </div>

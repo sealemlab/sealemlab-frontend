@@ -2,13 +2,13 @@
   <div class="information_page">
     <div class="box">
       <div class="left_content">
-        <div class="user_inputbox">
+        <div class="user_inputbox" :class="isEnLang?'en_Bold':''">
           <p class="font16 email_txt mobile_font14">{{ $t("message.account.txt5") }}</p>
           <div class="inputbox">
             <input disabled type="text" class="font16" v-model.trim="getLogin.mailAccount" />
           </div>
         </div>
-        <div class="user_inputbox">
+        <div class="user_inputbox" :class="isEnLang?'en_Bold':''">
           <p class="font16 email_txt mobile_font14">{{ $t("message.account.txt6") }}</p>
           <div class="inputbox">
             <input disabled :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="getLogin.password" />
@@ -20,32 +20,32 @@
             </div>
           </div>
         </div>
-        <div class="lin_content font12">
+        <div class="lin_content font12" :class="isEnLang?'en_medium':''">
           {{ $t("message.account.txt9") }}
         </div>
-        <div class="btn font18 mobile_font16" @click="updateInformation">
+        <div class="btn font18 mobile_font16" :class="isEnLang?'en_Bold':''" @click="updateInformation">
           {{ $t("message.account.txt10") }}
           <BtnLoading :isloading="loginbtnloading"></BtnLoading>
         </div>
       </div>
       <div class="right_content">
-        <div class="right_line font16">
-          <span class="account_status">{{ $t("message.account.txt11") }}</span>
-          <span class="_status">{{ $t("message.account.txt12") }}</span>
+        <div class="right_line">
+          <span class="account_status font16" :class="isEnLang?'en_Bold':''">{{ $t("message.account.txt11") }}</span>
+          <span class="_status font14" :class="isEnLang?'en_medium':''">{{ $t("message.account.txt12") }}</span>
         </div>
-        <div class="right_line font16">
-          <span class="account_status">{{ $t("message.account.txt13") }}</span>
-          <span class="_status">{{ $t("message.account.txt14") }}</span>
+        <div class="right_line">
+          <span class="account_status font16" :class="isEnLang?'en_Bold':''">{{ $t("message.account.txt13") }}</span>
+          <span class="_status font14" :class="isEnLang?'en_medium':''">{{ $t("message.account.txt14") }}</span>
         </div>
-        <div class="right_line font16">
-          <span class="account_status">{{ $t("message.account.txt15") }}</span>
-          <span class="_status">{{ getLogin.activationTime }}</span>
+        <div class="right_line">
+          <span class="account_status font16" :class="isEnLang?'en_Bold':''">{{ $t("message.account.txt15") }}</span>
+          <span class="_status font14" :class="isEnLang?'en_medium':''">{{ getLogin.activationTime }}</span>
         </div>
-        <div class="right_line font16">
-          <span class="account_status">{{ $t("message.account.txt16") }}</span>
-          <pre class="_status">
+        <div class="right_line">
+          <span class="account_status font16" :class="isEnLang?'en_Bold':''">{{ $t("message.account.txt16") }}</span>
+          <div class="_status font14" :class="isEnLang?'en_medium':''">
             {{ getLogin.lastLogin.indexOf("T") !== -1 ? getLogin.lastLogin.replace("T", "\n") : "" }}
-          </pre>
+          </div>
         </div>
       </div>
     </div>
@@ -198,6 +198,7 @@ export default {
         width: 100%;
         display: flex;
         margin-bottom: 79px;
+        justify-content: space-between;
         .account_status {
           font-weight: 600;
           color: #eccf83;

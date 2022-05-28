@@ -54,10 +54,10 @@ export default {
 <style lang="scss" scoped>
 .nft_page{
   width: 100%;
+  background: #000000;
   min-height: calc(100vh - 400px);
   .content_box{
     width: 90vw;
-    background: #000;
     padding-top: 80px;
     margin: 0 auto;
     display: flex;
@@ -65,7 +65,6 @@ export default {
       position: fixed;
       top: 116px;
       left: 5vw;
-      background: rgba(0,0,0,0.5);
       flex-direction: column;
       .a_link{
         min-width: 120px;
