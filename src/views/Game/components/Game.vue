@@ -72,9 +72,8 @@ export default {
 }
 .game_title {
   font-size: 32px;
-  font-weight: 800;
-  
-  margin-bottom: 2rem;
+  font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
+  margin-bottom: 20px;
 }
 .boxin {
   width: 100%;
@@ -83,7 +82,7 @@ export default {
   border: 1px solid rgba(68, 67, 67, 0.47);
   display: flex;
   padding: 2rem 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 20px;
   > img {
     width: 29rem;
     height: 14rem;
@@ -150,21 +149,15 @@ export default {
   .pc {
     display: none;
   }
-  .gamebox {
-    width: 100%;
-    height: auto;
-    margin-left: 0;
-  }
   .game_title {
-    margin-bottom: 0.4rem;
-    margin-top: 0.6rem;
     font-size: 0.2rem;
-    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
   }
   .boxin {
     display: block;
     padding: 5vw;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     > img {
       width: 100%;
       height: auto;

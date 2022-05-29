@@ -39,9 +39,7 @@ export default {
 .game_title {
   font-size: 32px;
   font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
-  font-weight: 800;
-  
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 .nodata {
   width: 100%;
@@ -53,23 +51,16 @@ export default {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  
 }
 @media screen and (max-width: 980px) {
-  .gamebox {
-    width: 100%;
-    height: auto;
-    padding-top: 0.3rem;
-  }
   .nodata {
     height: 2rem;
-    font-size: 12px;
+    font-size: 0.12rem;
     font-weight: 500;
   }
   .game_title {
     font-size: 0.2rem;
-    font-weight: bold;
-    margin-top: 0.3rem;
+    margin-top: 0.5rem;
     margin-bottom: 0.2rem;
   }
 }

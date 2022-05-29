@@ -1,5 +1,5 @@
 <template>
-  <div class="page" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
+  <div class="page" :class="isEnLang ? 'en_Regular' : 'cn_lang'">
     <div class="menu" v-if="isShowMenu">
       <ul>
         <li v-for="(item, index) in navArr" :key="index" @click="liClick(item)" :class="{ active: index == liIndex }">
