@@ -1,5 +1,6 @@
 <template>
   <div class="gamebox">
+    <div class="game_title">Updation</div>
     <div class="nodata">
       <div>
         <svg
@@ -35,6 +36,13 @@ export default {
   width: 100%;
   height: auto;
 }
+.game_title {
+  font-size: 32px;
+  font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
+  font-weight: 800;
+  
+  margin-bottom: 2rem;
+}
 .nodata {
   width: 100%;
   height: 20rem;
@@ -44,15 +52,25 @@ export default {
   justify-content: center;
   text-align: center;
   font-size: 18px;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #ced3d9;
+  
 }
 @media screen and (max-width: 980px) {
+  .gamebox {
+    width: 100%;
+    height: auto;
+    padding-top: 0.3rem;
+  }
   .nodata {
-    height: 5rem;
+    height: 2rem;
     font-size: 12px;
     font-weight: 500;
+  }
+  .game_title {
+    font-size: 0.2rem;
+    font-weight: bold;
+    margin-top: 0.3rem;
+    margin-bottom: 0.2rem;
   }
 }
 </style>

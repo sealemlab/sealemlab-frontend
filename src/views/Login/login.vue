@@ -16,15 +16,9 @@
         {{ $t("message.signin.txt17") }}
       </p>
       <div class="inputbox">
-        <input
-          :type="isShowPassword ? 'text' : 'password'"
-          v-model.trim="loginForm.password"
-        />
+        <input :type="isShowPassword ? 'text' : 'password'" v-model.trim="loginForm.password" />
         <div class="eye">
-          <div
-            @click="isShowPassword = !isShowPassword"
-            :class="{ active: isShowPassword }"
-          ></div>
+          <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
         </div>
       </div>
       <div class="input_prompt font12" v-if="loginForm.prompt2">
@@ -38,34 +32,22 @@
         </div>
         <span class="font16 account">{{ $t("message.signin.txt28") }}</span>
       </div>
-      <span class="font16 forget" @click="toForgetPassword">{{
-        $t("message.signin.txt29")
-      }}</span>
+      <span class="font16 forget" @click="toForgetPassword">{{ $t("message.signin.txt29") }}</span>
     </div>
     <div class="explain">
       <div>
         <img :src="`${$store.state.imgUrl}ques.webp`" class="ques_img" />
-        <span class="txt_ font16" :class="isEnLang ? 'en_medium' : ''">{{
-          $t("message.signin.txt26")
-        }}</span>
+        <span class="txt_ font16" :class="isEnLang ? 'en_medium' : ''">{{ $t("message.signin.txt26") }}</span>
       </div>
     </div>
     <div class="btn_box font20" @click="loginFun">
       {{ $t("message.signin.txt23") }}
       <BtnLoading :isloading="loginbtnloading"></BtnLoading>
     </div>
-    <p
-      class="font16 tip_txt"
-      :class="isEnLang ? 'en_medium' : ''"
-      @click="toRegister"
-    >
-      {{ $t("message.signin.txt27")
-      }}<span class="tip_login">{{ $t("message.signin.txt3") }}</span>
+    <p class="font16 tip_txt" :class="isEnLang ? 'en_medium' : ''" @click="toRegister">
+      {{ $t("message.signin.txt27") }}<span class="tip_login">{{ $t("message.signin.txt3") }}</span>
     </p>
-    <PassPopup
-      v-if="isShowPassPopup"
-      :isShowVerifyCode="isShowVerifyCode"
-    ></PassPopup>
+    <PassPopup v-if="isShowPassPopup" :isShowVerifyCode="isShowVerifyCode"></PassPopup>
   </div>
 </template>
 <script>
@@ -76,7 +58,7 @@ import PassPopup from "../../components/PassPopup.vue";
 export default {
   components: { PassPopup },
   computed: { ...mapGetters(["getLogin", "setLogin", "isEnLang"]) },
-  data () {
+  data() {
     return {
       loginForm: {
         mailAccount: "",
@@ -91,13 +73,13 @@ export default {
       isShowVerifyCode: false,
     };
   },
-  created () {
+  created() {
     this.loginForm.mailAccount = this.getLogin.mailAccount;
     this.loginForm.password = this.getLogin.password;
     this.rememberStatus = this.getLogin.rememberStatus;
   },
   methods: {
-    loginFun () {
+    loginFun() {
       if (this.loginbtnloading) return;
       if (!this.loginForm.mailAccount) return (this.loginForm.prompt1 = "message.signin.txt30"); // 填写邮箱
       if (!mailReg.test(this.loginForm.mailAccount)) return (this.loginForm.prompt1 = "message.signin.txt31"); // 邮箱不合法
@@ -129,10 +111,10 @@ export default {
           this.loginbtnloading = false;
         });
     },
-    toRegister () {
+    toRegister() {
       this.$router.push("/signin/register");
     },
-    toForgetPassword () {
+    toForgetPassword() {
       this.isShowPassPopup = this.isShowVerifyCode = true;
     },
   },
@@ -167,8 +149,7 @@ export default {
         width: 100%;
         height: 100%;
         background: #171718;
-        box-shadow: inset 0px 4px 11px 0px #0d0e0e,
-          inset 0px -1px 7px 0px #0d0e0e;
+        box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
         border-radius: 8px;
         border: 1px solid #373636;
         color: #ced3d9;
@@ -269,12 +250,11 @@ export default {
   .register_page {
     .user_inputbox {
       width: 100%;
-      height: 0.8rem;
+      height: 1rem;
       position: relative;
       padding: 0.1rem 0 0.1rem 0;
       .email_txt {
         font-weight: 600;
-
         line-height: 0.22rem;
         margin-bottom: 0.1rem;
       }
@@ -293,8 +273,7 @@ export default {
           width: 100%;
           height: 100%;
           background: #171718;
-          box-shadow: inset 0px 4px 11px 0px #0d0e0e,
-            inset 0px -1px 7px 0px #0d0e0e;
+          box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
           border-radius: 0.08rem;
           border: 1px solid #373636;
 

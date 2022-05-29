@@ -1,5 +1,5 @@
 <template>
-  <div class="page" :class="isEnLang ? 'en_Regular' : 'cn_lang'">
+  <div class="page" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="menu" v-if="isShowMenu">
       <ul>
         <li v-for="(item, index) in navArr" :key="index" @click="liClick(item)" :class="{ active: index == liIndex }">
@@ -86,9 +86,8 @@ export default {
       height: 3rem;
       line-height: 3rem;
       font-size: 18px;
-      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
-      color: #ced3d9;
+      
       margin-bottom: 2rem;
       cursor: pointer;
       &.active {
@@ -111,7 +110,7 @@ export default {
 @media screen and (max-width: 980px) {
   .page {
     width: 100vw;
-    min-height: calc(100vh - 1rem);
+    min-height: calc(100vh - 2rem);
   }
   .menu {
     width: 100%;
@@ -133,7 +132,7 @@ export default {
         width: fit-content;
         height: 0.3rem;
         line-height: 0.3rem;
-        font-size: 12px;
+        font-size: 0.12rem;
         font-weight: 500;
         margin: 0 0.2rem 0 0;
       }

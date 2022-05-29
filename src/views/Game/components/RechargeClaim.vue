@@ -225,7 +225,7 @@ export default {
   font-size: 32px;
   font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
   font-weight: 800;
-  color: #ced3d9;
+
   margin-bottom: 2rem;
 }
 .box1 {
@@ -239,7 +239,6 @@ export default {
     display: flex;
     justify-content: space-between;
     font-size: 24px;
-    font-family: SFCompactDisplay-Bold, SFCompactDisplay;
     font-weight: bold;
     &:nth-child(even) {
       padding-right: 0;
@@ -249,7 +248,7 @@ export default {
     font-size: 18px;
     font-family: SFCompactDisplay-Medium, SFCompactDisplay;
     font-weight: 500;
-    color: #ced3d9;
+
     display: flex;
     align-items: center;
     .inputbox {
@@ -280,7 +279,6 @@ export default {
         background: none;
         padding: 0 5.5rem 0 3.5rem;
         font-size: 18px;
-        font-family: SFCompactDisplay-Bold, SFCompactDisplay;
         font-weight: bold;
         color: #ced3d9;
         text-align: right;
@@ -300,7 +298,6 @@ export default {
         align-items: center;
         justify-content: center;
         font-size: 16px;
-        font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: bold;
         color: #000000;
       }
@@ -324,7 +321,6 @@ export default {
       width: 10rem;
       height: 2.5rem;
       font-size: 24px;
-      font-family: SFCompactDisplay-Bold, SFCompactDisplay;
       font-weight: bold;
       margin-right: 5rem;
       display: flex;
@@ -377,7 +373,6 @@ export default {
         height: 3rem;
         line-height: 3rem;
         font-size: 24px;
-        font-family: SFCompactDisplay-Bold, SFCompactDisplay;
         font-weight: bold;
       }
       td {
@@ -408,10 +403,8 @@ export default {
     padding-top: 0.3rem;
   }
   .game_title {
-    font-size: 26px;
-    font-family: SFCompactDisplay-Bold, SFCompactDisplay;
+    font-size: 0.2rem;
     font-weight: bold;
-    text-align: left;
     margin-top: 0.3rem;
     margin-bottom: 0.2rem;
   }
@@ -424,13 +417,13 @@ export default {
       width: 100%;
       padding-right: 0;
       padding-bottom: 0.2rem;
-      font-size: 16px;
+      font-size: 0.14rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     .content {
-      font-size: 12px;
+      font-size: 0.12rem;
       display: flex;
       align-items: center;
       .inputbox {
@@ -444,13 +437,13 @@ export default {
           }
         }
         input {
-          font-size: 12px;
+          font-size: 0.12rem;
           padding: 0 0.65rem 0 0.5rem;
         }
         .btn {
           width: 0.6rem;
           height: 100%;
-          font-size: 12px;
+          font-size: 0.12rem;
         }
       }
     }
@@ -460,14 +453,14 @@ export default {
     padding-bottom: 0.2rem;
     border-bottom: 2px solid #242222;
     .box2_title {
-      font-size: 20px;
+      font-size: 0.2rem;
       margin-bottom: 0.2rem;
     }
     .btns {
       div {
         width: 1rem;
         height: 0.3rem;
-        font-size: 16px;
+        font-size: 0.16rem;
         margin-right: 0.2rem;
       }
     }
@@ -484,11 +477,11 @@ export default {
           height: 0.4rem;
           line-height: 0.4rem;
           padding: 0.1rem 0;
-          font-size: 14px;
+          font-size: 0.14rem;
         }
         td {
           padding: 0.1rem 0;
-          font-size: 12px;
+          font-size: 0.12rem;
           div {
             img {
               width: 0.2rem;

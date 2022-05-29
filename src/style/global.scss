@@ -68,7 +68,6 @@ img {
     cursor: pointer;
     width: 30px;
     height: 100%;
-    margin: 0 auto;
     background-image: url($bg_url + "eye1.webp");
     background-size: 100%;
     background-repeat: no-repeat;
@@ -295,12 +294,6 @@ img {
   }
 }
 @media screen and (max-width: 980px) {
-  .eye {
-    width: 0.5rem;
-    div {
-      width: 0.15rem;
-    }
-  }
   .has_question_icon {
     &::after {
       content: "";
