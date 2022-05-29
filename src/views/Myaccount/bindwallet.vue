@@ -2,14 +2,14 @@
   <div class="bind_wallet_page">
     <div class="box">
       <template v-if="getLogin.addr">
-        <p class="font24 name_" :class="isEnLang?'en_Bold':''">{{ $t("message.account.txt20") }}</p>
+        <p class="name_" :class="isEnLang ? 'en_Bold' : ''">{{ $t("message.account.txt20") }}</p>
         <div class="content">
-          <span class="span1 font16" :class="isEnLang?'en_medium':''">{{ getLogin.addr }}</span>
+          <span class="span1 font16" :class="isEnLang ? 'en_medium' : ''">{{ getLogin.addr }}</span>
           <!-- <span class="btn_small font14">{{ $t("message.account.txt21") }}</span> -->
         </div>
       </template>
       <template v-else>
-        <div class="btn fotn18 mobile_font14" :class="isEnLang?'en_Bold':''" @click="bindWalletBefore()">
+        <div class="btn fotn18 mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="bindWalletBefore()">
           {{ $t("message.account.txt17") }}
           <BtnLoading :isloading="bindStatus"></BtnLoading>
         </div>
@@ -25,7 +25,7 @@
 import { mapGetters } from "vuex";
 import { getSigner } from "sealemlab-sdk";
 export default {
-  computed: { ...mapGetters(["getNoticeNum", "getLogin", "getIstrue", "getAccount","isEnLang"]) },
+  computed: { ...mapGetters(["getNoticeNum", "getLogin", "getIstrue", "getAccount", "isEnLang"]) },
   data() {
     return {
       bindStatus: false,
@@ -119,9 +119,8 @@ export default {
       line-height: 32px;
     }
     .name_ {
-      color: #ffffff;
       font-weight: 600;
-      line-height: 22px;
+      font-size: 32px;
     }
     .content {
       width: 100%;
@@ -129,7 +128,6 @@ export default {
       justify-content: space-between;
       align-items: center;
       .span1 {
-        color: #ffffff;
         font-weight: 400;
         line-height: 32px;
       }
@@ -180,12 +178,12 @@ export default {
       .txt_ {
         font-weight: 400;
         color: #706e6e;
-        line-height: 0.2rem
+        line-height: 0.2rem;
       }
       .name_ {
         color: #ffffff;
         font-weight: 600;
-        line-height: 0.22rem;
+        font-size: 0.2rem;
       }
       .content {
         width: 100%;
@@ -195,7 +193,6 @@ export default {
         .span1 {
           color: #ffffff;
           font-weight: 400;
-          line-height: 0.34rem;
         }
         // .btn_small {
         //   width: 93px;
