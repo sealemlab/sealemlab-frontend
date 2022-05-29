@@ -1,7 +1,7 @@
 <template>
   <div class="buy_blind_box">
     <ul class="title_box">
-      <li class="font45 box_txt mobile_font20" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt20")}}</li>
+      <li class="font32 box_txt mobile_font20" :class="isEnLang?'en_heavy':''">{{$t("message.nft.txt20")}}</li>
       <li class="font16">
         {{$t("message.nft.txt21")}}
       </li>
@@ -126,15 +126,15 @@
       <p class="font30 introduce_title_txt mobile_font18">{{$t("message.nft.txt29")}}</p>
       <div class="introduce_content">
         <div class="introduce_onebox">
-          <p class="title font16">{{$t("message.nft.txt32")}}</p>
+          <p class="title font16 mobile_font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt32")}}</p>
           <div class="center font12">{{$t("message.nft.txt30")}}</div>
         </div>
         <div class="introduce_onebox">
-          <p class="title font16">{{$t("message.nft.txt33")}}</p>
+          <p class="title font16 mobile_font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt33")}}</p>
           <div class="center font12">{{$t("message.nft.txt34")}}</div>
         </div>
         <div class="introduce_onebox">
-          <p class="title font16">{{$t("message.nft.txt35")}}</p>
+          <p class="title font16 mobile_font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt35")}}</p>
           <div class="center font12">{{$t("message.nft.txt36")}}</div>
         </div>
       </div>
@@ -402,7 +402,7 @@ export default {
 }
 .title_box {
   width: 100%;
-  text-align: center;
+  // text-align: center;
   li {
     &:nth-child(1) {
       font-weight: 600;

@@ -2,7 +2,7 @@
   <input
     :type="type"
     v-model="msg"
-    class="input font16"
+    class="input font16 mobile_font12"
     :style="{ color: fontColor,background:background}"
     :placeholder='placeholder'
     @blur="blurEvent"

@@ -3,7 +3,7 @@
     <!-- 背景图 -->
     <div class="box1 font16">
       <img :src="`${$store.state.imgUrl}newbondbg.webp`" class="pc_bond_bg" />
-      <img :src="`${$store.state.imgUrl}new_bond_bg.webp`" class="mobile_bond_bg" />
+      <!-- <img :src="`${$store.state.imgUrl}new_bond_bg.webp`" class="mobile_bond_bg" /> -->
       <div>
         <img :src="`${$store.state.imgUrl}BOND.webp`" class="bond_img" />
         <ul :class="isEnLang?'en_medium':''">
@@ -545,7 +545,7 @@ export default {
 }
 .progressbar {
   display: inline-block;
-  margin: 5px 0;
+  margin: 3px 0;
   width: 50px;
   height: 4px;
   background: #787775;
@@ -719,13 +719,12 @@ export default {
   width: 100%;
   position: relative;
   .pc_bond_bg {
-    display: block;
     width: 100%;
     min-height: 350px;
   }
-  .mobile_bond_bg{
-    display: none;
-  }
+  // .mobile_bond_bg{
+  //   display: none;
+  // }
   >div{
     position: absolute;
     top: 70px;
@@ -961,14 +960,14 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     font-weight: 400;
     color: #909090;
     line-height: 17px;
     p{
       &:nth-child(2){
         max-width: 70%;
-        margin-top: 10px;
+        // margin-top: 10px;
       }
     }
   }
@@ -1100,10 +1099,9 @@ export default {
   }
   .boxs {
     width: 90vw;
-    background: #101010;
     margin: 0 auto;
-    padding: 0.1rem;
-    // margin-top: -0.4rem;
+    padding:0;
+    margin-top: -0.4rem;
     .title {
       font-weight: 600;
       color: #ffffff;
@@ -1119,15 +1117,15 @@ export default {
   }
   .box1 {
     width: 100%;
-    // min-height: 2.3rem;
     position: relative;
     .pc_bond_bg {
-      display: none;
-    }
-    .mobile_bond_bg{
-      display: block;
       width: 100%;
+      min-height: 2rem;
     }
+    // .mobile_bond_bg{
+    //   display: block;
+    //   width: 100%;
+    // }
     >div{
       position: absolute;
       top: 0.2rem;
@@ -1144,6 +1142,7 @@ export default {
         margin-top: 0.2rem;
         li {
           width: auto;
+          max-width: 2.3rem;
           padding: 0.05rem;
           height: 0.21rem;
           background: rgba(248, 229, 186, 0.09);
@@ -1584,6 +1583,9 @@ export default {
       line-height: 0.3rem;
       margin: 0.4rem 0 0.2rem;
     }
+  }
+  .progressbar {
+    margin: 1px 0;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="blind_box">
-    <p class="title_box font45 mobile_font20" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt37")}}</p>
+    <p class="title_box font32 mobile_font20" :class="isEnLang?'en_heavy':''">{{$t("message.nft.txt37")}}</p>
     <div class="boxs_">
       <div class="onebox" v-for="(item,index) in list" :key="index" @click="openBox(item)">
         <img :src="item.src" class="img_" />
@@ -152,7 +152,6 @@ export default {
       .line_{
         margin-top: 14px;
         width: 95%;
-        // height: 37px;
         max-width: 204px;
         padding:8px;
         display: flex;
@@ -223,8 +222,7 @@ export default {
         }
         .line_{
           margin-top: 0.14rem;
-          width: 95%;
-          // height: 0.37rem;
+          width: auto;
           max-width: 2.04rem;
           padding:0.08rem;
           display: flex;

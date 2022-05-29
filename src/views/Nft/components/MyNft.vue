@@ -1,7 +1,7 @@
 <template>
   <div class="my_nft">
-    <p class="title_nft font45 mobile_font20" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt38")}}</p>
-    <div class="box" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
+    <p class="title_nft font32 mobile_font20" :class="isEnLang?'en_heavy':''">{{$t("message.nft.txt38")}}</p>
+    <div class="box" v-if="nftArr.length > 0" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
       <div class="out_box_one" v-for="(item, index) in nftArr" :key="index" @click="nftFun(item)">
         <div class="onebox">
           <div class="out_img"><img :src="item.src" class="imgcard" /></div>

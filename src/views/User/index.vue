@@ -60,7 +60,7 @@
         <p class="message font16" :class="isEnLang?'en_medium':''">{{$t("message.user.txt13")}}</p>
       </div>
       <div class="feedback_page" v-if="li_index == 2">
-        <span class="font30" :class="isEnLang?'en_Bold':''" >{{$t("message.user.txt10")}}</span>
+        <span class="font30 mobile_font20" :class="isEnLang?'en_Bold':''" >{{$t("message.user.txt10")}}</span>
         <span class="font24" :class="isEnLang?'en_medium':''" >{{$t("message.user.txt14")}}</span>
       </div>
       <ul class="ul_calss">
@@ -308,7 +308,6 @@ export default {
       flex-direction: column;
       li{
         font-weight: normal;
-        color: #FFFFFF;
         line-height: 48px;
         width: 230px;
         display: flex;
@@ -318,7 +317,7 @@ export default {
         cursor: pointer;
       }
       .active_li{
-        color: #BF9A50;
+        color: #EDD083;
       }
     }
     .main{
@@ -334,12 +333,12 @@ export default {
     .user_info{
       position: relative;
       width: 100%;
-      min-height: 3rem;
+      min-height: 2rem;
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
-      padding: 0 0.2rem;
-      padding-top: 0.14rem;
+      padding: 0.14rem 0.2rem 0.2rem;
+      border-bottom: 1px solid #242222;
       .invitation_code{
         background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
         box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
@@ -486,14 +485,14 @@ export default {
           &:nth-child(1){
             font-weight: 600;
             line-height: 0.42rem;
-            color: #FFFFFF;
+            color: #CED3D9;
             margin-top: 0.2rem;
           }
           &:nth-child(2){
             font-weight: 500;
-            color: #FFFFFF;
+            color: #CED3D9;
             line-height: 0.29rem;
-            margin-top: 0.15rem;
+            margin-top:0;
           }
         }
         
@@ -513,7 +512,7 @@ export default {
           color: #fff;
         }
         .active_li{
-          color: #BF9A50;
+          color: #EDD083;
         }
       }
     }

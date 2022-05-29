@@ -1,9 +1,9 @@
 <template>
   <div class="invite_page" :class="isEnLang?'en_Bold':'cn_lang'">
-    <div class="title_box display_flex font32" :class="isEnLang?'en_heavy':''">
+    <!-- <div class="title_box display_flex font32" :class="isEnLang?'en_heavy':''">
       <span class="mobile_font16">{{$t("message.user.txt15")}}</span>
       <span class="_txt mobile_font16">10</span>
-    </div>
+    </div> -->
     <div class="ranking">
       <p class="font32 mobile_font16" :class="isEnLang?'en_heavy':''">{{$t("message.user.txt16")}}</p>
       <div class="listbox">
@@ -97,7 +97,6 @@ export default {
   }
   .ranking{
     width: 100%;
-    margin-top: 50px;
     .listbox{
       width: 100%;
       display: flex;
@@ -183,12 +182,11 @@ export default {
       justify-content: space-between;
     }
     .ranking{
-      margin-top: 0;
       .listbox{
         margin-top: 0;
       }
       p{
-        margin: 0.4rem 0;
+        margin: 0 0 0.2rem;
       }
     }
   }

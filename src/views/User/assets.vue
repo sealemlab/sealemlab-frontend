@@ -7,7 +7,10 @@
       <div class="title_box display_flex">
         <div class="address_box display_flex">
           <span class="font32 mobile_font16" :class="isEnLang?'en_Bold':''">0 NFT</span>
-          <span class="font16 margin_top" :class="isEnLang?'en_Bold':''">{{$t("message.user.txt7")}}:0x*********</span>
+          <div class="add_address_metamask">
+            <span class="font16" :class="isEnLang?'en_Bold':''">{{$t("message.user.txt7")}}:0x*********</span>
+            <img :src="`${$store.state.imgUrl}add.webp`" class="add_img" />
+          </div>
         </div>
         <div class="add_buybtn font16" :class="isEnLang?'en_medium':''">{{$t("message.user.txt17")}}</div>
         <div class="menu display_flex">
@@ -181,8 +184,16 @@ export default {
       .address_box{
         flex-direction: column;
         align-items: center;
-        .margin_top{
+        .add_address_metamask{
           margin-top: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .add_img{
+            width: 11px;
+            margin-left: 10px;
+            cursor: pointer;
+          }
         }
       }
       .add_buybtn{
@@ -243,11 +254,16 @@ export default {
         }
         .address_box{
           align-items: flex-start;
-          .margin_top{
+          font-weight: 400;
+          color: #DBDADA;
+          line-height: 0.18rem;
+          .add_address_metamask{
             margin-top: 0.1rem;
-            font-weight: 400;
-            color: #DBDADA;
-            line-height: 0.18rem;
+            .add_img{
+              width: 0.11rem;
+              margin-left: 0.1rem;
+              cursor: pointer;
+            }
           }
         }
         .add_buybtn{

@@ -2,7 +2,7 @@
   <div class="nft_page" >
     <div class="content_box">
       <div class="display_flex menu_box" :class="getmobileInfo.direction == 'top'?'menShow':'menDis'">
-        <router-link class="a_link font20" :class="isEnLang?'en_Bold':''" v-for="(route, index) in navArr" :key="index" :to="route.link">
+        <router-link class="a_link font18" :class="isEnLang?'en_Bold':''" v-for="(route, index) in navArr" :key="index" :to="route.link">
           <span class="nav_txt">{{ $t(route.label) }}</span>
         </router-link>
       </div>
@@ -88,10 +88,11 @@ export default {
       width: 100vw;
       max-width: 1200px;
       margin: 0 auto;
-      margin-top: 50px;
+      margin-top: 32px;
       padding-left: 120px;
       min-height: calc(100vh - 80px);
       padding-bottom: 30px;
+      padding-left: 12rem;
     }
   }
 }

@@ -198,21 +198,22 @@ export default {
       cursor: pointer;
       padding: 10px 14px;
       font-weight: bold;
-      color: #fff;
+      color: #CED3D9;
       &:hover{
-        color: #fadd82;
+        color: #EDD083;
       }
     }
   }
 }
 .active {
-  background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  // background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
   span {
-    background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #EDD083;
+    // background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
+    // -webkit-background-clip: text;
+    // -webkit-text-fill-color: transparent;
   }
 }
 .nav_right {
@@ -309,7 +310,7 @@ export default {
             color: #fff;
           }
           .span_exit:hover {
-            color: #fadd82;
+            color: #EDD083;
           }
           .exit_class {
             width: 18px;
