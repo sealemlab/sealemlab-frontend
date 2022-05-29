@@ -224,9 +224,7 @@ export default {
 .game_title {
   font-size: 32px;
   font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
-  font-weight: 800;
-
-  margin-bottom: 2rem;
+  margin-bottom: 30px;
 }
 .box1 {
   width: 100%;
@@ -236,19 +234,20 @@ export default {
     width: 50%;
     padding-right: 3rem;
     padding-bottom: 2rem;
-    display: flex;
-    justify-content: space-between;
     font-size: 24px;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
     &:nth-child(even) {
       padding-right: 0;
     }
   }
+  .label {
+    width: 180px;
+  }
   .content {
     font-size: 18px;
-    font-family: SFCompactDisplay-Medium, SFCompactDisplay;
+    // font-family: SFCompactDisplay-Medium, SFCompactDisplay;
     font-weight: 500;
-
     display: flex;
     align-items: center;
     .inputbox {
@@ -279,7 +278,6 @@ export default {
         background: none;
         padding: 0 5.5rem 0 3.5rem;
         font-size: 18px;
-        font-weight: bold;
         color: #ced3d9;
         text-align: right;
       }
@@ -309,9 +307,7 @@ export default {
   padding-bottom: 2rem;
   border-bottom: 2px solid #242222;
   .box2_title {
-    font-size: 32px;
-    font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
-    font-weight: 800;
+    font-size: 26px;
     margin-bottom: 1rem;
   }
   .btns {
@@ -320,14 +316,13 @@ export default {
     div {
       width: 10rem;
       height: 2.5rem;
-      font-size: 24px;
-      font-weight: bold;
+      font-size: 22px;
       margin-right: 5rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
       color: #8f8e8e;
+      cursor: pointer;
       &.active {
         color: #edd07e;
         background: #171718;
@@ -375,13 +370,13 @@ export default {
         height: 3rem;
         line-height: 3rem;
         font-size: 24px;
-        font-weight: bold;
+        font-weight: 500;
       }
       td {
         width: 25%;
         padding: 0.5rem 0;
         font-size: 16px;
-        font-family: SFCompactDisplay-Medium, SFCompactDisplay;
+        // font-family: SFCompactDisplay-Medium, SFCompactDisplay;
         font-weight: 500;
         div {
           display: flex;
@@ -401,35 +396,24 @@ export default {
   }
 }
 @media screen and (max-width: 980px) {
-  .gamebox {
-    width: 100%;
-    height: auto;
-    padding-top: 0.3rem;
-  }
   .game_title {
     font-size: 0.2rem;
-    font-weight: bold;
-    margin-top: 0.3rem;
+    margin-top: 0.5rem;
     margin-bottom: 0.2rem;
   }
   .box1 {
     margin-top: 0.3rem;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
     > div {
       width: 100%;
       padding-right: 0;
       padding-bottom: 0.2rem;
       font-size: 0.14rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    }
+    .label {
+      width: 1.5rem;
     }
     .content {
       font-size: 0.12rem;
-      display: flex;
-      align-items: center;
       .inputbox {
         width: 2rem;
         height: 0.3rem;
@@ -453,18 +437,17 @@ export default {
     }
   }
   .box2 {
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
     padding-bottom: 0.2rem;
-    border-bottom: 2px solid #242222;
     .box2_title {
-      font-size: 0.2rem;
+      font-size: 0.18rem;
       margin-bottom: 0.2rem;
     }
     .btns {
       div {
         width: 1rem;
         height: 0.3rem;
-        font-size: 0.16rem;
+        font-size: 0.14rem;
         margin-right: 0.2rem;
       }
     }

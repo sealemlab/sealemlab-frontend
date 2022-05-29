@@ -1,5 +1,5 @@
 <template>
-  <div class="page" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
+  <div class="page" :class="isEnLang ? 'en_Regular' : 'cn_lang'">
     <div class="menu" v-if="isShowMenu">
       <ul>
         <li v-for="(item, index) in navArr" :key="index" @click="liClick(item)" :class="{ active: index == liIndex }">
@@ -83,12 +83,11 @@ export default {
   ul {
     li {
       width: 10rem;
-      height: 3rem;
-      line-height: 3rem;
+      height: 38px;
+      line-height: 38px;
       font-size: 18px;
       font-weight: 600;
-      
-      margin-bottom: 2rem;
+      margin-bottom: 60px;
       cursor: pointer;
       &.active {
         color: #eccf83;

@@ -160,13 +160,20 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        color: #8f8e8e;
         font-size: 16px;
-
         font-weight: 600;
-
+        cursor: pointer;
         span {
+          padding: 10px;
+          border: 1px solid transparent;
+          &.active,
           &:hover {
-            color: #eccf83;
+            color: #edd07e;
+            background: #171718;
+            box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39), inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+            border-radius: 4px;
+            border: 1px solid #373636;
           }
         }
       }
@@ -191,7 +198,7 @@ export default {
 }
 @media screen and (max-width: 980px) {
   .inset {
-    padding: 0.2rem 0.3rem;
+    padding: 0.2rem;
     .close_img {
       width: 0.2rem;
       height: 0.2rem;
@@ -237,6 +244,9 @@ export default {
         }
         .list {
           font-size: 0.12rem;
+          span {
+            padding: 0.05rem;
+          }
         }
         .btn {
           width: 1.8rem;
