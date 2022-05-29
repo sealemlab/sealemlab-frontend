@@ -29,7 +29,7 @@
       </div>
       <div class="btnbox font20 mobile_font16" :class="isEnLang?'en_Bold':''">
         <span>{{$t("message.home.txt7")}}</span>
-        <span>{{$t("message.home.txt8")}}</span>
+        <span @click="gamesFun">{{$t("message.home.txt8")}}</span>
       </div>
     </div>
     <!-- Protocol Stats -->
@@ -72,7 +72,7 @@
       <div class="gamebox">
         <div class="add_game_txt">
           <span class="span1 font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{$t("message.home.txt66")}}</span>
-          <span class="span2 font16" :class="isEnLang?'en_medium':''">{{$t("message.home.txt67")}}</span>
+          <span class="span2 font16" @click="gamesFun" :class="isEnLang?'en_medium':''">{{$t("message.home.txt67")}}</span>
         </div>
         <span class="span3 font12" :class="isEnLang?'en_medium':''">{{$t("message.home.txt68")}}</span>
         <div class="add_box">
@@ -617,6 +617,9 @@ export default {
     
   },
   methods:{
+    gamesFun(){
+      this.$router.push('/game/game')
+    },
     enter() {
       console.log("鼠标移入")
       this.$refs.mySwiper.swiper.autoplay.stop()

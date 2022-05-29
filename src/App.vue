@@ -156,6 +156,20 @@ export default {
         document.body.style.overflow = "visible";
       }
     },
+    $route(to) {
+      this.navArr.forEach((item) => {
+        item.status = false;
+      });
+      if (to.path == "/home") {
+        this.navArr[0].status = true
+      } else if (to.path == "/bond") {
+        this.navArr[1].status = true
+      } else if (to.path.indexOf("/nft/") !== -1) {
+        this.navArr[2].status = true
+      }else{
+        this.navArr[4].status = true
+      }
+    },
   },
   components: {
     NavigationBar,
@@ -192,17 +206,17 @@ export default {
     toRoute(item, index) {
       console.log("item,index: ", item, index);
       if (item.link) {
-        this.navArr.forEach((item) => {
-          item.status = false;
-        });
-        item.status = true;
+        // this.navArr.forEach((item) => {
+        //   item.status = false;
+        // });
+        // item.status = true;
         this.$router.push(item.link);
       } else {
         if (index == this.navArr.length - 1) {
-          this.navArr.forEach((item) => {
-            item.status = false;
-          });
-          item.status = true;
+          // this.navArr.forEach((item) => {
+          //   item.status = false;
+          // });
+          // item.status = true;
           this.isShowMore = true;
         } else {
           this.isShowMore = false;
