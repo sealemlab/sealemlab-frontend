@@ -788,12 +788,12 @@ export default {
           flex-direction: column;
           .font_1{
             font-weight: bold;
-            color: #FFFFFF;
+            color: #CED3D9;
             line-height: 22px;
           }
           .font_2{
             font-weight: bold;
-            color: #FFFFFF;
+            color: #CED3D9;
             margin: 13px 0 28px 0;
           }
         }
@@ -1284,7 +1284,7 @@ export default {
       .span1{
         margin:28px 0 6px;
         font-weight: bold;
-        color: #FFFFFF;
+        color: #CED3D9;
         line-height: 32px;
       }
       .span2{
@@ -1424,7 +1424,7 @@ export default {
         p{
           width: fit-content;
           font-weight: 800;
-          color: #FFFFFF;
+          color: #CED3D9;
           line-height: 0.22rem;
           margin-top: 0;
         }
@@ -1456,17 +1456,18 @@ export default {
           justify-content: space-between;
           align-items: center;
           margin-top: 0.33rem;
+          padding: 0 0.08rem;
           .leftbox{
             display: flex;
             flex-direction: column;
             .font_1{
               font-weight: bold;
-              color: #FFFFFF;
+              color: #CED3D9;
               line-height: 0.22rem;
             }
             .font_2{
               font-weight: bolder;
-              color: #FFFFFF;
+              color: #CED3D9;
               line-height: 0.49rem;
               margin: 0.05rem 0 0.2rem 0;
             }
@@ -1618,7 +1619,7 @@ export default {
                 align-items: center;
                 .txt{
                   font-weight: 600;
-                  color: #FFFFFF;
+                  color: #CED3D9;
                   line-height: 22px;
                   margin-left: 8px;
                 }
@@ -1949,7 +1950,7 @@ export default {
         .span1{
           margin:28px 0 6px;
           font-weight: bold;
-          color: #FFFFFF;
+          color: #CED3D9;
           line-height: 32px;
           background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
           -webkit-background-clip: text;
@@ -1957,7 +1958,7 @@ export default {
         }
         .span2{
           font-weight: bold;
-          color: #FFFFFF;
+          color: #CED3D9;
           line-height: 32px;
           margin-bottom: 10px;
         }
@@ -1994,7 +1995,7 @@ export default {
         border: 1px solid #ECCF83;
         background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
         margin-right: 0;
-        color: #FFFFFF;
+        color: #CED3D9;
       }
     }
     .voice_img{

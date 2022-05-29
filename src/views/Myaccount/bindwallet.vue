@@ -181,7 +181,7 @@ export default {
         line-height: 0.2rem;
       }
       .name_ {
-        color: #ffffff;
+        color: #CED3D9;
         font-weight: 600;
         font-size: 0.2rem;
       }
@@ -191,7 +191,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         .span1 {
-          color: #ffffff;
+          color: #CED3D9;
           font-weight: 400;
         }
         // .btn_small {

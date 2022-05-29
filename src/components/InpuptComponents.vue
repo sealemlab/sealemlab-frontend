@@ -34,7 +34,7 @@ export default {
     },
     fontColor:{
       type: String,
-      default: '#ffffff'
+      default: '#CED3D9'
     },
     background:{
       type: String,

@@ -476,7 +476,7 @@ export default {
       .lefttxt{
         width: 110px;
         font-weight: 400;
-        color: #FFFFFF;
+        color: #CED3D9;
         line-height: 22px;
       }
       .righttxt{
@@ -531,7 +531,7 @@ export default {
   margin-top: 100px;
   .introduce_title_txt{
     font-weight: bold;
-    color: #FFFFFF;
+    color: #CED3D9;
     line-height: 36px;
   }
   .introduce_content{
@@ -561,7 +561,7 @@ export default {
         min-height: 159px;
         padding: 10px 0;
         font-weight: 400;
-        color: #FFFFFF;
+        color: #CED3D9;
         line-height: 32px;
       }
     }
@@ -609,7 +609,7 @@ export default {
         line-height: 28px;
         &:nth-child(2){
           margin-top: 10px;
-          color: #FFFFFF;
+          color: #CED3D9;
         }
       }
       .specil_span{
@@ -697,7 +697,7 @@ export default {
         .lefttxt{
           width: 110px;
           font-weight: 400;
-          color: #FFFFFF;
+          color: #CED3D9;
           line-height: 22px;
         }
         .righttxt{

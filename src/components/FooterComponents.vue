@@ -124,7 +124,7 @@ export default {
             font-size: 18px;
             font-family: TrajanPro-Bold, TrajanPro;
             font-weight: bold;
-            color: #ffffff;
+            color: #CED3D9;
             line-height: 23px;
             background: linear-gradient(
               180deg,
@@ -186,7 +186,7 @@ export default {
               font-size: 18px;
               font-family: TrajanPro-Bold, TrajanPro;
               font-weight: bold;
-              color: #ffffff;
+              color: #CED3D9;
               line-height: 23px;
               background: linear-gradient(
                 180deg,

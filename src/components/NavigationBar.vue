@@ -257,14 +257,14 @@ export default {
       justify-content: space-between;
       align-items: center;
       .span2 {
-        color: #ffffff;
+        color: #CED3D9;
         font-weight: bold;
       }
       .connect_icon {
         border-width: 5px;
         margin-left: 5px;
         margin-top: 5px;
-        border-color: #ffffff;
+        border-color: #CED3D9;
         border-style: dashed;
         border-top-style: solid;
         border-left-color: transparent;
@@ -281,7 +281,7 @@ export default {
       .connect_icon {
         margin-top: -5px;
         border-top-color: transparent;
-        border-bottom-color: #ffffff;
+        border-bottom-color: #CED3D9;
         border-bottom-style: solid;
       }
     }
@@ -307,7 +307,7 @@ export default {
           justify-content: space-between;
           cursor: pointer;
           .span_exit {
-            color: #fff;
+            color: #CED3D9;
           }
           .span_exit:hover {
             color: #EDD083;
@@ -356,7 +356,7 @@ export default {
           font-family: WenYue-GuDianMingChaoTi-JRFC;
         }
         &:hover {
-          color: #fff;
+          color: #CED3D9;
         }
       }
     }
@@ -426,14 +426,14 @@ export default {
         justify-content: space-between;
         align-items: center;
         .span2 {
-          color: #ffffff;
+          color: #CED3D9;
           font-weight: bold;
         }
         .connect_icon {
           border-width: 5px;
           margin-left: 5px;
           margin-top: 5px;
-          border-color: #ffffff;
+          border-color: #CED3D9;
           border-style: dashed;
           border-top-style: solid;
           border-left-color: transparent;

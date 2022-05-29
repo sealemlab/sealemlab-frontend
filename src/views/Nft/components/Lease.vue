@@ -28,7 +28,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     font-weight: 600;
-    color: #FFFFFF;
+    color: #CED3D9;
     line-height: 63px;
   }
   .box{

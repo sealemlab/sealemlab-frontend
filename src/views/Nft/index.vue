@@ -92,7 +92,7 @@ export default {
       padding-left: 120px;
       min-height: calc(100vh - 80px);
       padding-bottom: 30px;
-      padding-left: 12rem;
+      padding-left: 150px;
     }
   }
 }

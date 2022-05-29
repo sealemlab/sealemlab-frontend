@@ -240,7 +240,7 @@ export default {
       width: 100%;
       text-align: center;
       font-weight: 600;
-      color: #FFFFFF;
+      color: #CED3D9;
       line-height: 63px;
     }
     .select_content{
@@ -266,7 +266,7 @@ export default {
         }
       }
       .select_ttx{
-        color: #FFFFFF;
+        color: #CED3D9;
         margin-left: 5px;
       }
     }
@@ -360,7 +360,7 @@ export default {
         width: 100%;
         text-align: center;
         font-weight: 600;
-        color: #FFFFFF;
+        color: #CED3D9;
         line-height: 0.42rem;
       }
       .select_content{
@@ -386,7 +386,7 @@ export default {
           }
         }
         .select_ttx{
-          color: #FFFFFF;
+          color: #CED3D9;
           margin-left: 5px;
         }
       }

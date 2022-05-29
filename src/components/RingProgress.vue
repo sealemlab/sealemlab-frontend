@@ -44,7 +44,7 @@ export default {
     },
     backgroundColor: { // 进度条背景色
       type: String,
-      default: '#fff'
+      default: '#CED3D9'
     },
     percentNum: { // 进度条现在在哪个位置的标记
       type: [String, Number],
@@ -52,7 +52,7 @@ export default {
     },
     fontcolor:{ // 文字颜色
       type: String,
-      default: '#fff'
+      default: '#CED3D9'
     },
     circleSize:{ //控制环形进度条的粗细(运动的那一圈)
       type: [String, Number],
@@ -208,7 +208,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: #CED3D9;
 }
 
 .radial-indicator-container .content-wrap .content-number {

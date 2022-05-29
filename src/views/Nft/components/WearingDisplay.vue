@@ -481,7 +481,7 @@ export default {
     padding: 0 20%;
     text-align: center;
     font-weight: 600;
-    color: #FFFFFF;
+    color: #CED3D9;
     line-height: 42px;
   }
   .tab_box {
@@ -491,7 +491,7 @@ export default {
     flex-direction: column;
     .add_introduce{
       font-weight: 400;
-      color: #FFFFFF;
+      color: #CED3D9;
       line-height: 22px;
       margin-top: 20px;
     }
@@ -516,7 +516,7 @@ export default {
         padding: 20px;
         margin-bottom: 10px;
         .border_type{
-          color:#fff;
+          color:#CED3D9;
         }
       }
       .li_class1{
@@ -627,7 +627,7 @@ export default {
       ul {
         width: 100%;
         height: auto;
-        color: #ffffff;
+        color: #CED3D9;
         li{
           width: 100%;
           display: flex;
@@ -640,7 +640,7 @@ export default {
             margin-top: 20px;
             span{
               font-weight: 400;
-              color: #FFFFFF;
+              color: #CED3D9;
               line-height: 22px;
               margin-left: 10px;
             }
@@ -676,14 +676,14 @@ export default {
               p{
                 &:nth-child(1){
                   font-weight: 400;
-                  color: #FFFFFF;
+                  color: #CED3D9;
                   line-height: 26px;
                   margin-top: 15px;
                 }
                 &:nth-child(2){
                   margin-top: 5px;
                   font-weight: 400;
-                  color: #FFFFFF;
+                  color: #CED3D9;
                   line-height: 20px;
                 }
               }
@@ -779,7 +779,7 @@ export default {
           padding: 0.1rem;
           margin-bottom: 0;
           .border_type{
-            color:#fff;
+            color:#CED3D9;
           }
         }
         .li_class1{
@@ -895,7 +895,7 @@ export default {
         ul {
           width: 100%;
           height: auto;
-          // color: #ffffff;
+          // color: #CED3D9;
           li{
             width: 100%;
             display: flex;
@@ -908,7 +908,7 @@ export default {
               margin-top: 0;
               span{
                 font-weight: 400;
-                // color: #FFFFFF;
+                // color: #CED3D9;
                 line-height: 0.22rem;
                 margin-left: 0.1rem;
               }
@@ -944,14 +944,14 @@ export default {
                 p{
                   &:nth-child(1){
                     font-weight: 400;
-                    // color: #FFFFFF;
+                    // color: #CED3D9;
                     line-height: 0.26rem;
                     margin-top: 0.15rem;
                   }
                   &:nth-child(2){
                     margin-top: 0.05rem;
                     font-weight: 400;
-                    // color: #FFFFFF;
+                    // color: #CED3D9;
                     line-height: 0.2rem;
                   }
                 }

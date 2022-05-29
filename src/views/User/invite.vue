@@ -158,7 +158,7 @@ export default {
           .title_onebox{
             min-width: 80px;
             display: flex;
-            color: #ffffff;
+            color: #CED3D9;
             .champion_box{
               display: flex;
             }

@@ -1,8 +1,8 @@
 <template>
   <div class="record_page" v-if="getwalletstatus">
-    <div class="title font26 mobile_font18">{{ $t("message.nav.txt9") }}</div>
-    <img :src="`${$store.state.imgUrl}passclose.webp`" class="close_img" @click="closepage" />
     <div class="boxarr">
+      <div class="title font26 mobile_font18">{{ $t("message.nav.txt9") }}</div>
+      <img :src="`${$store.state.imgUrl}passclose.webp`" class="close_img" @click="closepage" />
       <div class="onebox" v-for="(item, index) in walletarr" :key="index" @click="walletClick(item)">
         <span class="wallet_txt fontsize16">{{ item.name }}</span>
         <img :src="item.src" class="imgcard" />
@@ -67,21 +67,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  .title {
-    width: 100%;
-    text-align: center;
-    color: #ffffff;
-    margin: 50px 0;
-  }
-  .close_img {
-    position: absolute;
-    top: 10px;
-    right: 100px;
-    width: 44px;
-    object-fit: contain;
-    cursor: pointer;
-  }
+  justify-content: center;
   .boxarr {
+    position: relative;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -107,7 +95,7 @@ export default {
         width: 41px;
       }
       .wallet_txt {
-        color: #ffffff;
+        color: #CED3D9;
       }
     }
     .onebox:hover {
@@ -121,23 +109,24 @@ export default {
         cursor: pointer;
       }
     }
+    .title {
+      width: 100%;
+      text-align: center;
+      color: #CED3D9;
+      // margin: 50px 0;
+    }
+    .close_img {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      width: 44px;
+      object-fit: contain;
+      cursor: pointer;
+    }
   }
 }
 @media screen and (max-width: 980px) {
   .record_page {
-    .title {
-      margin-top: 1rem;
-      width: 100%;
-      text-align: center;
-      color: #ffffff;
-    }
-    .close_img {
-      position: absolute;
-      top: 0.3rem;
-      right: 0.2rem;
-      width: 0.36rem;
-      object-fit: contain;
-    }
     .boxarr {
       width: 90%;
       display: flex;
@@ -160,8 +149,21 @@ export default {
           object-fit: contain;
         }
         .wallet_txt {
-          color: #ffffff;
+          color: #CED3D9;
         }
+      }
+      .title {
+        margin-top: 0.2rem 0;
+        width: 100%;
+        text-align: center;
+        color: #CED3D9;
+      }
+      .close_img {
+        position: absolute;
+        top: 0.05rem;
+        right: 0.05rem;
+        width: 0.36rem;
+        object-fit: contain;
       }
     }
   }

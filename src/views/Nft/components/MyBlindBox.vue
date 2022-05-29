@@ -128,7 +128,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     font-weight: 600;
-    color: #FFFFFF;
+    color: #CED3D9;
     line-height: 63px;
   }
   .boxs_{
@@ -151,7 +151,7 @@ export default {
       }
       .line_{
         margin-top: 14px;
-        width: 95%;
+        width: auto;
         max-width: 204px;
         padding:8px;
         display: flex;
@@ -164,7 +164,7 @@ export default {
           width: 100%;
           display: inline-block;
           font-weight: 600;
-          color: #FFFFFF;
+          color: #CED3D9;
           line-height: 20px;
         }
         .add_bottom{
@@ -174,7 +174,7 @@ export default {
           justify-content: space-between;
           span{
             font-weight: 600;
-            color: #FFFFFF;
+            color: #CED3D9;
             line-height: 20px;
             &:nth-child(2){
               width: 56px;

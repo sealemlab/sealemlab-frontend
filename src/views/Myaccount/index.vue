@@ -110,7 +110,7 @@ export default {
           display: flex;
           align-items: center;
           margin-bottom: 0;
-          color: #fff;
+          color: #CED3D9;
           cursor: pointer;
           text-decoration: none;
           font-weight: normal;

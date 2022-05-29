@@ -14,7 +14,7 @@ export default {
 <style lang="scss" scoped>
 .donut {
   display: inline-block;
-  border: 2px dashed #ffffff;
+  border: 2px dashed #CED3D9;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -31,7 +31,7 @@ export default {
 }
 @media screen and (max-width: 980px) {
   .donut {
-    border: 0.02rem 2px dashed #ffffff;
+    border: 0.02rem 2px dashed #CED3D9;
     width: 0.16rem;
     height: 0.16rem;
     margin-left: 0.05rem;

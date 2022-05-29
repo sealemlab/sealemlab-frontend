@@ -231,7 +231,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     font-weight: 600;
-    color: #FFFFFF;
+    color: #CED3D9;
     line-height: 63px;
   }
   .box{
@@ -360,7 +360,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
+  color: #CED3D9;
 }
 .video_proup{
   width: 100vw;

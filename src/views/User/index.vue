@@ -201,13 +201,13 @@ export default {
               .bnb_class{
                 margin-left: 10px;
                 font-weight: bold;
-                color: #FFFFFF;
+                color: #CED3D9;
                 line-height: 24px;
               }
             }
             .txt{
               font-weight: normal;
-              color: #FFFFFF;
+              color: #CED3D9;
               line-height: 25px;
             }
           }
@@ -313,7 +313,7 @@ export default {
         display: flex;
         align-items: center;
         margin-bottom: 40px;
-        color: #fff;
+        color: #CED3D9;
         cursor: pointer;
       }
       .active_li{
@@ -401,13 +401,13 @@ export default {
                 .bnb_class{
                   margin-left: 10px;
                   font-weight: bold;
-                  color: #FFFFFF;
+                  color: #CED3D9;
                   line-height: 24px;
                 }
               }
               .txt{
                 font-weight: normal;
-                color: #FFFFFF;
+                color: #CED3D9;
                 line-height: 25px;
               }
             }
@@ -504,12 +504,12 @@ export default {
         display: flex;
         li{
           font-weight: normal;
-          color: #FFFFFF;
+          color: #CED3D9;
           line-height: 0.24rem;
           padding: 0 0.05rem;
           display: flex;
           align-items: center;
-          color: #fff;
+          color: #CED3D9;
         }
         .active_li{
           color: #EDD083;

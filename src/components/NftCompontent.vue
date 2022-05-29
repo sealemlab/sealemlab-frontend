@@ -346,7 +346,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
+  color: #CED3D9;
 }
 .video_proup{
   width: 100vw;

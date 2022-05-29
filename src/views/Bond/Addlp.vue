@@ -229,7 +229,7 @@ export default {
         text-align: center;
         line-height: 26px;
         font-weight: 600;
-        color: #ffffff;
+        color: #CED3D9;
         margin-bottom: 10px;
       }
       .activeClass{
@@ -270,7 +270,7 @@ export default {
         }
         .busd_txt{
           font-weight: 600;
-          color: #FFFFFF;
+          color: #CED3D9;
           line-height: 20px;
         }
       }
@@ -298,7 +298,7 @@ export default {
     .onebox{
       ._txt{
         font-weight: 600;
-        color: #FFFFFF;
+        color: #CED3D9;
         line-height: 20px;
       }
       .border_{
@@ -352,7 +352,7 @@ export default {
         margin-bottom: 15px;
         span{
           font-weight: 500;
-          color: #FFFFFF;
+          color: #CED3D9;
           line-height: 17px;
           margin-bottom: 0;
         }
@@ -425,7 +425,7 @@ export default {
           text-align: center;
           line-height: 0.22rem;
           font-weight: 600;
-          color: #ffffff;
+          color: #CED3D9;
           margin-bottom: 0.1rem;
         }
         .activeClass{
@@ -466,7 +466,7 @@ export default {
           }
           .busd_txt{
             font-weight: 600;
-            color: #FFFFFF;
+            color: #CED3D9;
             line-height: 0.2rem;
           }
         }
@@ -548,7 +548,7 @@ export default {
           margin-bottom: 0.15rem;
           span{
             font-weight: 500;
-            color: #FFFFFF;
+            color: #CED3D9;
             line-height: 0.17rem;
             margin-bottom: 0;
           }
