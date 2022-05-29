@@ -224,7 +224,7 @@ export default {
 .game_title {
   font-size: 32px;
   font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .box1 {
   width: 100%;

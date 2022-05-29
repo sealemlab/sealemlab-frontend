@@ -83,12 +83,11 @@ export default {
   ul {
     li {
       width: 10rem;
-      height: 3rem;
-      line-height: 3rem;
+      height: 38px;
+      line-height: 38px;
       font-size: 18px;
       font-weight: 600;
-      
-      margin-bottom: 2rem;
+      margin-bottom: 60px;
       cursor: pointer;
       &.active {
         color: #eccf83;
