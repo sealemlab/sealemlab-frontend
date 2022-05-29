@@ -72,9 +72,8 @@ export default {
 }
 .game_title {
   font-size: 32px;
-  font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
   font-weight: 800;
-  color: #ced3d9;
+  
   margin-bottom: 2rem;
 }
 .boxin {
@@ -86,15 +85,12 @@ export default {
   padding: 2rem 1rem;
   margin-bottom: 4rem;
   > img {
-    // width: 50%;
-    // height: auto;
     width: 29rem;
     height: 14rem;
     object-fit: cover;
   }
   .title {
     font-size: 24px;
-    font-family: SFCompactDisplay-Bold, SFCompactDisplay;
     color: #f1d17d;
     font-weight: bold;
     margin-bottom: 1rem;
@@ -110,13 +106,11 @@ export default {
         margin-bottom: 1.5rem;
         P {
           &:nth-child(1) {
-            font-family: SFCompactDisplay-Bold, SFCompactDisplay;
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 0.5rem;
           }
           &:nth-child(2) {
-            font-family: SFCompactDisplay-Medium, SFCompactDisplay;
             font-size: 16px;
             color: #8f8e8e;
             font-weight: 500;
@@ -136,7 +130,6 @@ export default {
         border-radius: 4px;
         backdrop-filter: blur(14px);
         font-size: 16px;
-        font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: bold;
         color: #000000;
         display: flex;
@@ -165,10 +158,8 @@ export default {
   .game_title {
     margin-bottom: 0.4rem;
     margin-top: 0.6rem;
-    font-size: 26px;
-    font-family: SFCompactDisplay-Bold, SFCompactDisplay;
+    font-size: 0.2rem;
     font-weight: bold;
-    text-align: left;
   }
   .boxin {
     display: block;
@@ -179,7 +170,7 @@ export default {
       height: auto;
     }
     .title {
-      font-size: 24px;
+      font-size: 0.16rem;
       margin-bottom: 0.2rem;
     }
     .content {
@@ -192,11 +183,11 @@ export default {
           margin-bottom: 0.2rem;
           P {
             &:nth-child(1) {
-              font-size: 20px;
+              font-size: 0.14rem;
               margin-bottom: 0.1rem;
             }
             &:nth-child(2) {
-              font-size: 14px;
+              font-size: 0.12rem;
             }
           }
         }
@@ -205,9 +196,7 @@ export default {
         .btn {
           width: 1.2rem;
           height: 0.3rem;
-          font-size: 12px;
-          font-family: SFCompactDisplay-Bold, SFCompactDisplay;
-          font-weight: bold;
+          font-size: 0.12rem;
         }
       }
     }

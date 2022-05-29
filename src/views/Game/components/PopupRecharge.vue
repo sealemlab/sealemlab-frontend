@@ -13,7 +13,7 @@
               <span>SR</span>
             </div>
             <div class="inputbtn">{{ $t("message.gamepage.text33") }}</div>
-            <div class="tip">{{ $t("message.gamepage.text34") }}: 345678 SR</div>
+            <div class="tip">{{ $t("message.gamepage.text34") }}: 345678</div>
           </div>
         </div>
         <div class="box">
@@ -62,8 +62,6 @@ export default {
 }
 .inset {
   padding: 1rem 5rem;
-  // background: url($bg_url + "proupbg.webp") no-repeat;
-  // background-size: 100% 100%;
   background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
   box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
   border-radius: 18px;
@@ -73,21 +71,17 @@ export default {
     cursor: pointer;
     width: 2rem;
     height: 2rem;
-    background: url($bg_url + "passclose.webp") no-repeat;
+    background: url($bg_url + "close.webp") no-repeat;
     background-size: 100% 100%;
     position: absolute;
     top: 1rem;
     right: 3rem;
-    &:hover {
-      background: url($bg_url + "close.webp") no-repeat;
-      background-size: 100% 100%;
-    }
   }
   .content {
     .title {
       text-align: center;
       font-size: 24px;
-      font-family: PingFangSC-Semibold, PingFang SC;
+
       font-weight: 600;
       color: #eccf83;
       margin-bottom: 2rem;
@@ -111,9 +105,8 @@ export default {
           border: 1px solid #373636;
           padding: 0 5rem;
           font-size: 16px;
-          font-family: PingFangSC-Semibold, PingFang SC;
+          color: #ced3d9;
           font-weight: 600;
-          color: #8f8e8e;
         }
         .sr {
           width: fit-content;
@@ -124,9 +117,9 @@ export default {
           left: 1rem;
           top: 0;
           font-size: 16px;
-          font-family: PingFangSC-Semibold, PingFang SC;
+
           font-weight: 600;
-          color: #ced3d9;
+
           img {
             width: 23px;
             height: 23px;
@@ -141,7 +134,7 @@ export default {
           border-radius: 8px;
           backdrop-filter: blur(14px);
           font-size: 22px;
-          font-family: SFCompactDisplay-Bold, SFCompactDisplay;
+
           font-weight: bold;
           color: #000000;
           position: absolute;
@@ -155,8 +148,8 @@ export default {
         .tip {
           font-size: 12px;
           font-family: SFCompactDisplay-Semibold, SFCompactDisplay;
-          font-weight: 600;
-          color: #ced3d9;
+          font-weight: 400;
+          color: #8b8484;
           position: absolute;
           top: -1rem;
           right: 0;
@@ -168,9 +161,9 @@ export default {
         align-items: center;
         justify-content: space-between;
         font-size: 16px;
-        font-family: PingFangSC-Semibold, PingFang SC;
+
         font-weight: 600;
-        color: #ced3d9;
+
         span {
           &:hover {
             color: #eccf83;
@@ -185,7 +178,7 @@ export default {
         border-radius: 4px;
         backdrop-filter: blur(14px);
         font-size: 18px;
-        font-family: PingFangSC-Semibold, PingFang SC;
+
         font-weight: 600;
         color: #000000;
         display: flex;
@@ -207,34 +200,35 @@ export default {
     }
     .content {
       .title {
-        font-size: 18px;
+        font-size: 0.18rem;
         margin-bottom: 0.2rem;
       }
       .box {
         margin-bottom: 0.2rem;
         .title {
-          font-size: 14px;
-          margin-bottom: 0.1rem;
+          font-size: 0.14rem;
+          margin-bottom: 0.2rem;
         }
         .inputbox {
           width: 2.5rem;
-          height: 0.35rem;
+          height: 0.3rem;
           input {
             padding: 0 0.6rem;
-            font-size: 10px;
+            font-size: 0.12rem;
           }
           .sr {
             left: 0.1rem;
+            font-size: 0.12rem;
             img {
-              width: 0.23rem;
-              height: 0.23rem;
+              width: 0.2rem;
+              height: 0.2rem;
               margin-right: 0.05rem;
             }
           }
           .inputbtn {
             width: 0.6rem;
-            height: 0.35rem;
-            font-size: 12px;
+            height: 100%;
+            font-size: 0.12rem;
           }
           .tip {
             font-size: 10px;
@@ -242,12 +236,12 @@ export default {
           }
         }
         .list {
-          font-size: 12px;
+          font-size: 0.12rem;
         }
         .btn {
           width: 1.8rem;
-          height: 0.4rem;
-          font-size: 16px;
+          height: 0.35rem;
+          font-size: 0.16rem;
         }
       }
     }
