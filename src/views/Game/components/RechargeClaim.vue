@@ -1,5 +1,6 @@
 <template>
   <div class="gamebox">
+    <div class="game_title">Recharge and Claim</div>
     <div class="box1">
       <div>
         <div class="label">{{ $t("message.gamepage.text16") }}</div>
@@ -13,26 +14,27 @@
         <div class="label">{{ $t("message.gamepage.text18") }}</div>
         <div class="content">
           <div class="inputbox">
-            <div>
+            <div class="left">
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
             </div>
-            <input type="number" value="123" disabled />
+            <input type="number" value="1234567890" disabled />
+            <div class="btn" @click="openRecharge">{{ $t("message.gamepage.text19") }}</div>
           </div>
-          <div class="btn" @click="openRecharge">{{ $t("message.gamepage.text19") }}</div>
         </div>
       </div>
       <div>
         <div class="label">{{ $t("message.gamepage.text20") }}</div>
         <div class="content">
           <div class="inputbox">
-            <div>
+            <div class="left">
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
             </div>
-            <input type="number" value="123" disabled />
+            <input type="number" value="123456789000" disabled />
+            <div class="btn">{{ $t("message.gamepage.text21") }}</div>
           </div>
-          <div class="btn">{{ $t("message.gamepage.text21") }}</div>
+
           <!-- {{ $t("message.gamepage.text22") }} -->
           <!-- {{ $t("message.gamepage.text13") }} -->
         </div>
@@ -41,8 +43,8 @@
     <div class="box2">
       <div class="box2_title">{{ $t("message.gamepage.text24") }}</div>
       <div class="btns">
-        <div @click="isShowRechargeList = true" :class="{ active: isShowRechargeList }">Recharge</div>
         <div @click="isShowRechargeList = false" :class="{ active: !isShowRechargeList }">Claim</div>
+        <div @click="isShowRechargeList = true" :class="{ active: isShowRechargeList }">Recharge</div>
       </div>
     </div>
     <div class="box3">
@@ -219,106 +221,123 @@ export default {
   width: 100%;
   height: auto;
 }
+.game_title {
+  font-size: 32px;
+  font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
+  font-weight: 800;
+  color: #ced3d9;
+  margin-bottom: 2rem;
+}
 .box1 {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   > div {
     width: 50%;
-    padding-right: 2rem;
+    padding-right: 3rem;
     padding-bottom: 2rem;
     display: flex;
     justify-content: space-between;
-    font-size: 32px;
+    font-size: 24px;
     font-family: SFCompactDisplay-Bold, SFCompactDisplay;
     font-weight: bold;
-    color: #ced3d9;
+    &:nth-child(even) {
+      padding-right: 0;
+    }
   }
   .content {
+    font-size: 18px;
+    font-family: SFCompactDisplay-Medium, SFCompactDisplay;
+    font-weight: 500;
+    color: #ced3d9;
     display: flex;
     align-items: center;
     .inputbox {
-      width: 8rem;
+      width: 16rem;
       height: 2rem;
+      background: #171718;
+      box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+      border-radius: 8px;
+      border: 1px solid #373636;
       position: relative;
-      font-size: 18px;
-      font-family: SFCompactDisplay-Bold, SFCompactDisplay;
-      font-weight: bold;
-      color: #ced3d9;
-      margin-right: 1rem;
-      > div {
+      .left {
         width: fit-content;
         height: 100%;
         display: flex;
         align-items: center;
         position: absolute;
-        left: 0.5rem;
+        left: 0;
         top: 0;
         img {
           width: 23px;
           height: 23px;
-          margin-right: 5px;
+          margin: 0 5px;
         }
       }
       input {
         width: 100%;
         height: 100%;
-        background: #171718;
-        box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
-        border-radius: 8px;
-        border: 1px solid #373636;
-        padding: 0 15px;
-        padding-left: 4rem;
+        background: none;
+        padding: 0 5.5rem 0 3.5rem;
         font-size: 18px;
         font-family: SFCompactDisplay-Bold, SFCompactDisplay;
         font-weight: bold;
         color: #ced3d9;
         text-align: right;
       }
-    }
-    .btn {
-      cursor: pointer;
-      width: 6rem;
-      height: 2rem;
-      background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-      box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
-      border-radius: 4px;
-      backdrop-filter: blur(14px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-family: PingFangSC-Semibold, PingFang SC;
-      font-weight: 600;
-      color: #000000;
+      .btn {
+        cursor: pointer;
+        width: 5rem;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+        box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+        border-radius: 4px;
+        backdrop-filter: blur(14px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: bold;
+        color: #000000;
+      }
     }
   }
 }
 .box2 {
+  margin-top: 0.3rem;
+  padding-bottom: 2rem;
   border-bottom: 2px solid #242222;
-  padding: 2rem 0;
   .box2_title {
     font-size: 32px;
     font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
     font-weight: 800;
-    color: #ced3d9;
     margin-bottom: 1rem;
   }
   .btns {
     display: flex;
     align-items: center;
     div {
+      width: 10rem;
+      height: 2.5rem;
       font-size: 24px;
       font-family: SFCompactDisplay-Bold, SFCompactDisplay;
       font-weight: bold;
-      color: #ced3d9;
-      margin-right: 8rem;
+      margin-right: 5rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      color: #8f8e8e;
       &.active {
         color: #edd07e;
+        background: #171718;
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39), inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+        border-radius: 4px;
+        border: 1px solid #373636;
       }
     }
   }
@@ -360,7 +379,6 @@ export default {
         font-size: 24px;
         font-family: SFCompactDisplay-Bold, SFCompactDisplay;
         font-weight: bold;
-        color: #ced3d9;
       }
       td {
         width: 25%;
@@ -368,7 +386,6 @@ export default {
         font-size: 16px;
         font-family: SFCompactDisplay-Medium, SFCompactDisplay;
         font-weight: 500;
-        color: #ced3d9;
         div {
           display: flex;
           align-items: center;
@@ -388,9 +405,18 @@ export default {
   .gamebox {
     width: 100%;
     height: auto;
+    padding-top: 0.3rem;
+  }
+  .game_title {
+    font-size: 26px;
+    font-family: SFCompactDisplay-Bold, SFCompactDisplay;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 0.3rem;
+    margin-bottom: 0.2rem;
   }
   .box1 {
-    margin-top: 0.6rem;
+    margin-top: 0.3rem;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -398,51 +424,51 @@ export default {
       width: 100%;
       padding-right: 0;
       padding-bottom: 0.2rem;
-      font-size: 18px;
+      font-size: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     .content {
+      font-size: 12px;
       display: flex;
       align-items: center;
       .inputbox {
-        width: 1.2rem;
+        width: 2rem;
         height: 0.3rem;
-        font-size: 14px;
-        margin-right: 0.1rem;
-        > div {
-          left: 0.1rem;
+        .left {
           img {
             width: 0.2rem;
             height: 0.2rem;
-            margin-right: 0.05rem;
+            margin: 0.05rem;
           }
         }
         input {
-          font-size: 14px;
-          padding: 0 0.05rem;
-          padding-left: 0.5rem;
+          font-size: 12px;
+          padding: 0 0.65rem 0 0.5rem;
         }
-      }
-      .btn {
-        width: 0.7rem;
-        height: 0.3rem;
-        font-size: 12px;
+        .btn {
+          width: 0.6rem;
+          height: 100%;
+          font-size: 12px;
+        }
       }
     }
   }
   .box2 {
+    margin-top: 0.3rem;
+    padding-bottom: 0.2rem;
     border-bottom: 2px solid #242222;
-    padding: 0.2rem 0;
     .box2_title {
-      font-size: 18px;
+      font-size: 20px;
       margin-bottom: 0.2rem;
     }
     .btns {
       div {
-        font-size: 14px;
-        margin-right: 0.5rem;
+        width: 1rem;
+        height: 0.3rem;
+        font-size: 16px;
+        margin-right: 0.2rem;
       }
     }
   }
@@ -458,7 +484,7 @@ export default {
           height: 0.4rem;
           line-height: 0.4rem;
           padding: 0.1rem 0;
-          font-size: 18px;
+          font-size: 14px;
         }
         td {
           padding: 0.1rem 0;

@@ -62,8 +62,12 @@ export default {
 }
 .inset {
   padding: 1rem 5rem;
-  background: url($bg_url + "proupbg.webp") no-repeat;
-  background-size: 100% 100%;
+  // background: url($bg_url + "proupbg.webp") no-repeat;
+  // background-size: 100% 100%;
+  background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
+  box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+  border-radius: 18px;
+  border: 1px solid rgba(68, 67, 67, 0.47);
   position: relative;
   .close_img {
     cursor: pointer;

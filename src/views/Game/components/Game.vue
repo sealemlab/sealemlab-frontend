@@ -75,7 +75,6 @@ export default {
   font-family: SFCompactDisplay-Heavy, SFCompactDisplay;
   font-weight: 800;
   color: #ced3d9;
-  text-align: center;
   margin-bottom: 2rem;
 }
 .boxin {
@@ -87,8 +86,11 @@ export default {
   padding: 2rem 1rem;
   margin-bottom: 4rem;
   > img {
-    width: 50%;
-    height: auto;
+    // width: 50%;
+    // height: auto;
+    width: 29rem;
+    height: 14rem;
+    object-fit: cover;
   }
   .title {
     font-size: 24px;
@@ -135,7 +137,7 @@ export default {
         backdrop-filter: blur(14px);
         font-size: 16px;
         font-family: PingFangSC-Semibold, PingFang SC;
-        font-weight: 600;
+        font-weight: bold;
         color: #000000;
         display: flex;
         align-items: center;
