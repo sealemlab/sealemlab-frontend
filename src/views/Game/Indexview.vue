@@ -24,8 +24,8 @@ export default {
       navArr: [
         { label: "message.gamepage.text1", link: "/game/game", status: true },
         { label: "message.gamepage.text2", link: "/game/rechargeclaim", status: true },
-        { label: "message.gamepage.text3", link: "/game/gamedata", status: false },
-        { label: "message.gamepage.text4", link: "/game/updation", status: false },
+        { label: "message.gamepage.text3", link: "/game/gamedata", status: true },
+        { label: "message.gamepage.text4", link: "/game/updation", status: true },
       ],
       oldScrollTop: 0,
       isShowMenu: true,
@@ -71,41 +71,43 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100vw;
-  min-height: 25rem;
+  min-height: 30rem;
   padding-top: 80px;
   position: relative;
 }
 .menu {
   position: fixed;
   left: 5vw;
-  top: 5rem;
+  top: calc(80px + 2rem);
   z-index: 9;
   ul {
     li {
       width: 10rem;
       height: 3rem;
       line-height: 3rem;
-      text-align: center;
       font-size: 18px;
       font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
       color: #ced3d9;
-      margin: 2rem 0;
+      margin-bottom: 2rem;
       cursor: pointer;
       &.active {
-        background: url($bg_url + "boxs_border.webp") no-repeat;
-        background-size: 100% 100%;
+        color: #eccf83;
       }
     }
   }
 }
 .main {
   width: 100vw;
+  height: 100%;
   padding: 2rem 5vw;
   .main_content {
+    width: 100%;
+    height: 100%;
     padding-left: 12rem;
   }
 }
+
 @media screen and (max-width: 980px) {
   .page {
     width: 100vw;
@@ -121,13 +123,19 @@ export default {
       width: 100%;
       display: flex;
       align-items: center;
+      overflow-x: auto;
+      white-space: nowrap;
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
       li {
-        width: 25%;
+        width: fit-content;
         height: 0.3rem;
         line-height: 0.3rem;
-        font-size: 9px;
+        font-size: 12px;
         font-weight: 500;
-        margin: 0;
+        margin: 0 0.2rem 0 0;
       }
     }
   }
