@@ -61,7 +61,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text29") }}</td>
             <td>
@@ -71,7 +71,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text29") }}</td>
             <td>
@@ -81,7 +81,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text29") }}</td>
             <td>
@@ -91,7 +91,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text29") }}</td>
             <td>
@@ -113,7 +113,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
@@ -123,7 +123,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
@@ -133,7 +133,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
@@ -143,7 +143,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
@@ -153,7 +153,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
@@ -163,7 +163,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
@@ -173,7 +173,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
@@ -183,7 +183,7 @@
           <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />34</div>
+              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
             </td>
             <td>{{ $t("message.gamepage.text30") }}</td>
             <td>
@@ -352,6 +352,7 @@ export default {
     overflow: hidden;
     thead {
       width: 100%;
+      padding-right: 10px;
       background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
       position: absolute;
       top: 0;
@@ -360,8 +361,9 @@ export default {
       display: block;
       width: 100%;
       height: 20rem;
-      padding-top: 3rem;
-      overflow-y: scroll;
+      padding-right: 5px;
+      margin-top: 3rem;
+      overflow-y: auto;
     }
     tr {
       width: 100%;
@@ -385,10 +387,12 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
+          span {
+            margin-left: 0.5rem;
+          }
           img {
             width: 23px;
             height: 23px;
-            margin-right: 0.5rem;
             cursor: pointer;
           }
         }
@@ -468,15 +472,18 @@ export default {
   .box3 {
     margin: 0.2rem 0;
     table {
+      thead {
+        padding-right: 0.1rem;
+      }
       tbody {
         height: 3rem;
-        padding-top: 0.4rem;
+        padding-right: 0.05rem;
+        margin-top: 0.4rem;
       }
       tr {
         th {
           height: 0.4rem;
           line-height: 0.4rem;
-          padding: 0.1rem 0;
           font-size: 0.14rem;
         }
         td {
@@ -486,7 +493,9 @@ export default {
             img {
               width: 0.2rem;
               height: 0.2rem;
-              margin-right: 0.05rem;
+            }
+            span {
+              margin-left: 0.05rem;
             }
           }
         }
