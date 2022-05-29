@@ -97,12 +97,17 @@ export default {
   }
   .ranking{
     width: 100%;
-    margin-top: 100px;
+    margin-top: 50px;
     .listbox{
       width: 100%;
       display: flex;
       flex-direction: column;
       margin-top: 60px;
+      background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+      box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+      border-radius: 8px;
+      border: 1px solid rgba(68, 67, 67, 0.47);
+      padding: 37px 27px;
       .topline{
         width: 100%;
         display: flex;

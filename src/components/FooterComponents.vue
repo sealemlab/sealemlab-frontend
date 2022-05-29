@@ -91,7 +91,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .footer_box {
-  margin-top: 50px;
+  // margin-top: 50px;
   padding-top: 60px;
   width: 100%;
   flex-direction: column;
@@ -100,7 +100,6 @@ export default {
   background-size: 100% 100%;
   .footer_img {
     width: 100%;
-    
   }
   .footer_content {
     width: 100%;
@@ -154,7 +153,7 @@ export default {
 }
 @media screen and (max-width: 980px) {
   .footer_box {
-    margin-top: 0.5rem;
+    // margin-top: 0.5rem;
     padding-top: 0;
     width: 100%;
     flex-direction: column;
@@ -162,7 +161,7 @@ export default {
     background: url($bg_url + "footerbg.webp") no-repeat #000;
     background-size: 100% 100%;
     .footer_img {
-      width: 100%;
+      display: none;
     }
     .footer_content {
       width: 100%;
@@ -172,7 +171,7 @@ export default {
       margin: 0.2rem 0;
       padding: 0 0.2rem;
       .footer_logo {
-        width: 0.48rem;
+        display: none;
       }
       .onebox {
         width: inherit;

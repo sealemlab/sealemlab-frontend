@@ -81,6 +81,20 @@ img {
     }
   }
 }
+.has_question_icon {
+  position: relative;
+  &::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    filter: blur(0px);
+    background: url($bg_url + "ques_new.webp") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: -20px;
+    top: -5px;
+  }
+}
 // 左右来回上下抖动 (input校验)
 .ani_shake {
   // animation-name: shock;
@@ -139,6 +153,38 @@ img {
   background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.loading_box_content{
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.video_proup{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 88;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  .video_{
+    height: 90%;
+    object-fit: cover;
+  }
+  .close_img{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 34px;
+    cursor: pointer;
+  }
 }
 // 左右来回抖动  (没有同意协议抖动)
 .animation_move {
@@ -254,6 +300,36 @@ img {
     div {
       width: 0.15rem;
     }
+  }
+  .has_question_icon {
+    &::after {
+      content: "";
+      width: 13px;
+      height: 13px;
+      right: -0.12rem;
+      top: -0.05rem;
+    }
+  }
+  .video_proup{
+    z-index: 100;
+    .video_{
+      height: 80%;
+      object-fit: cover;
+    }
+    .close_img{
+      position: absolute;
+      top: 0.2rem;
+      right: 0.2rem;
+      width: 0.28rem;
+      cursor: pointer;
+    }
+  }
+  .loading_box_content{
+    width: 100%;
+    min-height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .mobile_font45 {
     font-size: 0.45rem;

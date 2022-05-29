@@ -1,8 +1,8 @@
 <template>
-  <div class="pass_Popup_page">
+  <div class="pass_Popup_page" :class="isEnLang?'en_Bold':''">
     <div class="Popup_boxs">
       <template v-if="isShowVerifyCode">
-        <p class="propu_title_txt font24">{{ $t("message.signin.txt35") }}</p>
+        <p class="propu_title_txt font30">{{ $t("message.signin.txt35") }}</p>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt22") }}</p>
           <div class="inputbox">
@@ -56,7 +56,7 @@
         </div>
       </template>
       <template v-else>
-        <p class="propu_title_txt font24">{{ $t("message.signin.txt34") }}</p>
+        <p class="propu_title_txt font30">{{ $t("message.signin.txt34") }}</p>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt26") }}</p>
           <div class="inputbox">
@@ -322,7 +322,7 @@ export default {
     border: 2px solid #242222;
     .propu_title_txt {
       font-weight: 600;
-      color: #ffffff;
+      
       line-height: 33px;
       margin-bottom: 20px;
     }
@@ -333,7 +333,7 @@ export default {
       padding: 10px 0 10px 0;
       .email_txt {
         font-weight: 600;
-        color: #ffffff;
+        
         line-height: 22px;
         margin-bottom: 10px;
       }
@@ -355,7 +355,7 @@ export default {
           box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
           border-radius: 8px;
           border: 1px solid #373636;
-          color: #ffffff;
+          
           padding: 0 15px;
         }
         .verification {

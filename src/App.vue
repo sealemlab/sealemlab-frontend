@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="isEnLang ? 'en_Regular' : 'cn_lang'" @touchstart="handleTouchstart" @touchend="handleTouchend">
+  <div id="app" :class="isEnLang ? 'en_Regular' : 'cn_lang'">
     <NavigationBar />
     <router-view />
     <FooterComponents />
@@ -111,6 +111,7 @@ export default {
       // startX:0,
       startY: 0,
       startTime: null,
+      oldScrollTop:0
     };
   },
   watch: {
@@ -264,7 +265,7 @@ export default {
         return;
       }
       //滑动的方向
-      let direction = endY - this.startY > 0 ? "top" : "bottom";
+      let direction = endY - this.startY > 10 ? "top" : "bottom";
       console.log("endY -this.startY: ", endY, this.startY);
       //用户做了合法的滑动操作
       // console.log('方向'+direction)
@@ -277,11 +278,21 @@ export default {
         this.$store.commit("setMoblieTouch", JSON.stringify({ direction: "top" }));
       }
     },
+    scrollingFun() {
+      const bodyWidth = document.body.clientWidth;
+      if (bodyWidth <= 980) {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        let scrollStep = scrollTop - this.oldScrollTop > 0;
+        this.oldScrollTop = scrollTop;
+        this.$store.commit("setMoblieTouch", JSON.stringify({ direction: scrollStep?"bottom":"top" }));
+      }
+    },
   },
   mounted() {
     if (localStorage.getItem("walletType")) {
       this.$utils.connectWallet(localStorage.getItem("walletType"));
     }
+    window.addEventListener("scroll", this.scrollingFun);
     window.addEventListener("load", this.setRem);
     window.addEventListener("resize", this.setRem);
   },
@@ -303,8 +314,8 @@ export default {
 }
 @media screen and (max-width: 980px) {
   #app {
- width: 100%;
-     padding-bottom: 1.1rem;
+    width: 100%;
+    padding-bottom: 1.1rem;
   }
   .mobile_nav {
     position: fixed;

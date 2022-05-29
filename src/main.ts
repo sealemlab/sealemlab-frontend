@@ -27,9 +27,18 @@ import {
   faDice,
   // faTreasureChest,
   // faMelon,
+
+  faAddressCard,
+  // faShieldCheck,
+  // faHryvniaCign,
+  faCalendarDays,
+  faStore,
+  // faSwords
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
+  faCalendarDays,
+  faStore,
   faHouse,
   faGlobe,
   faBoxesPacking,
@@ -41,6 +50,7 @@ library.add(
   faMoneyBill,
   faFileInvoiceDollar,
   faDice,
+  faAddressCard
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

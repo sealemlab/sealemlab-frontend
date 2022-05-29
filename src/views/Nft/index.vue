@@ -2,7 +2,7 @@
   <div class="nft_page" >
     <div class="content_box">
       <div class="display_flex menu_box" :class="getmobileInfo.direction == 'top'?'menShow':'menDis'">
-        <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
+        <router-link class="a_link font20" :class="isEnLang?'en_Bold':''" v-for="(route, index) in navArr" :key="index" :to="route.link">
           <span class="nav_txt">{{ $t(route.label) }}</span>
         </router-link>
       </div>
@@ -31,6 +31,7 @@ export default {
   computed: { ...mapGetters(["isEnLang","getNoticeNum","getmobileInfo"]) },
   methods:{
     liClick(item,index){
+      console.log('sdsdsddf-------item: ', item);
       if(process.env.NODE_ENV === 'production'){
         if(item.status){
           this.li_index = index
@@ -54,8 +55,6 @@ export default {
 <style lang="scss" scoped>
 .nft_page{
   width: 100%;
-  background: #000000;
-  min-height: calc(100vh - 400px);
   .content_box{
     width: 90vw;
     padding-top: 80px;
@@ -71,12 +70,10 @@ export default {
         display: flex;
         align-items: center;
         margin-bottom: 60px;
-        color: #fff;
         cursor: pointer;
         text-decoration: none;
         .nav_txt{
           font-weight: normal;
-          color: #FFFFFF;
           line-height: 40px;
           margin-left: 5px;
         }
@@ -93,13 +90,14 @@ export default {
       margin: 0 auto;
       margin-top: 50px;
       padding-left: 120px;
+      min-height: calc(100vh - 80px);
+      padding-bottom: 30px;
     }
   }
 }
 @media screen and (max-width: 980px) {
   .nft_page{
     width: 100%;
-    min-height: calc(100vh - 1rem);
     .content_box{
       padding-top: 0.8rem;
       .menu_box{
@@ -117,12 +115,10 @@ export default {
           display: flex;
           align-items: center;
           margin-bottom: 0;
-          color: #fff;
           cursor: pointer;
           text-decoration: none;
           .nav_txt{
             font-weight: normal;
-            color: #FFFFFF;
             line-height: 40px;
             margin-left: 0;
           }
@@ -138,6 +134,7 @@ export default {
         max-width: 100%;
         margin: 0 auto;
         margin-top: 0.5rem;
+        min-height: calc(100vh - 1.5rem);
         padding-left: 0;
       }
     }

@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -447,6 +448,9 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters(["isEnLang"])
+  },
   watch: {
     currentSwiperIndex(newVal) {
       this.$refs.swiper1.swiper.slideTo(newVal);
@@ -719,6 +723,7 @@ export default {
             font-weight: bold;
             color: #CED3D9;
             line-height: 26px;
+            margin: 10px 0;
           }
         }
       }
@@ -730,10 +735,10 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 0.4rem;
+    margin-top:0.3rem;
     .wear_show{
       width: 100%;
-      margin-bottom: 0.28rem;
+      margin-bottom:0;
       padding: 0;
       text-align: left;
       font-weight: bold;
@@ -799,7 +804,7 @@ export default {
       width: 100%;
       display: flex;
       flex-direction: column;
-      margin-top: 50px;
+      margin-top: 0.25rem;
       background-image: none;
       .left_content{
         width:100%;
@@ -987,6 +992,7 @@ export default {
               color: #CED3D9;
               line-height: 0.26rem;
               margin-top: 0.08rem;
+              margin-bottom: 0;
             }
           }
         }

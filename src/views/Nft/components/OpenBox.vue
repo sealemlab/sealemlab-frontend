@@ -1,7 +1,7 @@
 <template>
   <div class="open_box" v-if="openStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font30 mobile_font18">{{$t("message.nft.txt39")}}</p>
+      <p class="propu_title_txt font45 mobile_font18">{{$t("message.nft.txt39")}}</p>
       <p class="propu_title_txt font16">{{$t("message.nft.txt40")}}</p>
       <!-- 全选按钮 -->
       <div class="select_content" @click="selectAllClick">
@@ -241,7 +241,7 @@ export default {
       text-align: center;
       font-weight: 600;
       color: #FFFFFF;
-      line-height: 42px;
+      line-height: 63px;
     }
     .select_content{
       width: 100%;

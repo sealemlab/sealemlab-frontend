@@ -2,7 +2,7 @@
   <div class="account_page">
     <div class="content_box">
       <div class="display_flex menu_box" :class="getmobileInfo.direction == 'top'?'menShow':'menDis'">
-        <router-link class="a_link font18" @click.native="liClick(index)" v-for="(route, index) in navArr" :key="index" :to="route.link">
+        <router-link class="a_link font20" :class="isEnLang?'en_Bold':''" @click.native="liClick(index)" v-for="(route, index) in navArr" :key="index" :to="route.link">
           {{ $t(route.label) }}
         </router-link>
       </div>
@@ -71,9 +71,8 @@ export default {
       margin-top: 80px;
       .a_link {
         font-weight: normal;
-        color: #ffffff;
         line-height: 40px;
-        width: 171px;
+        width: 120px;
         display: flex;
         align-items: center;
         margin-bottom: 60px;
@@ -81,13 +80,11 @@ export default {
         text-decoration: none;
         &.router-link-active {
           color: #EDD083;
-          // background: linear-gradient(90deg, #edd083 0%, rgba(240, 206, 117, 0) 100%);
-          // border-image: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(184, 155, 91, 1)) 1 1;
         }
       }
     }
     .main {
-      min-width: calc(100% - 171px);
+      min-width: calc(100% - 120px);
     }
   }
 }

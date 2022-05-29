@@ -37,16 +37,19 @@
       <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt77")}}</div>
       <div class="border_">
         <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
-          <div class="add_top_content">
+          <div class="add_top_content" :class="{ add_top_content_center: index == 1 || index == 4,add_top_content_end: index == 2 || index == 5 }">
             <!-- <img :src="item.src" class="add_img" /> -->
             <div class="iconbox">
-              <font-awesome-icon :icon="['fas',item.icon]" v-if="index != 3 || index == 4 "></font-awesome-icon>
-              <svg t="1653721794550" v-if="index == 3" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2162" width="16" height="16"><path d="M409.714286 773.714286l154.857143-154.857143-159.428571-159.428571-50.285714 50.285714 109.714286 109.142857-54.857143 54.857143-159.428571-159.428571 159.428571-159.428571 22.857143 22.857143 49.714286-49.714286-72.571429-73.142857-259.428571 259.428571zm204.571429-4.571429l259.428571-259.428571-259.428571-259.428571-154.857143 154.857143 159.428571 159.428571 50.285714-50.285714-109.714286-109.142857 54.857143-54.857143 159.428571 159.428571-159.428571 159.428571-22.857143-22.857143-49.714286 50.285714zm409.714286-257.142857q0 104-40.571429 198.857143t-109.142857 163.428571-163.428571 109.142857-198.857143 40.571429-198.857143-40.571429-163.428571-109.142857-109.142857-163.428571-40.571429-198.857143 40.571429-198.857143 109.142857-163.428571 163.428571-109.142857 198.857143-40.571429 198.857143 40.571429 163.428571 109.142857 109.142857 163.428571 40.571429 198.857143z" p-id="2163" fill="#9E9E9E"></path></svg>
-              <svg t="1653721184598" v-if="index == 4" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3417" width="16" height="16"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m22.3 665.2l0.2 31.7c0 4.4-3.6 8.1-8 8.1h-28.4c-4.4 0-8-3.6-8-8v-31.4C401.3 723 359.5 672.4 355 617.4c-0.4-4.7 3.3-8.7 8-8.7h46.2c3.9 0 7.3 2.8 7.9 6.6 5.1 31.7 29.8 55.4 74.1 61.3V533.9l-24.7-6.3c-52.3-12.5-102.1-45.1-102.1-112.7 0-72.9 55.4-112.1 126.2-119v-33c0-4.4 3.6-8 8-8h28.1c4.4 0 8 3.6 8 8v32.7c68.5 6.9 119.9 46.9 125.9 109.2 0.5 4.7-3.2 8.8-8 8.8h-44.9c-4 0-7.4-3-7.9-6.9-4-29.2-27.4-53-65.5-58.2v134.3l25.4 5.9c64.8 16 108.9 47 108.9 116.4 0 75.3-56 117.3-134.3 124.1zM426.6 410.3c0 25.4 15.7 45.1 49.5 57.3 4.7 1.9 9.4 3.4 15 5v-124c-36.9 4.7-64.5 25.4-64.5 61.7z m116.5 135.2c-2.8-0.6-5.6-1.3-8.8-2.2V677c42.6-3.8 72-27.2 72-66.4 0-30.7-15.9-50.7-63.2-65.1z" p-id="3418" fill="#9E9E9E"></path></svg>
+              <font-awesome-icon :icon="['fas','boxes-packing']" v-if="index == 0 "></font-awesome-icon>
+              <font-awesome-icon :icon="['fas','building-flag']" v-if="index == 1 "></font-awesome-icon>
+              <font-awesome-icon :icon="['fas','coins']" v-if="index == 2 "></font-awesome-icon>
+              <font-awesome-icon :icon="['fas','registered']" v-if="index == 5 "></font-awesome-icon>
+              <svg t="1653721794550" v-if="index == 3" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2162" width="32" height="32"><path d="M409.714286 773.714286l154.857143-154.857143-159.428571-159.428571-50.285714 50.285714 109.714286 109.142857-54.857143 54.857143-159.428571-159.428571 159.428571-159.428571 22.857143 22.857143 49.714286-49.714286-72.571429-73.142857-259.428571 259.428571zm204.571429-4.571429l259.428571-259.428571-259.428571-259.428571-154.857143 154.857143 159.428571 159.428571 50.285714-50.285714-109.714286-109.142857 54.857143-54.857143 159.428571 159.428571-159.428571 159.428571-22.857143-22.857143-49.714286 50.285714zm409.714286-257.142857q0 104-40.571429 198.857143t-109.142857 163.428571-163.428571 109.142857-198.857143 40.571429-198.857143-40.571429-163.428571-109.142857-109.142857-163.428571-40.571429-198.857143 40.571429-198.857143 109.142857-163.428571 163.428571-109.142857 198.857143-40.571429 198.857143 40.571429 163.428571 109.142857 109.142857 163.428571 40.571429 198.857143z" p-id="2163" fill="#9E9E9E"></path></svg>
+              <svg t="1653721184598" v-if="index == 4" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3417" width="32" height="32"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m22.3 665.2l0.2 31.7c0 4.4-3.6 8.1-8 8.1h-28.4c-4.4 0-8-3.6-8-8v-31.4C401.3 723 359.5 672.4 355 617.4c-0.4-4.7 3.3-8.7 8-8.7h46.2c3.9 0 7.3 2.8 7.9 6.6 5.1 31.7 29.8 55.4 74.1 61.3V533.9l-24.7-6.3c-52.3-12.5-102.1-45.1-102.1-112.7 0-72.9 55.4-112.1 126.2-119v-33c0-4.4 3.6-8 8-8h28.1c4.4 0 8 3.6 8 8v32.7c68.5 6.9 119.9 46.9 125.9 109.2 0.5 4.7-3.2 8.8-8 8.8h-44.9c-4 0-7.4-3-7.9-6.9-4-29.2-27.4-53-65.5-58.2v134.3l25.4 5.9c64.8 16 108.9 47 108.9 116.4 0 75.3-56 117.3-134.3 124.1zM426.6 410.3c0 25.4 15.7 45.1 49.5 57.3 4.7 1.9 9.4 3.4 15 5v-124c-36.9 4.7-64.5 25.4-64.5 61.7z m116.5 135.2c-2.8-0.6-5.6-1.3-8.8-2.2V677c42.6-3.8 72-27.2 72-66.4 0-30.7-15.9-50.7-63.2-65.1z" p-id="3418" fill="#9E9E9E"></path></svg>
             </div>
             <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
           </div>
-          <p class="font35" :class="isEnLang?'en_heavy':''">$&nbsp;{{item.num}}</p>
+          <p class="font35" :class="{ p_center: index == 1 || index == 4,p_end: index == 2 || index == 5,en_heavy:isEnLang}">$&nbsp;{{item.num}}</p>
         </div>
       </div>
     </div>
@@ -136,7 +139,9 @@
                 <svg t="1653722205715" v-if="index == 0" class="icon" viewBox="0 0 1281 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2643" width="16" height="16"><path d="M1278.7257 634l-56-364c-16-102-92-184-190-206C774.7257 6 506.7257 6 248.7257 64 148.7257 86 74.7257 168 58.7257 270L2.7257 634c-22 148 92 282 240 282 94 0 178-52 218-136l28-56h304l28 56c40 84 124 136 216 136h2c148 0 262-134 240-282z m-130 136c-28 32-68 50-112 50-54 0-104-30-130-82l-36-74c-12-22-34-36-58-36H468.7257c-24 0-48 14-58 36l-36 74c-26 52-76 82-132 82-42 0-82-18-110-50-28-34-42-78-34-122l54-362c10-64 56-114 118-128 244-56 496-56 740 0 62 14 108 64 118 128l54 362c6 44-6 88-34 122zM800.7257 436c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z m-304-80h-64v-64c0-26-22-48-48-48s-48 22-48 48v64h-64c-26 0-48 22-48 48s22 48 48 48h64v64c0 26 22 48 48 48s48-22 48-48v-64h64c26 0 48-22 48-48s-22-48-48-48z m432-112c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z" p-id="2644" fill="#D4BA76"></path></svg>
                 <svg t="1653723405535" v-if="index == 4 " class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3050" width="16" height="16"><path d="M512 256C299.946667 256 85.333333 321.962667 85.333333 448v170.666667C85.333333 744.704 299.946667 810.666667 512 810.666667s426.666667-65.962667 426.666667-192v-170.666667C938.666667 321.962667 724.053333 256 512 256z m-341.333333 362.666667v-51.072a426.197333 426.197333 0 0 0 85.333333 36.693333v80.256c-55.978667-21.930667-85.333333-48.042667-85.333333-65.877333z m512 6.314666v84.096c-36.992 7.637333-79.658667 13.226667-128 15.274667v-85.333333a928 928 0 0 0 128-14.037334z m-213.333334 99.413334a801.621333 801.621333 0 0 1-128-15.274667v-84.096c40.917333 7.424 84.138667 12.245333 128 14.08v85.290667z m298.666667-39.850667v-80.256a423.722667 423.722667 0 0 0 85.333333-36.693333V618.666667c0 17.834667-29.312 43.946667-85.333333 65.877333zM512 554.666667c-220.885333 0-341.333333-70.442667-341.333333-106.666667S291.114667 341.333333 512 341.333333s341.333333 70.442667 341.333333 106.666667-120.448 106.666667-341.333333 106.666667z" p-id="3051" fill="#D4BA76"></path></svg>
                 <svg t="1653724967297" v-if="index == 2 " class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="57047" width="16" height="16"><path d="M512 0C441.6 0 373.76 14.08 309.12 42.24c-22.4 9.6-33.28 36.48-23.04 58.88 9.6 22.4 36.48 33.28 58.88 23.04 53.12-23.04 108.8-34.56 167.04-34.56 232.96 0 422.4 189.44 422.4 422.4s-189.44 422.4-422.4 422.4-422.4-189.44-422.4-422.4c0-51.2 8.96-101.12 26.88-148.48 8.96-23.04-3.2-49.28-26.24-57.6-23.04-8.96-49.28 3.2-57.6 26.24C10.88 389.76 0 449.92 0 512c0 282.24 229.76 512 512 512s512-229.76 512-512S794.24 0 512 0z" p-id="57048" fill="#D4BA76"></path><path d="M512.64 849.28c44.8 0 89.6-8.96 133.12-26.88 23.04-9.6 33.92-35.84 24.32-58.24-9.6-23.04-35.84-33.92-58.24-24.32-33.28 13.44-65.28 20.48-98.56 20.48-136.32 0-247.04-110.72-247.04-247.04s110.72-247.04 247.04-247.04 247.04 110.72 247.04 247.04c0 29.44-5.76 59.52-16 87.68-8.32 23.04 3.2 49.28 26.24 57.6 23.04 8.32 49.28-3.2 57.6-26.24 14.08-37.76 21.12-78.72 21.12-118.4 0-185.6-151.04-336.64-336.64-336.64S176 327.04 176 512.64s151.04 336.64 336.64 336.64z" p-id="57049" fill="#D4BA76"></path><path d="M363.52 512c0 81.92 67.2 149.12 149.12 149.12 81.28 0 148.48-66.56 149.12-149.12 0-81.92-67.2-149.12-149.12-149.12S363.52 430.08 363.52 512z m208.64-0.64c-0.64 33.28-26.88 60.16-59.52 60.16-32.64 0-59.52-26.88-59.52-59.52 0-32.64 26.88-59.52 59.52-59.52s59.52 26.88 59.52 58.88z" p-id="57050" fill="#D4BA76"></path></svg>
-                <font-awesome-icon v-else :icon="['fas',item.icon]"></font-awesome-icon>
+                <font-awesome-icon v-if="index == 1" :icon="['fas','circle-dollar-to-slot']"></font-awesome-icon>
+                <font-awesome-icon v-if="index == 3" :icon="['fas','gem']"></font-awesome-icon>
+                <!-- <font-awesome-icon v-else :icon="['fas',item.icon]"></font-awesome-icon> -->
                 <span class="txt font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{$t(item.txt)}}</span>
               </div>
               <span class="txt1 font16" :class="isEnLang?'en_medium':''">{{$t(item.txt1)}}</span>
@@ -155,7 +160,11 @@
                 <svg t="1653721184598" v-if="index == 0" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3417" width="16" height="16"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m22.3 665.2l0.2 31.7c0 4.4-3.6 8.1-8 8.1h-28.4c-4.4 0-8-3.6-8-8v-31.4C401.3 723 359.5 672.4 355 617.4c-0.4-4.7 3.3-8.7 8-8.7h46.2c3.9 0 7.3 2.8 7.9 6.6 5.1 31.7 29.8 55.4 74.1 61.3V533.9l-24.7-6.3c-52.3-12.5-102.1-45.1-102.1-112.7 0-72.9 55.4-112.1 126.2-119v-33c0-4.4 3.6-8 8-8h28.1c4.4 0 8 3.6 8 8v32.7c68.5 6.9 119.9 46.9 125.9 109.2 0.5 4.7-3.2 8.8-8 8.8h-44.9c-4 0-7.4-3-7.9-6.9-4-29.2-27.4-53-65.5-58.2v134.3l25.4 5.9c64.8 16 108.9 47 108.9 116.4 0 75.3-56 117.3-134.3 124.1zM426.6 410.3c0 25.4 15.7 45.1 49.5 57.3 4.7 1.9 9.4 3.4 15 5v-124c-36.9 4.7-64.5 25.4-64.5 61.7z m116.5 135.2c-2.8-0.6-5.6-1.3-8.8-2.2V677c42.6-3.8 72-27.2 72-66.4 0-30.7-15.9-50.7-63.2-65.1z" p-id="3418" fill="#DBDADA"></path></svg>
                 <svg t="1653723586792" v-if="index == 5" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4129" width="16" height="16"><path d="M819.2 102.4V0H204.8v102.4H0v153.6a256 256 0 0 0 221.184 252.416 307.2 307.2 0 0 0 239.616 204.8V921.6H307.2v102.4h409.6v-102.4h-153.6v-209.408a307.2 307.2 0 0 0 239.616-204.8A256 256 0 0 0 1024 256V102.4zM102.4 256V204.8h102.4v196.096A153.6 153.6 0 0 1 102.4 256z m819.2 0a153.6 153.6 0 0 1-102.4 144.896V204.8h102.4z" p-id="4130" fill="#DBDADA"></path></svg>
                 <svg t="1653723989071" v-if="index == 4" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6467" width="16" height="16"><path d="M213.333333 170.666667h597.333334a128 128 0 0 1 128 128v170.666666h-298.666667v-42.666666H384v42.666666H85.333333V298.666667a128 128 0 0 1 128-128m256 298.666666h85.333334v85.333334h-85.333334v-85.333334m-384 42.666667h298.666667v42.666667l85.333333 85.333333h85.333334l85.333333-85.333333v-42.666667h298.666667v341.333333H85.333333v-341.333333z" fill="#DBDADA" p-id="6468"></path></svg>
-                <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon>
+                <!-- <font-awesome-icon :icon="['fas',item.icon]"></font-awesome-icon> -->
+                <font-awesome-icon v-if="index == 1" :icon="['fas','money-bill']"></font-awesome-icon>
+                <font-awesome-icon v-if="index == 2" :icon="['fas','file-invoice-dollar']"></font-awesome-icon>
+                <font-awesome-icon v-if="index == 3" :icon="['fas','dice']"></font-awesome-icon>
+
               </div>
               <span class="_span font16" :class="isEnLang?'en_medium':''">{{$t(item.txt)}}</span>
             </div>
@@ -202,7 +211,7 @@
     </div> -->
     <!-- 时间轴 -->
     <div class="time_axis_box">
-      <div class="time_axis display_flex">
+      <div class="time_axis display_flex" @mouseover="enter" @mouseleave="leave">
         <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt54")}}</div>
         <swiper :options="swiperOption" ref="mySwiper" class="self_swiper" v-if='swiperVisible'>
           <swiper-slide v-for="(item, index) in swiperArr" :key="index">
@@ -515,7 +524,7 @@ export default {
         loop: true,//循环播放
         centeredSlides: true, // 多个slider时居中
         autoplay: {
-          delay: 2000,
+          delay: 2500,
           stopOnLastSlide: false,
           disableOnInteraction: false,
         },
@@ -613,6 +622,14 @@ export default {
     
   },
   methods:{
+    enter() {
+      console.log("鼠标移入")
+      this.$refs.mySwiper.swiper.autoplay.stop()
+    },
+    leave() {
+      console.log("鼠标移除除")
+      this.$refs.mySwiper.swiper.autoplay.start()
+    },
     videoPlay() {
       this.haveVoice = !this.haveVoice
       if(this.haveVoice){
@@ -683,6 +700,7 @@ export default {
 <style lang="scss" soped>
 .home{
   width: 100%;
+  padding-bottom: 30px;
   .border_{
     width: 100%;
     height: 380px;
@@ -704,12 +722,13 @@ export default {
         display: flex;
         align-items: center;
         color: #9E9E9E;
-        .add_img{
-          width: 32px;
-        }
+        // .add_img{
+        //   width: 32px;
+        // }
         .iconbox{
-          width: 20px;
-          height: 20px;
+          width: 35px;
+          height: 35px;
+          font-size: 25px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -721,11 +740,24 @@ export default {
           margin-left: 16px;
         }
       }
+      .add_top_content_center{
+        justify-content: center;
+      }
+      .add_top_content_end{
+        justify-content: flex-end;
+      }
       p{
+        width: 100%;
         font-weight: 800;
         color: #CED3D9;
         line-height: 41px;
         margin-top: 25px;
+      }
+      .p_center{
+        padding-left: 25%;
+      }
+      .p_end{
+        padding-left: 55%;
       }
     }
   }
@@ -898,6 +930,7 @@ export default {
               color: #8F8E8E;
               line-height: 24px;
               margin-top: 10px;
+              padding-left: 24px;
             }
           }
         }
@@ -988,6 +1021,7 @@ export default {
       .self_swiper{
         width:100%;
         .swiper-slide{
+          cursor: pointer;
           display: flex;
           padding-bottom: 40px;
           flex-direction: column;
@@ -1127,13 +1161,12 @@ export default {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         margin-top: 20px;
         .span1{
           font-weight: bold;
           color: #CED3D9;
           line-height: 29px;
-          margin-right: 16px;
+          margin-right: 35px;
         }
         .span2{
           font-weight: 500;
@@ -1366,9 +1399,9 @@ export default {
           width: auto;
           display: flex;
           align-items: center;
-          .add_img{
-            width: 0.15rem;
-          }
+          // .add_img{
+          //   width: 0.15rem;
+          // }
           .span{
             font-weight: normal;
             color: #9E9E9E;
@@ -1376,11 +1409,25 @@ export default {
             margin-left: 0.15rem;
           }
         }
+        .add_top_content_center{
+          justify-content: flex-start;
+        }
+        .add_top_content_end{
+          justify-content: flex-start;
+        }
         p{
+          width: fit-content;
           font-weight: 800;
           color: #FFFFFF;
           line-height: 0.22rem;
           margin-top: 0;
+        }
+        
+        .p_center{
+          padding-left: 0;
+        }
+        .p_end{
+          padding-left: 0;
         }
       }
     }
@@ -1388,9 +1435,9 @@ export default {
       height: 50vh;
       min-height:50vh;
       .video_{
-        height: 50vh;
-        object-fit: contain;
-        margin-top: -0.56rem;
+        height: 33vh;
+        object-fit: fill;
+        // margin-top: -0.56rem;
       }
       .content{
         position: absolute;
@@ -1444,6 +1491,7 @@ export default {
       margin-top: 0.48rem;
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       justify-content: space-between;
       .left{
         display: flex;
@@ -1558,9 +1606,6 @@ export default {
             .onebox{
               flex-direction: column;
               align-items: center;
-              // &:nth-child(1){
-              //   padding-left: 0;
-              // }
               .add_content{
                 width: 100%;
                 display: flex;
@@ -1579,6 +1624,8 @@ export default {
                 font-weight: 400;
                 margin-top: 0.1rem;
                 max-width: 1.37rem;
+                display: inline-block;
+                min-height: 0.4rem;
               }
             }
           }
@@ -1863,8 +1910,9 @@ export default {
                 right: 0;
                 font-size: 0.12rem;
                 font-weight: normal;
-                color: #FFFFFF;
+                color: #CED3D9;
                 line-height: 0.11rem;
+                transform: scale(0.8);
               }
             }
           }
@@ -1931,7 +1979,7 @@ export default {
   }
   .btnbox{
     span{
-      width: 1.55rem;
+      width: 1.2rem;
       height: 0.4rem;
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
       border-radius: 0.04rem;

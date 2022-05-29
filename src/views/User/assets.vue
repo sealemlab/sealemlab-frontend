@@ -14,34 +14,97 @@
           <div class="onebox font14" :class="{ activeMenu: menuIndex == index }" v-for="(item, index) in menuArr" :key="index" @click="menuClick(item,index)">{{$t(item.title)}}</div>
         </div>
       </div>
-      <div class="content display_flex">
-        <div class="imgbox">
-          <swiper ref="swiper" :options="swiperOption" class="self_swiper">
-            <swiper-slide v-for="(item, index) in imgArr" :key="index">
-              <img :src="item.src" class="img_" />
-            </swiper-slide>
-          </swiper>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
-        <div class="mobile_nftboxs">
-          <div class="mobile_box" v-for="(item, index) in imgArr" :key="index">
-            <img :src="item.src" class="img_" />
-          </div>
-        </div>
-      </div>
+      <NftCompontent></NftCompontent>
     </div> 
   </div>
 </template>
 <script>
+import { sn } from "sealemlab-sdk";
 import { mapGetters } from "vuex";
+import NftCompontent from '@/components/NftCompontent.vue'
 export default {
+  components:{
+    NftCompontent
+  },
   computed: {
-    ...mapGetters(["isEnLang"])
+    ...mapGetters(["getAccount","getIstrue","getAccountStatus","isEnLang"])
+  },
+  watch: {
+    'getAccountStatus': {
+      handler: function (newValue) {
+        if(newValue == -1 || newValue == undefined){
+          console.log("还未连接钱包 ||  已退出钱包")
+          this.isOneLoading = false
+          this.loadMoreStatus = true
+          this.busy =  false
+          this.nftArr = []
+        }else if(newValue == 0){
+          console.log("已连接钱包")
+          this.getAllUserNftInfo(res => {
+            console.log('回调函数--用户拥有的总装备数:res: ', res);
+            if(res == 0){
+              this.nftArr = []
+              this.isOneLoading = false
+              this.loadMoreStatus = false
+              return
+            }
+            let arr = JSON.parse(localStorage.getItem('nftInfo'))
+            if(!arr ){
+              console.log("缓存不存在情况")
+              this.getUtilsFun()
+              return
+            }
+            if(arr.length < res){
+              console.log("缓存小于用户数据--此时获取的缓存数据的长度:",arr.length)
+              this.getUtilsFun()
+            }else{
+              console.log("缓存数据等于用户数据")
+              this.nftArr = JSON.parse(localStorage.getItem('nftInfo'))
+              this.isOneLoading = false
+              this.loadMoreStatus = false
+            }
+          })
+        }else if(newValue > 0){
+          console.log("切换账号")
+          localStorage.removeItem('nftInfo')
+          this.nftArr = []
+          this.loadMoreStatus = true
+          this.isOneLoading = false
+          this.busy = false
+          this.$utils.antiShakeFun(() => {
+            this.getAllUserNftInfo(res => {
+              console.log('回调函数--用户拥有的总装备数:res: ', res);
+              if(res == 0){
+                this.nftArr = []
+                this.isOneLoading = false
+                this.loadMoreStatus = false
+                return
+              }
+              let arr = JSON.parse(localStorage.getItem('nftInfo'))
+              if(!arr ){
+                console.log("缓存不存在情况")
+                this.getUtilsFun()
+                return
+              }
+              if(arr.length < res){
+                console.log("缓存小于用户数据--此时获取的缓存数据的长度:",arr.length)
+                this.getUtilsFun()
+              }else{
+                console.log("缓存数据等于用户数据")
+                this.nftArr = JSON.parse(localStorage.getItem('nftInfo'))
+                this.isOneLoading = false
+                this.loadMoreStatus = false
+              }
+            })
+          },3000)
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   data(){
     return{
-      title:'购买盲盒',
       menuIndex:0,
       menuArr:[
         {title:'message.user.txt18'},
@@ -49,42 +112,55 @@ export default {
         {title:'message.user.txt20'},
         {title:'message.user.txt21'},
       ],
-      imgArr:[
-        {
-          src:`${this.$store.state.imgUrl}mynft.webp`
-        },
-        {
-          src:`${this.$store.state.imgUrl}mynft.webp`
-        },
-        {
-          src:`${this.$store.state.imgUrl}mynft.webp`
-        },
-        {
-          src:`${this.$store.state.imgUrl}mynft.webp`
-        },
-        {
-          src:`${this.$store.state.imgUrl}mynft.webp`
-        },
-        {
-          src:`${this.$store.state.imgUrl}mynft.webp`
-        },
-        {
-          src:`${this.$store.state.imgUrl}mynft.webp`
-        }
-      ],
-      swiperOption: {
-        slidesPerView: 4,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }
-      },
+      isOneLoading:false,//第一次是否加载
+      loadMoreStatus:true,
+      busy: false, // 为true则第一次不执行loadmore
+      nftArr:[],
+      videoStatus:false,
+      videoSrc:''
     }
   },
   methods:{
     menuClick(item,index){
-      this.title = item.title
       this.menuIndex = index
+    },
+    loadMore() {
+      this.busy = true;
+      if(this.loadMoreStatus && this.isOneLoading) {
+        // console.log("loadmore加载更多")
+        this.getUtilsFun(this.nftArr.length)
+      }
+    },
+    nftFun(item){
+      console.log('装备信息item: ', item);
+      this.videoStatus = true
+      this.videoSrc = item.videoSrc
+    },
+    getAllUserNftInfo(calback){
+      sn().tokensOfOwnerBySize(this.getAccount, 0, 100000000).then(res => {
+        // console.log('用户拥有的所有装备数量res: ', Number(res[1]));
+        // this.userAllNft = res[1]
+        calback(Number(res[1]))
+      })
+    },
+    closeProup(){
+      this.videoStatus = false
+    },
+    getUtilsFun(size = 0){
+      this.$utils.getUserBindbox(this.getAccount,size).then(res => {
+        console.log('此次加载数据的页数:%s使用公共方法获取到的数据:res: ',size,res);
+        if(res.length > 0){
+          this.loadMoreStatus = true
+          this.isOneLoading = true
+          this.busy = false
+          this.nftArr = this.nftArr.concat(res)
+          localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
+        }else{
+          this.loadMoreStatus = false
+          this.isOneLoading = false
+          this.busy = true
+        }
+      })
     }
   }
 }
@@ -101,6 +177,7 @@ export default {
     .title_box{
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 30px;
       .address_box{
         flex-direction: column;
         align-items: center;
@@ -127,49 +204,14 @@ export default {
           padding: 0 15px;
           height: 31px;
           background: #000000;
-          border: 1px solid rgba(236, 207, 131, 0.5);
+          border: 1px solid rgba(68, 67, 67, 0.47);
           text-align: center;
           line-height: 31px;
         }
         .activeMenu{
-          color: #000000;
-          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          color: #FADD82;
+          // background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
         }
-      }
-    }
-    .content{
-      width: 100%;
-      flex-direction: column;
-      margin-top: 70px;
-      .imgbox{
-        position: relative;
-        max-width:900px;
-        .self_swiper{
-          width: 100%;
-          .swiper-slide{
-            display: flex;
-            justify-content: center;
-            width: fit-content;
-            .img_{
-              max-width: 204px;
-            }
-          }
-        }
-        .swiper-button-prev {
-          background-image: url($bg_url + "btn_left.webp");
-          background-size: 100% auto;
-          width: 40px;
-          left: -36px;
-        }
-        .swiper-button-next {
-          background-image: url($bg_url + "btn_right.webp");
-          background-size: 100% auto;
-          width: 40px;
-          right: -36px;
-        }
-      }
-      .mobile_nftboxs{
-        display: none;
       }
     }
   }
@@ -186,12 +228,13 @@ export default {
           padding: 0 15px;
           height: 31px;
           background: #000000;
-          border: 1px solid rgba(236, 207, 131, 0.5);
+          border: 1px solid rgba(68, 67, 67, 0.47);
           text-align: center;
           line-height: 31px;
         }
         .activeMenu{
-          background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
+          color: #FADD82;
+          // background: linear-gradient(180deg, #825F35 0%, #FADD82 51%, #876333 100%);
         }
       }
       .title_box{
@@ -220,28 +263,11 @@ export default {
           color: #000000;
         }
       }
-      .content{
-        width: 100%;
-        flex-direction: column;
-        margin-top: 0.4rem;
-        .imgbox{
-          display: none;
-        }
-        .mobile_nftboxs{
-          display: flex;
-          flex-wrap: wrap;
-          max-height: 6rem;
-          overflow: auto;
-          .mobile_box{
-            width: 50%;
-            padding: 0.1rem;
-            img{
-              width: 100%;
-            }
-          }
-        }
-      }
     }
   }
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 </style>

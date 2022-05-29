@@ -579,6 +579,7 @@ export const message = {
     },
   },
   bond: {
+    txt_tax:"",//bond弹窗tax的问号内容
     txt1: "Bond",
     txt2_1: "Buy bond to earn high ST rewards stably",
     txt2_2: "Each bond is available for sale",
@@ -789,6 +790,7 @@ export const message = {
     self_txt10: "Up to 5",
     self_txt11: "Opening...",
     self_txt12: "Open blind box result",
+    self_txt13: "NoData"
   },
   approve: "Approve",
 

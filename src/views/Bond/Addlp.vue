@@ -61,14 +61,14 @@
             </div>
           </div>
         </div>
-        <div class="main_button font16" @click="bondFun">Approve</div>
+        <div class="main_button font16 mobile_font16" :class="isEnLang?'en_Bold':''"  @click="bondFun">Approve</div>
         <div class="tipbox font12" :class="isEnLang?'en_medium':''">
           <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt27")}}</span><span>20%</span></p>
           <p class="color1"><span>{{$t("message.bond.txt28")}}</span><span>16%</span>
           <p class="color2"><span>{{$t("message.bond.txt30")}}</span><span>1%</span>
           <p class="color3"><span>{{$t("message.bond.txt29")}}</span><span>3%</span>
           <p class="color4"><span>{{$t("message.bond.txt31")}}</span><span>1%</span>
-          <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt32")}}</span><span>1%</span></p>
+          <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''"><span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span><span>1%</span></p>
           <p class="font16 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt33")}}</span><span>$0</span></p>
           <p>{{$t("message.bond.txt34")}}</p>
         </div>
@@ -191,8 +191,10 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 20px 100px;
-  background-image: url($bg_url + "proupbg.webp");
-  background-size: 100% 100%;
+  background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+  box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+  border-radius: 12px;
+  border: 1px solid rgba(68, 67, 67, 0.47);
   .propu_title_txt{
     font-weight: bold;
     color: #ECCF83;
@@ -322,7 +324,7 @@ export default {
   .main_button{
     width: 75%;
     min-height: 45px;
-    margin: 35px 0 37px;
+    margin: 35px auto 37px;
     background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
     box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
     border-radius: 4px;
@@ -348,7 +350,6 @@ export default {
       line-height: 14px;
       &:nth-child(1),&:nth-last-child(2),&:nth-last-child(3){
         margin-bottom: 15px;
-        // margin-top: 15px;
         span{
           font-weight: 500;
           color: #FFFFFF;
@@ -358,6 +359,9 @@ export default {
       }
       &:nth-last-child(3){
         margin-top: 15px;
+      }
+      &:nth-last-child(1){
+        margin-top: 20px;
       }
       span{
         margin-bottom: 8px;
@@ -386,8 +390,6 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 0.2rem;
-    background: url($bg_url + "proupbg.webp") no-repeat;
-    background-size: cover;
     border-radius: 0.2rem;
     .propu_title_txt{
       font-weight: bold;
@@ -518,7 +520,7 @@ export default {
     .main_button{
       width: 75%;
       min-height: 0.45rem;
-      margin: 0.35rem 0 0.37rem;
+      margin: 0.35rem auto 0.37rem;
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
       box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
       border-radius: 0.04rem;

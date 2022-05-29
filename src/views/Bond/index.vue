@@ -2,21 +2,22 @@
   <div class="bond_page">
     <!-- 背景图 -->
     <div class="box1 font16">
-      <img :src="`${$store.state.imgUrl}newbondbg.webp`" class="bond_bg" />
+      <img :src="`${$store.state.imgUrl}newbondbg.webp`" class="pc_bond_bg" />
+      <img :src="`${$store.state.imgUrl}new_bond_bg.webp`" class="mobile_bond_bg" />
       <div>
         <img :src="`${$store.state.imgUrl}BOND.webp`" class="bond_img" />
         <ul :class="isEnLang?'en_medium':''">
           <li>
             <div class="txt1">{{ $t("message.bond.txt2_1") }}</div>
-            <div class="line"></div>
+            <!-- <div class="line"></div> -->
           </li>
           <li>
             <div class="txt1">{{ $t("message.bond.txt2_2") }}</div>
-            <div class="line"></div>
+            <!-- <div class="line"></div> -->
           </li>
           <li>
             <div class="txt1">{{ $t("message.bond.txt2_3") }}</div>
-            <div class="line"></div>
+            <!-- <div class="line"></div> -->
           </li>
         </ul>
       </div>
@@ -98,7 +99,7 @@
           <span>{{ $t("message.bond.txt5") }}</span>
         </div>
         <div class="box">
-          <div class="text1">{{ $t("message.bond.txt40") }}</div>
+          <div class="text1 font12">{{ $t("message.bond.txt40") }}</div>
           <ul class="list_title1">
             <li>
               <ul class="list_title2">
@@ -124,13 +125,13 @@
                   </div>
                 </li>
                 <li>
-                  <span class="color1 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}1%</span>
+                  <span class="color1 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}1%</span>
                 </li>
                 <li>
-                  <span class="color1 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2 </span>
+                  <span class="color1 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color1 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt43") }} --</span>
+                  <span class="color1 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt43") }} --</span>
                 </li>
               </ul>
             </li>
@@ -162,13 +163,13 @@
                   </div>
                 </li>
                 <li>
-                  <span class="color2 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}0.0%</span>
+                  <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color2 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2</span>
+                  <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2</span>
                 </li>
                 <li>
-                  <span class="color2 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt45") }} --</span>
+                  <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt45") }} --</span>
                 </li>
                 <li>
                   <!-- <div @click="showBox =! showBox"><img :src="`${$store.state.imgUrl}accrow.webp`" alt="" /></div>
@@ -203,13 +204,13 @@
                   </div>
                 </li>
                 <li>
-                  <span class="color3 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}0.0%</span>
+                  <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color3 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2 </span>
+                  <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color3 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt47") }} --</span>
+                  <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt47") }} --</span>
                 </li>
               </ul>
             </li>
@@ -240,13 +241,13 @@
                   </div>
                 </li>
                 <li>
-                  <span class="color4 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}0.0%</span>
+                  <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}0.0%</span>
                 </li>
                 <li>
-                  <span class="color4 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2 </span>
+                  <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV2 </span>
                 </li>
                 <li>
-                  <span class="color4 font20" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt49") }} --</span>
+                  <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt49") }} --</span>
                 </li>
               </ul>
             </li>
@@ -275,7 +276,7 @@
             <div>
               <div class="btn_txt bg3 mobile_btn_es" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt54") }}</div>
             </div>
-            <div class="his font14">
+            <div class="his font12">
               <span>{{ $t("message.bond.txt55") }}</span>
             </div>
           </div>
@@ -323,7 +324,7 @@
       <!-- 附属仪表盘内容 -->
       <div class="dashboard_box" v-if="!dashboard">
         <div class="top font32 mobile_font16" :class="isEnLang?'en_heavy':''">
-          <span class="color_fff">{{ $t("message.bond.txt62") }}</span>
+          <span class="color_ced">{{ $t("message.bond.txt62") }}</span>
           <span>{{ $t("message.bond.txt63") }}</span>
         </div>
         <div class="content">
@@ -354,21 +355,9 @@
         </div>
         <p class="mobile_font16 font32" :class="isEnLang?'en_heavy':''">{{ $t("message.bond.txt66") }}</p>
         <div class="content">
-          <div class="databox">
-            <span class="font14">{{ $t("message.bond.txt67") }}</span>
-            <span class="font35 mobile_font22" :class="isEnLang?'en_Bold':''">0</span>
-          </div>
-          <div class="databox">
-            <span class="font14">{{ $t("message.bond.txt68") }}</span>
-            <span class="font35 mobile_font22" :class="isEnLang?'en_Bold':''">0</span>
-          </div>
-          <div class="databox">
-            <span class="font14">{{ $t("message.bond.txt69") }}</span>
-            <span class="font35 mobile_font22"  :class="isEnLang?'en_Bold':''">0</span>
-          </div>
-          <div class="databox">
-            <span class="font14">{{ $t("message.bond.txt70") }}</span>
-            <span class="font35 mobile_font22" :class="isEnLang?'en_Bold':''">0</span>
+          <div class="databox" :class="isEnLang?'en_Bold':''" v-for="(item,index) in inviteArr" :key="index">
+            <span class="font18 mobile_font14">{{ $t(item.title) }}</span>
+            <span class="font35 mobile_font22">{{item.num}}</span>
           </div>
         </div>
       </div>
@@ -387,6 +376,19 @@ export default {
   computed: { ...mapGetters(["getNoticeNum","isEnLang"]) },
   data() {
     return {
+      inviteArr:[{
+        title:'message.bond.txt67',
+        num:0
+      },{
+        title:'message.bond.txt68',
+        num:0
+      },{
+        title:'message.bond.txt69',
+        num:0
+      },{
+        title:'message.bond.txt69',
+        num:0
+      }],
       dashboard:true,//仪表盘切换
       showBox:false,//展示当前等级失效状态
       addlpDis: false, //一键购买lp弹窗状态
@@ -400,7 +402,7 @@ export default {
           fjlv2: "0%",
           fjlv3: "0%",
           lxzq: "14",
-          djs: "00:00:00",
+          djs: "00:00:00:00",
           gml: "0%",
         },
       ],
@@ -413,7 +415,7 @@ export default {
           fjlv2: "0%",
           fjlv3: "0%",
           yjklq: "0",
-          djs: "00:00:00",
+          djs: "00:00:00:00",
           status:false
         },
         // {
@@ -429,7 +431,7 @@ export default {
         // },
       ],
       list1: ["$ 0*0", "$ 0*0"],
-      domHeight:false
+      domHeight:false // 下拉移动端左侧保持一致高度变量
     };
   },
   methods: {
@@ -468,12 +470,15 @@ export default {
   }
   .content{
     width: 100%;
-    background: #000000;
+    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+    border-radius: 12px;
+    border: 1px solid rgba(68, 67, 67, 0.47);
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 35px 125px;
+    padding: 48px 125px 0;
     >div{
       width: 40%;
       height: 80px;
@@ -484,6 +489,7 @@ export default {
       box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
       border-radius: 8px;
       border: 1px solid #373636;
+      margin-bottom: 48px;
       .iconbox_{
         width: 20px;
         height: 20px;
@@ -491,10 +497,6 @@ export default {
         align-items: center;
         margin-right: 16px;
       }
-      // img{
-      //   width: 23px;
-      //   margin-right: 16px;
-      // }
       div{
         p{
           font-weight: 600;
@@ -509,6 +511,8 @@ export default {
       align-items: center;
       justify-content: space-evenly;
       padding-bottom:0;
+      font-weight: 600;
+      color: #CED3D9;
     }
   }
   >p{
@@ -521,14 +525,12 @@ export default {
 }
 .add_nav{
   width: 100%;
-  border-bottom: 2px solid #242222;
+  border-bottom: 1px solid #242222;
   display: flex;
   align-items: center;
   padding: 30px 0 50px;
   div{
     cursor: pointer;
-    // width: 236px;
-    padding: 0 10px;
     height: 54px;
     font-weight: 600;
     color: #CED3D9;
@@ -539,20 +541,6 @@ export default {
     &:nth-child(1){
       margin-right: 26px;
     }
-  }
-}
-.has_question_icon {
-  position: relative;
-  &::after {
-    content: "";
-    width: 16px;
-    height: 13px;
-    filter: blur(0px);
-    background: url($bg_url + "ques_new.webp") no-repeat;
-    background-size: 100% 100%;
-    position: absolute;
-    right: -20px;
-    top: -5px;
   }
 }
 .progressbar {
@@ -730,9 +718,13 @@ export default {
 .box1 {
   width: 100%;
   position: relative;
-  .bond_bg {
+  .pc_bond_bg {
+    display: block;
     width: 100%;
     min-height: 350px;
+  }
+  .mobile_bond_bg{
+    display: none;
   }
   >div{
     position: absolute;
@@ -748,11 +740,12 @@ export default {
       align-items: center;
       margin-top: 60px;
       li {
-        width: 243px;
+        // width: 243px;
+        max-width: 200px;
+        padding: 0 10px;
         height: 60px;
         background: rgba(163, 159, 148, 0.23);
         border-radius: 14px;
-        text-align: center;
         margin-right: 20px;
         .txt1 {
           width: 100%;
@@ -764,24 +757,22 @@ export default {
           align-items: center;
           justify-content: center;
         }
-        .line {
-          width: 50%;
-          height: 4px;
-          margin: 0 auto;
-          background: #f0ce75;
-          border-radius: 2px;
-        }
+        // .line {
+        //   width: 50%;
+        //   height: 4px;
+        //   margin: 0 auto;
+        //   background: #f0ce75;
+        //   border-radius: 2px;
+        // }
       }
     }
   }
 }
 .boxs {
   width: 90vw;
-  background: #101010;
   margin: 0 auto;
   padding: 20px;
   .title {
-    // font-size: 30px;
     font-weight: 600;
     color: #ffffff;
     line-height: 42px;
@@ -790,7 +781,10 @@ export default {
   .box {
     width: 100%;
     height: auto;
-    background: #000000;
+    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+    border-radius: 12px;
+    border: 1px solid rgba(68, 67, 67, 0.47);
     padding: 10px 0;
   }
 }
@@ -859,7 +853,6 @@ export default {
     position: relative;
   }
   .text1 {
-    font-size: 10px;
     font-weight: 400;
     color: #b79d53;
     line-height: 14px;
@@ -966,10 +959,18 @@ export default {
   }
   .text2 {
     width: 100%;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-weight: 400;
     color: #909090;
     line-height: 17px;
+    p{
+      &:nth-child(2){
+        max-width: 70%;
+        margin-top: 10px;
+      }
+    }
   }
 }
 .box4 {
@@ -993,15 +994,12 @@ export default {
     .his {
       width: fit-content;
       font-weight: 400;
-      color: #a9a7a7;
-      line-height: 17px;
+      color: #b79d53;
+      line-height: 14px;
       position: absolute;
       right: 0;
       top: 10px;
       cursor: pointer;
-      &:hover {
-        color: #eccf83;
-      }
     }
   }
   .bottom {
@@ -1080,20 +1078,6 @@ export default {
   }
 }
 @media screen and (max-width: 980px) {
-  .has_question_icon {
-    position: relative;
-    &::after {
-      content: "";
-      width: 13px;
-      height: 13px;
-      filter: blur(0px);
-      background: url($bg_url + "ques_new.webp") no-repeat;
-      background-size: 100% 100%;
-      position: absolute;
-      right: -0.12rem;
-      top: -0.05rem;
-    }
-  }
   .bond_page {
     margin-top: 0;
     padding-top: 0.8rem;
@@ -1106,7 +1090,7 @@ export default {
     line-height: 0.4rem;
     text-align: center;
     font-weight: 600;
-    font-size: 0.12rem;
+    font-size: 0.16rem;
     color: #000;
     box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
     border-radius: 0.04rem;
@@ -1119,7 +1103,7 @@ export default {
     background: #101010;
     margin: 0 auto;
     padding: 0.1rem;
-    margin-top: -0.4rem;
+    // margin-top: -0.4rem;
     .title {
       font-weight: 600;
       color: #ffffff;
@@ -1135,10 +1119,14 @@ export default {
   }
   .box1 {
     width: 100%;
+    // min-height: 2.3rem;
     position: relative;
-    .bond_bg {
+    .pc_bond_bg {
+      display: none;
+    }
+    .mobile_bond_bg{
+      display: block;
       width: 100%;
-      min-height: 2rem;
     }
     >div{
       position: absolute;
@@ -1157,11 +1145,11 @@ export default {
         li {
           width: auto;
           padding: 0.05rem;
-          height: auto;
-          background: rgba(248, 229, 186, 0.06);
+          height: 0.21rem;
+          background: rgba(248, 229, 186, 0.09);
           border-radius: 0.04rem;
           backdrop-filter: blur(14px);
-          text-align: center;
+          text-align: left;
           margin-right: 0;
           margin-bottom: 0.05rem;
           .txt1 {
@@ -1169,7 +1157,7 @@ export default {
             height: auto;
             padding:0;
             font-weight: 600;
-            color: #ffffff;
+            color: #9d9c9c;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1368,7 +1356,7 @@ export default {
                 width: 78px;
                 height: 25px;
                 line-height: 25px;
-                font-size: 10px;
+                font-size: 0.16rem;
                 margin: 0;
               }
             }
@@ -1398,11 +1386,17 @@ export default {
     }
     .text2 {
       width: 100%;
-      text-align: left;
       font-size: 0.12rem;
       font-weight: 400;
       color: #909090;
+      align-items: flex-start;
       line-height: 0.17rem;
+      p{
+        &:nth-child(2){
+          max-width: 100%;
+          width: 100%;
+        }
+      }
     }
   }
   .box4 {
@@ -1437,7 +1431,7 @@ export default {
         width: fit-content;
         font-size: 12px;
         font-weight: 400;
-        color: #a9a7a7;
+        color: #b79d53;
         line-height: 17px;
         position: absolute;
         right: 0;

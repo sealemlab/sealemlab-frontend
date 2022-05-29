@@ -1,14 +1,16 @@
 <template>
   <div class="blind_box">
-    <p class="title_box font30 mobile_font18">{{$t("message.nft.txt37")}}</p>
+    <p class="title_box font45 mobile_font20" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt37")}}</p>
     <div class="boxs_">
       <div class="onebox" v-for="(item,index) in list" :key="index" @click="openBox(item)">
         <img :src="item.src" class="img_" />
         <div class="line_ font14">
           <span>{{$t(item.title)}}</span>
-          <BtnLoading :isloading="true" v-if="item.status"></BtnLoading>
-          <span v-else>{{item.num}}</span>
-          <span class="font12">{{$t("message.nft.txt57")}}</span>
+          <div class="add_bottom">
+            <BtnLoading :isloading="true" v-if="item.status"></BtnLoading>
+            <span v-else>{{item.num}}</span>
+            <span class="font12">{{$t("message.nft.txt57")}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -21,7 +23,7 @@ import { mapGetters } from "vuex";
 import OpenNft from './OpenBox.vue'
 export default {
   computed: {
-    ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo"])
+    ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo","isEnLang"])
   },
   components:{
     OpenNft
@@ -121,12 +123,16 @@ export default {
   flex-direction: column;
   align-items: center;
   .title_box{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     font-weight: 600;
     color: #FFFFFF;
-    line-height: 42px;
-    margin-bottom: 60px;
+    line-height: 63px;
   }
   .boxs_{
+    margin-top: 100px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -146,30 +152,41 @@ export default {
       .line_{
         margin-top: 14px;
         width: 95%;
-        height: 37px;
+        // height: 37px;
         max-width: 204px;
-        padding:0 8px;
+        padding:8px;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         background: url($bg_url + "boxs_border.webp") no-repeat;
-        background-size: cover;
-        span{
+        background-size: 100% 100%;
+        > span{
+          width: 100%;
+          display: inline-block;
           font-weight: 600;
           color: #FFFFFF;
           line-height: 20px;
-          &:nth-child(1){
-            max-width: 100px;
-          }
-          &:last-child{
-            width: 56px;
-            height: 19px;
-            background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
-            box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
-            border-radius: 4px;
-            text-align: center;
-            line-height: 19px;
-            color: #000000;
+        }
+        .add_bottom{
+          margin-top: 8px;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          span{
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 20px;
+            &:nth-child(2){
+              width: 56px;
+              height: 19px;
+              background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+              box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+              border-radius: 4px;
+              text-align: center;
+              line-height: 19px;
+              color: #000000;
+            }
           }
         }
       }
@@ -180,11 +197,14 @@ export default {
   .blind_box {
     .title_box{
       font-weight: 600;
-      color: #FFFFFF;
+      color: #CED3D9;
       line-height: 0.21rem;
       margin-bottom: 0.32rem;
+      width: 100%;
+      text-align: left;
     }
     .boxs_{
+      margin-top: 0.3rem;
       width: 100%;
       display: flex;
       flex-wrap: wrap;
@@ -204,30 +224,32 @@ export default {
         .line_{
           margin-top: 0.14rem;
           width: 95%;
-          height: 0.37rem;
+          // height: 0.37rem;
           max-width: 2.04rem;
-          padding:0 0.08rem;
+          padding:0.08rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
           background: url($bg_url + "boxs_border.webp") no-repeat;
-          background-size: cover;
-          span{
+          background-size: 100% 100%;
+          > span{
             font-weight: 600;
-            color: #FFFFFF;
+            color: #CED3D9;
             line-height: 0.2rem;
-            &:nth-child(1){
-              max-width:0.8rem;
-            }
-            &:last-child{
-              width: 0.46rem;
-              height: 0.19rem;
-              background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
-              box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
-              border-radius: 0.04rem;
-              text-align: center;
-              line-height: 0.19rem;
-              color: #000000;
+          }
+          .add_bottom{
+            margin-top: 0.05rem;
+            span{
+              &:nth-child(2){
+                width: 0.46rem;
+                height: 0.19rem;
+                background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+                box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+                border-radius: 0.04rem;
+                text-align: center;
+                line-height: 0.19rem;
+                color: #000000;
+              }
             }
           }
         }

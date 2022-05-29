@@ -11,7 +11,7 @@
     </ul>
     <div class="conten_box">
       <div class="treasure_chest_box">
-        <!-- <img :src="`${$store.state.imgUrl}bindboxbg.webp`" class="mobile_img" /> -->
+        <img :src="`${$store.state.imgUrl}bind_box_base.webp`" class="base_img" />
       </div>
       <div class="right_content">
         <p class="font20 title_txt mobile_font16">
@@ -153,7 +153,7 @@ export default {
     WearingShow
   },
   computed: {
-    ...mapGetters(["getAccount","getIstrue"]),
+    ...mapGetters(["getAccount","getIstrue","isEnLang"]),
     per: {
       get() {
         return 0;
@@ -398,6 +398,7 @@ export default {
 <style lang="scss" scoped>
 .buy_blind_box{
   width: 100%;
+  height: 100%;
 }
 .title_box {
   width: 100%;
@@ -405,42 +406,50 @@ export default {
   li {
     &:nth-child(1) {
       font-weight: 600;
-      color: #FFFFFF;
       line-height: 63px;
     }
     &:nth-child(2) {
       font-weight: 400;
-      color: #FFFFFF;
       line-height: 32px;
       margin-top: 20px;
     }
     &:nth-child(3) {
       font-weight: 400;
-      color: #FFFFFF;
       line-height: 32px;
     }
   }
 }
 .conten_box {
+  margin-top: 30px;
+  position: relative;
   width: 100%;
   display: flex;
-  background: url($bg_url + "bindboxbg.webp") no-repeat #000;
-  background-size: contain;
+  justify-content: space-between;
   .treasure_chest_box {
-    width: 50%;
-    .mobile_img{
-      display: none;
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    align-items: flex-end;
+    .base_img{
+      width: 100%;
+      max-width: 848px;
     }
   }
   .right_content{
-    width: 405px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 307px;
     max-height:370px;
     padding:20px;
-    padding-right: 40px;
+    // padding-right: 40px;
     display: flex;
     flex-direction: column;
-    margin: 87px 0;
+    // margin: 87px 0;
     align-items: center;
+    background: rgba(248, 229, 186, 0.06);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
     .title_txt{
       width: 100%;
       font-weight: 600;
@@ -619,7 +628,6 @@ export default {
       &:nth-child(1) {
         text-align: left;
         font-weight: bold;
-        color: #FFFFFF;
         line-height: 0.2rem;
       }
       &:nth-child(2) {
@@ -643,20 +651,26 @@ export default {
     flex-direction: column;
     .treasure_chest_box {
       width: 100%;
-      .mobile_img{
-        display: flex;
+      min-height: 0.5em;
+      // display: flex;
+      // justify-content: center;
+      // align-items: flex-end;
+      margin: 1rem 0 0.3rem;
+      .base_img{
         width: 100%;
+        max-width: 100%;
       }
     }
     .right_content{
+      position: static;
       width: 100%;
       max-height:3.7rem;
       padding:0.2rem;
       display: flex;
       flex-direction: column;
-      margin: 0;
-      margin-top: 2rem;
+      margin:0;
       align-items: center;
+      background: rgba(248, 229, 186, 0.06);
       .title_txt{
         width: 100%;
         font-weight: 600;
@@ -735,7 +749,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top:0;
+    margin-top:0.3rem;
     .introduce_title_txt{
       font-weight: 600;
       color: #CED3D9;
@@ -782,7 +796,7 @@ export default {
       justify-content: space-between;
       border-radius: 0.12rem;
       border: 1px solid #D3B96D;
-      margin: 0.23rem 0;
+      margin-top: 0.23rem;
       padding: 0.2rem;
       .oneline{
         display: flex;

@@ -56,4 +56,9 @@ export default {
     box-shadow: -3em 2em 0 0.5em #fff, 0 2em 0 0 #fff, 3em 2em 0 -0.5em #fff;
   }
 }
+@media screen and (max-width: 980px) {
+  .loading_page {
+    min-height: 0.5rem;
+  }
+}
 </style>

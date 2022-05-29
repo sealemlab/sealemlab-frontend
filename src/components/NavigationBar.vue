@@ -199,6 +199,9 @@ export default {
       padding: 10px 14px;
       font-weight: bold;
       color: #fff;
+      &:hover{
+        color: #fadd82;
+      }
     }
   }
 }
