@@ -330,19 +330,10 @@ export default {
     toRoute (item, index) {
       console.log("1222222222----item,index: ", item, index);
       if (item.link) {
-        // this.navArr.forEach((item) => {
-        //   item.status = false;
-        // });
-        // item.status = true;
         this.$router.push(item.link);
-        console.log("item.link为真")
+        this.isShowMore = false;
       } else {
-        console.log("item.link为假")
         if (index == this.navArr.length - 1) {
-          // this.navArr.forEach((item) => {
-          //   item.status = false;
-          // });
-          // item.status = true;
           this.isShowMore = true;
           console.log("item.link为1111111")
         } else {
