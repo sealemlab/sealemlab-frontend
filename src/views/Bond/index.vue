@@ -87,7 +87,7 @@
       </div>
     </div>
     <!-- 仪表盘 -->
-    <div class="boxs add_top">
+    <div class="boxs">
       <!-- 仪表盘切换 -->
       <div class="add_nav font32 mobile_font16" :class="isEnLang?'en_heavy':''">
         <div :class="dashboard?'color3':''" @click="dashboard = true">{{ $t("message.bond.txt60") }}</div>
@@ -323,8 +323,8 @@
       </div>
       <!-- 附属仪表盘内容 -->
       <div class="dashboard_box" v-if="!dashboard">
-        <div class="top font32 mobile_font16" :class="isEnLang?'en_heavy':''">
-          <span class="color_ced">{{ $t("message.bond.txt62") }}</span>
+        <div class="top font24 mobile_font16" :class="isEnLang?'en_heavy':''">
+          <span class="color3">{{ $t("message.bond.txt62") }}</span>
           <span>{{ $t("message.bond.txt63") }}</span>
         </div>
         <div class="content">
@@ -353,7 +353,7 @@
             </div>
           </div>
         </div>
-        <p class="mobile_font16 font32" :class="isEnLang?'en_heavy':''">{{ $t("message.bond.txt66") }}</p>
+        <p class="mobile_font16 font24" :class="isEnLang?'en_heavy':''">{{ $t("message.bond.txt66") }}</p>
         <div class="content">
           <div class="databox" :class="isEnLang?'en_Bold':''" v-for="(item,index) in inviteArr" :key="index">
             <span class="font18 mobile_font14">{{ $t(item.title) }}</span>
@@ -465,6 +465,11 @@ export default {
       color: #5D5F61;
       &:nth-child(1){
         margin-right: 57px;
+        padding: 10px;
+        background: #171718;
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39), inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+        border-radius: 4px;
+        border: 1px solid #373636;
       }
     }
   }
@@ -528,7 +533,7 @@ export default {
   border-bottom: 1px solid #242222;
   display: flex;
   align-items: center;
-  padding: 30px 0 50px;
+  padding: 0 0 50px;
   div{
     cursor: pointer;
     height: 54px;
@@ -771,6 +776,7 @@ export default {
   width: 90vw;
   margin: 0 auto;
   padding: 20px;
+  padding-top: 0;
   .title {
     font-weight: 600;
     color: #CED3D9;
@@ -786,9 +792,6 @@ export default {
     border: 1px solid rgba(68, 67, 67, 0.47);
     padding: 10px 0;
   }
-}
-.add_top{
-  margin-top: 30px;
 }
 .box2 {
   padding: 20px 0;
@@ -1257,7 +1260,7 @@ export default {
     border-bottom: 2px solid #242222;
     display: flex;
     align-items: center;
-    padding: 0.2rem 0;
+    padding: 0.6rem 0 0.2rem;
     div{
       cursor: pointer;
       width:auto;
@@ -1514,6 +1517,7 @@ export default {
       width: 100%;
       height: 0.5rem;
       line-height: 0.5rem;
+      margin: 0.15rem 0;
       span{
         cursor: pointer;
         font-weight: bold;
