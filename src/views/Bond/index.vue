@@ -364,6 +364,14 @@
     </div>
     <AddLp :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
     <InviteProup :inviteDis="inviteDis" @closeInvite="closeInvite"></InviteProup>
+    <div class="out_title_box" v-show="isShowTitle" @click="isShowTitle = false">
+      <div ref="titContent" class="showTitle">
+        我是提示的内容
+        <div class="tip_box">
+          <!-- <div class="con"></div> -->
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -434,12 +442,16 @@ export default {
         // },
       ],
       list1: ["$ 0*0", "$ 0*0"],
-      domHeight:false // 下拉移动端左侧保持一致高度变量
+      domHeight:false, // 下拉移动端左侧保持一致高度变量
+      isShowTitle:false
     };
   },
   methods: {
     quesFun(data,e){
       console.log('data,e: ', data,e);
+      // this.$refs.titContent.style.top = e.clientY + 'px'
+      // this.$refs.titContent.style.left = e.clientX + 'px'
+      // this.isShowTitle = !this.isShowTitle
     },
     closeLP() {
       this.addlpDis = false;
@@ -458,10 +470,56 @@ export default {
       this.domHeight = item.status
     }
   },
+  watch:{
+    isShowTitle(newvala){
+      if(newvala){
+        document.body.style.overflow='hidden'
+      }else{
+        document.body.style.overflow='visible'
+      }
+    },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.out_title_box{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height:100vh;
+  width: 100vw;
+  .showTitle{
+    padding: 10px;
+    position: absolute;
+    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+    border: 1px solid rgba(68, 67, 67, 0.47);
+    .tip_box{
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px;
+      border-color: transparent transparent red transparent;
+      position: absolute;
+      top: -33%;
+      left: 30%;
+      // margin-left: 40px;
+      z-index: 10;
+      .con{ 
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 15px;
+        border-color: #fff transparent transparent transparent;
+        position: absolute;
+        left: -15px;
+        top: -16px;
+      }
+    }
+  }
+}
+
 .dashboard_box{
   width: 100%;
   display: flex;
