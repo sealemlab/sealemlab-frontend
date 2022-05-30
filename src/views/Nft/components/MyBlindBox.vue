@@ -125,8 +125,10 @@ export default {
   .title_box{
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    
+    left: 0;
+    // left: 50%;
+    // transform: translateX(-50%);
     font-weight: 600;
     color: #CED3D9;
     line-height: 63px;
