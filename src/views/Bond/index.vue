@@ -143,7 +143,7 @@
                   <span class="has_question_icon color2 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt30") }}</span>
                 </li>
                 <li>
-                  <div class="btn_txt bg1" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt44") }}</div>
+                  <div class="btn_txt bg1" @click="inviteFun" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt44") }}</div>
                 </li>
                 <li class="round_progressbar">
                   <!-- <RingProgress
@@ -184,7 +184,7 @@
                   <span class="has_question_icon color3 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt29") }}</span>
                 </li>
                 <li>
-                  <div class="btn_txt bg2" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt44") }}</div>
+                  <div class="btn_txt bg2" @click="inviteFun" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt44") }}</div>
                 </li>
                 <li class="round_progressbar">
                   <!-- <RingProgress
@@ -221,7 +221,7 @@
                   <span class="has_question_icon color4 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt31") }}</span>
                 </li>
                 <li>
-                  <div class="btn_txt bg3" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt48") }}</div>
+                  <div class="btn_txt bg3" @click="inviteFun" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt48") }}</div>
                 </li>
                 <li class="round_progressbar">
                   <!-- <RingProgress
@@ -363,15 +363,17 @@
       </div>
     </div>
     <AddLp :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
+    <InviteProup :inviteDis="inviteDis" @closeInvite="closeInvite"></InviteProup>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import AddLp from "./Addlp.vue";
+import InviteProup from "./InviteProup.vue";
 export default {
   components: {
-    AddLp,
+    AddLp,InviteProup
   },
   computed: { ...mapGetters(["getNoticeNum","isEnLang"]) },
   data() {
@@ -392,6 +394,7 @@ export default {
       dashboard:true,//仪表盘切换
       showBox:false,//展示当前等级失效状态
       addlpDis: false, //一键购买lp弹窗状态
+      inviteDis:false,
       showSelect: false,
       Arr1: [
         {
@@ -437,6 +440,12 @@ export default {
   methods: {
     closeLP() {
       this.addlpDis = false;
+    },
+    closeInvite() {
+      this.inviteDis = false;
+    },
+    inviteFun(){
+      this.inviteDis = true;
     },
     BondClick(data) {
       this.addlpDis = true
@@ -1186,6 +1195,11 @@ export default {
         font-weight: 600;
         color: #eccf83;
         line-height: 33px;
+        // .item{
+        //   width: 30px;
+        //   height: 30px;
+        //   background: red;
+        // }
         &:nth-child(2),&:nth-child(4){
           text-align: right;
         }

@@ -4,30 +4,65 @@
     <router-view />
     <FooterComponents />
     <div class="mobile_nav">
-      <div class="mobile_onebox" v-for="(item, index) in navArr" :key="index" @click="toRoute(item, index)">
-        <div class="box" :class="item.status ? 'box_color' : ''" v-if="index == 0">
+      <div
+        class="mobile_onebox"
+        v-for="(item, index) in navArr"
+        :key="index"
+        @click="toRoute(item, index)"
+      >
+        <div
+          class="box"
+          :class="item.status ? 'box_color' : ''"
+          v-if="index == 0"
+        >
           <font-awesome-icon :icon="['fas', 'house']"></font-awesome-icon>
         </div>
-        <div class="box" :class="item.status ? 'box_color' : ''" v-if="index == 1">
-          <font-awesome-icon :icon="['fas', 'globe']"></font-awesome-icon>
+        <div
+          class="box"
+          :class="item.status ? 'box_color' : ''"
+          v-if="index == 1"
+        >
+          <font-awesome-icon
+            :icon="['fas', 'circle-dollar-to-slot']"
+          ></font-awesome-icon>
         </div>
         <div class="box" v-if="index == 2">
-          <svg t="1653723717313" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5662" width="32" height="32"><path d="M561.92 28.7744a99.84 99.84 0 0 0-99.84 0l-343.552 198.3488a99.84 99.84 0 0 0-49.9712 86.528v396.6976c0 35.6864 19.0464 68.608 49.92 86.4768l343.6032 198.3488a99.84 99.84 0 0 0 99.84 0l343.552-198.3488a99.84 99.84 0 0 0 49.9712-86.4768V313.6a99.84 99.84 0 0 0-49.92-86.4768L561.92 28.7744z m-66.56 57.6512a33.28 33.28 0 0 1 33.28 0l343.552 198.3488a33.28 33.28 0 0 1 16.6912 28.8256v396.8a33.28 33.28 0 0 1-16.64 28.7744l-343.6032 198.3488a33.28 33.28 0 0 1-33.28 0l-343.552-198.3488a33.28 33.28 0 0 1-16.6912-28.8256V313.6a33.28 33.28 0 0 1 16.64-28.8256l343.6032-198.3488z m-137.6768 562.176a34.1504 34.1504 0 0 0 63.1296-17.9712v-238.08a34.1504 34.1504 0 1 0-68.2496 0v118.3232L267.9296 374.528A34.1504 34.1504 0 0 0 204.8 392.5504v238.08a34.1504 34.1504 0 1 0 68.2496 0v-118.3744l84.6336 136.3456z m144.0768 16.128a34.1504 34.1504 0 0 1-34.0992-34.1504V392.5504c0-18.8928 15.2576-34.1504 34.0992-34.1504h94.72a34.1504 34.1504 0 1 1 0 68.2496h-60.5696v50.7904h60.5184a34.1504 34.1504 0 1 1 0 68.2496h-60.5184v84.9408a34.1504 34.1504 0 0 1-34.1504 34.0992z m223.9488-238.08h-33.4848a34.1504 34.1504 0 1 1 0-68.2496H827.4944a34.1504 34.1504 0 1 1 0 68.2496h-33.4848v203.9296a34.0992 34.0992 0 1 1-68.3008 0V426.6496z" p-id="5663" :fill="item.status ? '#ECCF83' : '#CED3D9'"></path></svg>
-        </div>
-        <div class="box" v-if="index == 3">
           <svg
-            t="1653452552652"
+            t="1653882839805"
             class="icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            p-id="4246"
+            p-id="14255"
             width="32"
             height="32"
           >
             <path
-              d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z"
-              p-id="4247"
+              d="M708.608 864.0512a93.7984 93.7984 0 0 1-22.0672 2.6112H337.4592c-7.5776 0-14.9504-0.9216-22.016-2.56a275.0976 275.0976 0 0 1-151.3984-70.9632A174.3872 174.3872 0 0 0 337.4592 947.2h349.0816a174.3872 174.3872 0 0 0 173.3632-154.0608 275.0976 275.0976 0 0 1-151.3472 70.912z"
+              p-id="14256"
+              :fill="item.status ? '#ECCF83' : '#CED3D9'"
+            ></path>
+            <path
+              d="M670.5664 76.8H353.4336A225.1264 225.1264 0 0 0 128 301.6192v291.328a225.1264 225.1264 0 0 0 225.4336 224.768h317.1328a225.1264 225.1264 0 0 0 225.4336-224.768V301.568A225.1264 225.1264 0 0 0 670.5664 76.8z m-1.9456 527.1552a39.7824 39.7824 0 0 1-72.4992 22.8352L434.9952 397.5168v206.4896a39.7312 39.7312 0 0 1-79.616 0V280.7808a39.7824 39.7824 0 0 1 72.4992-22.8352l161.1264 228.7104V280.7296a39.7312 39.7312 0 0 1 79.616 0v323.2768z"
+              p-id="14257"
+              :fill="item.status ? '#ECCF83' : '#CED3D9'"
+            ></path>
+          </svg>
+        </div>
+        <div class="box" v-if="index == 3">
+          <svg
+            t="1653722205715"
+            class="icon"
+            viewBox="0 0 1281 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="2643"
+            width="32"
+            height="32"
+          >
+            <path
+              d="M1278.7257 634l-56-364c-16-102-92-184-190-206C774.7257 6 506.7257 6 248.7257 64 148.7257 86 74.7257 168 58.7257 270L2.7257 634c-22 148 92 282 240 282 94 0 178-52 218-136l28-56h304l28 56c40 84 124 136 216 136h2c148 0 262-134 240-282z m-130 136c-28 32-68 50-112 50-54 0-104-30-130-82l-36-74c-12-22-34-36-58-36H468.7257c-24 0-48 14-58 36l-36 74c-26 52-76 82-132 82-42 0-82-18-110-50-28-34-42-78-34-122l54-362c10-64 56-114 118-128 244-56 496-56 740 0 62 14 108 64 118 128l54 362c6 44-6 88-34 122zM800.7257 436c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z m-304-80h-64v-64c0-26-22-48-48-48s-48 22-48 48v64h-64c-26 0-48 22-48 48s22 48 48 48h64v64c0 26 22 48 48 48s48-22 48-48v-64h64c26 0 48-22 48-48s-22-48-48-48z m432-112c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z"
+              p-id="2644"
               :fill="item.status ? '#ECCF83' : '#CED3D9'"
             ></path>
           </svg>
@@ -60,21 +95,89 @@
             ></path>
           </svg>
         </div>
-        <span class="mobile_nav_txt" :class="item.status ? 'box_color' : ''">{{ $t(item.label) }}</span>
+        <span class="mobile_nav_txt" :class="item.status ? 'box_color' : ''">{{
+          $t(item.label)
+        }}</span>
       </div>
     </div>
     <div class="mobile_proup" v-if="isShowMore" @click="isShowMore = false">
       <div class="content">
-        <span @click="routeFun('Market')">{{$t("message.nav.txt4")}}</span>
-        <span @click="routeFun('Game')">{{$t("message.nav.txt5")}}</span>
-        <span @click="routeFun('User')">{{$t("message.nav.txt6")}}</span>
+        <div
+          class="add_icon"
+          v-for="(item, index) in ortherNavArr"
+          :key="index"
+          @click="routeFun(item, index)"
+        >
+          <svg
+            t="1653452552652"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="4246"
+            width="16"
+            height="16"
+            v-if="index == 0"
+          >
+            <path
+              d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z"
+              p-id="4247"
+              :fill="item.status ? '#ECCF83' : '#CED3D9'"
+            ></path>
+          </svg>
+          <svg
+            t="1653452552652"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="4246"
+            width="16"
+            height="16"
+            v-if="index == 1"
+          >
+            <path
+              d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z"
+              p-id="4247"
+              :fill="item.status ? '#ECCF83' : '#CED3D9'"
+            ></path>
+          </svg>
+          <svg
+            t="1653724466948"
+            v-if="index == 2"
+            class="icon"
+            viewBox="0 0 1107 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="36756"
+            width="16"
+            height="16"
+          >
+            <path
+              d="M563.323289 661.336738a330.663562 330.663562 0 1 0-330.531877-330.663562 331.190306 331.190306 0 0 0 330.531877 330.663562z"
+              :fill="item.status ? '#ECCF83' : '#CED3D9'"
+              p-id="36757"
+            ></path>
+            <path
+              d="M1106.528066 975.53955c-16.724123-134.319727-137.611877-293.001365-273.38015-373.066457a381.889419 381.889419 0 0 1-539.912627-0.65843C157.335331 679.246035 18.274908 834.635523 0.365611 975.53955a42.797952 42.797952 0 0 0 37.26714 48.065392h1031.628175A43.061324 43.061324 0 0 0 1106.528066 975.53955z"
+              :fill="item.status ? '#ECCF83' : '#CED3D9'"
+              p-id="36758"
+            ></path>
+          </svg>
+          <span :class="item.status ? 'box_color' : ''">{{
+            $t(item.label)
+          }}</span>
+        </div>
         <p>
           <span>EN</span>
         </p>
       </div>
     </div>
     <!-- 链接钱包弹窗 -->
-    <WalletComponents @closewalletpage="walletClose" @walletClick="walletClick"></WalletComponents>
+    <WalletComponents
+      @closewalletpage="walletClose"
+      @walletClick="walletClick"
+    ></WalletComponents>
     <!-- 普通弹窗 -->
     <Proup
       :isProgress="getProupInfo.isProgress"
@@ -84,9 +187,17 @@
       @closetimer="proupClose"
     ></Proup>
     <!-- 轻提示 -->
-    <Notice :noticeStatus="getNoticeInfo.status" :word="getNoticeInfo.word"></Notice>
+    <Notice
+      :noticeStatus="getNoticeInfo.status"
+      :word="getNoticeInfo.word"
+    ></Notice>
     <!-- 开盲盒弹窗 -->
-    <OpenProup :resultStatus="getPrizeInfo.status" :boxarr="getPrizeInfo.boxarr" @closepage="closepageFun"> </OpenProup>
+    <OpenProup
+      :resultStatus="getPrizeInfo.status"
+      :boxarr="getPrizeInfo.boxarr"
+      @closepage="closepageFun"
+    >
+    </OpenProup>
   </div>
 </template>
 <script>
@@ -98,20 +209,25 @@ export default {
   computed: {
     ...mapGetters(["getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
   },
-  data() {
+  data () {
     return {
       navArr: [
         { label: "message.nav.txt10", link: "/home", status: true },
         { label: "message.nav.txt1", link: "/bond", status: false },
         { label: "message.nav.txt3", link: "/nft", status: false },
-        { label: "message.nav.txt2", link: "", status: false },
+        { label: "message.nav.txt5", link: "/game/game", status: false },
         { label: "message.nav.txt13", link: "", status: false },
+      ],
+      ortherNavArr: [
+        { label: "message.nav.txt4", link: "", status: false },
+        { label: "message.nav.txt2", link: "", status: false },
+        { label: "message.nav.txt6", link: "", status: false }
       ],
       isShowMore: false,
       // startX:0,
       startY: 0,
       startTime: null,
-      oldScrollTop:0
+      oldScrollTop: 0
     };
   },
   watch: {
@@ -149,15 +265,18 @@ export default {
       deep: true,
       immediate: true,
     },
-    isShowMore(newvala) {
+    isShowMore (newvala) {
       if (newvala) {
         document.body.style.overflow = "hidden";
       } else {
         document.body.style.overflow = "visible";
       }
     },
-    $route(to) {
+    $route (to) {
       this.navArr.forEach((item) => {
+        item.status = false;
+      });
+      this.ortherNavArr.forEach((item) => {
         item.status = false;
       });
       if (to.path == "/home") {
@@ -166,7 +285,12 @@ export default {
         this.navArr[1].status = true
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navArr[2].status = true
-      }else{
+      } else if (to.path.indexOf("/game/") !== -1) {
+        this.navArr[3].status = true
+      } else if (to.path.indexOf("/user/") !== -1) {
+        this.ortherNavArr[2].status = true
+        this.navArr[4].status = true
+      } else {
         this.navArr[4].status = true
       }
     },
@@ -177,7 +301,7 @@ export default {
     OpenProup,
   },
   methods: {
-    proupClose() {
+    proupClose () {
       if (this.getProupInfo.ortherDoing) {
         this.$store.commit("setProupStatus", JSON.stringify({ status: false, content: "" }));
         setTimeout(() => {
@@ -191,7 +315,7 @@ export default {
         JSON.stringify({ status: false, content: "", isProgress: true, title: "message.tip.txt3", ortherDoing: false, link: "" }),
       );
     },
-    setRem() {
+    setRem () {
       // if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
       //   console.log("移动端")
       // }else{
@@ -203,22 +327,26 @@ export default {
         document.getElementsByTagName("html")[0].style.fontSize = rem375 + "px";
       }
     },
-    toRoute(item, index) {
-      console.log("item,index: ", item, index);
+    toRoute (item, index) {
+      console.log("1222222222----item,index: ", item, index);
       if (item.link) {
         // this.navArr.forEach((item) => {
         //   item.status = false;
         // });
         // item.status = true;
         this.$router.push(item.link);
+        console.log("item.link为真")
       } else {
+        console.log("item.link为假")
         if (index == this.navArr.length - 1) {
           // this.navArr.forEach((item) => {
           //   item.status = false;
           // });
           // item.status = true;
           this.isShowMore = true;
+          console.log("item.link为1111111")
         } else {
+          console.log("item.link为假3333333333")
           this.isShowMore = false;
           if (!this.getNoticeNum) {
             this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
@@ -227,16 +355,17 @@ export default {
         }
       }
     },
-    routeFun(data) {
+    // 更多方法
+    routeFun (item, index) {
       this.isShowMore = false;
-      switch (data) {
-        // case 'Market':
-        //   // this.$router.push('')
-        //   break;
-        case "Game":
-          this.$router.push("/game/game");
+      switch (index) {
+        case 0:
+          // this.$router.push('')
           break;
-        case "User":
+        case 1:
+          // this.$router.push("");
+          break;
+        case 2:
           this.$router.push("/user/assets/0");
           break;
         default:
@@ -248,28 +377,28 @@ export default {
       }
     },
     // 钱包关闭弹窗方法
-    walletClose() {
+    walletClose () {
       this.$store.commit("setwalletstatus", false);
     },
     // 链接钱包弹窗方法
-    walletClick(item) {
+    walletClick (item) {
       this.$utils.connectWallet("metamask").then((res) => {
         // console.log('方法返回res: ', res);
         this.$store.commit("setwalletstatus", false);
       });
     },
     // 关闭开盲盒弹窗
-    closepageFun() {
+    closepageFun () {
       this.$store.commit("setPrizeInfo", JSON.stringify({ status: false, boxarr: [] }));
     },
     //屏幕滑动 //手指按下屏幕
-    handleTouchstart(event) {
+    handleTouchstart (event) {
       this.startTime = Date.now();
       // this.startX = event.changedTouches[0].clientX
       this.startY = event.changedTouches[0].clientY;
     },
     //手指离开屏幕
-    handleTouchend(event) {
+    handleTouchend (event) {
       const endTime = Date.now();
       // const endX = event.changedTouches[0].clientX
       const endY = event.changedTouches[0].clientY;
@@ -292,17 +421,17 @@ export default {
         this.$store.commit("setMoblieTouch", JSON.stringify({ direction: "top" }));
       }
     },
-    scrollingFun() {
+    scrollingFun () {
       const bodyWidth = document.body.clientWidth;
       if (bodyWidth <= 980) {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
         let scrollStep = scrollTop - this.oldScrollTop > 0;
         this.oldScrollTop = scrollTop;
-        this.$store.commit("setMoblieTouch", JSON.stringify({ direction: scrollStep?"bottom":"top" }));
+        this.$store.commit("setMoblieTouch", JSON.stringify({ direction: scrollStep ? "bottom" : "top" }));
       }
     },
   },
-  mounted() {
+  mounted () {
     if (localStorage.getItem("walletType")) {
       this.$utils.connectWallet(localStorage.getItem("walletType"));
     }
@@ -315,10 +444,10 @@ export default {
 
 <style lang="scss">
 #app {
-  width:calc(100vw - 5px);
+  width: calc(100vw - 5px);
   min-height: 100vh;
   overflow-x: hidden;
-  background: linear-gradient(132deg, #0E0E0E 0%, #0B0A0A 100%);
+  background: linear-gradient(132deg, #0e0e0e 0%, #0b0a0a 100%);
 }
 @media screen and (min-width: 981px) {
   .mobile_nav,
@@ -357,11 +486,8 @@ export default {
       }
       .mobile_nav_txt {
         font-weight: 600;
-        color: #CED3D9;
+        color: #ced3d9;
         line-height: 0.14rem;
-      }
-      .box_color {
-        color: #eccf83;
       }
     }
   }
@@ -378,20 +504,28 @@ export default {
     justify-content: flex-end;
     align-items: flex-end;
     .content {
-      width: 1.48rem;
-      height: 2.05rem;
+      width: 1.3rem;
+      height: 1.6rem;
       background: linear-gradient(180deg, #1b1919 0%, #000000 100%);
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
-      align-items: flex-end;
-      padding-right: 0.26rem;
-      span {
-        font-weight: 600;
-        color: #eccf83;
-        line-height: 14px;
+      padding: 0.2rem;
+      .add_icon {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        // justify-content: space-between;
+        margin-bottom: 0.2rem;
+        span {
+          font-weight: 600;
+          line-height: 14px;
+          margin-left: 0.05rem;
+        }
       }
     }
+  }
+  .box_color {
+    color: #eccf83;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="record_page" v-if="resultStatus">
-    <div class="title font26">{{$t('message.tip.self_txt12')}}</div>
+    <div class="title font32 mobile_font16" :class="isEnLang?'en_heavy':''">{{$t('message.tip.self_txt12')}}</div>
     <img
       :src="`${$store.state.imgUrl}close.webp`"
       class="close_img"
@@ -50,7 +50,9 @@
                   </span>
                   <div class="box_3d">
                     <span class="font12"># {{item.id}}</span>
-                    <img :src="`${$store.state.imgUrl}new3d.webp`" />
+                    <svg t="1653790729523" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3152" width="16" height="16">
+                      <path d="M528.516129 53.97471l371.893677 214.709677a33.032258 33.032258 0 0 1 16.516129 28.605936v429.419354a33.032258 33.032258 0 0 1-16.516129 28.605936L528.516129 970.02529a33.032258 33.032258 0 0 1-33.032258 0l-371.893677-214.709677a33.032258 33.032258 0 0 1-16.516129-28.605936V297.290323a33.032258 33.032258 0 0 1 16.516129-28.605936L495.483871 53.97471a33.032258 33.032258 0 0 1 33.032258 0z m-16.516129 66.741677L206.170839 297.290323l93.48129 53.991225-33.032258 57.211871-93.48129-53.974709v353.131355L478.967742 884.190968 478.967742 776.258065h66.064516v107.932903l305.829161-176.55742V354.502194l-93.48129 53.974709-33.032258-57.211871 93.48129-53.991226L512 120.716387z m-113.796129 255.405419c25.666065 0.264258 46.046968 8.456258 61.159226 24.592517a81.226323 81.226323 0 0 1 22.049032 55.741935c0 10.834581-1.932387 21.28929-5.797161 31.347613-4.525419 10.074839-12.58529 19.026581-24.196129 26.92129 11.875097 7.729548 20.446968 17.011613 25.748645 27.86271 5.020903 10.834581 7.547871 22.181161 7.547871 34.056258-0.264258 26.458839-8.456258 47.285677-24.592516 62.513548-15.855484 15.624258-36.252903 23.552-61.159226 23.816258a77.460645 77.460645 0 0 1-51.084387-18.580645c-14.848-12.387097-24.460387-30.323613-28.853678-53.809548h40.464517c3.600516 9.414194 8.704 17.028129 15.277419 22.841806 6.722065 6.061419 15.624258 9.083871 26.723097 9.083871 11.858581 0 21.867355-4.062968 29.99329-12.188903 8.258065-7.597419 12.519226-18.448516 12.766968-32.520258-0.247742-14.319484-4.508903-25.418323-12.766968-33.28-8.125935-7.613935-18.448516-11.429161-30.967742-11.429161h-17.028129V497.300645h13.923097c13.807484 0 24.526452-3.79871 32.140387-11.412645 7.597419-7.349677 11.412645-16.896 11.412645-28.638968-0.247742-11.891613-4.195097-21.619613-11.809032-29.233548-7.597419-7.349677-17.408-11.164903-29.39871-11.412645-8.654452 0-16.516129 2.77471-23.618064 8.324129-7.498323 5.549419-12.519226 14.12129-15.112258 25.732129H320.578065c2.064516-20.892903 10.520774-38.515613 25.352258-52.851613 14.583742-14.170839 32.008258-21.404903 52.257032-21.669161z m209.589677 2.328775c38.201806 0.264258 66.85729 16.136258 85.949936 47.616 6.837677 10.570323 11.164903 21.669161 12.965161 33.28l0.528516 5.103484c0.990968 11.098839 1.519484 27.581935 1.585549 49.515354l0.016516 5.582452c0 30.323613-1.090065 51.480774-3.303226 63.488a70.87071 70.87071 0 0 1-4.624516 16.251871 150.263742 150.263742 0 0 1-7.944258 14.534193c-8.258065 13.278968-19.736774 24.245677-34.452645 32.883613-14.583742 9.298581-32.454194 13.939613-53.611355 13.939613h-95.793549V378.450581H607.793548z m-4.822709 40.464516h-51.100904V620.180645h51.100904c22.577548 0 39.341419-7.267097 50.275096-21.784774l1.981936-2.807742 1.932387-2.692129c3.666581-5.582452 6.061419-12.370581 7.168-20.331355 0.924903-7.267097 1.486452-19.604645 1.651613-36.996129l0.049548-4.855742 0.033033-15.161806c-0.082581-21.636129-0.660645-37.342968-1.734194-47.120516-1.552516-10.570323-5.235613-19.15871-11.032774-25.732129-10.405161-14.336-24.526452-22.214194-42.429936-23.618065l-3.897806-0.198193z" p-id="3153" fill="#CDCDCD"></path>
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -106,7 +108,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getIsMobile"])
+    ...mapGetters(["isEnLang"])
   },
   methods: {
     nftFun(item){
@@ -302,30 +304,6 @@ export default {
     }
   }
 }
-.video_proup{
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 88;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(6px);
-  .video_{
-    height: 90%;
-    object-fit: cover;
-  }
-  .close_img{
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    width: 34px;
-    cursor: pointer;
-  }
-}
 @media screen and (max-width: 980px) {
   .record_page {
     .title {
@@ -348,59 +326,64 @@ export default {
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      min-height: 3.7rem;
-      max-height: 3.7rem;
+      // min-height: 3rem;
+      // max-height: 5rem;
       overflow-y: auto;
       margin: 0.3rem;
-      .onebox {
-        position: relative;
-        width: 1.56rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-right: 0.05rem;
-        margin-bottom: 0.16rem;
-        .imgcard {
+      .out_box_one{
+        width: 50%;
+        padding: 0.05rem;
+        .onebox {
+          position: relative;
           width: 100%;
-          object-fit: contain;
+          min-height: 2.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-right: 0.05rem;
+          margin-bottom: 0.16rem;
+          .imgcard {
+            width: 100%;
+            object-fit: contain;
+          }
         }
       }
     }
-    .Suspension_btnbox {
-      position: absolute;
-      bottom: 0.15rem;
-      left: 50%;
-      transform: translate(-50%);
-      width: 80%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: linear-gradient(
-        180deg,
-        #06366d 0%,
-        rgba(7, 31, 58, 0) 100%,
-        #034088 100%
-      );
-      border-radius: 0.79rme;
-      padding-top: 0.12rem;
-      .bottom_title {
-        color: #CED3D9;
-        transform: scale(0.8);
-      }
-      .btn_box {
-        width: 1.67rem;
-        height: 0.39rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-image: url("//cdn.hashland.com/images/SpeciaBtn2.png");
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        color: #CED3D9;
-        cursor: pointer;
-        margin-top: 0.06rem;
-      }
-    }
+    // .Suspension_btnbox {
+    //   position: absolute;
+    //   bottom: 0.15rem;
+    //   left: 50%;
+    //   transform: translate(-50%);
+    //   width: 80%;
+    //   display: flex;
+    //   flex-direction: column;
+    //   align-items: center;
+    //   background: linear-gradient(
+    //     180deg,
+    //     #06366d 0%,
+    //     rgba(7, 31, 58, 0) 100%,
+    //     #034088 100%
+    //   );
+    //   border-radius: 0.79rme;
+    //   padding-top: 0.12rem;
+    //   .bottom_title {
+    //     color: #CED3D9;
+    //     transform: scale(0.8);
+    //   }
+    //   .btn_box {
+    //     width: 1.67rem;
+    //     height: 0.39rem;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     background-image: url("//cdn.hashland.com/images/SpeciaBtn2.png");
+    //     background-size: 100% 100%;
+    //     background-repeat: no-repeat;
+    //     color: #CED3D9;
+    //     cursor: pointer;
+    //     margin-top: 0.06rem;
+    //   }
+    // }
   }
 }
 @keyframes fadein {

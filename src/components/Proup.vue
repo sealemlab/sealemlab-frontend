@@ -184,4 +184,39 @@ export default {
     text-align: center;
   }
 }
+@media screen and (max-width: 980px) {
+  .proup_boxs{
+    position: relative;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.2rem;
+    background-image: url($bg_url + "proupbg.webp");
+    background-size: 100% 100%;
+    .propu_title_txt{
+      font-weight: bold;
+      color: #ECCF83;
+      line-height: 29px;
+    }
+    .proup_content{
+      width: 100%;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .success_img{
+        width: 80%;
+      }
+    }
+    .close_img{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      cursor: pointer;
+    }
+  }
+}
 </style>

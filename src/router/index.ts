@@ -24,9 +24,9 @@ const routes: Array<RouteConfig> = [
     // name: "NFT",
     component: () => import("../views/Nft/index.vue"),
     children: [
-      { path: "/", redirect: "buy-blind-box/0" },
+      { path: "/", redirect: "buy-blind-box/0/0" },
       {
-        path: "buy-blind-box/:boxtype",
+        path: "buy-blind-box/:boxtype/:address",
         name: "BuyBlindBox",
         component: () => import("../views/Nft/components/BuyBlindBox.vue"),
       },

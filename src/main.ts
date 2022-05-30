@@ -10,7 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { 
   faHouse,
-  faGlobe,
+  // faGlobe,
   faBoxesPacking,
   faBuildingFlag,
   faCoins,
@@ -40,7 +40,7 @@ library.add(
   faCalendarDays,
   faStore,
   faHouse,
-  faGlobe,
+  // faGlobe,
   faBoxesPacking,
   faBuildingFlag,
   faCoins,

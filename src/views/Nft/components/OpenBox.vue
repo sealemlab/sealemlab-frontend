@@ -1,7 +1,7 @@
 <template>
   <div class="open_box" v-if="openStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.nft.txt39")}}</p>
+      <p class="propu_title_txt font32 mobile_font20" :class="isEnLang?'en_heavy':''">{{$t("message.nft.txt39")}}</p>
       <p class="propu_title_txt font16">{{$t("message.nft.txt40")}}</p>
       <!-- 全选按钮 -->
       <div class="select_content" @click="selectAllClick">
@@ -22,7 +22,7 @@
       </div>
     </div>
     <img :src="`${$store.state.imgUrl}back.webp`" class="close_img" @click.stop="closeOpen"/>
-    <div class="open_btn mobile_font14" @click="openboxFun">
+    <div class="open_btn mobile_font16" :class="isEnLang?'en_Bold':''" @click="openboxFun">
       {{$t("message.nft.txt42")}}
       <BtnLoading :isloading="openstatus"></BtnLoading>
     </div>
@@ -33,7 +33,7 @@ import { mapGetters } from "vuex";
 import { sb,getSigner } from "sealemlab-sdk";
 export default {
   computed: {
-    ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo"]),
+    ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo","isEnLang"]),
     selectStatus: {
       get() {
         if(this.selectedNUM == 0){
@@ -232,16 +232,17 @@ export default {
   .proup_boxs{
     position: relative;
     width: 100%;
-    padding-top: 20px;
+    padding-top: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
     .propu_title_txt{
       width: 100%;
-      text-align: center;
+      // text-align: center;
       font-weight: 600;
       color: #CED3D9;
-      line-height: 63px;
+      line-height: 40px;
+      padding-left: 5vw;
     }
     .select_content{
       width: 100%;
@@ -322,7 +323,7 @@ export default {
   }
   .close_img{
     position: absolute;
-    top: 70px;
+    top: 30px;
     left: 5vw;
     width: 55px;
     cursor: pointer;
@@ -352,16 +353,16 @@ export default {
     .proup_boxs{
       position: relative;
       width: 100%;
-      padding-top: 0.2rem;
+      padding-top: 0.8rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       .propu_title_txt{
         width: 100%;
-        text-align: center;
+        // text-align: center;
         font-weight: 600;
         color: #CED3D9;
-        line-height: 0.42rem;
+        line-height: 0.23rem;
       }
       .select_content{
         width: 100%;
@@ -369,6 +370,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        margin-top: 0.15rem;
         cursor: pointer;
         .select{
           width: 18px;

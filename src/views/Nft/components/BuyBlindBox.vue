@@ -198,11 +198,13 @@ export default {
       userBuyNum:0,//用户剩余购买数量(频控)
       stTotal:0,//st的总价格
       sliderValue:0,// 拖动条value
+      userAddress:0,//邀请人地址
     };
   },
   watch: {
     $route(to) {
       this.bindboxType = to.params.boxtype
+      this.userAddress = to.params.address
       this.getBoxInfo(this.bindboxType)
     },
     'getIstrue': {
@@ -245,6 +247,10 @@ export default {
           this.buy_isloading = false;
           if(res){
             this.isapprove = true;
+            if(!this.getNoticeNum){
+              this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+              this.$store.commit("setNoticeNum",true)
+            }
           }else{
             this.isapprove = false;
           }
@@ -288,8 +294,9 @@ export default {
         return
       }
       this.buy_isloading = true
-      console.log('this.sliderValue,this.bindboxType: ', this.sliderValue,this.bindboxType);
-      sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType).then(async (res) => {
+      // 0x0000000000000000000000000000000000000000
+      console.log('this.sliderValue,this.bindboxType: ', this.sliderValue,this.bindboxType,this.$route);
+      sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType,this.userAddress == 0?'0x0000000000000000000000000000000000000000':this.userAddress).then(async (res) => {
         // 进度条
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
         const etReceipt = await res.wait();
@@ -391,6 +398,7 @@ export default {
   },
   mounted(){
     this.bindboxType = this.$route.params.boxtype // 页面加载时路由不会触发监听,所以在mounted赋值
+    this.userAddress = this.$route.params.address
     this.getBoxInfo(this.bindboxType)
   }
 };
@@ -799,7 +807,7 @@ export default {
           padding: 0;
           font-weight: 500;
           color: #DBDADA;
-          line-height: 0.2rem;
+          line-height: 0.15rem;
         }
       }
     }
