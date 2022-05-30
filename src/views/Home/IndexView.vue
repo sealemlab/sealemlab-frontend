@@ -36,20 +36,21 @@
     <div class="characteristic_box">
       <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt77")}}</div>
       <div class="border_">
-        <div class="add_one_box" v-for="(item,index) in addArr" :key="index">
-          <div class="add_top_content" :class="{ add_top_content_center: index == 1 || index == 4,add_top_content_end: index == 2 || index == 5 }">
-            <!-- <img :src="item.src" class="add_img" /> -->
-            <div class="iconbox">
-              <font-awesome-icon :icon="['fas','boxes-packing']" v-if="index == 0 "></font-awesome-icon>
-              <font-awesome-icon :icon="['fas','building-flag']" v-if="index == 1 "></font-awesome-icon>
-              <font-awesome-icon :icon="['fas','coins']" v-if="index == 2 "></font-awesome-icon>
-              <font-awesome-icon :icon="['fas','registered']" v-if="index == 5 "></font-awesome-icon>
-              <svg t="1653721794550" v-if="index == 3" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2162" width="32" height="32"><path d="M409.714286 773.714286l154.857143-154.857143-159.428571-159.428571-50.285714 50.285714 109.714286 109.142857-54.857143 54.857143-159.428571-159.428571 159.428571-159.428571 22.857143 22.857143 49.714286-49.714286-72.571429-73.142857-259.428571 259.428571zm204.571429-4.571429l259.428571-259.428571-259.428571-259.428571-154.857143 154.857143 159.428571 159.428571 50.285714-50.285714-109.714286-109.142857 54.857143-54.857143 159.428571 159.428571-159.428571 159.428571-22.857143-22.857143-49.714286 50.285714zm409.714286-257.142857q0 104-40.571429 198.857143t-109.142857 163.428571-163.428571 109.142857-198.857143 40.571429-198.857143-40.571429-163.428571-109.142857-109.142857-163.428571-40.571429-198.857143 40.571429-198.857143 109.142857-163.428571 163.428571-109.142857 198.857143-40.571429 198.857143 40.571429 163.428571 109.142857 109.142857 163.428571 40.571429 198.857143z" p-id="2163" fill="#9E9E9E"></path></svg>
-              <svg t="1653721184598" v-if="index == 4" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3417" width="32" height="32"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m22.3 665.2l0.2 31.7c0 4.4-3.6 8.1-8 8.1h-28.4c-4.4 0-8-3.6-8-8v-31.4C401.3 723 359.5 672.4 355 617.4c-0.4-4.7 3.3-8.7 8-8.7h46.2c3.9 0 7.3 2.8 7.9 6.6 5.1 31.7 29.8 55.4 74.1 61.3V533.9l-24.7-6.3c-52.3-12.5-102.1-45.1-102.1-112.7 0-72.9 55.4-112.1 126.2-119v-33c0-4.4 3.6-8 8-8h28.1c4.4 0 8 3.6 8 8v32.7c68.5 6.9 119.9 46.9 125.9 109.2 0.5 4.7-3.2 8.8-8 8.8h-44.9c-4 0-7.4-3-7.9-6.9-4-29.2-27.4-53-65.5-58.2v134.3l25.4 5.9c64.8 16 108.9 47 108.9 116.4 0 75.3-56 117.3-134.3 124.1zM426.6 410.3c0 25.4 15.7 45.1 49.5 57.3 4.7 1.9 9.4 3.4 15 5v-124c-36.9 4.7-64.5 25.4-64.5 61.7z m116.5 135.2c-2.8-0.6-5.6-1.3-8.8-2.2V677c42.6-3.8 72-27.2 72-66.4 0-30.7-15.9-50.7-63.2-65.1z" p-id="3418" fill="#9E9E9E"></path></svg>
+        <div class="add_one_box" :class="{ add_top_content_center: index == 1 || index == 4,add_top_content_end: index == 2 || index == 5 }" v-for="(item,index) in addArr" :key="index">
+          <div class="whole">
+            <div class="add_top_content">
+              <div class="iconbox">
+                <font-awesome-icon :icon="['fas','boxes-packing']" v-if="index == 0 "></font-awesome-icon>
+                <font-awesome-icon :icon="['fas','building-flag']" v-if="index == 1 "></font-awesome-icon>
+                <font-awesome-icon :icon="['fas','coins']" v-if="index == 2 "></font-awesome-icon>
+                <font-awesome-icon :icon="['fas','registered']" v-if="index == 5 "></font-awesome-icon>
+                <svg t="1653721794550" v-if="index == 3" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2162" width="32" height="32"><path d="M409.714286 773.714286l154.857143-154.857143-159.428571-159.428571-50.285714 50.285714 109.714286 109.142857-54.857143 54.857143-159.428571-159.428571 159.428571-159.428571 22.857143 22.857143 49.714286-49.714286-72.571429-73.142857-259.428571 259.428571zm204.571429-4.571429l259.428571-259.428571-259.428571-259.428571-154.857143 154.857143 159.428571 159.428571 50.285714-50.285714-109.714286-109.142857 54.857143-54.857143 159.428571 159.428571-159.428571 159.428571-22.857143-22.857143-49.714286 50.285714zm409.714286-257.142857q0 104-40.571429 198.857143t-109.142857 163.428571-163.428571 109.142857-198.857143 40.571429-198.857143-40.571429-163.428571-109.142857-109.142857-163.428571-40.571429-198.857143 40.571429-198.857143 109.142857-163.428571 163.428571-109.142857 198.857143-40.571429 198.857143 40.571429 163.428571 109.142857 109.142857 163.428571 40.571429 198.857143z" p-id="2163" fill="#9E9E9E"></path></svg>
+                <svg t="1653721184598" v-if="index == 4" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3417" width="32" height="32"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m22.3 665.2l0.2 31.7c0 4.4-3.6 8.1-8 8.1h-28.4c-4.4 0-8-3.6-8-8v-31.4C401.3 723 359.5 672.4 355 617.4c-0.4-4.7 3.3-8.7 8-8.7h46.2c3.9 0 7.3 2.8 7.9 6.6 5.1 31.7 29.8 55.4 74.1 61.3V533.9l-24.7-6.3c-52.3-12.5-102.1-45.1-102.1-112.7 0-72.9 55.4-112.1 126.2-119v-33c0-4.4 3.6-8 8-8h28.1c4.4 0 8 3.6 8 8v32.7c68.5 6.9 119.9 46.9 125.9 109.2 0.5 4.7-3.2 8.8-8 8.8h-44.9c-4 0-7.4-3-7.9-6.9-4-29.2-27.4-53-65.5-58.2v134.3l25.4 5.9c64.8 16 108.9 47 108.9 116.4 0 75.3-56 117.3-134.3 124.1zM426.6 410.3c0 25.4 15.7 45.1 49.5 57.3 4.7 1.9 9.4 3.4 15 5v-124c-36.9 4.7-64.5 25.4-64.5 61.7z m116.5 135.2c-2.8-0.6-5.6-1.3-8.8-2.2V677c42.6-3.8 72-27.2 72-66.4 0-30.7-15.9-50.7-63.2-65.1z" p-id="3418" fill="#9E9E9E"></path></svg>
+              </div>
+              <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
-            <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
+            <p class="font35" :class="isEnLang?'en_heavy':''">{{item.num}}</p>
           </div>
-          <p class="font35" :class="{ p_center: index == 1 || index == 4,p_end: index == 2 || index == 5,en_heavy:isEnLang}">$&nbsp;{{item.num}}</p>
         </div>
       </div>
     </div>
@@ -278,12 +279,12 @@ export default {
       haveVoice:false,//声音
       swiperVisible:true,
       addArr:[
-        {src:`${this.$store.state.imgUrl}home1.webp`,num:0,title:'message.home.txt71',icon:'boxes-packing'},
-        {src:`${this.$store.state.imgUrl}home2.webp`,num:0,title:'message.home.txt72',icon:'building-flag'},
-        {src:`${this.$store.state.imgUrl}home3.webp`,num:0,title:'message.home.txt73',icon:'coins'},
+        {src:`${this.$store.state.imgUrl}home1.webp`,num:'$ 0',title:'message.home.txt71',icon:'boxes-packing'},
+        {src:`${this.$store.state.imgUrl}home2.webp`,num:'$ 0',title:'message.home.txt72',icon:'building-flag'},
+        {src:`${this.$store.state.imgUrl}home3.webp`,num:'$ 0',title:'message.home.txt73',icon:'coins'},
         {src:`${this.$store.state.imgUrl}home4.webp`,num:0,title:'message.home.txt74',icon:'boxes'},
-        {src:`${this.$store.state.imgUrl}home5.webp`,num:0,title:'message.home.txt75',icon:'boxes'},
-        {src:`${this.$store.state.imgUrl}home6.webp`,num:0,title:'message.home.txt76',icon:'registered'},
+        {src:`${this.$store.state.imgUrl}home5.webp`,num:'$ 0',title:'message.home.txt75',icon:'boxes'},
+        {src:`${this.$store.state.imgUrl}home6.webp`,num:'$ 0',title:'message.home.txt76',icon:'registered'},
       ],
       activeIndex:0,//swiper索引
       videoStatus:true,//视频加载
@@ -712,51 +713,46 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     .add_one_box{
-      width: 26%;
+      width: 33%;
       display: flex;
-      flex-direction: column;
-      .add_top_content{
-        width: 100%;
+      .whole{
+        width: fit-content;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        color: #9E9E9E;
-        // .add_img{
-        //   width: 32px;
-        // }
-        .iconbox{
-          width: 35px;
-          height: 35px;
-          font-size: 25px;
+        .add_top_content{
           display: flex;
-          justify-content: center;
           align-items: center;
+          color: #9E9E9E;
+          .iconbox{
+            width: 35px;
+            height: 35px;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .span{
+            font-weight: 500;
+            line-height: 22px;
+            color: #CED3D9;
+            margin-left: 16px;
+          }
         }
-        .span{
-          font-weight: 500;
-          line-height: 22px;
+        p{
+          font-weight: 800;
           color: #CED3D9;
-          margin-left: 16px;
+          line-height: 41px;
+          margin-top: 25px;
+          text-align: center;
         }
       }
-      .add_top_content_center{
-        justify-content: center;
-      }
-      .add_top_content_end{
-        justify-content: flex-end;
-      }
-      p{
-        width: 100%;
-        font-weight: 800;
-        color: #CED3D9;
-        line-height: 41px;
-        margin-top: 25px;
-      }
-      .p_center{
-        padding-left: 25%;
-      }
-      .p_end{
-        padding-left: 55%;
-      }
+    }
+    .add_top_content_center{
+      justify-content: center;
+    }
+    .add_top_content_end{
+      justify-content: flex-end;
     }
   }
   .home_bgbox{
@@ -1121,7 +1117,6 @@ export default {
       padding: 0 20px;
       .partener_box{
         width: 100%;
-        max-width: 1200px;
         align-items: center;
         flex-wrap: wrap;
         margin-top: 20px;
@@ -1396,44 +1391,31 @@ export default {
       flex-wrap: wrap;
       .add_one_box{
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
         margin-bottom: 0.25rem;
-        .add_top_content{
-          width: auto;
+        .whole{
+          width: 100%;
           display: flex;
+          flex-direction: row;
+          justify-content: space-between;
           align-items: center;
-          // .add_img{
-          //   width: 0.15rem;
-          // }
-          .span{
-            font-weight: normal;
-            color: #9E9E9E;
-            line-height: 0.22rem;
-            margin-left: 0.15rem;
+          .add_top_content{
+            width: auto;
+            display: flex;
+            align-items: center;
+            .span{
+              font-weight: normal;
+              color: #9E9E9E;
+              line-height: 0.22rem;
+              margin-left: 0.15rem;
+            }
           }
-        }
-        .add_top_content_center{
-          justify-content: flex-start;
-        }
-        .add_top_content_end{
-          justify-content: flex-start;
-        }
-        p{
-          width: fit-content;
-          font-weight: 800;
-          color: #CED3D9;
-          line-height: 0.22rem;
-          margin-top: 0;
-        }
-        
-        .p_center{
-          padding-left: 0;
-        }
-        .p_end{
-          padding-left: 0;
+          p{
+            width: fit-content;
+            font-weight: 800;
+            color: #CED3D9;
+            line-height: 0.22rem;
+            margin-top: 0;
+          }
         }
       }
     }
@@ -1444,7 +1426,6 @@ export default {
         width: 1005;
         height: auto;
         object-fit: fill;
-        // margin-top: -0.56rem;
       }
       .content{
         position: absolute;

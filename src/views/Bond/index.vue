@@ -30,7 +30,7 @@
         </div>
         <div class="box">
           <div class="top mobile_font14 font24" :class="isEnLang?'en_Bold':''">
-            <div :title='$t("message.bond.txt71")' style="cursor:pointer" @click="quesFun(1,$event)">
+            <div :title='$t("message.bond.txt71")' style="cursor:pointer" @click="quesFun('message.bond.txt71',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
             </div>
             <div><span>$&nbsp;0</span></div>
@@ -50,7 +50,7 @@
               <li>
                 <span>{{ $t("message.bond.txt28") }}</span>
               </li>
-              <li :title='$t("message.bond.txt72")' style="cursor:pointer">
+              <li :title='$t("message.bond.txt72")' style="cursor:pointer" @click="quesFun('message.bond.txt72',$event)">
                 <span class="has_question_icon">{{ $t("message.bond.txt36") }}</span>
               </li>
               <li>
@@ -103,7 +103,7 @@
           <ul class="list_title1">
             <li>
               <ul class="list_title2">
-                <li :title='$t("message.bond.txt73")' style="cursor:pointer">
+                <li :title='$t("message.bond.txt73")' style="cursor:pointer" @click="quesFun('message.bond.txt73',$event)">
                   <span class="has_question_icon color1 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt28") }}</span>
                 </li>
                 <li></li>
@@ -139,7 +139,7 @@
             <li>
               <!-- <ul class="list_title2 coming_soon"> -->
               <ul class="list_title2">
-                <li :title='$t("message.bond.txt74")' style="cursor:pointer">
+                <li :title='$t("message.bond.txt74")' style="cursor:pointer" @click="quesFun('message.bond.txt74',$event)">
                   <span class="has_question_icon color2 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt30") }}</span>
                 </li>
                 <li>
@@ -180,7 +180,7 @@
             <!-- 第三个圆 -->
             <li>
               <ul class="list_title2">
-                <li :title='$t("message.bond.txt75")' style="cursor:pointer">
+                <li :title='$t("message.bond.txt75")' style="cursor:pointer" @click="quesFun('message.bond.txt75',$event)">
                   <span class="has_question_icon color3 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt29") }}</span>
                 </li>
                 <li>
@@ -217,7 +217,7 @@
             <!-- 第四个圆 -->
             <li>
               <ul class="list_title2">
-                <li :title='$t("message.bond.txt76")' style="cursor:pointer">
+                <li :title='$t("message.bond.txt76")' style="cursor:pointer" @click="quesFun('message.bond.txt76',$event)">
                   <span class="has_question_icon color4 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt31") }}</span>
                 </li>
                 <li>
@@ -265,11 +265,11 @@
         </div>
         <div class="box">
           <div class="top font24" :class="isEnLang?'en_Bold':''">
-            <div :title='$t("message.bond.txt77")' style="cursor:pointer">
+            <div :title='$t("message.bond.txt77")' style="cursor:pointer" @click="quesFun('message.bond.txt77',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
             <div><span>0 ST</span></div>
-            <div :title='$t("message.bond.txt78")' style="cursor:pointer">
+            <div :title='$t("message.bond.txt78")' style="cursor:pointer" @click="quesFun('message.bond.txt78',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
             <div><span>0 ST</span></div>
@@ -364,14 +364,7 @@
     </div>
     <AddLp :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
     <InviteProup :inviteDis="inviteDis" @closeInvite="closeInvite"></InviteProup>
-    <div class="out_title_box" v-show="isShowTitle" @click="isShowTitle = false">
-      <div ref="titContent" class="showTitle">
-        我是提示的内容
-        <div class="tip_box">
-          <!-- <div class="con"></div> -->
-        </div>
-      </div>
-    </div>
+    <MessageBox ref="mychild" :clientX='clientX' :clientY="clientY" :content="datacontent"></MessageBox>
   </div>
 </template>
 
@@ -379,9 +372,10 @@
 import { mapGetters } from "vuex";
 import AddLp from "./Addlp.vue";
 import InviteProup from "./InviteProup.vue";
+import MessageBox from "./MessageBox.vue";
 export default {
   components: {
-    AddLp,InviteProup
+    AddLp,InviteProup,MessageBox
   },
   computed: { ...mapGetters(["getNoticeNum","isEnLang"]) },
   data() {
@@ -443,15 +437,19 @@ export default {
       ],
       list1: ["$ 0*0", "$ 0*0"],
       domHeight:false, // 下拉移动端左侧保持一致高度变量
-      isShowTitle:false
+      datacontent:'',
+      clientX:0,
+      clientY:0
     };
   },
   methods: {
     quesFun(data,e){
-      console.log('data,e: ', data,e);
-      // this.$refs.titContent.style.top = e.clientY + 'px'
-      // this.$refs.titContent.style.left = e.clientX + 'px'
-      // this.isShowTitle = !this.isShowTitle
+      this.datacontent = data
+      this.clientX = e.clientX
+      this.clientY = e.clientY
+      setTimeout(() => {
+        this.$refs.mychild.titleFun()
+      },400)
     },
     closeLP() {
       this.addlpDis = false;
@@ -470,56 +468,10 @@ export default {
       this.domHeight = item.status
     }
   },
-  watch:{
-    isShowTitle(newvala){
-      if(newvala){
-        document.body.style.overflow='hidden'
-      }else{
-        document.body.style.overflow='visible'
-      }
-    },
-  }
 };
 </script>
 
 <style lang="scss" scoped>
-.out_title_box{
-  position: fixed;
-  top: 0;
-  left: 0;
-  height:100vh;
-  width: 100vw;
-  .showTitle{
-    padding: 10px;
-    position: absolute;
-    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
-    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
-    border: 1px solid rgba(68, 67, 67, 0.47);
-    .tip_box{
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 6px;
-      border-color: transparent transparent red transparent;
-      position: absolute;
-      top: -33%;
-      left: 30%;
-      // margin-left: 40px;
-      z-index: 10;
-      .con{ 
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 15px;
-        border-color: #fff transparent transparent transparent;
-        position: absolute;
-        left: -15px;
-        top: -16px;
-      }
-    }
-  }
-}
-
 .dashboard_box{
   width: 100%;
   display: flex;
@@ -797,9 +749,6 @@ export default {
     width: 100%;
     min-height: 350px;
   }
-  // .mobile_bond_bg{
-  //   display: none;
-  // }
   >div{
     position: absolute;
     top: 70px;
@@ -1033,14 +982,13 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     font-weight: 400;
     color: #909090;
     line-height: 17px;
     p{
       &:nth-child(2){
         max-width: 70%;
-        // margin-top: 10px;
       }
     }
   }
@@ -1195,10 +1143,6 @@ export default {
       width: 100%;
       min-height: 2rem;
     }
-    // .mobile_bond_bg{
-    //   display: block;
-    //   width: 100%;
-    // }
     >div{
       position: absolute;
       top: 0.2rem;
@@ -1256,11 +1200,6 @@ export default {
         font-weight: 600;
         color: #eccf83;
         line-height: 33px;
-        // .item{
-        //   width: 30px;
-        //   height: 30px;
-        //   background: red;
-        // }
         &:nth-child(2),&:nth-child(4){
           text-align: right;
         }

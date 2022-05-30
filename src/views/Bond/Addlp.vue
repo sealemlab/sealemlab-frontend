@@ -68,17 +68,19 @@
           <p class="color2"><span>{{$t("message.bond.txt30")}}</span><span>1%</span>
           <p class="color3"><span>{{$t("message.bond.txt29")}}</span><span>3%</span>
           <p class="color4"><span>{{$t("message.bond.txt31")}}</span><span>1%</span>
-          <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''"><span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span><span>1%</span></p>
+          <p class="font14 mobile_font14" @click="AddQuesFun('message.bond.txt_tax',$event)" :class="isEnLang?'en_Bold':''"><span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span><span>1%</span></p>
           <p class="font16 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt33")}}</span><span>$0</span></p>
           <p>{{$t("message.bond.txt34")}}</p>
         </div>
       </div>
       <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click.stop="closeProup"/>
     </div>
+    <MessageBox ref="mychildAdd" :clientX='clientX' :clientY="clientY" :content="datacontent"></MessageBox>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import MessageBox from "./MessageBox.vue";
 export default {
   watch:{
     addlpDis(newvala){
@@ -89,24 +91,11 @@ export default {
       }
     }
   },
+  components: {
+    MessageBox
+  },
   computed: {
-    ...mapGetters(["isEnLang"]),
-    per: {
-      get() {
-        return 0;
-      },
-      set(val) {
-        this.sliderValue = val
-      }
-    },
-    values: {
-      get() {
-        return 0;
-      },
-      set(val) {
-        this.sliderValue2 = val
-      }
-    },
+    ...mapGetters(["isEnLang"])
   },
   props: {
     addlpDis: {
@@ -116,9 +105,10 @@ export default {
   },
   data(){
     return {
-      sliderValue:0,
-      sliderValue2:0,
       activetype:0,
+      datacontent:'',
+      clientX:0,
+      clientY:0,
       arr:[
         {
           title:'BUSD&ST',
@@ -133,6 +123,14 @@ export default {
     }
   },
   methods: {
+    AddQuesFun(data,e){
+      this.datacontent = data
+      this.clientX = e.clientX
+      this.clientY = e.clientY
+      setTimeout(() => {
+        this.$refs.mychildAdd.titleFun()
+      },400)
+    },
     busdBlurEvent(){
       console.log("失焦")
     },
