@@ -1441,7 +1441,8 @@ export default {
       height: 50vh;
       min-height:50vh;
       .video_{
-        height: 33vh;
+        width: 1005;
+        height: auto;
         object-fit: fill;
         // margin-top: -0.56rem;
       }
@@ -1574,6 +1575,12 @@ export default {
           img{
             width: 100%;
           }
+        }
+        .txt_content{
+          max-width: 100%;
+          display: inline-block;
+          font-weight: 400;
+          line-height: 0.18rem;
         }
       }
     }

@@ -645,19 +645,19 @@ export default {
       &:nth-child(1) {
         text-align: left;
         font-weight: bold;
-        line-height: 0.2rem;
+        line-height: 0.14rem;
       }
       &:nth-child(2) {
         font-weight: 400;
         color: #CED3D9;
-        line-height: 0.2rem;
+        line-height: 0.14rem;
         margin-top: 0.2rem;
         text-align: left;
       }
       &:nth-child(3) {
         font-weight: 400;
         color: #CED3D9;
-        line-height: 0.2rem;
+        line-height: 0.14rem;
         text-align: left;
       }
     }

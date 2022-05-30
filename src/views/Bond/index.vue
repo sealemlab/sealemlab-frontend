@@ -30,7 +30,7 @@
         </div>
         <div class="box">
           <div class="top mobile_font14 font24" :class="isEnLang?'en_Bold':''">
-            <div :title='$t("message.bond.txt71")' style="cursor:pointer">
+            <div :title='$t("message.bond.txt71")' style="cursor:pointer" @click="quesFun(1,$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
             </div>
             <div><span>$&nbsp;0</span></div>
@@ -438,6 +438,9 @@ export default {
     };
   },
   methods: {
+    quesFun(data,e){
+      console.log('data,e: ', data,e);
+    },
     closeLP() {
       this.addlpDis = false;
     },

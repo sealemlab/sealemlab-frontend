@@ -106,25 +106,9 @@
           class="add_icon"
           v-for="(item, index) in ortherNavArr"
           :key="index"
-          @click="routeFun(item, index)"
+          @click="routeFun(index)"
         >
-          <svg
-            t="1653452552652"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="4246"
-            width="16"
-            height="16"
-            v-if="index == 0"
-          >
-            <path
-              d="M85.333333 625.92a85.333333 85.333333 0 1 0 170.666667 0v-85.333333H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333333z m539.306667-142.506667a85.333333 85.333333 0 0 0 85.333333-85.333333V170.666667a85.333333 85.333333 0 1 0-170.666666 0v227.413333a85.333333 85.333333 0 0 0 86.186666 85.333333z m312.32-85.333333a85.333333 85.333333 0 1 0-170.666667 0v85.333333h85.333334a85.333333 85.333333 0 0 0 87.04-85.333333zM398.506667 540.586667a85.333333 85.333333 0 0 0-85.333334 85.333333V853.333333a85.333333 85.333333 0 1 0 170.666667 0v-227.413333a85.333333 85.333333 0 0 0-85.333333-85.333333zM625.493333 768h-85.333333v85.333333a85.333333 85.333333 0 1 0 85.333333-85.333333zM853.333333 540.586667h-227.84a85.333333 85.333333 0 0 0 0 170.666666H853.333333a85.333333 85.333333 0 0 0 0-170.666666zM398.506667 312.746667H170.666667a85.333333 85.333333 0 1 0 0 170.666666h227.84a85.333333 85.333333 0 0 0 0-170.666666z m0-227.413334a85.333333 85.333333 0 0 0 0 170.666667h85.333333V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334z"
-              p-id="4247"
-              :fill="item.status ? '#ECCF83' : '#CED3D9'"
-            ></path>
-          </svg>
+          <font-awesome-icon :icon="['fas', 'store']" v-if="index == 0"></font-awesome-icon>
           <svg
             t="1653452552652"
             class="icon"
@@ -328,16 +312,13 @@ export default {
       }
     },
     toRoute (item, index) {
-      console.log("1222222222----item,index: ", item, index);
       if (item.link) {
         this.$router.push(item.link);
         this.isShowMore = false;
       } else {
         if (index == this.navArr.length - 1) {
           this.isShowMore = true;
-          console.log("item.link为1111111")
         } else {
-          console.log("item.link为假3333333333")
           this.isShowMore = false;
           if (!this.getNoticeNum) {
             this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
@@ -347,15 +328,15 @@ export default {
       }
     },
     // 更多方法
-    routeFun (item, index) {
+    routeFun (index) {
       this.isShowMore = false;
       switch (index) {
-        case 0:
-          // this.$router.push('')
-          break;
-        case 1:
-          // this.$router.push("");
-          break;
+        // case 0:
+        //   // this.$router.push('')
+        //   break;
+        // case 1:
+        //   // this.$router.push("");
+        //   break;
         case 2:
           this.$router.push("/user/assets/0");
           break;

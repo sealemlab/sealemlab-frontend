@@ -164,17 +164,17 @@ export default {
       }
       .p_title{
         font-weight: bold;
-        line-height: 19px;
-        margin-bottom: 7px;
+        line-height: 0.19rem;
+        margin-bottom: 0;
       }
       .add_top_p{
-        margin-top: 56px;
-        margin-bottom: 13px;
+        margin-top: 0.25rem;
+        margin-bottom: 0.08rem;
       }
       .p_content{
         font-weight: 500;
-        line-height: 20px;
-        margin-bottom: 20px;
+        line-height: 0.12rem;
+        margin-bottom: 0.15rem;
       }
     }
     .close_img{

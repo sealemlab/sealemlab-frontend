@@ -5,9 +5,9 @@
       <span class="_txt mobile_font16">10</span>
     </div> -->
     <div class="ranking">
-      <p class="font32 mobile_font16" :class="isEnLang?'en_heavy':''">{{$t("message.user.txt16")}}</p>
+      <p class="font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.user.txt16")}}</p>
       <div class="listbox">
-        <div class="topline font24">
+        <div class="topline font24 mobile_font14">
           <div class="title_onebox">{{ $t("message.user.txt1") }}</div>
           <div class="onebox">
             <div class="insertbox1">{{ $t("message.user.txt2") }}</div>
@@ -184,6 +184,17 @@ export default {
     .ranking{
       .listbox{
         margin-top: 0;
+        padding: 0.2rem;
+        .topline{
+          .onebox{
+            white-space: nowrap;
+          }
+        }
+        .bottomline{
+          .boxs{
+            margin-bottom: 0.15rem;
+          }
+        }
       }
       p{
         margin: 0 0 0.2rem;
