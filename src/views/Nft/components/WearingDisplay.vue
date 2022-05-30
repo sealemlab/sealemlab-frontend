@@ -477,9 +477,9 @@ export default {
   margin-top: 90px;
   .wear_show{
     width: 100%;
-    margin-bottom: 42px;
-    padding: 0 20%;
-    text-align: center;
+    // margin-bottom: 42px;
+    // padding: 0 20%;
+    // text-align: center;
     font-weight: 600;
     color: #CED3D9;
     line-height: 42px;
@@ -536,7 +536,7 @@ export default {
   .content{
     width: 100%;
     display: flex;
-    margin-top: 50px;
+    margin-top: 30px;
     background:url($bg_url + "swiper_bg1.webp") no-repeat #000;
     // background-size: 100% 100%;
     background-size: cover;

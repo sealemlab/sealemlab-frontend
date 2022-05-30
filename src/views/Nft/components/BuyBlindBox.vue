@@ -12,6 +12,7 @@
     <div class="conten_box">
       <div class="treasure_chest_box">
         <img :src="`${$store.state.imgUrl}bind_box_base.webp`" class="base_img" />
+        <img :src="`${$store.state.imgUrl}bindbox.webp`" class="bind_box_img" />
       </div>
       <div class="right_content">
         <p class="font20 title_txt mobile_font16">
@@ -426,6 +427,7 @@ export default {
   display: flex;
   justify-content: space-between;
   .treasure_chest_box {
+    position: relative;
     width: 100%;
     min-height: 400px;
     display: flex;
@@ -433,6 +435,13 @@ export default {
     .base_img{
       width: 100%;
       max-width: 848px;
+    }
+    .bind_box_img{
+      position: absolute;
+      top: -4%;
+      left: 20%;
+      // transform: translate(-50%,-50%);
+      width: 340px;
     }
   }
   .right_content{
@@ -527,7 +536,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   margin-top: 100px;
   .introduce_title_txt{
     font-weight: bold;
@@ -539,7 +548,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 84px;
+    margin-top: 23px;
     background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
     box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
     border-radius: 12px;
@@ -659,6 +668,13 @@ export default {
       .base_img{
         width: 100%;
         max-width: 100%;
+      }
+      .bind_box_img{
+        position: absolute;
+        top: -246%;
+        left: 27%;
+        // transform: translate(-50%,-50%);
+        width:1.34rem;
       }
     }
     .right_content{

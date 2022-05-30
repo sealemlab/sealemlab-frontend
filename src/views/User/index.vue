@@ -68,8 +68,8 @@
       </ul>
     </div>
     <div class="content_box display_flex">
-      <ul class="display_flex">
-        <li class="font20" :class="{ active_li: li_index == index,en_Bold: isEnLang}" v-for="(item,index) in menuArr" :key="index" @click="liClick(item,index)">{{$t(item.name)}}</li>
+      <ul class="display_flex font18">
+        <li :class="{ active_li: li_index == index,en_Bold: isEnLang}" v-for="(item,index) in menuArr" :key="index" @click="liClick(item,index)">{{$t(item.name)}}</li>
       </ul>
       <div class="main">
         <router-view />
@@ -143,6 +143,8 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 133px 70px 60px;
+    border-bottom: 1px solid #242222;
+    margin-bottom: 20px;
     .invitation_code{
       cursor: pointer;
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
@@ -338,7 +340,7 @@ export default {
       justify-content: flex-start;
       align-items: flex-start;
       padding: 0.14rem 0.2rem 0.2rem;
-      border-bottom: 1px solid #242222;
+      margin-bottom: 0;
       .invitation_code{
         background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
         box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
