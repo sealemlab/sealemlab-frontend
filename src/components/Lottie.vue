@@ -44,7 +44,7 @@ export default {
         margin: '0 auto',
         left:this.left?`${this.left}`:0,
         top:this.top?`${this.top}`:0,
-        transform:this.transform?'translate(-50%, -50%)':''
+        // transform:this.transform?'translate(-50%, -50%)':''
       },
       ani: null
     }
@@ -57,14 +57,13 @@ export default {
       if (this.ani) this.ani.destroy()
       this.ani = lottie.loadAnimation({
         container: this.$refs.lavContainer,
-        renderer: 'svg',
+        renderer: 'canvas',
         loop: true,
         autoplay: true,
         animationData: options
       })
     }
   }
-
 }
 </script>
 <style lang="scss" scoped>
@@ -72,5 +71,6 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+  max-width: 848px;
 }
 </style>

@@ -11,7 +11,7 @@
         </div>
         <!-- busd输入框 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 1">
-          <p class="font12 balance_" :class="isEnLang?'en_medium':''">BUSD {{$t("message.bond.txt22")}}: 0</p>
+          <p class="font12 balance_" :class="isEnLang?'en_medium':''">BUSD {{$t("message.bond.txt22")}}: {{getUserCoin.busd}}</p>
           <div class="inputcontent" :class="isEnLang?'en_Bold':''">
             <div class="left_content">
               <img :src="`${$store.state.imgUrl}busd.webp`" class="busd_img" />
@@ -25,7 +25,7 @@
         </div>
         <!-- st输入框 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 2">
-          <p class="font12 balance_" :class="isEnLang?'en_medium':''">ST {{$t("message.bond.txt22")}}: 0</p>
+          <p class="font12 balance_" :class="isEnLang?'en_medium':''">ST {{$t("message.bond.txt22")}}: {{getUserCoin.st}}</p>
           <div class="inputcontent" :class="isEnLang?'en_Bold':''">
             <div class="left_content">
               <img :src="`${$store.state.imgUrl}stlogo.webp`" class="busd_img" />
@@ -34,7 +34,7 @@
             <div class="center_content">
               <Input @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
             </div>
-            <div class="max_btn font16">MAX</div>
+            <div class="max_btn font16" @click="maxClick">MAX</div>
           </div>
         </div>
         <!-- 投入以及收益 -->
@@ -95,7 +95,7 @@ export default {
     MessageBox
   },
   computed: {
-    ...mapGetters(["isEnLang"])
+    ...mapGetters(["isEnLang","getUserCoin"])
   },
   props: {
     addlpDis: {
@@ -162,7 +162,10 @@ export default {
     },
     bondFun(){
       this.$emit('sureclick')
-    }
+    },
+    maxClick(){
+      console.log("max")
+    },
   }
 }
 </script>

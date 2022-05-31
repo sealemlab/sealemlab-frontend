@@ -279,5 +279,5 @@ export default {
     store.state.timer = setTimeout(()=>{
       callback()
     },delay);
-  },
+  }
 };

@@ -208,9 +208,10 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
 import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
-export default {
+import { token,util,erc20 } from  "sealemlab-sdk";
+export default { 
   computed: {
-    ...mapGetters(["getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
+    ...mapGetters(["getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
   },
   data () {
     return {
@@ -230,7 +231,8 @@ export default {
       // startX:0,
       startY: 0,
       startTime: null,
-      oldScrollTop: 0
+      oldScrollTop: 0,
+      timer:null
     };
   },
   watch: {
@@ -239,7 +241,15 @@ export default {
         if (newValue) {
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then((res) => {
             sessionStorage.setItem("sb_count", res);
-          });
+          })
+          this.$utils.antiShakeFun(() => {
+            this.getUserCoinInfo()
+          },3000)
+          // if(!this.timer){
+            
+          // }else{
+          //   console.log("获取用户余额已有定时器")
+          // }
         }
       },
       deep: true,
@@ -421,6 +431,35 @@ export default {
         this.$store.commit("setMoblieTouch", JSON.stringify({ direction: scrollStep ? "bottom" : "top" }));
       }
     },
+    getUserCoinInfo(){
+      let arr = [token().ST,token().SR,token().BUSD]
+      let count = 0
+      let obj = {
+        st:0,
+        sr:0,
+        busd:0
+      }
+      erc20(arr[0]).balanceOf(this.getAccount).then(res => {
+        obj.st = this.$utils.getBit(util.formatEther(res),4)
+        count++
+      })
+      erc20(arr[1]).balanceOf(this.getAccount).then(res => {
+        obj.sr = this.$utils.getBit(util.formatEther(res),4)
+        count++
+      })
+      erc20(arr[2]).balanceOf(this.getAccount).then(res => {
+        obj.busd = this.$utils.getBit(util.formatEther(res),4)
+        count++
+      })
+      this.timer = setInterval(() => {
+        if(count == 3){
+          clearInterval(this.timer)
+          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
+          console.log("获取用户代币余额结束",count)
+        }
+        console.log("获取用户代币余额中",count)
+      },1000)
+    }
   },
   mounted () {
     if (localStorage.getItem("walletType")) {

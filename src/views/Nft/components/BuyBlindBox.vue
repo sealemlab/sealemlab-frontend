@@ -13,7 +13,7 @@
       <div class="treasure_chest_box">
         <img :src="`${$store.state.imgUrl}bind_box_base.webp`" class="base_img" />
         <img :src="`${$store.state.imgUrl}bindbox.webp`" class="bind_box_img" />
-        <Lottie :options="datajson"></Lottie>
+        <Lottie :options="datajson1"></Lottie>
       </div>
       <div class="right_content">
         <p class="font20 title_txt mobile_font16">
@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import datajson from '@/assets/data.json'
+import datajson1 from '@/assets/data4.json'
 import WearingShow from './WearingDisplay.vue'
 import { mapGetters } from "vuex";
 import { sb,util,token,erc20,getSigner } from "sealemlab-sdk";
@@ -169,7 +169,7 @@ export default {
   },
   data() {
     return {
-      datajson,
+      datajson1,
       probabilityArr1:[
         {lv:4,num:'40%'},
         {lv:5,num:'32%'},
