@@ -161,6 +161,7 @@ export default {
     margin-bottom: 15px;
     .link_img{
       width: 12px;
+      margin-left: 5px;
     }
   }
   .box{

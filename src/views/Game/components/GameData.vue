@@ -1,6 +1,6 @@
 <template>
   <div class="gamebox">
-    <div class="game_title">Game Data</div>
+    <div class="game_title">{{ $t("message.gamepage.text3") }}</div>
     <div class="nodata">
       <div>
         <svg
@@ -19,7 +19,7 @@
             p-id="84372"
           ></path>
         </svg>
-        <div>NoData</div>
+        <div>{{ $t("message.gamepage.text37") }}</div>
       </div>
     </div>
   </div>

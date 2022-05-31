@@ -1,6 +1,6 @@
 <template>
   <div class="gamebox">
-    <div class="game_title">Recharge and Claim</div>
+    <div class="game_title">{{ $t("message.gamepage.text38") }}</div>
     <div class="box1">
       <div>
         <div class="label">{{ $t("message.gamepage.text16") }}</div>
@@ -43,8 +43,8 @@
     <div class="box2">
       <div class="box2_title">{{ $t("message.gamepage.text24") }}</div>
       <div class="btns">
-        <div @click="isShowRechargeList = false" :class="{ active: !isShowRechargeList }">Claim</div>
-        <div @click="isShowRechargeList = true" :class="{ active: isShowRechargeList }">Recharge</div>
+        <div @click="isShowRechargeList = false" :class="{ active: !isShowRechargeList }">{{ $t("message.gamepage.text23") }}</div>
+        <div @click="isShowRechargeList = true" :class="{ active: isShowRechargeList }">{{ $t("message.gamepage.text19") }}</div>
       </div>
     </div>
     <div class="box3">
