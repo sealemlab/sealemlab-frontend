@@ -809,5 +809,6 @@ export const message = {
     text36: "Approve",
     text37: "空空如也",
     text38: "Recharge and Claim",
+    text39: "请登录账号后查看信息",
   },
 };

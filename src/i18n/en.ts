@@ -840,5 +840,6 @@ export const message = {
     text36: "Approve",
     text37: "NoData",
     text38: "Recharge and Claim",
+    text39: "Please log in to view the information",
   },
 };
