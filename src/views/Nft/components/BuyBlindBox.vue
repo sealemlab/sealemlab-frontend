@@ -13,6 +13,7 @@
       <div class="treasure_chest_box">
         <img :src="`${$store.state.imgUrl}bind_box_base.webp`" class="base_img" />
         <img :src="`${$store.state.imgUrl}bindbox.webp`" class="bind_box_img" />
+        <Lottie :options="datajson"></Lottie>
       </div>
       <div class="right_content">
         <p class="font20 title_txt mobile_font16">
@@ -146,6 +147,7 @@
 </template>
 
 <script>
+import datajson from '@/assets/data.json'
 import WearingShow from './WearingDisplay.vue'
 import { mapGetters } from "vuex";
 import { sb,util,token,erc20,getSigner } from "sealemlab-sdk";
@@ -167,6 +169,7 @@ export default {
   },
   data() {
     return {
+      datajson,
       probabilityArr1:[
         {lv:4,num:'40%'},
         {lv:5,num:'32%'},
@@ -450,6 +453,7 @@ export default {
       left: 20%;
       // transform: translate(-50%,-50%);
       width: 340px;
+      animation: topbottom 4s linear 0s infinite alternate;
     }
   }
   .right_content{
@@ -636,6 +640,17 @@ export default {
   }
   .mobile_box_probability{
     display: none;
+  }
+}
+@keyframes topbottom {
+  0%{
+    transform: translateY(-20px);
+  }
+  50%{
+    transform: translateY(30px);
+  }
+  100%{
+    transform: translateY(-20px);
   }
 }
 @media screen and (max-width: 980px) {
