@@ -1,6 +1,6 @@
 <template>
   <div
-    class="out_title_box"
+    class="out_title_box font14"
     ref="outbox"
     v-if="isShowTitle"
     @click="closeTitle"
