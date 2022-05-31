@@ -579,7 +579,7 @@ export const message = {
     },
   },
   bond: {
-    txt_tax:"The floor tax rate is 0.1%, increasing by 0.01% per 1k USD.",//bond弹窗tax的问号内容
+    txt_tax: "The floor tax rate is 0.1%, increasing by 0.01% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "Bond",
     txt2_1: "Buy bond to earn stable ST rewards ",
     txt2_2: "Each bond offering is limited",
@@ -690,7 +690,7 @@ export const message = {
     txt21: "SealemLab Protocol",
     txt22: "If you have a registered account, click to",
     txt23: "Login",
-    txt24: "Login account",
+    txt24: "Login Account",
     txt25: "The account is applicable to each product on the Sealem platform.",
     txt26: "We recommend that you use the 'Remember Me' feature only on your own computer for your account security. ",
     txt27: "If you don’t have an account, click to",
@@ -731,7 +731,7 @@ export const message = {
     txt17: "Add Address connection",
     txt18: "In order to view your NFT products in the game, you need to complete the signing process.",
     txt19: "You can access your in-game NFT products by using the metamask plug-in signature.",
-    txt20: "Account name",
+    txt20: "Binding Adress",
     txt21: "Remove",
     txt22: "Enter email",
     txt23: "Enter verification code",
@@ -777,7 +777,6 @@ export const message = {
     txt25: "1. The binding is successful only after users enter the official website through the link to purchase the bond.",
     txt26: "2. The interest rate increases by 0.1% per 1K USD of bonds purchased or  staking by the invitee.",
     txt27: "3. The invitation staking interest rate changes according to the actual staking amount of the invitee.",
-    
   },
   tip: {
     txt1: "The account was created successfully, please go to the email to activate the account.",
@@ -798,7 +797,7 @@ export const message = {
     self_txt10: "Up to 5",
     self_txt11: "Opening…",
     self_txt12: "Open mystery box result",
-    self_txt13: "No Data"
+    self_txt13: "No Data",
   },
   approve: "Approve",
 
@@ -839,5 +838,7 @@ export const message = {
     text34: "Balance",
     text35: "Shortcut",
     text36: "Approve",
+    text37: "NoData",
+    text38: "Recharge and Claim",
   },
 };
