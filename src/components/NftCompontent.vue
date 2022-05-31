@@ -348,30 +348,6 @@ export default {
   align-items: center;
   color: #CED3D9;
 }
-.video_proup{
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 88;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(6px);
-  .video_{
-    height: 90%;
-    object-fit: cover;
-  }
-  .close_img{
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    width: 34px;
-    cursor: pointer;
-  }
-}
 @media screen and (max-width: 980px) {
   .nft_arr_page {
     .box{
@@ -402,7 +378,7 @@ export default {
             align-items: center;
             justify-content: center;
             .imgcard {
-              height: 1.84rem;
+              height: 1.6rem;
             }
           }
           .huxing_bg_box{
@@ -421,7 +397,7 @@ export default {
               display: flex;
               flex-direction: column;
               align-items: center;
-              padding: 0.21rem 0.13rem 0.1rem;
+              padding: 0.29rem 0.08rem 0.1rem;
               .start{
                 position: absolute;
                 top: 0.27rem;
@@ -437,7 +413,7 @@ export default {
                   margin-right: 0.05rem;
                 }
                 img{
-                  width: 0.24rem;
+                  width: 0.13rem;
                 }
               }
               .people_type{
@@ -453,6 +429,9 @@ export default {
                   display: flex;
                   flex-direction: column;
                   align-items: flex-start;
+                  &:nth-child(2){
+                    align-items: center;
+                  }
                 }
                 .left_content{
                   width: 100%;
@@ -485,5 +464,9 @@ export default {
       }
     }
   }
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 </style>
