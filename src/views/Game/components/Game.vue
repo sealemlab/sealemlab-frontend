@@ -3,7 +3,7 @@
     <div class="game_title">{{ $t("message.gamepage.text5") }}</div>
     <div class="boxin">
       <div class="title mobile">{{ $t("message.gamepage.text6") }}</div>
-      <img :src="`${$store.state.imgUrl}maxgame1.webp`" alt="" />
+      <img :src="`${$store.state.imgUrl}game_SacredRealm.webp`" alt="" />
       <div class="content">
         <div class="title pc">{{ $t("message.gamepage.text6") }}</div>
         <div class="textbox">
@@ -85,8 +85,8 @@ export default {
   margin-bottom: 20px;
   > img {
     width: 29rem;
-    height: 14rem;
-    object-fit: cover;
+    height: 15rem;
+    object-fit: fill;
   }
   .title {
     font-size: 24px;
