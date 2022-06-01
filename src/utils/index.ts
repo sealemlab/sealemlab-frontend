@@ -28,7 +28,7 @@ export default {
   /** 应用场景:返回秒数,展示对应时间;参数:传入秒数(返回的是秒数对应的时间)*/
   afferentTime(endtime: number, calback: any, type = 'hour',iscountdown = false) {
     if(endtime == 0 && type == 'day'){
-      calback({ day:"00",h: "00", m: "00", s: "00" });
+      calback({ d:"00",h: "00", m: "00", s: "00" });
       return
     }
     if(endtime == 0 && type == 'hour'){

@@ -639,7 +639,7 @@ export default {
       }
     },
     bondClick(){
-      this.$router.push('/bond');
+      this.$router.push('/bond/0');
     },
     showtxtFun(item){
       this.teamArr.forEach(item => {

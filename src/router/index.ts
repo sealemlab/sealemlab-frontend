@@ -15,7 +15,7 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Home/IndexView.vue"),
   },
   {
-    path: "/bond",
+    path: "/bond/:address",
     name: "Bond",
     component: () => import("../views/Bond/index.vue"),
   },

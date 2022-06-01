@@ -94,7 +94,7 @@
 <script>
 import { mapGetters } from "vuex";
 import MessageBox from "./MessageBox.vue";
-import { bondDepository,token,contract} from 'sealemlab-sdk'
+import { bondDepository,token,contract,getSigner} from 'sealemlab-sdk'
 export default {
   watch:{
     'addlpDis'(newvala){
@@ -174,11 +174,11 @@ export default {
   methods: {
     buyBondFun(){
       console.log('购买债券')
-      // bondDepository().swapAndAddLiquidityAndBond(this.newBondID,).then(res => {
-
-      // }).catch(() => {
-
-      // })
+      let address = this.$route.params.address == 0 ?'0x0000000000000000000000000000000000000000':''
+        console.log('this.newBondID,this.BUSDmsg,this.STmsg,0,address: ', this.newBondID,this.BUSDmsg,this.STmsg,0,address);
+      bondDepository().connect(getSigner()).swapAndAddLiquidityAndBond(this.newBondID,this.BUSDmsg,this.STmsg,0,address).then(res => {
+        console.log('购买债券res: ', res);
+      })
     },
     // 去授权
     authorizationClick(data){
@@ -278,6 +278,7 @@ export default {
     },
     busdInputClick(data){
       console.log('busd----data: ', data);
+      this.BUSDmsg = data
     },
     blurEvent(){
       console.log("失焦")
@@ -285,8 +286,9 @@ export default {
     focusEvent(){
       console.log("聚焦")
     },
-    inputClick(){
+    inputClick(data){
       console.log("input")
+      this.STmsg = data
     },
     typeClick(item,index){
       this.arr.forEach(item => {

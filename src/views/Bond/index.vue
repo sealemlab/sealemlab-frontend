@@ -458,9 +458,24 @@ export default {
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
+          this.bondInfoArr = []
           this.loadMoreStatus = true
         }else{
           this.loadMoreStatus = false
+          this.bondInfoArr = [
+            {
+              bondName:'ST-BUSD LP',
+              baseRate:"5%",//基础利率
+              additional1:'0%',//附加利率1
+              additional2:'0%',//附加利率1
+              additional3:'0%',//附加利率
+              purchaseRate:'0%',
+              lp:'',
+              maxSupplyLp:'',
+              cycle:'',
+              endTime:{ d:"00",h: "00", m: "00", s: "00" }
+            }
+          ]
         }
       },
       deep: true,

@@ -13,7 +13,7 @@
       <div class="treasure_chest_box">
         <img :src="`${$store.state.imgUrl}bind_box_base.webp`" class="base_img" />
         <img :src="`${$store.state.imgUrl}bindbox.webp`" class="bind_box_img" />
-        <Lottie :options="datajson1"></Lottie>
+        <Lottie :options="datajson1" :width="getIsMobile?375:''"></Lottie>
       </div>
       <div class="right_content">
         <p class="font20 title_txt mobile_font16">
@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import datajson1 from '@/assets/data4.json'
+import datajson1 from '@/assets/data.json'
 import WearingShow from './WearingDisplay.vue'
 import { mapGetters } from "vuex";
 import { sb,util,token,erc20,getSigner } from "sealemlab-sdk";
@@ -156,7 +156,7 @@ export default {
     WearingShow
   },
   computed: {
-    ...mapGetters(["getAccount","getIstrue","isEnLang"]),
+    ...mapGetters(["getAccount","getIstrue","isEnLang","getIsMobile"]),
     per: {
       get() {
         return 0;
@@ -432,7 +432,7 @@ export default {
   }
 }
 .conten_box {
-  margin-top: 30px;
+  margin-top: 80px;
   position: relative;
   width: 100%;
   display: flex;
@@ -677,6 +677,7 @@ export default {
     }
   }
   .conten_box {
+    margin-top: 0.6rem;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -693,7 +694,7 @@ export default {
       }
       .bind_box_img{
         position: absolute;
-        top: -246%;
+        top: -286%;
         left: 27%;
         // transform: translate(-50%,-50%);
         width:1.34rem;
@@ -859,6 +860,17 @@ export default {
           }
         }
       }
+    }
+  }
+  @keyframes topbottom {
+    0%{
+      transform: translateY(0px);
+    }
+    50%{
+      transform: translateY(30px);
+    }
+    100%{
+      transform: translateY(0px);
     }
   }
 }

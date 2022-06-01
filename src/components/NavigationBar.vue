@@ -62,7 +62,7 @@ export default {
     return {
       navActive: 0,
       navArr: [
-        { label: "message.nav.txt1", link: "/bond" },
+        { label: "message.nav.txt1", link: "/bond/0" },
         // { label: "message.nav.txt2", link: "" },
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
@@ -85,7 +85,7 @@ export default {
       // }
       if (to.path == "/home") {
         this.navActive = -1;
-      } else if (to.path == "/bond") {
+      } else if (to.path.indexOf("/bond/") !== -1) {
         this.navActive = 0;
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
