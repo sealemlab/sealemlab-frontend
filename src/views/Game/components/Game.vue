@@ -85,8 +85,8 @@ export default {
   margin-bottom: 20px;
   > img {
     width: 29rem;
-    height: 14rem;
-    object-fit: cover;
+    height: 15rem;
+    object-fit: fill;
   }
   .title {
     font-size: 24px;
