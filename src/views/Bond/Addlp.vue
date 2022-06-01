@@ -18,9 +18,9 @@
               <span class="busd_txt font14">BUSD</span>
             </div>
             <div class="center_content">
-              <Input @blurEvent="busdBlurEvent" @focusEvent="busdFocusEvent" :placeholder='$t("message.bond.txt23")' @input="busdInputClick"></Input>
+              <Input @blurEvent="busdBlurEvent" @focusEvent="busdFocusEvent" :msg="BUSDmsg" :placeholder='$t("message.bond.txt23")' @input="busdInputClick"></Input>
             </div>
-            <div class="max_btn font16">MAX</div>
+            <div class="max_btn font16" @click="maxClick('busd')">MAX</div>
           </div>
         </div>
         <!-- st输入框 -->
@@ -32,9 +32,9 @@
               <span class="busd_txt font14">ST</span>
             </div>
             <div class="center_content">
-              <Input @blurEvent="blurEvent" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
+              <Input @blurEvent="blurEvent" :msg="STmsg" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
             </div>
-            <div class="max_btn font16" @click="maxClick">MAX</div>
+            <div class="max_btn font16" @click="maxClick('st')">MAX</div>
           </div>
         </div>
         <!-- 投入以及收益 -->
@@ -61,7 +61,20 @@
             </div>
           </div>
         </div>
-        <div class="main_button font16 mobile_font16" :class="isEnLang?'en_Bold':''"  @click="bondFun">Approve</div>
+        <div class="main_button" v-if="allLoading">
+          <BtnLoading :isloading="true"></BtnLoading>
+        </div>
+        <div v-else>
+          <div class="main_button font16 mobile_font16" @click="buyBondFun" v-if="isApproveBUSD && isApproveST">
+            {{$t("message.tip.self_buy")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
+          </div>
+          <div class="main_button font16 mobile_font16" @click="authorizationClick('busd')" v-else-if="!isApproveBUSD">
+            BUSD {{$t("message.approve")}}<BtnLoading :isloading="busdisloading"></BtnLoading>
+          </div>
+          <div class="main_button font16 mobile_font16" @click="authorizationClick('st')" v-else-if="!isApproveST">
+            ST {{$t("message.approve")}}<BtnLoading :isloading="stisloading"></BtnLoading>
+          </div>
+        </div>
         <div class="tipbox font12" :class="isEnLang?'en_medium':''">
           <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt27")}}</span><span>0%</span></p>
           <p class="color1"><span>{{$t("message.bond.txt28")}}</span><span>0%</span>
@@ -81,30 +94,65 @@
 <script>
 import { mapGetters } from "vuex";
 import MessageBox from "./MessageBox.vue";
+import { bondDepository,token,contract} from 'sealemlab-sdk'
 export default {
   watch:{
-    addlpDis(newvala){
+    'addlpDis'(newvala){
       if(newvala){
         document.body.style.overflow='hidden'
       }else{
         document.body.style.overflow='visible'
       }
-    }
+    },
+    'getAccountStatus': {
+      handler: function (newValue) {
+        if(newValue == -1 || newValue == undefined){
+          this.allLoading = this.isApproveST = this.isApproveBUSD = false
+        }else if(newValue == 0){
+          this.allLoading = true
+          this.isApproveST = this.isApproveBUSD = false
+          this.getSDKInfo()
+        }else if(newValue > 0){
+          this.isApproveST = this.isApproveBUSD = false
+          this.allLoading = true
+          clearInterval(this.btntimernull)
+          this.$utils.antiShakeFun(() => {
+            this.getSDKInfo()
+          },2000)
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   components: {
     MessageBox
   },
   computed: {
-    ...mapGetters(["isEnLang","getUserCoin"])
+    ...mapGetters(["isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"])
   },
   props: {
     addlpDis: {
       type: Boolean,
       default: false
+    },
+    newBondID:{
+      type: Number,
+      default: -2
     }
   },
   data(){
     return {
+      BUSDmsg:'',
+      STmsg:'',
+      stbtn:1,
+      busdbtn:1,
+      allLoading:true,// 按钮转圈
+      isApproveST:false,//st是否授权
+      isApproveBUSD:false,//bsud是否授权
+      buyLoading:false,//购买债券loading
+      busdisloading:false,//busd授权loading
+      stisloading:false,//st授权loading
       activetype:0,
       datacontent:'',
       clientX:0,
@@ -119,10 +167,101 @@ export default {
         {
           title:'ST',
         }
-      ]
+      ],
+      btntimernull:null
     }
   },
   methods: {
+    buyBondFun(){
+      console.log('购买债券')
+      // bondDepository().swapAndAddLiquidityAndBond(this.newBondID,).then(res => {
+
+      // }).catch(() => {
+
+      // })
+    },
+    // 去授权
+    authorizationClick(data){
+      if(data == 'busd'){
+        if(!this.isApproveBUSD){
+          this.busdisloading = true
+          this.$utils.goApproveFun(token().BUSD, contract().BondDepository).then(res => {
+            console.log('busd授权结果res: ', res);
+            if(res){
+              this.isApproveBUSD = true
+              this.busdisloading = false
+              if(!this.getNoticeNum){
+                this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+                this.$store.commit("setNoticeNum",true)
+              }
+            }else{
+              this.isApproveBUSD = false
+              this.busdisloading = false
+            }
+          }).catch(() => {
+            this.isApproveBUSD = false
+            this.busdisloading = false
+          })
+        }
+      }else{
+        if(!this.isApproveST){
+          this.stisloading = true
+          this.$utils.goApproveFun(token().ST,contract().BondDepository).then(res => {
+            console.log('st授权结果res: ', res);
+            if(res){
+              this.isApproveST = true
+              this.stisloading = false
+              if(!this.getNoticeNum){
+                this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+                this.$store.commit("setNoticeNum",true)
+              }
+            }else{
+              this.isApproveST = false
+              this.stisloading = false
+            }
+          }).catch(() => {
+            this.isApproveST = false
+            this.stisloading = false
+          })
+        }
+      }
+    },
+    // 是否授权
+    getSDKInfo(){
+      this.$utils.isApproveFun(this.getAccount,token().BUSD,contract().BondDepository).then(res => {
+        console.log('busd是否授权res: ', res);
+        if (res) {
+          this.busdbtn = 2
+          this.isApproveBUSD = true
+        } else {
+          this.isApproveBUSD = false
+          this.busdbtn = 2
+        }
+      }).catch(() => {
+        this.isApproveBUSD = false
+        this.busdbtn = 2
+      })
+      this.$utils.isApproveFun(this.getAccount,token().ST,contract().BondDepository).then(res => {
+        console.log('st是否授权res: ', res);
+        if(res){
+          this.isApproveST = true
+          this.stbtn = 2
+        }else{
+          this.isApproveST = false
+          this.stbtn = 2
+        }
+      }).catch(() => {
+        this.isApproveST = false
+        this.stbtn = 2
+      })
+      clearInterval(this.btntimernull)
+      this.btntimernull = setInterval(() => {
+        if(this.stbtn == 2 && this.busdbtn == 2){
+          clearInterval(this.btntimernull)
+          this.allLoading = false
+        }
+      },1000)
+    },
     AddQuesFun(data,e){
       this.datacontent = data
       this.clientX = e.clientX
@@ -137,8 +276,8 @@ export default {
     busdFocusEvent(){
       console.log("聚焦")
     },
-    busdInputClick(){
-      console.log("input")
+    busdInputClick(data){
+      console.log('busd----data: ', data);
     },
     blurEvent(){
       console.log("失焦")
@@ -158,13 +297,15 @@ export default {
     },
     // 弹窗关闭
     closeProup () {
+      this.BUSDmsg = this.STmsg = ''
       this.$emit('closeLP')
     },
-    bondFun(){
-      this.$emit('sureclick')
-    },
-    maxClick(){
-      console.log("max")
+    maxClick(data){
+      if(data == 'busd'){
+        this.BUSDmsg = this.getUserCoin.busd
+      }else{
+        this.STmsg = this.getUserCoin.st
+      }
     },
   }
 }
@@ -177,7 +318,7 @@ export default {
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 99999999;
+  z-index: 99;
   backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
@@ -288,6 +429,7 @@ export default {
         line-height: 38px;
         color: #000000;
         font-weight: bolder;
+        cursor: pointer;
       }
     }
   }

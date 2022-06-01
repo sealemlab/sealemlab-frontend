@@ -11,11 +11,6 @@
 </template>
 <script>
 export default {
-  data(){
-    return {
-      msg:''
-    }
-  },
   watch:{
     msg(nval,oval){
       if(nval != oval){
@@ -24,6 +19,10 @@ export default {
     }
   },
   props: {
+    msg:{
+      type: String || Number,
+      default:''
+    },
     type:{
       type: String,
       default: 'text'

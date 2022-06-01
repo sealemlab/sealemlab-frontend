@@ -798,6 +798,7 @@ export const message = {
     self_txt11: "Opening…",
     self_txt12: "Open mystery box result",
     self_txt13: "No Data",
+    self_buy:"Buy"
   },
   approve: "Approve",
 

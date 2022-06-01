@@ -565,6 +565,7 @@ export const message = {
     },
   }, //nft页面
   bond: {
+    txt_tax: "The floor tax rate is 0.1%, increasing by 0.01% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "债券",
     txt2_1: "购买债券稳定获得高额ST收益",
     txt2_2: "每期限量发售",
@@ -767,6 +768,7 @@ export const message = {
     self_txt10: "最多5个",
     self_txt11: "开盒子中....",
     self_txt12: "开盲盒结果",
+    self_buy:"购买"
   }, //一些提示语句,文案你看哪不合适,替换就行
   approve: "授权",
 

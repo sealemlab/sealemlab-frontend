@@ -96,7 +96,7 @@ export default {
   width: 100%;
   flex-direction: column;
   align-items: center;
-  background: url($bg_url + 'footerbg.webp') no-repeat #000;
+  background: url($bg_url + 'new_footerbg.webp') no-repeat #000;
   background-size: 100% 100%;
   .footer_img {
     width: 100%;
@@ -158,7 +158,7 @@ export default {
     width: 100%;
     flex-direction: column;
     align-items: center;
-    background: url($bg_url + "footerbg.webp") no-repeat #000;
+    background: url($bg_url + "new_footerbg.webp") no-repeat #000;
     background-size: 100% 100%;
     .footer_img {
       display: none;

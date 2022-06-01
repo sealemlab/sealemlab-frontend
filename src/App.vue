@@ -208,7 +208,7 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
 import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
-import { token,util,erc20 } from  "sealemlab-sdk";
+import { token,util,erc20,bondDepository } from  "sealemlab-sdk";
 export default { 
   computed: {
     ...mapGetters(["getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
@@ -437,7 +437,8 @@ export default {
       let obj = {
         st:0,
         sr:0,
-        busd:0
+        busd:0,
+        stPrice:0
       }
       erc20(arr[0]).balanceOf(this.getAccount).then(res => {
         obj.st = this.$utils.getBit(util.formatEther(res),4)
@@ -451,13 +452,18 @@ export default {
         obj.busd = this.$utils.getBit(util.formatEther(res),4)
         count++
       })
+      bondDepository().getStPrice().then(res => {
+        // st价格
+        obj.stPrice = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        count++
+      })
       this.timer = setInterval(() => {
-        if(count == 3){
+        if(count == 4){
           clearInterval(this.timer)
           this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
           console.log("获取用户代币余额结束",count)
         }
-        console.log("获取用户代币余额中",count)
+        // console.log("获取用户代币余额中",count)
       },1000)
     }
   },

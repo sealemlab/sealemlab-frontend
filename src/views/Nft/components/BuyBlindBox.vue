@@ -427,7 +427,7 @@ export default {
     }
     &:nth-child(3) {
       font-weight: 400;
-      line-height: 32px;
+      line-height: 12px;
     }
   }
 }
@@ -579,11 +579,10 @@ export default {
       .center{
         margin-top: 10px;
         width: 100%;
-        min-height: 159px;
         padding: 10px 0;
         font-weight: 400;
         color: #CED3D9;
-        line-height: 32px;
+        line-height: 20px;
       }
     }
   }

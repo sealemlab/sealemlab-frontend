@@ -29,17 +29,20 @@
           <span>{{ $t("message.bond.txt1") }}</span>
         </div>
         <div class="box">
+          <!-- 国库  st价格 -->
           <div class="top mobile_font14 font24" :class="isEnLang?'en_Bold':''">
             <div :title='$t("message.bond.txt71")' style="cursor:pointer" @click="quesFun('message.bond.txt71',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
             </div>
-            <div><span>$&nbsp;0</span></div>
+            <div><span>$&nbsp;{{treasuryMoney}}</span></div>
             <div>
               <span>ST{{ $t("message.bond.txt4") }} </span>
             </div>
-            <div><span>$&nbsp;0</span></div>
+            <div><span>$&nbsp;{{getUserCoin.stPrice}}</span></div>
           </div>
+          <!-- 表格 -->
           <div class="bottom">
+            <!-- 标题 -->
             <ul class="list_title font20" :class="isEnLang?'en_Bold':''">
               <li>
                 <span>{{ $t("message.bond.txt1") }}</span>
@@ -64,22 +67,39 @@
               </li>
               <li></li>
             </ul>
-            <ul class="list_title2 font16" :class="isEnLang?'en_medium':''">
-              <li v-for="(item, index) in Arr1" :key="index">
-                <span>{{ item.zq }}</span>
-                <span>{{ item.zl }}</span>
-                <span>{{ item.jclv }}</span>
-                <span><span class="color2">{{ item.fjlv1 }}</span> + <span class="color3">{{ item.fjlv2 }}</span> + <span class="color4">{{ item.fjlv3 }}</span></span>
-                <span>{{ item.lxzq }}&nbsp;{{$t("message.bond.txt19")}}</span>
-                <span>{{ item.djs }}</span>
+            <ul class="list_title2 font16" :class="isEnLang?'en_medium':''" v-if="bondInfoArr.length > 0">
+              <li v-for="(item, index) in bondInfoArr" :key="index">
+                <span>{{ item.bondName }}</span>
+                <span>{{ item.maxSupplyLp }}</span>
+                <span>{{ item.baseRate }}</span>
                 <span>
-                  <div class="progressbar"><div :style="{ width: item.gml }"></div></div>
-                  {{ item.gml }}
+                  <span class="color2">{{ item.additional1 }}</span>
+                  + 
+                  <span class="color3">{{ item.additional2 }}</span>
+                  + 
+                  <span class="color4">{{ item.additional3 }}</span>
+                </span>
+                <span>{{ item.cycle }}&nbsp;{{$t("message.bond.txt19")}}</span>
+                <span>
+                  {{ item.endTime.d}}&nbsp;:
+                  {{ item.endTime.h }}&nbsp;:
+                  {{ item.endTime.m }}&nbsp;:
+                  {{ item.endTime.s }}
+                </span>
+                <span>
+                  <div class="progressbar"><div :style="{ width: item.purchaseRate }"></div></div>
+                  {{ item.purchaseRate }}
                 </span>
                 <span>
                   <div class="btn_txt mobile_btn bg3" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
                 </span>
               </li>
+            </ul>
+            <ul class="list_title2 nodata_add font16" v-if="bondInfoArr.length == 0 && loadMoreStatus">
+              <li><LoadingAnmation></LoadingAnmation></li>
+            </ul>
+            <ul class="list_title2 nodata_add font16" v-if="bondInfoArr.length == 0 && !loadMoreStatus">
+              <li>NoData</li>
             </ul>
             <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
           </div>
@@ -362,7 +382,7 @@
         </div>
       </div>
     </div>
-    <AddLp :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
+    <AddLp :newBondID="newBondID" :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
     <InviteProup :inviteDis="inviteDis" @closeInvite="closeInvite"></InviteProup>
     <MessageBox ref="mychild" :clientX='clientX' :clientY="clientY" :content="datacontent"></MessageBox>
   </div>
@@ -373,13 +393,17 @@ import { mapGetters } from "vuex";
 import AddLp from "./Addlp.vue";
 import InviteProup from "./InviteProup.vue";
 import MessageBox from "./MessageBox.vue";
+import { bondDepository,erc20,token} from 'sealemlab-sdk'
 export default {
   components: {
     AddLp,InviteProup,MessageBox
   },
-  computed: { ...mapGetters(["getNoticeNum","isEnLang"]) },
+  computed: { ...mapGetters(["getIstrue","getNoticeNum","isEnLang","getUserCoin"]) },
   data() {
     return {
+      newBondID:-2,//最新债券id
+      treasuryMoney:0,//国库金额
+      loadMoreStatus:true,//加载中
       inviteArr:[{
         title:'message.bond.txt67',
         num:0
@@ -398,19 +422,7 @@ export default {
       addlpDis: false, //一键购买lp弹窗状态
       inviteDis:false,
       showSelect: false,
-      Arr1: [
-        {
-          zq: "ST-BUSD LP",
-          zl: "0",
-          jclv: "5%",
-          fjlv1: "0%",
-          fjlv2: "0%",
-          fjlv3: "0%",
-          lxzq: "14",
-          djs: "00:00:00:00",
-          gml: "0%",
-        },
-      ],
+      bondInfoArr: [],
       Arr2: [
         {
           zq: "ST-BUSD LP",
@@ -442,7 +454,84 @@ export default {
       clientY:0
     };
   },
+  watch:{
+    'getIstrue': {
+      handler: function (newValue) {
+        if (newValue) {
+          this.loadMoreStatus = true
+        }else{
+          this.loadMoreStatus = false
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
+  // filters: {
+  //   filterFun(value) {
+  //     return this.bondInfoArr[0].soldLpNum / this.bondInfoArr[0].
+  //   }
+  // },
   methods: {
+    getBondInfo(){
+      // 获取发行中(还未到结束时间)的债券ID数组
+      bondDepository().getActiveBonds().then(res => {
+        console.log('获取发行中(还未到结束时间)的债券ID数组res[0]: ',res);
+        if(res.length > 0){
+          this.newBondID = Number(res[0])
+          this.getCertainBondInfo(Number(res[0]),data => {
+            this.loadMoreStatus = false
+            console.log('函数获取到债券的信息data: ', data);
+            this.bondInfoArr.push(data)
+          })
+        }else{
+          this.loadMoreStatus = false
+          console.log("没有正在发行的债券")
+          this.bondInfoArr = []
+        }
+      })
+      // 获取债券总数，总数-1就是最新债券ID
+      bondDepository().getMarketsLength().then(res1 => {
+        console.log('获取债券总数，总数-1就是最新债券IDres: ', Number(res1));
+      })
+      // 0xBC45dC703694831510bE20A64005e1C39fd34a36(测试)  国库地址
+      erc20(token().STLP).balanceOf('0xBC45dC703694831510bE20A64005e1C39fd34a36').then(res => {
+        // console.log('国库金额res: ', res);
+        this.treasuryMoney = this.$utils.convertBigNumberToNormal(Number(res), 2)
+      })
+    },
+    // 获取某债券的全部信息
+    getCertainBondInfo(bondId,calback){
+      bondDepository().markets(bondId).then(res => {
+        // console.log('获取某债券的全部信息res: ', res);
+        let obj = {}
+        obj.bondName = 'ST-BUSD LP',
+        obj.baseRate = "5%",//基础利率
+        obj.additional1 = '0%',//附加利率1
+        obj.additional2 = '0%',//附加利率1
+        obj.additional3 = '0%',//附加利率
+        // obj.purchaseRate = '0%' // 购买率
+        obj.lp = res.LP
+        obj.maxSupplyLp = this.$utils.convertBigNumberToNormal(Number(res.maxSupplyLp), 2) //本期最大供应数量
+        obj.maxUseBuylP = this.$utils.convertBigNumberToNormal(Number(res.userMaxLpBuyAmount), 2)//用户最大购买量
+        
+        this.$utils.afferentTime(Number(res.term), (data) => {
+          obj.cycle = data
+        },'day');//利息周期
+        
+        this.$utils.afferentTime(Number(res.conclusion), (data) => {
+          // console.log('data: ', data);
+          // console.log('Number(res.conclusion): ', Number(res.conclusion));
+          obj.endTime = data
+        },'day',true);//结束时间
+
+        obj.soldLpNum = this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount), 2)//已卖出lp数量
+        
+        let rate = this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount / res.maxSupplyLp), 2)
+        obj.purchaseRate = rate + '%'
+        calback(obj)
+      })
+    },
     quesFun(data,e){
       this.datacontent = data
       this.clientX = e.clientX
@@ -468,6 +557,9 @@ export default {
       this.domHeight = item.status
     }
   },
+  mounted(){
+    this.getBondInfo()
+  }
 };
 </script>
 
@@ -864,6 +956,13 @@ export default {
     }
     .add_btn_txt{
       display: none;
+    }
+    .nodata_add{
+      width: 100%;
+      li{
+        width: 100%;
+        justify-content: center;
+      }
     }
   }
 }
