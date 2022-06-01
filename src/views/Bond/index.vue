@@ -241,7 +241,7 @@
                   <span class="has_question_icon color4 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt31") }}</span>
                 </li>
                 <li>
-                  <div class="btn_txt bg3" @click="inviteFun" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt48") }}</div>
+                  <div class="btn_txt bg3" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt48") }}</div>
                 </li>
                 <li class="round_progressbar">
                   <!-- <RingProgress
@@ -1102,7 +1102,7 @@ export default {
     line-height: 17px;
     p{
       &:nth-child(2){
-        max-width: 70%;
+        max-width: 100%;
       }
     }
   }
