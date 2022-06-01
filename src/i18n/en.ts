@@ -838,7 +838,7 @@ export const message = {
     text34: "Balance",
     text35: "Shortcut",
     text36: "Approve",
-    text37: "NoData",
+    text37: "No Data",
     text38: "Recharge and Claim",
     text39: "Please log in to view the information",
   },
