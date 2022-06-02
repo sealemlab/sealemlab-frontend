@@ -63,7 +63,7 @@ export default new Vuex.Store({
     mobileInfo:{
       direction:'top',//默认上滑(true)
     },
-    userCoin:{},//用户各种币的余额
+    userCoin:{st: 0, sr: 0, busd: 0, stPrice: "0.00"},//用户各种币的余额
   },
   getters: {
     // 获取用户的币的余额

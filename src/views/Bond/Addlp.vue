@@ -93,7 +93,8 @@ export default {
     'getAccountStatus': {
       handler: function (newValue) {
         if(newValue == -1 || newValue == undefined){
-          this.allLoading = this.isApproveST = this.isApproveBUSD = false
+          this.allLoading = false
+          this.isApproveST = this.isApproveBUSD = true
         }else if(newValue == 0){
           this.allLoading = true
           this.isApproveST = this.isApproveBUSD = false

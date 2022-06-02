@@ -80,7 +80,7 @@ export default {
           children:[
             {title:"message.footer.txt11"},
             {title:"message.footer.txt12",link:'https://github.com/sealemlab'},
-            {title:"message.footer.txt13",link:''}
+            {title:"message.footer.txt13",link:'https://www.certik.com/projects/sealem'}
           ]
         },
         

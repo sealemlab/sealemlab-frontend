@@ -1896,7 +1896,7 @@ export default {
         box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
         border-radius: 0.08rem;
         border: 1px solid rgba(68, 67, 67, 0.47);
-        padding: 0 0.08rem;
+        padding: 0.2rem 0.08rem 0;
         .partener_box{
           width: 100%;
           align-items: center;

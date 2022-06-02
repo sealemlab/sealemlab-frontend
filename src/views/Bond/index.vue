@@ -73,11 +73,11 @@
                 <span>{{ bondinfo.maxSupplyLp }}</span>
                 <span>{{ bondinfo.baseRate }} %</span>
                 <span>
-                  <span class="color2">{{ bondinfo.additional1 }} %</span>
+                  <span class="color2">{{ bondinfo.additional1 }}%</span>
                   + 
-                  <span class="color3">{{ bondinfo.additional2 }} %</span>
+                  <span class="color3">{{ bondinfo.additional2 }}%</span>
                   + 
-                  <span class="color4">{{ bondinfo.additional3 }} %</span>
+                  <span class="color4">{{ bondinfo.additional3 }}%</span>
                 </span>
                 <span>{{ bondinfo.cycle }}&nbsp;{{$t("message.bond.txt19")}}</span>
                 <span>
