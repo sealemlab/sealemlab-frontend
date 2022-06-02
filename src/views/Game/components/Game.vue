@@ -147,7 +147,7 @@ export default {
     display: block;
   }
   .pc {
-    display: none;
+    display: none;   
   }
   .game_title {  
     font-size: 0.2rem;
