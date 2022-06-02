@@ -20,7 +20,7 @@
             </div>
             <input type="number" value="0" disabled />
             <!-- <div class="btn disable" @click="openRecharge">{{ $t("message.gamepage.text19") }}</div> -->
-            <div class="btn disable">Comming soon</div>
+            <div class="btn disable">Comming</div>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
             </div>
             <input type="number" value="0" disabled />
             <!-- <div class="btn disable">{{ $t("message.gamepage.text21") }}</div> -->
-            <div class="btn disable">Comming soon</div>
+            <div class="btn disable">Comming</div>
           </div>
           <!-- {{ $t("message.gamepage.text22") }} -->
           <!-- {{ $t("message.gamepage.text13") }} -->
@@ -195,14 +195,14 @@ export default {
         width: 100%;
         height: 100%;
         background: none;
-        padding: 0 7.5rem 0 3.5rem;
+        padding: 0 6.5rem 0 3.5rem;
         font-size: 18px;
         color: #ced3d9;
         text-align: right;
       }
       .btn {
         cursor: pointer;
-        width: 7rem;
+        width: 6rem;
         height: 100%;
         position: absolute;
         right: 0;
