@@ -57,13 +57,7 @@ export default {
         M = M > 9 ? M : "0" + M;
         S = S > 9 ? S : "0" + S;
         calback({ d:D,h: H, m: M, s: S });
-        // if(neddTime == 0){
-        //   clearInterval(timernull)
-        // }
-        // neddTime -= 1
-      // },1000)
     }else{
-      // let timernullobj = setInterval(() => {
         let H: any = parseInt((neddTime / (60 * 60)).toString());
         let M: any = parseInt(((neddTime / 60) % 60).toString());
         let S: any = parseInt((neddTime % 60).toString());
@@ -73,13 +67,8 @@ export default {
         if(type == 'hour' && iscountdown){
           calback({ h: H, m: M, s: S });
         }else if(type == 'day' && iscountdown){
-          calback({ "d":"00",h: H, m: M, s: S });
+          calback({ d:"00",h: H, m: M, s: S });
         }
-      //   if(neddTime == 0){
-      //     clearInterval(timernullobj)
-      //   }
-      //   neddTime -= 1
-      // },1000)
     }
   },
   /** 应用场景:时间戳转相对应的日期格式;参数:时间戳(s);返回值:yy-mm-dd hh:mm:ss */
@@ -100,6 +89,47 @@ export default {
     } else {
       return y + "-" + m + "-" + d;
     }
+  },
+  /** 应用场景:返回时间戳,然后倒计时;参数:时间戳(s)*/
+  customTime(endtime: any, calback: any) {
+    console.log('endtime: ', endtime);
+    // @ts-ignore
+    let time = new Date().getTime() / 1000
+    if(endtime < time){
+      calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});
+      return
+    }
+    let timernull = setInterval(() => {
+      if (time == endtime) {
+        clearInterval(timernull);
+        calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});
+        return;
+      }
+      let neddTime = endtime - time
+      // @ts-ignore
+      let day = parseFloat(neddTime / (24 * 3600))
+      if(day > 1){
+        let D: any = parseFloat((neddTime / (3600 * 24)).toString());
+        let result:any = parseInt((neddTime - (D * 3600 * 24)).toString());
+        let H: any = parseInt((result / (60 * 60)).toString());
+        let M: any = parseInt(((result / 60) % 60).toString());
+        let S: any = parseInt((result % 60).toString());
+        D = D > 9 ? D : "0" + D;
+        H = H > 9 ? H : "0" + H;
+        M = M > 9 ? M : "0" + M;
+        S = S > 9 ? S : "0" + S;
+        calback({countdownObject:timernull,countTime:{ d:D,h: H, m: M, s: S }});
+      }else{
+        let H: any = parseInt((neddTime / (60 * 60)).toString());
+        let M: any = parseInt(((neddTime / 60) % 60).toString());
+        let S: any = parseInt((neddTime % 60).toString());
+        H = H > 9 ? H : "0" + H;
+        M = M > 9 ? M : "0" + M;
+        S = S > 9 ? S : "0" + S;
+        calback({countdownObject:timernull,countTime:{ d:"00",h: H, m: M, s: S }});
+      }
+      endtime -= 1;
+    }, 1000);
   },
   // 截取字符串  已开头字符串中间....尾部字符串显示   eg:wsx....efdf   参数解释str:需要展示的字符串;num:开头结尾需要展示几位
   getSubStr(str: any, num: number) {

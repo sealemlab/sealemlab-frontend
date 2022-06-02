@@ -211,7 +211,7 @@ import { mapGetters } from "vuex";
 import { token,util,erc20,bondDepository } from  "sealemlab-sdk";
 export default { 
   computed: {
-    ...mapGetters(["getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
+    ...mapGetters(["getAccountStatus","getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
   },
   data () {
     return {
@@ -245,11 +245,6 @@ export default {
           this.$utils.antiShakeFun(() => {
             this.getUserCoinInfo()
           },3000)
-          // if(!this.timer){
-            
-          // }else{
-          //   console.log("获取用户余额已有定时器")
-          // }
         }
       },
       deep: true,
@@ -286,7 +281,6 @@ export default {
       }
     },
     $route (to) {
-      console.log('to: ', to);
       this.navArr.forEach((item) => {
         item.status = false;
       });
@@ -307,6 +301,19 @@ export default {
       } else {
         this.navArr[4].status = true
       }
+    },
+    'getAccountStatus': {
+      handler: function (newValue) {
+        if(newValue > 0){
+          console.log("app重新切换账号")
+          this.$utils.antiShakeFun(() => {
+            // this.getUserCoinInfo()
+            console.log("切换账号重新获取代币余额")
+          },2000)
+        }
+      },
+      deep: true,
+      immediate: true,
     },
   },
   components: {

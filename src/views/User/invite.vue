@@ -5,7 +5,7 @@
       <span class="_txt mobile_font16">10</span>
     </div> -->
     <div class="ranking">
-      <p class="font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.user.txt16")}}</p>
+      <p class="font26 mobile_font18" :class="isEnLang?'en_Regular':''">{{$t("message.user.txt16")}}</p>
       <div class="listbox">
         <div class="topline font24 mobile_font14">
           <div class="title_onebox">{{ $t("message.user.txt1") }}</div>

@@ -768,6 +768,7 @@ export const message = {
     self_txt10: "最多5个",
     self_txt11: "开盒子中....",
     self_txt12: "开盲盒结果",
+    self_txt13: "No Data",
     self_buy:"购买"
   }, //一些提示语句,文案你看哪不合适,替换就行
   approve: "授权",

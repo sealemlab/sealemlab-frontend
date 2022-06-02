@@ -108,7 +108,7 @@ export const message = {
     add_txt65_1: "Link to reality",
     add_txt65: "Launch of Sealem credit card; Start swap function; Create a creator protection fund",
 
-    txt59: "PARTNER",
+    txt59: "SUPPORT",
 
     txt65: "SEALEM GAME",
     txt66: "Extraordinary gaming experience",
@@ -118,7 +118,7 @@ export const message = {
     txt70: "Go to play game",
 
     txt71: "Market Cap",
-    txt72: "Treasury",
+    txt72: "Locked Liquidity",
     txt73: "Staking",
     txt74: "Circulating Supply",
     txt75: "ST Price",
@@ -584,7 +584,7 @@ export const message = {
     txt2_1: "Buy bond to earn stable ST rewards ",
     txt2_2: "Each bond offering is limited",
     txt2_3: "Multiple interest rates increase income",
-    txt3: "Treasury",
+    txt3: "Locked Liquidity",
     txt4: " Price",
     txt5: "Interest Rate",
     txt6: "Duration",
@@ -614,9 +614,9 @@ export const message = {
     txt30: "Invite to bond rate",
     txt31: "Your staking rate",
     txt32: "Tax",
-    txt33: "Purchased within 30 days",
+    txt33: "purchased within 14 days",
     txt34:
-      "After the bond expires, the principal and interest will be claimed in ST; the payment token will automatically be formed an LP and locked into the treasury; the tax rate will be reset to the initial value of 0.1% every 14 days.",
+      "After the bond expires, the principal and interest will be claimed in ST; the payment token will automatically be formed an LP; the tax rate will be reset to the initial value of 0.1% every 14 days.",
     txt35: "Total bond",
     txt36: "Extra rate",
     txt37: "Duration",

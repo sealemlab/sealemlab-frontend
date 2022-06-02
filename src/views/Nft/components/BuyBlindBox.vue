@@ -571,6 +571,7 @@ export default {
       display: flex;
       flex-direction: column;
       max-width: 310px;
+      min-height: 129px;
       .title{
         font-weight: bold;
         color: #ECCF83;

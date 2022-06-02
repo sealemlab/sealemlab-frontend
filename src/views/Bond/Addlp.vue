@@ -9,7 +9,7 @@
             <span class="type_ font12" :class="index == activetype?'activeClass':''">{{item.title}}</span>
           </div>
         </div>
-        <!-- busd输入框 -->
+        <!-- busd输入框 token1 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 1">
           <p class="font12 balance_" :class="isEnLang?'en_medium':''">BUSD {{$t("message.bond.txt22")}}: {{getUserCoin.busd}}</p>
           <div class="inputcontent" :class="isEnLang?'en_Bold':''">
@@ -23,7 +23,7 @@
             <div class="max_btn font16" @click="maxClick('busd')">MAX</div>
           </div>
         </div>
-        <!-- st输入框 -->
+        <!-- st输入框 token0 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 2">
           <p class="font12 balance_" :class="isEnLang?'en_medium':''">ST {{$t("message.bond.txt22")}}: {{getUserCoin.st}}</p>
           <div class="inputcontent" :class="isEnLang?'en_Bold':''">
@@ -39,24 +39,10 @@
         </div>
         <!-- 投入以及收益 -->
         <div class="profit_box">
-          <div class="onebox">
-            <p class="font14 _txt" :class="isEnLang?'en_Bold':''">{{$t("message.bond.txt24")}}</p>
+          <div class="onebox" v-for="(item,index) in moneyArr" :key="index">
+            <p class="font14 _txt" :class="isEnLang?'en_Bold':''">{{$t(item.title)}}</p>
             <div class="border_ font12" :class="isEnLang?'en_medium':''">
-              <span class="span1">0</span>
-              <span class="span1">BUSD</span>
-            </div>
-          </div>
-          <div class="onebox">
-            <p class="font14 _txt" :class="isEnLang?'en_Bold':''">{{$t("message.bond.txt25")}}</p>
-            <div class="border_ font12" :class="isEnLang?'en_medium':''">
-              <span class="span1">0</span>
-              <span class="span1">BUSD</span>
-            </div>
-          </div>
-          <div class="onebox">
-            <p class="font14 _txt" :class="isEnLang?'en_Bold':''">{{$t("message.bond.txt26")}}</p>
-            <div class="border_ font12" :class="isEnLang?'en_medium':''">
-              <span class="span1">0</span>
+              <span class="span1">{{item.num}}</span>
               <span class="span1">BUSD</span>
             </div>
           </div>
@@ -68,10 +54,10 @@
           <div class="main_button font16 mobile_font16" @click="buyBondFun" v-if="isApproveBUSD && isApproveST">
             {{$t("message.tip.self_buy")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
           </div>
-          <div class="main_button font16 mobile_font16" @click="authorizationClick('busd')" v-else-if="!isApproveBUSD">
+          <div class="main_button font16 mobile_font16" @click="authorizationClick('busd')" v-if="!isApproveBUSD && (activetype == 1 || activetype == 0)">
             BUSD {{$t("message.approve")}}<BtnLoading :isloading="busdisloading"></BtnLoading>
           </div>
-          <div class="main_button font16 mobile_font16" @click="authorizationClick('st')" v-else-if="!isApproveST">
+          <div class="main_button font16 mobile_font16" @click="authorizationClick('st')" v-if="!isApproveST && (activetype == 2 || activetype == 0)">
             ST {{$t("message.approve")}}<BtnLoading :isloading="stisloading"></BtnLoading>
           </div>
         </div>
@@ -118,6 +104,7 @@ export default {
           clearInterval(this.btntimernull)
           this.$utils.antiShakeFun(() => {
             this.getSDKInfo()
+            // console.log("切换账号重新判断授权")
           },2000)
         }
       },
@@ -145,8 +132,8 @@ export default {
     return {
       BUSDmsg:'',
       STmsg:'',
-      stbtn:1,
-      busdbtn:1,
+      busd_code:1,
+      st_vode:1,
       allLoading:true,// 按钮转圈
       isApproveST:false,//st是否授权
       isApproveBUSD:false,//bsud是否授权
@@ -168,16 +155,37 @@ export default {
           title:'ST',
         }
       ],
-      btntimernull:null
+      moneyArr:[
+        {title:'message.bond.txt24',num:0},
+        {title:'message.bond.txt25',num:0},
+        {title:'message.bond.txt26',num:0}
+      ],
+      btntimernull:null,
+      stBlurStatus:false,
+      busdBlurStatus:false,
     }
   },
   methods: {
     buyBondFun(){
       console.log('购买债券')
+      if(this.buyLoading)return
+      this.buyLoading = true
       let address = this.$route.params.address == 0 ?'0x0000000000000000000000000000000000000000':''
-        console.log('this.newBondID,this.BUSDmsg,this.STmsg,0,address: ', this.newBondID,this.BUSDmsg,this.STmsg,0,address);
-      bondDepository().connect(getSigner()).swapAndAddLiquidityAndBond(this.newBondID,this.BUSDmsg,this.STmsg,0,address).then(res => {
+      console.log('this.newBondID,this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),this.$utils.convertNormalToBigNumber(this.STmsg, 18),0,address: ', this.newBondID,this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),this.$utils.convertNormalToBigNumber(this.STmsg, 18),0,address);
+      bondDepository().connect(getSigner()).swapAndAddLiquidityAndBond(this.newBondID,this.$utils.convertNormalToBigNumber(this.STmsg, 18),this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),0,address).then(async res => {
         console.log('购买债券res: ', res);
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
+        const etReceipt = await res.wait();
+        if(etReceipt.status == 1){
+          this.buyLoading = false
+          this.BUSDmsg = this.STmsg = ''
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
+        }else{
+          this.buyLoading = false
+        }
+      }).catch(() => {
+        this.buyLoading = false
       })
     },
     // 去授权
@@ -228,37 +236,55 @@ export default {
     },
     // 是否授权
     getSDKInfo(){
+      let count = 0
       this.$utils.isApproveFun(this.getAccount,token().BUSD,contract().BondDepository).then(res => {
-        console.log('busd是否授权res: ', res);
+        // console.log('busd是否授权res: ', res);
         if (res) {
-          this.busdbtn = 2
-          this.isApproveBUSD = true
+          this.busd_code = 2
+          count++
+          // this.isApproveBUSD = true
         } else {
-          this.isApproveBUSD = false
-          this.busdbtn = 2
+          // this.isApproveBUSD = false
+          this.busd_code = 3
+          count++
         }
       }).catch(() => {
-        this.isApproveBUSD = false
-        this.busdbtn = 2
+        // this.isApproveBUSD = false
+        this.busd_code = 3
+        count++
       })
       this.$utils.isApproveFun(this.getAccount,token().ST,contract().BondDepository).then(res => {
-        console.log('st是否授权res: ', res);
+        // console.log('st是否授权res: ', res);
         if(res){
-          this.isApproveST = true
-          this.stbtn = 2
+          // this.isApproveST = true
+          this.st_vode = 2
+          count++
         }else{
-          this.isApproveST = false
-          this.stbtn = 2
+          // this.isApproveST = false
+          this.st_vode = 3
+          count++
         }
       }).catch(() => {
-        this.isApproveST = false
-        this.stbtn = 2
+        // this.isApproveST = false
+        this.st_vode = 3
+        count++
       })
       clearInterval(this.btntimernull)
       this.btntimernull = setInterval(() => {
-        if(this.stbtn == 2 && this.busdbtn == 2){
+        if(count == 2){
           clearInterval(this.btntimernull)
+          if(this.st_vode == 2){
+            this.isApproveST = true
+          }else{
+            this.isApproveST = false
+          }
+          if(this.busd_code == 2){
+            this.isApproveBUSD = true
+          }else{
+            this.isApproveBUSD = false
+          }
           this.allLoading = false
+          // console.log('按钮都已判断完毕',this.st_vode,this.busd_code)
         }
       },1000)
     },
@@ -270,21 +296,35 @@ export default {
         this.$refs.mychildAdd.titleFun()
       },400)
     },
+    // busd---input
     busdBlurEvent(){
-      console.log("失焦")
+      console.log("busd失焦")
+      this.busdBlurStatus = false
+      if(!this.stBlurStatus){
+        this.moneyArr[0].num = Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice
+        console.log('Number(this.BUSDmsg)', Number(this.BUSDmsg),Number(this.STmsg),this.getUserCoin);
+      }
     },
     busdFocusEvent(){
-      console.log("聚焦")
+      console.log("busd聚焦")
+      this.busdBlurStatus = true
     },
     busdInputClick(data){
       console.log('busd----data: ', data);
       this.BUSDmsg = data
     },
+    // st---input
     blurEvent(){
-      console.log("失焦")
+      console.log("st失焦")
+      this.stBlurStatus = false
+      if(!this.busdBlurStatus){
+        this.moneyArr[0].num = Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice
+        console.log('Number(this.BUSDmsg)', Number(this.BUSDmsg),Number(this.STmsg),this.getUserCoin);
+      }
     },
     focusEvent(){
-      console.log("聚焦")
+      console.log("st聚焦")
+      this.stBlurStatus = true
     },
     inputClick(data){
       console.log("input")
