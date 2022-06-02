@@ -208,15 +208,16 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
 import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
-export default {
+import { token,util,erc20,bondDepository } from  "sealemlab-sdk";
+export default { 
   computed: {
-    ...mapGetters(["getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
+    ...mapGetters(["getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
   },
   data () {
     return {
       navArr: [
         { label: "message.nav.txt10", link: "/home", status: true },
-        { label: "message.nav.txt1", link: "/bond", status: false },
+        { label: "message.nav.txt1", link: "/bond/0", status: false },
         { label: "message.nav.txt3", link: "/nft", status: false },
         { label: "message.nav.txt5", link: "/game/game", status: false },
         { label: "message.nav.txt13", link: "", status: false },
@@ -230,7 +231,8 @@ export default {
       // startX:0,
       startY: 0,
       startTime: null,
-      oldScrollTop: 0
+      oldScrollTop: 0,
+      timer:null
     };
   },
   watch: {
@@ -239,7 +241,8 @@ export default {
         if (newValue) {
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then((res) => {
             sessionStorage.setItem("sb_count", res);
-          });
+          })
+          this.getUserCoinInfo()
         }
       },
       deep: true,
@@ -284,7 +287,7 @@ export default {
       });
       if (to.path == "/home") {
         this.navArr[0].status = true
-      } else if (to.path == "/bond") {
+      } else if (to.path.indexOf("/bond/") !== -1) {
         this.navArr[1].status = true
       } else if (to.path.indexOf("/nft/") !== -1) {
         this.navArr[2].status = true
@@ -296,7 +299,7 @@ export default {
       } else {
         this.navArr[4].status = true
       }
-    },
+    }
   },
   components: {
     NavigationBar,
@@ -421,6 +424,41 @@ export default {
         this.$store.commit("setMoblieTouch", JSON.stringify({ direction: scrollStep ? "bottom" : "top" }));
       }
     },
+    getUserCoinInfo(){
+      let arr = [token().ST,token().SR,token().BUSD]
+      let count = 0
+      let obj = {
+        st:0,
+        sr:0,
+        busd:0,
+        stPrice:0
+      }
+      erc20(arr[0]).balanceOf(this.getAccount).then(res => {
+        obj.st = this.$utils.getBit(util.formatEther(res),4)
+        count++
+      })
+      erc20(arr[1]).balanceOf(this.getAccount).then(res => {
+        obj.sr = this.$utils.getBit(util.formatEther(res),4)
+        count++
+      })
+      erc20(arr[2]).balanceOf(this.getAccount).then(res => {
+        obj.busd = this.$utils.getBit(util.formatEther(res),4)
+        count++
+      })
+      bondDepository().getStPrice().then(res => {
+        // st价格
+        obj.stPrice = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        count++
+      })
+      this.timer = setInterval(() => {
+        if(count == 4){
+          clearInterval(this.timer)
+          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
+          console.log("获取用户代币余额结束",count)
+        }
+        // console.log("获取用户代币余额中",count)
+      },1000)
+    }
   },
   mounted () {
     if (localStorage.getItem("walletType")) {

@@ -108,7 +108,7 @@ export const message = {
     add_txt65_1: "Link to reality",
     add_txt65: "Launch of Sealem credit card; Start swap function; Create a creator protection fund",
 
-    txt59: "PARTNER",
+    txt59: "SUPPORT",
 
     txt65: "SEALEM GAME",
     txt66: "Extraordinary gaming experience",
@@ -118,7 +118,7 @@ export const message = {
     txt70: "Go to play game",
 
     txt71: "Market Cap",
-    txt72: "Treasury",
+    txt72: "Locked Liquidity",
     txt73: "Staking",
     txt74: "Circulating Supply",
     txt75: "ST Price",
@@ -579,12 +579,12 @@ export const message = {
     },
   },
   bond: {
-    txt_tax:"",//bond弹窗tax的问号内容
+    txt_tax: "The floor tax rate is 0.1%, increasing by 0.01% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "Bond",
     txt2_1: "Buy bond to earn stable ST rewards ",
     txt2_2: "Each bond offering is limited",
     txt2_3: "Multiple interest rates increase income",
-    txt3: "Treasury",
+    txt3: "Locked Liquidity",
     txt4: " Price",
     txt5: "Interest Rate",
     txt6: "Duration",
@@ -614,9 +614,9 @@ export const message = {
     txt30: "Invite to bond rate",
     txt31: "Your staking rate",
     txt32: "Tax",
-    txt33: "Purchased within 30 days",
+    txt33: "purchased within 14 days",
     txt34:
-      "After the bond expires, the principal and interest will be claimed in ST; the payment token will automatically be formed an LP and locked into the treasury; the tax rate will be reset to the initial value of 0.1% every 14 days.",
+      "After the bond expires, the principal and interest will be claimed in ST; the payment token will automatically be formed an LP; the tax rate will be reset to the initial value of 0.1% every 14 days.",
     txt35: "Total bond",
     txt36: "Extra rate",
     txt37: "Duration",
@@ -690,7 +690,7 @@ export const message = {
     txt21: "SealemLab Protocol",
     txt22: "If you have a registered account, click to",
     txt23: "Login",
-    txt24: "Login account",
+    txt24: "Login Account",
     txt25: "The account is applicable to each product on the Sealem platform.",
     txt26: "We recommend that you use the 'Remember Me' feature only on your own computer for your account security. ",
     txt27: "If you don’t have an account, click to",
@@ -731,7 +731,7 @@ export const message = {
     txt17: "Add Address connection",
     txt18: "In order to view your NFT products in the game, you need to complete the signing process.",
     txt19: "You can access your in-game NFT products by using the metamask plug-in signature.",
-    txt20: "Account name",
+    txt20: "Binding Adress",
     txt21: "Remove",
     txt22: "Enter email",
     txt23: "Enter verification code",
@@ -777,7 +777,6 @@ export const message = {
     txt25: "1. The binding is successful only after users enter the official website through the link to purchase the bond.",
     txt26: "2. The interest rate increases by 0.1% per 1K USD of bonds purchased or  staking by the invitee.",
     txt27: "3. The invitation staking interest rate changes according to the actual staking amount of the invitee.",
-    
   },
   tip: {
     txt1: "The account was created successfully, please go to the email to activate the account.",
@@ -798,7 +797,8 @@ export const message = {
     self_txt10: "Up to 5",
     self_txt11: "Opening…",
     self_txt12: "Open mystery box result",
-    self_txt13: "No Data"
+    self_txt13: "No Data",
+    self_buy:"Buy"
   },
   approve: "Approve",
 
@@ -839,5 +839,8 @@ export const message = {
     text34: "Balance",
     text35: "Shortcut",
     text36: "Approve",
+    text37: "No Data",
+    text38: "Recharge and Claim",
+    text39: "Please log in to view the information",
   },
 };

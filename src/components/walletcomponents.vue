@@ -2,7 +2,7 @@
   <div class="record_page" v-if="getwalletstatus">
     <div class="boxarr">
       <div class="title font26 mobile_font18">{{ $t("message.nav.txt9") }}</div>
-      <img :src="`${$store.state.imgUrl}passclose.webp`" class="close_img" @click="closepage" />
+      <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click="closepage" />
       <div class="onebox" v-for="(item, index) in walletarr" :key="index" @click="walletClick(item)">
         <span class="wallet_txt fontsize16">{{ item.name }}</span>
         <img :src="item.src" class="imgcard" />

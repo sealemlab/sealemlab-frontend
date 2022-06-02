@@ -1,14 +1,14 @@
 <template>
   <div class="gamebox">
-    <div class="game_title">Recharge and Claim</div>
+    <div class="game_title">{{ $t("message.gamepage.text38") }}</div>
     <div class="box1">
       <div>
         <div class="label">{{ $t("message.gamepage.text16") }}</div>
-        <div class="content">muyihf@163.com</div>
+        <div class="content">{{ getLogin.mailAccount | mailEllipsis }}</div>
       </div>
       <div>
         <div class="label">{{ $t("message.gamepage.text17") }}</div>
-        <div class="content">0x45...6789</div>
+        <div class="content">{{ getLogin.addr | ellipsis }}</div>
       </div>
       <div>
         <div class="label">{{ $t("message.gamepage.text18") }}</div>
@@ -18,8 +18,9 @@
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
             </div>
-            <input type="number" value="1234567890" disabled />
-            <div class="btn" @click="openRecharge">{{ $t("message.gamepage.text19") }}</div>
+            <input type="number" value="0" disabled />
+            <!-- <div class="btn disable" @click="openRecharge">{{ $t("message.gamepage.text19") }}</div> -->
+            <div class="btn disable">Comming</div>
           </div>
         </div>
       </div>
@@ -31,10 +32,10 @@
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
             </div>
-            <input type="number" value="123456789000" disabled />
-            <div class="btn">{{ $t("message.gamepage.text21") }}</div>
+            <input type="number" value="0" disabled />
+            <!-- <div class="btn disable">{{ $t("message.gamepage.text21") }}</div> -->
+            <div class="btn disable">Comming</div>
           </div>
-
           <!-- {{ $t("message.gamepage.text22") }} -->
           <!-- {{ $t("message.gamepage.text13") }} -->
         </div>
@@ -43,8 +44,8 @@
     <div class="box2">
       <div class="box2_title">{{ $t("message.gamepage.text24") }}</div>
       <div class="btns">
-        <div @click="isShowRechargeList = false" :class="{ active: !isShowRechargeList }">Claim</div>
-        <div @click="isShowRechargeList = true" :class="{ active: isShowRechargeList }">Recharge</div>
+        <div @click="isShowRechargeList = false" :class="{ active: !isShowRechargeList }">{{ $t("message.gamepage.text23") }}</div>
+        <div @click="isShowRechargeList = true" :class="{ active: isShowRechargeList }">{{ $t("message.gamepage.text19") }}</div>
       </div>
     </div>
     <div class="box3">
@@ -58,7 +59,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
@@ -67,37 +68,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text29") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text29") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text29") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
       <table v-else>
@@ -110,7 +81,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>2022-12-17 16:23:23</td>
             <td>
               <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
@@ -119,77 +90,7 @@
             <td>
               <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
             </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text30") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text30") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text30") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text30") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text30") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text30") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
-          <tr>
-            <td>2022-12-17 16:23:23</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" /><span>34</span></div>
-            </td>
-            <td>{{ $t("message.gamepage.text30") }}</td>
-            <td>
-              <div><img :src="`${$store.state.imgUrl}link.webp`" alt="" /></div>
-            </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -198,19 +99,37 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import PopupRecharge from "./PopupRecharge.vue";
 export default {
   name: "RechargeClaim",
   components: { PopupRecharge },
+  computed: { ...mapGetters(["getLogin"]) },
   data() {
     return {
       isShowRechargePopup: false,
       isShowRechargeList: false,
     };
   },
+  created() {
+    if (!this.getLogin.loginStatus) this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: this.$t("message.gamepage.text39") }));
+  },
   methods: {
     openRecharge() {
       this.isShowRechargePopup = true;
+    },
+  },
+  filters: {
+    ellipsis(value) {
+      if (!value) return "";
+      const index = value.length;
+      return value.slice(0, 6) + "..." + value.slice(index - 4, index);
+    },
+    mailEllipsis(value) {
+      if (!value) return "";
+      const index = value.length;
+      const index2 = value.indexOf("@");
+      return value.slice(0, 2) + "***" + value.slice(index2, index);
     },
   },
 };
@@ -276,14 +195,14 @@ export default {
         width: 100%;
         height: 100%;
         background: none;
-        padding: 0 5.5rem 0 3.5rem;
+        padding: 0 6.5rem 0 3.5rem;
         font-size: 18px;
         color: #ced3d9;
         text-align: right;
       }
       .btn {
         cursor: pointer;
-        width: 5rem;
+        width: 6rem;
         height: 100%;
         position: absolute;
         right: 0;
@@ -298,6 +217,15 @@ export default {
         font-size: 16px;
         font-weight: bold;
         color: #000000;
+        &.disable {
+          background: linear-gradient(180deg, #6d6d6d 0%, #464645 100%);
+          color: #e0d9d9;
+          cursor: not-allowed;
+        }
+        &.comingsoon {
+          background: linear-gradient(180deg, #6d6d6d 0%, #464645 100%);
+          color: #e0d9d9;
+        }
       }
     }
   }

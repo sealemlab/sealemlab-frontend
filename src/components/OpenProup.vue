@@ -326,8 +326,6 @@ export default {
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      // min-height: 3rem;
-      // max-height: 5rem;
       overflow-y: auto;
       margin: 0.3rem;
       .out_box_one{
@@ -342,9 +340,86 @@ export default {
           align-items: center;
           margin-right: 0.05rem;
           margin-bottom: 0.16rem;
-          .imgcard {
+          .out_img{
             width: 100%;
-            object-fit: contain;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .imgcard {
+              height: 1.6rem;
+            }
+          }
+          .huxing_bg_box{
+            .huxing_content{
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              padding: 0.29rem 0.08rem 0.1rem;
+              .start{
+                position: absolute;
+                top: 0.29rem;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom:0.05rem;
+                .span1{
+                  font-weight: 800;
+                  color: #EFB045;
+                  line-height: 0.26rem;
+                  margin-right: 0.05rem;
+                }
+                img{
+                  width: 0.13rem;
+                }
+              }
+              .people_type{
+                margin-top: 0.07rem;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                img{
+                  width: 0.24rem;
+                }
+                .leftimgbox{
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  &:nth-child(2){
+                    align-items: center;
+                  }
+                }
+                .left_content{
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  .scale_box{
+                    white-space:nowrap;
+                    zoom:0.8;
+                    font-weight: 800;
+                    line-height: 0.14rem;
+                  }
+                  .box_3d{
+                    margin-top: 0.05rem;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    span{
+                      font-weight: 800;
+                      line-height: 0.14rem;
+                      transform: scale(0.83);
+                      zoom:0.8;
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

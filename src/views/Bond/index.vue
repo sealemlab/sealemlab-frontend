@@ -29,17 +29,20 @@
           <span>{{ $t("message.bond.txt1") }}</span>
         </div>
         <div class="box">
+          <!-- 国库  st价格 -->
           <div class="top mobile_font14 font24" :class="isEnLang?'en_Bold':''">
-            <div :title='$t("message.bond.txt71")' style="cursor:pointer" @click="quesFun(1,$event)">
+            <div :title='$t("message.bond.txt71")' style="cursor:pointer" @click="quesFun('message.bond.txt71',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
             </div>
-            <div><span>$&nbsp;0</span></div>
+            <div><span>$&nbsp;{{treasuryMoney}}</span></div>
             <div>
               <span>ST{{ $t("message.bond.txt4") }} </span>
             </div>
-            <div><span>$&nbsp;0</span></div>
+            <div><span>$&nbsp;{{getUserCoin.stPrice}}</span></div>
           </div>
+          <!-- 表格 -->
           <div class="bottom">
+            <!-- 标题 -->
             <ul class="list_title font20" :class="isEnLang?'en_Bold':''">
               <li>
                 <span>{{ $t("message.bond.txt1") }}</span>
@@ -50,7 +53,7 @@
               <li>
                 <span>{{ $t("message.bond.txt28") }}</span>
               </li>
-              <li :title='$t("message.bond.txt72")' style="cursor:pointer">
+              <li :title='$t("message.bond.txt72")' style="cursor:pointer" @click="quesFun('message.bond.txt72',$event)">
                 <span class="has_question_icon">{{ $t("message.bond.txt36") }}</span>
               </li>
               <li>
@@ -65,22 +68,39 @@
               <li></li>
             </ul>
             <ul class="list_title2 font16" :class="isEnLang?'en_medium':''">
-              <li v-for="(item, index) in Arr1" :key="index">
-                <span>{{ item.zq }}</span>
-                <span>{{ item.zl }}</span>
-                <span>{{ item.jclv }}</span>
-                <span><span class="color2">{{ item.fjlv1 }}</span> + <span class="color3">{{ item.fjlv2 }}</span> + <span class="color4">{{ item.fjlv3 }}</span></span>
-                <span>{{ item.lxzq }}&nbsp;{{$t("message.bond.txt19")}}</span>
-                <span>{{ item.djs }}</span>
+              <li>
+                <span>{{ bondinfo.bondName }}</span>
+                <span>{{ bondinfo.maxSupplyLp }}</span>
+                <span>{{ bondinfo.baseRate }} %</span>
                 <span>
-                  <div class="progressbar"><div :style="{ width: item.gml }"></div></div>
-                  {{ item.gml }}
+                  <span class="color2">{{ bondinfo.additional1 }}%</span>
+                  + 
+                  <span class="color3">{{ bondinfo.additional2 }}%</span>
+                  + 
+                  <span class="color4">{{ bondinfo.additional3 }}%</span>
+                </span>
+                <span>{{ bondinfo.cycle }}&nbsp;{{$t("message.bond.txt19")}}</span>
+                <span>
+                  {{ bondinfo.countTime.d}}&nbsp;:
+                  {{ bondinfo.countTime.h }}&nbsp;:
+                  {{ bondinfo.countTime.m }}&nbsp;:
+                  {{ bondinfo.countTime.s }}
+                </span>
+                <span>
+                  <div class="progressbar"><div :style="{ width: bondinfo.purchaseRate }"></div></div>
+                  {{ bondinfo.purchaseRate }} %
                 </span>
                 <span>
                   <div class="btn_txt mobile_btn bg3" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
                 </span>
               </li>
             </ul>
+            <!-- <ul class="list_title2 nodata_add font16" v-if="bondInfoArr.length == 0 && loadMoreStatus">
+              <li><LoadingAnmation></LoadingAnmation></li>
+            </ul> -->
+            <!-- <ul class="list_title2 nodata_add font16" v-if="bondInfoArr.length == 0 && !loadMoreStatus">
+              <li>NoData</li>
+            </ul> -->
             <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
           </div>
         </div>
@@ -103,7 +123,7 @@
           <ul class="list_title1">
             <li>
               <ul class="list_title2">
-                <li :title='$t("message.bond.txt73")' style="cursor:pointer">
+                <li :title='$t("message.bond.txt73")' style="cursor:pointer" @click="quesFun('message.bond.txt73',$event)">
                   <span class="has_question_icon color1 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt28") }}</span>
                 </li>
                 <li></li>
@@ -139,7 +159,7 @@
             <li>
               <!-- <ul class="list_title2 coming_soon"> -->
               <ul class="list_title2">
-                <li :title='$t("message.bond.txt74")' style="cursor:pointer">
+                <li :title='$t("message.bond.txt74")' style="cursor:pointer" @click="quesFun('message.bond.txt74',$event)">
                   <span class="has_question_icon color2 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt30") }}</span>
                 </li>
                 <li>
@@ -180,7 +200,7 @@
             <!-- 第三个圆 -->
             <li>
               <ul class="list_title2">
-                <li :title='$t("message.bond.txt75")' style="cursor:pointer">
+                <li :title='$t("message.bond.txt75")' style="cursor:pointer" @click="quesFun('message.bond.txt75',$event)">
                   <span class="has_question_icon color3 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt29") }}</span>
                 </li>
                 <li>
@@ -217,11 +237,11 @@
             <!-- 第四个圆 -->
             <li>
               <ul class="list_title2">
-                <li :title='$t("message.bond.txt76")' style="cursor:pointer">
+                <li :title='$t("message.bond.txt76")' style="cursor:pointer" @click="quesFun('message.bond.txt76',$event)">
                   <span class="has_question_icon color4 font24" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt31") }}</span>
                 </li>
                 <li>
-                  <div class="btn_txt bg3" @click="inviteFun" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt48") }}</div>
+                  <div class="btn_txt bg3" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt48") }}</div>
                 </li>
                 <li class="round_progressbar">
                   <!-- <RingProgress
@@ -265,11 +285,11 @@
         </div>
         <div class="box">
           <div class="top font24" :class="isEnLang?'en_Bold':''">
-            <div :title='$t("message.bond.txt77")' style="cursor:pointer">
+            <div :title='$t("message.bond.txt77")' style="cursor:pointer" @click="quesFun('message.bond.txt77',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
             <div><span>0 ST</span></div>
-            <div :title='$t("message.bond.txt78")' style="cursor:pointer">
+            <div :title='$t("message.bond.txt78")' style="cursor:pointer" @click="quesFun('message.bond.txt78',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
             <div><span>0 ST</span></div>
@@ -362,16 +382,9 @@
         </div>
       </div>
     </div>
-    <AddLp :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
+    <AddLp :obj="bondinfo" :newBondID="newBondID" :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
     <InviteProup :inviteDis="inviteDis" @closeInvite="closeInvite"></InviteProup>
-    <div class="out_title_box" v-show="isShowTitle" @click="isShowTitle = false">
-      <div ref="titContent" class="showTitle">
-        我是提示的内容
-        <div class="tip_box">
-          <!-- <div class="con"></div> -->
-        </div>
-      </div>
-    </div>
+    <MessageBox ref="mychild" :clientX='clientX' :clientY="clientY" :content="datacontent"></MessageBox>
   </div>
 </template>
 
@@ -379,13 +392,18 @@
 import { mapGetters } from "vuex";
 import AddLp from "./Addlp.vue";
 import InviteProup from "./InviteProup.vue";
+import MessageBox from "./MessageBox.vue";
+import { bondDepository,erc20,token} from 'sealemlab-sdk'
 export default {
   components: {
-    AddLp,InviteProup
+    AddLp,InviteProup,MessageBox
   },
-  computed: { ...mapGetters(["getNoticeNum","isEnLang"]) },
+  computed: { ...mapGetters(["getAccount","getIstrue","getNoticeNum","isEnLang","getUserCoin"]) },
   data() {
     return {
+      newBondID:-2,//最新债券id
+      treasuryMoney:0,//国库金额
+      loadMoreStatus:true,//加载中
       inviteArr:[{
         title:'message.bond.txt67',
         num:0
@@ -404,19 +422,7 @@ export default {
       addlpDis: false, //一键购买lp弹窗状态
       inviteDis:false,
       showSelect: false,
-      Arr1: [
-        {
-          zq: "ST-BUSD LP",
-          zl: "0",
-          jclv: "5%",
-          fjlv1: "0%",
-          fjlv2: "0%",
-          fjlv3: "0%",
-          lxzq: "14",
-          djs: "00:00:00:00",
-          gml: "0%",
-        },
-      ],
+      // bondInfoArr: [],
       Arr2: [
         {
           zq: "ST-BUSD LP",
@@ -443,15 +449,168 @@ export default {
       ],
       list1: ["$ 0*0", "$ 0*0"],
       domHeight:false, // 下拉移动端左侧保持一致高度变量
-      isShowTitle:false
+      datacontent:'',
+      clientX:0,
+      clientY:0,
+      counrnull:null,
+      bondinfo:{
+        bondName:'ST-BUSD LP',
+        baseRate:"0",//基础利率
+        additional1:'0',//附加利率1
+        additional2:'0',//附加利率1
+        additional3:'0',//附加利率
+        purchaseRate:'0',
+        lp:'',
+        maxSupplyLp:'',
+        cycle:'',
+        addtimeobj:'',
+        conclusion:null,
+        countTime:{ d:"00",h: "00", m: "00", s: "00" }
+      },
+      baseInterestRateInfo:{
+        num1:0,//基础利率
+        num2:0,//利率等级
+        num3:0,//升级所需流动性
+        num4:0//升级完成率
+      },
+      inviteBuy:{
+        num1:0,//邀请购买利率
+        num2:0,//利率等级
+        num3:0,//升级所需购买额
+        num4:0//升级完成率
+      },
+      invitePledge:{
+        num1:0,//邀请质押利率
+        num2:0,//利率等级
+        num3:0,//升级所需质押额
+        num4:0//升级完成率
+      },
+      Pledge:{
+        num1:0,//质押利率
+        num2:0,//利率等级
+        num3:0,//升级所需质押额
+        num4:0//升级完成率
+      },
     };
   },
+  watch:{
+    'getIstrue': {
+      handler: function (newValue) {
+        if (newValue) {
+          this.setCountDown()
+          this.getBondInfo()
+        }else{
+          clearInterval(this.counrnull)
+          this.bondinfo = {
+            bondName:'ST-BUSD LP',
+            baseRate:"5",//基础利率
+            additional1:'0',//附加利率1
+            additional2:'0',//附加利率1
+            additional3:'0',//附加利率
+            purchaseRate:'0%',
+            lp:'',
+            maxSupplyLp:0,
+            cycle:14,
+            addtimeobj:'',
+            conclusion:null,
+            countTime:{ d:"00",h: "00", m: "00", s: "00" }
+          }
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
   methods: {
+    getBondInfo(){
+      // 获取发行中(还未到结束时间)的债券ID数组
+      if(!this.getIstrue)return
+      bondDepository().getActiveBonds().then(res => {
+        console.log('获取发行中(还未到结束时间)的债券ID数组res[0]: ',res);
+        if(res.length > 0){
+          this.newBondID = Number(res[0])
+          this.getCertainBondInfo(Number(res[0]),data => {
+            this.bondinfo = Object.assign(this.bondinfo,data)
+          })
+          this.getUserRate(this.newBondID)
+        }
+      })
+      // 获取债券总数，总数-1就是最新债券ID
+      // bondDepository().getMarketsLength().then(res1 => {
+      //   // console.log('获取债券总数，总数-1就是最新债券IDres: ', Number(res1));
+      // })
+      // 0xBC45dC703694831510bE20A64005e1C39fd34a36(测试)  国库地址
+      erc20(token().STLP).balanceOf('0xBC45dC703694831510bE20A64005e1C39fd34a36').then(res => {
+        // console.log('国库金额res: ', res);
+        this.treasuryMoney = this.$utils.convertBigNumberToNormal(Number(res), 2)
+      })
+    },
+    // 获取某债券的全部信息
+    getCertainBondInfo(bondId,calback){
+      bondDepository().markets(bondId).then(res => {
+        // console.log('获取某债券的全部信息res: ', res);
+        let obj = {}
+        obj.lp = res.LP
+        obj.maxSupplyLp = this.$utils.convertBigNumberToNormal(Number(res.maxSupplyLp), 2) //本期最大供应数量
+        obj.maxUseBuylP = this.$utils.convertBigNumberToNormal(Number(res.userMaxLpBuyAmount), 2)//用户最大购买量
+        obj.cycle = this.$utils.getBit(Number(res.term) / (24 * 3600))//利息周期
+        console.log('利息周期: ', Number(res.term));
+        obj.conclusion = Number(res.conclusion) // 结束时间
+        obj.soldLpNum = this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount), 2)//已卖出lp数量
+        
+        obj.purchaseRate = this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount / res.maxSupplyLp), 2)
+        calback(obj)
+      })
+    },
+    // 购买利率 邀请质押  邀请购买 基础利率
+    getUserRate(bondID){
+      // 获取某债券的基础利率等级信息
+      bondDepository().getBasicRateLevelInfo(bondID).then(res => {
+        console.log('获取某债券的基础利率等级信息res: ', res);
+        this.baseInterestRateInfo.num1 = Number(res[0]) / 1e2
+        this.baseInterestRateInfo.num2 = Number(res[1]) / 1e2
+        this.baseInterestRateInfo.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.baseInterestRateInfo.num4 = Number(res[3]) / 1e2
+        this.bondinfo.baseRate = this.baseInterestRateInfo.num1 // 基础利率
+      })
+      // 获取某用户的某期债券的邀请购买利率等级信息；等级有效期至当前期结束
+      bondDepository().getUserInviteBuyLevelInfo(this.getAccount,bondID).then(res => {
+        console.log('邀请购买利率res1: ', res);
+        this.inviteBuy.num1 = Number(res[0]) / 1e2
+        this.inviteBuy.num2 = Number(res[1]) / 1e2
+        this.inviteBuy.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.inviteBuy.num4 = Number(res[3]) / 1e2
+        this.bondinfo.additional1 = this.inviteBuy.num1//邀请购买利率
+      })
+      // 获取某用户的邀请质押利率等级信息
+      bondDepository().getUserInviteStakeLevelInfo(this.getAccount).then(res => {
+        console.log('邀请质押利率res1: ', res);
+        this.invitePledge.num1 = Number(res[0]) / 1e2
+        this.invitePledge.num2 = Number(res[1]) / 1e2
+        this.invitePledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.invitePledge.num4 = Number(res[3]) / 1e2
+        this.bondinfo.additional2 = this.inviteBuy.num1//邀请质押利率
+      })
+      // 获取某用户的质押利率等级信息
+      bondDepository().getUserStakeLevelInfo(this.getAccount).then(res => {
+        console.log('质押利率res1: ', res);
+        this.Pledge.num1 = Number(res[0]) / 1e2
+        this.Pledge.num2 = Number(res[1]) / 1e2
+        this.Pledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.Pledge.num4 = Number(res[3]) / 1e2
+        this.bondinfo.additional3 = this.Pledge.num1//你的质押利率
+      })
+    },
+
+
+
     quesFun(data,e){
-      console.log('data,e: ', data,e);
-      // this.$refs.titContent.style.top = e.clientY + 'px'
-      // this.$refs.titContent.style.left = e.clientX + 'px'
-      // this.isShowTitle = !this.isShowTitle
+      this.datacontent = data
+      this.clientX = e.clientX
+      this.clientY = e.clientY
+      setTimeout(() => {
+        this.$refs.mychild.titleFun()
+      },400)
     },
     closeLP() {
       this.addlpDis = false;
@@ -462,64 +621,38 @@ export default {
     inviteFun(){
       this.inviteDis = true;
     },
-    BondClick(data) {
+    BondClick() {
       this.addlpDis = true
     },
     showBuy(item){
       item.status = !item.status
       this.domHeight = item.status
+    },
+    // 倒计时
+    setCountDown(){
+      clearInterval(this.counrnull)
+      if(this.bondinfo.addtimeobj){
+        clearInterval(this.bondinfo.addtimeobj)
+      }
+      this.counrnull = setInterval(() => {
+        if(this.bondinfo.conclusion){
+          clearInterval(this.counrnull)
+          this.$utils.customTime(this.bondinfo.conclusion,(data) => {
+            // console.log('倒计时返回对象data: ', data);
+            this.bondinfo.addtimeobj = data.countdownObject
+            this.bondinfo.countTime = data.countTime
+          });//结束时间
+        }
+      },1000)
     }
   },
-  watch:{
-    isShowTitle(newvala){
-      if(newvala){
-        document.body.style.overflow='hidden'
-      }else{
-        document.body.style.overflow='visible'
-      }
-    },
+  mounted(){
+    this.getBondInfo()
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.out_title_box{
-  position: fixed;
-  top: 0;
-  left: 0;
-  height:100vh;
-  width: 100vw;
-  .showTitle{
-    padding: 10px;
-    position: absolute;
-    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
-    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
-    border: 1px solid rgba(68, 67, 67, 0.47);
-    .tip_box{
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 6px;
-      border-color: transparent transparent red transparent;
-      position: absolute;
-      top: -33%;
-      left: 30%;
-      // margin-left: 40px;
-      z-index: 10;
-      .con{ 
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 15px;
-        border-color: #fff transparent transparent transparent;
-        position: absolute;
-        left: -15px;
-        top: -16px;
-      }
-    }
-  }
-}
-
 .dashboard_box{
   width: 100%;
   display: flex;
@@ -797,9 +930,6 @@ export default {
     width: 100%;
     min-height: 350px;
   }
-  // .mobile_bond_bg{
-  //   display: none;
-  // }
   >div{
     position: absolute;
     top: 70px;
@@ -915,6 +1045,13 @@ export default {
     }
     .add_btn_txt{
       display: none;
+    }
+    .nodata_add{
+      width: 100%;
+      li{
+        width: 100%;
+        justify-content: center;
+      }
     }
   }
 }
@@ -1033,14 +1170,13 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     font-weight: 400;
     color: #909090;
     line-height: 17px;
     p{
       &:nth-child(2){
-        max-width: 70%;
-        // margin-top: 10px;
+        max-width: 100%;
       }
     }
   }
@@ -1195,10 +1331,6 @@ export default {
       width: 100%;
       min-height: 2rem;
     }
-    // .mobile_bond_bg{
-    //   display: block;
-    //   width: 100%;
-    // }
     >div{
       position: absolute;
       top: 0.2rem;
@@ -1256,11 +1388,6 @@ export default {
         font-weight: 600;
         color: #eccf83;
         line-height: 33px;
-        // .item{
-        //   width: 30px;
-        //   height: 30px;
-        //   background: red;
-        // }
         &:nth-child(2),&:nth-child(4){
           text-align: right;
         }

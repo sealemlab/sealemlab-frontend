@@ -1,7 +1,7 @@
 <template>
   <input
     :type="type"
-    v-model="msg"
+    v-model="inputmsg"
     class="input font16 mobile_font12"
     :style="{ color: fontColor,background:background}"
     :placeholder='placeholder'
@@ -11,19 +11,23 @@
 </template>
 <script>
 export default {
-  data(){
-    return {
-      msg:''
-    }
-  },
   watch:{
-    msg(nval,oval){
+    inputmsg(nval,oval){
       if(nval != oval){
         this.$emit('input',nval)
       }
     }
   },
+  data(){
+    return{
+      inputmsg:this.msg
+    }
+  },
   props: {
+    msg:{
+      type: String || Number,
+      default:''
+    },
     type:{
       type: String,
       default: 'text'

@@ -274,14 +274,15 @@ export default {
     .cardarr_class{
       width: 90vw;
       margin: 0 auto;
-      max-height: calc(100%-200px);
+      // height: calc(100%-200px);
       overflow: auto;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       margin-top: 20px;
       max-height: 600px;
-      padding-bottom: 240px;
+      // padding-bottom: 240px;
+      padding-bottom: 310px;
       .onebox{
         position: relative;
         width: 20%;
@@ -395,14 +396,14 @@ export default {
       .cardarr_class{
         width: 90vw;
         margin: 0 auto;
-        max-height: calc(100%-2rem);
+        // max-height: calc(100%-2rem);
         overflow: auto;
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         margin-top: 0.2rem;
         max-height: 6rem;
-        padding-bottom: 1.4rem;
+        padding-bottom: 1.9rem;
         .onebox{
           position: relative;
           width: 50%;
