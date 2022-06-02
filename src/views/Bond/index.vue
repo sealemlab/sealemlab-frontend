@@ -67,41 +67,40 @@
               </li>
               <li></li>
             </ul>
-            <ul class="list_title2 font16" :class="isEnLang?'en_medium':''" v-if="bondInfoArr.length > 0">
-              <li v-for="(item, index) in bondInfoArr" :key="index">
-                <span>{{ item.bondName }}</span>
-                <span>{{ item.maxSupplyLp }}</span>
-                <span>{{ item.baseRate }}</span>
+            <ul class="list_title2 font16" :class="isEnLang?'en_medium':''">
+              <li>
+                <span>{{ bondinfo.bondName }}</span>
+                <span>{{ bondinfo.maxSupplyLp }}</span>
+                <span>{{ bondinfo.baseRate }} %</span>
                 <span>
-                  <span class="color2">{{ item.additional1 }}</span>
+                  <span class="color2">{{ bondinfo.additional1 }} %</span>
                   + 
-                  <span class="color3">{{ item.additional2 }}</span>
+                  <span class="color3">{{ bondinfo.additional2 }} %</span>
                   + 
-                  <span class="color4">{{ item.additional3 }}</span>
+                  <span class="color4">{{ bondinfo.additional3 }} %</span>
                 </span>
-                <span>{{ item.cycle }}&nbsp;{{$t("message.bond.txt19")}}</span>
-                <span v-show="item.countTime">
-                  {{ item.countTime.d}}&nbsp;:
-                  {{ item.countTime.h }}&nbsp;:
-                  {{ item.countTime.m }}&nbsp;:
-                  {{ item.countTime.s }}
-                </span>
-                <span v-show="!item.countTime">00:00:00:00</span>
+                <span>{{ bondinfo.cycle }}&nbsp;{{$t("message.bond.txt19")}}</span>
                 <span>
-                  <div class="progressbar"><div :style="{ width: item.purchaseRate }"></div></div>
-                  {{ item.purchaseRate }}
+                  {{ bondinfo.countTime.d}}&nbsp;:
+                  {{ bondinfo.countTime.h }}&nbsp;:
+                  {{ bondinfo.countTime.m }}&nbsp;:
+                  {{ bondinfo.countTime.s }}
+                </span>
+                <span>
+                  <div class="progressbar"><div :style="{ width: bondinfo.purchaseRate }"></div></div>
+                  {{ bondinfo.purchaseRate }} %
                 </span>
                 <span>
                   <div class="btn_txt mobile_btn bg3" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
                 </span>
               </li>
             </ul>
-            <ul class="list_title2 nodata_add font16" v-if="bondInfoArr.length == 0 && loadMoreStatus">
+            <!-- <ul class="list_title2 nodata_add font16" v-if="bondInfoArr.length == 0 && loadMoreStatus">
               <li><LoadingAnmation></LoadingAnmation></li>
-            </ul>
-            <ul class="list_title2 nodata_add font16" v-if="bondInfoArr.length == 0 && !loadMoreStatus">
+            </ul> -->
+            <!-- <ul class="list_title2 nodata_add font16" v-if="bondInfoArr.length == 0 && !loadMoreStatus">
               <li>NoData</li>
-            </ul>
+            </ul> -->
             <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
           </div>
         </div>
@@ -383,7 +382,7 @@
         </div>
       </div>
     </div>
-    <AddLp :newBondID="newBondID" :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
+    <AddLp :obj="bondinfo" :newBondID="newBondID" :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
     <InviteProup :inviteDis="inviteDis" @closeInvite="closeInvite"></InviteProup>
     <MessageBox ref="mychild" :clientX='clientX' :clientY="clientY" :content="datacontent"></MessageBox>
   </div>
@@ -399,7 +398,7 @@ export default {
   components: {
     AddLp,InviteProup,MessageBox
   },
-  computed: { ...mapGetters(["getIstrue","getNoticeNum","isEnLang","getUserCoin"]) },
+  computed: { ...mapGetters(["getAccount","getIstrue","getNoticeNum","isEnLang","getUserCoin"]) },
   data() {
     return {
       newBondID:-2,//最新债券id
@@ -423,7 +422,7 @@ export default {
       addlpDis: false, //一键购买lp弹窗状态
       inviteDis:false,
       showSelect: false,
-      bondInfoArr: [],
+      // bondInfoArr: [],
       Arr2: [
         {
           zq: "ST-BUSD LP",
@@ -453,36 +452,69 @@ export default {
       datacontent:'',
       clientX:0,
       clientY:0,
-      counrnull:null
+      counrnull:null,
+      bondinfo:{
+        bondName:'ST-BUSD LP',
+        baseRate:"0",//基础利率
+        additional1:'0',//附加利率1
+        additional2:'0',//附加利率1
+        additional3:'0',//附加利率
+        purchaseRate:'0',
+        lp:'',
+        maxSupplyLp:'',
+        cycle:'',
+        addtimeobj:'',
+        conclusion:null,
+        countTime:{ d:"00",h: "00", m: "00", s: "00" }
+      },
+      baseInterestRateInfo:{
+        num1:0,//基础利率
+        num2:0,//利率等级
+        num3:0,//升级所需流动性
+        num4:0//升级完成率
+      },
+      inviteBuy:{
+        num1:0,//邀请购买利率
+        num2:0,//利率等级
+        num3:0,//升级所需购买额
+        num4:0//升级完成率
+      },
+      invitePledge:{
+        num1:0,//邀请质押利率
+        num2:0,//利率等级
+        num3:0,//升级所需质押额
+        num4:0//升级完成率
+      },
+      Pledge:{
+        num1:0,//质押利率
+        num2:0,//利率等级
+        num3:0,//升级所需质押额
+        num4:0//升级完成率
+      },
     };
   },
   watch:{
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
-          this.bondInfoArr = []
-          this.loadMoreStatus = true
           this.setCountDown()
+          this.getBondInfo()
         }else{
-          this.loadMoreStatus = false
           clearInterval(this.counrnull)
-          this.bondInfoArr = []
-          // this.bondInfoArr = [
-          //   {
-          //     bondName:'ST-BUSD LP',
-          //     baseRate:"5%",//基础利率
-          //     additional1:'0%',//附加利率1
-          //     additional2:'0%',//附加利率1
-          //     additional3:'0%',//附加利率
-          //     purchaseRate:'0%',
-          //     lp:'',
-          //     maxSupplyLp:'',
-          //     cycle:'',
-          //     addtimeobj:'',
-          //     conclusion:null,
-          //     countTime:{}
-          //   }
-          // ]
+          this.bondinfo = {
+            bondName:'ST-BUSD LP',
+            baseRate:"5",//基础利率
+            additional1:'0',//附加利率1
+            additional2:'0',//附加利率1
+            additional3:'0',//附加利率
+            purchaseRate:'0%',
+            lp:'',
+            maxSupplyLp:0,
+            cycle:14,
+            addtimeobj:'',
+            conclusion:null,
+            countTime:{ d:"00",h: "00", m: "00", s: "00" }
+          }
         }
       },
       deep: true,
@@ -492,40 +524,21 @@ export default {
   methods: {
     getBondInfo(){
       // 获取发行中(还未到结束时间)的债券ID数组
+      if(!this.getIstrue)return
       bondDepository().getActiveBonds().then(res => {
         console.log('获取发行中(还未到结束时间)的债券ID数组res[0]: ',res);
         if(res.length > 0){
           this.newBondID = Number(res[0])
           this.getCertainBondInfo(Number(res[0]),data => {
-            this.loadMoreStatus = false
-            console.log('函数获取到债券的信息data: ', data);
-            this.bondInfoArr.push(data)
+            this.bondinfo = Object.assign(this.bondinfo,data)
           })
-        }else{
-          this.loadMoreStatus = false
-          console.log("没有正在发行的债券")
-          this.bondInfoArr = []
-          // this.bondInfoArr = [
-          //   {
-          //     bondName:'ST-BUSD LP',
-          //     baseRate:"5%",//基础利率
-          //     additional1:'0%',//附加利率1
-          //     additional2:'0%',//附加利率1
-          //     additional3:'0%',//附加利率
-          //     purchaseRate:'0%',
-          //     lp:'',
-          //     maxSupplyLp:'',
-          //     cycle:'',
-          //     endTime:{ d:"00",h: "00", m: "00", s: "00" }
-          //     addtimeobj:null
-          //   }
-          // ]
+          this.getUserRate(this.newBondID)
         }
       })
       // 获取债券总数，总数-1就是最新债券ID
-      bondDepository().getMarketsLength().then(res1 => {
-        console.log('获取债券总数，总数-1就是最新债券IDres: ', Number(res1));
-      })
+      // bondDepository().getMarketsLength().then(res1 => {
+      //   // console.log('获取债券总数，总数-1就是最新债券IDres: ', Number(res1));
+      // })
       // 0xBC45dC703694831510bE20A64005e1C39fd34a36(测试)  国库地址
       erc20(token().STLP).balanceOf('0xBC45dC703694831510bE20A64005e1C39fd34a36').then(res => {
         // console.log('国库金额res: ', res);
@@ -537,33 +550,60 @@ export default {
       bondDepository().markets(bondId).then(res => {
         // console.log('获取某债券的全部信息res: ', res);
         let obj = {}
-        obj.addtimeobj = ''
-        obj.countTime = {}
-        obj.bondName = 'ST-BUSD LP',
-        obj.baseRate = "5%",//基础利率
-        obj.additional1 = '0%',//附加利率1
-        obj.additional2 = '0%',//附加利率1
-        obj.additional3 = '0%',//附加利率
-        // obj.purchaseRate = '0%' // 购买率
         obj.lp = res.LP
         obj.maxSupplyLp = this.$utils.convertBigNumberToNormal(Number(res.maxSupplyLp), 2) //本期最大供应数量
         obj.maxUseBuylP = this.$utils.convertBigNumberToNormal(Number(res.userMaxLpBuyAmount), 2)//用户最大购买量
-        
-        this.$utils.afferentTime(Number(res.term), (data) => {
-          obj.cycle = data
-        },'day');//利息周期
-        
-        // this.$utils.afferentTime(Number(res.conclusion), (data) => {
-        //   obj.countTime = data
-        // },'day',true);//结束时间
+        obj.cycle = this.$utils.getBit(Number(res.term) / (24 * 3600))//利息周期
+        console.log('利息周期: ', Number(res.term));
         obj.conclusion = Number(res.conclusion) // 结束时间
         obj.soldLpNum = this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount), 2)//已卖出lp数量
         
-        let rate = this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount / res.maxSupplyLp), 2)
-        obj.purchaseRate = rate + '%'
+        obj.purchaseRate = this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount / res.maxSupplyLp), 2)
         calback(obj)
       })
     },
+    // 购买利率 邀请质押  邀请购买 基础利率
+    getUserRate(bondID){
+      // 获取某债券的基础利率等级信息
+      bondDepository().getBasicRateLevelInfo(bondID).then(res => {
+        console.log('获取某债券的基础利率等级信息res: ', res);
+        this.baseInterestRateInfo.num1 = Number(res[0]) / 1e2
+        this.baseInterestRateInfo.num2 = Number(res[1]) / 1e2
+        this.baseInterestRateInfo.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.baseInterestRateInfo.num4 = Number(res[3]) / 1e2
+        this.bondinfo.baseRate = this.baseInterestRateInfo.num1 // 基础利率
+      })
+      // 获取某用户的某期债券的邀请购买利率等级信息；等级有效期至当前期结束
+      bondDepository().getUserInviteBuyLevelInfo(this.getAccount,bondID).then(res => {
+        console.log('邀请购买利率res1: ', res);
+        this.inviteBuy.num1 = Number(res[0]) / 1e2
+        this.inviteBuy.num2 = Number(res[1]) / 1e2
+        this.inviteBuy.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.inviteBuy.num4 = Number(res[3]) / 1e2
+        this.bondinfo.additional1 = this.inviteBuy.num1//邀请购买利率
+      })
+      // 获取某用户的邀请质押利率等级信息
+      bondDepository().getUserInviteStakeLevelInfo(this.getAccount).then(res => {
+        console.log('邀请质押利率res1: ', res);
+        this.invitePledge.num1 = Number(res[0]) / 1e2
+        this.invitePledge.num2 = Number(res[1]) / 1e2
+        this.invitePledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.invitePledge.num4 = Number(res[3]) / 1e2
+        this.bondinfo.additional2 = this.inviteBuy.num1//邀请质押利率
+      })
+      // 获取某用户的质押利率等级信息
+      bondDepository().getUserStakeLevelInfo(this.getAccount).then(res => {
+        console.log('质押利率res1: ', res);
+        this.Pledge.num1 = Number(res[0]) / 1e2
+        this.Pledge.num2 = Number(res[1]) / 1e2
+        this.Pledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.Pledge.num4 = Number(res[3]) / 1e2
+        this.bondinfo.additional3 = this.Pledge.num1//你的质押利率
+      })
+    },
+
+
+
     quesFun(data,e){
       this.datacontent = data
       this.clientX = e.clientX
@@ -581,27 +621,26 @@ export default {
     inviteFun(){
       this.inviteDis = true;
     },
-    BondClick(data) {
+    BondClick() {
       this.addlpDis = true
     },
     showBuy(item){
       item.status = !item.status
       this.domHeight = item.status
     },
+    // 倒计时
     setCountDown(){
       clearInterval(this.counrnull)
-      console.log('this.bondInfoArr[0].addtimeobj:',this.bondInfoArr);
-      if(this.bondInfoArr.length > 0){
-        clearInterval(this.bondInfoArr[0].addtimeobj)
+      if(this.bondinfo.addtimeobj){
+        clearInterval(this.bondinfo.addtimeobj)
       }
       this.counrnull = setInterval(() => {
-        if(this.bondInfoArr[0].conclusion){
+        if(this.bondinfo.conclusion){
           clearInterval(this.counrnull)
-          this.$utils.customTime(this.bondInfoArr[0].conclusion,(data) => {
+          this.$utils.customTime(this.bondinfo.conclusion,(data) => {
             // console.log('倒计时返回对象data: ', data);
-            this.bondInfoArr[0].addtimeobj = data.countdownObject
-            this.bondInfoArr[0].countTime = data.countTime
-            console.log('this.bondInfoArr[0]: ', this.bondInfoArr[0]);
+            this.bondinfo.addtimeobj = data.countdownObject
+            this.bondinfo.countTime = data.countTime
           });//结束时间
         }
       },1000)

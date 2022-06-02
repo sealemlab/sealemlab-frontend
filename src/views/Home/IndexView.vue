@@ -248,19 +248,31 @@
       <div class="gamebox">
         <div class="partener_box display_flex">
           <div class="one_partener display_flex" v-for="(item, index) in partenerArr" :key="index">
-            <img :src="item.src" 
-              :class="{par1:index == 0,
-              par2:index == 1,
-              par3:index == 2,
-              par4:index == 3,
-              par5:index == 4,
-              par6:index == 5,
-              par7:index == 6,
-              par8:index == 7,
-              par9:index == 8,
-              par10:index == 9
-              }"
-            />
+            <a :href="item.link" target="_blank" rel="noopener noreferrer">
+              <img :src="item.src" 
+                :class="{
+                  par1:index == 0,
+                  par2:index == 1,
+                  par3:index == 2,
+                  par4:index == 3,
+                  par5:index == 4,
+                  par6:index == 5,
+                  par7:index == 6,
+                  par8:index == 7,
+                  par9:index == 8,
+                  par10:index == 9,
+                  par11:index == 10,
+                  par12:index == 11,
+                  par13:index == 12,
+                  par14:index == 13,
+                  par15:index == 14,
+                  par16:index == 15,
+                  par17:index == 16,
+                  par18:index == 17,
+                  par19:index == 18,
+                }"
+              />
+            </a>
           </div>
         </div>
       </div>
@@ -423,34 +435,99 @@ export default {
         {txt:"message.home.txt21",src:`${this.$store.state.imgUrl}money6.webp`,icon:''}
       ],
       partenerArr:[{
-        src:`${this.$store.state.imgUrl}partener1.webp`,
+        id:1,
+        src:`${this.$store.state.imgUrl}new_partener1.webp`,
+        link:'https://www.coingecko.com/'
       },
       {
-        src:`${this.$store.state.imgUrl}partener2.webp`,
+        id:2,
+        src:`${this.$store.state.imgUrl}new_partener2.webp`,
+        link:'https://coinmarketcap.com/'
       },
       {
-        src:`${this.$store.state.imgUrl}partener3.webp`,
+        id:3,
+        src:`${this.$store.state.imgUrl}new_partener3.webp`,
+        link:'https://bscscan.com/address/0x6f706319c46d1b28508e8e4bcaa59e47d15e028c'
       },
       {
-        src:`${this.$store.state.imgUrl}partener4.webp`,
+        id:4,
+        src:`${this.$store.state.imgUrl}new_partener4.webp`,
+        link:'https://pancakeswap.finance/swap/0x6F706319C46D1b28508E8e4bCaA59e47D15e028C'
       },
       {
-        src:`${this.$store.state.imgUrl}partener5.webp`,
+        id:5,
+        src:`${this.$store.state.imgUrl}new_partener5.webp`,
+        link:'https://www.dapp.com/'
       },
       {
-        src:`${this.$store.state.imgUrl}partener6.webp`,
+        id:6,
+        src:`${this.$store.state.imgUrl}new_partener6.webp`,
+        link:'https://coin98.com/'
       },
       {
-        src:`${this.$store.state.imgUrl}partener7.webp`,
+        id:7,
+        src:`${this.$store.state.imgUrl}new_partener7.webp`,
+        link:'https://bnbproject.org/#/project/2464'
       },
       {
-        src:`${this.$store.state.imgUrl}partener8.webp`,
+        id:8,
+        src:`${this.$store.state.imgUrl}new_partener8.webp`,
+        link:'https://dappradar.com/binance-smart-chain/defi/sealem'
       },
       {
-        src:`${this.$store.state.imgUrl}partener9.webp`,
+        id:9,
+        src:`${this.$store.state.imgUrl}new_partener9.webp`,
+        link:'https://mathwallet.org/'
       },
       {
-        src:`${this.$store.state.imgUrl}partener10.webp`,
+        id:10,
+        src:`${this.$store.state.imgUrl}new_partener10.webp`,
+        link:'https://www.tokenpocket.pro/'
+      },
+      {
+        id:11,
+        src:`${this.$store.state.imgUrl}new_partener11.webp`,
+        link:'https://bitkeep.com/'
+      },
+      {
+        id:12,
+        src:`${this.$store.state.imgUrl}new_partener12.webp`,
+        link:'https://www.pinksale.finance/'
+      },
+      {
+        id:13,
+        src:`${this.$store.state.imgUrl}new_partener13.webp`,
+        link:'https://www.certik.com/projects/sealem'
+      },
+      {
+        id:14,
+        src:`${this.$store.state.imgUrl}new_partener14.webp`,
+        link:'https://planckx.io/'
+      },
+      {
+        id:15,
+        src:`${this.$store.state.imgUrl}new_partener15.webp`,
+        link:'https://onto.app/'
+      },
+      {
+        id:16,
+        src:`${this.$store.state.imgUrl}new_partener16.webp`,
+        link:'https://safepal.io/'
+      },
+      {
+        id:17,
+        src:`${this.$store.state.imgUrl}new_partener17.webp`,
+        link:'https://nabox.io/'
+      },
+      {
+        id:18,
+        src:`${this.$store.state.imgUrl}new_partener18.webp`,
+        link:'https://trustwallet.com/'
+      },
+      {
+        id:19,
+        src:`${this.$store.state.imgUrl}new_partener19.webp`,
+        link:'https://www.coinhub.org/'
       }
       ],
       swiperArr:[
@@ -1114,47 +1191,75 @@ export default {
       box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
       border-radius: 12px;
       border: 1px solid rgba(68, 67, 67, 0.47);
-      padding: 0 20px;
+      padding:50px 20px 0;
       .partener_box{
         width: 100%;
         align-items: center;
         flex-wrap: wrap;
-        margin-top: 20px;
         .one_partener{
           width: 25%;
+          display: flex;
+          align-items: center;
+          margin-bottom:50px;
           img{
-            margin-bottom: 49px;
             cursor: pointer;
           }
           .par1{
             width: 182px;
           }
           .par2{
-            width: 208px;
-          }
-          .par3{
             width: 222px;
           }
+          .par3{
+            width: 237px;
+          }
           .par4{
-            width: 235px;
+            width: 250px;
           }
           .par5{
-            width: 207px;
+            width: 192px;
           }
           .par6{
-            width: 169px;
+            width: 180px;
           }
           .par7{
-            width: 159px;
+            width: 195px;
           }
           .par8{
-            width: 194px;
+            width: 247px;
           }
           .par9{
-            width: 220px;
+            width: 211px;
           }
           .par10{
-            width: 249px;
+            width: 213px;
+          }
+          .par11{
+            width: 158px;
+          }
+          .par12{
+            width: 150px;
+          }
+          .par13{
+            width: 184px;
+          }
+          .par14{
+            width: 210px
+          }
+          .par15{
+            width: 150px;
+          }
+          .par16{
+            width: 147px;
+          }
+          .par17{
+            width: 174px;
+          }
+          .par18{
+            width: 192px;
+          }
+          .par19{
+            width: 157px;
           }
         }
       }
@@ -1797,8 +1902,14 @@ export default {
           align-items: center;
           .one_partener{
             width: 33%;
+            display: flex;
+            align-items: center;
+            margin-bottom:0.2rem;
+            img{
+              cursor: pointer;
+            }
             .par1{
-              width: 0.73rem;
+              width: 0.72rem;
             }
             .par2{
               width: 0.89rem;
@@ -1826,6 +1937,33 @@ export default {
             }
             .par10{
               width: 0.93rem;
+            }
+            .par11{
+              width: 0.54rem;
+            }
+            .par12{
+              width: 0.56rem;
+            }
+            .par13{
+              width: 0.79rem;
+            }
+            .par14{
+              width: 0.86rem;
+            }
+            .par15{
+              width: 0.61rem;
+            }
+            .par16{
+              width: 0.6rem;
+            }
+            .par17{
+              width: 0.63rem;
+            }
+            .par18{
+              width: 0.75rem;
+            }
+            .par19{
+              width: 0.64rem;
             }
           }
         }

@@ -80,7 +80,7 @@
 <script>
 import { mapGetters } from "vuex";
 import MessageBox from "./MessageBox.vue";
-import { bondDepository,token,contract,getSigner} from 'sealemlab-sdk'
+import { bondDepository,token,contract,getSigner,erc20,util} from 'sealemlab-sdk'
 export default {
   watch:{
     'addlpDis'(newvala){
@@ -106,6 +106,8 @@ export default {
             this.getSDKInfo()
             // console.log("切换账号重新判断授权")
           },2000)
+          this.getUserCoinBalance('busd')
+          this.getUserCoinBalance('st')
         }
       },
       deep: true,
@@ -116,7 +118,10 @@ export default {
     MessageBox
   },
   computed: {
-    ...mapGetters(["isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"])
+    ...mapGetters(["isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
+    userRate(){
+      return (this.obj.baseRate + this.obj.additional1 + this.obj.additional2 + this.obj.additional3) / 100
+    }
   },
   props: {
     addlpDis: {
@@ -126,6 +131,10 @@ export default {
     newBondID:{
       type: Number,
       default: -2
+    },
+    obj: {
+      type: Object,
+      default: function () { return {} }
     }
   },
   data(){
@@ -179,8 +188,11 @@ export default {
         if(etReceipt.status == 1){
           this.buyLoading = false
           this.BUSDmsg = this.STmsg = ''
+          this.moneyArr[0].num = this.moneyArr[1].num = this.moneyArr[2].num = 0
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
+          this.getUserCoinBalance('busd')
+          this.getUserCoinBalance('st')
         }else{
           this.buyLoading = false
         }
@@ -302,7 +314,8 @@ export default {
       this.busdBlurStatus = false
       if(!this.stBlurStatus){
         this.moneyArr[0].num = Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice
-        console.log('Number(this.BUSDmsg)', Number(this.BUSDmsg),Number(this.STmsg),this.getUserCoin);
+        this.moneyArr[1].num = this.$utils.getBit(this.userRate * this.moneyArr[0].num,2)
+        this.moneyArr[2].num = Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num)
       }
     },
     busdFocusEvent(){
@@ -319,7 +332,8 @@ export default {
       this.stBlurStatus = false
       if(!this.busdBlurStatus){
         this.moneyArr[0].num = Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice
-        console.log('Number(this.BUSDmsg)', Number(this.BUSDmsg),Number(this.STmsg),this.getUserCoin);
+        this.moneyArr[1].num = this.$utils.getBit(this.userRate * this.moneyArr[0].num,2)
+        this.moneyArr[2].num = Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num)
       }
     },
     focusEvent(){
@@ -349,6 +363,24 @@ export default {
         this.STmsg = this.getUserCoin.st
       }
     },
+    // 获取当前用户的代币余额
+    getUserCoinBalance(data){
+      if(data == 'busd'){
+        erc20(token().BUSD).balanceOf(this.getAccount).then(res => {
+          let obj = {}
+          obj.busd = this.$utils.getBit(util.formatEther(res),4)
+          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
+          console.log("busd余额")
+        })
+      }else if(data == 'st'){
+        erc20(token().ST).balanceOf(this.getAccount).then(res => {
+          let obj = {}
+          obj.st = this.$utils.getBit(util.formatEther(res),4)
+          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
+          console.log("st余额")
+        })
+      }
+    }
   }
 }
 </script>
@@ -445,8 +477,9 @@ export default {
       border-radius: 8px;
       border: 1px solid #373636;
       .left_content{
+        min-width: 58px;
         display: flex;
-        justify-content: center;
+        // justify-content: center;
         align-items: center;
         .busd_img{
           width: 17px;

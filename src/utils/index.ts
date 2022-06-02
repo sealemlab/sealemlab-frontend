@@ -40,7 +40,7 @@ export default {
     let neddTime = endtime - timestamp
     // @ts-ignore
     let day = parseFloat(neddTime / (24 * 3600))
-    console.log('当前s数换算下来的天数day: ', day);
+    // console.log('当前s数换算下来的天数day: ', day);
     if(type == 'day' && !iscountdown){
       calback(day);
       return
@@ -92,7 +92,7 @@ export default {
   },
   /** 应用场景:返回时间戳,然后倒计时;参数:时间戳(s)*/
   customTime(endtime: any, calback: any) {
-    console.log('endtime: ', endtime);
+    // console.log('endtime: ', endtime);
     // @ts-ignore
     let time = new Date().getTime() / 1000
     if(endtime < time){
