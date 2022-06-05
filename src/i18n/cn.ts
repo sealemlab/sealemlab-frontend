@@ -753,6 +753,13 @@ export const message = {
     txt19: "Purchased",
     txt20: "Sell",
     txt21: "Rent",
+    txt22: "Invitation",
+    txt23: "Your referral link",
+    txt24: "Invitation Rules",
+    txt25: "1. The binding is successful only after users enter the official website through the link to purchase the bond.",
+    txt26: "2. The interest rate increases by 0.1% per 1K USD of bonds purchased or  staking by the invitee.",
+    txt27: "3. The invitation staking interest rate changes according to the actual staking amount of the invitee.",
+  
   },
   tip: {
     txt1: "创建账户成功,请到邮箱激活账户",
@@ -769,7 +776,10 @@ export const message = {
     self_txt11: "开盒子中....",
     self_txt12: "开盲盒结果",
     self_txt13: "No Data",
-    self_buy:"购买"
+    self_buy:"购买",
+    self_userBuy:'用户个人剩余购买量为0',
+    self_calim:'提取中...',
+    self_calimResult:'暂无奖励需要提取'
   }, //一些提示语句,文案你看哪不合适,替换就行
   approve: "授权",
 

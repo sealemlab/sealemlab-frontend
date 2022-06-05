@@ -20,7 +20,7 @@ export default {
     return {
       li_index:0,
       navArr: [
-        { label: "message.nft.txt2", link: "/nft/buy-blind-box/0/0",src:`${this.$store.state.imgUrl}nft_nav1.webp`,status:true},
+        { label: "message.nft.txt2", link: "/nft/buy-blind-box/0",src:`${this.$store.state.imgUrl}nft_nav1.webp`,status:true},
         { label: "message.nft.txt3", link: "/nft/blind-box",src:`${this.$store.state.imgUrl}nft_nav2.webp`,status:false },
         { label: "message.nft.txt4", link: "/nft/my-nft",src:`${this.$store.state.imgUrl}nft_nav3.webp`,status:false },
         { label: "message.nft.txt5", link: "/nft/giving",src:`${this.$store.state.imgUrl}nft_nav4.webp`,status:false },

@@ -207,7 +207,7 @@ export default {
   watch: {
     $route(to) {
       this.bindboxType = to.params.boxtype
-      this.userAddress = to.params.address
+      // this.userAddress = to.params.address
       this.getBoxInfo(this.bindboxType)
     },
     'getIstrue': {
@@ -401,7 +401,8 @@ export default {
   },
   mounted(){
     this.bindboxType = this.$route.params.boxtype // 页面加载时路由不会触发监听,所以在mounted赋值
-    this.userAddress = this.$route.params.address
+    // this.userAddress = this.$route.params.address
+    this.userAddress = localStorage.getItem('userInvite')
     this.getBoxInfo(this.bindboxType)
   }
 };

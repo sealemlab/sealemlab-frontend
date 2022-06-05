@@ -12,7 +12,7 @@ export default {
       required: true
     },
     // height: Number,
-    width: Number,
+    width: Number || String,
     // left:{
     //   type: String,
     //   default:'0'

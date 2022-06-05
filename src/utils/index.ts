@@ -2,6 +2,15 @@ import {wallet, network,sb,sn,getSourceUrl,erc20,getSigner} from "sealemlab-sdk"
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
+  // 复制
+  copyClick(params: any) {
+    const dummy = document.createElement("input");
+    document.body.appendChild(dummy);
+    dummy.value = params;
+    dummy.select(); // 选择对象
+    document.execCommand("copy"); // 执行浏览器复制命令
+    document.body.removeChild(dummy);
+  },
   // 根据浏览器语言  自动切换中英文
   isLang() {
     // @ts-ignore
@@ -108,9 +117,14 @@ export default {
       let neddTime = endtime - time
       // @ts-ignore
       let day = parseFloat(neddTime / (24 * 3600))
+      // console.log('总共的天数day: ', day);
       if(day > 1){
-        let D: any = parseFloat((neddTime / (3600 * 24)).toString());
-        let result:any = parseInt((neddTime - (D * 3600 * 24)).toString());
+        // @ts-ignore
+        let D: any = parseInt(day)
+        // console.log('整数位天数D: ', D);
+        // @ts-ignore
+        let result:any = parseFloat((day - D) * 24 * 3600);
+        // console.log('剩余天数result: ', result);
         let H: any = parseInt((result / (60 * 60)).toString());
         let M: any = parseInt(((result / 60) % 60).toString());
         let S: any = parseInt((result % 60).toString());

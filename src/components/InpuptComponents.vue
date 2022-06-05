@@ -1,30 +1,19 @@
 <template>
   <input
     :type="type"
-    v-model="inputmsg"
+    :value="modelValue"
     class="input font16 mobile_font12"
     :style="{ color: fontColor,background:background}"
     :placeholder='placeholder'
     @blur="blurEvent"
     @focus="focusEvent"
+    @input="inpChange"
   />
 </template>
 <script>
 export default {
-  watch:{
-    inputmsg(nval,oval){
-      if(nval != oval){
-        this.$emit('input',nval)
-      }
-    }
-  },
-  data(){
-    return{
-      inputmsg:this.msg
-    }
-  },
   props: {
-    msg:{
+    modelValue:{
       type: String || Number,
       default:''
     },
@@ -51,7 +40,10 @@ export default {
     },
     blurEvent(){
       this.$emit('blurEvent')
-    }
+    },
+    inpChange(e) {
+      this.$emit("input", e.target.value);
+    },
   }
 }
 </script>

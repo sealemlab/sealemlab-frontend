@@ -18,7 +18,7 @@
               <span class="busd_txt font14">BUSD</span>
             </div>
             <div class="center_content">
-              <Input @blurEvent="busdBlurEvent" @focusEvent="busdFocusEvent" :msg="BUSDmsg" :placeholder='$t("message.bond.txt23")' @input="busdInputClick"></Input>
+              <Input :modelValue="BUSDmsg" type="number" :placeholder='$t("message.bond.txt23")' @input="busdInputClick"></Input>
             </div>
             <div class="max_btn font16" @click="maxClick('busd')">MAX</div>
           </div>
@@ -32,7 +32,7 @@
               <span class="busd_txt font14">ST</span>
             </div>
             <div class="center_content">
-              <Input @blurEvent="blurEvent" :msg="STmsg" @focusEvent="focusEvent" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
+              <Input :modelValue="STmsg" type="number" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
             </div>
             <div class="max_btn font16" @click="maxClick('st')">MAX</div>
           </div>
@@ -62,13 +62,19 @@
           </div>
         </div>
         <div class="tipbox font12" :class="isEnLang?'en_medium':''">
-          <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt27")}}</span><span>0%</span></p>
-          <p class="color1"><span>{{$t("message.bond.txt28")}}</span><span>0%</span>
-          <p class="color2"><span>{{$t("message.bond.txt30")}}</span><span>0%</span>
-          <p class="color3"><span>{{$t("message.bond.txt29")}}</span><span>0%</span>
-          <p class="color4"><span>{{$t("message.bond.txt31")}}</span><span>0%</span>
-          <p class="font14 mobile_font14" @click="AddQuesFun('message.bond.txt_tax',$event)" :class="isEnLang?'en_Bold':''"><span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span><span>0.1%</span></p>
-          <p class="font16 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt33")}}</span><span>$0</span></p>
+          <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''">
+            <span>{{$t("message.bond.txt27")}}</span>
+            <span>{{obj.baseRate + obj.additional1 + obj.additional2 + obj.additional3}}%</span>
+          </p>
+          <p class="color1"><span>{{$t("message.bond.txt28")}}</span><span>{{obj.baseRate}}%</span>
+          <p class="color2"><span>{{$t("message.bond.txt30")}}</span><span>{{obj.additional1}}%</span>
+          <p class="color3"><span>{{$t("message.bond.txt29")}}</span><span>{{obj.additional2}}%</span>
+          <p class="color4"><span>{{$t("message.bond.txt31")}}</span><span>{{obj.additional3}}%</span>
+          <p class="font14 mobile_font14" @click="AddQuesFun('message.bond.txt_tax',$event)" :class="isEnLang?'en_Bold':''">
+            <span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span>
+            <span>{{userTaxRate}}%</span>
+          </p>
+          <p class="font16 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt33")}}</span><span>$ {{useReadyBy}}</span></p>
           <p>{{$t("message.bond.txt34")}}</p>
         </div>
       </div>
@@ -86,6 +92,12 @@ export default {
     'addlpDis'(newvala){
       if(newvala){
         document.body.style.overflow='hidden'
+        this.getUserSurplusNum(res => {
+          // console.log('用户剩余购买数量useNum:以及税率 ',res);
+          this.userSurplusNum = res.userSurplusNum
+          this.userTaxRate = res.taxRate
+          this.useReadyBy = res.useReadyBy
+        })
       }else{
         document.body.style.overflow='visible'
       }
@@ -131,7 +143,7 @@ export default {
     },
     newBondID:{
       type: Number,
-      default: -2
+      default: -999
     },
     obj: {
       type: Object,
@@ -140,6 +152,9 @@ export default {
   },
   data(){
     return {
+      userTaxRate:0,
+      useReadyBy:0,
+      userSurplusNum:0,//用户剩余购买量
       BUSDmsg:'',
       STmsg:'',
       busd_code:1,
@@ -171,29 +186,47 @@ export default {
         {title:'message.bond.txt26',num:0}
       ],
       btntimernull:null,
-      stBlurStatus:false,
-      busdBlurStatus:false,
+      userBuyStatus:false
     }
   },
   methods: {
     buyBondFun(){
-      console.log('购买债券')
-      if(this.buyLoading)return
+      // console.log('购买债券',this.userRate)
+      if(this.userSurplusNum == 0){
+        return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_userBuy'}));
+      }
+      if(this.allLoading || this.buyLoading)return
       this.buyLoading = true
       let address = this.$route.params.address == 0 ?'0x0000000000000000000000000000000000000000':''
-      console.log('this.newBondID,this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),this.$utils.convertNormalToBigNumber(this.STmsg, 18),0,address: ', this.newBondID,this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),this.$utils.convertNormalToBigNumber(this.STmsg, 18),0,address);
-      bondDepository().connect(getSigner()).swapAndAddLiquidityAndBond(this.newBondID,this.$utils.convertNormalToBigNumber(this.STmsg, 18),this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),0,address).then(async res => {
-        console.log('购买债券res: ', res);
+      let token0 = 0 //st
+      let token1 = 0 //busd
+      if(this.activetype == 0){
+        token0 = this.$utils.convertNormalToBigNumber(this.STmsg, 18)
+        token1 = this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
+      }else if(this.activetype == 1){
+        token1 = this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
+        token0 = 0
+      }else if(this.activetype == 2){
+        token1 = 0
+        token0 = this.$utils.convertNormalToBigNumber(this.STmsg, 18)
+      }
+      // console.log('this.newBondID,this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),this.$utils.convertNormalToBigNumber(this.STmsg, 18),0,address: ', this.newBondID,this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),this.$utils.convertNormalToBigNumber(this.STmsg, 18),0,address);
+      bondDepository().connect(getSigner()).swapAndAddLiquidityAndBond(this.newBondID,token0,token1,0,address).then(async res => {
+        // console.log('购买债券res: ', res);
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
           this.buyLoading = false
-          this.BUSDmsg = this.STmsg = ''
-          this.moneyArr[0].num = this.moneyArr[1].num = this.moneyArr[2].num = 0
+          this.resetData()
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.getUserCoinBalance('busd')
           this.getUserCoinBalance('st')
+          this.userBuyStatus = true
+          // 获取用户某期债券的LP购买量
+          bondDepository().userEpochLpBuyAmount(this.getAccount,this.newBondID).then(res => {
+            this.useReadyBy = this.$utils.convertBigNumberToNormal(Number(res), 2)
+          })
         }else{
           this.buyLoading = false
         }
@@ -207,7 +240,7 @@ export default {
         if(!this.isApproveBUSD){
           this.busdisloading = true
           this.$utils.goApproveFun(token().BUSD, contract().BondDepository).then(res => {
-            console.log('busd授权结果res: ', res);
+            // console.log('busd授权结果res: ', res);
             if(res){
               this.isApproveBUSD = true
               this.busdisloading = false
@@ -228,7 +261,7 @@ export default {
         if(!this.isApproveST){
           this.stisloading = true
           this.$utils.goApproveFun(token().ST,contract().BondDepository).then(res => {
-            console.log('st授权结果res: ', res);
+            // console.log('st授权结果res: ', res);
             if(res){
               this.isApproveST = true
               this.stisloading = false
@@ -309,41 +342,25 @@ export default {
         this.$refs.mychildAdd.titleFun()
       },400)
     },
-    // busd---input
-    busdBlurEvent(){
-      console.log("busd失焦")
-      this.busdBlurStatus = false
-      if(!this.stBlurStatus){
-        this.moneyArr[0].num = Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice
-        this.moneyArr[1].num = this.$utils.getBit(this.userRate * this.moneyArr[0].num,2)
-        this.moneyArr[2].num = Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num)
-      }
-    },
-    busdFocusEvent(){
-      console.log("busd聚焦")
-      this.busdBlurStatus = true
-    },
     busdInputClick(data){
-      console.log('busd----data: ', data);
+      // console.log('busd----data:利率:%s,st价格:%s',this.userRate,this.getUserCoin.stPrice);
       this.BUSDmsg = data
-    },
-    // st---input
-    blurEvent(){
-      console.log("st失焦")
-      this.stBlurStatus = false
-      if(!this.busdBlurStatus){
-        this.moneyArr[0].num = Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice
-        this.moneyArr[1].num = this.$utils.getBit(this.userRate * this.moneyArr[0].num,2)
-        this.moneyArr[2].num = Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num)
+      if(data){
+        this.STmsg = this.$utils.getBit( Number(data) / this.getUserCoin.stPrice)
+      }else{
+        this.STmsg = ''
       }
-    },
-    focusEvent(){
-      console.log("st聚焦")
-      this.stBlurStatus = true
+      this.youChangeIChange()
     },
     inputClick(data){
-      console.log("input")
+      // console.log('st----data:利率:%s,st价格:%s',this.userRate,this.getUserCoin.stPrice);
       this.STmsg = data
+      if(data){
+        this.BUSDmsg = this.$utils.getBit(Number(data) * this.getUserCoin.stPrice)
+      }else{
+        this.BUSDmsg = ''
+      }
+      this.youChangeIChange()
     },
     typeClick(item,index){
       this.arr.forEach(item => {
@@ -351,18 +368,22 @@ export default {
       })
       item.status = true
       this.activetype = index
+      this.resetData()
     },
     // 弹窗关闭
     closeProup () {
-      this.BUSDmsg = this.STmsg = ''
-      this.$emit('closeLP')
+      this.resetData()
+      this.$emit('closeLP',this.userBuyStatus)
     },
     maxClick(data){
       if(data == 'busd'){
         this.BUSDmsg = this.getUserCoin.busd
+        this.STmsg = this.$utils.getBit(Number(this.getUserCoin.busd) / this.getUserCoin.stPrice)
       }else{
         this.STmsg = this.getUserCoin.st
+        this.BUSDmsg = this.$utils.getBit(Number(this.getUserCoin.st) * this.getUserCoin.stPrice)
       }
+      this.youChangeIChange()
     },
     // 获取当前用户的代币余额
     getUserCoinBalance(data){
@@ -371,16 +392,47 @@ export default {
           let obj = {}
           obj.busd = this.$utils.getBit(util.formatEther(res),4)
           this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
-          console.log("busd余额")
+          // console.log("busd余额")
         })
       }else if(data == 'st'){
         erc20(token().ST).balanceOf(this.getAccount).then(res => {
           let obj = {}
           obj.st = this.$utils.getBit(util.formatEther(res),4)
           this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
-          console.log("st余额")
+          // console.log("st余额")
         })
       }
+    },
+    getUserSurplusNum(calback){
+      let obj = {}
+      // 获取某用户某期债券剩余可购买LP数量
+      bondDepository().getUserLeftLpCanBuy(this.getAccount,this.newBondID).then(res => {
+        obj.userSurplusNum = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        calback(Object.assign({},obj))
+      })
+      // 个人税率
+      bondDepository().getUserTaxRate(this.getAccount,this.newBondID).then(res => {
+        // console.log('res: ', res);
+        obj.taxRate = res / 1e2
+        calback(Object.assign({},obj))
+      })
+      // 获取用户某期债券的LP购买量
+      bondDepository().userEpochLpBuyAmount(this.getAccount,this.newBondID).then(res => {
+        // console.log('res: ', res);
+        obj.useReadyBy = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        calback(Object.assign({},obj))
+      })
+    },
+    youChangeIChange(){
+      this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice)
+      this.moneyArr[1].num = this.$utils.getBit(this.userRate * this.moneyArr[0].num,2)
+      this.moneyArr[2].num = this.$utils.getBit(Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num))
+    },
+    resetData(){
+      this.BUSDmsg = this.STmsg = ''
+      this.moneyArr.forEach(item => {
+        item.num = 0
+      })
     }
   }
 }
@@ -596,6 +648,7 @@ export default {
   }
 }
 .add_overflow_box{
+  width: 100%;
   height: 90%;
   overflow: auto;
 }

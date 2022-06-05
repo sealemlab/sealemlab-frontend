@@ -106,10 +106,9 @@ export default {
     align-items: center;
     justify-content: space-around;
     margin: 20px 0;
-    padding: 0 49.5px;
+    padding: 0 5vw;
     .footer_logo {
-      width: 185px;
-      
+      width: 88px;
     }
     .onebox {
       width: inherit;

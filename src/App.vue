@@ -244,6 +244,12 @@ export default {
           })
           this.getUserCoinInfo()
         }
+        // else{
+        //   let setIntervalOBJ = setInterval(function (){},1)
+        //   for (let index = 0; index < setIntervalOBJ; index++) {
+        //     clearInterval(index)
+        //   }
+        // }
       },
       deep: true,
       immediate: true,
@@ -287,9 +293,9 @@ export default {
       });
       if (to.path == "/home") {
         this.navArr[0].status = true
-      } else if (to.path.indexOf("/bond/") !== -1) {
+      }else if (to.path.indexOf("/bond/") !== -1) {
         this.navArr[1].status = true
-      } else if (to.path.indexOf("/nft/") !== -1) {
+      }else if (to.path.indexOf("/nft/") !== -1) {
         this.navArr[2].status = true
       } else if (to.path.indexOf("/game/") !== -1) {
         this.navArr[3].status = true

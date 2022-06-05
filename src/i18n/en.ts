@@ -15,7 +15,7 @@ export const message = {
     txt11: "New to crypto?",
     txt12: "Learn more about wallets",
     txt13: "More",
-  },
+  },//导航栏
   home: {
     add_txt1: "High APY",
     txt1: "New generation DeFi + Gamefi protocol",
@@ -124,7 +124,7 @@ export const message = {
     txt75: "ST Price",
     txt76: "SR Price",
     txt77: "OVERVIEW",
-  },
+  },// 主页
   footer: {
     txt1: "ABOUT",
     txt2: "White Paper",
@@ -150,7 +150,7 @@ export const message = {
     txt19: "SR $0.00",
 
     txt21: "COPYRIGHT © 2022 Sealem Lab, All Rights Reserved",
-  },
+  },//底部
   nft: {
     // txt1: "Display",
     txt2: "Mystery Box",
@@ -665,7 +665,7 @@ export const message = {
     txt76: "The staking increases by 1K USD, and the interest rate increases by 0.1%.",
     txt77: "The total amount of bonds includes outstanding and unclaimed.",
     txt78: "Bond principal and interest will be issued by ST.",
-  },
+  },//债券
   signin: {
     txt1: "Create Account",
     txt2: "The account is applicable all products on the Sealem platform.",
@@ -710,7 +710,7 @@ export const message = {
     txt38: "Password verification failed",
     txt39: "Send verification code",
     txt40: "",
-  },
+  },// 登录注册
   account: {
     txt1: "Information",
     txt2: "Bind Wallet",
@@ -747,7 +747,7 @@ export const message = {
 
     txt32: "Login firstly",
     txt33: "Connect wallet firstly",
-  },
+  },//账号
   user: {
     txt1: "Raking",
     txt2: "Address",
@@ -777,7 +777,7 @@ export const message = {
     txt25: "1. The binding is successful only after users enter the official website through the link to purchase the bond.",
     txt26: "2. The interest rate increases by 0.1% per 1K USD of bonds purchased or  staking by the invitee.",
     txt27: "3. The invitation staking interest rate changes according to the actual staking amount of the invitee.",
-  },
+  },//用户中心
   tip: {
     txt1: "The account was created successfully, please go to the email to activate the account.",
     txt2: "Please check whether the account/password is correct and whether the account is activated",
@@ -798,8 +798,11 @@ export const message = {
     self_txt11: "Opening…",
     self_txt12: "Open mystery box result",
     self_txt13: "No Data",
-    self_buy:"Buy"
-  },
+    self_buy:"Buy",
+    self_userBuy:'用户个人剩余购买量为0',
+    self_calim:'提取中...',
+    self_calimResult:'暂无奖励需要提取'
+  },//提示性文案
   approve: "Approve",
 
   gamepage: {
@@ -842,5 +845,5 @@ export const message = {
     text37: "No Data",
     text38: "Recharge and Claim",
     text39: "Please log in to view the information",
-  },
+  },//游戏
 };

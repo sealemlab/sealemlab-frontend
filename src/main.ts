@@ -76,9 +76,6 @@ Vue.component("Slider", Slider);
 import LoadingAnmation from '@/components/loadingAnmation.vue'
 Vue.component("LoadingAnmation", LoadingAnmation);
 
-import RingProgress from '@/components/RingProgress.vue'
-Vue.component("RingProgress", RingProgress);
-
 import Proup from "@/components/Proup.vue";
 Vue.component("Proup", Proup);
 
