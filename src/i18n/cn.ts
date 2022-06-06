@@ -648,6 +648,9 @@ export const message = {
     txt76: "你质押额增加1k,利率增加0.1%",
     txt77: "债券总额包括未到期和到期未领取",
     txt78: "所有到期债券已ST发放",
+
+    txt79:"BUSD-ST lp数量:",
+    txt80:"最大购买量"
   }, //债券
   signin: {
     txt1: "创建账户",

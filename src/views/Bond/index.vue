@@ -312,7 +312,7 @@
                 <span>{{ item.title }}</span>
                 <span class="has_select">
                   <div class="small_angle" @click="showBuy(item)">
-                    {{ item.buyMoney }}
+                  $ {{ item.buyMoney }}
                     &nbsp;&nbsp;
                     <svg t="1654321191240" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2336" width="16" height="16"><path d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z" p-id="2337" fill="#CED3D9"></path></svg>
                   </div>
@@ -836,7 +836,6 @@ export default {
     //       }
     //     }, 1000);  
     // this.getBondInfo()
-    console.log("this.$route",this.$route)
     localStorage.setItem('userInvite',this.$route.params.address)
   },
   beforeDestroy(){

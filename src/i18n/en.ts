@@ -613,7 +613,7 @@ export const message = {
     txt29: "Invite to stake",
     txt30: "Invite to buy bond",
     txt31: "Your staking",
-    txt32: "Tax",
+    txt32: "Estimated tax rate",
     txt33: "Purchased within 14 days",
     txt34:
       "After the bond expires, the principal and interest will be claimed in ST; the payment token will automatically be formed an LP; the tax will be reset to the initial value of 0.1% every 14 days.",
@@ -665,6 +665,9 @@ export const message = {
     txt76: "The staking increases by 1K USD, and the interest rate increases by 0.1%.",
     txt77: "The total amount of bonds includes outstanding and unclaimed.",
     txt78: "Bond principal and interest will be issued by ST.",
+
+    txt79:"Estimated ST-BUSD LP:",
+    txt80:"Max you can buy"
   },//债券
   signin: {
     txt1: "Create Account",

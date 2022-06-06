@@ -37,6 +37,9 @@
             <div class="max_btn font16" @click="maxClick('st')">MAX</div>
           </div>
         </div>
+        <p class="font12 balance_ add_balance_" :class="isEnLang?'en_medium':''" v-if="changeLpNum > 0">
+          {{$t("message.bond.txt79")}}{{changeLpNum}}
+        </p>
         <!-- 投入以及收益 -->
         <div class="profit_box">
           <div class="onebox" v-for="(item,index) in moneyArr" :key="index">
@@ -51,15 +54,34 @@
           <BtnLoading :isloading="true"></BtnLoading>
         </div>
         <div v-else>
-          <div class="main_button font16 mobile_font16" @click="buyBondFun" v-if="isApproveBUSD && isApproveST">
-            {{$t("message.tip.self_buy")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
+          <div v-if="activetype == 0">
+            <div class="main_button font16 mobile_font16" @click="buyBondFun" v-if="isApproveBUSD && isApproveST">
+              {{$t("message.tip.self_buy")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
+            </div>
+            <div class="main_button font16 mobile_font16" @click="authorizationClick('busd')" v-else-if="!isApproveBUSD">
+              BUSD {{$t("message.approve")}}<BtnLoading :isloading="busdisloading"></BtnLoading>
+            </div>
+            <div class="main_button font16 mobile_font16" @click="authorizationClick('st')" v-else-if="!isApproveST">
+              ST {{$t("message.approve")}}<BtnLoading :isloading="stisloading"></BtnLoading>
+            </div>
           </div>
-          <div class="main_button font16 mobile_font16" @click="authorizationClick('busd')" v-if="!isApproveBUSD && (activetype == 1 || activetype == 0)">
-            BUSD {{$t("message.approve")}}<BtnLoading :isloading="busdisloading"></BtnLoading>
+          <div v-if="activetype == 1">
+            <div class="main_button font16 mobile_font16" @click="buyBondFun" v-if="isApproveBUSD">
+              {{$t("message.tip.self_buy")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
+            </div>
+            <div class="main_button font16 mobile_font16" @click="authorizationClick('busd')" v-else-if="!isApproveBUSD">
+              BUSD {{$t("message.approve")}}<BtnLoading :isloading="busdisloading"></BtnLoading>
+            </div>
           </div>
-          <div class="main_button font16 mobile_font16" @click="authorizationClick('st')" v-if="!isApproveST && (activetype == 2 || activetype == 0)">
-            ST {{$t("message.approve")}}<BtnLoading :isloading="stisloading"></BtnLoading>
+          <div v-if="activetype == 2">
+            <div class="main_button font16 mobile_font16" @click="buyBondFun" v-if="isApproveST">
+              {{$t("message.tip.self_buy")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
+            </div>
+            <div class="main_button font16 mobile_font16" @click="authorizationClick('st')" v-else-if="!isApproveST">
+              ST {{$t("message.approve")}}<BtnLoading :isloading="stisloading"></BtnLoading>
+            </div>
           </div>
+          
         </div>
         <div class="tipbox font12" :class="isEnLang?'en_medium':''">
           <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''">
@@ -72,9 +94,16 @@
           <p class="color4"><span>{{$t("message.bond.txt31")}}</span><span>{{obj.additional3}}%</span>
           <p class="font14 mobile_font14" @click="AddQuesFun('message.bond.txt_tax',$event)" :class="isEnLang?'en_Bold':''">
             <span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span>
-            <span>{{userTaxRate}}%</span>
+            <span>
+              {{userTaxRate}}%
+              <span>(+{{additionalTaxRate}}%)</span>
+            </span>
           </p>
-          <p class="font16 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt33")}}</span><span>$ {{useReadyBy}}</span></p>
+          <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''">
+            <span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt80")}}</span>
+            <span>{{userSurplusNum}} ST-BUSD LP</span>
+          </p>
+          <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt33")}}</span><span>$ {{useReadyBy}}</span></p>
           <p>{{$t("message.bond.txt34")}}</p>
         </div>
       </div>
@@ -98,6 +127,7 @@ export default {
           this.userTaxRate = res.taxRate
           this.useReadyBy = res.useReadyBy
         })
+        this.getSTLPPrice()
       }else{
         document.body.style.overflow='visible'
       }
@@ -134,7 +164,10 @@ export default {
     ...mapGetters(["isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
     userRate(){
       return (this.obj.baseRate + this.obj.additional1 + this.obj.additional2 + this.obj.additional3) / 100
-    }
+    },
+    additionalTaxRate(){ // 用户已经购买额加上即将要购买额是否超过额定额度
+      return Math.floor((Number(this.useReadyBy) + Number(this.moneyArr[0].num)) / 1000) * 0.01
+    },
   },
   props: {
     addlpDis: {
@@ -152,6 +185,7 @@ export default {
   },
   data(){
     return {
+      changeLpNum:0,// 其他币转换的lp数量
       userTaxRate:0,
       useReadyBy:0,
       userSurplusNum:0,//用户剩余购买量
@@ -186,7 +220,8 @@ export default {
         {title:'message.bond.txt26',num:0}
       ],
       btntimernull:null,
-      userBuyStatus:false
+      userBuyStatus:false,
+      lpTimer:null
     }
   },
   methods: {
@@ -223,9 +258,10 @@ export default {
           this.getUserCoinBalance('busd')
           this.getUserCoinBalance('st')
           this.userBuyStatus = true
-          // 获取用户某期债券的LP购买量
-          bondDepository().userEpochLpBuyAmount(this.getAccount,this.newBondID).then(res => {
-            this.useReadyBy = this.$utils.convertBigNumberToNormal(Number(res), 2)
+          this.getUserSurplusNum(res => {
+            this.userSurplusNum = res.userSurplusNum
+            this.userTaxRate = res.taxRate
+            this.useReadyBy = res.useReadyBy
           })
         }else{
           this.buyLoading = false
@@ -385,12 +421,18 @@ export default {
       this.$emit('closeLP',this.userBuyStatus)
     },
     maxClick(data){
-      if(data == 'busd'){
+      if(this.activetype == 0 ){
+        if(data == 'busd'){
+          this.BUSDmsg = this.getUserCoin.busd
+          this.STmsg = this.$utils.getBit(Number(this.getUserCoin.busd) / this.getUserCoin.stPrice)
+        }else{
+          this.STmsg = this.getUserCoin.st
+          this.BUSDmsg = this.$utils.getBit(Number(this.getUserCoin.st) * this.getUserCoin.stPrice)
+        }
+      }else if(this.activetype == 1){
         this.BUSDmsg = this.getUserCoin.busd
-        this.STmsg = this.$utils.getBit(Number(this.getUserCoin.busd) / this.getUserCoin.stPrice)
-      }else{
+      }else if(this.activetype == 2){
         this.STmsg = this.getUserCoin.st
-        this.BUSDmsg = this.$utils.getBit(Number(this.getUserCoin.st) * this.getUserCoin.stPrice)
       }
       this.youChangeIChange()
     },
@@ -416,6 +458,7 @@ export default {
       let obj = {}
       // 获取某用户某期债券剩余可购买LP数量
       bondDepository().getUserLeftLpCanBuy(this.getAccount,this.newBondID).then(res => {
+        console.log('获取某用户某期债券剩余可购买LP数量res: ', res);
         obj.userSurplusNum = this.$utils.convertBigNumberToNormal(Number(res), 2)
         calback(Object.assign({},obj))
       })
@@ -425,9 +468,9 @@ export default {
         obj.taxRate = res / 1e2
         calback(Object.assign({},obj))
       })
-      // 获取用户某期债券的LP购买量
+      // 获取用户某期债券的税前购买USD金额
       bondDepository().userEpochUsdPayinBeforeTax(this.getAccount,this.newBondID).then(res => {
-        console.log('获取用户某期债券的LP购买量res: ', res);
+        console.log('获取用户某期债券的税前购买USD金额: ', res);
         obj.useReadyBy = this.$utils.convertBigNumberToNormal(Number(res), 2)
         calback(Object.assign({},obj))
       })
@@ -445,12 +488,23 @@ export default {
       }
       this.moneyArr[1].num = this.$utils.getBit((Number(this.userRate) - Number(this.userTaxRate / 100)) * this.moneyArr[0].num,2)
       this.moneyArr[2].num = this.$utils.getBit(Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num))
+      this.changeLpNum = this.$utils.getBit( Number(this.moneyArr[0].num) / this.getUserCoin.stlpPrice)
     },
     resetData(){
+      this.changeLpNum = 0
       this.BUSDmsg = this.STmsg = ''
       this.moneyArr.forEach(item => {
         item.num = 0
       })
+    },
+    getSTLPPrice(){
+      clearInterval(this.lpTimer)
+      this.lpTimer = setInterval(() => {
+        bondDepository().getLpPrice(this.newBondID).then(res => {
+          console.log('lp价格res: ', res);
+          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stlpPrice:Number(res / 1e18)}));
+        })
+      },1000)
     }
   }
 }
@@ -525,16 +579,19 @@ export default {
       }
     }
   }
+  .balance_{
+    width: 100%;
+    text-align: right;
+    font-weight: 400;
+    color: #8B8484;
+    line-height: 14px;
+  }
+  .add_balance_{
+    margin-bottom: 20px;
+  }
   .inputbox{
     width: 100%;
     margin-bottom: 30px;
-    .balance_{
-      width: 100%;
-      text-align: right;
-      font-weight: 400;
-      color: #8B8484;
-      line-height: 14px;
-    }
     .inputcontent{
       padding-left: 14px;
       margin-top: 8px;
@@ -637,7 +694,7 @@ export default {
       font-weight: 400;
       color: #A4A4A4;
       line-height: 14px;
-      &:nth-child(1),&:nth-last-child(2),&:nth-last-child(3){
+      &:nth-child(1){
         margin-bottom: 15px;
         span{
           font-weight: 500;
@@ -646,11 +703,18 @@ export default {
           margin-bottom: 0;
         }
       }
-      &:nth-last-child(3){
+      &:nth-child(6){
         margin-top: 15px;
       }
+      &:nth-child(6),&:nth-child(7),&:nth-child(8){
+        span{
+          font-weight: 500;
+          color: #CED3D9;
+          line-height: 17px;
+        }
+      }
       &:nth-last-child(1){
-        margin-top: 20px;
+        margin-top: 10px;
       }
       span{
         margin-bottom: 8px;
