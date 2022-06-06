@@ -11,7 +11,7 @@
     <div class="nav_right">
       <div class="st_price">
         <img :src="`${$store.state.imgUrl}stlogo.webp`" class="st_price_img" />
-        <span class="font_price font16">$ 0.00</span>
+        <span class="font_price font16">$ {{getUserCoin.stPrice | PriceConversion}}</span>
       </div>
       <div class="login_box">
         <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
@@ -76,7 +76,7 @@ export default {
       langArr: ["EN", "ZH"],
     };
   },
-  computed: { ...mapGetters(["getNoticeNum", "isEnLang", "getLogin", "getSubtringAccount", "getIstrue"]) },
+  computed: { ...mapGetters(["getNoticeNum", "isEnLang", "getLogin","getUserCoin","getSubtringAccount", "getIstrue"]) },
   watch: {
     $route(to, from) {
       window.scrollTo(0, 0);

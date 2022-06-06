@@ -13,7 +13,7 @@
       <div class="treasure_chest_box">
         <img :src="`${$store.state.imgUrl}bind_box_base.webp`" class="base_img" />
         <img :src="`${$store.state.imgUrl}bindbox.webp`" class="bind_box_img" />
-        <Lottie :options="datajson1" :width="getIsMobile?375:''"></Lottie>
+        <Lottie :options="datajson1" :width="getIsMobile?375:100"></Lottie>
       </div>
       <div class="right_content">
         <p class="font20 title_txt mobile_font16">

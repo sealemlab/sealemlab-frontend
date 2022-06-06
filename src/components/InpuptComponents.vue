@@ -18,7 +18,7 @@ export default {
       default:''
     },
     type:{
-      type: String,
+      type: String || Number,
       default: 'text'
     },
     placeholder:{

@@ -38,7 +38,7 @@ export default {
   data () {
     return {
       style: {
-        width: this.width ? `${this.width}px` : '100%',
+        width: this.width == 100 ? '100%' :`${this.width}px`,
         // height: this.height ? `${this.height}px` : '100%',
         overflow: 'hidden',
         margin: '0 auto',

@@ -453,7 +453,16 @@ export default {
       })
       bondDepository().getStPrice().then(res => {
         // st价格
-        obj.stPrice = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        if(res){
+          obj.stPrice = Number(res) / 1e18
+          count++
+        }else{
+          obj.stPrice = 0
+          count++
+        }
+        
+      }).catch(() => {
+        obj.stPrice = 0
         count++
       })
       this.timer = setInterval(() => {

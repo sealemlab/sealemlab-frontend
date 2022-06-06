@@ -343,22 +343,30 @@ export default {
       },400)
     },
     busdInputClick(data){
-      // console.log('busd----data:利率:%s,st价格:%s',this.userRate,this.getUserCoin.stPrice);
-      this.BUSDmsg = data
-      if(data){
+      if(!data){
+        this.STmsg = ''
+        this.resetData()
+      }else if(Number(data) <= Number(this.getUserCoin.busd)){
+        this.BUSDmsg = data
         this.STmsg = this.$utils.getBit( Number(data) / this.getUserCoin.stPrice)
       }else{
-        this.STmsg = ''
+        this.BUSDmsg = this.getUserCoin.busd
+        this.STmsg = this.$utils.getBit( Number(this.BUSDmsg) / this.getUserCoin.stPrice)
       }
       this.youChangeIChange()
     },
     inputClick(data){
+      console.log('st输入框data: ', data);
       // console.log('st----data:利率:%s,st价格:%s',this.userRate,this.getUserCoin.stPrice);
-      this.STmsg = data
-      if(data){
-        this.BUSDmsg = this.$utils.getBit(Number(data) * this.getUserCoin.stPrice)
-      }else{
+      if(!data){
         this.BUSDmsg = ''
+        this.resetData()
+      }else if(Number(data) <= Number(this.getUserCoin.st)){
+        this.STmsg = data
+        this.BUSDmsg = this.$utils.getBit( Number(data) * this.getUserCoin.stPrice)
+      }else{
+        this.STmsg = this.getUserCoin.st
+        this.BUSDmsg = this.$utils.getBit( Number(this.STmsg) / this.getUserCoin.stPrice)
       }
       this.youChangeIChange()
     },
@@ -372,6 +380,7 @@ export default {
     },
     // 弹窗关闭
     closeProup () {
+      this.activetype = 0
       this.resetData()
       this.$emit('closeLP',this.userBuyStatus)
     },
@@ -412,20 +421,29 @@ export default {
       })
       // 个人税率
       bondDepository().getUserTaxRate(this.getAccount,this.newBondID).then(res => {
-        // console.log('res: ', res);
+        console.log('个人税率res: ', res);
         obj.taxRate = res / 1e2
         calback(Object.assign({},obj))
       })
       // 获取用户某期债券的LP购买量
-      bondDepository().userEpochLpBuyAmount(this.getAccount,this.newBondID).then(res => {
-        // console.log('res: ', res);
+      bondDepository().userEpochUsdPayinBeforeTax(this.getAccount,this.newBondID).then(res => {
+        console.log('获取用户某期债券的LP购买量res: ', res);
         obj.useReadyBy = this.$utils.convertBigNumberToNormal(Number(res), 2)
         calback(Object.assign({},obj))
       })
     },
     youChangeIChange(){
-      this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice)
-      this.moneyArr[1].num = this.$utils.getBit(this.userRate * this.moneyArr[0].num,2)
+      if(this.activetype == 0){
+        this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice)
+        console.log('Number(this.STmsg): ', Number(this.STmsg));
+        console.log('this.moneyArr[0].num: ', this.moneyArr[0].num);
+        console.log('this.getUserCoin.stPrice: ', this.getUserCoin.stPrice);
+      }else if(this.activetype == 1){
+        this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg))
+      }else if(this.activetype == 2){
+        this.moneyArr[0].num = this.$utils.getBit(Number(this.STmsg) * this.getUserCoin.stPrice)
+      }
+      this.moneyArr[1].num = this.$utils.getBit((Number(this.userRate) - Number(this.userTaxRate / 100)) * this.moneyArr[0].num,2)
       this.moneyArr[2].num = this.$utils.getBit(Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num))
     },
     resetData(){

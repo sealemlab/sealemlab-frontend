@@ -38,7 +38,7 @@
             <div>
               <span>ST{{ $t("message.bond.txt4") }} </span>
             </div>
-            <div><span>$&nbsp;{{getUserCoin.stPrice}}</span></div>
+            <div><span>$&nbsp;{{getUserCoin.stPrice | PriceConversion}}</span></div>
           </div>
           <!-- 表格 -->
           <div class="bottom">
@@ -266,19 +266,15 @@
             <div :title='$t("message.bond.txt77")' style="cursor:pointer" @click="quesFun('message.bond.txt77',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
-            <div v-if="NotExtractedBUSDMoney != 0">
-              <span>$ {{NotExtractedBUSDMoney}} ≈ {{(Number(NotExtractedBUSDMoney)) / getUserCoin.stPrice}} ST</span>
+            <div>
+              <span>$ {{NotExtractedBUSDMoney}}(≈{{ Not_BUSDchangeST }}ST)</span>
             </div>
-            <div v-else>
-              <span>$ 0 ≈ 0 ST</span>
-            </div>s
             <div :title='$t("message.bond.txt78")' style="cursor:pointer" @click="quesFun('message.bond.txt78',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
-            <div v-if="userClaimeMoney != 0">
-              <span>$ {{userClaimeMoney}} ≈ {{userClaimeMoney / getUserCoin.stPrice}} ST</span>
+            <div>
+              <span>$ {{userClaimeMoney}}(≈{{Ready_BUSDchangeST}}ST)</span>
             </div>
-            <div v-else><span>$ 0 ≈ 0 ST</span></div>
             <div class="add_btnbox">
               <div class="btn_txt bg3 mobile_btn_es" @click="userClaimSt" :class="isEnLang?'en_Bold':''">
                 {{ $t("message.bond.txt54") }}
@@ -508,6 +504,8 @@ export default {
       },
       orderArr:[],
       NotExtractedBUSDMoney:0,//用户未提取busd总额
+      Not_BUSDchangeST:0,//未领取----busd转st的数量
+      Ready_BUSDchangeST:0,//已领取---busd转st的数量
       userOrderIDInfo:[],
       claimLoading:false,
       userClaimeMoney:0,
@@ -560,8 +558,7 @@ export default {
     amountConversion: (value) => {
       if (!value) return 0
       return common.convertBigNumberToNormal(Number(value), 2)
-    },
-
+    }
   },
   methods: {
     getBondInfo(){
@@ -672,6 +669,7 @@ export default {
         // console.log('用户未提取订单信息res: ', res);
           this.userOrderIDInfo = res[0]
           this.NotExtractedBUSDMoney = this.$utils.convertBigNumberToNormal(Number(res[1]), 2)
+          this.Not_BUSDchangeST = this.$utils.convertBigNumberToNormal(Number(res[1]) / this.getUserCoin.stPrice, 2)
           if(res[0].length == 0){
             this.orderArr = []
             this.loadMoreStatus = false
@@ -716,6 +714,7 @@ export default {
       bondDepository().getUserClaimableOrders(this.getAccount).then(res => {
         // console.log('获取用户可提取的订单ID数组及总USD金额: ', res);
         this.userClaimeMoney = this.$utils.convertBigNumberToNormal(Number(res[1]), 2)
+        this.Ready_BUSDchangeST = this.$utils.convertBigNumberToNormal(Number(res[1]) / this.getUserCoin.stPrice, 2)
       })
     },
     // 用户批量提取订单ST收益
@@ -732,9 +731,7 @@ export default {
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
           this.claimLoading = false
-          bondDepository().getUserClaimableOrders(this.getAccount).then(data => {
-            this.userClaimeMoney = this.$utils.convertBigNumberToNormal(Number(data[1]), 2)
-          })
+          this.getUserOrder()
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
         }else{
@@ -1103,6 +1100,7 @@ export default {
       width: 100%;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       font-weight: 600;
       color: #CED3D9;
       line-height: 28px;
@@ -1122,6 +1120,7 @@ export default {
         width: 100%;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         padding: 10px 0;
         > span {
           width: 160px;
@@ -1246,6 +1245,7 @@ export default {
       width: 100%;
       display: flex;
       align-items: center;
+      justify-content:space-between;
       font-weight: 600;
       color: #CED3D9;
       line-height: 28px;
@@ -1277,6 +1277,7 @@ export default {
       li {
         width: 100%;
         display: flex;
+        justify-content: space-between;
         padding: 10px 0;
         > span {
           cursor: pointer;

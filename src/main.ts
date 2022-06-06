@@ -95,6 +95,13 @@ Vue.prototype.$utils = utils;
 import vueiInfinite from 'vue-infinite-scroll'
 Vue.use(vueiInfinite)
 
+import filters from "@/utils/filter";
+//全局注册过滤器
+Object.keys(filters).forEach(key=> {
+  // @ts-ignore
+	Vue.filter(key, filters[key]);
+});
+
 Vue.directive('loading-img', async function (el, binding) {//指令名称为：real-img
   const imgURL = binding.value;//获取图片地址
   if (imgURL) {
