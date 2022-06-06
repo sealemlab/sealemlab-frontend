@@ -266,15 +266,19 @@
             <div :title='$t("message.bond.txt77")' style="cursor:pointer" @click="quesFun('message.bond.txt77',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
-            <div>
+            <div v-if="NotExtractedBUSDMoney != 0">
               <span>$ {{NotExtractedBUSDMoney}} ≈ {{(Number(NotExtractedBUSDMoney)) / getUserCoin.stPrice}} ST</span>
             </div>
+            <div v-else>
+              <span>$ 0 ≈ 0 ST</span>
+            </div>s
             <div :title='$t("message.bond.txt78")' style="cursor:pointer" @click="quesFun('message.bond.txt78',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
-            <div>
+            <div v-if="userClaimeMoney != 0">
               <span>$ {{userClaimeMoney}} ≈ {{userClaimeMoney / getUserCoin.stPrice}} ST</span>
             </div>
+            <div v-else><span>$ 0 ≈ 0 ST</span></div>
             <div class="add_btnbox">
               <div class="btn_txt bg3 mobile_btn_es" @click="userClaimSt" :class="isEnLang?'en_Bold':''">
                 {{ $t("message.bond.txt54") }}
