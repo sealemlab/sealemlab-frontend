@@ -1,7 +1,7 @@
 const production = process.env.NODE_ENV === "production";
+const timestamp = new Date().getTime();
 module.exports = {
   configureWebpack: (config) => {
-    // if (production){
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
       // chunk.js被分别打成小体积的依赖包
       config.optimization = {
@@ -21,7 +21,14 @@ module.exports = {
           }
         }
       }
-    // }
+      Object.assign(config, {
+        output: {
+          // 生产环境时给js文件添加时间戳，避免浏览器使用旧版js文件
+          ...config.output,
+          filename: `js/[name].[chunkhash].${timestamp}.js`, // 打包时js文件配置
+          chunkFilename: `js/[name].[chunkhash].${timestamp}.js`
+        }
+      });
   },
   productionSourceMap: false,
   chainWebpack(config) {

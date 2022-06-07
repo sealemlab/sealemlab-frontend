@@ -782,7 +782,8 @@ export const message = {
     self_buy:"购买",
     self_userBuy:'用户个人剩余购买量为0',
     self_calim:'提取中...',
-    self_calimResult:'暂无奖励需要提取'
+    self_calimResult:'暂无奖励需要提取',
+    self_bond:'获取最新债券中,请稍后...'
   }, //一些提示语句,文案你看哪不合适,替换就行
   approve: "授权",
 

@@ -38,7 +38,7 @@
             <div>
               <span>ST{{ $t("message.bond.txt4") }} </span>
             </div>
-            <div><span>$&nbsp;{{getUserCoin.stPrice | PriceConversion}}</span></div>
+            <div><span>$&nbsp;{{getUserCoin.stPrice | PriceConversion(4)}}</span></div>
           </div>
           <!-- 表格 -->
           <div class="bottom">
@@ -140,8 +140,9 @@
                 <li>
                   <span class="color1 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV{{baseInterestRateInfo.num2 + 1}}</span>
                 </li>
-                <li>
-                  <span class="color1 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt43") }}:$ {{baseInterestRateInfo.num3}}</span>
+                <li :class="isEnLang?'en_Bold':''">
+                  <span class="color1 font18">{{ $t("message.bond.txt43") }}:</span>
+                  <span class="color1 font18">&nbsp;${{baseInterestRateInfo.num3}}</span>
                 </li>
               </ul>
             </li>
@@ -174,8 +175,12 @@
                 <li>
                   <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV{{inviteBuy.num2 + 1}}</span>
                 </li>
-                <li>
+                <!-- <li>
                   <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt45") }}:$ {{inviteBuy.num3}}</span>
+                </li> -->
+                <li :class="isEnLang?'en_Bold':''">
+                  <span class="color2 font18">{{ $t("message.bond.txt45") }}:</span>
+                  <span class="color3 font18">&nbsp;${{inviteBuy.num3}}</span>
                 </li>
                 <li>
                   <!-- <div @click="showBox =! showBox"><img :src="`${$store.state.imgUrl}accrow.webp`" alt="" /></div>
@@ -211,8 +216,12 @@
                 <li>
                   <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV{{invitePledge.num2 + 1}}</span>
                 </li>
-                <li>
+                <!-- <li>
                   <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt47") }}:$ {{invitePledge.num3}}</span>
+                </li> -->
+                <li :class="isEnLang?'en_Bold':''">
+                  <span class="color3 font18">{{ $t("message.bond.txt47") }}:</span>
+                  <span class="color3 font18">&nbsp;${{invitePledge.num3}}</span>
                 </li>
               </ul>
             </li>
@@ -244,8 +253,12 @@
                 <li>
                   <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV{{Pledge.num2 + 1}}</span>
                 </li>
-                <li>
+                <!-- <li>
                   <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt49") }}:$ {{Pledge.num3}}</span>
+                </li> -->
+                <li :class="isEnLang?'en_Bold':''">
+                  <span class="color4 font18">{{ $t("message.bond.txt49") }}:</span>
+                  <span class="color4 font18">&nbsp;${{Pledge.num3}}</span>
                 </li>
               </ul>
             </li>
@@ -267,13 +280,13 @@
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
             <div>
-              <span>$ {{NotExtractedBUSDMoney}}(≈{{ Not_BUSDchangeST }}ST)</span>
+              <span>$ {{NotExtractedBUSDMoney}}(≈{{ Not_BUSDchangeST }} ST)</span>
             </div>
             <div :title='$t("message.bond.txt78")' style="cursor:pointer" @click="quesFun('message.bond.txt78',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
             <div>
-              <span>$ {{userClaimeMoney}}(≈{{Ready_BUSDchangeST}}ST)</span>
+              <span>$ {{userClaimeMoney}}(≈{{Ready_BUSDchangeST}} ST)</span>
             </div>
             <div class="add_btnbox">
               <div class="btn_txt bg3 mobile_btn_es" @click="userClaimSt" :class="isEnLang?'en_Bold':''">
@@ -316,9 +329,12 @@
                     &nbsp;&nbsp;
                     <svg t="1654321191240" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2336" width="16" height="16"><path d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z" p-id="2337" fill="#CED3D9"></path></svg>
                   </div>
-                  <ul class="has_select_list" v-if="item.status">
-                    <li v-for="(i, ind) in list1" :key="ind">{{ i }}</li>
-                  </ul>
+                  <div class="add_small_angle" v-if="item.status">
+                    <span>$ {{ item.lpAmount }} * {{item.lpPrice}}</span>
+                  </div>
+                  <!-- <ul class="has_select_list" >
+                    <li></li>
+                  </ul> -->
                 </span>
                 <span>{{ item.bondRate}} %</span>
                 <span>
@@ -326,7 +342,7 @@
                   <span class="color3">{{ item.personalArr[1] }}%</span> + 
                   <span class="color4">{{ item.personalArr[2] }}%</span>
                 </span>
-                <span>$ {{ item.usdPayout}}</span>
+                <span>$ {{ item.usdPayout}}(≈ {{item.changeSt | PriceConversion}} ST)</span>
                 <span v-if="item.countTime">
                   {{ item.countTime.d}}&nbsp;:
                   {{ item.countTime.h }}&nbsp;:
@@ -412,6 +428,7 @@ export default {
   computed: { ...mapGetters(["getAccount","getIsMobile","getIstrue","getNoticeNum","isEnLang","getUserCoin"]) },
   data() {
     return {
+      bondStatus:false,// 是否获取到最新bond
       inviter:'',//邀请者
       newBondID:-999,//最新债券id
       treasuryMoney:0,//国库金额
@@ -434,31 +451,31 @@ export default {
       addlpDis: false, //一键购买lp弹窗状态
       inviteDis:false,
       showSelect: false,
-      Arr2: [
-        {
-          zq: "ST-BUSD LP",
-          gme: "0",
-          jclv: "5%",
-          fjlv1: "0%",
-          fjlv2: "0%",
-          fjlv3: "0%",
-          yjklq: "0",
-          djs: "00:00:00:00",
-          status:false
-        },
-        // {
-        //   zq: "ST-BUSD LP",
-        //   gme: "0",
-        //   jclv: "1%",
-        //   fjlv1: "0%",
-        //   fjlv2: "0%",
-        //   fjlv3: "0%",
-        //   yjklq: "0",
-        //   djs: "待领取",
-        //   status:false
-        // },
-      ],
-      list1: ["$ 0*0", "$ 0*0"],
+      // Arr2: [
+      //   {
+      //     zq: "ST-BUSD LP",
+      //     gme: "0",
+      //     jclv: "5%",
+      //     fjlv1: "0%",
+      //     fjlv2: "0%",
+      //     fjlv3: "0%",
+      //     yjklq: "0",
+      //     djs: "00:00:00:00",
+      //     status:false
+      //   },
+      //   // {
+      //   //   zq: "ST-BUSD LP",
+      //   //   gme: "0",
+      //   //   jclv: "1%",
+      //   //   fjlv1: "0%",
+      //   //   fjlv2: "0%",
+      //   //   fjlv3: "0%",
+      //   //   yjklq: "0",
+      //   //   djs: "待领取",
+      //   //   status:false
+      //   // },
+      // ],
+      // list1: ["$ 0*0", "$ 0*0"],
       domHeight:false, // 下拉移动端左侧保持一致高度变量
       datacontent:'',
       clientX:0,
@@ -482,25 +499,25 @@ export default {
         num1:0,//基础利率
         num2:0,//利率等级
         num3:0,//升级所需流动性
-        num4:0//升级完成率
+        num4:0,//升级完成率
       },
       inviteBuy:{
         num1:0,//邀请购买利率
         num2:0,//利率等级
         num3:0,//升级所需购买额
-        num4:0//升级完成率
+        num4:0,//升级完成率
       },
       invitePledge:{
         num1:0,//邀请质押利率
         num2:0,//利率等级
         num3:0,//升级所需质押额
-        num4:0//升级完成率
+        num4:0,//升级完成率
       },
       Pledge:{
         num1:0,//质押利率
         num2:0,//利率等级
         num3:0,//升级所需质押额
-        num4:0//升级完成率
+        num4:0,//升级完成率
       },
       orderArr:[],
       NotExtractedBUSDMoney:0,//用户未提取busd总额
@@ -509,13 +526,15 @@ export default {
       userOrderIDInfo:[],
       claimLoading:false,
       userClaimeMoney:0,
-      userTimeOBJ:null
+      userTimeOBJ:null,
+      lpTimer:null
     };
   },
   watch:{
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
+          this.bondStatus = false
           this.loadMoreStatus = true
           this.orderArr = []
           this.setCountDown()
@@ -544,6 +563,7 @@ export default {
           }
           this.loadMoreStatus = false
           this.orderArr = []
+          this.bondStatus = true
         }
       },
       deep: true,
@@ -565,14 +585,17 @@ export default {
       // 获取发行中(还未到结束时间)的债券ID数组
       if(!this.getIstrue)return
       bondDepository().getActiveBonds().then(res => {
-        // console.log('获取发行中(还未到结束时间)的债券ID数组res[0]: ',Number(res[0]));
+        console.log('获取发行中(还未到结束时间)的债券ID数组res[0]: ',Number(res[0]));
         if(res.length > 0){
           this.newBondID = Number(res[0])
+          this.bondStatus = true
           this.getCertainBondInfo(Number(res[0]),data => {
             this.bondinfo = Object.assign(this.bondinfo,data)
           })
           this.getUserRate(this.newBondID)
+          this.getNEWPrice(this.newBondID)
         }else{
+          this.bondStatus = true
           this.newBondID = -999
           this.bondinfo = {
             bondName:'ST-BUSD LP',
@@ -622,11 +645,14 @@ export default {
     getUserRate(bondID){
       // 获取某债券的基础利率等级信息
       bondDepository().getBasicRateLevelInfo(bondID).then(res => {
-        console.log('获取某债券的基础利率等级信息res: ', res);
+        // console.log('获取某债券的基础利率等级信息res: ', res);
         this.baseInterestRateInfo.num1 = Number(res[0]) / 1e2
         this.baseInterestRateInfo.num2 = Number(res[1]) / 1e2
         this.baseInterestRateInfo.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        // console.log('this.baseInterestRateInfo.num3: ', this.baseInterestRateInfo.num3);
         this.baseInterestRateInfo.num4 = Number(res[3]) / 1e2
+        // console.log(' this.getUserCoin.stPrice: ',  this.getUserCoin.stPrice);
+        // console.log(' Number(res[2]): ',  Number(res[2]));
         this.bondinfo.baseRate = this.baseInterestRateInfo.num1 // 基础利率
       })
       // 获取某用户的某期债券的邀请购买利率等级信息；等级有效期至当前期结束
@@ -692,6 +718,9 @@ export default {
               orderObj.lpPrice = this.$utils.convertBigNumberToNormal(Number(sdkObj.lpPrice), 2)
               orderObj.buyMoney = this.$utils.getBit(orderObj.lpAmount * orderObj.lpPrice)
               orderObj.usdPayout = this.$utils.convertBigNumberToNormal(Number(sdkObj.usdPayout), 2)
+              orderObj.changeSt = Number(sdkObj.usdPayout) / 1e18 / this.getUserCoin.stPrice
+              // console.log('this.getUserCoin.stPrice: ', this.getUserCoin.stPrice);
+              // console.log('Number(sdkObj.usdPayout): ', Number(sdkObj.usdPayout));
               orderObj.bondRate = sdkObj.bondRate / 1e2
               orderObj.expiry = Number(sdkObj.expiry)
               orderObj.claimTime = Number(sdkObj.claimTime)
@@ -703,7 +732,6 @@ export default {
                 this.orderArr = insetArr.sort((n1,n2) =>{return n1.bondID - n2.bondID})
                 // console.log('this.orderArr: ', this.orderArr);
                 this.getUsetTime()
-                
                 this.loadMoreStatus = false
               }
               orderCount++
@@ -726,7 +754,7 @@ export default {
       if(this.claimLoading)return
       this.claimLoading = true
       bondDepository().connect(getSigner()).claim(this.userOrderIDInfo).then(async res => {
-        console.log('提取结果res1: ', res);
+        // console.log('提取结果res1: ', res);
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_calim','link':res.hash}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
@@ -767,7 +795,11 @@ export default {
       this.inviteDis = true;
     },
     BondClick() {
-      this.addlpDis = true
+      if(this.bondStatus){
+        this.addlpDis = true
+      }else{
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_bond'}));
+      }
     },
     showBuy(item){
       item.status = !item.status
@@ -804,7 +836,9 @@ export default {
               // console.log('订单倒计时返回对象data: ', data);
               item.selfTimeOBJ = data.countdownObject 
               item.countTime = data.countTime
+              console.log('item.countTime: ', item.countTime,this.orderArr);
             });//结束时间
+            // console.log('this.orderArr: ', this.orderArr);
           })
           
         }
@@ -813,13 +847,27 @@ export default {
     // 获取邀请人地址
     getUserInvite(){
       inviting().userInviter(this.getAccount).then(res => {
-        console.log('邀请我的人的地址res: ', res);
+        // console.log('邀请我的人的地址res: ', res);
         if(res == '0x0000000000000000000000000000000000000000'){
           this.inviter = ''
         }else{
           this.inviter = this.$utils.getSubStr(res,6);
         }
       })
+    },
+    getNEWPrice(){
+      clearInterval(this.lpTimer)
+      this.lpTimer = setInterval(() => {
+        bondDepository().getLpPrice(this.newBondID).then(res => {
+          // console.log('lp价格res: ', res);
+          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stlpPrice:Number(res / 1e18)}));
+        })
+        bondDepository().getStPrice().then(res => {
+          // console.log('st价格res: ', res);
+          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:Number(res / 1e18)}));
+        })
+        // console.log("获取价格中")
+      },1000)
     }
   },
   mounted(){
@@ -839,6 +887,7 @@ export default {
     localStorage.setItem('userInvite',this.$route.params.address)
   },
   beforeDestroy(){
+    clearInterval(this.lpTimer)
     clearInterval(this.counrnull)
     clearInterval(this.bondinfo.addtimeobj)
     this.orderArr.forEach(item => {
@@ -853,7 +902,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: fit-content;
+  text-align: center;
 }
 /* @media screen and (max-width: 980px) {
   .center_text{
@@ -1174,6 +1223,10 @@ export default {
             position: relative;
             width: fit-content;
           }
+          // &:nth-last-child(1){
+          //   display: flex;
+          //   flex-direction: column;
+          // }
         }
       }
     }
@@ -1250,22 +1303,22 @@ export default {
       line-height: 28px;
       padding: 10px 0;
       li {
-        width: 160px;
+        min-width: 160px;
         &:nth-child(2){
           >div{
             display: none;
           }
         }
         &:nth-child(2),&:nth-child(3),&:nth-child(5){
-          text-align: center;
+          // text-align: center;
         }
         &:nth-child(4){
-          width: 200px;
-          text-align: center;
+          // width: 200px;
+          // text-align: center;
         }
         &:nth-child(6){
-          width: 250px;
-          text-align: center;
+          // width: 250px;
+          // text-align: center;
         }
       }
     }
@@ -1280,17 +1333,22 @@ export default {
         padding: 10px 0;
         > span {
           cursor: pointer;
-          width: 160px;
+          min-width: 160px;
           &:nth-child(2),&:nth-child(3),&:nth-child(5){
-            text-align: center;
+            // text-align: center;
           }
           &:nth-child(4){
-            width: 200px;
-            text-align: center;
+            // width: 200px;
+            // text-align: center;
           }
           &:nth-child(6){
-            width: 250px;
-            text-align: center;
+            // width: 250px;
+            // text-align: center;
+          }
+          .add_small_angle{
+            // width: 100%;
+            // text-align: left;
+            margin-top: 10px;
           }
         }
       }

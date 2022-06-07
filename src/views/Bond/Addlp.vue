@@ -96,7 +96,8 @@
             <span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span>
             <span>
               {{userTaxRate}}%
-              <span>(+{{additionalTaxRate}}%)</span>
+              <span v-if="isThan1000">(+{{additionalTaxRate}}%)</span>
+              <span v-else>(+0.00%)</span>
             </span>
           </p>
           <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''">
@@ -127,7 +128,6 @@ export default {
           this.userTaxRate = res.taxRate
           this.useReadyBy = res.useReadyBy
         })
-        this.getSTLPPrice()
       }else{
         document.body.style.overflow='visible'
       }
@@ -164,6 +164,14 @@ export default {
     ...mapGetters(["isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
     userRate(){
       return (this.obj.baseRate + this.obj.additional1 + this.obj.additional2 + this.obj.additional3) / 100
+    },
+    isThan1000:{
+      get(){
+        return Number(this.useReadyBy) + Number(this.moneyArr[0].num) > 1000
+      },
+      set(val){
+        console.log('设置是否大于1000的val: ', val);
+      }
     },
     additionalTaxRate(){ // 用户已经购买额加上即将要购买额是否超过额定额度
       return Math.floor((Number(this.useReadyBy) + Number(this.moneyArr[0].num)) / 1000) * 0.01
@@ -221,7 +229,6 @@ export default {
       ],
       btntimernull:null,
       userBuyStatus:false,
-      lpTimer:null
     }
   },
   methods: {
@@ -251,10 +258,10 @@ export default {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.buyLoading = false
           this.resetData()
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.getUserCoinBalance('busd')
           this.getUserCoinBalance('st')
           this.userBuyStatus = true
@@ -478,15 +485,16 @@ export default {
     youChangeIChange(){
       if(this.activetype == 0){
         this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice)
-        console.log('Number(this.STmsg): ', Number(this.STmsg));
-        console.log('this.moneyArr[0].num: ', this.moneyArr[0].num);
-        console.log('this.getUserCoin.stPrice: ', this.getUserCoin.stPrice);
       }else if(this.activetype == 1){
         this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg))
       }else if(this.activetype == 2){
         this.moneyArr[0].num = this.$utils.getBit(Number(this.STmsg) * this.getUserCoin.stPrice)
       }
-      this.moneyArr[1].num = this.$utils.getBit((Number(this.userRate) - Number(this.userTaxRate / 100)) * this.moneyArr[0].num,2)
+      if(this.isThan1000){
+        this.moneyArr[1].num = this.$utils.getBit((Number(this.userRate) - (Number(this.userTaxRate / 100) + Number(this.additionalTaxRate))) * this.moneyArr[0].num,2)
+      }else{
+        this.moneyArr[1].num = this.$utils.getBit((Number(this.userRate) - Number(this.userTaxRate / 100)) * this.moneyArr[0].num,2)
+      }
       this.moneyArr[2].num = this.$utils.getBit(Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num))
       this.changeLpNum = this.$utils.getBit( Number(this.moneyArr[0].num) / this.getUserCoin.stlpPrice)
     },
@@ -496,15 +504,6 @@ export default {
       this.moneyArr.forEach(item => {
         item.num = 0
       })
-    },
-    getSTLPPrice(){
-      clearInterval(this.lpTimer)
-      this.lpTimer = setInterval(() => {
-        bondDepository().getLpPrice(this.newBondID).then(res => {
-          console.log('lp价格res: ', res);
-          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stlpPrice:Number(res / 1e18)}));
-        })
-      },1000)
     }
   }
 }
