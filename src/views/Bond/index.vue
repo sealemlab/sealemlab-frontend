@@ -73,11 +73,11 @@
                 <span>{{ bondinfo.maxSupplyLp }}</span>
                 <span>{{ bondinfo.baseRate | SquareRoot}} %</span>
                 <span>
-                  <span class="color2">{{ bondinfo.additional1 }}%</span>
+                  <span class="color2">{{ bondinfo.additional1 | SquareRoot}}%</span>
                   + 
-                  <span class="color3">{{ bondinfo.additional2 }}%</span>
+                  <span class="color3">{{ bondinfo.additional2 | SquareRoot}}%</span>
                   + 
-                  <span class="color4">{{ bondinfo.additional3 }}%</span>
+                  <span class="color4">{{ bondinfo.additional3 | SquareRoot}}%</span>
                 </span>
                 <span>{{ bondinfo.cycle }}&nbsp;{{$t("message.bond.txt19")}}</span>
                 <span>
@@ -667,7 +667,7 @@ export default {
       })
       // 获取某用户的邀请质押利率等级信息
       bondDepository().getUserInviteStakeLevelInfo(this.getAccount).then(res => {
-        // console.log('邀请质押利率res1: ', res);
+        console.log('邀请质押利率res1: ', res);
         this.invitePledge.num1 = Number(res[0])
         this.invitePledge.num2 = Number(res[1])
         this.invitePledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
@@ -856,7 +856,7 @@ export default {
           this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:Number(res / 1e18)}));
         })
         console.log("获取价格中")
-      },1000)
+      },60000)
     }
   },
   mounted(){
@@ -1249,7 +1249,6 @@ export default {
     border-bottom: 2px solid #242222;
     padding: 40px 0;
     > div {
-      // width: calc(100% / 5);
       min-width: 200px;
       font-weight: 600;
       color: #eccf83;
@@ -1292,7 +1291,9 @@ export default {
       line-height: 28px;
       padding: 10px 0;
       li {
-        min-width: 160px;
+        
+        width: calc(100% / 6);
+        // min-width: 160px;
         &:nth-child(2){
           >div{
             display: none;
@@ -1322,7 +1323,8 @@ export default {
         padding: 10px 0;
         > span {
           cursor: pointer;
-          min-width: 160px;
+          // min-width: 160px;
+          width: calc(100% / 6);
           &:nth-child(2),&:nth-child(3),&:nth-child(5){
             // text-align: center;
           }
