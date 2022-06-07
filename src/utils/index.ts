@@ -104,17 +104,18 @@ export default {
     // console.log('endtime: ', endtime);
     // @ts-ignore
     let time = new Date().getTime() / 1000
+    
     if(endtime < time){
       calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});
       return
     }
     let timernull = setInterval(() => {
-      if (time == endtime) {
+      let neddTime = endtime - time
+      if (time == neddTime) {
         clearInterval(timernull);
         calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});
         return;
       }
-      let neddTime = endtime - time
       // @ts-ignore
       let day = parseFloat(neddTime / (24 * 3600))
       // console.log('总共的天数day: ', day);
