@@ -338,9 +338,9 @@
                 </span>
                 <span>{{ item.bondRate}} %</span>
                 <span>
-                  <span class="color2">{{ item.personalArr[0] }}%</span> + 
-                  <span class="color3">{{ item.personalArr[1] }}%</span> + 
-                  <span class="color4">{{ item.personalArr[2] }}%</span>
+                  <span class="color2">{{ item.personalArr[0] | SquareRoot}}%</span> + 
+                  <span class="color3">{{ item.personalArr[1] | SquareRoot}}%</span> + 
+                  <span class="color4">{{ item.personalArr[2] | SquareRoot}}%</span>
                 </span>
                 <span>$ {{ item.usdPayout}}(≈ {{item.changeSt | PriceConversion}} ST)</span>
                 <span v-if="item.countTime">

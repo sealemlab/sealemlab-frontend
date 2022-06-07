@@ -82,9 +82,9 @@ export default {
       padding: 10px;
       max-width: 200px;
       background: #fff;
-      background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
-      box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
-      border: 1px solid rgba(68, 67, 67, 0.47);
+      background: #252526;
+      border: 1px solid #373636;
+      box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.07), inset 0px 4px 9px 0px rgba(22, 24, 25, 0.82), inset 0px -1px 9px 0px #161819;
     }
     .mar_left {
       margin-left: 20px;
@@ -108,7 +108,7 @@ export default {
         height: 0;
         border-style: solid;
         border-width: 10px;
-        border-color: transparent transparent #121212 transparent;
+        border-color: transparent transparent #252526 transparent;
         position: absolute;
         top: -2%;
       }
