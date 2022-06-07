@@ -650,7 +650,8 @@ export const message = {
     txt78: "所有到期债券已ST发放",
 
     txt79:"BUSD-ST lp数量:",
-    txt80:"最大购买量"
+    txt80:"最大购买量",
+    txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally."
   }, //债券
   signin: {
     txt1: "创建账户",

@@ -579,7 +579,7 @@ export const message = {
     },
   },
   bond: {
-    txt_tax: "The floor tax rate is 0.1%, increasing by 0.01% per 1k USD.", //bond弹窗tax的问号内容
+    txt_tax: "The floor tax rate is 1.0%, increasing by 0.1% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "Bond",
     txt2_1: "Buy bond to earn stable ST rewards ",
     txt2_2: "Each bond offering is limited",
@@ -616,7 +616,7 @@ export const message = {
     txt32: "Estimated tax rate",
     txt33: "Purchased within 14 days",
     txt34:
-      "After the bond expires, the principal and interest will be claimed in ST; the payment token will automatically be formed an LP; the tax will be reset to the initial value of 0.1% every 14 days.",
+      "After the bond expires, the principal and interest will be claimed in ST; the payment token will automatically be formed an LP; the tax will be reset to the initial value of 0.1% every 14 days;each wallet enjoys a maximum of 30% extra rate.",
     txt35: "Capacity",
     txt36: "Extra rate",
     txt37: "Duration",
@@ -656,9 +656,9 @@ export const message = {
     txt69: "Invitee staked ",
     txt70: "Bond bought within 30 days",
 
-    txt71: "All bonds issued are locked in the treasury.",
+    txt71: "All assets issued are locked.",
     txt72: "Extra rate=Invite to buy bond + Invite to stake+ Your staking",
-    txt73: "The initial interest rate is 5%, and the interest rate increases by 0.01% for every 10K USD increase of liquidity.",
+    txt73: "The initial base rate is 3%, and the interest rate increases by 0.01% for every 10K USD increase of liquidity.",
     txt74: "1K USD increase in bond purchased by invitees and 0.1% increase in interest rate.",
     txt75:
       "The Invitee stake ST increasing by 1K USD, the interest rate increases by 0.1%, cancel the staking by 1k USD, and the interest rate decreases by 0.1%.",
@@ -667,7 +667,8 @@ export const message = {
     txt78: "Bond principal and interest will be issued by ST.",
 
     txt79:"Estimated ST-BUSD LP:",
-    txt80:"Max you can buy"
+    txt80:"Max you can buy",
+    txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally."
   },//债券
   signin: {
     txt1: "Create Account",

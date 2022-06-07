@@ -39,6 +39,10 @@
               <span>ST{{ $t("message.bond.txt4") }} </span>
             </div>
             <div><span>$&nbsp;{{getUserCoin.stPrice | PriceConversion(4)}}</span></div>
+            <div>
+              <span>ST-BUSD LP{{ $t("message.bond.txt4") }} </span>
+            </div>
+            <div><span>$&nbsp;{{getUserCoin.stlpPrice | PriceConversion(4)}}</span></div>
           </div>
           <!-- 表格 -->
           <div class="bottom">
@@ -135,10 +139,10 @@
                   </circle-progressbar>
                 </li>
                 <li>
-                  <span class="color1 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}{{baseInterestRateInfo.num1 | SquareRoot}}%</span>
+                  <span class="color1 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }} {{baseInterestRateInfo.num1 | SquareRoot}}%</span>
                 </li>
                 <li>
-                  <span class="color1 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV{{baseInterestRateInfo.num2 + 1}}</span>
+                  <span class="color1 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }} LV{{baseInterestRateInfo.num2 + 1}}</span>
                 </li>
                 <li :class="isEnLang?'en_Bold':''">
                   <span class="color1 font18">{{ $t("message.bond.txt43") }}:</span>
@@ -170,17 +174,17 @@
                   </circle-progressbar>
                 </li>
                 <li>
-                  <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}{{inviteBuy.num1 | SquareRoot}}%</span>
+                  <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }} {{inviteBuy.num1 | SquareRoot}}%</span>
                 </li>
                 <li>
-                  <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV{{inviteBuy.num2 + 1}}</span>
+                  <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }} LV{{inviteBuy.num2 + 1}}</span>
                 </li>
                 <!-- <li>
                   <span class="color2 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt45") }}:$ {{inviteBuy.num3}}</span>
                 </li> -->
                 <li :class="isEnLang?'en_Bold':''">
                   <span class="color2 font18">{{ $t("message.bond.txt45") }}:</span>
-                  <span class="color3 font18">&nbsp;${{inviteBuy.num3}}</span>
+                  <span class="color2 font18">&nbsp;${{inviteBuy.num3}}</span>
                 </li>
                 <li>
                   <!-- <div @click="showBox =! showBox"><img :src="`${$store.state.imgUrl}accrow.webp`" alt="" /></div>
@@ -211,10 +215,10 @@
                   </circle-progressbar>
                 </li>
                 <li>
-                  <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}{{invitePledge.num1 | SquareRoot}}%</span>
+                  <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }} {{invitePledge.num1 | SquareRoot}}%</span>
                 </li>
                 <li>
-                  <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV{{invitePledge.num2 + 1}}</span>
+                  <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }} LV{{invitePledge.num2 + 1}}</span>
                 </li>
                 <!-- <li>
                   <span class="color3 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt47") }}:$ {{invitePledge.num3}}</span>
@@ -232,7 +236,7 @@
                   <span class="has_question_icon color4 font24 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt31") }}</span>
                 </li>
                 <li>
-                  <div class="btn_txt bg3" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt48") }}</div>
+                  <div class="btn_txt bg3" :class="isEnLang?'en_Bold':''" @click="toPledge">{{ $t("message.bond.txt48") }}</div>
                 </li>
                 <li class="round_progressbar">
                   <circle-progressbar 
@@ -248,10 +252,10 @@
                   </circle-progressbar>
                 </li>
                 <li>
-                  <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }}{{Pledge.num1 | SquareRoot}}%</span>
+                  <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt41") }} {{Pledge.num1 | SquareRoot}}%</span>
                 </li>
                 <li>
-                  <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }}LV{{Pledge.num2 + 1}}</span>
+                  <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt42") }} LV{{Pledge.num2 + 1}}</span>
                 </li>
                 <!-- <li>
                   <span class="color4 font18" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt49") }}:$ {{Pledge.num3}}</span>
@@ -451,31 +455,6 @@ export default {
       addlpDis: false, //一键购买lp弹窗状态
       inviteDis:false,
       showSelect: false,
-      // Arr2: [
-      //   {
-      //     zq: "ST-BUSD LP",
-      //     gme: "0",
-      //     jclv: "5%",
-      //     fjlv1: "0%",
-      //     fjlv2: "0%",
-      //     fjlv3: "0%",
-      //     yjklq: "0",
-      //     djs: "00:00:00:00",
-      //     status:false
-      //   },
-      //   // {
-      //   //   zq: "ST-BUSD LP",
-      //   //   gme: "0",
-      //   //   jclv: "1%",
-      //   //   fjlv1: "0%",
-      //   //   fjlv2: "0%",
-      //   //   fjlv3: "0%",
-      //   //   yjklq: "0",
-      //   //   djs: "待领取",
-      //   //   status:false
-      //   // },
-      // ],
-      // list1: ["$ 0*0", "$ 0*0"],
       domHeight:false, // 下拉移动端左侧保持一致高度变量
       datacontent:'',
       clientX:0,
@@ -527,7 +506,21 @@ export default {
       claimLoading:false,
       userClaimeMoney:0,
       userTimeOBJ:null,
-      lpTimer:null
+      lpTimer:null,
+      lastBondInfo:{
+        bondName:'ST-BUSD LP',
+        baseRate:"300",//基础利率
+        additional1:'0',//附加利率1
+        additional2:'0',//附加利率1
+        additional3:'0',//附加利率
+        purchaseRate:'0',
+        lp:'',
+        maxSupplyLp:0,
+        cycle:14,
+        addtimeobj:'',
+        conclusion:null,
+        countTime:{ d:"00",h: "00", m: "00", s: "00" }
+      }
     };
   },
   watch:{
@@ -546,20 +539,7 @@ export default {
           this.orderArr.forEach(item => {
             clearInterval(item.selfTimeOBJ)
           })
-          this.bondinfo = {
-            bondName:'ST-BUSD LP',
-            baseRate:"300",//基础利率
-            additional1:'0',//附加利率1
-            additional2:'0',//附加利率1
-            additional3:'0',//附加利率
-            purchaseRate:'0',
-            lp:'',
-            maxSupplyLp:0,
-            cycle:14,
-            addtimeobj:'',
-            conclusion:null,
-            countTime:{ d:"00",h: "00", m: "00", s: "00" }
-          }
+          this.bondinfo = this.lastBondInfo
           this.loadMoreStatus = false
           this.orderArr = []
           this.bondStatus = true
@@ -568,16 +548,6 @@ export default {
       deep: true,
       immediate: true,
     },
-  },
-  filters:{
-    interestRate: (value) => {
-      if (!value) return 0
-      return value / 1e2
-    },
-    amountConversion: (value) => {
-      if (!value) return 0
-      return common.convertBigNumberToNormal(Number(value), 2)
-    }
   },
   methods: {
     getBondInfo(){
@@ -598,20 +568,7 @@ export default {
           console.log('没有正在发售的债券')
           this.bondStatus = true
           this.newBondID = -999
-          this.bondinfo = {
-            bondName:'ST-BUSD LP',
-            baseRate:"300",//基础利率
-            additional1:'0',//附加利率1
-            additional2:'0',//附加利率1
-            additional3:'0',//附加利率
-            purchaseRate:'0',
-            lp:'',
-            maxSupplyLp:0,
-            cycle:14,
-            addtimeobj:'',
-            conclusion:null,
-            countTime:{ d:"00",h: "00", m: "00", s: "00" }
-          }
+          this.bondinfo = this.lastBondInfo
         }
       })
       // 获取债券总数，总数-1就是最新债券ID
@@ -757,40 +714,8 @@ export default {
         this.claimLoading = false
       })
     },
-    quesFun(data,e){
-      this.datacontent = data
-      this.clientX = e.clientX
-      this.clientY = e.clientY
-      setTimeout(() => {
-        this.$refs.mychild.titleFun()
-      },400)
-    },
-    closeLP(data) {
-      // console.log('关闭lp返回的参数data: ', data);
-      this.addlpDis = false;
-      if(data){
-        this.loadMoreStatus = true
-        this.orderArr = []
-        this.getBondInfo()
-        this.getUserOrder()
-      }
-    },
-    closeInvite() {
-      this.inviteDis = false;
-    },
     inviteFun(){
       this.inviteDis = true;
-    },
-    BondClick() {
-      if(this.bondStatus){
-        this.addlpDis = true
-      }else{
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_bond'}));
-      }
-    },
-    showBuy(item){
-      item.status = !item.status
-      this.domHeight = item.status
     },
     // 当前债券售卖倒计时
     setCountDown(){
@@ -802,7 +727,6 @@ export default {
         if(this.bondinfo.conclusion){
           clearInterval(this.counrnull)
           this.$utils.customTime(this.bondinfo.conclusion,(data) => {
-            // console.log('data: ', data);
             this.bondinfo.addtimeobj = data.countdownObject
             this.bondinfo.countTime = data.countTime
           });//结束时间
@@ -822,21 +746,16 @@ export default {
           clearInterval(this.userTimeOBJ)
           this.orderArr.forEach(item => {
             this.$utils.customTime(item.expiry,(data) => {
-              // console.log('订单倒计时返回对象data: ', data);
               item.selfTimeOBJ = data.countdownObject 
               item.countTime = data.countTime
-              // console.log('item.countTime: ', item.countTime,this.orderArr);
             });//结束时间
-            // console.log('this.orderArr: ', this.orderArr);
           })
-          
         }
       },1000)
     },
     // 获取邀请人地址
     getUserInvite(){
       inviting().userInviter(this.getAccount).then(res => {
-        // console.log('邀请我的人的地址res: ', res);
         if(res == '0x0000000000000000000000000000000000000000'){
           this.inviter = ''
         }else{
@@ -848,31 +767,53 @@ export default {
       clearInterval(this.lpTimer)
       this.lpTimer = setInterval(() => {
         bondDepository().getLpPrice(this.newBondID).then(res => {
-          // console.log('lp价格res: ', res);
           this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stlpPrice:Number(res / 1e18)}));
         })
         bondDepository().getStPrice().then(res => {
-          // console.log('st价格res: ', res);
           this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:Number(res / 1e18)}));
         })
-        console.log("获取价格中")
+        console.log("1分钟刷新一次价格(st,stlp)")
       },60000)
-    }
+    },
+    toPledge(){
+      if (!this.getNoticeNum) {
+        this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+        this.$store.commit("setNoticeNum", true);
+      }
+    },
+    closeLP(data) {
+      this.addlpDis = false;
+      if(data){
+        this.loadMoreStatus = true
+        this.orderArr = []
+        this.getBondInfo()
+        this.getUserOrder()
+      }
+    },
+    closeInvite() {
+      this.inviteDis = false;
+    },
+    quesFun(data,e){
+      this.datacontent = data
+      this.clientX = e.clientX
+      this.clientY = e.clientY
+      setTimeout(() => {
+        this.$refs.mychild.titleFun()
+      },400)
+    },
+    showBuy(item){
+      item.status = !item.status
+      this.domHeight = item.status
+    },
+    BondClick() {
+      if(this.bondStatus){
+        this.addlpDis = true
+      }else{
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_bond'}));
+      }
+    },
   },
   mounted(){
-    // this.progress = 0;
-    //     var that = this;
-    //     var timer = setInterval(function () {
-    //       that.progress = parseInt(that.progress) + 10;
-    //       // console.log(that.progress);
-    //       if (that.progress == 100) {
-    //         if (that.progress == "100") {
-    //           that.dialogComputedVisible = false;
-    //         }
-    //         clearInterval(timer);
-    //       }
-    //     }, 1000);  
-    // this.getBondInfo()
     localStorage.setItem('userInvite',this.$route.params.address)
   },
   beforeDestroy(){
@@ -1124,10 +1065,14 @@ export default {
     border-bottom: 2px solid #242222;
     padding: 20px;
     > div {
-      width: calc(100% / 4);
+      width: calc(100% / 6);
       font-weight: 600;
       color: #eccf83;
       line-height: 33px;
+      text-align: center;
+      &:nth-child(1){
+        text-align: left;
+      }
     }
   }
   .bottom {
@@ -1143,9 +1088,10 @@ export default {
       line-height: 28px;
       padding: 10px 0;
       li {
-        width: 160px;
+        // width: 160px;
+        width: calc(100% / 8);
         &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
-          text-align: center;
+          // text-align: center;
         }
       }
     }
@@ -1160,9 +1106,11 @@ export default {
         justify-content: space-between;
         padding: 10px 0;
         > span {
-          width: 160px;
+          // width: 160px;
+          
+          width: calc(100% / 8);
           &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
-            text-align: center;
+            // text-align: center;
           }
         }
       }

@@ -111,7 +111,7 @@ export default {
     }
     let timernull = setInterval(() => {
       let neddTime = endtime - time
-      if (time == neddTime) {
+      if (endtime == time) {
         clearInterval(timernull);
         calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});
         return;

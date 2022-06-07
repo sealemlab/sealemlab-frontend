@@ -73,7 +73,7 @@ export default {
 .proup_boxs{
   position: relative;
   width: 50vw;
-  height: 90%;
+  height: auto;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -137,8 +137,7 @@ export default {
 @media screen and (max-width: 980px) {
   .proup_boxs{
     position: relative;
-    width: 90%; 
-    height: auto;
+    width: 90%;
     overflow: auto;
     display: flex;
     flex-direction: column;
