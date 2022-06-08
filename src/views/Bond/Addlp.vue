@@ -18,7 +18,7 @@
               <span class="busd_txt font14">BUSD</span>
             </div>
             <div class="center_content">
-              <Input :modelValue="BUSDmsg" type="number" :placeholder='$t("message.bond.txt23")' @input="busdInputClick"></Input>
+              <Input :modelValue="BUSDmsg" :readonly="isWriteStatus" type="number" :placeholder='$t("message.bond.txt23")' @input="busdInputClick"></Input>
             </div>
             <div class="max_btn font16" @click="maxClick('busd')">MAX</div>
           </div>
@@ -32,7 +32,7 @@
               <span class="busd_txt font14">ST</span>
             </div>
             <div class="center_content">
-              <Input :modelValue="STmsg" type="number" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
+              <Input :modelValue="STmsg" :readonly="isWriteStatus" type="number" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
             </div>
             <div class="max_btn font16" @click="maxClick('st')">MAX</div>
           </div>
@@ -96,7 +96,7 @@
             <span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span>
             <span>
               {{userTaxRate | SquareRoot}}%
-              <span v-if="isThan1000 && BUSDmsg && STmsg">(+{{additionalTaxRate | MultiplyBySquare}}%)</span>
+              <span v-if="(isThan1000 && BUSDmsg) || (isThan1000 && STmsg)">(+{{additionalTaxRate | MultiplyBySquare}}%)</span>
               <span v-else>(+0.0%)</span>
             </span>
           </p>
@@ -124,13 +124,15 @@ export default {
         document.body.style.overflow='hidden'
         this.getUserSurplusNum(res => {
           // console.log('用户剩余购买数量useNum:以及税率 ',res);
-          this.userSurplusNum = res.userSurplusNum
+          this.userSurplusNum = res.userSurplusNum // 用户剩余购买量
+          this.useBuyStatus = true
           this.userTaxRate = res.userTaxRate
           this.useReadyBy = res.useReadyBy
           this.additional1 = res.additional1//邀请购买利率
           this.additional2 = res.additional2//邀请质押利率
           this.additional3 = res.additional3//质押利率
           this.additional4 = res.additional4//总个人额外利率
+          this.isWriteStatus = false // 是否可以输入
         })
       }else{
         document.body.style.overflow='visible'
@@ -151,10 +153,10 @@ export default {
           clearInterval(this.btntimernull)
           this.$utils.antiShakeFun(() => {
             this.getSDKInfo()
+            this.$utils.getUserCoinQuantity(token().BUSD,'busd',this.getAccount)
+            this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
             // console.log("切换账号重新判断授权")
           },2000)
-          this.getUserCoinBalance('busd')
-          this.getUserCoinBalance('st')
         }
       },
       deep: true,
@@ -197,6 +199,8 @@ export default {
   },
   data(){
     return {
+      isWriteStatus:true,//输入框是否可以输入 (税率拿不到,计算会出错)
+      useBuyStatus:false,// 用户剩余购买量状态判断
       additional1:0,//邀请购买利率
       additional2:0,//邀请质押利率
       additional3:0,//质押利率
@@ -241,6 +245,9 @@ export default {
   },
   methods: {
     buyBondFun(){
+      if(!this.useBuyStatus){
+        return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_userBuyNum'}));
+      }
       if(this.userSurplusNum == 0){
         return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_userBuy'}));
       }
@@ -269,12 +276,14 @@ export default {
           this.buyLoading = false
           this.resetData()
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
-          this.getUserCoinBalance('busd')
-          this.getUserCoinBalance('st')
+          this.$utils.getUserCoinQuantity(token().BUSD,'busd',this.getAccount)
+          this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
           this.userBuyStatus = true
+          this.useBuyStatus = false
           let that = this
           this.getUserSurplusNum(res => {
             that.userSurplusNum = res.userSurplusNum
+            that.useBuyStatus = true
             that.userTaxRate = res.userTaxRate
             that.useReadyBy = res.useReadyBy
             that.additional1 = res.additional1//邀请购买利率
@@ -439,6 +448,7 @@ export default {
       this.$emit('closeLP',this.userBuyStatus)
     },
     maxClick(data){
+      if(this.isWriteStatus)return
       if(this.activetype == 0 ){
         if(data == 'busd'){
           this.BUSDmsg = this.getUserCoin.busd
@@ -453,24 +463,6 @@ export default {
         this.STmsg = this.getUserCoin.st
       }
       this.youChangeIChange()
-    },
-    // 获取当前用户的代币余额
-    getUserCoinBalance(data){
-      if(data == 'busd'){
-        erc20(token().BUSD).balanceOf(this.getAccount).then(res => {
-          let obj = {}
-          obj.busd = this.$utils.getBit(util.formatEther(res),4)
-          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
-          // console.log("busd余额")
-        })
-      }else if(data == 'st'){
-        erc20(token().ST).balanceOf(this.getAccount).then(res => {
-          let obj = {}
-          obj.st = this.$utils.getBit(util.formatEther(res),4)
-          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
-          // console.log("st余额")
-        })
-      }
     },
     getUserSurplusNum(calback){
       let obj = {}
@@ -503,6 +495,7 @@ export default {
       })
     },
     youChangeIChange(){
+      console.log("调用you change i change")
       if(this.activetype == 0){
         this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice)
       }else if(this.activetype == 1){

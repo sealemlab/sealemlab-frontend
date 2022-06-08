@@ -5,6 +5,7 @@
     class="input font16 mobile_font12"
     :style="{ color: fontColor,background:background}"
     :placeholder='placeholder'
+    :readonly="readonly"
     @blur="blurEvent"
     @focus="focusEvent"
     @input="inpChange"
@@ -33,6 +34,10 @@ export default {
       type: String,
       default: 'transparent'
     },
+    readonly:{
+      type:Boolean,
+      default:false
+    }
   },
   methods:{
     focusEvent(){

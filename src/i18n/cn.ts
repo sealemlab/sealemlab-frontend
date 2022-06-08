@@ -788,7 +788,8 @@ export const message = {
     self_calim:'提取中...',
     self_calimResult:'暂无奖励需要提取',
     self_bond:'获取最新债券中,请稍后...',
-    self_sold:'已卖完'
+    self_sold:'已卖完',
+    self_userBuyNum:'本期stlp购买量获取中',
   }, //一些提示语句,文案你看哪不合适,替换就行
   approve: "授权",
 

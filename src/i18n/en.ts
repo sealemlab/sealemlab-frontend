@@ -811,7 +811,8 @@ export const message = {
     self_calim:'Claiming..',
     self_calimResult:'No reward need to be claimed',
     self_bond:'Getting the latest bond, please wait..',
-    self_sold:'Sold out'
+    self_sold:'Sold out',
+    self_userBuyNum:'本期stlp购买量获取中',
   },//提示性文案
   approve: "Approve",
 
