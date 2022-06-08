@@ -50,7 +50,13 @@ export default {
       this.$emit('sureclick')
     },
     copyClick(){
-      this.$utils.copyClick(`https://sealemlab.com/#/bond/${this.getAccount}`)
+      let istrue = process.env.NODE_ENV === "production"
+      if(istrue){
+        this.$utils.copyClick(`https://sealemlab.com/#/bond/${this.getAccount}`)
+      }else{
+        this.$utils.copyClick(`https://test.sealemlab.com/#/bond/${this.getAccount}`)
+      }
+      
       this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
     }
   }
