@@ -626,7 +626,7 @@ export default {
         this.inviteBuy.num2 = Number(res[1])
         this.inviteBuy.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
         this.inviteBuy.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
-        this.bondinfo.additional1 = this.$utils.getBit(this.inviteBuy.num1,1)//邀请购买利率
+        this.bondinfo.additional1 = this.inviteBuy.num1//邀请购买利率
       })
       // 获取某用户的邀请质押利率等级信息
       bondDepository().getUserInviteStakeLevelInfo(this.getAccount).then(res => {
@@ -635,16 +635,16 @@ export default {
         this.invitePledge.num2 = Number(res[1])
         this.invitePledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
         this.invitePledge.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
-        this.bondinfo.additional2 = this.$utils.getBit(this.inviteBuy.num1,1)//邀请质押利率
+        this.bondinfo.additional2 = this.invitePledge.num1//邀请质押利率
       })
       // 获取某用户的质押利率等级信息
       bondDepository().getUserStakeLevelInfo(this.getAccount).then(res => {
-        // console.log('质押利率res1: ', res);
+        console.log('质押利率res1: ', res);
         this.Pledge.num1 = Number(res[0])
         this.Pledge.num2 = Number(res[1])
         this.Pledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
         this.Pledge.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
-        this.bondinfo.additional3 = this.$utils.getBit(this.Pledge.num1,1)//你的质押利率
+        this.bondinfo.additional3 = this.Pledge.num1//你的质押利率
       })
     },
     // 用户订单相关信息
