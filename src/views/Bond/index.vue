@@ -100,7 +100,7 @@
                 </span>
               </li>
             </ul>
-            <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''"  v-if="bondinfo.maxSupplyLp == bondinfo.soldLpNum || bondinfo.addtimeobj == 0" @click="BondClick(false)">{{ $t("message.bond.add_txt_disable_btn") }}</div>
+            <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''"  v-if="(bondinfo.maxSupplyLp == bondinfo.soldLpNum || bondinfo.addtimeobj == 0) && bondStatus" @click="BondClick(false)">{{ $t("message.bond.add_txt_disable_btn") }}</div>
             <div class="add_btn_txt disable_bnb mobile_font16" :class="isEnLang?'en_Bold':''"  v-else @click="BondClick(true)">{{ $t("message.bond.add_txt_btn") }}</div>
           </div>
         </div>
@@ -317,7 +317,7 @@
                 <span>{{ $t("message.bond.txt28") }}</span>
               </li>
               <li>
-                <span class="has_question_icon">{{ $t("message.bond.txt57") }}</span>
+                <span class="has_question_icon"  :title='$t("message.bond.txt_81_ques")' style="cursor:pointer" @click="quesFun('message.bond.txt_81_ques',$event)">{{ $t("message.bond.txt57") }}</span>
               </li>
               <li>
                 <span>{{ $t("message.bond.txt58") }}</span>
@@ -612,14 +612,11 @@ export default {
     getUserRate(bondID){
       // 获取某债券的基础利率等级信息
       bondDepository().getBasicRateLevelInfo(bondID).then(res => {
-        // console.log('获取某债券的基础利率等级信息res: ', res);
+        console.log('获取某债券的基础利率等级信息res: ', res);
         this.baseInterestRateInfo.num1 = Number(res[0])
         this.baseInterestRateInfo.num2 = Number(res[1])
         this.baseInterestRateInfo.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
-        // console.log('this.baseInterestRateInfo.num3: ', this.baseInterestRateInfo.num3);
-        this.baseInterestRateInfo.num4 = Number(res[3])
-        // console.log(' this.getUserCoin.stPrice: ',  this.getUserCoin.stPrice);
-        // console.log(' Number(res[2]): ',  Number(res[2]));
+        this.baseInterestRateInfo.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
         this.bondinfo.baseRate = this.baseInterestRateInfo.num1 // 基础利率
       })
       // 获取某用户的某期债券的邀请购买利率等级信息；等级有效期至当前期结束
@@ -628,16 +625,16 @@ export default {
         this.inviteBuy.num1 = Number(res[0])
         this.inviteBuy.num2 = Number(res[1])
         this.inviteBuy.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
-        this.inviteBuy.num4 = Number(res[3])
+        this.inviteBuy.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
         this.bondinfo.additional1 = this.$utils.getBit(this.inviteBuy.num1,1)//邀请购买利率
       })
       // 获取某用户的邀请质押利率等级信息
       bondDepository().getUserInviteStakeLevelInfo(this.getAccount).then(res => {
-        // console.log('邀请质押利率res1: ', res);
+        console.log('邀请质押利率res1: ', res);
         this.invitePledge.num1 = Number(res[0])
         this.invitePledge.num2 = Number(res[1])
         this.invitePledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
-        this.invitePledge.num4 = Number(res[3])
+        this.invitePledge.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
         this.bondinfo.additional2 = this.$utils.getBit(this.inviteBuy.num1,1)//邀请质押利率
       })
       // 获取某用户的质押利率等级信息
@@ -646,7 +643,7 @@ export default {
         this.Pledge.num1 = Number(res[0])
         this.Pledge.num2 = Number(res[1])
         this.Pledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
-        this.Pledge.num4 = Number(res[3])
+        this.Pledge.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
         this.bondinfo.additional3 = this.$utils.getBit(this.Pledge.num1,1)//你的质押利率
       })
     },

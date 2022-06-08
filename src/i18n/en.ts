@@ -671,7 +671,8 @@ export const message = {
 
     txt79:"Estimated ST-BUSD LP:",
     txt80:"Max you can buy",
-    txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally."
+    txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally.",
+    txt_81_ques:"Each wallet enjoys a maximum of 30% extra rate."
   },//债券
   signin: {
     txt1: "Create Account",
@@ -812,7 +813,8 @@ export const message = {
     self_calimResult:'No reward need to be claimed',
     self_bond:'Getting the latest bond, please wait..',
     self_sold:'Sold out',
-    self_userBuyNum:'本期stlp购买量获取中',
+    self_userBuyNum:'The current STLP purchase volume is loading',
+    self_write:'Please enter the amount of bond to buy'
   },//提示性文案
   approve: "Approve",
 

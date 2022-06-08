@@ -332,7 +332,7 @@ export default {
           ],
         },
         {
-          image: `${this.$store.state.imgUrl}nav_nft_cike_active.webp`,
+          image: `${this.$store.state.imgUrl}new_nav_nft_cike_active.webp`,
           label: "message.nft.txt11",//刺客
           arms: "message.nft.txt12",
           skill: "message.nft.txt13",

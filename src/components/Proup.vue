@@ -67,7 +67,7 @@ export default {
     },
   },
   computed: { 
-    ...mapGetters(["getProgressInfo","getProupInfo","isEnLang"])
+    ...mapGetters(["getProgressInfo","getProupInfo","isEnLang",])
   },
   methods: {
     // 进度条展示
@@ -95,7 +95,7 @@ export default {
             this.$emit('closetimer')
           },1500)
         }
-      },100)
+      },this.getProgressInfo.speed)
     }
   }
 }
@@ -120,8 +120,10 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 20px 100px;
-    background-image: url($bg_url + "proupbg.webp");
-    background-size: 100% 100%;
+    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+    border-radius: 6px;
+    border: 1px solid rgba(68, 67, 67, 0.47);
     .propu_title_txt{
       font-weight: bold;
       color: #ECCF83;
@@ -194,8 +196,8 @@ export default {
       flex-direction: column;
       align-items: center;
       padding: 0.2rem;
-      background-image: url($bg_url + "proupbg.webp");
-      background-size: 100% 100%;
+      // background-image: url($bg_url + "proupbg.webp");
+      // background-size: 100% 100%;
       .propu_title_txt{
         font-weight: bold;
         color: #ECCF83;

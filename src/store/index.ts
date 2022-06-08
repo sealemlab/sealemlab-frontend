@@ -57,6 +57,7 @@ export default new Vuex.Store({
     ProgressInfo: {
       value: 1,
       title: "",
+      speed:100
     }, // 给进度条传值
     noticeNum: false, // 轻提示弹窗只弹一次
     BSC_BROWSER: process.env.NODE_ENV === "production" ? "https://www.bscscan.com/tx/" : "https://testnet.bscscan.com/tx/",
@@ -147,7 +148,7 @@ export default new Vuex.Store({
     },
     // 设置进度条的值
     setProgressInfo(state, data) {
-      state.ProgressInfo = JSON.parse(data);
+      state.ProgressInfo = Object.assign(state.ProgressInfo,JSON.parse(data));
     },
     // 轻提示状态
     setNoticeStatus(state, data) {
