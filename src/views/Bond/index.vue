@@ -409,7 +409,8 @@
             </div>
             <div>
               <p class="font18 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt65") }}</p>
-              <p class="font12" :class="isEnLang?'en_medium':''">https://sealemlab.com/#/bond/{{getAccount}}</p>
+              <p class="font12" v-if="istrue" :class="isEnLang?'en_medium':''">https://sealemlab.com/#/bond/{{getAccount}}</p>
+              <p class="font12" v-else :class="isEnLang?'en_medium':''">https://test.sealemlab.com/#/bond/{{getAccount}}</p>
             </div>
           </div>
         </div>
@@ -439,7 +440,11 @@ export default {
   components: {
     AddLp,InviteProup,MessageBox,circleProgressbar
   },
-  computed: { ...mapGetters(["getAccount","getIsMobile","getIstrue","getNoticeNum","isEnLang","getUserCoin"]) },
+  computed: { ...mapGetters(["getAccount","getIsMobile","getIstrue","getNoticeNum","isEnLang","getUserCoin"]),
+    istrue(){
+      return process.env.NODE_ENV === "production"
+    }
+  },
   data() {
     return {
       bondStatus:false,// 是否获取到最新bond
