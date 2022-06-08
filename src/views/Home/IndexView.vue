@@ -80,7 +80,7 @@
           <div class="left right mobile_game_box" :class="isEnLang?'en_medium':''">
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}new_game2.webp`" class="game2" />
-              <span>{{$t("message.tip.txt5")}}</span>
+              <!-- <span>{{$t("message.tip.txt5")}}</span> -->
             </div>
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
@@ -113,7 +113,7 @@
           <div class="left right pc_box font16" :class="isEnLang?'en_medium':''">
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}new_game2.webp`" class="game2" />
-              <span>{{$t("message.tip.txt5")}}</span>
+              <!-- <span>{{$t("message.tip.txt5")}}</span> -->
             </div>
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
@@ -699,11 +699,11 @@ export default {
       this.$router.push('/game/game')
     },
     enter() {
-      console.log("鼠标移入")
+      // console.log("鼠标移入")
       this.$refs.mySwiper.swiper.autoplay.stop()
     },
     leave() {
-      console.log("鼠标移除除")
+      // console.log("鼠标移除除")
       this.$refs.mySwiper.swiper.autoplay.start()
     },
     videoPlay() {
@@ -1341,6 +1341,13 @@ export default {
             max-width: 404px;
             width: 100%;
             margin-bottom: 37px;
+            &:nth-child(1){
+              // min-height: 100px;
+              padding: 2px;
+              // border: 3px solid;
+              background: linear-gradient(270deg, rgba(232, 199, 120, 0.24) 0%, rgba(255, 178, 69, 0.34) 47%, rgba(234, 181, 100, 0.35) 100%);
+              // border-image: linear-gradient(270deg, rgba(232, 199, 120, 0.24), rgba(255, 178, 69, 0.34), rgba(234, 181, 100, 0.35)) 5 5;
+            }
             .game2{
               width: 100%;
             }

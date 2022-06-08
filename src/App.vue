@@ -440,15 +440,15 @@ export default {
         stPrice:0
       }
       erc20(arr[0]).balanceOf(this.getAccount).then(res => {
-        obj.st = this.$utils.getBit(util.formatEther(res),4)
+        obj.st = res / 1e18 //this.$utils.getBit(util.formatEther(res),4)
         count++
       })
       erc20(arr[1]).balanceOf(this.getAccount).then(res => {
-        obj.sr = this.$utils.getBit(util.formatEther(res),4)
+        obj.sr = res / 1e18 //this.$utils.getBit(util.formatEther(res),4)
         count++
       })
       erc20(arr[2]).balanceOf(this.getAccount).then(res => {
-        obj.busd = this.$utils.getBit(util.formatEther(res),4)
+        obj.busd = res / 1e18 //this.$utils.getBit(util.formatEther(res),4)
         count++
       })
       bondDepository().getStPrice().then(res => {

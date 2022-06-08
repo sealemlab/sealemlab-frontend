@@ -11,7 +11,7 @@
         </div>
         <!-- busd输入框 token1 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 1">
-          <p class="font12 balance_" :class="isEnLang?'en_medium':''">BUSD {{$t("message.bond.txt22")}}: {{getUserCoin.busd}}</p>
+          <p class="font12 balance_" :class="isEnLang?'en_medium':''">BUSD {{$t("message.bond.txt22")}}: {{getUserCoin.busd | KeepDecimals}}</p>
           <div class="inputcontent" :class="isEnLang?'en_Bold':''">
             <div class="left_content">
               <img :src="`${$store.state.imgUrl}busd.webp`" class="busd_img" />
@@ -25,7 +25,7 @@
         </div>
         <!-- st输入框 token0 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 2">
-          <p class="font12 balance_" :class="isEnLang?'en_medium':''">ST {{$t("message.bond.txt22")}}: {{getUserCoin.st}}</p>
+          <p class="font12 balance_" :class="isEnLang?'en_medium':''">ST {{$t("message.bond.txt22")}}: {{getUserCoin.st | KeepDecimals}}</p>
           <div class="inputcontent" :class="isEnLang?'en_Bold':''">
             <div class="left_content">
               <img :src="`${$store.state.imgUrl}stlogo.webp`" class="busd_img" />
@@ -45,8 +45,8 @@
           <div class="onebox" v-for="(item,index) in moneyArr" :key="index">
             <p class="font14 _txt" :class="isEnLang?'en_Bold':''">{{$t(item.title)}}</p>
             <div class="border_ font12" :class="isEnLang?'en_medium':''">
-              <span class="span1">{{item.num}}</span>
-              <span class="span1">BUSD</span>
+              <span class="span1">$ {{item.num}}</span>
+              <!-- <span class="span1">BUSD</span> -->
             </div>
           </div>
         </div>
@@ -94,8 +94,9 @@
           <p class="color4"><span>{{$t("message.bond.txt31")}}</span><span>{{additional3 | SquareRoot}}%</span>
           <p class="font14 mobile_font14" @click="AddQuesFun('message.bond.txt_tax',$event)" :class="isEnLang?'en_Bold':''">
             <span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span>
-            <span>
-              {{userTaxRate | SquareRoot}}%
+            <span class="userTaxRateStatus">
+              <span v-if="userTaxRateStatus">{{userTaxRate | SquareRoot}}%</span>
+              <span v-else><BtnLoading :isloading="true"></BtnLoading></span>
               <span v-if="(isThan1000 && BUSDmsg) || (isThan1000 && STmsg)">(+{{additionalTaxRate | MultiplyBySquare}}%)</span>
               <span v-else>(+0.0%)</span>
             </span>
@@ -116,7 +117,7 @@
 <script>
 import { mapGetters } from "vuex";
 import MessageBox from "./MessageBox.vue";
-import { bondDepository,token,contract,getSigner,erc20,util} from 'sealemlab-sdk'
+import { bondDepository,token,contract,getSigner} from 'sealemlab-sdk'
 export default {
   watch:{
     'addlpDis'(newvala){
@@ -125,13 +126,14 @@ export default {
         this.getUserSurplusNum(res => {
           // console.log('用户剩余购买数量useNum:以及税率 ',res);
           this.userSurplusNum = res.userSurplusNum // 用户剩余购买量
-          this.useBuyStatus = true
+          this.useBuyNumStatus = true
           this.userTaxRate = res.userTaxRate
           this.useReadyBy = res.useReadyBy
           this.additional1 = res.additional1//邀请购买利率
           this.additional2 = res.additional2//邀请质押利率
           this.additional3 = res.additional3//质押利率
           this.additional4 = res.additional4//总个人额外利率
+          this.userTaxRateStatus = true // 获取到个人税率
           this.isWriteStatus = false // 是否可以输入
         })
       }else{
@@ -180,7 +182,16 @@ export default {
       }
     },
     additionalTaxRate(){ // 用户已经购买额加上即将要购买额是否超过额定额度(每1000增加0.1%---(0.001))
-      return Math.floor((Number(this.useReadyBy) + Number(this.moneyArr[0].num)) / 1000) * 0.001
+      if(this.userTaxRate == 1000){
+        return 0
+      }else{
+        let num = Math.floor((Number(this.useReadyBy) + Number(this.moneyArr[0].num)) / 1000) * 0.001
+        if(num >= 0.09){
+          return 0.09
+        }else{
+          return num
+        }
+      }
     },
   },
   props: {
@@ -199,8 +210,9 @@ export default {
   },
   data(){
     return {
+      userTaxRateStatus:false,//个人税率获取中
       isWriteStatus:true,//输入框是否可以输入 (税率拿不到,计算会出错)
-      useBuyStatus:false,// 用户剩余购买量状态判断
+      useBuyNumStatus:false,// 用户剩余购买量状态判断
       additional1:0,//邀请购买利率
       additional2:0,//邀请质押利率
       additional3:0,//质押利率
@@ -240,33 +252,41 @@ export default {
         {title:'message.bond.txt26',num:0}
       ],
       btntimernull:null,
-      userBuyStatus:false,
+      userBuyStatus:false, // 用户购买成功以后此变量刷新,返回父页面进行刷新订单及其他操作
     }
   },
   methods: {
     buyBondFun(){
-      if(!this.useBuyStatus){
+      if(!this.useBuyNumStatus){
         return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_userBuyNum'}));
       }
       if(this.userSurplusNum == 0){
         return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_userBuy'}));
       }
       if(this.allLoading || this.buyLoading)return
-      this.buyLoading = true
       let address = this.$route.params.address == 0 ?'0x0000000000000000000000000000000000000000':''
       let token0 = 0 //st
       let token1 = 0 //busd
       if(this.activetype == 0){
+        if(!this.STmsg || !this.BUSDmsg){
+          return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
+        }
         token0 = this.$utils.convertNormalToBigNumber(this.STmsg, 18)
         token1 = this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
       }else if(this.activetype == 1){
+        if(!this.BUSDmsg){
+          return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
+        }
         token1 = this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
         token0 = 0
       }else if(this.activetype == 2){
+        if(!this.STmsg){
+          return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
+        }
         token1 = 0
         token0 = this.$utils.convertNormalToBigNumber(this.STmsg, 18)
       }
-      // console.log('this.newBondID,this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),this.$utils.convertNormalToBigNumber(this.STmsg, 18),0,address: ', this.newBondID,this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18),this.$utils.convertNormalToBigNumber(this.STmsg, 18),0,address);
+      this.buyLoading = true
       bondDepository().connect(getSigner()).swapAndAddLiquidityAndBond(this.newBondID,token0,token1,0,address).then(async res => {
         // console.log('购买债券res: ', res);
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
@@ -279,17 +299,23 @@ export default {
           this.$utils.getUserCoinQuantity(token().BUSD,'busd',this.getAccount)
           this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
           this.userBuyStatus = true
-          this.useBuyStatus = false
+          this.useBuyNumStatus = false
+          this.userTaxRateStatus = false // 获取到个人税率
+          this.isWriteStatus = true // 是否可以输入
           let that = this
-          this.getUserSurplusNum(res => {
+          that.getUserSurplusNum(res => {
+            console.log("购买成功以后刷新用户的税率等等")
             that.userSurplusNum = res.userSurplusNum
-            that.useBuyStatus = true
+            that.useBuyNumStatus = true
             that.userTaxRate = res.userTaxRate
             that.useReadyBy = res.useReadyBy
             that.additional1 = res.additional1//邀请购买利率
             that.additional2 = res.additional2//邀请质押利率
             that.additional3 = res.additional3//质押利率
             that.additional4 = res.additional4//总个人额外利率
+
+            that.userTaxRateStatus = true // 获取到个人税率
+            that.isWriteStatus = false // 是否可以输入
           })
         }else{
           this.buyLoading = false
@@ -420,7 +446,7 @@ export default {
       this.youChangeIChange()
     },
     inputClick(data){
-      console.log('st输入框data: ', data);
+      // console.log('st输入框data: ', data);
       if(!data){
         this.BUSDmsg = ''
         this.resetData()
@@ -466,9 +492,10 @@ export default {
     },
     getUserSurplusNum(calback){
       let obj = {}
+      this.userTaxRateStatus = false
       // 获取某用户某期债券剩余可购买LP数量
       bondDepository().getUserLeftLpCanBuy(this.getAccount,this.newBondID).then(res => {
-        console.log('获取某用户某期债券剩余可购买LP数量res: ', res);
+        // console.log('获取某用户某期债券剩余可购买LP数量res: ', res);
         obj.userSurplusNum = this.$utils.convertBigNumberToNormal(Number(res), 2)
         calback(Object.assign({},obj))
       })
@@ -480,13 +507,13 @@ export default {
       })
       // 获取用户某期债券的税前购买USD金额
       bondDepository().userEpochUsdPayinBeforeTax(this.getAccount,this.newBondID).then(res => {
-        console.log('获取用户某期债券的税前购买USD金额: ', res);
+        // console.log('获取用户某期债券的税前购买USD金额: ', res);
         obj.useReadyBy = this.$utils.convertBigNumberToNormal(Number(res), 2)
         calback(Object.assign({},obj))
       })
       // 获取某用户的某期债券的个人额外利率数组，数组元素分别为邀请购买利率、邀请质押利率、质押利率、总个人额外利率（以上3个利率之和，最大30%）
       bondDepository().getUserExtraRates(this.getAccount,this.newBondID).then(res => {
-        console.log('某用户的额外利率res: ', res);
+        // console.log('某用户的额外利率res: ', res);
         obj.additional1 = Number(res[0])
         obj.additional2 = Number(res[1])
         obj.additional3 = Number(res[2])
@@ -495,7 +522,7 @@ export default {
       })
     },
     youChangeIChange(){
-      console.log("调用you change i change")
+      // console.log("调用you change i change")
       if(this.activetype == 0){
         this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice)
       }else if(this.activetype == 1){
@@ -505,10 +532,10 @@ export default {
       }
       if(this.isThan1000){
         this.moneyArr[1].num = this.$utils.getBit(((Number(this.userRate) / 1e4) - ((Number(this.userTaxRate) / 1e4) + Number(this.additionalTaxRate))) * this.moneyArr[0].num,2)
-        console.log('this.moneyArr[0].num: ', this.moneyArr[0].num);
-        console.log('Number(this.additionalTaxRate): ', Number(this.additionalTaxRate));
-        console.log('Number(this.userTaxRate) / 1e4: ', Number(this.userTaxRate) / 1e4);
-        console.log('Number(this.userRate) / 1e4: ', Number(this.userRate) / 1e4);
+        // console.log('this.moneyArr[0].num: ', this.moneyArr[0].num);
+        // console.log('Number(this.additionalTaxRate): ', Number(this.additionalTaxRate));
+        // console.log('Number(this.userTaxRate) / 1e4: ', Number(this.userTaxRate) / 1e4);
+        // console.log('Number(this.userRate) / 1e4: ', Number(this.userRate) / 1e4);
       }else{
         this.moneyArr[1].num = this.$utils.getBit(((Number(this.userRate) / 1e4) - (Number(this.userTaxRate) / 1e4)) * this.moneyArr[0].num,2)
       }
@@ -527,6 +554,15 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.userTaxRateStatus{
+  display: flex;
+  align-items: center;
+  span{
+    &:nth-child(1){
+      margin-right: 5px;
+    }
+  }
+}
 .input_proup {
   width: 100%;
   height: 100vh;
@@ -674,7 +710,7 @@ export default {
         border-radius: 4px;
         border: 1px solid #373636;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         .span1{
           font-weight: 600;

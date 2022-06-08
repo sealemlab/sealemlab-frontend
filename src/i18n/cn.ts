@@ -654,7 +654,8 @@ export const message = {
 
     txt79:"BUSD-ST lp数量:",
     txt80:"最大购买量",
-    txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally."
+    txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally.",
+    txt_81_ques:"Each wallet enjoys a maximum of 30% extra rate."
   }, //债券
   signin: {
     txt1: "创建账户",
@@ -790,6 +791,7 @@ export const message = {
     self_bond:'获取最新债券中,请稍后...',
     self_sold:'已卖完',
     self_userBuyNum:'本期stlp购买量获取中',
+    self_write:'请输入数额'
   }, //一些提示语句,文案你看哪不合适,替换就行
   approve: "授权",
 

@@ -15,11 +15,11 @@
 export default {
   props: {
     modelValue:{
-      type: String || Number,
+      type: [String, Number],
       default:''
     },
     type:{
-      type: String || Number,
+      type: [String, Number],
       default: 'text'
     },
     placeholder:{

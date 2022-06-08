@@ -196,7 +196,12 @@ export default {
     let str = value.toString();
     let strIndex = str.indexOf(".");
     if (strIndex === -1) return this.cutZero(str);
-    str = str.substring(0, strIndex + bit + 1);
+    if(bit == 0){
+      str = str.substring(0, strIndex);
+    }else{
+      str = str.substring(0, strIndex + bit + 1);
+    }
+    
     return this.cutZero(str);
   },
   // 一个数乘以1e18   eg:convertNormalToBigNumber('input num',18)
