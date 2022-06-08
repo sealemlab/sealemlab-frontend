@@ -264,7 +264,7 @@ export default {
         return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_userBuy'}));
       }
       if(this.allLoading || this.buyLoading)return
-      let address = this.$route.params.address == 0 ?'0x0000000000000000000000000000000000000000':''
+      let address = localStorage.getItem('userInvite') == 0 ?'0x0000000000000000000000000000000000000000':localStorage.getItem('userInvite')
       let token0 = 0 //st
       let token1 = 0 //busd
       if(this.activetype == 0){
