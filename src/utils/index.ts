@@ -1,4 +1,4 @@
-import {wallet, network,sb,sn,getSourceUrl,erc20,getSigner} from "sealemlab-sdk";
+import {wallet, network,sb,sn,getSourceUrl,erc20,getSigner,token,bondDepository} from "sealemlab-sdk";
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
@@ -103,7 +103,7 @@ export default {
   customTime(endtime: any, calback: any) {
     // console.log('endtime: ', endtime);
     // @ts-ignore
-    let time = new Date().getTime() / 1000
+    let time = parseInt(new Date().getTime() / 1000)
     
     if(endtime < time){
       calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});
@@ -407,5 +407,29 @@ export default {
           resolve(false)
         })
       })
+  },
+  // 刷新代币余额
+  getUserCoinQuantity(address:any,name:string,account:string){
+    erc20(address).balanceOf(account).then((res:any)=> {
+      if(name == 'busd'){
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'busd':res / 1e18}));
+      }else if(name == 'st'){
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'st':res / 1e18}));
+      }else if(name == 'sr'){
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'sr':res / 1e18}));
+      }
+    })
+  },
+  // 刷新代币价格
+  refreshPrice(type:string,bondID = ''){
+    if(type == 'st'){
+      bondDepository().getStPrice().then((res:any) => {
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stPrice':res / 1e18}));
+      })
+    }else if(type == 'stlp'){
+      bondDepository().getLpPrice(bondID).then((res:any) => {
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stlpPrice':res / 1e18}));
+      })
+    }
   }
 };

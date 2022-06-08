@@ -49,7 +49,7 @@
             <!-- 标题 -->
             <ul class="list_title font20" :class="isEnLang?'en_Bold':''">
               <li>
-                <span>{{ $t("message.bond.txt1") }}</span>
+                <span>{{ $t("message.bond.add_txt1") }}</span>
               </li>
               <li>
                 <span>{{ $t("message.bond.txt35") }}</span>
@@ -94,12 +94,14 @@
                   <div class="progressbar"><div :style="{ width: bondinfo.purchaseRate }"></div></div>
                   {{ bondinfo.purchaseRate }} %
                 </span>
-                <span>
-                  <div class="btn_txt mobile_btn bg3" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
+                <span :class="isEnLang?'en_Bold':''">
+                  <div class="btn_txt mobile_btn disable_bnb" v-if="(bondinfo.maxSupplyLp == bondinfo.soldLpNum || bondinfo.addtimeobj == 0) && bondStatus" @click="BondClick(false)">{{ $t("message.bond.add_txt_disable_btn") }}</div>
+                  <div class="btn_txt mobile_btn bg3" v-else @click="BondClick(true)">{{ $t("message.bond.add_txt_btn") }}</div>
                 </span>
               </li>
             </ul>
-            <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''" @click="BondClick(1)">{{ $t("message.bond.txt1") }}</div>
+            <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''"  v-if="bondinfo.maxSupplyLp == bondinfo.soldLpNum || bondinfo.addtimeobj == 0" @click="BondClick(false)">{{ $t("message.bond.add_txt_disable_btn") }}</div>
+            <div class="add_btn_txt disable_bnb mobile_font16" :class="isEnLang?'en_Bold':''"  v-else @click="BondClick(true)">{{ $t("message.bond.add_txt_btn") }}</div>
           </div>
         </div>
       </div>
@@ -315,7 +317,7 @@
                 <span>{{ $t("message.bond.txt28") }}</span>
               </li>
               <li>
-                <span>{{ $t("message.bond.txt57") }}</span>
+                <span class="has_question_icon">{{ $t("message.bond.txt57") }}</span>
               </li>
               <li>
                 <span>{{ $t("message.bond.txt58") }}</span>
@@ -336,12 +338,21 @@
                   <div class="add_small_angle" v-if="item.status">
                     <span>$ {{ item.lpAmount }} * {{item.lpPrice}}</span>
                   </div>
-                  <!-- <ul class="has_select_list" >
-                    <li></li>
-                  </ul> -->
                 </span>
                 <span>{{ item.bondRate}} %</span>
-                <span>
+                <span class="has_select" v-if="item.personalArr[3] == 3000">
+                  <div class="small_angle" @click="showRate(item)">
+                    {{ item.personalArr[3] | SquareRoot}}%
+                    &nbsp;&nbsp;
+                    <svg t="1654321191240" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2336" width="16" height="16"><path d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z" p-id="2337" fill="#CED3D9"></path></svg>
+                  </div>
+                  <div class="add_small_angle" v-if="item.rateStatus">
+                    <span class="color2">{{ item.personalArr[0] | SquareRoot}}%</span> + 
+                    <span class="color3">{{ item.personalArr[1] | SquareRoot}}%</span> + 
+                    <span class="color4">{{ item.personalArr[2] | SquareRoot}}%</span>
+                  </div>
+                </span>
+                <span v-else>
                   <span class="color2">{{ item.personalArr[0] | SquareRoot}}%</span> + 
                   <span class="color3">{{ item.personalArr[1] | SquareRoot}}%</span> + 
                   <span class="color4">{{ item.personalArr[2] | SquareRoot}}%</span>
@@ -419,7 +430,6 @@
 
 <script>
 import circleProgressbar from 'vue-circleprogressbar';
-import common from '@/utils/index'
 import { mapGetters } from "vuex";
 import AddLp from "./Addlp.vue";
 import InviteProup from "./InviteProup.vue";
@@ -562,8 +572,10 @@ export default {
             this.bondinfo = Object.assign(this.bondinfo,data)
           })
           this.getUserRate(this.newBondID) // 圆形各等级信息
-          this.getNEWPrice(this.newBondID) // 每s获取最新st,lp价格
+          this.$utils.refreshPrice('stlp',this.newBondID)
+          this.getNEWPrice() // 获取最新st,stlp价格
           this.setCountDown() // 债券倒计时
+          this.bondLoading = false
         }else{
           console.log('没有正在发售的债券')
           this.bondStatus = true
@@ -590,11 +602,8 @@ export default {
         obj.maxSupplyLp = this.$utils.convertBigNumberToNormal(Number(res.maxSupplyLp), 2) //本期最大供应数量
         obj.maxUseBuylP = this.$utils.convertBigNumberToNormal(Number(res.userMaxLpBuyAmount), 2)//用户最大购买量
         obj.cycle = this.$utils.getBit(Number(res.term) / (24 * 3600))//利息周期
-        // console.log('利息周期: ', Number(res.term));
         obj.conclusion = Number(res.conclusion) // 结束时间
         obj.soldLpNum = this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount), 2)//已卖出lp数量
-        
-        // console.log('obj.soldLpNum / obj.maxSupplyLp: ', obj.soldLpNum / obj.maxSupplyLp);
         obj.purchaseRate = this.$utils.getBit(obj.soldLpNum / obj.maxSupplyLp / 1e2)
         calback(obj)
       })
@@ -624,7 +633,7 @@ export default {
       })
       // 获取某用户的邀请质押利率等级信息
       bondDepository().getUserInviteStakeLevelInfo(this.getAccount).then(res => {
-        console.log('邀请质押利率res1: ', res);
+        // console.log('邀请质押利率res1: ', res);
         this.invitePledge.num1 = Number(res[0])
         this.invitePledge.num2 = Number(res[1])
         this.invitePledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
@@ -659,6 +668,7 @@ export default {
               orderObj.orderID = Number(item)
               let sdkObj = await bondDepository().orders(this.getAccount,Number(item))
               let personalInterestRate = await bondDepository().getUserOrderExtraRates(this.getAccount,Number(item))
+              // console.log('personalInterestRate: ', personalInterestRate);
               orderObj.bondID = Number(sdkObj.bondId)
               orderObj.title = "ST-BUSD LP"
               orderObj.personalArr = personalInterestRate
@@ -671,6 +681,7 @@ export default {
               orderObj.expiry = Number(sdkObj.expiry)
               orderObj.claimTime = Number(sdkObj.claimTime)
               orderObj.status = false
+              orderObj.rateStatus = false
               orderObj.selfTimeOBJ = null
               orderObj.countTime = null
               insetArr.push(orderObj)
@@ -707,6 +718,8 @@ export default {
           this.getUserOrder()
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+          this.$utils.getUserCoinQuantity(token().BUSD,'busd',this.getAccount)
+          this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
         }else{
           this.claimLoading = false
         }
@@ -727,6 +740,7 @@ export default {
         if(this.bondinfo.conclusion){
           clearInterval(this.counrnull)
           this.$utils.customTime(this.bondinfo.conclusion,(data) => {
+            // console.log('当前债券售卖倒计时data: ', data);
             this.bondinfo.addtimeobj = data.countdownObject
             this.bondinfo.countTime = data.countTime
           });//结束时间
@@ -766,12 +780,8 @@ export default {
     getNEWPrice(){
       clearInterval(this.lpTimer)
       this.lpTimer = setInterval(() => {
-        bondDepository().getLpPrice(this.newBondID).then(res => {
-          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stlpPrice:Number(res / 1e18)}));
-        })
-        bondDepository().getStPrice().then(res => {
-          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:Number(res / 1e18)}));
-        })
+        this.$utils.refreshPrice('st')
+        this.$utils.refreshPrice('stlp',this.newBondID)
         console.log("1分钟刷新一次价格(st,stlp)")
       },60000)
     },
@@ -805,11 +815,18 @@ export default {
       item.status = !item.status
       this.domHeight = item.status
     },
-    BondClick() {
-      if(this.bondStatus){
-        this.addlpDis = true
+    showRate(item){
+      item.rateStatus = !item.rateStatus
+    },
+    BondClick(data) {
+      if(data){
+        if(this.bondStatus){
+          this.addlpDis = true
+        }else{
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_bond'}));
+        }
       }else{
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_bond'}));
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sold'}));
       }
     },
   },

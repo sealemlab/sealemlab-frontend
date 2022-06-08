@@ -581,6 +581,9 @@ export const message = {
   bond: {
     txt_tax: "The floor tax rate is 1.0%, increasing by 0.1% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "Bond",
+    add_txt1:"Asset",
+    add_txt_btn:"Mint",
+    add_txt_disable_btn:"Sold out",
     txt2_1: "Buy bond to earn stable ST rewards ",
     txt2_2: "Each bond offering is limited",
     txt2_3: "Multiple interest rates increase income",
@@ -803,10 +806,12 @@ export const message = {
     self_txt12: "Open mystery box result",
     self_txt13: "No Data",
     self_buy:"Buy",
-    self_userBuy:'用户个人剩余购买量为0',
-    self_calim:'提取中...',
-    self_calimResult:'暂无奖励需要提取',
-    self_bond:'获取最新债券中,请稍后...'
+
+    self_userBuy:"The user's personal remaining purchase amount is 0",
+    self_calim:'Claiming..',
+    self_calimResult:'No reward need to be claimed',
+    self_bond:'Getting the latest bond, please wait..',
+    self_sold:'Sold out'
   },//提示性文案
   approve: "Approve",
 

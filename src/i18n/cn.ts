@@ -567,6 +567,9 @@ export const message = {
   bond: {
     txt_tax: "The floor tax rate is 0.1%, increasing by 0.01% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "债券",
+    add_txt1:"Asset",
+    add_txt_btn:"Mint",
+    add_txt_disable_btn:"Sold out",
     txt2_1: "购买债券稳定获得高额ST收益",
     txt2_2: "每期限量发售",
     txt2_3: "多重利率提升收益",
@@ -784,7 +787,8 @@ export const message = {
     self_userBuy:'用户个人剩余购买量为0',
     self_calim:'提取中...',
     self_calimResult:'暂无奖励需要提取',
-    self_bond:'获取最新债券中,请稍后...'
+    self_bond:'获取最新债券中,请稍后...',
+    self_sold:'已卖完'
   }, //一些提示语句,文案你看哪不合适,替换就行
   approve: "授权",
 
