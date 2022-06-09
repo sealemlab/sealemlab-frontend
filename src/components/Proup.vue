@@ -1,7 +1,7 @@
 <template>
   <div class="proup_page" v-if="proupStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24">{{getProgressInfo.title?$t(getProgressInfo.title):$t(getProupInfo.title)}}</p>
+      <p class="propu_title_txt font24 mobile_font18" :class="isEnLang?'en_heavy':''">{{getProgressInfo.title?$t(getProgressInfo.title):$t(getProupInfo.title)}}</p>
       <div class="proup_content" v-if="isProgress">
         <img :src="`${$store.state.imgUrl}success.webp`" class="success_img" />
         {{$t(content)}}
@@ -67,7 +67,7 @@ export default {
     },
   },
   computed: { 
-    ...mapGetters(["getProgressInfo","getProupInfo"])
+    ...mapGetters(["getProgressInfo","getProupInfo","isEnLang",])
   },
   methods: {
     // 进度条展示
@@ -95,7 +95,7 @@ export default {
             this.$emit('closetimer')
           },1500)
         }
-      },100)
+      },this.getProgressInfo.speed)
     }
   }
 }
@@ -120,8 +120,10 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 20px 100px;
-    background-image: url($bg_url + "proupbg.webp");
-    background-size: 100% 100%;
+    background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+    border-radius: 6px;
+    border: 1px solid rgba(68, 67, 67, 0.47);
     .propu_title_txt{
       font-weight: bold;
       color: #ECCF83;
@@ -161,6 +163,7 @@ export default {
     margin-bottom: 15px;
     .link_img{
       width: 12px;
+      margin-left: 5px;
     }
   }
   .box{
@@ -182,6 +185,43 @@ export default {
     margin-top: 20px;
     width: 100%;
     text-align: center;
+  }
+}
+@media screen and (max-width: 980px) {
+  .proup_page{
+    .proup_boxs{
+      position: relative;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.2rem;
+      // background-image: url($bg_url + "proupbg.webp");
+      // background-size: 100% 100%;
+      .propu_title_txt{
+        font-weight: bold;
+        color: #ECCF83;
+        line-height: 29px;
+      }
+      .proup_content{
+        width: 100%;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .success_img{
+          width: 80%;
+        }
+      }
+      .close_img{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 34px;
+        cursor: pointer;
+      }
+    }
   }
 }
 </style>

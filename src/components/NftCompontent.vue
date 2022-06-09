@@ -1,13 +1,7 @@
 <template>
-  <div class="record_page" v-if="resultStatus">
-    <div class="title font32 mobile_font16" :class="isEnLang?'en_heavy':''">{{$t('message.tip.self_txt12')}}</div>
-    <img
-      :src="`${$store.state.imgUrl}close.webp`"
-      class="close_img"
-      @click="closepage"
-    />
-    <div class="boxarr">
-      <div class="out_box_one" v-for="(item, index) in boxarr" :key="index" @click="nftFun(item)">
+  <div class="nft_arr_page">
+    <div class="box" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
+      <div class="out_box_one" v-for="(item, index) in nftArr" :key="index" @click="nftFun(item)">
         <div class="onebox">
           <div class="out_img"><img :src="item.src" class="imgcard" /></div>
           <div class="huxing_bg_box">
@@ -60,13 +54,18 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- <div class="Suspension_btnbox">
-      <span class="bottom_title fontsize12_400">按钮上方提示信息</span>
-      <div class="btn_box fontsize18" @click="winbtnsure">
-        确认
+      <div class="bottom_loading font16" v-if="nftArr.length > 9">
+        <span v-if="loadMoreStatus">Loading...</span>
+        <span v-else-if="!loadMoreStatus">End</span>
       </div>
-    </div> -->
+    </div>
+    <div class="loading_box_content" v-if="nftArr.length == 0 && getIstrue && loadMoreStatus">
+      <LoadingAnmation></LoadingAnmation>
+    </div>
+    <div class="loading_box_content" v-else-if="nftArr.length == 0 || !getIstrue">
+      <svg t="1653726615818" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="84371" width="200" height="200"><path d="M102.4 634.88h13.824c3.584 0 6.656 3.072 6.656 6.656 0 3.584-3.072 6.656-6.656 6.656H102.4v13.824c0 3.584-3.072 6.656-6.656 6.656-2.048 0-3.584-0.512-4.608-2.048-1.536-1.024-2.048-3.072-2.048-4.608v-13.824h-13.824c-3.584 0-6.656-3.072-6.656-6.656 0-3.584 3.072-6.656 6.656-6.656h13.824v-13.824c0-3.584 3.072-6.656 6.656-6.656 3.584 0 6.656 3.072 6.656 6.656v13.824z m901.12-54.784v-13.824c0-2.048-0.512-3.584-2.048-4.608-1.536-1.024-3.072-2.048-4.608-2.048-3.584 0-6.656 3.072-6.656 6.656v13.824h-13.824c-2.048 0-3.584 0.512-4.608 2.048-1.024 1.536-2.048 3.072-2.048 4.608 0 3.584 3.072 6.656 6.656 6.656h13.824v13.824c0 3.584 3.072 6.656 6.656 6.656 3.584 0 6.656-3.072 6.656-6.656V593.92h13.824c3.584 0 6.656-3.072 6.656-6.656 0-3.584-3.072-6.656-6.656-6.656H1003.52z m-496.128 225.28H163.84a13.98784 13.98784 0 0 1-13.824-13.824c0-7.68 6.144-13.824 13.824-13.824h61.952c-4.608-8.192-7.168-17.92-7.168-27.136V354.816c0-14.336 5.632-28.16 15.872-38.4s24.064-15.872 38.4-15.872h40.96V286.72c0-14.336 5.632-28.16 15.872-38.4s24.064-15.872 38.4-15.872h327.68c14.336 0 28.16 5.632 38.4 15.872s15.872 24.064 15.872 38.4v396.288c0 9.728-2.56 19.456-7.168 27.136H819.2c7.68 0 13.824 6.144 13.824 13.824 0 7.68-6.144 13.824-13.824 13.824h-163.84v13.824c0 9.728-2.56 19.456-7.168 27.136h7.168c7.68 0 13.824 6.144 13.824 13.824 0 7.68-6.144 13.824-13.824 13.824h-71.68c6.144 10.24 5.12 24.064-4.096 33.28-5.12 5.12-12.288 8.192-19.456 8.192s-14.336-3.072-19.456-8.192l-33.28-34.304z m50.176-27.136h43.52c14.848 0 27.136-12.288 27.136-27.136V354.304c0-14.848-11.776-26.624-26.112-26.624H271.872c-14.336 0-26.112 11.776-26.112 26.624v396.8c0 15.36 12.288 27.136 27.136 27.136h207.36l-7.168-7.168c-7.168-6.656-9.728-16.896-7.168-26.624l-12.8-12.8c-39.936 29.696-96.768 23.552-129.536-14.336-32.768-37.888-30.72-94.72 4.608-130.048 35.328-35.328 92.16-37.888 130.048-4.608 37.888 32.768 44.032 89.6 13.824 129.536l12.8 12.8c9.216-2.56 19.456 0 26.624 7.168l46.08 46.08z m97.792-68.608h40.96c14.848 0 27.136-12.288 27.136-27.136V286.72c0-15.36-12.288-27.136-27.136-27.136H368.64c-14.848 0-27.136 12.288-27.136 27.136v13.824h259.584c14.336 0 28.16 5.632 38.4 15.872s15.872 24.064 15.872 38.4v354.816z m-481.28-501.76h20.48c5.632 0 10.24 4.608 10.24 10.24s-4.608 10.24-10.24 10.24h-20.48v20.48c0 5.632-4.608 10.24-10.24 10.24-2.56 0-5.12-1.024-7.168-3.072-2.048-2.048-3.072-4.608-3.072-7.168v-20.48h-20.48c-2.56 0-5.12-1.024-7.168-3.072-2.048-2.048-3.072-4.608-3.072-7.168 0-5.632 4.608-10.24 10.24-10.24h20.48v-20.48c0-5.632 4.608-10.24 10.24-10.24s10.24 4.608 10.24 10.24v20.48z m-160.256 583.68c0-7.68 6.144-13.824 13.824-13.824h81.92c7.68 0 13.824 6.144 13.824 13.824 0 7.68-6.144 13.824-13.824 13.824h-81.92c-3.584 0-7.168-1.536-9.728-4.096-3.072-2.56-4.096-6.144-4.096-9.728z m430.592-88.064c26.624-26.624 26.624-70.144 0-96.768-26.624-26.624-70.144-26.624-96.768 0-26.624 26.624-26.624 70.144 0 96.768 26.624 26.624 70.144 26.624 96.768 0zM300.544 381.952c0-7.68 6.144-13.824 13.824-13.824h150.016c7.68 0 13.824 6.144 13.824 13.824 0 7.68-6.144 13.824-13.824 13.824H313.856c-3.584 0-7.168-1.536-9.728-4.096s-3.584-6.144-3.584-9.728z m0 68.608c0-7.68 6.144-13.824 13.312-13.824H532.48c7.68 0 13.312 6.144 13.312 13.824 0 7.68-6.144 13.824-13.312 13.824H313.856c-3.584 0-7.168-1.536-9.728-4.096s-3.584-6.144-3.584-9.728z m0 68.096c0-7.68 6.144-13.824 13.824-13.824H409.6c7.68 0 13.824 6.144 13.824 13.824 0 7.68-6.144 13.824-13.824 13.824H313.856c-3.584 0-7.168-1.536-9.728-4.096s-3.584-6.144-3.584-9.728zM40.96 436.736c-14.848 0-28.16-7.68-35.328-20.48-7.168-12.8-7.168-28.16 0-40.96s20.992-20.48 35.328-20.48c22.528 0 40.96 18.432 40.96 40.96s-18.432 40.96-40.96 40.96z m0-20.48c7.168 0 13.824-4.096 17.92-10.24 3.584-6.144 3.584-14.336 0-20.48-3.584-6.144-10.24-10.24-17.92-10.24-11.264 0-20.48 9.216-20.48 20.48s9.216 20.48 20.48 20.48z m846.336-61.44c-14.848 0-28.16-7.68-35.328-20.48-7.168-12.8-7.168-28.16 0-40.96s20.992-20.48 35.328-20.48c22.528 0 40.96 18.432 40.96 40.96s-17.92 40.96-40.96 40.96z m0-20.48c7.168 0 14.336-4.096 17.92-10.24 3.584-6.144 3.584-14.336 0-20.48-3.584-6.144-10.24-10.24-17.92-10.24-11.264 0-20.48 9.216-20.48 20.48s9.216 20.48 20.48 20.48z m0 0" fill="#CDCDCD" p-id="84372"></path></svg>
+      {{$t("message.tip.self_txt13")}}
+    </div>
     <div class="video_proup" v-if="videoStatus">
       <video class="video_" :src="videoSrc" loop autoplay muted controls></video>
       <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click="closeProup"/>
@@ -76,103 +75,175 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { sn } from "sealemlab-sdk";
 export default {
-  props: {
-    resultStatus: {
-      type: Boolean,
-      default: false
-    },
-    boxarr: {
-      type: Array,
-      default: function () { return [] }
-    }
+  // props: {
+  //   boxarr: {
+  //     type: Array,
+  //     default: function () { return [] }
+  //   }
+  // },
+  computed: {
+    ...mapGetters(["getAccount","getIstrue","getAccountStatus","isEnLang"])
   },
   data(){
     return{
+      isOneLoading:false,//第一次是否加载
+      loadMoreStatus:true,
+      busy: false, // 为true则第一次不执行loadmore
+      nftArr:[],
       videoStatus:false,
-      videoSrc:'',
+      videoSrc:''
     }
   },
-  watch:{
-    'resultStatus': {
+  watch: {
+    'videoStatus'(newvala){
+      if(newvala){
+        document.body.style.overflow='hidden'
+      }else{
+        document.body.style.overflow='visible'
+      }
+    },
+    'getAccountStatus': {
       handler: function (newValue) {
-        if(newValue){
-          document.body.style.overflow='hidden'
-        console.log('boxarr: ', this.boxarr);
-        }else{
-          document.body.style.overflow='visible'
+        if(newValue == -1 || newValue == undefined){
+          console.log("还未连接钱包 ||  已退出钱包")
+          this.isOneLoading = false
+          this.loadMoreStatus = true
+          this.busy =  false
+          this.nftArr = []
+        }else if(newValue == 0){
+          console.log("已连接钱包")
+          this.getAllUserNftInfo(res => {
+            console.log('回调函数--用户拥有的总装备数:res: ', res);
+            if(res == 0){
+              this.nftArr = []
+              this.isOneLoading = false
+              this.loadMoreStatus = false
+              return
+            }
+            let arr = JSON.parse(localStorage.getItem('nftInfo'))
+            if(!arr ){
+              console.log("缓存不存在情况")
+              this.getUtilsFun()
+              return
+            }
+            if(arr.length < res){
+              console.log("缓存小于用户数据--此时获取的缓存数据的长度:",arr.length)
+              this.getUtilsFun()
+            }else{
+              console.log("缓存数据等于用户数据")
+              this.nftArr = JSON.parse(localStorage.getItem('nftInfo'))
+              this.isOneLoading = false
+              this.loadMoreStatus = false
+            }
+          })
+        }else if(newValue > 0){
+          console.log("切换账号")
+          localStorage.removeItem('nftInfo')
+          this.nftArr = []
+          this.loadMoreStatus = true
+          this.isOneLoading = false
+          this.busy = false
+          this.$utils.antiShakeFun(() => {
+            this.getAllUserNftInfo(res => {
+              console.log('回调函数--用户拥有的总装备数:res: ', res);
+              if(res == 0){
+                this.nftArr = []
+                this.isOneLoading = false
+                this.loadMoreStatus = false
+                return
+              }
+              let arr = JSON.parse(localStorage.getItem('nftInfo'))
+              if(!arr ){
+                console.log("缓存不存在情况")
+                this.getUtilsFun()
+                return
+              }
+              if(arr.length < res){
+                console.log("缓存小于用户数据--此时获取的缓存数据的长度:",arr.length)
+                this.getUtilsFun()
+              }else{
+                console.log("缓存数据等于用户数据")
+                this.nftArr = JSON.parse(localStorage.getItem('nftInfo'))
+                this.isOneLoading = false
+                this.loadMoreStatus = false
+              }
+            })
+          },3000)
         }
       },
       deep: true,
       immediate: true,
-    }
+    },
   },
-  computed: {
-    ...mapGetters(["isEnLang"])
-  },
-  methods: {
+  methods:{
+    loadMore() {
+      this.busy = true;
+      if(this.loadMoreStatus && this.isOneLoading) {
+        // console.log("loadmore加载更多")
+        this.getUtilsFun(this.nftArr.length)
+      }
+    },
     nftFun(item){
+      console.log('装备信息item: ', item);
       this.videoStatus = true
       this.videoSrc = item.videoSrc
     },
-    // 弹窗关闭
-    closepage () {
-      this.$emit('closepage')
-    },
-    winbtnsure () {
-      this.$emit('winbtnsure')
+    getAllUserNftInfo(calback){
+      sn().tokensOfOwnerBySize(this.getAccount, 0, 100000000).then(res => {
+        // console.log('用户拥有的所有装备数量res: ', Number(res[1]));
+        // this.userAllNft = res[1]
+        calback(Number(res[1]))
+      })
     },
     closeProup(){
       this.videoStatus = false
+    },
+    getUtilsFun(size = 0){
+      this.$utils.getUserBindbox(this.getAccount,size).then(res => {
+        console.log('此次加载数据的页数:%s使用公共方法获取到的数据:res: ',size,res);
+        if(res.length > 0){
+          this.loadMoreStatus = true
+          this.isOneLoading = true
+          this.busy = false
+          this.nftArr = this.nftArr.concat(res)
+          localStorage.setItem('nftInfo',JSON.stringify(this.nftArr))
+        }else{
+          this.loadMoreStatus = false
+          this.isOneLoading = false
+          this.busy = true
+        }
+      })
     }
   }
-}
+};
 </script>
 
-<style lang='scss' scoped>
-.record_page {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99999999;
+<style lang="scss" scoped>
+.nft_arr_page {
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px);
+  min-height:100%;
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  animation: fadein 3s linear 1;
-  .title {
-    margin-top: 50px;
+  .box{
     width: 100%;
-    text-align: center;
-    color: #CED3D9;
-  }
-  .close_img {
-    position: absolute;
-    top: 40px;
-    right: 100px;
-    width: 44px;
-    object-fit: contain;
-    cursor: pointer;
-  }
-  .boxarr {
-    width: 100%;
-    padding: 0 5vw;
-    margin-top: 80px;
+    max-height: 630px;
+    overflow: auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
-    padding-bottom: 132px;
+    align-items: center;
+    padding-bottom: 20px;
     .out_box_one{
       width: 20%;
-      padding: 10px;
+      padding: 10px 5px;
       .onebox {
         position: relative;
         cursor: pointer;
-        width: 204px;
+        width: 100%;
         height: 292px;
         display: flex;
         flex-direction: column;
@@ -269,77 +340,38 @@ export default {
       }
     }
   }
-  .Suspension_btnbox {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translate(-50%);
-    width: 637px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(
-      180deg,
-      #06366d 0%,
-      rgba(7, 31, 58, 0) 100%,
-      #034088 100%
-    );
-    border-radius: 79px;
-    padding-top: 24px;
-    .bottom_title {
-      color: #CED3D9;
-    }
-    .btn_box {
-      width: 274px;
-      height: 59px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-image: url("//cdn.hashland.com/images/SpeciaBtn2.png");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      color: #CED3D9;
-      cursor: pointer;
-      margin-top: 14px;
-    }
-  }
+}
+.bottom_loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #CED3D9;
 }
 @media screen and (max-width: 980px) {
-  .record_page {
-    .title {
-      margin-top: 1rem;
+  .nft_arr_page {
+    .box{
       width: 100%;
-      text-align: center;
-      color: #CED3D9;
-    }
-    .close_img {
-      position: absolute;
-      top: 0.3rem;
-      right: 0.2rem;
-      width: 0.36rem;
-      object-fit: contain;
-    }
-    .boxarr {
-      width: 100%;
-      padding: 0 0.2rem;
+      max-height: 6.3rem;
+      overflow: auto;
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-wrap: wrap;
-      overflow-y: auto;
-      margin: 0.3rem;
+      align-items: center;
+      padding-bottom: 0.2rem;
       .out_box_one{
         width: 50%;
-        padding: 0.05rem;
+        padding: 0.1rem 0.05rem;
         .onebox {
           position: relative;
+          cursor: pointer;
           width: 100%;
-          min-height: 2.5rem;
+          height: 2.92rem;
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-right: 0.05rem;
-          margin-bottom: 0.16rem;
+          margin-bottom: 0.2rem;
+          background: url($bg_url + 'nftbg6.webp') no-repeat;
+          background-size: contain;
           .out_img{
             width: 100%;
             display: flex;
@@ -350,6 +382,13 @@ export default {
             }
           }
           .huxing_bg_box{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            .huxing_img{
+              width: 100%;
+            }
             .huxing_content{
               position: absolute;
               top: 0;
@@ -361,7 +400,7 @@ export default {
               padding: 0.29rem 0.08rem 0.1rem;
               .start{
                 position: absolute;
-                top: 0.29rem;
+                top: 0.27rem;
                 width: 100%;
                 display: flex;
                 justify-content: center;
@@ -370,7 +409,7 @@ export default {
                 .span1{
                   font-weight: 800;
                   color: #EFB045;
-                  line-height: 0.26rem;
+                  line-height: 0.29rem;
                   margin-right: 0.05rem;
                 }
                 img{
@@ -424,49 +463,10 @@ export default {
         }
       }
     }
-    // .Suspension_btnbox {
-    //   position: absolute;
-    //   bottom: 0.15rem;
-    //   left: 50%;
-    //   transform: translate(-50%);
-    //   width: 80%;
-    //   display: flex;
-    //   flex-direction: column;
-    //   align-items: center;
-    //   background: linear-gradient(
-    //     180deg,
-    //     #06366d 0%,
-    //     rgba(7, 31, 58, 0) 100%,
-    //     #034088 100%
-    //   );
-    //   border-radius: 0.79rme;
-    //   padding-top: 0.12rem;
-    //   .bottom_title {
-    //     color: #CED3D9;
-    //     transform: scale(0.8);
-    //   }
-    //   .btn_box {
-    //     width: 1.67rem;
-    //     height: 0.39rem;
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     background-image: url("//cdn.hashland.com/images/SpeciaBtn2.png");
-    //     background-size: 100% 100%;
-    //     background-repeat: no-repeat;
-    //     color: #CED3D9;
-    //     cursor: pointer;
-    //     margin-top: 0.06rem;
-    //   }
-    // }
   }
 }
-@keyframes fadein {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 </style>

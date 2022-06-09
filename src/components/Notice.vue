@@ -31,7 +31,7 @@ export default {
   backface-visibility: hidden; // 动画抖动
   perspective: 1000; // 动画抖动
   .content {
-    min-width: 200px;
+    min-width: 150px;
     text-align: center;
     border-radius: 5px;
     padding: 10px;

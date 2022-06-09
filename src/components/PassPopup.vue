@@ -1,8 +1,8 @@
 <template>
-  <div class="pass_Popup_page">
+  <div class="pass_Popup_page" :class="isEnLang ? 'en_Bold' : ''">
     <div class="Popup_boxs">
       <template v-if="isShowVerifyCode">
-        <p class="propu_title_txt font24">{{ $t("message.signin.txt35") }}</p>
+        <p class="propu_title_txt">{{ $t("message.signin.txt35") }}</p>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt22") }}</p>
           <div class="inputbox">
@@ -56,7 +56,7 @@
         </div>
       </template>
       <template v-else>
-        <p class="propu_title_txt font24">{{ $t("message.signin.txt34") }}</p>
+        <p class="propu_title_txt">{{ $t("message.signin.txt34") }}</p>
         <div class="user_inputbox">
           <p class="font16 email_txt">{{ $t("message.account.txt26") }}</p>
           <div class="inputbox">
@@ -98,7 +98,7 @@
           <BtnLoading :isloading="submitloading"></BtnLoading>
         </div>
       </template>
-      <img :src="`${$store.state.imgUrl}passclose.webp`" class="close_img" @click.stop="closePassPopup" />
+      <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click.stop="closePassPopup" />
     </div>
   </div>
 </template>
@@ -187,7 +187,6 @@ export default {
       }
     },
     handleSubmit1() {
-      console.log("Retrieve passwords");
       if (this.submitloading) return;
       if (!this.forgetPassForm.mailAccount) return (this.forgetPassForm.prompt1 = "message.signin.txt30"); // 填写邮箱
       if (!mailReg.test(this.forgetPassForm.mailAccount)) return (this.forgetPassForm.prompt1 = "message.signin.txt31"); // 邮箱不合法
@@ -220,7 +219,6 @@ export default {
         });
     },
     handleSubmit2() {
-      console.log("Change passwords");
       if (this.submitloading) return;
       if (!this.changePassForm.oldPass) return (this.changePassForm.prompt1 = "message.signin.txt33"); // 填写密码
       if (!pwReg.test(this.changePassForm.oldPass)) return (this.changePassForm.prompt1 = "message.signin.txt37"); // 6-16位数字英文组合
@@ -306,101 +304,123 @@ export default {
   left: 0;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(6px);
-  z-index: 9;
+  z-index: 99;
   display: flex;
   align-items: center;
   justify-content: center;
-  .Popup_boxs {
+}
+.Popup_boxs {
+  position: relative;
+  width: 40vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 35px 50px;
+  background: #101010;
+  border: 2px solid #242222;
+  .propu_title_txt {
+    font-weight: 600;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  .user_inputbox {
+    width: 100%;
+    height: 100px;
     position: relative;
-    width: 40vw;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 35px 50px;
-    background: #101010;
-    border: 2px solid #242222;
-    .propu_title_txt {
+    padding: 10px 0 10px 0;
+    .email_txt {
       font-weight: 600;
-      color: #ffffff;
-      line-height: 33px;
-      margin-bottom: 20px;
+      line-height: 22px;
+      margin-bottom: 10px;
+    }
+    .inputbox {
+      width: 100%;
+      height: 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      .eye {
+        position: absolute;
+        right: 0;
+      }
+      input {
+        width: 100%;
+        height: 100%;
+        background: #171718;
+        box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+        border-radius: 8px;
+        border: 1px solid #373636;
+        color: #ced3d9;
+        padding: 0 15px;
+      }
+      .verification {
+        cursor: pointer;
+        min-width: fit-content;
+        padding: 0 10px;
+        height: 100%;
+        color: #000000;
+        font-weight: 600;
+        background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+      }
+    }
+    .input_prompt {
+      width: 100%;
+      color: #fb3e3e;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+  .btn {
+    width: fit-content;
+    height: 50px;
+    padding: 0 80px;
+    background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+    border-radius: 4px;
+    backdrop-filter: blur(14px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: #000000;
+    cursor: pointer;
+  }
+  .close_img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 44px;
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 980px) {
+  .Popup_boxs {
+    width: 80vw;
+    padding: 20px;
+    .propu_title_txt {
+      font-size: 0.2rem;
     }
     .user_inputbox {
       width: 100%;
-      height: 100px;
-      position: relative;
-      padding: 10px 0 10px 0;
+      height: 0.8rem;
+      padding: 0.05rem 0 0.05rem 0;
       .email_txt {
-        font-weight: 600;
-        color: #ffffff;
-        line-height: 22px;
-        margin-bottom: 10px;
+        margin-bottom: 0.05rem;
       }
       .inputbox {
         width: 100%;
-        height: 35px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        .eye {
-          position: absolute;
-          right: 0;
-        }
-        input {
-          width: 100%;
-          height: 100%;
-          background: #171718;
-          box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
-          border-radius: 8px;
-          border: 1px solid #373636;
-          color: #ffffff;
-          padding: 0 15px;
-        }
-        .verification {
-          cursor: pointer;
-          min-width: fit-content;
-          padding: 0 10px;
-          height: 100%;
-          color: #000000;
-          font-weight: 600;
-          background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-left: 10px;
-        }
+        height: 0.35rem;
       }
-      .input_prompt {
-        width: 100%;
-        color: #fb3e3e;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-      }
-    }
-    .btn {
-      width: fit-content;
-      height: 50px;
-      padding: 0 80px;
-      background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-      border-radius: 4px;
-      backdrop-filter: blur(14px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: 600;
-      color: #000000;
-      cursor: pointer;
     }
     .close_img {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 44px;
-      cursor: pointer;
+      width: 0.35rem;
     }
   }
 }

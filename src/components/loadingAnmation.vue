@@ -17,7 +17,8 @@ export default {
 <style lang="scss" scoped>
 .loading_page {
   width:100%;
-  min-height: 400px;
+  height: 100%;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,25 +35,30 @@ export default {
   .loading_margin {
     margin-top: 60px;
     font-weight: normal;
-    color: #ffffff;
+    color: #CED3D9;
     line-height: 34px;
   }
 }
 @keyframes loadingA {
   0% {
-    box-shadow: -3em 2em 0 0.5em #fff, 0 2em 0 0 #fff, 3em 2em 0 -0.5em #fff;
+    box-shadow: -3em 2em 0 0.5em #CED3D9, 0 2em 0 0 #CED3D9, 3em 2em 0 -0.5em #CED3D9;
   }
   25% {
-    box-shadow: -3em 2em 0 0 #fff, 0 2em 0 -0.5em #fff, 3em 2em 0 0 #fff;
+    box-shadow: -3em 2em 0 0 #CED3D9, 0 2em 0 -0.5em #CED3D9, 3em 2em 0 0 #CED3D9;
   }
   50% {
-    box-shadow: -3em 2em 0 -0.5em #fff, 0 2em 0 0 #fff, 3em 2em 0 0.5em #fff;
+    box-shadow: -3em 2em 0 -0.5em #CED3D9, 0 2em 0 0 #CED3D9, 3em 2em 0 0.5em #CED3D9;
   }
   75% {
-    box-shadow: -3em 2em 0 0 #fff, 0 2em 0 0.5em #fff, 3em 2em 0 0 #fff;
+    box-shadow: -3em 2em 0 0 #CED3D9, 0 2em 0 0.5em #CED3D9, 3em 2em 0 0 #CED3D9;
   }
   100% {
-    box-shadow: -3em 2em 0 0.5em #fff, 0 2em 0 0 #fff, 3em 2em 0 -0.5em #fff;
+    box-shadow: -3em 2em 0 0.5em #CED3D9, 0 2em 0 0 #CED3D9, 3em 2em 0 -0.5em #CED3D9;
+  }
+}
+@media screen and (max-width: 980px) {
+  .loading_page {
+    min-height: 0.5rem;
   }
 }
 </style>

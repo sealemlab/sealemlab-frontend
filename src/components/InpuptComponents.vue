@@ -1,31 +1,25 @@
 <template>
   <input
     :type="type"
-    v-model="msg"
-    class="input font16"
+    :value="modelValue"
+    class="input font16 mobile_font12"
     :style="{ color: fontColor,background:background}"
     :placeholder='placeholder'
+    :readonly="readonly"
     @blur="blurEvent"
     @focus="focusEvent"
+    @input="inpChange"
   />
 </template>
 <script>
 export default {
-  data(){
-    return {
-      msg:''
-    }
-  },
-  watch:{
-    msg(nval,oval){
-      if(nval != oval){
-        this.$emit('input',nval)
-      }
-    }
-  },
   props: {
+    modelValue:{
+      type: [String, Number],
+      default:''
+    },
     type:{
-      type: String,
+      type: [String, Number],
       default: 'text'
     },
     placeholder:{
@@ -34,12 +28,16 @@ export default {
     },
     fontColor:{
       type: String,
-      default: '#ffffff'
+      default: '#CED3D9'
     },
     background:{
       type: String,
       default: 'transparent'
     },
+    readonly:{
+      type:Boolean,
+      default:false
+    }
   },
   methods:{
     focusEvent(){
@@ -47,7 +45,10 @@ export default {
     },
     blurEvent(){
       this.$emit('blurEvent')
-    }
+    },
+    inpChange(e) {
+      this.$emit("input", e.target.value);
+    },
   }
 }
 </script>

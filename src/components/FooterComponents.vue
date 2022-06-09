@@ -2,7 +2,7 @@
   <!-- 底部 -->
   <div class="footer_box display_flex">
     <div class="footer_content display_flex">
-      <img :src="`${$store.state.imgUrl}logo.webp`" class="footer_logo" />
+      <img :src="`${$store.state.imgUrl}new_logo.webp`" class="footer_logo" />
       <div class="onebox display_flex">
         <ul v-for="(ele, index) in footerArr" :key="index">
           <li class="font14 en_Regular" v-for="(item, index1) in ele.children" :key="index1">
@@ -65,14 +65,6 @@ export default {
           ]
         },
         {
-          id:3,
-          children:[
-            {title:"message.footer.txt11"},
-            {title:"message.footer.txt12",link:'https://github.com/sealemlab'},
-            {title:"message.footer.txt13",link:''}
-          ]
-        },
-        {
           id:4,
           children:[
             {title:"message.footer.txt14",link:''},
@@ -82,7 +74,16 @@ export default {
             {title:"message.footer.txt18",link:''},
             {title:"message.footer.txt19",link:''}
           ]
-        }
+        },
+        {
+          id:3,
+          children:[
+            {title:"message.footer.txt11"},
+            {title:"message.footer.txt12",link:'https://github.com/sealemlab'},
+            {title:"message.footer.txt13",link:'https://www.certik.com/projects/sealem'}
+          ]
+        },
+        
       ]
     }
   }
@@ -90,26 +91,24 @@ export default {
 </script>
 <style lang="scss" scoped>
 .footer_box {
-  margin-top: 50px;
+  // margin-top: 50px;
   padding-top: 60px;
   width: 100%;
   flex-direction: column;
   align-items: center;
-  background: url($bg_url + 'footerbg.webp') no-repeat #000;
+  background: url($bg_url + 'new_footerbg.webp') no-repeat #000;
   background-size: 100% 100%;
   .footer_img {
     width: 100%;
-    
   }
   .footer_content {
     width: 100%;
     align-items: center;
     justify-content: space-around;
     margin: 20px 0;
-    padding: 0 49.5px;
+    padding: 0 5vw;
     .footer_logo {
-      width: 185px;
-      
+      width: 88px;
     }
     .onebox {
       width: inherit;
@@ -119,11 +118,12 @@ export default {
           margin: 14px 0;
           cursor: pointer;
           letter-spacing: 0.52px;
+          color: #DBDADA;
           &:nth-child(1) {
             font-size: 18px;
             font-family: TrajanPro-Bold, TrajanPro;
             font-weight: bold;
-            color: #ffffff;
+            color: #CED3D9;
             line-height: 23px;
             background: linear-gradient(
               180deg,
@@ -152,29 +152,32 @@ export default {
 }
 @media screen and (max-width: 980px) {
   .footer_box {
-    margin-top: 0.5rem;
+    // margin-top: 0.5rem;
     padding-top: 0;
     width: 100%;
     flex-direction: column;
     align-items: center;
-    background: url($bg_url + "footerbg.webp") no-repeat #000;
+    background: url($bg_url + "new_footerbg.webp") no-repeat #000;
     background-size: 100% 100%;
     .footer_img {
-      width: 100%;
+      display: none;
     }
     .footer_content {
       width: 100%;
-      align-items: center;
-      justify-content: space-around;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
       margin: 0.2rem 0;
       padding: 0 0.2rem;
       .footer_logo {
-        width: 0.48rem;
+        display: none;
       }
       .onebox {
         width: inherit;
-        justify-content: space-around;
+        justify-content: space-between;
+        flex-wrap: wrap;
         ul {
+          width: 50%;
           li {
             margin: 14px 0;
             letter-spacing: 0.52px;
@@ -182,7 +185,7 @@ export default {
               font-size: 18px;
               font-family: TrajanPro-Bold, TrajanPro;
               font-weight: bold;
-              color: #ffffff;
+              color: #CED3D9;
               line-height: 23px;
               background: linear-gradient(
                 180deg,

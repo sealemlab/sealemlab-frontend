@@ -57,11 +57,24 @@ export default new Vuex.Store({
     ProgressInfo: {
       value: 1,
       title: "",
+      speed:100
     }, // 给进度条传值
     noticeNum: false, // 轻提示弹窗只弹一次
     BSC_BROWSER: process.env.NODE_ENV === "production" ? "https://www.bscscan.com/tx/" : "https://testnet.bscscan.com/tx/",
+    mobileInfo:{
+      direction:'top',//默认上滑(true)
+    },
+    userCoin:{st: 0, sr: 0, busd: 0, stPrice: "0.00",stlpPrice:"0.00"},//用户各种币的余额
   },
   getters: {
+    // 获取用户的币的余额
+    getUserCoin(state){
+      return state.userCoin;
+    },
+    // 获取移动端当前滑动方向
+    getmobileInfo(state) {
+      return state.mobileInfo;
+    },
     // 获取开盲盒弹窗信息
     getPrizeInfo(state) {
       return state.prizeInfo;
@@ -117,6 +130,14 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    // 设置用户的币的余额
+    setUserCoin(state,data){
+      state.userCoin = data;
+    },
+    // 设置移动端上滑下滑
+    setMoblieTouch(state, data){
+      state.mobileInfo = JSON.parse(data);
+    },
     // 设置开盲盒弹窗信息
     setPrizeInfo(state, data) {
       state.prizeInfo = JSON.parse(data);
@@ -127,7 +148,7 @@ export default new Vuex.Store({
     },
     // 设置进度条的值
     setProgressInfo(state, data) {
-      state.ProgressInfo = JSON.parse(data);
+      state.ProgressInfo = Object.assign(state.ProgressInfo,JSON.parse(data));
     },
     // 轻提示状态
     setNoticeStatus(state, data) {
@@ -173,6 +194,7 @@ export default new Vuex.Store({
         return {
           // 只储存state中的MenuActive
           userInfo: val.userInfo,
+          userCoin: val.userCoin
         };
       },
     }),

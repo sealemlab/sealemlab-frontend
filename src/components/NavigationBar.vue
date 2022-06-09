@@ -1,9 +1,9 @@
 <template>
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
-      <img class="logo" :src="`${$store.state.imgUrl}logo.webp`" alt="" @click="toRoute('/home')" />
-      <ul :class="getIsMobile?'disply_none':''">
-        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link,index)">
+      <img class="logo" :src="`${$store.state.imgUrl}new_logo.webp`" alt="" @click="toRoute('/home')" />
+      <ul class="mobile_none">
+        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link, index)">
           <span class="font18">{{ $t(item.label) }}</span>
         </li>
       </ul>
@@ -11,16 +11,16 @@
     <div class="nav_right">
       <div class="st_price">
         <img :src="`${$store.state.imgUrl}stlogo.webp`" class="st_price_img" />
-        <span class="font_price font16">$ 0.00</span>
+        <span class="font_price font16">$ {{getUserCoin.stPrice | PriceConversion(4)}}</span>
       </div>
       <div class="login_box">
-        <!-- <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
+        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
           {{ $t("message.nav.txt8") }}
         </div>
         <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
           <span @click="loginClick('register')">{{ $t("message.nav.txt8_1") }}</span> /
           <span @click="loginClick('login')">{{ $t("message.nav.txt8_2") }}</span>
-        </div> -->
+        </div>
       </div>
       <!-- 链接钱包 -->
       <div class="walletBox font16" v-if="getIstrue">
@@ -40,7 +40,7 @@
       <div class="walletBox font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div>
       <!-- <div class="connect font16" v-if="getIstrue">{{getSubtringAccount}}</div>
       <div class="connect font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div> -->
-      <div class="lang_box" :class="getIsMobile ? 'disply_none' : ''">
+      <div class="lang_box mobile_lang">
         <!--  @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false" -->
         <span>{{ language }}</span>
         <!-- <img :src="`${$store.state.imgUrl}accrow.webp`" alt="" />
@@ -66,7 +66,7 @@ export default {
         // { label: "message.nav.txt2", link: "" },
         { label: "message.nav.txt3", link: "/nft" },
         { label: "message.nav.txt4", link: "" },
-        { label: "message.nav.txt5", link: "" },
+        { label: "message.nav.txt5", link: "/game/game" },
         // { label: "message.nav.txt6", link: "" },
         { label: "message.nav.txt6", link: "/user/assets/0" },
         // { label: "message.nav.txt7", link: "" }
@@ -76,7 +76,7 @@ export default {
       langArr: ["EN", "ZH"],
     };
   },
-  computed: { ...mapGetters(["getNoticeNum", "isEnLang", "getLogin", "getIsMobile", "getSubtringAccount", "getIstrue"]) },
+  computed: { ...mapGetters(["getNoticeNum", "isEnLang", "getLogin","getUserCoin","getSubtringAccount", "getIstrue"]) },
   watch: {
     $route(to, from) {
       window.scrollTo(0, 0);
@@ -87,17 +87,22 @@ export default {
         this.navActive = -1;
       } else if (to.path == "/bond") {
         this.navActive = 0;
-      } else if (to.path.indexOf("/nft/") !== -1) {
+      }else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
+      }
+      // else if (to.path.indexOf("/market/") !== -1) {
+      //   this.navActive = 2;
+      // }
+      else if (to.path.indexOf("/game/") !== -1) {
+        this.navActive = 3;
+      } else if (to.path.indexOf("/user/") !== -1) {
+        this.navActive = 4;
       } else if (to.path.indexOf("/signin/") !== -1 || to.path.indexOf("/myaccount/") !== -1) {
         this.navActive = 7;
-      }else if (to.path.indexOf("/user/") !== -1) {
-        this.navActive = 4;
-      }
-      else{
-        if(!this.getNoticeNum){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-          this.$store.commit("setNoticeNum",true)
+      } else {
+        if (!this.getNoticeNum) {
+          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+          this.$store.commit("setNoticeNum", true);
         }
       }
     },
@@ -116,14 +121,14 @@ export default {
       localStorage.removeItem("walletType");
       this.$store.commit("setnewinfo", JSON.stringify({}));
     },
-    toRoute(link,index) {
-      if (link){
-        if(process.env.NODE_ENV === 'production' && index == 4){
-          if(!this.getNoticeNum){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.txt5'}));
-            this.$store.commit("setNoticeNum",true)
+    toRoute(link, index) {
+      if (link) {
+        if (process.env.NODE_ENV === "production" && index == 4) {
+          if (!this.getNoticeNum) {
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+            this.$store.commit("setNoticeNum", true);
           }
-          return
+          return;
         }
         this.$router.push(link);
       } else {
@@ -182,7 +187,7 @@ export default {
   align-items: center;
   .logo {
     width: auto;
-    height: 62px;
+    height: 63px;
     margin-right: 14px;
     cursor: pointer;
   }
@@ -193,18 +198,22 @@ export default {
       cursor: pointer;
       padding: 10px 14px;
       font-weight: bold;
-      color: #fff;
+      color: #CED3D9;
+      &:hover{
+        color: #EDD083;
+      }
     }
   }
 }
 .active {
-  background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  // background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
   span {
-    background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #EDD083;
+    // background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
+    // -webkit-background-clip: text;
+    // -webkit-text-fill-color: transparent;
   }
 }
 .nav_right {
@@ -248,14 +257,14 @@ export default {
       justify-content: space-between;
       align-items: center;
       .span2 {
-        color: #ffffff;
+        color: #CED3D9;
         font-weight: bold;
       }
       .connect_icon {
         border-width: 5px;
         margin-left: 5px;
         margin-top: 5px;
-        border-color: #ffffff;
+        border-color: #CED3D9;
         border-style: dashed;
         border-top-style: solid;
         border-left-color: transparent;
@@ -272,7 +281,7 @@ export default {
       .connect_icon {
         margin-top: -5px;
         border-top-color: transparent;
-        border-bottom-color: #ffffff;
+        border-bottom-color: #CED3D9;
         border-bottom-style: solid;
       }
     }
@@ -298,10 +307,10 @@ export default {
           justify-content: space-between;
           cursor: pointer;
           .span_exit {
-            color: #fff;
+            color: #CED3D9;
           }
           .span_exit:hover {
-            color: #fadd82;
+            color: #EDD083;
           }
           .exit_class {
             width: 18px;
@@ -347,7 +356,7 @@ export default {
           font-family: WenYue-GuDianMingChaoTi-JRFC;
         }
         &:hover {
-          color: #fff;
+          color: #CED3D9;
         }
       }
     }
@@ -372,7 +381,10 @@ export default {
     .logo {
       width: auto;
       height: 0.3rem;
-      margin-right: 0.2rem;
+      margin-right: 0;
+    }
+    .mobile_none {
+      display: none;
     }
   }
   .nav_right {
@@ -387,7 +399,7 @@ export default {
       }
     }
     .login_box {
-      margin: 0 0.3rem 0;
+      margin: 0 0.1rem;
       .font_login {
         font-weight: bold;
         line-height: 0.14rem;
@@ -397,8 +409,41 @@ export default {
       cursor: pointer;
       padding: 0.05rem 0.15rem;
       border-radius: 0.08rem;
-      margin-right: 0.1rem;
+      margin-right: 0;
       line-height: 0.12rem;
+    }
+    .walletBox {
+      position: relative;
+      cursor: pointer;
+      background: #232229;
+      border: 1px solid #4f4e53;
+      border-radius: 0.08rem;
+      margin-right: 0;
+      padding: 0.05rem 0.1rem;
+      .connect_triangle {
+        width: fit-content;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .span2 {
+          color: #CED3D9;
+          font-weight: bold;
+        }
+        .connect_icon {
+          border-width: 5px;
+          margin-left: 5px;
+          margin-top: 5px;
+          border-color: #CED3D9;
+          border-style: dashed;
+          border-top-style: solid;
+          border-left-color: transparent;
+          border-right-color: transparent;
+          border-bottom-color: transparent;
+        }
+      }
+    }
+    .mobile_lang {
+      display: none;
     }
   }
 }

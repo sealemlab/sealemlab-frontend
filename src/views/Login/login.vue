@@ -1,61 +1,52 @@
 <template>
-  <div class="register_page">
-    <span class="font30 establish_txt mobile_font16">{{ $t("message.signin.txt24") }}</span>
-    <span class="font26 subtitle_txt">{{ $t("message.signin.txt25") }}</span>
-    <div class="content">
-      <div class="left_content">
-        <div class="onebox" v-for="(item, index) in list" :key="index">
-          <div class="imgbox_"><img :src="item.src" /></div>
-          <div class="right_txt">
-            <span class="font22 mobile_font14">{{ $t(item.title) }}</span>
-            <span class="font16">{{ $t(item.explain) }}</span>
-          </div>
-        </div>
+  <div class="register_page font24 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">
+    <div class="user_inputbox">
+      <p class="email_txt" :class="isEnLang ? 'en_Bold' : ''">
+        {{ $t("message.signin.txt16") }}
+      </p>
+      <div class="inputbox">
+        <input type="text" v-model.trim="loginForm.mailAccount" />
       </div>
-      <div class="right_content">
-        <div class="user_inputbox">
-          <p class="font16 email_txt">{{ $t("message.signin.txt16") }}</p>
-          <div class="inputbox">
-            <input type="text" class="font16" v-model.trim="loginForm.mailAccount" />
-          </div>
-          <div class="input_prompt font12" v-if="loginForm.prompt1">
-            <span>* {{ $t(loginForm.prompt1) }}</span>
-          </div>
-        </div>
-        <div class="user_inputbox">
-          <p class="font16 email_txt">{{ $t("message.signin.txt17") }}</p>
-          <div class="inputbox">
-            <input :type="isShowPassword ? 'text' : 'password'" class="font16" v-model.trim="loginForm.password" />
-            <div class="eye">
-              <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
-            </div>
-          </div>
-          <div class="input_prompt font12" v-if="loginForm.prompt2">
-            <span>* {{ $t(loginForm.prompt2) }}</span>
-          </div>
-        </div>
-        <div class="remember_box">
-          <div class="_check" @click="rememberStatus = !rememberStatus">
-            <div class="checkbox"><span class="correct font22" v-show="rememberStatus"></span></div>
-            <span class="font16 account">{{ $t("message.signin.txt28") }}</span>
-          </div>
-          <span class="font16 forget" @click="toForgetPassword">{{ $t("message.signin.txt29") }}</span>
-        </div>
-        <div class="explain">
-          <div>
-            <img :src="`${$store.state.imgUrl}ques.webp`" class="ques_img" />
-            <span class="txt_ font16">{{ $t("message.signin.txt26") }}</span>
-          </div>
-        </div>
-        <div class="btn_box font18" @click="loginFun">
-          {{ $t("message.signin.txt23") }}
-          <BtnLoading :isloading="loginbtnloading"></BtnLoading>
-        </div>
-        <p class="font16 tip_txt" @click="toRegister">
-          {{ $t("message.signin.txt27") }}<span class="tip_login">{{ $t("message.signin.txt3") }}</span>
-        </p>
+      <div class="input_prompt font12" v-if="loginForm.prompt1">
+        <span>* {{ $t(loginForm.prompt1) }}</span>
       </div>
     </div>
+    <div class="user_inputbox">
+      <p class="email_txt" :class="isEnLang ? 'en_Bold' : ''">
+        {{ $t("message.signin.txt17") }}
+      </p>
+      <div class="inputbox">
+        <input :type="isShowPassword ? 'text' : 'password'" v-model.trim="loginForm.password" />
+        <div class="eye">
+          <div @click="isShowPassword = !isShowPassword" :class="{ active: isShowPassword }"></div>
+        </div>
+      </div>
+      <div class="input_prompt font12" v-if="loginForm.prompt2">
+        <span>* {{ $t(loginForm.prompt2) }}</span>
+      </div>
+    </div>
+    <div class="remember_box">
+      <div class="_check" @click="rememberStatus = !rememberStatus">
+        <div class="checkbox">
+          <span class="correct font22" v-show="rememberStatus"></span>
+        </div>
+        <span class="font16 account">{{ $t("message.signin.txt28") }}</span>
+      </div>
+      <span class="font16 forget" @click="toForgetPassword">{{ $t("message.signin.txt29") }}</span>
+    </div>
+    <div class="explain">
+      <div>
+        <img :src="`${$store.state.imgUrl}ques.webp`" class="ques_img" />
+        <span class="txt_ font16" :class="isEnLang ? 'en_medium' : ''">{{ $t("message.signin.txt26") }}</span>
+      </div>
+    </div>
+    <div class="btn_box font20" @click="loginFun">
+      {{ $t("message.signin.txt23") }}
+      <BtnLoading :isloading="loginbtnloading"></BtnLoading>
+    </div>
+    <p class="font16 tip_txt" :class="isEnLang ? 'en_medium' : ''" @click="toRegister">
+      {{ $t("message.signin.txt27") }}<span class="tip_login">{{ $t("message.signin.txt3") }}</span>
+    </p>
     <PassPopup v-if="isShowPassPopup" :isShowVerifyCode="isShowVerifyCode"></PassPopup>
   </div>
 </template>
@@ -66,41 +57,9 @@ import { mapGetters } from "vuex";
 import PassPopup from "../../components/PassPopup.vue";
 export default {
   components: { PassPopup },
-  computed: { ...mapGetters(["getLogin", "setLogin"]) },
+  computed: { ...mapGetters(["getLogin", "setLogin", "isEnLang"]) },
   data() {
     return {
-      list: [
-        {
-          src: `${this.$store.state.imgUrl}register1.webp`,
-          title: "message.signin.txt3",
-          explain: "message.signin.txt4",
-        },
-        {
-          src: `${this.$store.state.imgUrl}register2.webp`,
-          title: "message.signin.txt5",
-          explain: "message.signin.txt6",
-        },
-        {
-          src: `${this.$store.state.imgUrl}register3.webp`,
-          title: "message.signin.txt7",
-          explain: "message.signin.txt8",
-        },
-        {
-          src: `${this.$store.state.imgUrl}register4.webp`,
-          title: "message.signin.txt9",
-          explain: "message.signin.txt10",
-        },
-        {
-          src: `${this.$store.state.imgUrl}register5.webp`,
-          title: "message.signin.txt11",
-          explain: "message.signin.txt12",
-        },
-        {
-          src: `${this.$store.state.imgUrl}register6.webp`,
-          title: "message.signin.txt13",
-          explain: "message.signin.txt14",
-        },
-      ],
       loginForm: {
         mailAccount: "",
         password: "",
@@ -164,358 +123,250 @@ export default {
 <style lang="scss" scoped>
 .register_page {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .establish_txt {
-    font-weight: 600;
-    line-height: 42px;
-    margin-bottom: 26px;
-  }
-  .subtitle_txt {
-    font-weight: 400;
-    color: #ffffff;
-    line-height: 28px;
-  }
-  .content {
-    width: 90vw;
-    background: #101010;
-    border: 2px solid #242222;
-    margin: 0 auto;
-    margin-top: 73px;
-    display: flex;
-    .left_content {
-      flex: 1;
-      border-right: 2px solid #242222;
-      .onebox {
+  .user_inputbox {
+    width: 100%;
+    height: 100px;
+    position: relative;
+    padding: 10px 0 10px 0;
+    .email_txt {
+      font-weight: 600;
+
+      line-height: 22px;
+      margin-bottom: 15px;
+    }
+    .inputbox {
+      width: 100%;
+      height: 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      .eye {
+        position: absolute;
+        right: 0;
+      }
+      input {
         width: 100%;
-        height: 100px;
-        padding: 0 20px;
-        display: flex;
-        align-items: center;
-        border-bottom: 2px solid #242222;
-        &:last-child {
-          border-bottom: none;
-        }
-        .imgbox_ {
-          width: 70px;
-          min-width: 70px;
-          margin-right: 20px;
-          img {
-            width: 100%;
-          }
-        }
-        .right_txt {
-          display: flex;
-          flex-direction: column;
-          span {
-            &:nth-child(1) {
-              font-weight: 600;
-              color: #eccf83;
-              line-height: 30px;
-            }
-            &:nth-child(2) {
-              font-weight: 400;
-              color: #eccf83;
-              line-height: 22px;
-              margin-top: 8px;
-            }
-          }
-        }
+        height: 100%;
+        background: #171718;
+        box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+        border-radius: 8px;
+        border: 1px solid #373636;
+        color: #ced3d9;
+        padding: 0 15px;
       }
     }
-    .right_content {
-      flex: 1;
-      padding: 0 40px;
-      .user_inputbox {
-        width: 100%;
-        height: 100px;
-        position: relative;
-        padding: 10px 0 10px 0;
-        .email_txt {
-          font-weight: 600;
-          color: #ffffff;
-          line-height: 22px;
-          margin-bottom: 10px;
-        }
-        .inputbox {
-          width: 100%;
-          height: 35px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          position: relative;
-          .eye {
-            position: absolute;
-            right: 0;
-          }
-          input {
-            width: 100%;
-            height: 100%;
-            background: #171718;
-            box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
-            border-radius: 8px;
-            border: 1px solid #373636;
-            color: #ffffff;
-            padding: 0 15px;
-          }
-        }
-        .input_prompt {
-          width: 100%;
-          color: #fb3e3e;
-          position: absolute;
-          left: 0;
-          bottom: 0;
-        }
+    .input_prompt {
+      width: 100%;
+      color: #fb3e3e;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+  .remember_box {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    ._check {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      .account {
+        margin-left: 12px;
+        font-weight: 400;
+
+        line-height: 22px;
       }
-      .remember_box {
-        width: 100%;
-        height: 100px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        ._check {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-          .account {
-            margin-left: 12px;
-            font-weight: 400;
-            color: #ffffff;
-            line-height: 22px;
-          }
-          .checkbox {
-            width: 24px;
-            height: 24px;
-            background: #d8d8d8;
-            border-radius: 2px;
-            border: 1px solid #979797;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .correct:before {
-              content: "\2714";
-              color: #000;
-            }
-          }
-        }
-        .forget {
-          cursor: pointer;
-          font-weight: 400;
-          color: #eccf83;
-          line-height: 22px;
-        }
-      }
-      .explain {
-        width: 100%;
-        height: 100px;
-        display: flex;
-        align-items: center;
-        > div {
-          display: flex;
-          align-items: flex-start;
-        }
-        img {
-          width: 15px;
-          height: auto;
-          margin-right: 10px;
-        }
-        .txt_ {
-          font-weight: 400;
-          color: #ffffff;
-        }
-      }
-      .btn_box {
-        cursor: pointer;
-        width: 100%;
-        height: 50px;
-        background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-        border-radius: 4px;
+      .checkbox {
+        width: 24px;
+        height: 24px;
+        background: #d8d8d8;
+        border-radius: 2px;
+        border: 1px solid #979797;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-weight: 600;
-        color: #000000;
-      }
-      .tip_txt {
-        text-align: center;
-        cursor: pointer;
-        font-weight: 400;
-        color: #969090;
-        line-height: 17px;
-        margin-top: 20px;
-        .tip_login {
-          color: #eccf83;
-          margin: 0 5px;
+        .correct:before {
+          content: "\2714";
+          color: #000;
         }
       }
+    }
+    .forget {
+      cursor: pointer;
+      font-weight: 400;
+      color: #eccf83;
+      line-height: 22px;
+    }
+  }
+  .explain {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    > div {
+      display: flex;
+      align-items: flex-start;
+    }
+    img {
+      width: 15px;
+      height: auto;
+      margin-right: 10px;
+    }
+    .txt_ {
+      font-weight: 400;
+    }
+  }
+  .btn_box {
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: #000000;
+  }
+  .tip_txt {
+    text-align: center;
+    cursor: pointer;
+    font-weight: 400;
+    color: #969090;
+    line-height: 17px;
+    margin-top: 20px;
+    .tip_login {
+      color: #eccf83;
+      margin: 0 5px;
     }
   }
 }
 @media screen and (max-width: 980px) {
   .register_page {
-    .establish_txt {
-      font-weight: 600;
-      line-height: 0.2rem;
-      margin-bottom: 0.15rem;
-    }
-    .subtitle_txt {
-      font-weight: 400;
-      color: #ffffff;
-      line-height: 0.14rem;
-    }
-    .content {
-      width: 90vw;
-      background: #101010;
-
-      margin: 0 auto;
-      margin-top: 0.3rem;
-      display: flex;
-      flex-direction: column;
-      .left_content {
-        border-right: none;
-        flex: 1;
+    .user_inputbox {
+      width: 100%;
+      height: 1rem;
+      position: relative;
+      padding: 0.1rem 0 0.1rem 0;
+      .email_txt {
+        font-weight: 600;
+        line-height: 0.22rem;
+        margin-bottom: 0.1rem;
+      }
+      .inputbox {
+        width: 100%;
+        height: 0.35rem;
         display: flex;
-        flex-direction: column;
-        .onebox {
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        .eye {
+          position: absolute;
+          right: 0;
+        }
+        input {
           width: 100%;
-          padding: 0.18rem 0.1rem;
-          display: flex;
-          align-items: center;
-          &:last-child {
-            border-bottom: 2px solid #242222;
-          }
-          .imgbox_ {
-            width: 0.2rem;
-            margin-right: 0.15rem;
-            .img_ {
-              width: 100%;
-            }
-          }
-          .right_txt {
-            display: flex;
-            flex-direction: column;
-            .txt_1 {
-              font-weight: 600;
-              color: #eccf83;
-              line-height: 0.14rem;
-            }
-            .txt_2 {
-              font-weight: 400;
-              color: #eccf83;
-              line-height: 0.14rem;
-              margin-top: 0.08rem;
-            }
-          }
+          height: 100%;
+          background: #171718;
+          box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+          border-radius: 0.08rem;
+          border: 1px solid #373636;
+
+          padding: 0 0.15rem;
         }
       }
-      .right_content {
-        padding: 0.23rem 0.1rem;
+      .input_prompt {
+        width: 100%;
+        color: #fb3e3e;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+    }
+    .remember_box {
+      width: 100%;
+      height: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      ._check {
+        display: flex;
+        justify-content: center;
         align-items: center;
-        .user_inputbox {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          margin-bottom: 10px;
-          .email_txt {
-            font-weight: 600;
-            color: #ffffff;
-            line-height: 22px;
-          }
-          .input {
-            background: #171718;
-            box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
-            border-radius: 8px;
-            border: 1px solid #373636;
-            height: 46px;
-            color: #ffffff;
-            margin-top: 15px;
-            padding: 0 15px;
-          }
+        cursor: pointer;
+        .account {
+          margin-left: 0.12rem;
+          font-weight: 400;
+
+          line-height: 0.22rem;
         }
-        .remember_box {
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          cursor: pointer;
-          ._check {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .account {
-              margin-left: 13px;
-              font-weight: 400;
-              color: #ffffff;
-              line-height: 22px;
-            }
-            .checkbox {
-              width: 24px;
-              height: 24px;
-              background: #d8d8d8;
-              border-radius: 2px;
-              border: 1px solid #979797;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              .correct:before {
-                content: "\2714";
-                color: #000;
-              }
-            }
-          }
-          .forget {
-            font-weight: 400;
-            color: #eccf83;
-            line-height: 22px;
-          }
-        }
-        .explain {
-          width: fit-content;
-          padding: 0 25px;
-          margin-top: 57px;
-          display: flex;
-          .radious {
-            margin-top: 3px;
-            margin-right: 9px;
-            .ques_img {
-              width: 13px;
-            }
-          }
-          .txt_ {
-            font-weight: 400;
-            color: #ffffff;
-            line-height: 22px;
-          }
-        }
-        .btn_box {
-          cursor: pointer;
-          width: 100%;
-          height: 54px;
-          background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-          border-radius: 4px;
-          backdrop-filter: blur(14px);
+        .checkbox {
+          width: 0.24rem;
+          height: 0.24rem;
+          background: #d8d8d8;
+          border-radius: 0.02rem;
+          border: 1px solid #979797;
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-top: 46px;
-          font-weight: 600;
-          color: #000000;
-        }
-        .tip_txt {
-          cursor: pointer;
-          font-weight: 400;
-          color: #969090;
-          line-height: 17px;
-          margin-top: 16px;
-          .tip_login {
-            font-weight: 400;
-            color: #eccf83;
-            line-height: 17px;
-            margin: 0 5px;
+          .correct:before {
+            content: "\2714";
+            color: #000;
           }
         }
+      }
+      .forget {
+        cursor: pointer;
+        font-weight: 400;
+        color: #eccf83;
+        line-height: 0.22rem;
+      }
+    }
+    .explain {
+      width: 100%;
+      height: 0.8rem;
+      display: flex;
+      align-items: center;
+      > div {
+        display: flex;
+        align-items: flex-start;
+      }
+      img {
+        width: 0.15rem;
+        height: auto;
+        margin-right: 0.1rem;
+      }
+      .txt_ {
+        font-weight: 400;
+      }
+    }
+    .btn_box {
+      cursor: pointer;
+      width: 100%;
+      height: 0.5rem;
+      background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+      border-radius: 0.04rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      color: #000000;
+    }
+    .tip_txt {
+      text-align: center;
+      cursor: pointer;
+      font-weight: 400;
+      color: #969090;
+      line-height: 0.17rem;
+      margin-top: 0.2rem;
+      .tip_login {
+        color: #eccf83;
+        margin: 0 0.05rem;
       }
     }
   }

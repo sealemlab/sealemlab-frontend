@@ -53,6 +53,35 @@ const routes: Array<RouteConfig> = [
     ],
   },
   {
+    path: "/game",
+    // name: "Game",
+    component: () => import("../views/Game/Indexview.vue"),
+    children: [
+      { path: "/", redirect: "game" },
+      {
+        path: "game",
+        name: "Game",
+        component: () => import("../views/Game/components/Game.vue"),
+      },
+      {
+        path: "rechargeclaim",
+        name: "RechargeClaim",
+        component: () => import("../views/Game/components/RechargeClaim.vue"),
+      },
+      {
+        path: "gamedata",
+        name: "GameData",
+        component: () => import("../views/Game/components/GameData.vue"),
+      },
+      {
+        path: "updation",
+        name: "Updation",
+        component: () => import("../views/Game/components/Updation.vue"),
+      },
+  
+    ],
+  },
+  {
     path: "/user",
     // name: "User",
     component: () => import("../views/User/index.vue"),
