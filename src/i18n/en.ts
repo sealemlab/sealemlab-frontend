@@ -130,7 +130,7 @@ export const message = {
     txt2: "White Paper",
     txt3: "Project Overview",
     txt4: "FAQ",
-    txt5: "Tokenomiics",
+    txt5: "Tokenomics",
     txt6: "Game Instructions",
 
     txt20: "SOCIAL",
@@ -653,10 +653,11 @@ export const message = {
     txt63: "History Record",
     txt64: "Your sponsor address",
     txt65: "Your referral link",
-    txt66: "Invitation Stas",
+    txt66: "Invitation Stats",
     txt67: "Invited",
     txt68: "Invitee's liquidity increase",
-    txt69: "Invitee staked ",
+    txt69: "Invitees buy bond within 14 days",
+    add_txt69:"Invitees staking",
     txt70: "Bond bought within 30 days",
 
     txt71: "All assets issued are locked.",

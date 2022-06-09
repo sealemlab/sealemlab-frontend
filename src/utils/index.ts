@@ -211,9 +211,13 @@ export default {
       .toFixed(0);
   },
   /**一个数除以1e18,默认保留8位小数*/
-  convertBigNumberToNormal(bigNumber:any, bit = 8,decimals = 18) {
+  convertBigNumberToNormal(bigNumber:any, bit = 8,decimals = 18,original = false) {
     let result = (new BigNumber(bigNumber).dividedBy(new BigNumber(Math.pow(10, decimals))));
-    return this.getBit(result,bit)
+    if(!original){
+      return this.getBit(result,bit)
+    }else{
+      return result.toPrecision()
+    }
   },
   // 统计数据中相同的元素的个数  eg:arr = [0,0,0,1,1,2]  ===> {0:3,1:2,2:1}
   getWordCnt(arr:any){ 
@@ -417,11 +421,11 @@ export default {
   getUserCoinQuantity(address:any,name:string,account:string){
     erc20(address).balanceOf(account).then((res:any)=> {
       if(name == 'busd'){
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'busd':res / 1e18}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'busd':this.convertBigNumberToNormal(Number(res),0,18,true)}));
       }else if(name == 'st'){
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'st':res / 1e18}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'st':this.convertBigNumberToNormal(Number(res),0,18,true)}));
       }else if(name == 'sr'){
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'sr':res / 1e18}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'sr':this.convertBigNumberToNormal(Number(res),0,18,true)}));
       }
     })
   },
@@ -429,11 +433,11 @@ export default {
   refreshPrice(type:string,bondID = ''){
     if(type == 'st'){
       bondDepository().getStPrice().then((res:any) => {
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stPrice':res / 1e18}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stPrice':this.convertBigNumberToNormal(Number(res),0,18,true)}));
       })
     }else if(type == 'stlp'){
       bondDepository().getLpPrice(bondID).then((res:any) => {
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stlpPrice':res / 1e18}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stlpPrice':this.convertBigNumberToNormal(Number(res),0,18,true)}));
       })
     }
   }

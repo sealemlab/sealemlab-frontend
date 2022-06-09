@@ -641,6 +641,7 @@ export const message = {
     txt67: "邀请数量",
     txt68: "被邀请人流动性增加额",
     txt69: "被邀请人质押额",
+    add_txt69:"Invitees staking",
     txt70: "30天内下级购买债券量",
 
     txt71: "所有发行债券全部锁在国库中",

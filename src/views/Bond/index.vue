@@ -437,7 +437,7 @@ import { mapGetters } from "vuex";
 import AddLp from "./Addlp.vue";
 import InviteProup from "./InviteProup.vue";
 import MessageBox from "./MessageBox.vue";
-import { bondDepository,erc20,token,getSigner,inviting} from 'sealemlab-sdk'
+import { bondDepository,erc20,token,getSigner,inviting,stStaking} from 'sealemlab-sdk'
 export default {
   components: {
     AddLp,InviteProup,MessageBox,circleProgressbar
@@ -468,7 +468,7 @@ export default {
         title:'message.bond.txt69',
         num:0
       },{
-        title:'message.bond.txt69',
+        title:'message.bond.add_txt69',
         num:0
       }],
       dashboard:true,//仪表盘切换
@@ -582,6 +582,7 @@ export default {
           this.getUserRate(this.newBondID) // 圆形各等级信息
           this.$utils.refreshPrice('stlp',this.newBondID)
           this.setCountDown() // 债券倒计时
+          this.getUserSubordinateMoney() // 用户下属某期债券税前购买金额
           this.bondLoading = false
         }else{
           console.log('没有正在发售的债券')
@@ -775,6 +776,18 @@ export default {
         }else{
           this.inviter = this.$utils.getSubStr(res,6);
         }
+      })
+      // 获取某用户的下级的质押的ST数量
+      stStaking().affiliateStakedST(this.getAccount).then(res => {
+        console.log('获取某用户的下级的质押的ST数量res: ', res);
+        this.inviteArr[3].num = this.$utils.PriceConversion(Number(res), 2)
+      })
+    },
+    // 获取用户的下属某期债券的税前购买USD金额
+    getUserSubordinateMoney(){
+      bondDepository().affiliateEpochUsdPayinBeforeTax(this.getAccount,this.newBondID).then(res => {
+        console.log('获取用户的下属某期债券的税前购买USD金额res: ', res);
+        this.inviteArr[2].num = this.$utils.PriceConversion(Number(res), 2)
       })
     },
     getNEWPrice(){

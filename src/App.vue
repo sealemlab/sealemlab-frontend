@@ -439,21 +439,23 @@ export default {
         stPrice:0
       }
       erc20(arr[0]).balanceOf(this.getAccount).then(res => {
-        obj.st = res / 1e18 //this.$utils.getBit(util.formatEther(res),4)
+        obj.st = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         count++
       })
       erc20(arr[1]).balanceOf(this.getAccount).then(res => {
-        obj.sr = res / 1e18 //this.$utils.getBit(util.formatEther(res),4)
+        obj.sr = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         count++
       })
       erc20(arr[2]).balanceOf(this.getAccount).then(res => {
-        obj.busd = res / 1e18 //this.$utils.getBit(util.formatEther(res),4)
+        console.log('用户的busd余额res: ', res);
+        obj.busd = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        console.log('obj.busd: ', obj.busd);
         count++
       })
       bondDepository().getStPrice().then(res => {
         // st价格
         if(res){
-          obj.stPrice = Number(res) / 1e18
+          obj.stPrice = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
           count++
         }else{
           obj.stPrice = 0

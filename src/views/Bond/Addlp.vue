@@ -11,7 +11,7 @@
         </div>
         <!-- busd输入框 token1 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 1">
-          <p class="font12 balance_" :class="isEnLang?'en_medium':''">BUSD {{$t("message.bond.txt22")}}: {{getUserCoin.busd | KeepDecimals}}</p>
+          <p class="font12 balance_" :class="isEnLang?'en_medium':''">BUSD {{$t("message.bond.txt22")}}: {{getUserCoin.busd | PriceConversion}}</p>
           <div class="inputcontent" :class="isEnLang?'en_Bold':''">
             <div class="left_content">
               <img :src="`${$store.state.imgUrl}busd.webp`" class="busd_img" />
@@ -25,7 +25,7 @@
         </div>
         <!-- st输入框 token0 -->
         <div class="inputbox" v-if="activetype == 0 || activetype == 2">
-          <p class="font12 balance_" :class="isEnLang?'en_medium':''">ST {{$t("message.bond.txt22")}}: {{getUserCoin.st | KeepDecimals}}</p>
+          <p class="font12 balance_" :class="isEnLang?'en_medium':''">ST {{$t("message.bond.txt22")}}: {{getUserCoin.st | PriceConversion}}</p>
           <div class="inputcontent" :class="isEnLang?'en_Bold':''">
             <div class="left_content">
               <img :src="`${$store.state.imgUrl}stlogo.webp`" class="busd_img" />
@@ -478,16 +478,16 @@ export default {
       if(this.isWriteStatus)return
       if(this.activetype == 0 ){
         if(data == 'busd'){
-          this.BUSDmsg = this.getUserCoin.busd
-          this.STmsg = Number(this.getUserCoin.busd) / this.getUserCoin.stPrice
+          this.BUSDmsg = this.getUserCoin.busd > 1e-8?this.getUserCoin.busd:0
+          this.STmsg = Number(this.BUSDmsg) / this.getUserCoin.stPrice
         }else{
-          this.STmsg = this.getUserCoin.st
-          this.BUSDmsg = Number(this.getUserCoin.st) * this.getUserCoin.stPrice
+          this.STmsg = this.getUserCoin.st > 1e-8?this.getUserCoin.st:0
+          this.BUSDmsg = Number(this.STmsg) * this.getUserCoin.stPrice
         }
       }else if(this.activetype == 1){
-        this.BUSDmsg = this.getUserCoin.busd
+        this.BUSDmsg = this.getUserCoin.busd > 1e-8?this.getUserCoin.busd:0
       }else if(this.activetype == 2){
-        this.STmsg = this.getUserCoin.st
+        this.STmsg = this.getUserCoin.st > 1e-8?this.getUserCoin.st:0
       }
       this.youChangeIChange()
     },
