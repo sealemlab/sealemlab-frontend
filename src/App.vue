@@ -217,7 +217,7 @@ export default {
     return {
       navArr: [
         { label: "message.nav.txt10", link: "/home", status: true },
-        { label: "message.nav.txt1", link: "/bond/0", status: false },
+        { label: "message.nav.txt1", link: "/bond", status: false },
         { label: "message.nav.txt3", link: "/nft", status: false },
         { label: "message.nav.txt5", link: "/game/game", status: false },
         { label: "message.nav.txt13", link: "", status: false },
@@ -293,7 +293,7 @@ export default {
       });
       if (to.path == "/home") {
         this.navArr[0].status = true
-      }else if (to.path.indexOf("/bond/") !== -1) {
+      }else if (to.path == "/bond") {
         this.navArr[1].status = true
       }else if (to.path.indexOf("/nft/") !== -1) {
         this.navArr[2].status = true

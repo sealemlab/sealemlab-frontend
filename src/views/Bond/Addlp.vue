@@ -264,7 +264,7 @@ export default {
         return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_userBuy'}));
       }
       if(this.allLoading || this.buyLoading)return
-      let address = localStorage.getItem('userInvite') == 0 ?'0x0000000000000000000000000000000000000000':localStorage.getItem('userInvite')
+      let address = localStorage.getItem('Invitee')?localStorage.getItem('Invitee'):'0x0000000000000000000000000000000000000000'
       let token0 = 0 //st
       let token1 = 0 //busd
       if(this.activetype == 0){
@@ -287,6 +287,7 @@ export default {
         token0 = this.$utils.convertNormalToBigNumber(this.STmsg, 18)
       }
       this.buyLoading = true
+      console.log('this.newBondID,token0,token1,0,address: ', this.newBondID,token0,token1,0,address);
       bondDepository().connect(getSigner()).swapAndAddLiquidityAndBond(this.newBondID,token0,token1,0,address).then(async res => {
         // console.log('购买债券res: ', res);
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
@@ -579,7 +580,7 @@ export default {
 .proup_boxs{
   position: relative;
   width: 50vw;
-  height: 90%;
+  height: auto;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -791,7 +792,7 @@ export default {
   .proup_boxs{
     position: relative;
     width: 90%; 
-    height: 90%;
+    height:auto;
     overflow: auto;
     display: flex;
     flex-direction: column;

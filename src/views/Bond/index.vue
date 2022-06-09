@@ -400,16 +400,19 @@
               <p class="font12" :class="isEnLang?'en_medium':''">{{inviter}}</p>
             </div>
           </div>
-          <div>
+          <div @click="copyClick" class="linkdiv">
             <div class="iconbox_">
               <svg t="1653724606480" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8184" width="16" height="16">
                 <path d="M599.552 696.832l-1.024 1.024c-1.024 1.024-61.952 50.176-93.696 75.776-41.472 33.28-93.184 48.64-145.92 43.008s-100.352-31.232-133.632-72.704c-69.12-84.992-55.808-210.944 29.696-279.552l99.328-80.896-46.08-57.344-99.328 80.896c-116.736 94.72-134.656 266.752-39.936 383.488 45.568 56.32 111.104 91.648 183.296 99.328 9.728 1.024 19.456 1.536 29.184 1.536 62.464 0 121.856-20.992 171.008-60.928l94.208-76.288-45.568-56.32-1.536-1.024zM856.064 232.96c-94.208-116.224-266.24-134.656-383.488-39.936l-90.112 73.216 46.08 57.344 90.112-73.216c84.992-69.12 210.944-55.808 279.552 29.696 69.12 85.504 55.808 210.944-29.696 279.552l-95.744 77.312-1.024 1.024 46.08 57.344 96.768-78.336c56.832-46.08 92.16-111.104 99.84-183.808 8.192-72.192-12.8-143.36-58.368-200.192z" p-id="8185"  fill="#CED3D9"></path>
                 <path d="M388.096 667.648l305.664-254.464 1.024-1.024-47.616-56.32-305.664 254.976-1.024 0.512z" p-id="8186" fill="#CED3D9"></path>
               </svg>
             </div>
-            <div>
+            <div class="link_">
               <p class="font18 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt65") }}</p>
               <p class="font12" :class="isEnLang?'en_medium':''">{{istrue}}</p>
+            </div>
+            <div class="copy_img">
+              <svg t="1653893405932" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18173" width="16" height="16"><path d="M394.666667 106.666667h448a74.666667 74.666667 0 0 1 74.666666 74.666666v448a74.666667 74.666667 0 0 1-74.666666 74.666667H394.666667a74.666667 74.666667 0 0 1-74.666667-74.666667V181.333333a74.666667 74.666667 0 0 1 74.666667-74.666666z m0 64a10.666667 10.666667 0 0 0-10.666667 10.666666v448a10.666667 10.666667 0 0 0 10.666667 10.666667h448a10.666667 10.666667 0 0 0 10.666666-10.666667V181.333333a10.666667 10.666667 0 0 0-10.666666-10.666666H394.666667z m245.333333 597.333333a32 32 0 0 1 64 0v74.666667a74.666667 74.666667 0 0 1-74.666667 74.666666H181.333333a74.666667 74.666667 0 0 1-74.666666-74.666666V394.666667a74.666667 74.666667 0 0 1 74.666666-74.666667h74.666667a32 32 0 0 1 0 64h-74.666667a10.666667 10.666667 0 0 0-10.666666 10.666667v448a10.666667 10.666667 0 0 0 10.666666 10.666666h448a10.666667 10.666667 0 0 0 10.666667-10.666666v-74.666667z" p-id="18174" fill="#8F8E8E"></path></svg>
             </div>
           </div>
         </div>
@@ -442,9 +445,9 @@ export default {
   computed: { ...mapGetters(["getAccount","getIsMobile","getIstrue","getNoticeNum","isEnLang","getUserCoin"]),
     istrue(){
       if(process.env.NODE_ENV == "production"){
-        return `https://sealemlab.com/#/bond/${this.getAccount}`
+        return `https://sealemlab.com/#/home?ref=${this.getAccount}`
       }else{
-        return `https://test.sealemlab.com/#/bond/${this.getAccount}`
+        return `https://test.sealemlab.com/#/home?ref=${this.getAccount}`
       }
     }
   },
@@ -834,9 +837,14 @@ export default {
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sold'}));
       }
     },
-  },
-  mounted(){
-    localStorage.setItem('userInvite',this.$route.params.address)
+    copyClick(){
+      if(this.getIstrue){
+        this.$utils.copyClick(this.istrue)
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+      }else{
+        this.$store.commit("setwalletstatus", true);
+      }
+    }
   },
   beforeDestroy(){
     clearInterval(this.lpTimer)
@@ -905,9 +913,12 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 48px 125px 0;
+    .linkdiv{
+      height: auto;
+    }
     >div{
-      width: 40%;
-      height: 80px;
+      width: 45%;
+      min-height: 98px;
       padding: 15px 30px;
       display: flex;
       align-items: flex-start;
@@ -923,11 +934,25 @@ export default {
         align-items: center;
         margin-right: 16px;
       }
+      .link_{
+        width: 90%;
+      }
       div{
+        cursor: pointer;
+        position: relative;
+        width: 100%;
         p{
+          max-width: 100%;
           font-weight: 600;
           color: #CED3D9;
           line-height: 22px;
+          // white-space:pre-line;
+          overflow-wrap:break-word;
+        }
+        .copy_img{
+          position: absolute;
+          right: 0;
+          top: 0;
         }
       }
     }

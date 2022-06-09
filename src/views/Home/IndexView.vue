@@ -79,7 +79,9 @@
         <div class="add_box">
           <div class="left right mobile_game_box" :class="isEnLang?'en_medium':''">
             <div class="before_box">
-              <img :src="`${$store.state.imgUrl}new_game2.webp`" class="game2" />
+              <div class="add_out_box">
+                <img :src="`${$store.state.imgUrl}new_game2.webp`" class="game2" />
+              </div>
               <!-- <span>{{$t("message.tip.txt5")}}</span> -->
             </div>
             <div class="before_box">
@@ -112,7 +114,9 @@
           </div>
           <div class="left right pc_box font16" :class="isEnLang?'en_medium':''">
             <div class="before_box">
-              <img :src="`${$store.state.imgUrl}new_game2.webp`" class="game2" />
+              <div class="add_out_box">
+                <img :src="`${$store.state.imgUrl}new_game2.webp`" class="game2" />
+              </div>
               <!-- <span>{{$t("message.tip.txt5")}}</span> -->
             </div>
             <div class="before_box">
@@ -301,7 +305,6 @@ export default {
       activeIndex:0,//swiper索引
       videoStatus:true,//视频加载
       gameIndex:0,//游戏场景展示对应大图的索引
-      peopleIndex:0,// 人物展示对应大图的索引
       comminicateArr:[
         {
           src:`${this.$store.state.imgUrl}tel_1.webp`,
@@ -716,7 +719,7 @@ export default {
       }
     },
     bondClick(){
-      this.$router.push('/bond/0');
+      this.$router.push('/bond');
     },
     showtxtFun(item){
       this.teamArr.forEach(item => {
@@ -733,6 +736,10 @@ export default {
     this.$refs.video.addEventListener('canplaythrough',function(){
       that.videoStatus = false
     });
+    console.log('this.$route.query: ', this.$route.query,localStorage.getItem('Invitee') == true);
+    if(this.$route.query.ref){
+      localStorage.setItem('Invitee',this.$route.query.ref)
+    }
   },
 }
 </script>
@@ -1327,6 +1334,9 @@ export default {
                     width: 100%;
                   }
                 }
+                .active_oneimgbox{
+                  background: linear-gradient(270deg, rgba(232, 199, 120, 0.24) 0%, rgba(255, 178, 69, 0.34) 47%, rgba(234, 181, 100, 0.35) 100%);
+                }
               }
             }
           }
@@ -1338,15 +1348,16 @@ export default {
           align-items: flex-end;
           .before_box{
             position: relative;
-            max-width: 404px;
+            max-width: 90%;
             width: 100%;
             margin-bottom: 37px;
-            &:nth-child(1){
-              // min-height: 100px;
-              padding: 2px;
-              // border: 3px solid;
+            .add_out_box{
+              width: 100%;
+              padding: 4px;
+              align-items: center;
+              justify-content: center;
+              display: flex;
               background: linear-gradient(270deg, rgba(232, 199, 120, 0.24) 0%, rgba(255, 178, 69, 0.34) 47%, rgba(234, 181, 100, 0.35) 100%);
-              // border-image: linear-gradient(270deg, rgba(232, 199, 120, 0.24), rgba(255, 178, 69, 0.34), rgba(234, 181, 100, 0.35)) 5 5;
             }
             .game2{
               width: 100%;

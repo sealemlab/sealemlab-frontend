@@ -6,8 +6,7 @@
         <div class="tipbox font12" :class="isEnLang?'en_medium':''">
           <p class="p_title font16" :class="isEnLang?'en_Bold':''">{{$t("message.user.txt23")}}</p>
           <div @click="copyClick">
-            <span v-if="istrue">https://sealemlab.com/#/bond/{{getAccount}}</span>
-            <span v-else>https://test.sealemlab.com/#/bond/{{getAccount}}</span>
+            <span>{{istrue}}</span>
             <svg t="1653893405932" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18173" width="16" height="16"><path d="M394.666667 106.666667h448a74.666667 74.666667 0 0 1 74.666666 74.666666v448a74.666667 74.666667 0 0 1-74.666666 74.666667H394.666667a74.666667 74.666667 0 0 1-74.666667-74.666667V181.333333a74.666667 74.666667 0 0 1 74.666667-74.666666z m0 64a10.666667 10.666667 0 0 0-10.666667 10.666666v448a10.666667 10.666667 0 0 0 10.666667 10.666667h448a10.666667 10.666667 0 0 0 10.666666-10.666667V181.333333a10.666667 10.666667 0 0 0-10.666666-10.666666H394.666667z m245.333333 597.333333a32 32 0 0 1 64 0v74.666667a74.666667 74.666667 0 0 1-74.666667 74.666666H181.333333a74.666667 74.666667 0 0 1-74.666666-74.666666V394.666667a74.666667 74.666667 0 0 1 74.666666-74.666667h74.666667a32 32 0 0 1 0 64h-74.666667a10.666667 10.666667 0 0 0-10.666666 10.666667v448a10.666667 10.666667 0 0 0 10.666666 10.666666h448a10.666667 10.666667 0 0 0 10.666667-10.666666v-74.666667z" p-id="18174" fill="#8F8E8E"></path></svg>
           </div>
           <p class="p_title add_top_p font16" :class="isEnLang?'en_Bold':''">{{$t("message.user.txt24")}}</p>
@@ -36,7 +35,11 @@ export default {
   computed: {
     ...mapGetters(["isEnLang","getAccount"]),
     istrue(){
-      return process.env.NODE_ENV === "production"
+      if(process.env.NODE_ENV == "production"){
+        return `https://sealemlab.com/#/home/${this.getAccount}`
+      }else{
+        return `https://test.sealemlab.com/#/home/${this.getAccount}`
+      }
     }
   },
   props: {
@@ -54,12 +57,7 @@ export default {
       this.$emit('sureclick')
     },
     copyClick(){
-      if(this.istrue){
-        this.$utils.copyClick(`https://sealemlab.com/#/bond/${this.getAccount}`)
-      }else{
-        this.$utils.copyClick(`https://test.sealemlab.com/#/bond/${this.getAccount}`)
-      }
-      
+      this.$utils.copyClick(this.istrue)
       this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
     }
   }
