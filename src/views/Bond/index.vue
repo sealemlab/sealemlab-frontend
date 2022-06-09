@@ -136,7 +136,7 @@
                     :radius="6" 
                     :progress="baseInterestRateInfo.num4"
                     :isAnimation="false">
-                    <span class="color1" v-if="newBondID == -999">{{$t("message.tip.txt5")}}</span>
+                    <span class="color1" v-if="!newBondID">{{$t("message.tip.txt5")}}</span>
                     <span class="color1" v-else>lv{{baseInterestRateInfo.num2}}</span>
                   </circle-progressbar>
                 </li>
@@ -171,7 +171,7 @@
                     :radius="6" 
                     :progress="inviteBuy.num4"
                     :isAnimation="false">
-                    <span class="color2" v-if="newBondID == -999">{{$t("message.tip.txt5")}}</span>
+                    <span class="color2" v-if="!newBondID">{{$t("message.tip.txt5")}}</span>
                     <span class="color2" v-else>lv{{inviteBuy.num2}}</span>
                   </circle-progressbar>
                 </li>
@@ -212,7 +212,7 @@
                     :radius="6" 
                     :progress="invitePledge.num4"
                     :isAnimation="false">
-                    <span class="color3" v-if="newBondID == -999">{{$t("message.tip.txt5")}}</span>
+                    <span class="color3" v-if="!newBondID">{{$t("message.tip.txt5")}}</span>
                     <span class="color3" v-else>lv{{invitePledge.num2}}</span>
                   </circle-progressbar>
                 </li>
@@ -249,7 +249,7 @@
                     :radius="6" 
                     :progress="Pledge.num4"
                     :isAnimation="false">
-                    <span class="color4" v-if="newBondID == -999">{{$t("message.tip.txt5")}}</span>
+                    <span class="color4" v-if="!newBondID">{{$t("message.tip.txt5")}}</span>
                     <span class="color4" v-else>lv{{Pledge.num2}}</span>
                   </circle-progressbar>
                 </li>
@@ -455,7 +455,7 @@ export default {
     return {
       bondStatus:false,// 是否获取到最新bond
       inviter:'',//邀请者
-      newBondID:-999,//最新债券id
+      newBondID:'',//最新债券id
       treasuryMoney:0,//国库金额
       loadMoreStatus:true,//加载中
       inviteArr:[{
@@ -548,19 +548,17 @@ export default {
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
-          this.bondStatus = false
           this.loadMoreStatus = true
           this.orderArr = []
-          this.getBondInfo() // 获取当前债券信息
           this.getUserOrder() // 获取订单信息
           this.getUserInvite() // 邀请人地址
         }else{
-          clearInterval(this.counrnull)
-          clearInterval(this.bondinfo.addtimeobj)
+          // clearInterval(this.counrnull)
+          // clearInterval(this.bondinfo.addtimeobj)
           this.orderArr.forEach(item => {
             clearInterval(item.selfTimeOBJ)
           })
-          this.bondinfo = this.lastBondInfo
+          // this.bondinfo = this.lastBondInfo
           this.loadMoreStatus = false
           this.orderArr = []
           this.bondStatus = true
@@ -573,7 +571,6 @@ export default {
   methods: {
     getBondInfo(){
       // 获取发行中(还未到结束时间)的债券ID数组
-      if(!this.getIstrue)return
       bondDepository().getActiveBonds().then(res => {
         console.log('获取发行中(还未到结束时间)的债券ID数组res[0]: ',Number(res[0]));
         if(res.length > 0){
@@ -584,20 +581,15 @@ export default {
           })
           this.getUserRate(this.newBondID) // 圆形各等级信息
           this.$utils.refreshPrice('stlp',this.newBondID)
-          this.getNEWPrice() // 获取最新st,stlp价格
           this.setCountDown() // 债券倒计时
           this.bondLoading = false
         }else{
           console.log('没有正在发售的债券')
           this.bondStatus = true
-          this.newBondID = -999
+          this.newBondID = ''
           this.bondinfo = this.lastBondInfo
         }
       })
-      // 获取债券总数，总数-1就是最新债券ID
-      // bondDepository().getMarketsLength().then(res1 => {
-      //   // console.log('获取债券总数，总数-1就是最新债券IDres: ', Number(res1));
-      // })
       // 0xBC45dC703694831510bE20A64005e1C39fd34a36(测试)  国库地址
       erc20(token().STLP).balanceOf('0xBC45dC703694831510bE20A64005e1C39fd34a36').then(res => {
         // console.log('国库金额res: ', res);
@@ -827,6 +819,11 @@ export default {
       item.rateStatus = !item.rateStatus
     },
     BondClick(data) {
+      console.log('data: ', data);
+      if(!this.getIstrue){
+        this.$store.commit("setwalletstatus", true);
+        return
+      }
       if(data){
         if(this.bondStatus){
           this.addlpDis = true
@@ -845,6 +842,10 @@ export default {
         this.$store.commit("setwalletstatus", true);
       }
     }
+  },
+  mounted(){
+    this.getBondInfo() // 最新债券信息
+    this.getNEWPrice() // 获取最新st,stlp价格
   },
   beforeDestroy(){
     clearInterval(this.lpTimer)

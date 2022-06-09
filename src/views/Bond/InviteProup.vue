@@ -36,9 +36,9 @@ export default {
     ...mapGetters(["isEnLang","getAccount"]),
     istrue(){
       if(process.env.NODE_ENV == "production"){
-        return `https://sealemlab.com/#/home/${this.getAccount}`
+        return `https://sealemlab.com/#/home/?ref=${this.getAccount}`
       }else{
-        return `https://test.sealemlab.com/#/home/${this.getAccount}`
+        return `https://test.sealemlab.com/#/home/?ref=${this.getAccount}`
       }
     }
   },

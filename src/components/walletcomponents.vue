@@ -3,9 +3,11 @@
     <div class="boxarr">
       <div class="title font26 mobile_font18">{{ $t("message.nav.txt9") }}</div>
       <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click="closepage" />
-      <div class="onebox" v-for="(item, index) in walletarr" :key="index" @click="walletClick(item)">
-        <span class="wallet_txt fontsize16">{{ item.name }}</span>
-        <img :src="item.src" class="imgcard" />
+      <div class="out_box_hidden">
+        <div class="onebox" v-for="(item, index) in walletarr" :key="index" @click="walletClick(item)">
+          <span class="wallet_txt fontsize16">{{ item.name }}</span>
+          <img :src="item.src" class="imgcard" />
+        </div>
       </div>
       <div class="new_cry font16">
         {{ $t("message.nav.txt11") }}
@@ -26,19 +28,16 @@ export default {
   data() {
     return {
       walletarr: [
-        { name: "Metamask", src: `${this.$store.state.imgUrl}wallet1.webp` },
-        { name: "WalletConnect", src: `${this.$store.state.imgUrl}wallet2.webp` },
-        // {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.webp`},
-        // {name:'Coin98',src:`${this.$store.state.imgUrl}wallet11.webp`},
-        // {name:'ONTO',src:`${this.$store.state.imgUrl}wallet5.webp`},
-        // { name: "TokenPocket", src: `${this.$store.state.imgUrl}wallet6.webp` },
-        // {name:'TrustWallet',src:`${this.$store.state.imgUrl}wallet3.webp`},
-        // {name:'SafePal Wallet',src:`${this.$store.state.imgUrl}wallet4.webp`},
-        // {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet7.webp`},
-        // {name:'MathWallet',src:`${this.$store.state.imgUrl}wallet8.webp`},
-        // {name:'Onekey',src:`${this.$store.state.imgUrl}wallet9.webp`},
-        // {name:'Bitpie',src:`${this.$store.state.imgUrl}wallet10.webp`},
-        // {name:'Binance Chain Wallet',src:`${this.$store.state.imgUrl}wallet12.webp`},
+        { name: "Metamask", src: `${this.$store.state.imgUrl}wallet1.webp`,content:'metamask' },
+        { name: "WalletConnect", src: `${this.$store.state.imgUrl}wallet2.webp`,content:'walletconnect' },
+        {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet3.webp`,content:'metamask'},
+        {name:'TokenPocket',src:`${this.$store.state.imgUrl}wallet4.webp`,content:'metamask'},
+        {name:'Nabox',src:`${this.$store.state.imgUrl}wallet5.webp`,content:'metamask'},
+        { name: "COIN98", src: `${this.$store.state.imgUrl}wallet6.webp`,content:'metamask'},
+        {name:'Math Wallet',src:`${this.$store.state.imgUrl}wallet7.webp`,content:'metamask'},
+        {name:'SafePal',src:`${this.$store.state.imgUrl}wallet8.webp`,content:'metamask'},
+        {name:'ONTO',src:`${this.$store.state.imgUrl}wallet9.webp`,content:'metamask'},
+        {name:'Coinhub',src:`${this.$store.state.imgUrl}wallet10.webp`,content:'metamask'}
       ],
     };
   },
@@ -71,35 +70,40 @@ export default {
   .boxarr {
     position: relative;
     margin: 0 auto;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 60px 20px 10px;
     border-radius: 5px;
-    max-height: 600px;
-    overflow-y: auto;
     background: #171717;
     padding-bottom: 40px;
-    .onebox {
-      cursor: pointer;
-      width: 432px;
-      height: 67px;
-      padding: 10px 22px 10px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(63, 65, 71, 0.5);
-      border-radius: 15px;
-      margin-top: 32px;
-      .imgcard {
-        width: 41px;
+    .out_box_hidden{
+      width: 100%;
+      max-height: 560px;
+      overflow-y: auto;
+      padding: 0 0 10px;
+      .onebox {
+        cursor: pointer;
+        width: 432px;
+        height: 67px;
+        padding: 10px 22px 10px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(63, 65, 71, 0.5);
+        border-radius: 15px;
+        margin-top: 32px;
+        .imgcard {
+          width: 41px;
+        }
+        .wallet_txt {
+          color: #CED3D9;
+        }
       }
-      .wallet_txt {
-        color: #CED3D9;
+      .onebox:hover {
+        background: rgba(63, 65, 71, 1);
       }
-    }
-    .onebox:hover {
-      background: rgba(63, 65, 71, 1);
     }
     .new_cry {
       width: 100%;
@@ -110,17 +114,17 @@ export default {
       }
     }
     .title {
-      width: 100%;
-      text-align: center;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       color: #CED3D9;
-      // margin: 50px 0;
     }
     .close_img {
       position: absolute;
       top: 10px;
       right: 20px;
       width: 44px;
-      object-fit: contain;
       cursor: pointer;
     }
   }
@@ -167,5 +171,9 @@ export default {
       }
     }
   }
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 </style>

@@ -382,8 +382,7 @@ export default {
     },
     // 链接钱包弹窗方法
     walletClick (item) {
-      this.$utils.connectWallet("metamask").then((res) => {
-        // console.log('方法返回res: ', res);
+      this.$utils.connectWallet(item.content).then(() => {
         this.$store.commit("setwalletstatus", false);
       });
     },

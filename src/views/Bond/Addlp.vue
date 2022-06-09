@@ -200,8 +200,8 @@ export default {
       default: false
     },
     newBondID:{
-      type: Number,
-      default: -999
+      type: [String, Number],
+      default: ''
     },
     obj: {
       type: Object,
@@ -439,10 +439,10 @@ export default {
         this.resetData()
       }else if(Number(data) <= Number(this.getUserCoin.busd)){
         this.BUSDmsg = data
-        this.STmsg = this.$utils.getBit( Number(data) / this.getUserCoin.stPrice)
+        this.STmsg = Number(data) / this.getUserCoin.stPrice 
       }else{
         this.BUSDmsg = this.getUserCoin.busd
-        this.STmsg = this.$utils.getBit( Number(this.BUSDmsg) / this.getUserCoin.stPrice)
+        this.STmsg = Number(this.BUSDmsg) / this.getUserCoin.stPrice
       }
       this.youChangeIChange()
     },
@@ -453,10 +453,10 @@ export default {
         this.resetData()
       }else if(Number(data) <= Number(this.getUserCoin.st)){
         this.STmsg = data
-        this.BUSDmsg = this.$utils.getBit( Number(data) * this.getUserCoin.stPrice)
+        this.BUSDmsg = Number(data) * this.getUserCoin.stPrice
       }else{
         this.STmsg = this.getUserCoin.st
-        this.BUSDmsg = this.$utils.getBit( Number(this.STmsg) / this.getUserCoin.stPrice)
+        this.BUSDmsg = Number(this.STmsg) / this.getUserCoin.stPrice
       }
       this.youChangeIChange()
     },
@@ -479,10 +479,10 @@ export default {
       if(this.activetype == 0 ){
         if(data == 'busd'){
           this.BUSDmsg = this.getUserCoin.busd
-          this.STmsg = this.$utils.getBit(Number(this.getUserCoin.busd) / this.getUserCoin.stPrice)
+          this.STmsg = Number(this.getUserCoin.busd) / this.getUserCoin.stPrice
         }else{
           this.STmsg = this.getUserCoin.st
-          this.BUSDmsg = this.$utils.getBit(Number(this.getUserCoin.st) * this.getUserCoin.stPrice)
+          this.BUSDmsg = Number(this.getUserCoin.st) * this.getUserCoin.stPrice
         }
       }else if(this.activetype == 1){
         this.BUSDmsg = this.getUserCoin.busd
