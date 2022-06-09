@@ -14,13 +14,13 @@
         <span class="font_price font16">$ {{getUserCoin.stPrice | PriceConversion(4)}}</span>
       </div>
       <div class="login_box">
-        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
+        <!-- <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
           {{ $t("message.nav.txt8") }}
         </div>
         <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
           <span @click="loginClick('register')">{{ $t("message.nav.txt8_1") }}</span> /
           <span @click="loginClick('login')">{{ $t("message.nav.txt8_2") }}</span>
-        </div>
+        </div> -->
       </div>
       <!-- 链接钱包 -->
       <div class="walletBox font16" v-if="getIstrue">
