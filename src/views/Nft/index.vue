@@ -1,14 +1,11 @@
 <template>
-  <div class="nft_page">
+  <div class="nft_page" >
     <div class="content_box">
-      <div class="display_flex menu_box">
+      <div class="display_flex menu_box" :class="getmobileInfo.direction == 'top'?'menShow':'menDis'">
         <router-link class="a_link font18" v-for="(route, index) in navArr" :key="index" :to="route.link">
           <span class="nav_txt">{{ $t(route.label) }}</span>
         </router-link>
       </div>
-      <!-- <ul class="display_flex">
-        <li class="font24" :class="{ active_li: li_index == index }" v-for="(item,index) in navArr" :key="index" @click="liClick(item,index)">{{$t(item.label)}}</li>
-      </ul> -->
       <div class="main">
         <router-view />
       </div>
@@ -31,9 +28,10 @@ export default {
       ],
     };
   },
-  computed: { ...mapGetters(["isEnLang","getNoticeNum"]) },
+  computed: { ...mapGetters(["isEnLang","getNoticeNum","getmobileInfo"]) },
   methods:{
     liClick(item,index){
+      console.log('sdsdsddf-------item: ', item);
       if(process.env.NODE_ENV === 'production'){
         if(item.status){
           this.li_index = index
@@ -49,7 +47,7 @@ export default {
         this.$router.push(item.link)
       }
       
-    }
+    },
   }
 };
 </script>
@@ -57,10 +55,8 @@ export default {
 <style lang="scss" scoped>
 .nft_page{
   width: 100%;
-  min-height: calc(100vh - 400px);
   .content_box{
     width: 90vw;
-    background: #000;
     padding-top: 80px;
     margin: 0 auto;
     display: flex;
@@ -68,19 +64,16 @@ export default {
       position: fixed;
       top: 116px;
       left: 5vw;
-      background: rgba(0,0,0,0.5);
       flex-direction: column;
       .a_link{
         min-width: 120px;
         display: flex;
         align-items: center;
         margin-bottom: 60px;
-        color: #fff;
         cursor: pointer;
         text-decoration: none;
         .nav_txt{
-          font-weight: normal;
-          color: #FFFFFF;
+          font-weight: 600;
           line-height: 40px;
           margin-left: 5px;
         }
@@ -91,33 +84,60 @@ export default {
         }
       }
     }
-    // ul{
-    //   position: fixed;
-    //   top: 116px;
-    //   left: 5vw;
-    //   background: rgba(0,0,0,0.5);
-    //   flex-direction: column;
-    //   li{
-    //     font-weight: normal;
-    //     color: #FFFFFF;
-    //     line-height: 48px;
-    //     min-width: 120px;
-    //     display: flex;
-    //     align-items: center;
-    //     margin-bottom: 30px;
-    //     color: #fff;
-    //     cursor: pointer;
-    //   }
-    //   .active_li{
-    //     color: #EDD083;
-    //   }
-    // }
     .main{
       width: 100vw;
       max-width: 1200px;
       margin: 0 auto;
-      margin-top: 50px;
+      margin-top: 32px;
       padding-left: 120px;
+      min-height: calc(100vh - 80px);
+      padding-bottom: 30px;
+      padding-left: 150px;
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .nft_page{
+    width: 100%;
+    .content_box{
+      padding-top: 0.8rem;
+      .menu_box{
+        position: fixed;
+        top: 0.8rem;
+        left: 0;
+        width: 100%;
+        z-index: 15;
+        padding: 0 0.2rem;
+        flex-direction: row;
+        justify-content: space-between;
+        background: rgba(0,0,0,0.5);
+        .a_link{
+          min-width: 0.2rem;
+          display: flex;
+          align-items: center;
+          margin-bottom: 0;
+          cursor: pointer;
+          text-decoration: none;
+          .nav_txt{
+            font-weight: normal;
+            line-height: 40px;
+            margin-left: 0;
+          }
+          &.router-link-active {
+            .nav_txt{
+              color: #EDD083;
+            }
+          }
+        }
+      }
+      .main{
+        width: 100vw;
+        max-width: 100%;
+        margin: 0 auto;
+        margin-top: 0.5rem;
+        min-height: calc(100vh - 1.5rem);
+        padding-left: 0;
+      }
     }
   }
 }

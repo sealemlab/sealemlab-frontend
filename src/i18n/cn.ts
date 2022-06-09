@@ -14,6 +14,7 @@ export const message = {
     txt10: "Home",
     txt11: "加密新手?",
     txt12: "了解有关钱包的更多信息",
+    txt13: "更多",
   }, //导航栏
   home: {
     add_txt1: "高APY",
@@ -256,8 +257,7 @@ export const message = {
     txt103: "4件:增加暴击几率26%",
     txt105: "2套:增加天堂之怒伤害51%",
     txt106: "3套:增加暴击伤害48%",
-    txt107:
-      "介绍:出自远古圣城伟大工匠和高级法师之手，铸造后由法师附魔上神圣力量，经过千年时间洗礼依然隐隐发出魔法光泽，可为穿戴者的技能攻击增加高额伤害.",
+    txt107: "出自远古圣城伟大工匠和高级法师之手，铸造后由法师附魔上神圣力量，经过千年时间洗礼依然隐隐发出魔法光泽，可为穿戴者的技能攻击增加高额伤害.",
 
     txt108: "钢铁套装",
     txt110: "2件:暴击几率抵抗51%",
@@ -265,8 +265,7 @@ export const message = {
     txt112: "4件:Def增加7,650",
     txt114: "2件:增加刀锋冲击伤害26%",
     txt115: "3件:伤害减少38%",
-    txt116:
-      "介绍:存粹由钢铁铸成的装备，厚重且具有力量，为穿戴者的每个部位提供完美保护，磅礴的气势让敌人几乎失去攻击欲望。穿上后能轻松通过地下城挑战。",
+    txt116: "存粹由钢铁铸成的装备，厚重且具有力量，为穿戴者的每个部位提供完美保护，磅礴的气势让敌人几乎失去攻击欲望。穿上后能轻松通过地下城挑战。",
 
     txt117: "沉默征服者套装",
     txt119: "2套:增加boss伤害26%",
@@ -274,7 +273,7 @@ export const message = {
     txt121: "4套:HP增加2,550",
     txt123: "2件:增加剑刃风暴伤害26%",
     txt124: "3件:减少技能冷却6.6秒",
-    txt125: "介绍:征服者套装专为渴望主宰竞技场的勇者打造，蕴藏的力量足以让你应对挑战时的各种情况，穿上它来成为竞技场的王者。",
+    txt125: "征服者套装专为渴望主宰竞技场的勇者打造，蕴藏的力量足以让你应对挑战时的各种情况，穿上它来成为竞技场的王者。",
 
     txt126: "神圣之光套装",
     txt127: "防具套装属性:",
@@ -295,7 +294,7 @@ export const message = {
     txt141: "2套:增加光束伤害51%",
     txt142: "3套:增加暴击伤害48%",
     txt143:
-      "介绍:出自远古圣城伟大工匠和高级法师之手，铸造后由法师附魔上神圣力量，经过千年时间洗礼依然隐隐发出魔法光泽，可为穿戴者的技能攻击增加高额伤害。",
+      "出自远古圣城伟大工匠和高级法师之手，铸造后由法师附魔上神圣力量，经过千年时间洗礼依然隐隐发出魔法光泽，可为穿戴者的技能攻击增加高额伤害。",
 
     txt144: "钢铁套装",
     txt146: "2件:暴击几率抵抗51%",
@@ -303,8 +302,7 @@ export const message = {
     txt148: "4件:Def增加7,650",
     txt150: "2件:增加启示伤害26%",
     txt151: "3件:伤害减少38%",
-    txt152:
-      "介绍:纯粹由钢铁铸成的装备，厚重且具有力量，为穿戴者的每个部位提供完美保护，磅礴的气势让敌人几乎失去攻击欲望。穿上后能轻松通过地下城挑战。",
+    txt152: "纯粹由钢铁铸成的装备，厚重且具有力量，为穿戴者的每个部位提供完美保护，磅礴的气势让敌人几乎失去攻击欲望。穿上后能轻松通过地下城挑战。",
 
     txt153: "沉默征服者套装",
     txt155: "2套:增加boss伤害26%",
@@ -312,7 +310,7 @@ export const message = {
     txt157: "4套:HP增加2,550",
     txt159: "2件:增加魔法风暴伤害26%",
     txt160: "3件:减少技能冷却6.6秒",
-    txt161: "介绍:征服者套装专为渴望主宰竞技场的勇者打造，蕴藏的力量足以让你应对挑战时的各种情况，穿上它来成为竞技场的王者。",
+    txt161: "征服者套装专为渴望主宰竞技场的勇者打造，蕴藏的力量足以让你应对挑战时的各种情况，穿上它来成为竞技场的王者。",
 
     /**刺客套装 */
     txt162: "神秘远古套装",
@@ -322,7 +320,7 @@ export const message = {
     txt168: "2套:增加暗影之舞伤害51%",
     txt169: "3套:增加暴击伤害48%",
     txt170:
-      "介绍:出自远古圣城伟大工匠和高级法师之手，铸造后由法师附魔上神圣力量，经过千年时间洗礼依然隐隐发出魔法光泽，可为穿戴者的技能攻击增加高额伤害。",
+      "出自远古圣城伟大工匠和高级法师之手，铸造后由法师附魔上神圣力量，经过千年时间洗礼依然隐隐发出魔法光泽，可为穿戴者的技能攻击增加高额伤害。",
 
     txt171: "钢铁套装",
     txt173: "2件:暴击几率抵抗51%",
@@ -330,8 +328,7 @@ export const message = {
     txt175: "4件:Def增加7,650",
     txt177: "2件:增加匕首扇伤害26%",
     txt178: "3件:伤害减少38%",
-    txt179:
-      "介绍:纯粹由钢铁铸成的装备，厚重且具有力量，为穿戴者的每个部位提供完美保护，磅礴的气势让敌人几乎失去攻击欲望。穿上后能轻松通过地下城挑战。",
+    txt179: "纯粹由钢铁铸成的装备，厚重且具有力量，为穿戴者的每个部位提供完美保护，磅礴的气势让敌人几乎失去攻击欲望。穿上后能轻松通过地下城挑战。",
 
     txt180: "沉默征服者套装",
     txt182: "2套:增加boss伤害26% ",
@@ -339,7 +336,7 @@ export const message = {
     txt184: "4套:HP增加2,550",
     txt186: "2件:增加暗影突袭伤害26% ",
     txt187: "3件:减少技能冷却6.6秒",
-    txt188: "介绍:征服者套装专为渴望主宰竞技场的勇者打造，蕴藏的力量足以让你应对挑战时的各种情况，穿上它来成为竞技场的王者。",
+    txt188: "征服者套装专为渴望主宰竞技场的勇者打造，蕴藏的力量足以让你应对挑战时的各种情况，穿上它来成为竞技场的王者。",
 
     /**战士套装 */
     txt189: "神秘远古套装",
@@ -349,7 +346,7 @@ export const message = {
     txt195: "2套:增加流星拳伤害51% ",
     txt196: "3套:增加暴击伤害48%",
     txt197:
-      "介绍:出自远古圣城伟大工匠和高级法师之手，铸造后由法师附魔上神圣力量，经过千年时间洗礼依然隐隐发出魔法光泽，可为穿戴者的技能攻击增加高额伤害。",
+      "出自远古圣城伟大工匠和高级法师之手，铸造后由法师附魔上神圣力量，经过千年时间洗礼依然隐隐发出魔法光泽，可为穿戴者的技能攻击增加高额伤害。",
 
     txt198: "钢铁套装",
     txt200: "2件:暴击几率抵抗51% ",
@@ -357,8 +354,7 @@ export const message = {
     txt202: "4件:Def增加7,650",
     txt204: "2件:增加惩戒伤害26% ",
     txt205: "3件:伤害减少38%",
-    txt206:
-      "介绍:纯粹由钢铁铸成的装备，厚重且具有力量，为穿戴者的每个部位提供完美保护，磅礴的气势让敌人几乎失去攻击欲望。穿上后能轻松通过地下城挑战。",
+    txt206: "纯粹由钢铁铸成的装备，厚重且具有力量，为穿戴者的每个部位提供完美保护，磅礴的气势让敌人几乎失去攻击欲望。穿上后能轻松通过地下城挑战。",
 
     txt207: "沉默征服者套装",
     txt209: "2套:增加boss伤害26% ",
@@ -366,7 +362,7 @@ export const message = {
     txt211: "4套:HP增加2,550",
     txt213: "2件:增加气爆伤害26% ",
     txt214: "3件:减少技能冷却6.6秒",
-    txt215: "介绍:征服者套装专为渴望主宰竞技场的勇者打造，蕴藏的力量足以让你应对挑战时的各种情况，穿上它来成为竞技场的王者。",
+    txt215: "征服者套装专为渴望主宰竞技场的勇者打造，蕴藏的力量足以让你应对挑战时的各种情况，穿上它来成为竞技场的王者。",
 
     txt216: "盲盒概率",
     txt217: "星级",
@@ -377,198 +373,203 @@ export const message = {
     txt222: "稀有",
     txt223: "史诗",
     txt224: "传奇",
+    txt225: "介绍:",
 
     // 战士的所有套装
-    "type1": {
-      "suit1": {
-        "name": "神聖之光套裝",
-        "position1": "神聖之光巨劍",
-        "position2": "神聖之光頭盔",
-        "position3": "神聖之光鎧甲",
-        "position4": "神聖之光手套",
-        "position5": "神聖之光靴子",
-        "position6": "神聖之光腰帶",
-        "position7": "神聖之光項鏈",
-        "position8": "神聖之光戒指"
+    type1: {
+      suit1: {
+        name: "神聖之光套裝",
+        position1: "神聖之光巨劍",
+        position2: "神聖之光頭盔",
+        position3: "神聖之光鎧甲",
+        position4: "神聖之光手套",
+        position5: "神聖之光靴子",
+        position6: "神聖之光腰帶",
+        position7: "神聖之光項鏈",
+        position8: "神聖之光戒指",
       },
-      "suit2": {
-        "name": "神秘遠古套裝",
-        "position1": "神秘遠古巨劍",
-        "position2": "神秘遠古頭盔",
-        "position3": "神秘遠古鎧甲",
-        "position4": "神秘遠古手套",
-        "position5": "神秘遠古靴子",
-        "position6": "神秘遠古腰帶",
-        "position7": "神秘遠古項鏈",
-        "position8": "神秘遠古戒指"
+      suit2: {
+        name: "神秘遠古套裝",
+        position1: "神秘遠古巨劍",
+        position2: "神秘遠古頭盔",
+        position3: "神秘遠古鎧甲",
+        position4: "神秘遠古手套",
+        position5: "神秘遠古靴子",
+        position6: "神秘遠古腰帶",
+        position7: "神秘遠古項鏈",
+        position8: "神秘遠古戒指",
       },
-      "suit3": {
-        "name": "鋼鐵角鬥士套裝",
-        "position1": "鋼鐵角鬥士巨劍",
-        "position2": "鋼鐵角鬥士頭盔",
-        "position3": "鋼鐵角鬥士鎧甲",
-        "position4": "鋼鐵角鬥士手套",
-        "position5": "鋼鐵角鬥士靴子",
-        "position6": "鋼鐵角鬥士腰帶",
-        "position7": "鋼鐵角鬥士項鏈",
-        "position8": "鋼鐵角鬥士戒指"
+      suit3: {
+        name: "鋼鐵角鬥士套裝",
+        position1: "鋼鐵角鬥士巨劍",
+        position2: "鋼鐵角鬥士頭盔",
+        position3: "鋼鐵角鬥士鎧甲",
+        position4: "鋼鐵角鬥士手套",
+        position5: "鋼鐵角鬥士靴子",
+        position6: "鋼鐵角鬥士腰帶",
+        position7: "鋼鐵角鬥士項鏈",
+        position8: "鋼鐵角鬥士戒指",
       },
-      "suit4": {
-        "name": "沉默征服者套裝",
-        "position1": "沉默征服者巨劍",
-        "position2": "沉默征服者頭盔",
-        "position3": "沉默征服者鎧甲",
-        "position4": "沉默征服者手套",
-        "position5": "沉默征服者靴子",
-        "position6": "沉默征服者腰帶",
-        "position7": "沉默征服者項鏈",
-        "position8": "沉默征服者戒指"
-      }
+      suit4: {
+        name: "沉默征服者套裝",
+        position1: "沉默征服者巨劍",
+        position2: "沉默征服者頭盔",
+        position3: "沉默征服者鎧甲",
+        position4: "沉默征服者手套",
+        position5: "沉默征服者靴子",
+        position6: "沉默征服者腰帶",
+        position7: "沉默征服者項鏈",
+        position8: "沉默征服者戒指",
+      },
     },
     // 角斗士的所有套装
-    "type2": {
-      "suit1": {
-        "name": "神聖之光套裝",
-        "position1": "神聖之光匕首",
-        "position2": "神聖之光頭盔",
-        "position3": "神聖之光鎧甲",
-        "position4": "神聖之光手套",
-        "position5": "神聖之光靴子",
-        "position6": "神聖之光腰帶",
-        "position7": "神聖之光項鏈",
-        "position8": "神聖之光戒指"
+    type2: {
+      suit1: {
+        name: "神聖之光套裝",
+        position1: "神聖之光匕首",
+        position2: "神聖之光頭盔",
+        position3: "神聖之光鎧甲",
+        position4: "神聖之光手套",
+        position5: "神聖之光靴子",
+        position6: "神聖之光腰帶",
+        position7: "神聖之光項鏈",
+        position8: "神聖之光戒指",
       },
-      "suit2": {
-        "name": "神秘遠古套裝",
-        "position1": "神秘遠古匕首",
-        "position2": "神秘遠古頭盔",
-        "position3": "神秘遠古鎧甲",
-        "position4": "神秘遠古手套",
-        "position5": "神秘遠古靴子",
-        "position6": "神秘遠古腰帶",
-        "position7": "神秘遠古項鏈",
-        "position8": "神秘遠古戒指"
+      suit2: {
+        name: "神秘遠古套裝",
+        position1: "神秘遠古匕首",
+        position2: "神秘遠古頭盔",
+        position3: "神秘遠古鎧甲",
+        position4: "神秘遠古手套",
+        position5: "神秘遠古靴子",
+        position6: "神秘遠古腰帶",
+        position7: "神秘遠古項鏈",
+        position8: "神秘遠古戒指",
       },
-      "suit3": {
-        "name": "鋼鐵刺客套裝",
-        "position1": "鋼鐵刺客匕首",
-        "position2": "鋼鐵刺客頭盔",
-        "position3": "鋼鐵刺客鎧甲",
-        "position4": "鋼鐵刺客手套",
-        "position5": "鋼鐵刺客靴子",
-        "position6": "鋼鐵刺客腰帶",
-        "position7": "鋼鐵刺客項鏈",
-        "position8": "鋼鐵刺客戒指"
+      suit3: {
+        name: "鋼鐵刺客套裝",
+        position1: "鋼鐵刺客匕首",
+        position2: "鋼鐵刺客頭盔",
+        position3: "鋼鐵刺客鎧甲",
+        position4: "鋼鐵刺客手套",
+        position5: "鋼鐵刺客靴子",
+        position6: "鋼鐵刺客腰帶",
+        position7: "鋼鐵刺客項鏈",
+        position8: "鋼鐵刺客戒指",
       },
-      "suit4": {
-        "name": "沉默征服者套裝",
-        "position1": "沉默征服者匕首",
-        "position2": "沉默征服者頭盔",
-        "position3": "沉默征服者鎧甲",
-        "position4": "沉默征服者手套",
-        "position5": "沉默征服者靴子",
-        "position6": "沉默征服者腰帶",
-        "position7": "沉默征服者項鏈",
-        "position8": "沉默征服者戒指"
-      }
+      suit4: {
+        name: "沉默征服者套裝",
+        position1: "沉默征服者匕首",
+        position2: "沉默征服者頭盔",
+        position3: "沉默征服者鎧甲",
+        position4: "沉默征服者手套",
+        position5: "沉默征服者靴子",
+        position6: "沉默征服者腰帶",
+        position7: "沉默征服者項鏈",
+        position8: "沉默征服者戒指",
+      },
     },
     // 巫师的所有套装
-    "type3": {
-      "suit1": {
-        "name": "神聖之光套裝",
-        "position1": "神聖之光法環",
-        "position2": "神聖之光頭盔",
-        "position3": "神聖之光鎧甲",
-        "position4": "神聖之光手套",
-        "position5": "神聖之光靴子",
-        "position6": "神聖之光腰帶",
-        "position7": "神聖之光項鏈",
-        "position8": "神聖之光戒指"
+    type3: {
+      suit1: {
+        name: "神聖之光套裝",
+        position1: "神聖之光法環",
+        position2: "神聖之光頭盔",
+        position3: "神聖之光鎧甲",
+        position4: "神聖之光手套",
+        position5: "神聖之光靴子",
+        position6: "神聖之光腰帶",
+        position7: "神聖之光項鏈",
+        position8: "神聖之光戒指",
       },
-      "suit2": {
-        "name": "神秘遠古套裝",
-        "position1": "神秘遠古法環",
-        "position2": "神秘遠古頭盔",
-        "position3": "神秘遠古鎧甲",
-        "position4": "神秘遠古手套",
-        "position5": "神秘遠古靴子",
-        "position6": "神秘遠古腰帶",
-        "position7": "神秘遠古項鏈",
-        "position8": "神秘遠古戒指"
+      suit2: {
+        name: "神秘遠古套裝",
+        position1: "神秘遠古法環",
+        position2: "神秘遠古頭盔",
+        position3: "神秘遠古鎧甲",
+        position4: "神秘遠古手套",
+        position5: "神秘遠古靴子",
+        position6: "神秘遠古腰帶",
+        position7: "神秘遠古項鏈",
+        position8: "神秘遠古戒指",
       },
-      "suit3": {
-        "name": "鋼鐵魔法師套裝",
-        "position1": "鋼鐵魔法師法環",
-        "position2": "鋼鐵魔法師頭盔",
-        "position3": "鋼鐵魔法師鎧甲",
-        "position4": "鋼鐵魔法師手套",
-        "position5": "鋼鐵魔法師靴子",
-        "position6": "鋼鐵魔法師腰帶",
-        "position7": "鋼鐵魔法師項鏈",
-        "position8": "鋼鐵魔法師戒指"
+      suit3: {
+        name: "鋼鐵魔法師套裝",
+        position1: "鋼鐵魔法師法環",
+        position2: "鋼鐵魔法師頭盔",
+        position3: "鋼鐵魔法師鎧甲",
+        position4: "鋼鐵魔法師手套",
+        position5: "鋼鐵魔法師靴子",
+        position6: "鋼鐵魔法師腰帶",
+        position7: "鋼鐵魔法師項鏈",
+        position8: "鋼鐵魔法師戒指",
       },
-      "suit4": {
-        "name": "沉默征服者套裝",
-        "position1": "沉默征服者法環",
-        "position2": "沉默征服者頭盔",
-        "position3": "沉默征服者鎧甲",
-        "position4": "沉默征服者手套",
-        "position5": "沉默征服者靴子",
-        "position6": "沉默征服者腰帶",
-        "position7": "沉默征服者項鏈",
-        "position8": "沉默征服者戒指"
-      }
+      suit4: {
+        name: "沉默征服者套裝",
+        position1: "沉默征服者法環",
+        position2: "沉默征服者頭盔",
+        position3: "沉默征服者鎧甲",
+        position4: "沉默征服者手套",
+        position5: "沉默征服者靴子",
+        position6: "沉默征服者腰帶",
+        position7: "沉默征服者項鏈",
+        position8: "沉默征服者戒指",
+      },
     },
     // 刺客的所有套装
-    "type4": {
-      "suit1": {
-        "name": "神聖之光套裝",
-        "position1": "神聖之光拳套",
-        "position2": "神聖之光頭盔",
-        "position3": "神聖之光鎧甲",
-        "position4": "神聖之光手套",
-        "position5": "神聖之光靴子",
-        "position6": "神聖之光腰帶",
-        "position7": "神聖之光項鏈",
-        "position8": "神聖之光戒指"
+    type4: {
+      suit1: {
+        name: "神聖之光套裝",
+        position1: "神聖之光拳套",
+        position2: "神聖之光頭盔",
+        position3: "神聖之光鎧甲",
+        position4: "神聖之光手套",
+        position5: "神聖之光靴子",
+        position6: "神聖之光腰帶",
+        position7: "神聖之光項鏈",
+        position8: "神聖之光戒指",
       },
-      "suit2": {
-        "name": "神秘遠古套裝",
-        "position1": "神秘遠古拳套",
-        "position2": "神秘遠古頭盔",
-        "position3": "神秘遠古鎧甲",
-        "position4": "神秘遠古手套",
-        "position5": "神秘遠古靴子",
-        "position6": "神秘遠古腰帶",
-        "position7": "神秘遠古項鏈",
-        "position8": "神秘遠古戒指"
+      suit2: {
+        name: "神秘遠古套裝",
+        position1: "神秘遠古拳套",
+        position2: "神秘遠古頭盔",
+        position3: "神秘遠古鎧甲",
+        position4: "神秘遠古手套",
+        position5: "神秘遠古靴子",
+        position6: "神秘遠古腰帶",
+        position7: "神秘遠古項鏈",
+        position8: "神秘遠古戒指",
       },
-      "suit3": {
-        "name": "鋼鐵格鬥家套裝",
-        "position1": "鋼鐵格鬥家拳套",
-        "position2": "鋼鐵格鬥家頭盔",
-        "position3": "鋼鐵格鬥家鎧甲",
-        "position4": "鋼鐵格鬥家手套",
-        "position5": "鋼鐵格鬥家靴子",
-        "position6": "鋼鐵格鬥家腰帶",
-        "position7": "鋼鐵格鬥家項鏈",
-        "position8": "鋼鐵格鬥家戒指"
+      suit3: {
+        name: "鋼鐵格鬥家套裝",
+        position1: "鋼鐵格鬥家拳套",
+        position2: "鋼鐵格鬥家頭盔",
+        position3: "鋼鐵格鬥家鎧甲",
+        position4: "鋼鐵格鬥家手套",
+        position5: "鋼鐵格鬥家靴子",
+        position6: "鋼鐵格鬥家腰帶",
+        position7: "鋼鐵格鬥家項鏈",
+        position8: "鋼鐵格鬥家戒指",
       },
-      "suit4": {
-        "name": "沉默征服者套裝",
-        "position1": "沉默征服者拳套",
-        "position2": "沉默征服者頭盔",
-        "position3": "沉默征服者鎧甲",
-        "position4": "沉默征服者手套",
-        "position5": "沉默征服者靴子",
-        "position6": "沉默征服者腰帶",
-        "position7": "沉默征服者項鏈",
-        "position8": "沉默征服者戒指"
-      }
-    }
+      suit4: {
+        name: "沉默征服者套裝",
+        position1: "沉默征服者拳套",
+        position2: "沉默征服者頭盔",
+        position3: "沉默征服者鎧甲",
+        position4: "沉默征服者手套",
+        position5: "沉默征服者靴子",
+        position6: "沉默征服者腰帶",
+        position7: "沉默征服者項鏈",
+        position8: "沉默征服者戒指",
+      },
+    },
   }, //nft页面
   bond: {
+    txt_tax: "The floor tax rate is 0.1%, increasing by 0.01% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "债券",
+    add_txt1:"Asset",
+    add_txt_btn:"Mint",
+    add_txt_disable_btn:"Sold out",
     txt2_1: "购买债券稳定获得高额ST收益",
     txt2_2: "每期限量发售",
     txt2_3: "多重利率提升收益",
@@ -650,6 +651,11 @@ export const message = {
     txt76: "你质押额增加1k,利率增加0.1%",
     txt77: "债券总额包括未到期和到期未领取",
     txt78: "所有到期债券已ST发放",
+
+    txt79:"BUSD-ST lp数量:",
+    txt80:"最大购买量",
+    txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally.",
+    txt_81_ques:"Each wallet enjoys a maximum of 30% extra rate."
   }, //债券
   signin: {
     txt1: "创建账户",
@@ -755,6 +761,13 @@ export const message = {
     txt19: "Purchased",
     txt20: "Sell",
     txt21: "Rent",
+    txt22: "Invitation",
+    txt23: "Your referral link",
+    txt24: "Invitation Rules",
+    txt25: "1. The binding is successful only after users enter the official website through the link to purchase the bond.",
+    txt26: "2. The interest rate increases by 0.1% per 1K USD of bonds purchased or  staking by the invitee.",
+    txt27: "3. The invitation staking interest rate changes according to the actual staking amount of the invitee.",
+  
   },
   tip: {
     txt1: "创建账户成功,请到邮箱激活账户",
@@ -764,12 +777,63 @@ export const message = {
     txt5: "即将开始",
     txt6: "请选择要开的盒子",
 
-    self_txt7:'成功',
-    self_txt8:'购买中...',
-    self_txt9:'失败',
-    self_txt10:'最多5个',
-    self_txt11:'开盒子中....',
-    self_txt12:'开盲盒结果'
+    self_txt7: "成功",
+    self_txt8: "购买中...",
+    self_txt9: "失败",
+    self_txt10: "最多5个",
+    self_txt11: "开盒子中....",
+    self_txt12: "开盲盒结果",
+    self_txt13: "No Data",
+    self_buy:"购买",
+    self_userBuy:'用户个人剩余购买量为0',
+    self_calim:'提取中...',
+    self_calimResult:'暂无奖励需要提取',
+    self_bond:'获取最新债券中,请稍后...',
+    self_sold:'已卖完',
+    self_userBuyNum:'本期stlp购买量获取中',
+    self_write:'请输入数额'
   }, //一些提示语句,文案你看哪不合适,替换就行
   approve: "授权",
+
+  gamepage: {
+    text1: "Game",
+    text2: "Recharge/Claim",
+    text3: "Game data",
+    text4: "Updation",
+    text5: "Play for Fun and toEarn",
+    text6: "Sacred Realm",
+    text7: "Type",
+    text8: "MORPG",
+    text9: "Developer",
+    text10: "Sealemlab",
+    text11: "Status",
+    text12: "Developing",
+    text13: "Enter",
+    text14: "Download",
+    text15: "PSYCHE",
+    text16: "Account",
+    text17: "Binding Adress",
+    text18: "Wallet Balance",
+    text19: "Recharge",
+    text20: "Claimable",
+    text21: "Apply",
+    text22: "In Review",
+    text23: "Claim",
+    text24: "Recharge/Claim History",
+    text25: "Date",
+    text26: "Quantity",
+    text27: "Status",
+    text28: "Tx",
+    text29: "Succeeded",
+    text30: "Failed",
+    text31: "Amount",
+    text32: "Enter the amount to recharge",
+    text33: "Max",
+    text34: "Balance",
+    text35: "Shortcut",
+    text36: "Approve",
+    text37: "空空如也",
+    text38: "Recharge and Claim",
+    text39: "请登录账号后查看信息",
+  },
 };

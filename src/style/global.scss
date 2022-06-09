@@ -49,6 +49,9 @@
 .color_fff {
   color: #fff !important;
 }
+.color_ced{
+  color: #CED3D9 !important;
+}
 .color_000 {
   color: #000 !important;
 }
@@ -65,7 +68,6 @@ img {
     cursor: pointer;
     width: 30px;
     height: 100%;
-    margin: 0 auto;
     background-image: url($bg_url + "eye1.webp");
     background-size: 100%;
     background-repeat: no-repeat;
@@ -76,6 +78,20 @@ img {
       background-repeat: no-repeat;
       background-position: center;
     }
+  }
+}
+.has_question_icon {
+  position: relative;
+  &::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    filter: blur(0px);
+    background: url($bg_url + "ques_new.webp") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: -20px;
+    top: -5px;
   }
 }
 // 左右来回上下抖动 (input校验)
@@ -100,6 +116,77 @@ img {
     margin-top: 5px;
   }
 }
+// 移动端导航栏显示隐藏
+@keyframes showMen{
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+@keyframes DisMen{
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+.menDis{
+  display: none !important;
+  animation: DisMen 0.5s linear !important;
+}
+.menShow{
+  display: flex !important;
+  animation: showMen 0.5s linear !important;
+}
+.demo_font_color {
+  background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.loading_box_content{
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.video_proup{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 88;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  .video_{
+    max-width: 400px;
+    width: auto;
+    height: 90%;
+    object-fit: cover;
+  }
+  .close_img{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 34px;
+    cursor: pointer;
+  }
+}
 // 左右来回抖动  (没有同意协议抖动)
 .animation_move {
   animation: move 0.1s linear 0s 3 normal;
@@ -113,11 +200,6 @@ img {
     margin-left: 15px;
     margin-right: 0px;
   }
-}
-.demo_font_color {
-  background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 // 英文---粗体
 @font-face {
@@ -142,7 +224,7 @@ img {
   font-family: "SFCompactDisplay-Heavy";
   src: url($font_url + "SF-Compact-Display-Heavy.otf");
 }
-.en_special {
+.en_heavy {
   font-family: "SFCompactDisplay-Heavy" !important;
 }
 
@@ -169,9 +251,16 @@ img {
   .font45 {
     font-size: 45px;
   }
+  .font35 {
+    font-size: 35px;
+  }
   // banner 标题 eg:token
   .font34 {
     font-size: 34px;
+  }
+  // banner 标题 eg:token
+  .font32 {
+    font-size: 32px;
   }
   .font30 {
     font-size: 30px;
@@ -182,6 +271,9 @@ img {
   }
   .font26 {
     font-size: 26px;
+  }
+  .font24 {
+    font-size: 24px;
   }
   .font22 {
     font-size: 22px;
@@ -204,6 +296,38 @@ img {
   }
 }
 @media screen and (max-width: 980px) {
+  .has_question_icon {
+    &::after {
+      content: "";
+      width: 11px;
+      height: 11px;
+      right: -0.14rem;
+      top: -0.05rem;
+    }
+  }
+  .video_proup{
+    z-index: 100;
+    .video_{
+      max-width: 3.5rem;
+      width: auto;
+      height: 80%;
+      object-fit: cover;
+    }
+    .close_img{
+      position: absolute;
+      top: 0.2rem;
+      right: 0.2rem;
+      width: 0.28rem;
+      cursor: pointer;
+    }
+  }
+  .loading_box_content{
+    width: 100%;
+    min-height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .mobile_font45 {
     font-size: 0.45rem;
   }

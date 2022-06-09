@@ -33,7 +33,6 @@ export default {
   },
   watch:{
     resetdata(newvalue){
-      // console.log('省份加算了可的飞机---newvalue: ', newvalue);
       if(newvalue){
         this.$refs.progress.style.width = 0
         this.$refs.trunk.style.left = 0
@@ -42,7 +41,12 @@ export default {
   },
   //渲染到页面的时候
   mounted () {
-    this.load()
+    const bodyWidth = document.body.clientWidth;
+    if(bodyWidth <= 980){
+      this.mobileLoad()
+    }else{
+      this.load()
+    }
   },
   computed: {
     // 设置一个百分比，提供计算slider进度宽度和trunk的left值
@@ -90,6 +94,34 @@ export default {
         };
         document.onmouseup = function () {
           document.onmousemove = document.onmouseup = null;
+        };
+        return false;
+      }
+    },
+    mobileLoad(){
+      this.slider = this.$refs.slider;
+      this.thunk = this.$refs.trunk;
+      var _this = this;
+      this.thunk.ontouchstart = function (e) {
+        // console.log('手指按下e: ', e);
+        var width = parseInt(_this.width);
+        var disX = e.changedTouches[0].clientX;
+        document.ontouchmove = function (e) {
+          // console.log('手指移动e: ', e);
+          // value, left, width
+          // 当value变化的时候，会通过计算属性修改left，width
+          // 拖拽的时候获取的新width
+          var newWidth = e.changedTouches[0].clientX - disX + width;
+          // 拖拽的时候得到新的百分比
+          var scale = newWidth / _this.slider.offsetWidth;
+          _this.per = Math.ceil((_this.max - _this.min) * scale + _this.min);
+          _this.per = Math.max(_this.per, _this.min);
+          _this.per = Math.min(_this.per, _this.max);
+          _this.$emit("input", _this.per);
+        };
+        document.ontouchend = function () {
+          // console.log("手指抬起")
+          document.ontouchmove = document.ontouchend = null;
         };
         return false;
       }

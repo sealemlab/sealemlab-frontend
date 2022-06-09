@@ -1,7 +1,16 @@
-import {wallet, network,sb,sn,getSourceUrl} from "sealemlab-sdk";
+import {wallet, network,sb,sn,getSourceUrl,erc20,getSigner,token,bondDepository} from "sealemlab-sdk";
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
+  // 复制
+  copyClick(params: any) {
+    const dummy = document.createElement("input");
+    document.body.appendChild(dummy);
+    dummy.value = params;
+    dummy.select(); // 选择对象
+    document.execCommand("copy"); // 执行浏览器复制命令
+    document.body.removeChild(dummy);
+  },
   // 根据浏览器语言  自动切换中英文
   isLang() {
     // @ts-ignore
@@ -26,27 +35,116 @@ export default {
     else return null;
   },
   /** 应用场景:返回秒数,展示对应时间;参数:传入秒数(返回的是秒数对应的时间)*/
-  afferentTime(endtime: number, calback: any, type = 'H') {
-    if (endtime == 0) {
-      if(type === 'S'){
-        calback({ s: "00" });
-      }else{
-        calback({ h: "00", m: "00", s: "00" });
-      }
-      return;
+  afferentTime(endtime: number, calback: any, type = 'hour',iscountdown = false) {
+    if(endtime == 0 && type == 'day'){
+      calback({ d:"00",h: "00", m: "00", s: "00" });
+      return
     }
-    let H: any = parseInt((endtime / (60 * 60)).toString());
-    let M: any = parseInt(((endtime / 60) % 60).toString());
-    let S: any = parseInt((endtime % 60).toString());
+    if(endtime == 0 && type == 'hour'){
+      calback({ h: "00", m: "00", s: "00" });
+      return
+    }
+    // @ts-ignore
+    let timestamp = parseInt(new Date().getTime() / 1000) 
+    let neddTime = endtime - timestamp
+    // @ts-ignore
+    let day = parseFloat(neddTime / (24 * 3600))
+    // console.log('当前s数换算下来的天数day: ', day);
+    if(type == 'day' && !iscountdown){
+      calback(day);
+      return
+    }
+    if(day > 1){
+      // let timernull = setInterval(() => {
+        let D: any = parseFloat((neddTime / (3600 * 24)).toString());
+        let result:any = parseInt((neddTime - (D * 3600 * 24)).toString());
+        let H: any = parseInt((result / (60 * 60)).toString());
+        let M: any = parseInt(((result / 60) % 60).toString());
+        let S: any = parseInt((result % 60).toString());
+        D = D > 9 ? D : "0" + D;
+        H = H > 9 ? H : "0" + H;
+        M = M > 9 ? M : "0" + M;
+        S = S > 9 ? S : "0" + S;
+        calback({ d:D,h: H, m: M, s: S });
+    }else{
+        let H: any = parseInt((neddTime / (60 * 60)).toString());
+        let M: any = parseInt(((neddTime / 60) % 60).toString());
+        let S: any = parseInt((neddTime % 60).toString());
+        H = H > 9 ? H : "0" + H;
+        M = M > 9 ? M : "0" + M;
+        S = S > 9 ? S : "0" + S;
+        if(type == 'hour' && iscountdown){
+          calback({ h: H, m: M, s: S });
+        }else if(type == 'day' && iscountdown){
+          calback({ d:"00",h: H, m: M, s: S });
+        }
+    }
+  },
+  /** 应用场景:时间戳转相对应的日期格式;参数:时间戳(s);返回值:yy-mm-dd hh:mm:ss */
+  timeFormat(timestamp: any, type = 1) {
+    let y: any = new Date(timestamp).getFullYear();
+    let m: any = new Date(timestamp).getMonth() + 1;
+    let d: any = new Date(timestamp).getDate();
+    let H: any = new Date(timestamp).getHours();
+    let M: any = new Date(timestamp).getMinutes();
+    let S: any = new Date(timestamp).getSeconds();
+    m = m > 9 ? m : "0" + m;
+    d = d > 9 ? d : "0" + d;
     H = H > 9 ? H : "0" + H;
     M = M > 9 ? M : "0" + M;
     S = S > 9 ? S : "0" + S;
-    if(type === 'S'){
-      calback({ s: S });
-    }else{
-      calback({ h: H, m: M, s: S });
+    if (type == 1) {
+      return y + "-" + m + "-" + d + " " + H + ":" + M + ":" + S;
+    } else {
+      return y + "-" + m + "-" + d;
     }
-    endtime = endtime - 1;
+  },
+  /** 应用场景:返回时间戳,然后倒计时;参数:时间戳(s)*/
+  customTime(endtime: any, calback: any) {
+    // console.log('endtime: ', endtime);
+    // @ts-ignore
+    let time = parseInt(new Date().getTime() / 1000)
+    
+    if(endtime < time){
+      calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});
+      return
+    }
+    let timernull = setInterval(() => {
+      let neddTime = endtime - time
+      if (endtime == time) {
+        clearInterval(timernull);
+        calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});
+        return;
+      }
+      // @ts-ignore
+      let day = parseFloat(neddTime / (24 * 3600))
+      // console.log('总共的天数day: ', day);
+      if(day > 1){
+        // @ts-ignore
+        let D: any = parseInt(day)
+        // console.log('整数位天数D: ', D);
+        // @ts-ignore
+        let result:any = parseFloat((day - D) * 24 * 3600);
+        // console.log('剩余天数result: ', result);
+        let H: any = parseInt((result / (60 * 60)).toString());
+        let M: any = parseInt(((result / 60) % 60).toString());
+        let S: any = parseInt((result % 60).toString());
+        D = D > 9 ? D : "0" + D;
+        H = H > 9 ? H : "0" + H;
+        M = M > 9 ? M : "0" + M;
+        S = S > 9 ? S : "0" + S;
+        calback({countdownObject:timernull,countTime:{ d:D,h: H, m: M, s: S }});
+      }else{
+        let H: any = parseInt((neddTime / (60 * 60)).toString());
+        let M: any = parseInt(((neddTime / 60) % 60).toString());
+        let S: any = parseInt((neddTime % 60).toString());
+        H = H > 9 ? H : "0" + H;
+        M = M > 9 ? M : "0" + M;
+        S = S > 9 ? S : "0" + S;
+        calback({countdownObject:timernull,countTime:{ d:"00",h: H, m: M, s: S }});
+      }
+      endtime -= 1;
+    }, 1000);
   },
   // 截取字符串  已开头字符串中间....尾部字符串显示   eg:wsx....efdf   参数解释str:需要展示的字符串;num:开头结尾需要展示几位
   getSubStr(str: any, num: number) {
@@ -98,7 +196,12 @@ export default {
     let str = value.toString();
     let strIndex = str.indexOf(".");
     if (strIndex === -1) return this.cutZero(str);
-    str = str.substring(0, strIndex + bit + 1);
+    if(bit == 0){
+      str = str.substring(0, strIndex);
+    }else{
+      str = str.substring(0, strIndex + bit + 1);
+    }
+    
     return this.cutZero(str);
   },
   // 一个数乘以1e18   eg:convertNormalToBigNumber('input num',18)
@@ -280,4 +383,58 @@ export default {
       callback()
     },delay);
   },
+  // 是否授权
+  isApproveFun(account:string, type:string,contractAdrdess: string) {
+    return new Promise(resolve => {
+      erc20(type).allowance(account,contractAdrdess).then((res:any) => {
+        if (res.toString() > 0) {
+          resolve(true)
+        } else {
+          resolve(false)
+        }
+      }).catch(() => {
+        resolve(false)
+      })
+    })
+  },
+  // 去授权
+  goApproveFun(type:string, contractAdrdess:string) {
+    const TOKEN_amount = '50000000000000000000000000000000000000000000000000000000000';
+      return new Promise(resolve => {
+        erc20(type).connect(getSigner()).approve(contractAdrdess,TOKEN_amount).then(async res => {
+          const etReceipt = await res.wait();
+          if(etReceipt.status == 1){
+            resolve(true)
+          }else{
+            resolve(false)
+          }
+        }).catch(() => {
+          resolve(false)
+        })
+      })
+  },
+  // 刷新代币余额
+  getUserCoinQuantity(address:any,name:string,account:string){
+    erc20(address).balanceOf(account).then((res:any)=> {
+      if(name == 'busd'){
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'busd':res / 1e18}));
+      }else if(name == 'st'){
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'st':res / 1e18}));
+      }else if(name == 'sr'){
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'sr':res / 1e18}));
+      }
+    })
+  },
+  // 刷新代币价格
+  refreshPrice(type:string,bondID = ''){
+    if(type == 'st'){
+      bondDepository().getStPrice().then((res:any) => {
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stPrice':res / 1e18}));
+      })
+    }else if(type == 'stlp'){
+      bondDepository().getLpPrice(bondID).then((res:any) => {
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stlpPrice':res / 1e18}));
+      })
+    }
+  }
 };
