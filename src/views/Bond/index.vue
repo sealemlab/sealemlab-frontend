@@ -1462,7 +1462,7 @@ export default {
         font-weight: 600;
         color: #eccf83;
         line-height: 33px;
-        &:nth-child(2),&:nth-child(4){
+        &:nth-child(2),&:nth-child(4),&:nth-child(6){
           text-align: right;
         }
       }
@@ -1700,14 +1700,13 @@ export default {
         line-height: 0.28rem;
         &:nth-child(2){
           display: flex;
-          
         }
         li {
           width: 100%;
           display: flex;
           padding: 0;
           flex-direction: column;
-          align-items:flex-end;
+          align-items:center;
           > span {
             width: auto;
             min-width: 1.06rem;
