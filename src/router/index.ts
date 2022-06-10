@@ -126,6 +126,11 @@ const routes: Array<RouteConfig> = [
       },
     ],
   },
+  {
+    path: "/activepage",
+    name: "ActivePage",
+    component: () => import("../views/ActivityPage/index.vue"),
+  },
 ];
 
 const router = new VueRouter({

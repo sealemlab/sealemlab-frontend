@@ -1,5 +1,5 @@
 const isProd = process.env.NODE_ENV == "production";
-const timestamp = new Date().getTime(); // 获取当前时间戳
+// const timestamp = new Date().getTime(); // 获取当前时间戳
 
 module.exports = {
   publicPath: "/",
@@ -21,8 +21,8 @@ module.exports = {
   css: isProd
     ? {
         extract: {
-          filename: `css/[name].[chunkhash].${timestamp}.css`, // 打包时css文件配置
-          chunkFilename: `css/[name].[chunkhash].${timestamp}.css`,
+          filename: `css/[name].[chunkhash].css`, // 打包时css文件配置
+          chunkFilename: `css/[name].[chunkhash].css`,
         },
       }
     : {}, // 生产环境时给css文件添加时间戳，避免浏览器使用旧版css文件
@@ -54,8 +54,8 @@ module.exports = {
         output: {
           // 生产环境时给js文件添加时间戳，避免浏览器使用旧版js文件
           ...config.output,
-          filename: `js/[name].[chunkhash].${timestamp}.js`, // 打包时js文件配置
-          chunkFilename: `js/[name].[chunkhash].${timestamp}.js`,
+          filename: `js/[name].[chunkhash].js`, // 打包时js文件配置
+          chunkFilename: `js/[name].[chunkhash].js`,
         },
       });
     }

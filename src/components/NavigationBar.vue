@@ -7,6 +7,7 @@
           <span class="font18">{{ $t(item.label) }}</span>
         </li>
       </ul>
+      <!-- <div class="buy_box" @click="buybox">购买宝箱</div> -->
     </div>
     <div class="nav_right">
       <div class="st_price">
@@ -87,6 +88,8 @@ export default {
         this.navActive = -1;
       } else if (to.path == "/bond") {
         this.navActive = 0;
+      }else if (to.path == "/activepage") {
+        this.navActive = -1;
       }else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
       }
@@ -164,6 +167,9 @@ export default {
     commonLink() {
       this.$store.commit("setwalletstatus", true);
     },
+    buybox(){
+      this.$router.push('/activepage');
+    }
   },
 };
 </script>
@@ -203,6 +209,19 @@ export default {
         color: #EDD083;
       }
     }
+  }
+  .buy_box{
+    cursor: pointer;
+    width: 114px;
+    height: 34px;
+    background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+    border-radius: 4px;
+    border: 1px solid #ECCF83;
+    backdrop-filter: blur(14px);
+    text-align: center;
+    line-height: 34px;
+    font-weight: bold;
+    color: #CED3D9;
   }
 }
 .active {

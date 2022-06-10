@@ -99,7 +99,7 @@ export default {
       return y + "-" + m + "-" + d;
     }
   },
-  /** 应用场景:返回时间戳,然后倒计时;参数:时间戳(s)*/
+  /** 应用场景:时间戳,然后倒计时;参数:时间戳(s)*/
   customTime(endtime: any, calback: any) {
     // console.log('endtime: ', endtime);
     // @ts-ignore
@@ -111,33 +111,30 @@ export default {
     }
     let timernull = setInterval(() => {
       let neddTime = endtime - time
+      // console.log('neddTime: ', neddTime);
       if (endtime == time) {
         clearInterval(timernull);
         calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});
         return;
       }
       // @ts-ignore
-      let day = parseFloat(neddTime / (24 * 3600))
-      // console.log('总共的天数day: ', day);
+      let day = neddTime / (24 * 3600)
+      console.log('总共的天数day: ', day);
       if(day > 1){
         // @ts-ignore
-        let D: any = parseInt(day)
-        // console.log('整数位天数D: ', D);
-        // @ts-ignore
-        let result:any = parseFloat((day - D) * 24 * 3600);
-        // console.log('剩余天数result: ', result);
-        let H: any = parseInt((result / (60 * 60)).toString());
-        let M: any = parseInt(((result / 60) % 60).toString());
-        let S: any = parseInt((result % 60).toString());
+        let D: any = Math.floor(neddTime / 60 / 60 / 24)
+        let H: any = Math.floor(neddTime / 60 / 60 % 24)
+        let M: any = Math.floor(neddTime /60 % 60)
+        let S: any = Math.floor(neddTime % 60)
         D = D > 9 ? D : "0" + D;
         H = H > 9 ? H : "0" + H;
         M = M > 9 ? M : "0" + M;
         S = S > 9 ? S : "0" + S;
         calback({countdownObject:timernull,countTime:{ d:D,h: H, m: M, s: S }});
       }else{
-        let H: any = parseInt((neddTime / (60 * 60)).toString());
-        let M: any = parseInt(((neddTime / 60) % 60).toString());
-        let S: any = parseInt((neddTime % 60).toString());
+        let H: any = Math.floor(neddTime / 60 / 60 % 24)
+        let M: any = Math.floor(neddTime /60 % 60)
+        let S: any = Math.floor(neddTime % 60)
         H = H > 9 ? H : "0" + H;
         M = M > 9 ? M : "0" + M;
         S = S > 9 ? S : "0" + S;
