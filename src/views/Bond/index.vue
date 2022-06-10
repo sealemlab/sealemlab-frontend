@@ -100,8 +100,8 @@
                 </span>
               </li>
             </ul>
-            <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''"  v-if="(bondinfo.maxSupplyLp == bondinfo.soldLpNum || bondinfo.addtimeobj == 0) && bondStatus" @click="BondClick(false)">{{ $t("message.bond.add_txt_disable_btn") }}</div>
-            <div class="add_btn_txt disable_bnb mobile_font16" :class="isEnLang?'en_Bold':''"  v-else @click="BondClick(true)">{{ $t("message.bond.add_txt_btn") }}</div>
+            <div class="add_btn_txt mobile_font16 disable_bnb" :class="isEnLang?'en_Bold':''"  v-if="(bondinfo.maxSupplyLp == bondinfo.soldLpNum || bondinfo.addtimeobj == 0) && bondStatus" @click="BondClick(false)">{{ $t("message.bond.add_txt_disable_btn") }}</div>
+            <div class="add_btn_txt bg3 mobile_font16" :class="isEnLang?'en_Bold':''"  v-else @click="BondClick(true)">{{ $t("message.bond.add_txt_btn") }}</div>
           </div>
         </div>
       </div>

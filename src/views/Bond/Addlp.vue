@@ -111,12 +111,14 @@
       </div>
       <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click.stop="closeProup"/>
     </div>
+    <ToolTip :TooltipStatus="TooltipStatus" :isshowTip="isshowTip" @sureclick="sureclick"></ToolTip>
     <MessageBox ref="mychildAdd" :clientX='clientX' :clientY="clientY" :content="datacontent"></MessageBox>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
 import MessageBox from "./MessageBox.vue";
+import ToolTip from "./Tooltip.vue";
 import { bondDepository,token,contract,getSigner} from 'sealemlab-sdk'
 export default {
   watch:{
@@ -166,7 +168,7 @@ export default {
     },
   },
   components: {
-    MessageBox
+    MessageBox,ToolTip
   },
   computed: {
     ...mapGetters(["isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
@@ -210,6 +212,8 @@ export default {
   },
   data(){
     return {
+      isshowTip:true,
+      TooltipStatus:false,
       userTaxRateStatus:false,//个人税率获取中
       isWriteStatus:true,//输入框是否可以输入 (税率拿不到,计算会出错)
       useBuyNumStatus:false,// 用户剩余购买量状态判断
@@ -434,6 +438,11 @@ export default {
       },400)
     },
     busdInputClick(data){
+      if(this.activetype == 1){
+        if(data > 10000){
+          this.TooltipStatus = true
+        }
+      }
       if(!data){
         this.STmsg = ''
         this.resetData()
@@ -447,7 +456,11 @@ export default {
       this.youChangeIChange()
     },
     inputClick(data){
-      // console.log('st输入框data: ', data);
+      if(this.activetype == 2){
+        if(data * this.getUserCoin.stPrice > 10000){
+          this.TooltipStatus = true
+        }
+      }
       if(!data){
         this.BUSDmsg = ''
         this.resetData()
@@ -456,11 +469,12 @@ export default {
         this.BUSDmsg = Number(data) * this.getUserCoin.stPrice
       }else{
         this.STmsg = this.getUserCoin.st < 1e-8?0:this.getUserCoin.st
-        this.BUSDmsg = Number(this.STmsg) / this.getUserCoin.stPrice
+        this.BUSDmsg = Number(this.STmsg) * this.getUserCoin.stPrice
       }
       this.youChangeIChange()
     },
     typeClick(item,index){
+      this.isshowTip = true
       this.arr.forEach(item => {
         item.status = false
       })
@@ -470,6 +484,8 @@ export default {
     },
     // 弹窗关闭
     closeProup () {
+      this.isshowTip = true
+      this.TooltipStatus = false
       this.userSurplusNum = this.userTaxRate = this.useReadyBy = this.additional1 = this.additional2 = this.additional3 = this.additional4 = this.activetype = 0
       this.resetData()
       this.$emit('closeLP',this.userBuyStatus)
@@ -485,8 +501,14 @@ export default {
           this.BUSDmsg = Number(this.STmsg) * this.getUserCoin.stPrice
         }
       }else if(this.activetype == 1){
+        if(this.getUserCoin.busd > 10000){
+          this.TooltipStatus = true
+        }
         this.BUSDmsg = this.getUserCoin.busd > 1e-8?this.getUserCoin.busd:0
       }else if(this.activetype == 2){
+        if(this.getUserCoin.st * this.getUserCoin.stPrice > 10000){
+          this.TooltipStatus = true
+        }
         this.STmsg = this.getUserCoin.st > 1e-8?this.getUserCoin.st:0
       }
       this.youChangeIChange()
@@ -550,6 +572,10 @@ export default {
       this.moneyArr.forEach(item => {
         item.num = 0
       })
+    },
+    sureclick(){
+      this.TooltipStatus = false
+      this.isshowTip = false
     }
   }
 }
@@ -580,7 +606,7 @@ export default {
 .proup_boxs{
   position: relative;
   width: 50vw;
-  height: auto;
+  height: 85%;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -792,7 +818,7 @@ export default {
   .proup_boxs{
     position: relative;
     width: 90%; 
-    height:auto;
+    height: 85%;
     overflow: auto;
     display: flex;
     flex-direction: column;

@@ -77,12 +77,6 @@
 import { mapGetters } from "vuex";
 import { sn } from "sealemlab-sdk";
 export default {
-  // props: {
-  //   boxarr: {
-  //     type: Array,
-  //     default: function () { return [] }
-  //   }
-  // },
   computed: {
     ...mapGetters(["getAccount","getIstrue","getAccountStatus","isEnLang"])
   },
@@ -223,7 +217,7 @@ export default {
 <style lang="scss" scoped>
 .nft_arr_page {
   width: 100%;
-  min-height:100%;
+  // min-height:100%;
   position: relative;
   display: flex;
   flex-direction: column;

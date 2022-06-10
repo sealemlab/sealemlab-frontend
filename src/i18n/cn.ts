@@ -565,6 +565,10 @@ export const message = {
     },
   }, //nft页面
   bond: {
+    tip_title_txt:'Risk Warning',
+    tip_content_txt:"There is a risk of loss when purchasing bond in ST or BUSD when the token price fluctuates greatly. You can go to Pancake Swap to buy token and then pay ST and BUSD to buy bond.",
+    tip_btn_txt:"I've known the risk",
+    tip_txt:"Please confirm that you have known this risk.",
     txt_tax: "The floor tax rate is 0.1%, increasing by 0.01% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "债券",
     add_txt1:"Asset",

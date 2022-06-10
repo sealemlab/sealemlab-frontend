@@ -579,6 +579,10 @@ export const message = {
     },
   },
   bond: {
+    tip_title_txt:'Risk Warning',
+    tip_content_txt:"There is a risk of loss when purchasing bond in ST or BUSD when the token price fluctuates greatly. You can go to Pancake Swap to buy token and then pay ST and BUSD to buy bond.",
+    tip_btn_txt:"I've known the risk",
+    tip_txt:"Please confirm that you have known this risk.",
     txt_tax: "The floor tax rate is 1.0%, increasing by 0.1% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "Bond",
     add_txt1:"Asset",
@@ -605,10 +609,10 @@ export const message = {
     txt18: "You will get",
     txt19: "Days",
     txt20: "ST-BUSD LP",
-    txt21: "Pay to mint",
+    txt21: "Select tokens",
     txt22: "Balance",
     txt23: "Amount",
-    txt24: "Pay to mint",
+    txt24: "Cost",
     txt25: "Interest",
     txt26: "You will get",
     txt27: "Interest rate",

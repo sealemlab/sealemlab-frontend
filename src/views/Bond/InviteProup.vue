@@ -50,9 +50,6 @@ export default {
     closeProup () {
       this.$emit('closeInvite')
     },
-    bondFun(){
-      this.$emit('sureclick')
-    },
     copyClick(){
       if(this.getIstrue){
         this.$utils.copyClick(this.invitelink)
