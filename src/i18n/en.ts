@@ -675,7 +675,7 @@ export const message = {
     txt78: "Bond principal and interest will be issued by ST.",
 
     txt79:"Estimated ST-BUSD LP:",
-    txt80:"Max you can buy",
+    txt80:"Max you can buy within 14 days",
     txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally.",
     txt_81_ques:"Each wallet enjoys a maximum of 30% extra rate."
   },//债券

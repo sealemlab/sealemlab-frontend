@@ -2,16 +2,29 @@
   <div class="record_page" v-if="getwalletstatus">
     <div class="boxarr">
       <div class="title font26 mobile_font18">{{ $t("message.nav.txt9") }}</div>
-      <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click="closepage" />
+      <img
+        :src="`${$store.state.imgUrl}close.webp`"
+        class="close_img"
+        @click="closepage"
+      />
       <div class="out_box_hidden">
-        <div class="onebox" v-for="(item, index) in walletarr" :key="index" @click="walletClick(item)">
+        <div
+          class="onebox"
+          v-for="(item, index) in walletarr"
+          :key="index"
+          @click="walletClick(item)"
+        >
           <span class="wallet_txt fontsize16">{{ item.name }}</span>
           <img :src="item.src" class="imgcard" />
         </div>
       </div>
       <div class="new_cry font16">
         {{ $t("message.nav.txt11") }}
-        <a href="https://en.wikipedia.org/wiki/Cryptocurrency_wallet" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://en.wikipedia.org/wiki/Cryptocurrency_wallet"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <span class="color4">{{ $t("message.nav.txt12") }}</span>
         </a>
       </div>
@@ -25,29 +38,30 @@ export default {
   computed: {
     ...mapGetters(["getwalletstatus"]),
   },
-  data() {
+  data () {
     return {
       walletarr: [
-        { name: "Metamask", src: `${this.$store.state.imgUrl}wallet1.webp`,content:'metamask' },
-        { name: "WalletConnect", src: `${this.$store.state.imgUrl}wallet2.webp`,content:'walletconnect' },
-        {name:'Bitkeep',src:`${this.$store.state.imgUrl}wallet3.webp`,content:'metamask'},
-        {name:'TokenPocket',src:`${this.$store.state.imgUrl}wallet4.webp`,content:'metamask'},
-        {name:'Nabox',src:`${this.$store.state.imgUrl}wallet5.webp`,content:'metamask'},
-        { name: "COIN98", src: `${this.$store.state.imgUrl}wallet6.webp`,content:'metamask'},
-        {name:'Math Wallet',src:`${this.$store.state.imgUrl}wallet7.webp`,content:'metamask'},
-        {name:'SafePal',src:`${this.$store.state.imgUrl}wallet8.webp`,content:'metamask'},
-        {name:'ONTO',src:`${this.$store.state.imgUrl}wallet9.webp`,content:'metamask'},
-        {name:'Coinhub',src:`${this.$store.state.imgUrl}wallet10.webp`,content:'metamask'}
+        { name: "Metamask", src: `${this.$store.state.imgUrl}wallet1.webp`, content: 'metamask' },
+        { name: "WalletConnect", src: `${this.$store.state.imgUrl}wallet2.webp`, content: 'walletconnect' },
+        { name: 'Bitkeep', src: `${this.$store.state.imgUrl}wallet3.webp`, content: 'metamask' },
+        { name: 'TokenPocket', src: `${this.$store.state.imgUrl}wallet4.webp`, content: 'metamask' },
+        { name: 'Nabox', src: `${this.$store.state.imgUrl}wallet5.webp`, content: 'metamask' },
+        { name: "COIN98", src: `${this.$store.state.imgUrl}wallet6.webp`, content: 'metamask' },
+        { name: 'Math Wallet', src: `${this.$store.state.imgUrl}wallet7.webp`, content: 'metamask' },
+        { name: 'SafePal', src: `${this.$store.state.imgUrl}wallet8.webp`, content: 'metamask' },
+        { name: 'ONTO', src: `${this.$store.state.imgUrl}wallet9.webp`, content: 'metamask' },
+        { name: 'Coinhub', src: `${this.$store.state.imgUrl}wallet10.webp`, content: 'metamask' },
+        { name: 'Formless', src: `${this.$store.state.imgUrl}wallet11.webp`, content: 'formless' }
       ],
     };
   },
   methods: {
     // 弹窗关闭
-    closepage() {
+    closepage () {
       this.$emit("closewalletpage");
     },
     // 各类钱包点击
-    walletClick(item) {
+    walletClick (item) {
       this.$emit("walletClick", item);
     },
   },
@@ -78,7 +92,7 @@ export default {
     border-radius: 5px;
     background: #171717;
     padding-bottom: 40px;
-    .out_box_hidden{
+    .out_box_hidden {
       width: 100%;
       max-height: 560px;
       overflow-y: auto;
@@ -98,7 +112,7 @@ export default {
           width: 41px;
         }
         .wallet_txt {
-          color: #CED3D9;
+          color: #ced3d9;
         }
       }
       .onebox:hover {
@@ -118,7 +132,7 @@ export default {
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      color: #CED3D9;
+      color: #ced3d9;
     }
     .close_img {
       position: absolute;
@@ -137,7 +151,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      padding:0.2rem;
+      padding: 0.2rem;
       max-height: 6rem;
       overflow-y: auto;
       margin-top: 0.27rem;
@@ -153,14 +167,14 @@ export default {
           object-fit: contain;
         }
         .wallet_txt {
-          color: #CED3D9;
+          color: #ced3d9;
         }
       }
       .title {
         margin-top: 0.2rem 0;
         width: 100%;
         text-align: center;
-        color: #CED3D9;
+        color: #ced3d9;
       }
       .close_img {
         position: absolute;

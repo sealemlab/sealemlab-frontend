@@ -17,7 +17,7 @@ export default {
 <style lang="scss" scoped>
 .lease_page {
   width: 100%;
-  min-height:100%;
+  // min-height:100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@ export default {
   }
   .box{
     width: 100%;
-    min-height:100%;
+    // min-height:100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

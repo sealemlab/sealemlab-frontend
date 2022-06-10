@@ -38,7 +38,7 @@
           </div>
         </div>
         <p class="font12 balance_ add_balance_" :class="isEnLang?'en_medium':''" v-if="changeLpNum > 0">
-          {{$t("message.bond.txt79")}}{{changeLpNum}}
+          {{$t("message.bond.txt79")}} {{changeLpNum}}
         </p>
         <!-- 投入以及收益 -->
         <div class="profit_box">
@@ -107,7 +107,7 @@
           </p>
           <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''">
             <span>{{$t("message.bond.txt33")}}</span>
-            <span>$ {{useReadyBy}}(≈{{add_changest | PriceConversion}} ST)</span>
+            <span>{{userbuylp | PriceConversion}} ST-BUSD LP (≈ $ {{useReadyBy}})</span>
           </p>
           <p>{{$t("message.bond.txt34")}}</p>
         </div>
@@ -133,13 +133,13 @@ export default {
           this.userSurplusNum = res.userSurplusNum // 用户剩余购买量
           this.useBuyNumStatus = true
           this.useReadyBy = res.useReadyBy
-          this.add_changest = res.useReadyBy / this.getUserCoin.stPrice
           this.additional1 = res.additional1//邀请购买利率
           this.additional2 = res.additional2//邀请质押利率
           this.additional3 = res.additional3//质押利率
           this.additional4 = res.additional4//总个人额外利率
           this.userTaxRateStatus = true // 获取到总个人额外利率
           this.isWriteStatus = false // 是否可以输入
+          this.userbuylp = res.userbuylp
         })
       }else{
         document.body.style.overflow='visible'
@@ -211,6 +211,7 @@ export default {
   },
   data(){
     return {
+      userbuylp:0,//用户已经购买的lp
       isshowTip:true,
       TooltipStatus:false,
       userTaxRateStatus:false,//总额外利率获取中
@@ -223,7 +224,6 @@ export default {
       changeLpNum:0,// 其他币转换的lp数量
       userTaxRate:1,
       useReadyBy:0,
-      add_changest:0,
       userSurplusNum:0,//用户剩余购买量
       BUSDmsg:'',
       STmsg:'',
@@ -313,12 +313,12 @@ export default {
             that.userSurplusNum = res.userSurplusNum
             that.useBuyNumStatus = true
             that.useReadyBy = res.useReadyBy
-            that.add_changest = res.useReadyBy / that.getUserCoin.stPrice
             that.additional1 = res.additional1//邀请购买利率
             that.additional2 = res.additional2//邀请质押利率
             that.additional3 = res.additional3//质押利率
             that.additional4 = res.additional4//总个人额外利率
-
+            
+            that.userbuylp = res.userbuylp // 用户已经购买的lp数量
             that.userTaxRateStatus = true // 获取总个人额外利率
             that.isWriteStatus = false // 是否可以输入
           })
@@ -486,7 +486,7 @@ export default {
     closeProup () {
       this.isshowTip = true
       this.TooltipStatus = false
-      this.userSurplusNum = this.add_changest = this.useReadyBy = this.additional1 = this.additional2 = this.additional3 = this.additional4 = this.activetype = 0
+      this.userSurplusNum = this.useReadyBy = this.additional1 = this.additional2 = this.additional3 = this.additional4 = this.activetype = 0
       this.resetData()
       this.$emit('closeLP',this.userBuyStatus)
     },
@@ -518,7 +518,7 @@ export default {
       this.userTaxRateStatus = false
       // 获取某用户某期债券剩余可购买LP数量
       bondDepository().getUserLeftLpCanBuy(this.getAccount,this.newBondID).then(res => {
-        // console.log('获取某用户某期债券剩余可购买LP数量res: ', res);
+        console.log('获取某用户某期债券剩余可购买LP数量res: ', res);
         obj.userSurplusNum = this.$utils.convertBigNumberToNormal(Number(res), 2)
         calback(Object.assign({},obj))
       })
@@ -541,6 +541,13 @@ export default {
         obj.additional2 = Number(res[1])
         obj.additional3 = Number(res[2])
         obj.additional4 = Number(res[3])
+        calback(Object.assign({},obj))
+      })
+      // 获取用户某期债券的LP购买量
+      bondDepository().userEpochLpBuyAmount(this.getAccount,this.newBondID).then(res => {
+        console.log('获取用户某期债券的LP购买量: ', res);
+        obj.userbuylp = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        console.log('obj.userbuylp: ', obj.userbuylp);
         calback(Object.assign({},obj))
       })
     },

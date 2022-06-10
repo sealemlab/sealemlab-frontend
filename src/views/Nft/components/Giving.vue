@@ -19,7 +19,7 @@ export default {
 <style lang="scss" scoped>
 .giving_page {
   width: 100%;
-  min-height:100%;
+  // min-height:100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ export default {
   }
   .box{
     width: 100%;
-    min-height: 100%;
+    // min-height: 100%;
     // min-height:calc(100% - 42px);
     display: flex;
     flex-direction: column;

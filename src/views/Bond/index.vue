@@ -119,7 +119,7 @@
           <span>{{ $t("message.bond.txt5") }}</span>
         </div>
         <div class="box">
-          <div class="text1 font12">{{ $t("message.bond.txt40") }}</div>
+          <div class="text1 font12" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt40") }}</div>
           <ul class="list_title1">
             <li>
               <ul class="list_title2">
@@ -286,13 +286,13 @@
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
             <div>
-              <span>$ {{NotExtractedBUSDMoney}}(≈{{ Not_BUSDchangeST }} ST)</span>
+              <span>$ {{NotExtractedBUSDMoney}} (≈{{ Not_BUSDchangeST }} ST)</span>
             </div>
             <div :title='$t("message.bond.txt78")' style="cursor:pointer" @click="quesFun('message.bond.txt78',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
             <div>
-              <span>$ {{userClaimeMoney}}(≈{{Ready_BUSDchangeST}} ST)</span>
+              <span>$ {{userClaimeMoney}} (≈{{Ready_BUSDchangeST}} ST)</span>
             </div>
             <div class="add_btnbox">
               <div class="btn_txt bg3 mobile_btn_es" @click="userClaimSt" :class="isEnLang?'en_Bold':''">
@@ -357,7 +357,7 @@
                   <span class="color3">{{ item.personalArr[1] | SquareRoot}}%</span> + 
                   <span class="color4">{{ item.personalArr[2] | SquareRoot}}%</span>
                 </span>
-                <span>$ {{ item.usdPayout}}(≈ {{item.changeSt | PriceConversion}} ST)</span>
+                <span>$ {{ item.usdPayout}} (≈ {{item.changeSt | PriceConversion}} ST)</span>
                 <span v-if="item.countTime">
                   {{ item.countTime.d}}&nbsp;:
                   {{ item.countTime.h }}&nbsp;:
@@ -591,11 +591,23 @@ export default {
           this.bondinfo = this.lastBondInfo
         }
       })
-      // 0xBC45dC703694831510bE20A64005e1C39fd34a36(测试)  国库地址
-      erc20(token().STLP).balanceOf('0xBC45dC703694831510bE20A64005e1C39fd34a36').then(res => {
-        // console.log('国库金额res: ', res);
-        this.treasuryMoney = this.$utils.convertBigNumberToNormal(Number(res), 2)
-      })
+      // 正式情况下  国库地址加ox地址的余额显示
+      if(process.env.NODE_ENV == "production"){
+        erc20(token().STLP).balanceOf('0x0000000000000000000000000000000000000000').then(res => {
+          console.log('销毁地址国库金额res: ', res);
+          this.treasuryMoney = this.$utils.convertBigNumberToNormal((Number(res) * this.getUserCoin.stlpPrice), 2)
+          // erc20(token().STLP).balanceOf('0x0000000000000000000000000000000000000000').then(res1 => {
+          //   console.log('国库金额res: ', res1);
+          //   // this.treasuryMoney = this.$utils.convertBigNumberToNormal(Number(res), 2)
+          // })
+        })
+      }else{
+        erc20(token().STLP).balanceOf('0xBC45dC703694831510bE20A64005e1C39fd34a36').then(res => {
+          erc20(token().STLP).balanceOf('0xa41F8EFd21eEbA425835bFD6f4B34B0b3b5B45Ab').then(res1 => {
+            this.treasuryMoney = this.$utils.convertBigNumberToNormal((Number(res) + Number(res1) * this.getUserCoin.stlpPrice), 2)
+          })
+        })
+      }
     },
     // 获取某债券的全部信息
     getCertainBondInfo(bondId,calback){
