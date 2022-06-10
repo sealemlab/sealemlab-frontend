@@ -441,7 +441,7 @@ export default {
         this.BUSDmsg = data
         this.STmsg = Number(data) / this.getUserCoin.stPrice 
       }else{
-        this.BUSDmsg = this.getUserCoin.busd
+        this.BUSDmsg = this.getUserCoin.busd < 1e-8?0:this.getUserCoin.busd
         this.STmsg = Number(this.BUSDmsg) / this.getUserCoin.stPrice
       }
       this.youChangeIChange()
@@ -455,7 +455,7 @@ export default {
         this.STmsg = data
         this.BUSDmsg = Number(data) * this.getUserCoin.stPrice
       }else{
-        this.STmsg = this.getUserCoin.st
+        this.STmsg = this.getUserCoin.st < 1e-8?0:this.getUserCoin.st
         this.BUSDmsg = Number(this.STmsg) / this.getUserCoin.stPrice
       }
       this.youChangeIChange()
@@ -525,7 +525,7 @@ export default {
     youChangeIChange(){
       // console.log("调用you change i change")
       if(this.activetype == 0){
-        this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg) + Number(this.STmsg) * this.getUserCoin.stPrice)
+        this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg) * 2)
       }else if(this.activetype == 1){
         this.moneyArr[0].num = this.$utils.getBit(Number(this.BUSDmsg))
       }else if(this.activetype == 2){

@@ -426,7 +426,7 @@
       </div>
     </div>
     <AddLp :obj="bondinfo" :newBondID="newBondID" :addlpDis="addlpDis" @closeLP="closeLP"></AddLp>
-    <InviteProup :inviteDis="inviteDis" @closeInvite="closeInvite"></InviteProup>
+    <InviteProup :invitelink="istrue" :inviteDis="inviteDis" @closeInvite="closeInvite"></InviteProup>
     <MessageBox ref="mychild" :clientX='clientX' :clientY="clientY" :content="datacontent"></MessageBox>
   </div>
 </template>
@@ -572,7 +572,7 @@ export default {
     getBondInfo(){
       // 获取发行中(还未到结束时间)的债券ID数组
       bondDepository().getActiveBonds().then(res => {
-        console.log('获取发行中(还未到结束时间)的债券ID数组res[0]: ',Number(res[0]));
+        console.log('获取发行中(还未到结束时间)的债券ID数组res[0]: ',res);
         if(res.length > 0){
           this.newBondID = Number(res[0])
           this.bondStatus = true
