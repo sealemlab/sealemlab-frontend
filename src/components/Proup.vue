@@ -169,7 +169,7 @@ export default {
   .box{
     width: 100%;
     height: 27px;
-    background: #171718;
+    background: #000;
     box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
     border-radius: 13px;
     .load{

@@ -119,7 +119,7 @@ export default {
       }
       // @ts-ignore
       let day = neddTime / (24 * 3600)
-      console.log('总共的天数day: ', day);
+      // console.log('总共的天数day: ', day);
       if(day > 1){
         // @ts-ignore
         let D: any = Math.floor(neddTime / 60 / 60 / 24)
@@ -416,25 +416,27 @@ export default {
   },
   // 刷新代币余额
   getUserCoinQuantity(address:any,name:string,account:string){
+    let that = this
     erc20(address).balanceOf(account).then((res:any)=> {
       if(name == 'busd'){
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'busd':this.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'busd':that.convertBigNumberToNormal(Number(res),0,18,true)}));
       }else if(name == 'st'){
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'st':this.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'st':that.convertBigNumberToNormal(Number(res),0,18,true)}));
       }else if(name == 'sr'){
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'sr':this.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'sr':that.convertBigNumberToNormal(Number(res),0,18,true)}));
       }
     })
   },
   // 刷新代币价格
   refreshPrice(type:string,bondID = ''){
+    let that = this
     if(type == 'st'){
       bondDepository().getStPrice().then((res:any) => {
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stPrice':this.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stPrice':that.convertBigNumberToNormal(Number(res),0,18,true)}));
       })
     }else if(type == 'stlp'){
       bondDepository().getLpPrice(bondID).then((res:any) => {
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stlpPrice':this.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stlpPrice':that.convertBigNumberToNormal(Number(res),0,18,true)}));
       })
     }
   }

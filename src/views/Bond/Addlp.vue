@@ -86,7 +86,8 @@
         <div class="tipbox font12" :class="isEnLang?'en_medium':''">
           <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''">
             <span>{{$t("message.bond.txt27")}}</span>
-            <span>{{(Number(obj.baseRate) + Number(additional4)) | SquareRoot}}%</span>
+            <span v-if="userTaxRateStatus">{{(Number(obj.baseRate) + Number(additional4)) | SquareRoot}}%</span>
+            <BtnLoading :isloading="true" v-else></BtnLoading>
           </p>
           <p class="color1"><span>{{$t("message.bond.txt28")}}</span><span>{{obj.baseRate | SquareRoot}}%</span>
           <p class="color2"><span>{{$t("message.bond.txt30")}}</span><span>{{additional1 | SquareRoot}}%</span>
@@ -95,8 +96,7 @@
           <p class="font14 mobile_font14" @click="AddQuesFun('message.bond.txt_tax',$event)" :class="isEnLang?'en_Bold':''">
             <span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span>
             <span class="userTaxRateStatus">
-              <span v-if="userTaxRateStatus">{{userTaxRate | SquareRoot}}%</span>
-              <span v-else><BtnLoading :isloading="true"></BtnLoading></span>
+              <span>{{userTaxRate}}%</span>
               <span v-if="(isThan1000 && BUSDmsg) || (isThan1000 && STmsg)">(+{{additionalTaxRate | MultiplyBySquare}}%)</span>
               <span v-else>(+0.0%)</span>
             </span>
@@ -105,7 +105,10 @@
             <span class="has_question_icon" :title='$t("message.bond.txt_80_ques")'>{{$t("message.bond.txt80")}}</span>
             <span>{{userSurplusNum}} ST-BUSD LP</span>
           </p>
-          <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''"><span>{{$t("message.bond.txt33")}}</span><span>$ {{useReadyBy}}</span></p>
+          <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''">
+            <span>{{$t("message.bond.txt33")}}</span>
+            <span>$ {{useReadyBy}}(≈{{add_changest | PriceConversion}} ST)</span>
+          </p>
           <p>{{$t("message.bond.txt34")}}</p>
         </div>
       </div>
@@ -129,13 +132,13 @@ export default {
           // console.log('用户剩余购买数量useNum:以及税率 ',res);
           this.userSurplusNum = res.userSurplusNum // 用户剩余购买量
           this.useBuyNumStatus = true
-          this.userTaxRate = res.userTaxRate
           this.useReadyBy = res.useReadyBy
+          this.add_changest = res.useReadyBy / this.getUserCoin.stPrice
           this.additional1 = res.additional1//邀请购买利率
           this.additional2 = res.additional2//邀请质押利率
           this.additional3 = res.additional3//质押利率
           this.additional4 = res.additional4//总个人额外利率
-          this.userTaxRateStatus = true // 获取到个人税率
+          this.userTaxRateStatus = true // 获取到总个人额外利率
           this.isWriteStatus = false // 是否可以输入
         })
       }else{
@@ -184,15 +187,11 @@ export default {
       }
     },
     additionalTaxRate(){ // 用户已经购买额加上即将要购买额是否超过额定额度(每1000增加0.1%---(0.001))
-      if(this.userTaxRate == 1000){
-        return 0
+      let num = Math.floor((Number(this.useReadyBy) + Number(this.moneyArr[0].num)) / 1000) * 0.001
+      if(num >= 0.09){
+        return 0.09
       }else{
-        let num = Math.floor((Number(this.useReadyBy) + Number(this.moneyArr[0].num)) / 1000) * 0.001
-        if(num >= 0.09){
-          return 0.09
-        }else{
-          return num
-        }
+        return num
       }
     },
   },
@@ -214,7 +213,7 @@ export default {
     return {
       isshowTip:true,
       TooltipStatus:false,
-      userTaxRateStatus:false,//个人税率获取中
+      userTaxRateStatus:false,//总额外利率获取中
       isWriteStatus:true,//输入框是否可以输入 (税率拿不到,计算会出错)
       useBuyNumStatus:false,// 用户剩余购买量状态判断
       additional1:0,//邀请购买利率
@@ -222,8 +221,9 @@ export default {
       additional3:0,//质押利率
       additional4:0,//总个人额外利率
       changeLpNum:0,// 其他币转换的lp数量
-      userTaxRate:0,
+      userTaxRate:1,
       useReadyBy:0,
+      add_changest:0,
       userSurplusNum:0,//用户剩余购买量
       BUSDmsg:'',
       STmsg:'',
@@ -305,21 +305,21 @@ export default {
           this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
           this.userBuyStatus = true
           this.useBuyNumStatus = false
-          this.userTaxRateStatus = false // 获取到个人税率
+          this.userTaxRateStatus = false // 获取额外利率
           this.isWriteStatus = true // 是否可以输入
           let that = this
           that.getUserSurplusNum(res => {
             console.log("购买成功以后刷新用户的税率等等")
             that.userSurplusNum = res.userSurplusNum
             that.useBuyNumStatus = true
-            that.userTaxRate = res.userTaxRate
             that.useReadyBy = res.useReadyBy
+            that.add_changest = res.useReadyBy / that.getUserCoin.stPrice
             that.additional1 = res.additional1//邀请购买利率
             that.additional2 = res.additional2//邀请质押利率
             that.additional3 = res.additional3//质押利率
             that.additional4 = res.additional4//总个人额外利率
 
-            that.userTaxRateStatus = true // 获取到个人税率
+            that.userTaxRateStatus = true // 获取总个人额外利率
             that.isWriteStatus = false // 是否可以输入
           })
         }else{
@@ -486,7 +486,7 @@ export default {
     closeProup () {
       this.isshowTip = true
       this.TooltipStatus = false
-      this.userSurplusNum = this.userTaxRate = this.useReadyBy = this.additional1 = this.additional2 = this.additional3 = this.additional4 = this.activetype = 0
+      this.userSurplusNum = this.add_changest = this.useReadyBy = this.additional1 = this.additional2 = this.additional3 = this.additional4 = this.activetype = 0
       this.resetData()
       this.$emit('closeLP',this.userBuyStatus)
     },
@@ -523,11 +523,11 @@ export default {
         calback(Object.assign({},obj))
       })
       // 个人税率
-      bondDepository().getUserTaxRate(this.getAccount,this.newBondID).then(res => {
-        console.log('个人税率res: ', res);
-        obj.userTaxRate = Number(res)
-        calback(Object.assign({},obj))
-      })
+      // bondDepository().getUserTaxRate(this.getAccount,this.newBondID).then(res => {
+      //   console.log('个人税率res: ', res);
+      //   obj.userTaxRate = Number(res)
+      //   calback(Object.assign({},obj))
+      // })
       // 获取用户某期债券的税前购买USD金额
       bondDepository().userEpochUsdPayinBeforeTax(this.getAccount,this.newBondID).then(res => {
         // console.log('获取用户某期债券的税前购买USD金额: ', res);
@@ -554,15 +554,10 @@ export default {
         this.moneyArr[0].num = this.$utils.getBit(Number(this.STmsg) * this.getUserCoin.stPrice)
       }
       if(this.isThan1000){
-        this.moneyArr[1].num = this.$utils.getBit(((Number(this.userRate) / 1e4) - ((Number(this.userTaxRate) / 1e4) + Number(this.additionalTaxRate))) * this.moneyArr[0].num,2)
-        // console.log('this.moneyArr[0].num: ', this.moneyArr[0].num);
-        // console.log('Number(this.additionalTaxRate): ', Number(this.additionalTaxRate));
-        // console.log('Number(this.userTaxRate) / 1e4: ', Number(this.userTaxRate) / 1e4);
-        // console.log('Number(this.userRate) / 1e4: ', Number(this.userRate) / 1e4);
+        this.moneyArr[1].num = this.$utils.getBit(((Number(this.userRate) / 1e4) - (0.01 + Number(this.additionalTaxRate))) * this.moneyArr[0].num,2)
       }else{
-        this.moneyArr[1].num = this.$utils.getBit(((Number(this.userRate) / 1e4) - (Number(this.userTaxRate) / 1e4)) * this.moneyArr[0].num,2)
+        this.moneyArr[1].num = this.$utils.getBit(((Number(this.userRate) / 1e4) - 0.01) * this.moneyArr[0].num,2)
       }
-      // console.log('用户的总利率this.userRate: ', (Number(this.userRate) / 1e4));
       this.moneyArr[2].num = this.$utils.getBit(Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num))
       this.changeLpNum = this.$utils.getBit( Number(this.moneyArr[0].num) / this.getUserCoin.stlpPrice)
     },

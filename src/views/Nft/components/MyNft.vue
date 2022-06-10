@@ -22,7 +22,7 @@ export default {
 <style lang="scss" scoped>
 .my_nft {
   width: 100%;
-  min-height:100%;
+  // min-height:100%;
   position: relative;
   display: flex;
   flex-direction: column;

@@ -814,7 +814,7 @@ export const message = {
     self_buy:"Buy",
 
     self_userBuy:"The user's personal remaining purchase amount is 0",
-    self_calim:'Claiming..',
+    self_calim:'Claiming...',
     self_calimResult:'No reward need to be claimed',
     self_bond:'Getting the latest bond, please wait..',
     self_sold:'Sold out',

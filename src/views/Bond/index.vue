@@ -780,14 +780,14 @@ export default {
       // 获取某用户的下级的质押的ST数量
       stStaking().affiliateStakedST(this.getAccount).then(res => {
         console.log('获取某用户的下级的质押的ST数量res: ', res);
-        this.inviteArr[3].num = this.$utils.PriceConversion(Number(res), 2)
+        this.inviteArr[3].num = this.$utils.convertBigNumberToNormal(Number(res), 2)
       })
     },
     // 获取用户的下属某期债券的税前购买USD金额
     getUserSubordinateMoney(){
       bondDepository().affiliateEpochUsdPayinBeforeTax(this.getAccount,this.newBondID).then(res => {
         console.log('获取用户的下属某期债券的税前购买USD金额res: ', res);
-        this.inviteArr[2].num = this.$utils.PriceConversion(Number(res), 2)
+        this.inviteArr[2].num = this.$utils.convertBigNumberToNormal(Number(res), 2)
       })
     },
     getNEWPrice(){
