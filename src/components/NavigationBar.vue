@@ -1,13 +1,13 @@
 <template>
   <div class="nav" :class="isEnLang ? 'en_Bold' : 'cn_lang'">
     <div class="nav_left">
-      <img class="logo" :src="`${$store.state.imgUrl}new_logo.webp`" alt="" @click="toRoute('/home')" />
+      <img class="logo" :src="`${$store.state.imgUrl}new_logo.webp`" alt="" @click="goHome" />
       <ul class="mobile_none">
-        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link, index)">
+        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
           <span class="font18">{{ $t(item.label) }}</span>
         </li>
       </ul>
-      <div class="buy_box" @click="buybox">购买宝箱</div>
+      <!-- <div class="buy_box" @click="buybox">购买宝箱</div> -->
     </div>
     <div class="nav_right">
       <div class="st_price">
@@ -63,13 +63,13 @@ export default {
     return {
       navActive: 0,
       navArr: [
-        { label: "message.nav.txt1", link: "/bond" },
+        { label: "message.nav.txt1", link: "/bond",status:true },
         // { label: "message.nav.txt2", link: "" },
-        { label: "message.nav.txt3", link: "/nft" },
-        { label: "message.nav.txt4", link: "" },
-        { label: "message.nav.txt5", link: "/game/game" },
+        { label: "message.nav.txt3", link: "/nft",status:true },
+        { label: "message.nav.txt4", link: "market",status:false },
+        { label: "message.nav.txt5", link: "/game/game",status:true },
         // { label: "message.nav.txt6", link: "" },
-        { label: "message.nav.txt6", link: "/user/assets/0" },
+        { label: "message.nav.txt6", link: "/user/assets/0",status:true },
         // { label: "message.nav.txt7", link: "" }
       ],
       showLangSelect: false,
@@ -92,10 +92,9 @@ export default {
         this.navActive = -1;
       }else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
+      }else if (to.path == "/market") {
+        this.navActive = 2;
       }
-      // else if (to.path.indexOf("/market/") !== -1) {
-      //   this.navActive = 2;
-      // }
       else if (to.path.indexOf("/game/") !== -1) {
         this.navActive = 3;
       } else if (to.path.indexOf("/user/") !== -1) {
@@ -124,22 +123,18 @@ export default {
       localStorage.removeItem("walletType");
       this.$store.commit("setnewinfo", JSON.stringify({}));
     },
-    toRoute(link, index) {
-      if (link) {
-        if (process.env.NODE_ENV === "production" && index == 4) {
-          if (!this.getNoticeNum) {
-            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-            this.$store.commit("setNoticeNum", true);
-          }
-          return;
-        }
-        this.$router.push(link);
-      } else {
+    toRoute(item) {
+      if(item.status){
+        this.$router.push(item.link);
+      }else{
         if (!this.getNoticeNum) {
           this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
           this.$store.commit("setNoticeNum", true);
         }
       }
+    },
+    goHome(){
+      this.$router.push('/home');
     },
     loginClick(data) {
       switch (data) {

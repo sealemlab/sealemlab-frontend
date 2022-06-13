@@ -2,8 +2,8 @@
   <input
     :type="type"
     :value="modelValue"
-    class="input font16 mobile_font16"
-    :style="{ color: fontColor,background:background}"
+    class="input"
+    :style="{ color: fontColor,background:background,fontSize:fontSize}"
     :placeholder='placeholder'
     :readonly="readonly"
     @blur="blurEvent"
@@ -14,6 +14,10 @@
 <script>
 export default {
   props: {
+    fontSize:{
+      type: String,
+      default:'16px'
+    },
     modelValue:{
       type: [String, Number],
       default:''
@@ -55,7 +59,7 @@ export default {
 <style lang="scss" scoped>
 .input {
   height: 100%;
-  padding-right:15px;
+  // padding-right:15px;
   width:100%;
 }
 </style>

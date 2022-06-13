@@ -37,6 +37,14 @@
   cursor: not-allowed !important;
   border-radius: 25px;
 }
+.btn_normal{
+  color: #000000 !important;
+  background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%) !important;
+}
+.btn_black{
+  color: #CED3D9 !important;
+  background: linear-gradient(180deg, #6D6D6D 0%, #595858 100%) !important;
+}
 .display_flex {
   display: flex;
 }

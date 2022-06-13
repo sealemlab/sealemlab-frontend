@@ -552,6 +552,7 @@ export default {
         if (newValue) {
           this.loadMoreStatus = true
           this.orderArr = []
+          this.getBondInfo() // 最新债券信息
           this.getUserOrder() // 获取订单信息
           this.getUserInvite() // 邀请人地址
         }else{
@@ -873,7 +874,6 @@ export default {
     }
   },
   mounted(){
-    this.getBondInfo() // 最新债券信息
     this.getNEWPrice() // 获取最新st,stlp价格
   },
   beforeDestroy(){

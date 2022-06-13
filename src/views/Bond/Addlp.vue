@@ -494,11 +494,31 @@ export default {
       if(this.isWriteStatus)return
       if(this.activetype == 0 ){
         if(data == 'busd'){
-          this.BUSDmsg = this.getUserCoin.busd > 1e-8?this.getUserCoin.busd:0
-          this.STmsg = Number(this.BUSDmsg) / this.getUserCoin.stPrice
+          let userBusdNum = this.getUserCoin.busd > 1e-8?this.getUserCoin.busd:0
+          let changest_ = Number(userBusdNum) / this.getUserCoin.stPrice
+          console.log('max点击时转换的st数量changest_: ', changest_)
+          console.log("用户拥有的st数量:",this.getUserCoin.st)
+          if(changest_ > this.getUserCoin.st){
+            this.BUSDmsg = this.getUserCoin.st * this.getUserCoin.stPrice
+            this.STmsg = this.getUserCoin.st
+          }else{
+            this.BUSDmsg = userBusdNum
+            this.STmsg = Number(userBusdNum) / this.getUserCoin.stPrice
+          }
+          // this.BUSDmsg = this.getUserCoin.busd > 1e-8?this.getUserCoin.busd:0
+          // this.STmsg = Number(this.BUSDmsg) / this.getUserCoin.stPrice
         }else{
-          this.STmsg = this.getUserCoin.st > 1e-8?this.getUserCoin.st:0
-          this.BUSDmsg = Number(this.STmsg) * this.getUserCoin.stPrice
+          let userSTNum = this.getUserCoin.st > 1e-8?this.getUserCoin.st:0
+          let changeBUSD_ = Number(userSTNum) * this.getUserCoin.stPrice
+          if(changeBUSD_ > this.getUserCoin.busd){
+            this.STmsg = this.getUserCoin.busd / this.getUserCoin.stPrice
+            this.BUSDmsg = this.getUserCoin.busd
+          }else{
+            this.STmsg = userSTNum
+            this.BUSDmsg = userSTNum * this.getUserCoin.stPrice
+          }
+          // this.STmsg = this.getUserCoin.st > 1e-8?this.getUserCoin.st:0
+          // this.BUSDmsg = Number(this.STmsg) * this.getUserCoin.stPrice
         }
       }else if(this.activetype == 1){
         if(this.getUserCoin.busd > 10000){
