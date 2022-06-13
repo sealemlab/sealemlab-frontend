@@ -2,7 +2,7 @@
   <input
     :type="type"
     :value="modelValue"
-    class="input font16 mobile_font12"
+    class="input font16 mobile_font16"
     :style="{ color: fontColor,background:background}"
     :placeholder='placeholder'
     :readonly="readonly"
@@ -55,7 +55,7 @@ export default {
 <style lang="scss" scoped>
 .input {
   height: 100%;
-  padding: 0 15px;
+  padding-right:15px;
   width:100%;
 }
 </style>

@@ -864,4 +864,32 @@ export const message = {
     text38: "Recharge and Claim",
     text39: "Please log in to view the information",
   },//游戏
+  acticePage:{
+    title1:"IDO sale",
+    title2:"IDO begains in",
+    txt1:"IDO PROGRESS",
+    txt2:"Sale live",
+    txt3:"Sold in current",
+    txt4:"Avaliable for sale",
+    txt5:"Participated",
+    txt6:"Total avaliable",
+    txt7:"Who can join the presale?",
+    txt8:"Anyone in whitelist",
+    txt9:"How much ST can I get?",
+    txt9_1:"0.1B-0.5B",
+    txt10:"What should I do when i gain ST?",
+    txt11:"Purchase bond",
+    txt12:"More information?",
+    txt13:"Read the documentation.",
+    txt14:"Learn about ST tokenomics",
+    txt15:"Buy ST",
+    txt16:"BNB balance:",
+    txt17:"Offering price:",
+    txt18:"Your max buyable:",
+    txt19:"Amount",
+    txt20:"Avaliable:",
+    txt21:"BNB",
+    txt22:"Please enter an amount for your purchase.",
+    txt23:"Purchse"
+  }
 };

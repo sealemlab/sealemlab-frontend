@@ -1,91 +1,226 @@
 <template>
   <div class="active_page_coin">
     <div class="top_box">
-      <p class="font35" :class="isEnLang ? 'en_Bold' : ''">IDO sale</p>
+      <p
+        class="font35 mobile_font20 mobile_left"
+        :class="isEnLang ? 'en_Bold' : ''"
+      >
+        {{ $t("message.acticePage.title1") }}
+      </p>
       <div class="timebox">
         <div class="onebox">
-          <span class="font45" :class="isEnLang ? 'en_Bold' : ''">{{countTime.d}}</span>
+          <span
+            class="font45 mobile_font24"
+            :class="isEnLang ? 'en_Bold' : ''"
+            >{{ countTime.d }}</span
+          >
           <span class="font14" :class="isEnLang ? 'en_Bold' : ''">DAYS</span>
         </div>
-        <div class="line font45">:</div>
+        <div class="line font45 mobile_font24">:</div>
         <div class="onebox">
-          <span class="font45" :class="isEnLang ? 'en_Bold' : ''">{{countTime.h}}</span>
+          <span
+            class="font45 mobile_font24"
+            :class="isEnLang ? 'en_Bold' : ''"
+            >{{ countTime.h }}</span
+          >
           <span class="font14" :class="isEnLang ? 'en_Bold' : ''">HRS</span>
         </div>
-        <div class="line font45">:</div>
+        <div class="line font45 mobile_font24">:</div>
         <div class="onebox">
-          <span class="font45" :class="isEnLang ? 'en_Bold' : ''">{{countTime.m}}</span>
+          <span
+            class="font45 mobile_font24"
+            :class="isEnLang ? 'en_Bold' : ''"
+            >{{ countTime.m }}</span
+          >
           <span class="font14" :class="isEnLang ? 'en_Bold' : ''">MIN</span>
         </div>
-        <div class="line font45">:</div>
+        <div class="line font45 mobile_font24">:</div>
         <div class="onebox">
-          <span class="font45" :class="isEnLang ? 'en_Bold' : ''">{{countTime.s}}</span>
+          <span
+            class="font45 mobile_font24"
+            :class="isEnLang ? 'en_Bold' : ''"
+            >{{ countTime.s }}</span
+          >
           <span class="font14" :class="isEnLang ? 'en_Bold' : ''">SEC</span>
         </div>
       </div>
-      <p class="font24" :class="isEnLang ? 'en_medium' : ''">IDO begains in</p>
+      <p class="font24" :class="isEnLang ? 'en_medium' : ''">
+        {{ $t("message.acticePage.title2") }}
+      </p>
     </div>
     <div class="content">
       <div class="left_box">
         <div class="onebox">
           <p>
-            <span class="font24" :class="isEnLang ? 'en_Bold' : 'cn_lang'">IDO PROGRESS</span>
-            <span class="font12" :class="isEnLang ? 'en_Bold' : 'cn_lang'">Sale live</span>
+            <span
+              class="font24 mobile_font20"
+              :class="isEnLang ? 'en_Bold' : 'cn_lang'"
+              >{{ $t("message.acticePage.txt1") }}</span
+            >
+            <span class="font12" :class="isEnLang ? 'en_Bold' : 'cn_lang'">{{
+              $t("message.acticePage.txt2")
+            }}</span>
           </p>
           <div class="allbox">
-            <div class="Onegroup" v-for="(item,index) in arr" :key="index">
-              <span class="font16" :class="isEnLang ? 'en_medium' : 'cn_lang'">{{item.title}}</span>
-              <span class="font24" :class="isEnLang ? 'en_Bold' : 'cn_lang'">$ {{item.num}}</span>
+            <div class="Onegroup" v-for="(item, index) in arr" :key="index">
+              <span
+                class="font16 mobile_font14"
+                :class="isEnLang ? 'en_medium' : 'cn_lang'"
+                >{{ $t(item.title) }}</span
+              >
+              <span
+                class="font24 mobile_font18"
+                :class="isEnLang ? 'en_Bold' : 'cn_lang'"
+                >$ {{ item.num }}</span
+              >
             </div>
           </div>
           <div class="progress_box">
             <div class="box">
-              <div class="load" :style="{width}"></div>
+              <div class="load" :style="{ width }"></div>
             </div>
-            <span>{{width}}</span>
+            <span>{{ width }}</span>
           </div>
         </div>
         <div class="three_box">
-          <div v-for="(item,index) in arr1" :key="index">
-            <p class="font16" :class="isEnLang ? 'en_medium' : ''">{{item.title}}</p>
-            <p class="font20" :class="isEnLang ? 'en_Bold' : ''">{{item.num}}</p>
+          <div v-for="(item, index) in arr1" :key="index">
+            <div class="package_box">
+              <div class="iconbox_">
+                <svg
+                  t="1653724466948"
+                  class="icon"
+                  viewBox="0 0 1107 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="36756"
+                  width="16"
+                  height="16"
+                >
+                  <path
+                    d="M563.323289 661.336738a330.663562 330.663562 0 1 0-330.531877-330.663562 331.190306 331.190306 0 0 0 330.531877 330.663562z"
+                    fill="#CED3D9"
+                    p-id="36757"
+                  ></path>
+                  <path
+                    d="M1106.528066 975.53955c-16.724123-134.319727-137.611877-293.001365-273.38015-373.066457a381.889419 381.889419 0 0 1-539.912627-0.65843C157.335331 679.246035 18.274908 834.635523 0.365611 975.53955a42.797952 42.797952 0 0 0 37.26714 48.065392h1031.628175A43.061324 43.061324 0 0 0 1106.528066 975.53955z"
+                    fill="#CED3D9"
+                    p-id="36758"
+                  ></path>
+                </svg>
+              </div>
+              <p class="font16" :class="isEnLang ? 'en_medium' : ''">
+                {{ $t(item.title) }}
+              </p>
+            </div>
+            <p class="font20" :class="isEnLang ? 'en_Bold' : ''">
+              {{ $t(item.num) }}
+            </p>
           </div>
         </div>
         <div class="learnbox">
           <div class="left font20" :class="isEnLang ? 'en_medium' : ''">
-            <span>More information?</span>
-            <span>Read the documentation.</span>
+            <span>{{ $t("message.acticePage.txt12") }}</span>
+            <span>{{ $t("message.acticePage.txt13") }}</span>
           </div>
           <div class="btn font16" :class="isEnLang ? 'en_Bold' : ''">
-            Learn about ST tokenomics
+            {{ $t("message.acticePage.txt14") }}
           </div>
         </div>
       </div>
       <div class="right_box">
-        <p class="font24" :class="isEnLang ? 'en_Bold' : ''">Buy ST</p>
-        <p class="font16" :class="isEnLang ? 'en_medium' : ''">BNB balance: 1.567 </p>
-        <div class="box1 font16" :class="isEnLang ? 'en_medium' : ''">
-          <p>Offering price: $ 456 </p>
-          <p>Your max buyable: 200000 </p>
+        <p class="font24 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">
+          {{ $t("message.acticePage.txt15") }}
+        </p>
+        <p class="font16 mobile_font14" :class="isEnLang ? 'en_medium' : ''">
+          {{ $t("message.acticePage.txt16") }} 1.567
+        </p>
+        <div
+          class="box1 font16 mobile_font14"
+          :class="isEnLang ? 'en_medium' : ''"
+        >
+          <p>{{ $t("message.acticePage.txt17") }} $ 456</p>
+          <p>{{ $t("message.acticePage.txt18") }} 200000</p>
         </div>
-        <div class="box2 box1 font16" :class="isEnLang ? 'en_medium' : ''">
+        <div
+          class="box2 box1 font16 mobile_font16"
+          :class="isEnLang ? 'en_medium' : ''"
+        >
           <div>
-            <span class="span1">Amount</span>
-            <span class="span2">Avaliable:1.567</span>
+            <span class="span1">{{ $t("message.acticePage.txt19") }}</span>
+            <span class="span2">{{ $t("message.acticePage.txt20") }}1.567</span>
           </div>
           <div>
-            <span class="span1">0.345</span>
+            <!-- <span class="span1">0.345</span> -->
+            <Input
+              :modelValue="inputvalue"
+              type="number"
+              :placeholder="$t('message.bond.txt23')"
+              @input="InputClick"
+            ></Input>
             <p>
-              <span class="span_btn font12" :class="isEnLang ? 'en_Bold' : ''">MAX</span>
-              <span class="span2">BNB</span>
+              <span
+                class="span_btn font12 mobile_font12"
+                :class="isEnLang ? 'en_Bold' : ''"
+                >MAX</span
+              >
+              <span class="span2">{{ $t("message.acticePage.txt21") }}</span>
             </p>
           </div>
         </div>
-        <div class="tip_txt font12" :class="isEnLang?'en_medium':''">
-          <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img"/>
-          {{$t("message.bond.tip_txt")}}
+        <div class="tip_txt font12" :class="isEnLang ? 'en_medium' : ''">
+          <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img" />
+          {{ $t("message.acticePage.txt22") }}
         </div>
-        <div class="main_button font18 mobile_font16" :class="isEnLang?'en_Bold':''">Purchse</div>
+        <div
+          class="main_button font18 mobile_font16"
+          :class="isEnLang ? 'en_Bold' : ''"
+        >
+          {{ $t("message.acticePage.txt23") }}
+        </div>
+      </div>
+      <div class="mobile_three_box">
+        <div v-for="(item, index) in arr1" :key="index">
+          <div class="package_box">
+            <div class="iconbox_">
+              <svg
+                t="1653724466948"
+                class="icon"
+                viewBox="0 0 1107 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="36756"
+                width="16"
+                height="16"
+              >
+                <path
+                  d="M563.323289 661.336738a330.663562 330.663562 0 1 0-330.531877-330.663562 331.190306 331.190306 0 0 0 330.531877 330.663562z"
+                  fill="#CED3D9"
+                  p-id="36757"
+                ></path>
+                <path
+                  d="M1106.528066 975.53955c-16.724123-134.319727-137.611877-293.001365-273.38015-373.066457a381.889419 381.889419 0 0 1-539.912627-0.65843C157.335331 679.246035 18.274908 834.635523 0.365611 975.53955a42.797952 42.797952 0 0 0 37.26714 48.065392h1031.628175A43.061324 43.061324 0 0 0 1106.528066 975.53955z"
+                  fill="#CED3D9"
+                  p-id="36758"
+                ></path>
+              </svg>
+            </div>
+            <p class="font16" :class="isEnLang ? 'en_medium' : ''">
+              {{ $t(item.title) }}
+            </p>
+          </div>
+          <p class="font20" :class="isEnLang ? 'en_Bold' : ''">
+            {{ $t(item.num) }}
+          </p>
+        </div>
+      </div>
+      <div class="mobile_learnbox">
+        <div class="left font20" :class="isEnLang ? 'en_medium' : ''">
+          <span>{{ $t("message.acticePage.txt12") }}</span>
+          <span>{{ $t("message.acticePage.txt13") }}</span>
+        </div>
+        <div class="btn font16" :class="isEnLang ? 'en_Bold' : ''">
+          {{ $t("message.acticePage.txt14") }}
+        </div>
       </div>
     </div>
   </div>
@@ -93,305 +228,319 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  computed: { ...mapGetters(["isEnLang","getUserCoin","getIstrue"]) },
-  data(){
-    return{
-      width:"20%",
-      countTime:{ d:"00",h: "00", m: "00", s: "00" },
-      countTimeOBJ:null,
-      endtime:1656068646,
-      arr:[
-        {title:'Sold in current',num:1212},
-        {title:'Sold in current',num:1212},
-        {title:'Sold in current',num:1212},
-        {title:'Sold in current',num:1212},
+  computed: { ...mapGetters(["isEnLang", "getUserCoin", "getIstrue"]) },
+  data () {
+    return {
+      inputvalue: '',
+      width: "20%",
+      countTime: { d: "00", h: "00", m: "00", s: "00" },
+      countTimeOBJ: null,
+      endtime: 1656068646,
+      arr: [
+        { title: 'message.acticePage.txt3', num: 1212 },
+        { title: 'message.acticePage.txt4', num: 1212 },
+        { title: 'message.acticePage.txt5', num: 1212 },
+        { title: 'message.acticePage.txt6', num: 1212 },
       ],
-      arr1:[
-        {title:'Who can join the presale?',num:"Anyone in whitelist"},
-        {title:'Who can join the presale?',num:"Anyone in whitelist"},
-        {title:'Who can join the presale?',num:"Anyone in whitelist"},
+      arr1: [
+        { title: 'message.acticePage.txt7', num: "message.acticePage.txt8" },
+        { title: 'message.acticePage.txt9', num: "message.acticePage.txt9_1" },
+        { title: 'message.acticePage.txt10', num: "message.acticePage.txt11" },
       ]
     }
   },
-  methods:{
-    getUsetTime(){
+  methods: {
+    InputClick (data) {
+      console.log('input输入框', data)
+    },
+    getUsetTime () {
       clearInterval(this.countTimeOBJ)
-      this.$utils.customTime(this.endtime,data => {
+      this.$utils.customTime(this.endtime, data => {
         // console.log('id的倒计时data: ', data.countTime);
         this.countTimeOBJ = data.countdownObject
         this.countTime = data.countTime
       });//结束时间
     },
   },
-  mounted(){
+  mounted () {
     this.getUsetTime()
   },
-  beforeDestroy(){
+  beforeDestroy () {
     clearInterval(this.countTimeOBJ)
   }
 }
 </script>
 <style lang="scss" scoped>
-.active_page_coin{
+.active_page_coin {
   width: 100%;
   margin-bottom: 150px;
-  .top_box{
+  .top_box {
     width: 100%;
     padding-top: 105px;
     min-height: 396px;
-    background:url($bg_url + "ido.webp") no-repeat #000;
+    background: url($bg_url + "ido.webp") no-repeat #000;
     background-size: 100% 100%;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
-    p{
-      :nth-child(2){
-        font-weight: 500;
-        color: #CED3D9;
-        line-height: 29px;
-      }
-    }
-    .timebox{
+    .timebox {
       width: auto;
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 56px 0 40px;
-      .onebox{
+      .onebox {
         width: 95px;
         height: 95px;
         background: rgba(248, 229, 186, 0.06);
         border-radius: 7px;
         backdrop-filter: blur(4px);
         display: flex;
-        flex-direction:column;
+        flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        span{
-          &:nth-child(1){
+        span {
+          &:nth-child(1) {
             font-weight: bold;
-            color: #ECCF83;
+            color: #eccf83;
             line-height: 54px;
           }
-          &:nth-child(2){
+          &:nth-child(2) {
             font-weight: 500;
-            color: #8F8E8E;
+            color: #8f8e8e;
             line-height: 16px;
           }
         }
       }
-      .line{
+      .line {
         font-weight: 500;
-        color: #ECCF83;
+        color: #eccf83;
         line-height: 63px;
         margin: 0 20px;
       }
     }
   }
-  .content{
+  .content {
     width: 90vw;
     margin: 70px auto 0;
     display: flex;
     justify-content: space-between;
-    .left_box{
+    .left_box {
       width: 68%;
       display: flex;
       flex-direction: column;
-      .onebox{
+      .onebox {
         width: 100%;
-        background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+        background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
         box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
         border-radius: 12px;
         border: 1px solid rgba(68, 67, 67, 0.47);
         display: flex;
         flex-direction: column;
         padding: 20px;
-        p{
+        p {
           font-weight: bold;
-          color: #CED3D9;
+          color: #ced3d9;
           line-height: 29px;
-          span{
-            &:nth-child(2){
+          span {
+            &:nth-child(2) {
               display: inline-block;
               padding: 0 5px;
-              height: 26px;
+              // height: 26px;
               line-height: 26px;
-              background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+              background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
               border-radius: 4px;
-              color: #0E0D0D;
+              color: #0e0d0d;
               border: 1px solid rgba(255, 255, 255, 0.36);
               backdrop-filter: blur(14px);
               margin-left: 13px;
             }
           }
         }
-        .allbox{
+        .allbox {
           width: 100%;
           display: flex;
           justify-content: space-between;
           align-items: center;
           margin-top: 42px;
-          .Onegroup{
+          .Onegroup {
             display: flex;
             flex-direction: column;
             align-items: center;
-            span{
-              &:nth-child(1){
+            span {
+              &:nth-child(1) {
                 font-weight: 500;
-                color: #8F8E8E;
+                color: #8f8e8e;
                 line-height: 19px;
               }
-              &:nth-child(1){
+              &:nth-child(2) {
                 font-weight: bold;
-                color: #CED3D9;
+                color: #ced3d9;
                 line-height: 29px;
                 margin-top: 15px;
               }
             }
           }
         }
-        .progress_box{
+        .progress_box {
           width: 100%;
           display: flex;
           align-items: center;
           margin: 56px 0 35px;
-          .box{
+          .box {
             width: 90%;
             height: 17px;
             background: #373535;
-            box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39), inset 0px 3px 8px 0px rgba(17, 16, 16, 0.5), inset 0px -1px 3px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
+              inset 0px 3px 8px 0px rgba(17, 16, 16, 0.5),
+              inset 0px -1px 3px 0px rgba(0, 0, 0, 0.5);
             border-radius: 12px;
-            .load{
-              width:0;
+            .load {
+              width: 0;
               height: 17px;
-              background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+              background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
               border-radius: 12px;
               backdrop-filter: blur(14px);
             }
           }
-          span{
+          span {
             margin-left: 15px;
             font-weight: bold;
-            color: #CED3D9;
+            color: #ced3d9;
             line-height: 24px;
           }
         }
       }
-      .three_box{
+      .three_box {
         width: 100%;
         display: flex;
         justify-content: space-between;
         margin-top: 52px;
-        >div{
+        > div {
           width: 32%;
           height: 104px;
           background: #171718;
-          box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39), inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+          box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
+            inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
           border-radius: 12px;
           border: 1px solid #373636;
           display: flex;
           flex-direction: column;
           justify-content: space-evenly;
-          padding: 20px;
-          p{
-            &:nth-child(1){
+          padding: 20px 15px;
+          .package_box {
+            display: flex;
+            align-items: center;
+            .iconbox_ {
+              margin-right: 5px;
+            }
+            p {
               font-weight: 500;
-              color: #8F8E8E;
+              color: #8f8e8e;
               line-height: 19px;
+              white-space: nowrap;
+              padding-left: 0;
             }
-            &:nth-child(2){
-              font-weight: bold;
-              color: #CED3D9;
-              line-height: 24px;
-            }
+          }
+          p {
+            font-weight: bold;
+            color: #ced3d9;
+            line-height: 24px;
+            padding-left: 20px;
           }
         }
       }
-      .learnbox{
+      .learnbox {
         margin-top: 51px;
         width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 20px;
-        background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+        background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
         box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
         border-radius: 12px;
         border: 1px solid rgba(68, 67, 67, 0.47);
-        .left{
+        .left {
           display: flex;
           flex-direction: column;
+          font-weight: 500;
+          color: #ced3d9;
+          line-height: 32px;
         }
-        .btn{
+        .btn {
           padding: 0 20px;
           height: 48px;
           border-radius: 4px;
-          border: 1px solid #EAD28E;
+          border: 1px solid #ead28e;
           backdrop-filter: blur(14px);
           text-align: center;
           line-height: 48px;
           font-weight: bold;
+          cursor: pointer;
         }
       }
     }
-    .right_box{
+    .right_box {
       width: 30%;
       padding: 20px;
       display: flex;
       flex-direction: column;
-      background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
+      background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
       box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
       border-radius: 12px;
       border: 1px solid rgba(68, 67, 67, 0.47);
-      p{
-        &:nth-child(1){
+      p {
+        &:nth-child(1) {
           font-weight: bold;
-          color: #CED3D9;
+          color: #ced3d9;
           line-height: 29px;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
           font-weight: 500;
-          color: #CED3D9;
+          color: #ced3d9;
           line-height: 19px;
           margin-top: 13px;
         }
       }
-      .box1{
+      .box1 {
         width: 100%;
         margin-top: 37px;
         background: #171718;
-        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39), inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
+          inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
         border-radius: 12px;
         border: 1px solid #373636;
         padding: 20px;
       }
-      .box2{
+      .box2 {
         margin-top: 33px;
-        >div{
+        > div {
           width: 100%;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          &:nth-child(2){
+          &:nth-child(2) {
             margin-top: 15px;
           }
-          .span1{
+          .span1 {
             font-weight: 500;
-            color: #8F8E8E;
+            color: #8f8e8e;
             line-height: 19px;
           }
-          .span2{
+          .span2 {
             font-weight: 500;
-            color: #CED3D9;
+            color: #ced3d9;
             line-height: 19px;
           }
-          p{
+          p {
             display: flex;
             align-items: center;
             margin-top: 0;
-            .span_btn{
+            .span_btn {
               padding: 0 5px;
               height: 21px;
-              background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+              background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
               box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
               border-radius: 2px;
               backdrop-filter: blur(14px);
@@ -404,25 +553,25 @@ export default {
           }
         }
       }
-      .tip_txt{
+      .tip_txt {
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: 500;
-        color: #8F8E8E;
+        color: #8f8e8e;
         line-height: 14px;
         margin-top: 24px;
-        .ques_img{
+        .ques_img {
           width: 11px;
           margin-right: 5px;
         }
       }
-      .main_button{
+      .main_button {
         width: 100%;
         min-height: 45px;
         margin: 50px auto 0;
-        background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+        background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
         box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
         border-radius: 4px;
         backdrop-filter: blur(14px);
@@ -432,6 +581,349 @@ export default {
         font-weight: bold;
         color: #000000;
         cursor: pointer;
+      }
+    }
+    .mobile_three_box,
+    .mobile_learnbox {
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .active_page_coin {
+    width: 100%;
+    margin-bottom: 0.3rem;
+    padding: 0 0.2rem;
+    .top_box {
+      width: 100%;
+      padding-top: 1rem;
+      padding-bottom: 0.1rem;
+      min-height: 1.24rem;
+      background: url($bg_url + "ido.webp") no-repeat #000;
+      background-size: 100% 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .mobile_left {
+        width: 100%;
+        text-align: left;
+      }
+      .timebox {
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.2rem 0;
+        .onebox {
+          width: 0.62rem;
+          padding: 0.1rem;
+          height: 0.62rem;
+          background: rgba(248, 229, 186, 0.06);
+          border-radius: 0.07rem;
+          backdrop-filter: blur(4px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-around;
+          span {
+            &:nth-child(1) {
+              font-weight: bold;
+              color: #eccf83;
+              line-height: 0.29rem;
+            }
+            &:nth-child(2) {
+              font-weight: 500;
+              color: #8f8e8e;
+              line-height: 0.12rem;
+              margin-top: 0.05rem;
+            }
+          }
+        }
+        .line {
+          font-weight: 500;
+          color: #eccf83;
+          line-height: 0.33rem;
+          margin: 0 0.08rem;
+        }
+      }
+    }
+    .content {
+      width: 100%;
+      margin: 0.2rem auto 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      .left_box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .onebox {
+          width: 100%;
+          background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
+          box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+          border-radius: 12px;
+          border: 1px solid rgba(68, 67, 67, 0.47);
+          display: flex;
+          flex-direction: column;
+          padding: 0.1rem;
+          p {
+            font-weight: bold;
+            color: #ced3d9;
+            line-height: 29px;
+            span {
+              &:nth-child(2) {
+                display: inline-block;
+                padding: 0 0.1rem;
+                height: 0.22rem;
+                line-height: 0.22rem;
+                background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+                border-radius: 0.04rem;
+                color: #0e0d0d;
+                border: 1px solid rgba(255, 255, 255, 0.36);
+                backdrop-filter: blur(14px);
+                margin-left: 0.1rem;
+              }
+            }
+          }
+          .allbox {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.15rem;
+            .Onegroup {
+              width: 50%;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              margin-bottom: 0.2rem;
+              span {
+                &:nth-child(1) {
+                  font-weight: 500;
+                  color: #8f8e8e;
+                  line-height: 0.16rem;
+                }
+                &:nth-child(2) {
+                  font-weight: bold;
+                  color: #ced3d9;
+                  line-height: 0.21rem;
+                  margin-top: 0.05rem;
+                }
+              }
+            }
+          }
+          .progress_box {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin: 0.1rem 0 0.25rem;
+            .box {
+              width: 90%;
+              height: 0.08rem;
+              background: #373535;
+              box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
+                inset 0px 3px 8px 0px rgba(17, 16, 16, 0.5),
+                inset 0px -1px 3px 0px rgba(0, 0, 0, 0.5);
+              border-radius: 12px;
+              .load {
+                width: 0;
+                height: 0.08rem;
+                background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+                border-radius: 12px;
+                backdrop-filter: blur(14px);
+              }
+            }
+            span {
+              margin-left: 15px;
+              font-weight: bold;
+              color: #ced3d9;
+              line-height: 24px;
+            }
+          }
+        }
+        .three_box {
+          display: none;
+        }
+        .learnbox {
+          display: none;
+        }
+      }
+      .right_box {
+        margin-top: 0.15rem;
+        width: 100%;
+        padding: 0.1rem;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+        border-radius: 12px;
+        border: 1px solid rgba(68, 67, 67, 0.47);
+        p {
+          &:nth-child(1) {
+            font-weight: bold;
+            color: #ced3d9;
+            line-height: 0.24rem;
+          }
+          &:nth-child(2) {
+            font-weight: 500;
+            color: #ced3d9;
+            line-height: 0.16rem;
+            margin-top: 0.08rem;
+          }
+        }
+        .box1 {
+          width: 100%;
+          margin-top: 0.18rem;
+          background: #171718;
+          box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
+            inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+          border-radius: 0.12rem;
+          border: 1px solid #373636;
+          padding: 0.2rem;
+        }
+        .box2 {
+          margin-top: 0.25rem;
+          > div {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &:nth-child(2) {
+              margin-top: 0.15rem;
+            }
+            .span1 {
+              font-weight: 500;
+              color: #8f8e8e;
+              line-height: 0.19rem;
+            }
+            .span2 {
+              font-weight: 500;
+              color: #ced3d9;
+              line-height: 0.19rem;
+            }
+            p {
+              display: flex;
+              align-items: center;
+              margin-top: 0;
+              .span_btn {
+                padding: 0 0.08rem;
+                height: 0.21rem;
+                background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+                box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+                border-radius: 2px;
+                backdrop-filter: blur(14px);
+                text-align: center;
+                line-height: 0.21rem;
+                font-weight: 500;
+                color: #000000;
+                margin-right: 0.1rem;
+              }
+            }
+          }
+        }
+        .tip_txt {
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          font-weight: 500;
+          color: #8f8e8e;
+          line-height: 0.14rem;
+          margin-top: 0.49rem;
+          .ques_img {
+            width: 0.11rem;
+            margin-right: 0.05rem;
+          }
+        }
+        .main_button {
+          width: 80%;
+          min-height: 0.4rem;
+          margin: 0.26rem auto 0.3rem;
+          background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+          box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+          border-radius: 4px;
+          backdrop-filter: blur(14px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: bold;
+          color: #000000;
+          cursor: pointer;
+        }
+      }
+      .mobile_three_box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 0.3rem;
+        > div {
+          width: 100%;
+          height: 0.8rem;
+          background: #171718;
+          box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
+            inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+          border-radius: 0.04rem;
+          border: 1px solid #373636;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 0.15rem 0.1rem;
+          margin-bottom: 0.12rem;
+          .package_box {
+            display: flex;
+            align-items: center;
+            .iconbox_ {
+              margin-right: 5px;
+            }
+            p {
+              font-weight: 500;
+              color: #8f8e8e;
+              line-height: 0.16rem;
+              margin-top: 0;
+              padding-left: 0;
+            }
+          }
+          p {
+            font-weight: bold;
+            color: #ced3d9;
+            line-height: 0.21rem;
+            margin-top: 0.12rem;
+            padding-left: 0.2rem;
+          }
+        }
+      }
+      .mobile_learnbox {
+        margin-top: 0.26rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.1rem;
+        background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
+        border-radius: 0.04rem;
+        border: 1px solid rgba(68, 67, 67, 0.47);
+        .left {
+          display: flex;
+          flex-direction: column;
+          line-height: 0.32rem;
+          font-weight: 500;
+          color: #ced3d9;
+        }
+        .btn {
+          width: 95%;
+          padding: 0;
+          height: 0.4rem;
+          border-radius: 0.04rem;
+          border: 1px solid #ead28e;
+          backdrop-filter: blur(14px);
+          text-align: center;
+          line-height: 0.4rem;
+          font-weight: bold;
+          margin-top: 0.14rem;
+        }
       }
     }
   }

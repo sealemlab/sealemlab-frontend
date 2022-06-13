@@ -227,7 +227,7 @@
                 </li> -->
                 <li :class="isEnLang?'en_Bold':''">
                   <span class="color3 font18">{{ $t("message.bond.txt47") }}:</span>
-                  <span class="color3 font18">&nbsp;${{invitePledge.num3}}</span>
+                  <span class="color3 font18">&nbsp;${{invitePledge.num3}} (≈ {{invitePledge.num5 | PriceConversion}} ST)</span>
                 </li>
               </ul>
             </li>
@@ -264,7 +264,7 @@
                 </li> -->
                 <li :class="isEnLang?'en_Bold':''">
                   <span class="color4 font18">{{ $t("message.bond.txt49") }}:</span>
-                  <span class="color4 font18">&nbsp;${{Pledge.num3}}</span>
+                  <span class="color4 font18">&nbsp;${{Pledge.num3}} (≈ {{Pledge.num5 | PriceConversion}} ST)</span>
                 </li>
               </ul>
             </li>
@@ -336,7 +336,7 @@
                     <svg t="1654321191240" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2336" width="16" height="16"><path d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z" p-id="2337" fill="#CED3D9"></path></svg>
                   </div>
                   <div class="add_small_angle" v-if="item.status">
-                    <span>$ {{ item.lpAmount }} * {{item.lpPrice}}</span>
+                    <span>$ {{item.lpPrice}} * {{ item.lpAmount }}</span>
                   </div>
                 </span>
                 <span>{{ item.bondRate}} %</span>
@@ -512,12 +512,14 @@ export default {
         num2:0,//利率等级
         num3:0,//升级所需质押额
         num4:0,//升级完成率
+        num5:0
       },
       Pledge:{
         num1:0,//质押利率
         num2:0,//利率等级
         num3:0,//升级所需质押额
         num4:0,//升级完成率
+        num5:0
       },
       orderArr:[],
       NotExtractedBUSDMoney:0,//用户未提取busd总额
@@ -651,6 +653,7 @@ export default {
         this.invitePledge.num2 = Number(res[1])
         this.invitePledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
         this.invitePledge.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
+        this.invitePledge.num5 = Number(res[2]) / 1e18 / this.getUserCoin.stPrice
         this.bondinfo.additional2 = this.invitePledge.num1//邀请质押利率
       })
       // 获取某用户的质押利率等级信息
@@ -660,6 +663,7 @@ export default {
         this.Pledge.num2 = Number(res[1])
         this.Pledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
         this.Pledge.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
+        this.Pledge.num5 = Number(res[2]) / 1e18 / this.getUserCoin.stPrice
         this.bondinfo.additional3 = this.Pledge.num1//你的质押利率
       })
     },

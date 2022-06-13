@@ -17,7 +17,7 @@
             <div class="outbox_add">
               <div class="onelin display_flex">
                 <span class="mobile_font16 font16">{{$t(item.name1)}}</span>
-                <span class="mobile_font16 font16">{{item.num1}}(≈${{item.num1_money}})</span>
+                <span class="mobile_font16 font16">{{item.num1 | PriceConversion}} ( ≈ $ {{item.num1_money | PriceConversion}})</span>
               </div>
               <div class="onelin display_flex" v-if="item.name3">
                 <span class="font14">{{$t(item.name3)}}</span>
@@ -38,9 +38,9 @@
             <div class="income_box display_flex font20">
               <div class="imgbox display_flex">
                 <img :src="`${$store.state.imgUrl}srlogo.webp`" class="homebg" />
-                <span >SR</span>
+                <span>SR</span>
               </div>
-              <span>100</span>
+              <span>0</span>
             </div>
           </div>
           <div class="left display_flex">
@@ -51,7 +51,7 @@
                 <span>SR</span>
               </div>
               <div class="btn_content">
-                <span>100</span>
+                <span>0</span>
                 <div class="invitation_code claim font16" :class="isEnLang?'en_Bold':''">{{ $t("message.gamepage.text23") }}</div>
               </div>
             </div>
@@ -81,7 +81,27 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["isEnLang"])
+    ...mapGetters(["isEnLang","getUserCoin","getAccountStatus"])
+  },
+  watch: {
+    'getAccountStatus': {
+      handler: function (newValue) {
+        if(newValue == 0){
+          this.walletArr[0].num1 = this.walletArr[0].num1_money = this.getUserCoin.busd
+          this.walletArr[1].num1 = this.getUserCoin.st
+          this.walletArr[1].num1_money = this.getUserCoin.st * this.getUserCoin.stPrice
+          this.walletArr[2].num1 = this.getUserCoin.sr
+          // this.walletArr[2].num1_money = this.getUserCoin.sr * 
+        }else if(newValue > 0){
+          this.walletArr[0].num1 = this.walletArr[0].num1_money = this.getUserCoin.busd
+          this.walletArr[1].num1 = this.getUserCoin.st
+          this.walletArr[1].num1_money = this.getUserCoin.st * this.getUserCoin.stPrice
+          this.walletArr[2].num1 = this.getUserCoin.sr
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   data(){
     return {
@@ -323,7 +343,8 @@ export default {
       }
     }
     .main{
-      width: 100%;
+      // width: 100%;
+      min-width: calc(100% - 230px);
     }
   }
 }
