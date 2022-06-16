@@ -868,5 +868,8 @@ export const message = {
     txt21:"BNB",
     txt22:"Please confirm that you have known this risk.",
     txt23:"Purchse"
+  },
+  market:{
+    txt1:'Search by name or traits'
   }
 };

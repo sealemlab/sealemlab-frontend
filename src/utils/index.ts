@@ -1,4 +1,4 @@
-import {wallet, network,sb,sn,getSourceUrl,erc20,getSigner,token,bondDepository} from "sealemlab-sdk";
+import {wallet, network,sb,sn,getSourceUrl,erc20,getSigner,bondDepository} from "sealemlab-sdk";
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
@@ -304,11 +304,16 @@ export default {
           let boxInfoArr: any = [];
           res[0].map(async (item: any) => {
             let obj = {
-              boxID:0,//盲盒ID
+              id:0,//盲盒ID
               type:0,//盲盒类型
-              status:false//状态
+              title:'Mysterybox',
+              nft: false,
+              src:'//cdn.sealemlab.com/sealemlab_assets_test/images/mybox1.webp',
+              status:false,//状态
+              showSelect: false, // 展示选择框
+              selectStatus: false // 选中状态
             }
-            obj.boxID = Number(item)
+            obj.id = Number(item)
             // @ts-ignore
             obj.type = Number(await sb().sbIdToType(item))
             // console.log('obj.type: ', obj.type);
@@ -330,6 +335,7 @@ export default {
         // console.log("公共函数:获取用户的装备信息:",res)
         if(res[0].length > 0){
           this.ProcessingFunction(res[0]).then(data => {
+            // console.log('调用处理函数得到的data: ', data);
             resolve(data)
           })
         }else{
@@ -346,6 +352,7 @@ export default {
       let orther_arr:any = []
       arr.map(async (item:any) => {
         let obj = {
+          nft: true,
           id:-1,
           src:'',
           type:-1,//职业
@@ -354,7 +361,9 @@ export default {
           position:-1,//部位
           suit:-1,//套装
           videoSrc:'',//
-          status:false//状态
+          status:false,//状态
+          showSelect: false, // 展示选择框
+          selectStatus: false // 选中状态
         }
         obj.id = Number(item)
         // console.log("公共函数:处理函数:",obj)
@@ -376,13 +385,19 @@ export default {
     })
   },
   // 函数防抖
-  antiShakeFun(callback:any,delay:number){
-    // @ts-ignore
-    clearTimeout(store.state.timer);  
-    // @ts-ignore
-    store.state.timer = setTimeout(()=>{
-      callback()
-    },delay);
+  antiShakeFun(fn:any,delay:number){
+    let timer:any= null
+    return function() {
+      // @ts-ignore
+      let that = this
+      let args = arguments
+      if(timer){
+        clearTimeout(timer)
+      }
+      timer = setTimeout(function(){
+        fn.apply(that,args)
+      },delay)
+    }
   },
   // 是否授权
   isApproveFun(account:string, type:string,contractAdrdess: string) {
@@ -413,6 +428,64 @@ export default {
           resolve(false)
         })
       })
+  },
+  nftisApproveFun(account:string, type:string,contractAdrdess: string) {
+    if(type == 'sb'){
+      return new Promise(resolve => {
+        sb().isApprovedForAll(account, contractAdrdess).then((res:any) => {
+          // console.log('子组件方法--hn是否授权res: ', res);
+          if (res) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        }).catch(() => {
+          resolve(false)
+        })
+      })
+    }else if(type == 'sn'){
+      return new Promise(resolve => {
+        sn().isApprovedForAll(account, contractAdrdess).then((res:any) => {
+          if (res) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        }).catch(() => {
+          resolve(false)
+        })
+      })
+    }
+  },
+  nftgoApproveFun(type:string, contractAdrdess:string){
+    if (type == 'sb') {
+      return new Promise((resolve,reject) => {
+        sb().connect(getSigner()).setApprovalForAll(contractAdrdess, true).then(async (res:any) => {
+          // console.log('子组件方法--hn去授权res: ', res);
+          const etReceipt = await res.wait();
+          if(etReceipt.status == 1){
+            resolve(true)
+          }else{
+            resolve(false)
+          }
+        }).catch(() => {
+          reject(false)
+        })
+      })
+    }else if(type == 'sn') {
+      return new Promise((resolve,reject) => {
+        sn().connect(getSigner()).setApprovalForAll(contractAdrdess, true).then(async (res:any) => {
+          const etReceipt = await res.wait();
+          if(etReceipt.status == 1){
+            resolve(true)
+          }else{
+            resolve(false)
+          }
+        }).catch(() => {
+          reject(false)
+        })
+      })
+    }
   },
   // 刷新代币余额
   getUserCoinQuantity(address:any,name:string,account:string){

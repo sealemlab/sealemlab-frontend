@@ -819,7 +819,10 @@ export const message = {
     self_bond:'Getting the latest bond, please wait..',
     self_sold:'Sold out',
     self_userBuyNum:'The current STLP purchase volume is loading',
-    self_write:'Please enter the amount of bond to buy'
+    self_write:'Please enter the amount of bond to buy',
+
+    self_select:'请选择盒子或者nft',
+    self_sell_txt:'请输入售卖价格'
   },//提示性文案
   approve: "Approve",
 
@@ -891,5 +894,18 @@ export const message = {
     txt21:"BNB",
     txt22:"Please enter an amount for your purchase.",
     txt23:"Purchse"
+  },
+  market:{
+    txt1:'Search by name or traits',
+    sortTXT:'Sort by',
+    txt17: "BTC Hashrate: High to Low", // HC低 desc
+    txt17_1: "BTC Hashrate: Low to High", // HC低 desc
+    txt18: "HC Hashrate: High to Low", // HC低 desc
+    txt18_1: "HC Hashrate: Low to High", // HC低 desc
+    txt19: "Price: High to Low", // 价格低 desc
+    txt19_1: "Price: Low to High", // 价格高 asc
+    txt20: "Recently Listed", // 最新上架 desc
+    txt20_1: "Oldest", //最老上架 asc
+    sell_btn:'Complete listing'
   }
 };

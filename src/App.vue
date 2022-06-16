@@ -447,9 +447,9 @@ export default {
         count++
       })
       erc20(arr[2]).balanceOf(this.getAccount).then(res => {
-        console.log('用户的busd余额res: ', res);
+        // console.log('用户的busd余额res: ', res);
         obj.busd = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        console.log('obj.busd: ', obj.busd);
+        // console.log('obj.busd: ', obj.busd);
         count++
       })
       bondDepository().getStPrice().then(res => {
@@ -470,7 +470,7 @@ export default {
         if(count == 4){
           clearInterval(this.timer)
           this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
-          console.log("获取用户代币余额结束",count)
+          // console.log("获取用户代币余额结束",count)
         }
         // console.log("获取用户代币余额中",count)
       },1000)

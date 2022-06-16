@@ -66,7 +66,7 @@ export default {
         { label: "message.nav.txt1", link: "/bond",status:true },
         // { label: "message.nav.txt2", link: "" },
         { label: "message.nav.txt3", link: "/nft",status:true },
-        { label: "message.nav.txt4", link: "market",status:false },
+        { label: "message.nav.txt4", link: "/market",status:true },
         { label: "message.nav.txt5", link: "/game/game",status:true },
         // { label: "message.nav.txt6", link: "" },
         { label: "message.nav.txt6", link: "/user/assets/0",status:true },

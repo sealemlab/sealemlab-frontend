@@ -32,18 +32,18 @@ export default {
     ...mapGetters(["getAccount","getIstrue","getAccountStatus","isEnLang"])
   },
   watch: {
-    'getAccountStatus': {
-      handler: function (newValue) {
-        if(newValue == -1 || newValue == undefined){
-        }else if(newValue == 0){
+    // 'getAccountStatus': {
+    //   handler: function (newValue) {
+    //     if(newValue == -1 || newValue == undefined){
+    //     }else if(newValue == 0){
           
-        }else if(newValue > 0){
+    //     }else if(newValue > 0){
           
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
+    //     }
+    //   },
+    //   deep: true,
+    //   immediate: true,
+    // },
   },
   data(){
     return{

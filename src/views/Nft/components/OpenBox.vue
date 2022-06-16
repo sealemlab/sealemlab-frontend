@@ -14,7 +14,7 @@
       <div class="cardarr_class">
         <div class="onebox" v-for="(item,index) in pageshowarr" :key="index" @click="cardClick(item)">
           <img :src="`${$store.state.imgUrl}mybox1.webp`" class="card_picture" />
-          <!-- <span class="boxID"># {{item.boxID}}</span> -->
+          <!-- <span class="boxID"># {{item.id}}</span> -->
           <div class="box_select">
             <span class="selected" v-if="item.status"></span>
           </div>
@@ -167,7 +167,7 @@ export default {
       let arr = []
       this.pageshowarr.forEach(item => {
         if(item.status){
-          arr.push(item.boxID)
+          arr.push(item.id)
         }
       })
       if(arr.length == 0){

@@ -66,6 +66,9 @@
 img {
   object-fit: contain;
 }
+.clear_hover:hover {
+  display: none !important;
+}
 .disply_none {
   display: none !important;
 }
