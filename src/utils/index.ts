@@ -304,16 +304,16 @@ export default {
           let boxInfoArr: any = [];
           res[0].map(async (item: any) => {
             let obj = {
-              id:0,//盲盒ID
+              nftId:0,//盲盒ID
               type:0,//盲盒类型
               title:'Mysterybox',
-              nft: false,
+              isnft: false,
               src:'//cdn.sealemlab.com/sealemlab_assets_test/images/mybox1.webp',
               status:false,//状态
               showSelect: false, // 展示选择框
               selectStatus: false // 选中状态
             }
-            obj.id = Number(item)
+            obj.nftId = Number(item)
             // @ts-ignore
             obj.type = Number(await sb().sbIdToType(item))
             // console.log('obj.type: ', obj.type);
@@ -352,26 +352,26 @@ export default {
       let orther_arr:any = []
       arr.map(async (item:any) => {
         let obj = {
-          nft: true,
-          id:-1,
+          isnft: true,
+          nftId:-1,
           src:'',
-          type:-1,//职业
-          start:-1,//星级
+          role:-1,//职业
+          stars:-1,//星级
           power:-1,//战力
-          position:-1,//部位
+          part:-1,//部位
           suit:-1,//套装
           videoSrc:'',//
           status:false,//状态
           showSelect: false, // 展示选择框
           selectStatus: false // 选中状态
         }
-        obj.id = Number(item)
+        obj.nftId = Number(item)
         // console.log("公共函数:处理函数:",obj)
         let fun_arr:any = await sn().getDatas(Number(item), 'attr')
-        obj.start = Number(fun_arr[0])
+        obj.stars = Number(fun_arr[0])
         obj.power = Number(fun_arr[1])
-        obj.type = Number(fun_arr[2])
-        obj.position = Number(fun_arr[3])
+        obj.role = Number(fun_arr[2])
+        obj.part = Number(fun_arr[3])
         obj.suit =  Number(fun_arr[4])
         obj.src = getSourceUrl(fun_arr) + '.png'
         obj.videoSrc = getSourceUrl(fun_arr) + '.mp4'
@@ -390,6 +390,7 @@ export default {
     return function() {
       // @ts-ignore
       let that = this
+      // @ts-ignore
       let args = arguments
       if(timer){
         clearTimeout(timer)

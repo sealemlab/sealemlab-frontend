@@ -86,7 +86,7 @@
             v-for="(item, index) in selectarr.arr"
             :key="index"
           >
-            <div class="onebox" v-if="item.nft">
+            <div class="onebox" v-if="item.isnft">
               <div class="out_img"><img :src="item.src" class="imgcard" /></div>
               <div class="huxing_bg_box">
                 <img
@@ -95,23 +95,23 @@
                 />
                 <div class="huxing_content">
                   <div class="start">
-                    <span class="span1 font24">{{ item.start }}</span>
+                    <span class="span1 font24">{{ item.stars }}</span>
                     <img :src="`${$store.state.imgUrl}start.webp`" />
                   </div>
                   <div class="people_type">
-                    <div class="leftimgbox" v-if="item.type == 1">
+                    <div class="leftimgbox" v-if="item.role == 1">
                       <img :src="`${$store.state.imgUrl}type_jds.webp`" />
                       <span class="font12">{{ $t("message.nft.txt9") }}</span>
                     </div>
-                    <div class="leftimgbox" v-if="item.type == 2">
+                    <div class="leftimgbox" v-if="item.role == 2">
                       <img :src="`${$store.state.imgUrl}type_cike.webp`" />
                       <span class="font12">{{ $t("message.nft.txt11") }}</span>
                     </div>
-                    <div class="leftimgbox" v-if="item.type == 3">
+                    <div class="leftimgbox" v-if="item.role == 3">
                       <img :src="`${$store.state.imgUrl}type_wushi.webp`" />
                       <span class="font12">{{ $t("message.nft.txt10") }}</span>
                     </div>
-                    <div class="leftimgbox" v-if="item.type == 4">
+                    <div class="leftimgbox" v-if="item.role == 4">
                       <img :src="`${$store.state.imgUrl}type_zs.webp`" />
                       <span class="font12">{{ $t("message.nft.txt8") }}</span>
                     </div>
@@ -144,12 +144,12 @@
                       <span class="font14 scale_box">
                         {{
                           $t(
-                            `message.nft.type${item.type}.suit${item.suit}.position${item.position}`
+                            `message.nft.type${item.role}.suit${item.suit}.position${item.part}`
                           )
                         }}
                       </span>
                       <div class="box_3d">
-                        <span class="font12"># {{ item.id }}</span>
+                        <span class="font12"># {{ item.nftId }}</span>
                         <img
                           :src="`${$store.state.imgUrl}new_3dimg.webp`"
                           class="img_3d"
@@ -174,7 +174,7 @@
                     >{{item.title}}</span
                   >
                   <span class="font12" :class="isEnLang ? 'en_medium' : ''"
-                    >#{{item.id}}</span
+                    >#{{item.nftId}}</span
                   >
                 </div>
               </div>
@@ -284,17 +284,18 @@ export default {
           if(etReceipt.status == 1){
             that.buyLoading = false
             that.alredaySellStatus = true
+            that.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
             if(that.selectarr.isbox){
               console.log("刷新box")
               that.$utils.newgetUserBoxInfoFun(that.getAccount).then((res) => {
                 sessionStorage.setItem("sb_count", res);
               })
-              that.Pricevalue = ''
-              that.getValue = 0
             }
             if(that.selectarr.isnft){
               console.log("刷新nft")
             }
+            that.Pricevalue = ''
+            that.getValue = 0
           }else{
             that.buyLoading = false
           }
@@ -322,7 +323,7 @@ export default {
           }else if(type == 'BUSD'){
             obj.type = token().BUSD
           }
-          obj.address = item.nft?token().SN:token().SB
+          obj.address = item.isnft?token().SN:token().SB
           arr_cardinfo.push(obj)
           if (count == arr.length) {
             resolve(arr_cardinfo);

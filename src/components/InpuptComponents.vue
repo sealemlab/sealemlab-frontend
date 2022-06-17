@@ -9,6 +9,7 @@
     @blur="blurEvent"
     @focus="focusEvent"
     @input="inpChange"
+    @keyup.enter="enterClick"
   />
 </template>
 <script>
@@ -53,6 +54,9 @@ export default {
     inpChange(e) {
       this.$emit("input", e.target.value);
     },
+    enterClick(){
+      this.$emit("enterClick");
+    }
   }
 }
 </script>

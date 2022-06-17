@@ -8,23 +8,23 @@
             <img :src="`${$store.state.imgUrl}huxing6.webp`" class="huxing_img" />
             <div class="huxing_content">
               <div class="start">
-                <span class="span1 font24">{{item.start}}</span>
+                <span class="span1 font24">{{item.stars}}</span>
                 <img :src="`${$store.state.imgUrl}start.webp`" />
               </div>
               <div class="people_type">
-                <div class="leftimgbox" v-if="item.type == 1">
+                <div class="leftimgbox" v-if="item.role == 1">
                   <img :src="`${$store.state.imgUrl}type_jds.webp`" />
                   <span class="font12">{{$t("message.nft.txt9")}}</span>
                 </div>
-                <div class="leftimgbox" v-if="item.type == 2">
+                <div class="leftimgbox" v-if="item.role == 2">
                   <img :src="`${$store.state.imgUrl}type_cike.webp`"/>
                   <span class="font12">{{$t("message.nft.txt11")}}</span>
                 </div>
-                <div class="leftimgbox" v-if="item.type == 3">
+                <div class="leftimgbox" v-if="item.role == 3">
                   <img :src="`${$store.state.imgUrl}type_wushi.webp`"/>
                   <span class="font12">{{$t("message.nft.txt10")}}</span>
                 </div>
-                <div class="leftimgbox" v-if="item.type == 4">
+                <div class="leftimgbox" v-if="item.role == 4">
                   <img :src="`${$store.state.imgUrl}type_zs.webp`"/>
                   <span class="font12">{{$t("message.nft.txt8")}}</span>
                 </div>
@@ -40,7 +40,7 @@
               <div class="people_type">
                 <div class="left_content">
                   <span class="font14 scale_box">
-                    {{$t(`message.nft.type${item.type}.suit${item.suit}.position${item.position}`)}}
+                    {{$t(`message.nft.type${item.role}.suit${item.suit}.position${item.part}`)}}
                   </span>
                   <div class="box_3d">
                     <span class="font12"># {{item.id}}</span>

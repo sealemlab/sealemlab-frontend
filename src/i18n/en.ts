@@ -158,10 +158,10 @@ export const message = {
     txt4: "Your NFT",
     txt5: "Gift",
     txt6: "Rent",
-    txt8: "Fighter",
-    txt9: "Gladiator",
-    txt10: "Wizard",
-    txt11: "Assassin",
+    txt8: "Fighter", // 战士
+    txt9: "Gladiator", // 角斗士
+    txt10: "Wizard", // 巫师
+    txt11: "Assassin",// 刺客
     txt12: "Weapon",
     txt13: "Skill",
     txt14: "Dark nemesis, good at uninterrupted attack",
@@ -791,39 +791,6 @@ export const message = {
     txt26: "2. The interest rate increases by 0.1% per 1K USD of bonds purchased or  staking by the invitee.",
     txt27: "3. The invitation staking interest rate changes according to the actual staking amount of the invitee.",
   },//用户中心
-  tip: {
-    txt1: "The account was created successfully, please go to the email to activate the account.",
-    txt2: "Please check whether the account/password is correct and whether the account is activated",
-    txt3: "Remind",
-    txt4: "This is a light reminder",
-    txt5: "Coming soon",
-    txt6: "Please select the box to open",
-    txt7: "Login successfully",
-    txt8: "Login failed",
-    txt9: "Information updated successfully",
-    txt10: "Information update failed",
-    txt11: "Registration success",
-    txt12: "Registration failed",
-    self_txt7: "Success",
-    self_txt8: "Buying…",
-    self_txt9: "Failed",
-    self_txt10: "Up to 5",
-    self_txt11: "Opening…",
-    self_txt12: "Open mystery box result",
-    self_txt13: "No Data",
-    self_buy:"Buy",
-
-    self_userBuy:"The user's personal remaining purchase amount is 0",
-    self_calim:'Claiming...',
-    self_calimResult:'No reward need to be claimed',
-    self_bond:'Getting the latest bond, please wait..',
-    self_sold:'Sold out',
-    self_userBuyNum:'The current STLP purchase volume is loading',
-    self_write:'Please enter the amount of bond to buy',
-
-    self_select:'请选择盒子或者nft',
-    self_sell_txt:'请输入售卖价格'
-  },//提示性文案
   approve: "Approve",
 
   gamepage: {
@@ -897,15 +864,50 @@ export const message = {
   },
   market:{
     txt1:'Search by name or traits',
-    sortTXT:'Sort by',
-    txt17: "BTC Hashrate: High to Low", // HC低 desc
-    txt17_1: "BTC Hashrate: Low to High", // HC低 desc
-    txt18: "HC Hashrate: High to Low", // HC低 desc
-    txt18_1: "HC Hashrate: Low to High", // HC低 desc
-    txt19: "Price: High to Low", // 价格低 desc
-    txt19_1: "Price: Low to High", // 价格高 asc
-    txt20: "Recently Listed", // 最新上架 desc
-    txt20_1: "Oldest", //最老上架 asc
+    sortTXT:'Recently listed', // 'Sort by',
+    txt17: "Recently listed", // 最新上架 desc
+    txt17_1: "Oldest", // 最老上架 asc
+    txt18: "Price high to low", // desc
+    txt18_1: "Price low to high", // asc
+    txt19: "Star high to low", //
+    txt19_1: "Star low to high", //
+    txt20: "Rarity high to low", //
+    txt20_1: "Rarity low to high", //
     sell_btn:'Complete listing'
-  }
+  },
+  
+  tip: {
+    txt1: "The account was created successfully, please go to the email to activate the account.",
+    txt2: "Please check whether the account/password is correct and whether the account is activated",
+    txt3: "Remind",
+    txt4: "This is a light reminder",
+    txt5: "Coming soon",
+    txt6: "Please select the box to open",
+    txt7: "Login successfully",
+    txt8: "Login failed",
+    txt9: "Information updated successfully",
+    txt10: "Information update failed",
+    txt11: "Registration success",
+    txt12: "Registration failed",
+    self_txt7: "Success",
+    self_txt8: "Buying…",
+    self_txt9: "Failed",
+    self_txt10: "Up to 5",
+    self_txt11: "Opening…",
+    self_txt12: "Open mystery box result",
+    self_txt13: "No Data",
+    self_buy:"Buy",
+
+    self_userBuy:"The user's personal remaining purchase amount is 0",
+    self_calim:'Claiming...',
+    self_calimResult:'No reward need to be claimed',
+    self_bond:'Getting the latest bond, please wait..',
+    self_sold:'Sold out',
+    self_userBuyNum:'The current STLP purchase volume is loading',
+    self_write:'Please enter the amount of bond to buy',
+
+    self_select:'请选择盒子或者nft',
+    self_sell_txt:'请输入售卖价格',
+    self_sell_out:'当前卡牌已售出'
+  },//提示性文案
 };
