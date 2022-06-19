@@ -218,7 +218,7 @@
               <span class="span2">BUSD</span>
             </p>
           </div>
-          <div class="add_box_st" v-if="inputvalue">{{ $t("message.acticePage.txt24") }}:{{userbuyst | PriceConversion}}</div>
+          <div class="add_box_st" v-if="inputvalue">{{ $t("message.acticePage.txt24") }}:{{userbuyst | PriceConversion(4)}}</div>
         </div>
         <div class="tip_txt font12" :class="isEnLang ? 'en_medium' : ''">
           <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img" />
@@ -381,7 +381,10 @@ export default {
   methods: {
     // 去授权
     sonapprove() {
-      if(!this.userIsWhiteList)return
+      if(!this.userIsWhiteList){
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt26'}));
+        return
+      }
       if (this.buy_isloading) return;
       this.buy_isloading = true;
       this.$refs.mychild.goApproveFun(this.payAddress, contract().IDO)
@@ -408,7 +411,11 @@ export default {
         this.userbuyst = this.getUserCoin.busd / this.nowPrice
       }else{
         this.inputvalue = data
-        this.userbuyst = data / this.nowPrice
+        if(data / this.nowPrice < 1e-8){
+          this.userbuyst = 0.0
+        }else{
+          this.userbuyst = data / this.nowPrice
+        }
       }
     },
     maxClick(){
@@ -431,7 +438,7 @@ export default {
         this.countTime = data.countTime
       },starttime);
     },
-    async getIdoInfo(idoID){
+    getIdoInfo(idoID){
       console.log("获取ido信息")
       // 获取某IDO的开始时间
       ido().startTimes(idoID).then(res => { 
@@ -460,13 +467,14 @@ export default {
         this.userBuyMax = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
       })
 
-      
+      this.refresh(idoID)
+    },
+    // 刷新占比进度条
+    async refresh(idoID){
       // 获取某IDO的支付代币单价
       let price = await ido().tokenPrices(idoID)
       this.nowPrice = this.$utils.convertBigNumberToNormal(Number(price),0,18,true)
       this.nowPriceStatus = true
-
-      
       
       // 获取某IDO的最大供应量
       let maxnum = await ido().tokenMaxSupplys(idoID)
@@ -549,6 +557,7 @@ export default {
             this.userbuyst = 0
             this.inputvalue = ''
             this.userConnectInfo(this.idoID,false)
+            this.refresh(this.idoID)
             this.$utils.getUserCoinQuantity(token().BUSD,'busd',this.getAccount)
             this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           }else{
