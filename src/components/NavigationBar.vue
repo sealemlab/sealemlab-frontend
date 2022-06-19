@@ -7,7 +7,7 @@
           <span class="font18">{{ $t(item.label) }}</span>
         </li>
       </ul>
-      <!-- <div class="buy_box" @click="buybox">购买宝箱</div> -->
+      <div class="buy_box" @click="buybox">购买宝箱</div>
     </div>
     <div class="nav_right">
       <div class="st_price">
@@ -88,7 +88,7 @@ export default {
         this.navActive = -1;
       } else if (to.path == "/bond") {
         this.navActive = 0;
-      }else if (to.path == "/activepage") {
+      }else if (to.path.indexOf("/activepage/") !== -1) {
         this.navActive = -1;
       }else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
@@ -163,7 +163,7 @@ export default {
       this.$store.commit("setwalletstatus", true);
     },
     buybox(){
-      this.$router.push('/activepage');
+      this.$router.push('/activepage/0');
     }
   },
 };

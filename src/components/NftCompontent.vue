@@ -165,7 +165,7 @@ export default {
                 this.loadMoreStatus = false
               }
             })
-          },3000)
+          },3000)()
         }
       },
       deep: true,

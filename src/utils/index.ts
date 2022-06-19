@@ -100,10 +100,19 @@ export default {
     }
   },
   /** 应用场景:时间戳,然后倒计时;参数:时间戳(s)*/
-  customTime(endtime: any, calback: any) {
-    // console.log('endtime: ', endtime);
+  customTime(endtime: any, calback: any,starttime = 0) {
+    let time:any;
     // @ts-ignore
-    let time = parseInt(new Date().getTime() / 1000)
+    let nowTime = parseInt(new Date().getTime() / 1000)
+    if(starttime == 0){
+      time = nowTime
+    }else{
+      if(starttime > nowTime){
+        calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" },status:0,msg:'活动暂未开始'});
+        return
+      }
+      time = nowTime
+    }
     
     if(endtime < time){
       calback({countdownObject:0,countTime:{ d:"00",h: "00", m: "00", s: "00" }});

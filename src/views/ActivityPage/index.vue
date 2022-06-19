@@ -71,7 +71,14 @@
               <span
                 class="font24 mobile_font18"
                 :class="isEnLang ? 'en_Bold' : 'cn_lang'"
-                >$ {{ item.num }}</span
+                v-if="index != 2"
+                >$ {{ item.busdnum | PriceConversion}} (≈ {{item.num | PriceConversion}} ST)</span
+              >
+              <span
+                class="font24 mobile_font18"
+                :class="isEnLang ? 'en_Bold' : 'cn_lang'"
+                v-else
+                >{{ item.num }}</span
               >
             </div>
           </div>
@@ -163,7 +170,7 @@
             <span>{{ $t("message.acticePage.txt13") }}</span>
           </div>
           <div class="btn font16" :class="isEnLang ? 'en_Bold' : ''">
-            {{ $t("message.acticePage.txt14") }}
+            <a :href="isEnLang?'https://lab-sealem.gitbook.io/sealem-lab/tokenomics/st':'https://lab-sealem.gitbook.io/slmcn/dai-bi-jing-ji-xue/st'" target="_blank" rel="noopener noreferrer" >{{ $t("message.acticePage.txt14") }}</a>
           </div>
         </div>
       </div>
@@ -172,14 +179,18 @@
           {{ $t("message.acticePage.txt15") }}
         </p>
         <p class="font16 mobile_font14" :class="isEnLang ? 'en_medium' : ''">
-          {{ $t("message.acticePage.txt16") }} 1.567
+          BUSD {{ $t("message.acticePage.txt16") }} $ {{getUserCoin.busd | PriceConversion}}
         </p>
         <div
           class="box1 font16 mobile_font14"
           :class="isEnLang ? 'en_medium' : ''"
         >
-          <p>{{ $t("message.acticePage.txt17") }} $ 456</p>
-          <p>{{ $t("message.acticePage.txt18") }} 200000</p>
+          <p>
+            {{ $t("message.acticePage.txt17") }}
+            <span v-if="nowPriceStatus"> $ {{nowPrice | PriceConversion}}</span>
+            <BtnLoading :isloading="true" v-else></BtnLoading>
+          </p>
+          <p>{{ $t("message.acticePage.txt18") }} {{userBuyMax}} ST</p>
         </div>
         <div
           class="box2 box1 font16 mobile_font16"
@@ -187,7 +198,7 @@
         >
           <div>
             <span class="span1">{{ $t("message.acticePage.txt19") }}</span>
-            <span class="span2">{{ $t("message.acticePage.txt20") }}1.567</span>
+            <span class="span2">{{ $t("message.acticePage.txt20") }} {{userRemaining}} ST</span>
           </div>
           <div>
             <!-- <span class="span1">0.345</span> -->
@@ -201,21 +212,33 @@
               <span
                 class="span_btn font12 mobile_font12"
                 :class="isEnLang ? 'en_Bold' : ''"
+                @click="maxClick"
                 >MAX</span
               >
-              <span class="span2">{{ $t("message.acticePage.txt21") }}</span>
+              <span class="span2">BUSD</span>
             </p>
           </div>
+          <div class="add_box_st" v-if="inputvalue">{{ $t("message.acticePage.txt24") }}:{{userbuyst | PriceConversion}}</div>
         </div>
         <div class="tip_txt font12" :class="isEnLang ? 'en_medium' : ''">
           <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img" />
           {{ $t("message.acticePage.txt22") }}
         </div>
-        <div
-          class="main_button font18 mobile_font16"
-          :class="isEnLang ? 'en_Bold' : ''"
-        >
-          {{ $t("message.acticePage.txt23") }}
+        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:countTimeOBJ == 0}" v-if="countTimeOBJ == 0">
+          {{ $t("message.tip.self_sold") }}
+        </div>
+        <div class="main_button font18 mobile_font16" v-else :class="{ en_Bold: isEnLang,disable_bnb:isWhiteList?(userIsWhiteList?false:true):false}">
+          <!-- {{ $t("message.acticePage.txt23") }} -->
+          <FunBtn
+            :allLoading="allLoading"
+            :isapprove="isapprove"
+            :approveloading="buy_isloading"
+            :isloading="buy_isloading"
+            :word="'message.acticePage.txt23'"
+            ref="mychild"
+            @sonapprove="sonapprove"
+            @dosomething="userBuyIdo"
+          />
         </div>
       </div>
       <div class="mobile_three_box">
@@ -259,7 +282,7 @@
           <span>{{ $t("message.acticePage.txt13") }}</span>
         </div>
         <div class="btn font16" :class="isEnLang ? 'en_Bold' : ''">
-          {{ $t("message.acticePage.txt14") }}
+          <a :href="isEnLang?'https://lab-sealem.gitbook.io/sealem-lab/tokenomics/st':'https://lab-sealem.gitbook.io/slmcn/dai-bi-jing-ji-xue/st'" target="_blank" rel="noopener noreferrer" >{{ $t("message.acticePage.txt14") }}</a>
         </div>
       </div>
     </div>
@@ -267,43 +290,272 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { ido,contract,getSigner,token } from 'sealemlab-sdk'
 export default {
-  computed: { ...mapGetters(["isEnLang", "getUserCoin", "getIstrue"]) },
+  computed: { ...mapGetters(["getUserCoin","isEnLang", "getAccountStatus", "getIstrue","getAccount"]),
+    width () {
+      if(this.arr[0].num == 0){
+        return '0%'
+      }
+      return (this.$utils.getBit(this.arr[0].num / this.arr[3].num,0)) + '%'
+    },
+  },
   data () {
     return {
+      buy_isloading: false, // 按钮loading
+      isapprove: false, //是否授权
+      allLoading:true,// 授权/操作按钮在没有进行判断之前,全部转圈圈状态
       inputvalue: '',
-      width: "20%",
       countTime: { d: "00", h: "00", m: "00", s: "00" },
       countTimeOBJ: null,
-      endtime: 1656068646,
       arr: [
-        { title: 'message.acticePage.txt3', num: 1212 },
-        { title: 'message.acticePage.txt4', num: 1212 },
-        { title: 'message.acticePage.txt5', num: 1212 },
-        { title: 'message.acticePage.txt6', num: 1212 },
+        { title: 'message.acticePage.txt3', num: 0,busdnum:0 },
+        { title: 'message.acticePage.txt4', num: 0,busdnum:0 },
+        { title: 'message.acticePage.txt5', num: 0},
+        { title: 'message.acticePage.txt6', num: 0,busdnum:0 },
       ],
       arr1: [
         { title: 'message.acticePage.txt7', num: "message.acticePage.txt8" },
         { title: 'message.acticePage.txt9', num: "message.acticePage.txt9_1" },
         { title: 'message.acticePage.txt10', num: "message.acticePage.txt11" },
-      ]
+      ],
+      nowPrice:0,
+      nowPriceStatus:false,
+      userBuyMax:0,
+      idoAddress:'',
+      payAddress:'',// 获取某IDO的支付代币地址
+      isWhiteList:true, // 默认开启白名单
+      userIsWhiteList:false,// 默认用户不在白名单
+      // userBuynum:0,// 用户已经购买的数量
+      userRemaining:0,// 用户剩余购买量
+      setIntervalOBJ:null,
+      userbuyst:0,//用户输入u换成的st数量
+      idoID:0,//本期售卖id
+    }
+  },
+  watch:{
+    'getAccountStatus': {
+      handler: function (newValue) {
+        if(newValue == 0){
+          this.userConnectInfo(this.idoID)
+        }else if(newValue > 0){
+          this.$utils.antiShakeFun(() => {
+            this.userConnectInfo(this.idoID)
+          },2000)()
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    'getIstrue': {
+      handler: function (newValue) {
+        if (newValue) {
+          this.allLoading = true
+          clearInterval(this.setIntervalOBJ);
+          this.setIntervalOBJ = setInterval(() => {
+            if(this.countTimeOBJ == 0){
+              clearInterval(this.setIntervalOBJ);
+              return
+            }
+            if (this.payAddress) {
+              clearInterval(this.setIntervalOBJ);
+              this.$refs.mychild.isApproveFun(this.payAddress, contract().IDO).then((res) => {
+                if (res) {
+                  this.isapprove = true;
+                } else {
+                  this.isapprove = false;
+                }
+                this.allLoading = false
+              });
+            }
+          }, 1000);
+        }else{
+          this.allLoading = false
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    $route(to) {
+      this.idoID = to.params.id
+      this.getIdoInfo(this.idoID)
     }
   },
   methods: {
+    // 去授权
+    sonapprove() {
+      if (this.buy_isloading) return;
+      this.buy_isloading = true;
+      this.$refs.mychild.goApproveFun(this.payAddress, contract().IDO)
+        .then((res) => {
+          this.buy_isloading = false;
+          if(res){
+            this.isapprove = true;
+            // if(!this.getNoticeNum){
+            //   this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+            //   this.$store.commit("setNoticeNum",true)
+            // }
+          }else{
+            this.isapprove = false;
+          }
+          this.allLoading = false
+        })
+    },
     InputClick (data) {
-      console.log('input输入框', data)
+      if(!data){this.userbuyst = 0}
+      // console.log('input输入框', data)
+      if(Number(data) > Number(this.getUserCoin.busd)){
+        this.inputvalue = this.getUserCoin.busd
+        this.userbuyst = this.getUserCoin.busd / this.nowPrice
+      }else{
+        this.inputvalue = data
+        this.userbuyst = data / this.nowPrice
+      }
     },
-    getUsetTime () {
+    maxClick(){
+      this.inputvalue = this.getUserCoin.busd
+      this.userbuyst = this.getUserCoin.busd / this.nowPrice
+    },
+    getUsetTime (endtime,starttime) {
       clearInterval(this.countTimeOBJ)
-      this.$utils.customTime(this.endtime, data => {
-        // console.log('id的倒计时data: ', data.countTime);
+      this.$utils.customTime(endtime, data => {
+        // console.log('data: ', data);
         this.countTimeOBJ = data.countdownObject
+        if(this.countTimeOBJ == 0){
+          this.isWhiteList = this.userIsWhiteList = true
+        }
         this.countTime = data.countTime
-      });//结束时间
+      },starttime);
     },
+    async getIdoInfo(idoID){
+      console.log("获取ido信息")
+      // 获取某IDO的开始时间
+      ido().startTimes(idoID).then(res => { 
+        // console.log('获取某IDO的开始时间: ', res);
+        // 获取某IDO的结束时间
+        ido().endTimes(idoID).then(res1 => { 
+          // console.log('获取某IDO的结束时间: ', res1);
+          this.getUsetTime(Number(res1),res)
+        })
+      })
+      
+      // 获取某IDO的代币地址
+      ido().idoTokens(idoID).then(res => {
+        // console.log('获取某IDO的代币地址res: ', res);
+        this.idoAddress = res
+      })
+      // 获取某IDO的支付代币地址
+      ido().tokenAddrs(idoID).then(res => {
+        // console.log('获取某IDO的支付代币地址: ', res);
+        this.payAddress = res
+      })
+
+      // 获取某IDO的用户最大可购买数量限制
+      ido().userBuyLimits(idoID).then(res => { 
+        // console.log('获取某IDO的用户最大可购买数量限制: ', res);
+        this.userBuyMax = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+      })
+
+      // 获取某IDO的是否开启白名单
+      ido().whiteListFlags(idoID).then(res => { 
+        // console.log('获取某IDO的是否开启白名单: ', res);
+        this.isWhiteList = res
+      })
+
+      // 获取某IDO的支付代币单价
+      let price = await ido().tokenPrices(idoID)
+      this.nowPrice = this.$utils.convertBigNumberToNormal(Number(price),0,18,true)
+      this.nowPriceStatus = true
+
+      
+      
+      // 获取某IDO的最大供应量
+      ido().tokenMaxSupplys(idoID).then(res => {
+        console.log('获取某IDO的最大供应量: ', res);
+        this.arr[3].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.arr[3].busdnum = res / 1e18 * this.nowPrice
+      })
+      // 获取某IDO的已售出数量
+      ido().tokenSoldout(idoID).then(res => { 
+        console.log('获取某IDO的已售出数量: ', res);
+        this.arr[0].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.arr[0].busdnum = res / 1e18 * this.nowPrice
+      })
+      // 获取某IDO的剩余可销售数量
+      ido().getTokenLeftSupply(idoID).then(res => { 
+        console.log('获取某IDO的剩余可销售数量: ', res);
+        this.arr[1].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.arr[1].busdnum = res / 1e18 * this.nowPrice
+      })
+    },
+    userConnectInfo(idoID,iswhite = true){
+      // console.log("获取用户信息")
+      // // 获取某用户某IDO的已购买数量
+      // ido().userTokenPurchased(this.getAccount,this.idoID).then(res => { 
+      //   console.log('获取某用户某IDO的已购买数量: ', res);
+      //   this.userBuynum = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+      // })
+      // 判断某用户是否在某IDO的白名单
+      if(iswhite){
+        ido().getWhiteListExistence(idoID,this.getAccount).then(res => { 
+          // console.log('判断某用户是否在某IDO的白名单: ', res);
+          this.userIsWhiteList = res
+        })
+      }
+      // 获取某用户某IDO的剩余购买限额
+      ido().getUserTokenLeftSupply(idoID,this.getAccount).then(res => { 
+        // console.log('获取某用户某IDO的剩余购买限额: ', res);
+        this.userRemaining = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+      })
+    },
+    // 用户购买
+    userBuyIdo(){
+      if (this.buy_isloading) return;
+      if(this.countTimeOBJ != 0){
+        if(!this.inputvalue){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt25'}));
+          return
+        }
+        if(this.isWhiteList){
+          if(!this.userIsWhiteList){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt26'}));
+            return
+          }
+        }
+        if(Number(this.userRemaining) < Number(this.userbuyst)){ // 用户剩余购买量
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt27'}));
+          return
+        }
+        if(Number(this.arr[1].num) < Number(this.userbuyst)){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt28'}));
+          return
+        }
+        this.buy_isloading = true
+        ido().connect(getSigner()).buyToken(this.$utils.convertNormalToBigNumber(this.userbuyst, 18),this.idoID).then(async res => {
+          // console.log('购买idores: ', res);
+          const etReceipt = await res.wait();
+          if(etReceipt.status == 1){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+            this.buy_isloading = false
+            this.userbuyst = 0
+            this.inputvalue = ''
+            this.userConnectInfo(this.idoID,false)
+            this.$utils.getUserCoinQuantity(token().BUSD,'busd',this.getAccount)
+          }else{
+            this.buy_isloading = false
+          }
+        }).catch(() => {
+          this.buy_isloading = false
+        })
+      }else{
+        // console.log("活动已结束")
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt29'}));
+      }
+    }
   },
   mounted () {
-    this.getUsetTime()
+    this.idoID = this.$route.params.id
+    this.getIdoInfo(this.idoID)
   },
   beforeDestroy () {
     clearInterval(this.countTimeOBJ)
@@ -428,7 +680,7 @@ export default {
           align-items: center;
           margin: 56px 0 35px;
           .box {
-            width: 90%;
+            width: 100%;
             height: 17px;
             background: #373535;
             box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
@@ -578,6 +830,7 @@ export default {
             align-items: center;
             margin-top: 0;
             .span_btn {
+              cursor: pointer;
               padding: 0 5px;
               height: 21px;
               background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
@@ -591,6 +844,12 @@ export default {
               margin-right: 8px;
             }
           }
+        }
+        .add_box_st{
+          margin-top: 15px;
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
         }
       }
       .tip_txt {

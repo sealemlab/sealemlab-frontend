@@ -223,7 +223,7 @@ export default {
           clearInterval(this.btntimernull)
           this.$utils.antiShakeFun(() => {
             this.getSDKInfo()
-          },2000)
+          },2000)()
         }
       },
       deep: true,

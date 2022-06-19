@@ -853,14 +853,21 @@ export const message = {
     txt13:"Read the documentation.",
     txt14:"Learn about ST tokenomics",
     txt15:"Buy ST",
-    txt16:"BNB balance:",
+    txt16:"balance:",
     txt17:"Offering price:",
     txt18:"Your max buyable:",
     txt19:"Amount",
     txt20:"Avaliable:",
     txt21:"BNB",
     txt22:"Please enter an amount for your purchase.",
-    txt23:"Purchse"
+    txt23:"Purchse",
+    txt24:"可购买ST数量",
+    txt25:"请输入购买金额",
+    txt26:"用户不在白名单",
+    txt27:"用户剩余购买量不足",
+    txt28:"库存剩余购买量不足",
+    txt29:"活动已结束",
+
   },
   market:{
     txt1:'Search by name or traits',

@@ -127,7 +127,7 @@ const routes: Array<RouteConfig> = [
     ],
   },
   {
-    path: "/activepage",
+    path: "/activepage/:id",
     name: "ActivePage",
     component: () => import("../views/ActivityPage/index.vue"),
   },

@@ -163,7 +163,7 @@ export default {
             this.$utils.getUserCoinQuantity(token().BUSD,'busd',this.getAccount)
             this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
             // console.log("切换账号重新判断授权")
-          },2000)
+          },2000)()
         }
       },
       deep: true,
