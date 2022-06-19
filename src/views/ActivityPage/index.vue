@@ -84,9 +84,9 @@
           </div>
           <div class="progress_box">
             <div class="box">
-              <div class="load" :style="{ width }"></div>
+              <div class="load" :style="{ width: width + '%' }"></div>
             </div>
-            <span>{{ width }}</span>
+            <span>{{ percentage }} %</span>
           </div>
         </div>
         <div class="three_box">
@@ -227,7 +227,7 @@
         <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:countTimeOBJ == 0}" v-if="countTimeOBJ == 0">
           {{ $t("message.tip.self_sold") }}
         </div>
-        <div class="main_button font18 mobile_font16" v-else :class="{ en_Bold: isEnLang,disable_bnb:isWhiteList?(userIsWhiteList?false:true):false}">
+        <div class="main_button font18 mobile_font16" v-else :class="{ en_Bold: isEnLang,disable_bnb:userIsWhiteList?false:true}">
           <!-- {{ $t("message.acticePage.txt23") }} -->
           <FunBtn
             :allLoading="allLoading"
@@ -292,14 +292,7 @@
 import { mapGetters } from "vuex";
 import { ido,contract,getSigner,token } from 'sealemlab-sdk'
 export default {
-  computed: { ...mapGetters(["getUserCoin","isEnLang", "getAccountStatus", "getIstrue","getAccount"]),
-    width () {
-      if(this.arr[0].num == 0){
-        return '0%'
-      }
-      return (this.$utils.getBit(this.arr[0].num / this.arr[3].num,0)) + '%'
-    },
-  },
+  computed: { ...mapGetters(["getUserCoin","isEnLang", "getAccountStatus", "getIstrue","getAccount"]),},
   data () {
     return {
       buy_isloading: false, // 按钮loading
@@ -324,13 +317,16 @@ export default {
       userBuyMax:0,
       idoAddress:'',
       payAddress:'',// 获取某IDO的支付代币地址
-      isWhiteList:true, // 默认开启白名单
       userIsWhiteList:false,// 默认用户不在白名单
       // userBuynum:0,// 用户已经购买的数量
       userRemaining:0,// 用户剩余购买量
       setIntervalOBJ:null,
       userbuyst:0,//用户输入u换成的st数量
       idoID:0,//本期售卖id
+      disableBth:true,// 按钮禁止点击
+      percentage:0,
+      width:0,
+      progressTimer:null
     }
   },
   watch:{
@@ -338,6 +334,7 @@ export default {
       handler: function (newValue) {
         if(newValue == 0){
           this.userConnectInfo(this.idoID)
+          this.userIsWhiteList = false
         }else if(newValue > 0){
           this.$utils.antiShakeFun(() => {
             this.userConnectInfo(this.idoID)
@@ -384,6 +381,7 @@ export default {
   methods: {
     // 去授权
     sonapprove() {
+      if(!this.userIsWhiteList)return
       if (this.buy_isloading) return;
       this.buy_isloading = true;
       this.$refs.mychild.goApproveFun(this.payAddress, contract().IDO)
@@ -399,6 +397,7 @@ export default {
             this.isapprove = false;
           }
           this.allLoading = false
+          // this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
         })
     },
     InputClick (data) {
@@ -413,8 +412,13 @@ export default {
       }
     },
     maxClick(){
-      this.inputvalue = this.getUserCoin.busd
-      this.userbuyst = this.getUserCoin.busd / this.nowPrice
+      if(this.userRemaining * this.nowPrice <= this.getUserCoin.busd){
+        this.inputvalue = this.userRemaining * this.nowPrice
+        this.userbuyst = this.userRemaining
+      }else{
+        this.inputvalue = this.getUserCoin.busd
+        this.userbuyst = this.getUserCoin.busd / this.nowPrice
+      }
     },
     getUsetTime (endtime,starttime) {
       clearInterval(this.countTimeOBJ)
@@ -422,7 +426,7 @@ export default {
         // console.log('data: ', data);
         this.countTimeOBJ = data.countdownObject
         if(this.countTimeOBJ == 0){
-          this.isWhiteList = this.userIsWhiteList = true
+          this.userIsWhiteList = false
         }
         this.countTime = data.countTime
       },starttime);
@@ -456,12 +460,7 @@ export default {
         this.userBuyMax = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
       })
 
-      // 获取某IDO的是否开启白名单
-      ido().whiteListFlags(idoID).then(res => { 
-        // console.log('获取某IDO的是否开启白名单: ', res);
-        this.isWhiteList = res
-      })
-
+      
       // 获取某IDO的支付代币单价
       let price = await ido().tokenPrices(idoID)
       this.nowPrice = this.$utils.convertBigNumberToNormal(Number(price),0,18,true)
@@ -470,11 +469,10 @@ export default {
       
       
       // 获取某IDO的最大供应量
-      ido().tokenMaxSupplys(idoID).then(res => {
-        console.log('获取某IDO的最大供应量: ', res);
-        this.arr[3].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        this.arr[3].busdnum = res / 1e18 * this.nowPrice
-      })
+      let maxnum = await ido().tokenMaxSupplys(idoID)
+      this.arr[3].num = this.$utils.convertBigNumberToNormal(Number(maxnum),0,18,true)
+      this.arr[3].busdnum = maxnum / 1e18 * this.nowPrice
+
       // 获取某IDO的已售出数量
       ido().tokenSoldout(idoID).then(res => { 
         console.log('获取某IDO的已售出数量: ', res);
@@ -486,6 +484,12 @@ export default {
         console.log('获取某IDO的剩余可销售数量: ', res);
         this.arr[1].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.arr[1].busdnum = res / 1e18 * this.nowPrice
+        
+        this.percentage = parseInt(Number(this.arr[1].num) / Number(this.arr[3].num) * 100) 
+        console.log('this.arr[3].num: ', this.arr[3].num);
+        console.log('this.arr[1].num: ', this.arr[1].num);
+        console.log('this.percentage: ', this.percentage);
+        this.progressFun()
       })
     },
     userConnectInfo(idoID,iswhite = true){
@@ -497,9 +501,15 @@ export default {
       // })
       // 判断某用户是否在某IDO的白名单
       if(iswhite){
-        ido().getWhiteListExistence(idoID,this.getAccount).then(res => { 
-          // console.log('判断某用户是否在某IDO的白名单: ', res);
-          this.userIsWhiteList = res
+        // 获取某IDO的是否开启白名单
+        ido().whiteListFlags(idoID).then(res => { 
+          // console.log('获取某IDO的是否开启白名单: ', res);
+          if(res){
+            ido().getWhiteListExistence(idoID,this.getAccount).then(res1 => { 
+              console.log('判断某用户是否在某IDO的白名单: ', res1);
+              this.userIsWhiteList = res1
+            })
+          }
         })
       }
       // 获取某用户某IDO的剩余购买限额
@@ -512,15 +522,13 @@ export default {
     userBuyIdo(){
       if (this.buy_isloading) return;
       if(this.countTimeOBJ != 0){
+        if(!this.userIsWhiteList){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt26'}));
+          return
+        }
         if(!this.inputvalue){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt25'}));
           return
-        }
-        if(this.isWhiteList){
-          if(!this.userIsWhiteList){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt26'}));
-            return
-          }
         }
         if(Number(this.userRemaining) < Number(this.userbuyst)){ // 用户剩余购买量
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt27'}));
@@ -533,6 +541,7 @@ export default {
         this.buy_isloading = true
         ido().connect(getSigner()).buyToken(this.$utils.convertNormalToBigNumber(this.userbuyst, 18),this.idoID).then(async res => {
           // console.log('购买idores: ', res);
+          this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
           const etReceipt = await res.wait();
           if(etReceipt.status == 1){
             this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
@@ -541,8 +550,10 @@ export default {
             this.inputvalue = ''
             this.userConnectInfo(this.idoID,false)
             this.$utils.getUserCoinQuantity(token().BUSD,'busd',this.getAccount)
+            this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           }else{
             this.buy_isloading = false
+            this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
           }
         }).catch(() => {
           this.buy_isloading = false
@@ -551,6 +562,16 @@ export default {
         // console.log("活动已结束")
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt29'}));
       }
+    },
+    progressFun(){
+      clearInterval(this.progressTimer)
+      this.progressTimer = setInterval(() => {
+        if(this.width >= this.percentage){
+          this.width = this.percentage
+          clearInterval(this.progressTimer)
+        }
+        this.width += 5
+      },100)
     }
   },
   mounted () {
@@ -675,7 +696,7 @@ export default {
           }
         }
         .progress_box {
-          width: 100%;
+          width:100%;
           display: flex;
           align-items: center;
           margin: 56px 0 35px;
@@ -700,6 +721,7 @@ export default {
             font-weight: bold;
             color: #ced3d9;
             line-height: 24px;
+            white-space:nowrap;
           }
         }
       }

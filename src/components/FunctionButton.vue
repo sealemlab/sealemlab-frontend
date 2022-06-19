@@ -75,6 +75,7 @@ export default {
       const TOKEN_amount = '50000000000000000000000000000000000000000000000000000000000';
         return new Promise(resolve => {
           erc20(type).connect(getSigner()).approve(contractAdrdess,TOKEN_amount).then(async res => {
+            // this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
             const etReceipt = await res.wait();
             if(etReceipt.status == 1){
               resolve(true)
