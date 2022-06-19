@@ -376,6 +376,7 @@ export default {
     $route(to) {
       this.idoID = to.params.id
       this.getIdoInfo(this.idoID)
+      this.inputvalue = ''
     }
   },
   methods: {
@@ -494,9 +495,7 @@ export default {
         this.arr[1].busdnum = res / 1e18 * this.nowPrice
         
         this.percentage = parseInt(Number(this.arr[1].num) / Number(this.arr[3].num) * 100) 
-        console.log('this.arr[3].num: ', this.arr[3].num);
-        console.log('this.arr[1].num: ', this.arr[1].num);
-        console.log('this.percentage: ', this.percentage);
+        
         this.progressFun()
       })
     },
@@ -575,6 +574,12 @@ export default {
     progressFun(){
       clearInterval(this.progressTimer)
       this.progressTimer = setInterval(() => {
+        if(!this.percentage){
+          this.percentage = 0
+          this.width = 0
+          clearInterval(this.progressTimer)
+          return
+        }
         if(this.width >= this.percentage){
           this.width = this.percentage
           clearInterval(this.progressTimer)
