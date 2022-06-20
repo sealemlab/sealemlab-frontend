@@ -2383,7 +2383,7 @@ export default {
       this.loadMoreStatus = true
       this.getMarketInfo(this.sortObj).then((res) => {
 
-        // console.log('筛选以后的结果res: ', res);
+        console.log('筛选以后的结果res: ', res);
         this.sortObj.skip += this.sortObj.first;
         istrue = false
         if (res.status == 0) {

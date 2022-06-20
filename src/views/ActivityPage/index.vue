@@ -44,8 +44,11 @@
           <span class="font14" :class="isEnLang ? 'en_Bold' : ''">SEC</span>
         </div>
       </div>
-      <p class="font24" :class="isEnLang ? 'en_medium' : ''">
+      <p class="font24" :class="isEnLang ? 'en_medium' : ''" v-if="beginStatus">
         {{ $t("message.acticePage.title2") }}
+      </p>
+      <p class="font24" :class="isEnLang ? 'en_medium' : ''" v-else>
+        {{ $t("message.acticePage.title2_1") }}
       </p>
     </div>
     <div class="content">
@@ -57,7 +60,9 @@
               :class="isEnLang ? 'en_Bold' : 'cn_lang'"
               >{{ $t("message.acticePage.txt1") }}</span
             >
-            <span class="font12" :class="isEnLang ? 'en_Bold' : 'cn_lang'">{{
+            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="arr[0].num == arr[3].num">{{ $t("message.tip.self_sold") }}</span>
+            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="beginStatus">{{$t("message.tip.self_Nobegin")}}</span>
+            <span class="font12" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="!beginStatus">{{
               $t("message.acticePage.txt2")
             }}</span>
           </p>
@@ -224,10 +229,12 @@
           <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img" />
           {{ $t("message.acticePage.txt22") }}
         </div>
-        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:countTimeOBJ == 0}" v-if="countTimeOBJ == 0">
+        <!-- 卖完 -->
+        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:arr[0].num == arr[3].num}" v-if="arr[0].num == arr[3].num">
           {{ $t("message.tip.self_sold") }}
         </div>
-        <div class="main_button font18 mobile_font16" v-else :class="{ en_Bold: isEnLang,disable_bnb:userIsWhiteList?false:true}">
+        <!-- 购买 -->
+        <div class="main_button font18 mobile_font16" v-show="arr[0].num != arr[3].num" :class="{ en_Bold: isEnLang,disable_bnb:userIsWhiteList?false:true}">
           <!-- {{ $t("message.acticePage.txt23") }} -->
           <FunBtn
             :allLoading="allLoading"
@@ -295,6 +302,7 @@ export default {
   computed: { ...mapGetters(["getUserCoin","isEnLang", "getAccountStatus", "getIstrue","getAccount"]),},
   data () {
     return {
+      beginStatus:true,// 开始时间状态
       buy_isloading: false, // 按钮loading
       isapprove: false, //是否授权
       allLoading:true,// 授权/操作按钮在没有进行判断之前,全部转圈圈状态
@@ -326,7 +334,9 @@ export default {
       disableBth:true,// 按钮禁止点击
       percentage:0,
       width:0,
-      progressTimer:null
+      progressTimer:null,
+      // startTime:0,
+      endTime:0
     }
   },
   watch:{
@@ -350,10 +360,10 @@ export default {
           this.allLoading = true
           clearInterval(this.setIntervalOBJ);
           this.setIntervalOBJ = setInterval(() => {
-            if(this.countTimeOBJ == 0){
-              clearInterval(this.setIntervalOBJ);
-              return
-            }
+            // if(this.countTimeOBJ == 0){
+            //   clearInterval(this.setIntervalOBJ);
+            //   return
+            // }
             if (this.payAddress) {
               clearInterval(this.setIntervalOBJ);
               this.$refs.mychild.isApproveFun(this.payAddress, contract().IDO).then((res) => {
@@ -365,9 +375,11 @@ export default {
                 this.allLoading = false
               });
             }
+            console.log("判断是否授权中")
           }, 1000);
         }else{
           this.allLoading = false
+          this.nowPriceStatus = true
         }
       },
       deep: true,
@@ -428,26 +440,32 @@ export default {
         this.userbuyst = this.getUserCoin.busd / this.nowPrice
       }
     },
-    getUsetTime (endtime,starttime) {
+    getUsetTime (endtime) {
       clearInterval(this.countTimeOBJ)
       this.$utils.customTime(endtime, data => {
-        // console.log('data: ', data);
         this.countTimeOBJ = data.countdownObject
         if(this.countTimeOBJ == 0){
           this.userIsWhiteList = false
         }
         this.countTime = data.countTime
-      },starttime);
+      });
     },
     getIdoInfo(idoID){
       console.log("获取ido信息")
       // 获取某IDO的开始时间
       ido().startTimes(idoID).then(res => { 
-        // console.log('获取某IDO的开始时间: ', res);
-        // 获取某IDO的结束时间
+        console.log('获取某IDO的开始时间: ', res);
+        let nowTime = parseInt(new Date().getTime() / 1000)
+        if(nowTime <= res){
+          this.getUsetTime(res)
+        }
         ido().endTimes(idoID).then(res1 => { 
-          // console.log('获取某IDO的结束时间: ', res1);
-          this.getUsetTime(Number(res1),res)
+          console.log('获取某IDO的结束时间: ', res1);
+          this.endTime = res1
+          if(res < nowTime <= res1){
+            this.beginStatus = false
+            this.getUsetTime(res1)
+          }
         })
       })
       
@@ -494,7 +512,7 @@ export default {
         this.arr[1].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.arr[1].busdnum = res / 1e18 * this.nowPrice
         
-        this.percentage = parseInt(Number(this.arr[1].num) / Number(this.arr[3].num) * 100) 
+        this.percentage = parseInt(Number(this.arr[0].num) / Number(this.arr[3].num) * 100) 
         
         this.progressFun()
       })
@@ -580,11 +598,11 @@ export default {
           clearInterval(this.progressTimer)
           return
         }
+        this.width += 5
         if(this.width >= this.percentage){
           this.width = this.percentage
           clearInterval(this.progressTimer)
         }
-        this.width += 5
       },100)
     }
   },
@@ -669,6 +687,8 @@ export default {
           font-weight: bold;
           color: #ced3d9;
           line-height: 29px;
+          display: flex;
+          align-items: center;
           span {
             &:nth-child(2) {
               display: inline-block;

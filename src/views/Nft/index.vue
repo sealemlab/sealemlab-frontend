@@ -86,13 +86,14 @@ export default {
     }
     .main{
       width: 100vw;
-      max-width: 1200px;
+      // max-width: 1200px;
       margin: 0 auto;
       margin-top: 32px;
       padding-left: 120px;
       min-height: calc(100vh - 80px);
       padding-bottom: 30px;
       padding-left: 150px;
+      padding-right: 10vw;
     }
   }
 }

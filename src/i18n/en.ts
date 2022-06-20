@@ -15,6 +15,7 @@ export const message = {
     txt11: "New to crypto?",
     txt12: "Learn more about wallets",
     txt13: "More",
+    txt14: "IDO"
   },//导航栏
   home: {
     add_txt1: "High APY",
@@ -837,6 +838,7 @@ export const message = {
   acticePage:{
     title1:"IDO sale",
     title2:"IDO begains in",
+    title2_1:"IDO ends in",
     txt1:"IDO PROGRESS",
     txt2:"Sale live",
     txt3:"Sold in current",
@@ -846,7 +848,7 @@ export const message = {
     txt7:"Who can join the presale?",
     txt8:"Anyone in whitelist",
     txt9:"How much ST can I get?",
-    txt9_1:"0.1B-0.5B",
+    txt9_1:"0 BUSD - 500 BUSD",
     txt10:"What should I do when i gain ST?",
     txt11:"Purchase bond",
     txt12:"More information?",
@@ -861,12 +863,20 @@ export const message = {
     txt21:"BNB",
     txt22:"Please enter an amount for your purchase.",
     txt23:"Purchse",
-    txt24:"可购买ST数量",
-    txt25:"请输入购买金额",
-    txt26:"用户不在白名单",
-    txt27:"用户剩余购买量不足",
-    txt28:"库存剩余购买量不足",
-    txt29:"活动已结束",
+
+    txt24:"The amount of ST you can get",
+    txt25:"Enter the purchase amount",
+    txt26:"User doesn't exist in the whitelist",
+    txt27:"The user's remaining purchases is insufficient",
+    txt28:"Insufficient inventory remaining to buy",
+    txt29:"The event is over",
+
+    // txt24:"可获得ST数量",
+    // txt25:"请输入购买金额",
+    // txt26:"用户不在白名单",
+    // txt27:"用户剩余购买量不足",
+    // txt28:"库存剩余购买量不足",
+    // txt29:"活动已结束",
 
   },
   market:{
@@ -910,6 +920,7 @@ export const message = {
     self_calimResult:'No reward need to be claimed',
     self_bond:'Getting the latest bond, please wait..',
     self_sold:'Sold out',
+    self_Nobegin:'Upcoming',
     self_userBuyNum:'The current STLP purchase volume is loading',
     self_write:'Please enter the amount of bond to buy',
 

@@ -12,13 +12,14 @@
       </div>
       <!-- 页面展示数组 -->
       <div class="cardarr_class">
-        <div class="onebox" v-for="(item,index) in pageshowarr" :key="index" @click="cardClick(item)">
+        <!-- <div class="onebox" v-for="(item,index) in pageshowarr" :key="index" @click="cardClick(item)">
           <img :src="`${$store.state.imgUrl}mybox1.webp`" class="card_picture" />
-          <!-- <span class="boxID"># {{item.id}}</span> -->
+          <span class="boxID"># {{item.nftId}}</span>
           <div class="box_select">
             <span class="selected" v-if="item.status"></span>
           </div>
-        </div>
+        </div> -->
+        <BoxComponents :nftArr="pageshowarr" @nftFun="cardClick"></BoxComponents>
       </div>
     </div>
     <img :src="`${$store.state.imgUrl}back.webp`" class="close_img" @click.stop="closeOpen"/>
@@ -31,6 +32,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { sb,getSigner } from "sealemlab-sdk";
+import BoxComponents from "@/components/BoxComponents.vue"
 export default {
   computed: {
     ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo","isEnLang"]),
@@ -49,6 +51,9 @@ export default {
         return newValue;
       }
     },
+  },
+  components:{
+    BoxComponents
   },
   props: {
     openStatus: {
@@ -89,7 +94,12 @@ export default {
         if(sessionStorage.getItem('sb_count')){
           // console.log(' this.getUserBoxInfo: ',  this.getUserBoxInfo);
           clearInterval(this.timerll)
-          this.pageshowarr = JSON.parse(this.getUserBoxInfo).filter(data => {
+          let arr = JSON.parse(this.getUserBoxInfo)
+          arr.forEach(item => {
+            item.showSelect = true
+            item.selectStatus = false
+          })
+          this.pageshowarr = arr.filter(data => {
             return data.type == this.boxtype
           })
           // console.log('this.pageshowarr: ', this.pageshowarr.length);
@@ -105,8 +115,8 @@ export default {
     // 选择盒子
     cardClick(data){
       if(this.selectedNUM >= this.selectNum){
-        if(data.status){
-          data.status = false
+        if(data.selectStatus){
+          data.selectStatus = false
           this.selectedNUM--
           this.selectALLBtn = false
         }else{
@@ -117,9 +127,9 @@ export default {
         }
         return
       }
-      data.status = !data.status
+      data.selectStatus = !data.selectStatus
 
-      if(data.status){
+      if(data.selectStatus){
         this.selectedNUM++
       }else{
         this.selectedNUM--
@@ -132,7 +142,7 @@ export default {
       if(this.selectALLBtn || this.selectStatus){
         this.selectALLBtn = this.selectStatus = false
         this.pageshowarr.forEach(item => {
-          item.status = false
+          item.selectStatus = false
         })
         this.selectedNUM = 0
       }else{
@@ -140,20 +150,20 @@ export default {
         this.selectALLBtn = this.selectStatus = true
         if(this.pageshowarr.length < this.selectNum + 1){
           this.pageshowarr.forEach(item => {
-            item.status = true
+            item.selectStatus = true
           })
           this.selectedNUM = this.pageshowarr.length
         }else{
           // console.log("全选按钮的else状态")
           this.pageshowarr.forEach(item =>{
-            item.status = false
+            item.selectStatus = false
           })
           this.pageshowarr.forEach((item,index) => {
             if(index <= this.selectNum - 1){
-              item.status = true
+              item.selectStatus = true
             }
           })
-          this.selectedNUM = this.pageshowarr.filter(item => {return item.status == true}).length
+          this.selectedNUM = this.pageshowarr.filter(item => {return item.selectStatus == true}).length
           if(!this.getNoticeNum){
             this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':`message.tip.self_txt10`}));
             this.$store.commit("setNoticeNum",true)
@@ -165,9 +175,10 @@ export default {
     openboxFun(){
       if(this.openstatus)return
       let arr = []
+        console.log('this.pageshowarr: ', this.pageshowarr);
       this.pageshowarr.forEach(item => {
-        if(item.status){
-          arr.push(item.id)
+        if(item.selectStatus){
+          arr.push(item.nftId)
         }
       })
       if(arr.length == 0){
@@ -178,6 +189,7 @@ export default {
         return
       }
       this.openstatus = true
+        console.log('arr: ', arr);
       sb().connect(getSigner()).openBoxes(arr).then(res => {
         console.log('开盒子res: ', res);
         // 进度条
@@ -282,7 +294,7 @@ export default {
       margin-top: 20px;
       max-height: 600px;
       // padding-bottom: 240px;
-      padding-bottom: 310px;
+      // padding-bottom: 310px;
       .onebox{
         position: relative;
         width: 20%;
@@ -434,12 +446,12 @@ export default {
               background: #ECCF83;
             }
           }
-          // .boxID{
-          //   position: absolute;
-          //   top: 10px;
-          //   left: 20px;
-          //   color: red;
-          // }
+          .boxID{
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: red;
+          }
         }
       }
     }

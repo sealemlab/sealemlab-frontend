@@ -447,7 +447,7 @@ export default {
     .bind_box_img{
       position: absolute;
       top: -4%;
-      left: 20%;
+      left: 15%;
       // transform: translate(-50%,-50%);
       width: 340px;
       animation: topbottom 4s linear 0s infinite alternate;

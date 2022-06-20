@@ -743,7 +743,7 @@ export default {
     this.$refs.video.addEventListener('canplaythrough',function(){
       that.videoStatus = false
     });
-    console.log('this.$route.query: ', this.$route.query,localStorage.getItem('Invitee') == true);
+    // console.log('this.$route.query: ', this.$route.query,localStorage.getItem('Invitee') == true);
     if(this.$route.query.ref){
       localStorage.setItem('Invitee',this.$route.query.ref)
     }

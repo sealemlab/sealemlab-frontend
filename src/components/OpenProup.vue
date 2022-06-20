@@ -7,7 +7,7 @@
       @click="closepage"
     />
     <div class="boxarr">
-      <div class="out_box_one" v-for="(item, index) in boxarr" :key="index" @click="nftFun(item)">
+      <!-- <div class="out_box_one" v-for="(item, index) in boxarr" :key="index" @click="nftFun(item)">
         <div class="onebox">
           <div class="out_img"><img :src="item.src" class="imgcard" /></div>
           <div class="huxing_bg_box">
@@ -59,7 +59,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
+
+      <BoxComponents :centr="true" :nftArr="boxarr" @nftFun="nftFun"></BoxComponents>
     </div>
     <!-- <div class="Suspension_btnbox">
       <span class="bottom_title fontsize12_400">按钮上方提示信息</span>
@@ -75,6 +77,7 @@
 </template>
 
 <script>
+import BoxComponents from "@/components/BoxComponents.vue"
 import { mapGetters } from "vuex";
 export default {
   props: {
@@ -106,6 +109,9 @@ export default {
       deep: true,
       immediate: true,
     }
+  },
+  components:{
+    BoxComponents
   },
   computed: {
     ...mapGetters(["isEnLang"])

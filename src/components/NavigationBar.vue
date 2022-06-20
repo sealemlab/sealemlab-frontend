@@ -7,7 +7,9 @@
           <span class="font18">{{ $t(item.label) }}</span>
         </li>
       </ul>
-      <div class="buy_box" @click="buybox">购买宝箱</div>
+    </div>
+    <div class="buy_box" :class="{activepage:navActive == 8}" @click="buybox">
+      <span>{{ $t("message.nav.txt14") }}</span>
     </div>
     <div class="nav_right">
       <div class="st_price">
@@ -89,7 +91,7 @@ export default {
       } else if (to.path == "/bond") {
         this.navActive = 0;
       }else if (to.path.indexOf("/activepage/") !== -1) {
-        this.navActive = -1;
+        this.navActive = 8;
       }else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
       }else if (to.path == "/market") {
@@ -205,29 +207,34 @@ export default {
       }
     }
   }
-  .buy_box{
-    cursor: pointer;
-    width: 114px;
-    height: 34px;
-    background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
-    border-radius: 4px;
-    border: 1px solid #ECCF83;
-    backdrop-filter: blur(14px);
-    text-align: center;
-    line-height: 34px;
-    font-weight: bold;
-    color: #CED3D9;
+}
+.buy_box{
+  cursor: pointer;
+  width: 114px;
+  height: 34px;
+  background: linear-gradient(180deg, #1B1919 0%, #000000 100%);
+  border-radius: 4px;
+  border: 1px solid #CED3D9;
+  backdrop-filter: blur(14px);
+  text-align: center;
+  line-height: 34px;
+  font-weight: bold;
+  color: #CED3D9;
+  &:hover{
+    span {
+      color: #EDD083;
+    }
+  }
+}
+.activepage{
+  border: 1px solid #ECCF83;
+  span {
+    color: #EDD083;
   }
 }
 .active {
-  // background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-  // -webkit-background-clip: text;
-  // -webkit-text-fill-color: transparent;
   span {
     color: #EDD083;
-    // background: linear-gradient(180deg, #825f35 0%, #fadd82 51%, #876333 100%);
-    // -webkit-background-clip: text;
-    // -webkit-text-fill-color: transparent;
   }
 }
 .nav_right {
