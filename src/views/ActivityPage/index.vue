@@ -232,12 +232,13 @@
             :isapprove="isapprove"
             :approveloading="buy_isloading"
             :isloading="buy_isloading"
-            :word="(arr[0].num == arr[2].num || !startAndEnd) ?'message.tip.self_sold':'message.acticePage.txt23'"
+            :word="btntxt"
             ref="mychild"
             @sonapprove="sonapprove"
             @dosomething="userBuyIdo"
           />
         </div>
+        <!-- (arr[0].num == arr[2].num || !startAndEnd) ?'message.tip.self_sold': 'message.acticePage.txt23' -->
       </div>
       <div class="mobile_three_box">
         <div v-for="(item, index) in arr1" :key="index">
@@ -297,6 +298,7 @@ export default {
   },
   data () {
     return {
+      btntxt:'acticePage.txt23',
       buy_isloading: false, // 按钮loading
       isapprove: false, //是否授权
       allLoading:true,// 授权/操作按钮在没有进行判断之前,全部转圈圈状态
@@ -334,6 +336,7 @@ export default {
       pageTimer:null,
       getEndTimeStatus:false,
       startAndEnd:true,// 开始售卖前 跟结束售卖后 此变量为假
+      showNoSellStatus:false,// 没有开始售卖前  此状态为假
     }
   },
   watch:{
@@ -451,6 +454,7 @@ export default {
         if(this.getEndTimeStatus){
           console.log("获取到结束时间",this.endTime,nowTime)
           if(this.endTime < nowTime){
+            this.btntxt = 'message.tip.self_sold'
             this.startAndEnd = false
             clearInterval(this.pageTimer)
             return
@@ -458,6 +462,7 @@ export default {
         }
         if(this.startTime > 0){
           if(nowTime < this.startTime){
+            this.btntxt = 'message.acticePage.txt23'
             this.startAndEnd = false
             clearInterval(this.countTimeOBJ)
             this.$utils.customTime(this.startTime, data => {
@@ -470,6 +475,7 @@ export default {
               this.countTime = data.countTime
             });
           }else if(this.startTime <= nowTime < this.endTime){
+            this.btntxt = 'message.acticePage.txt23'
             clearInterval(this.countTimeOBJ)
             this.startAndEnd = true
             this.$utils.customTime(this.endTime, data => {
