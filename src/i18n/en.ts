@@ -870,6 +870,7 @@ export const message = {
     txt27:"The user's remaining purchases is insufficient",
     txt28:"Insufficient inventory remaining to buy",
     txt29:"The event is over",
+    txt30:"Address"
 
     // txt24:"可获得ST数量",
     // txt25:"请输入购买金额",
