@@ -77,9 +77,9 @@
               <span
                 class="font24 mobile_font18"
                 :class="isEnLang ? 'en_Bold' : 'cn_lang'"
-                >$ {{ item.busdnum | PriceConversion}}</span>
+                >{{ item.busdnum | PriceConversion}} BUSD</span>
               <span
-                class="font24 mobile_font18"
+                class="font20 mobile_font6"
                 :class="isEnLang ? 'en_Bold' : 'cn_lang'"
                 >≈ {{item.num | PriceConversion}} ST</span>
             </div>
@@ -193,7 +193,7 @@
             <span v-if="nowPriceStatus"> 1 ST = {{nowPrice | PriceConversion}} BUSD</span>
             <BtnLoading :isloading="true" v-else></BtnLoading>
           </p>
-          <p>{{ $t("message.acticePage.txt18") }} {{userBuyMax * nowPrice | PriceConversion(0)}} BUSD</p>
+          <p>{{ $t("message.acticePage.txt18") }} {{userRemaining | PriceConversion(2)}} ST / {{userBuyMax | PriceConversion(0)}} ST</p>
         </div>
         <div
           class="box2 box1 font16 mobile_font16"
@@ -221,7 +221,7 @@
               <span class="span2">BUSD</span>
             </p>
           </div>
-          <div class="add_box_st" v-if="inputvalue">{{ $t("message.acticePage.txt24") }}{{userbuyst | PriceConversion(4)}}</div>
+          <div class="add_box_st" v-if="inputvalue">{{ $t("message.acticePage.txt24") }}{{userbuyst | PriceConversion(4)}} ST</div>
         </div>
         <div class="tip_txt font12" :class="isEnLang ? 'en_medium' : ''">
           <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img" />
@@ -325,6 +325,7 @@ export default {
       idoAddress:'',
       payAddress:'',// 获取某IDO的支付代币地址
       userIsWhiteList:false,// 默认用户不在白名单
+      new_userIsWhiteList:false,// 授权按钮可以点击 ,此变量存用户是否在白名单状态
       // userBuynum:0,// 用户已经购买的数量
       userRemaining:0,// 用户剩余购买量
       setIntervalOBJ:null,
@@ -377,6 +378,7 @@ export default {
                   this.isapprove = false;
                 }
                 this.allLoading = false
+                
               });
             }
             // console.log("判断是否授权中")
@@ -401,10 +403,10 @@ export default {
     },
     // 去授权
     sonapprove() {
-      if(!this.userIsWhiteList){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt26'}));
-        return
-      }
+      // if(!this.userIsWhiteList){
+      //   this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt26'}));
+      //   return
+      // }
       if (this.buy_isloading) return;
       this.buy_isloading = true;
       this.$refs.mychild.goApproveFun(this.payAddress, contract().IDO)
@@ -420,6 +422,7 @@ export default {
             this.isapprove = false;
           }
           this.allLoading = false
+          this.userIsWhiteList = this.new_userIsWhiteList
           // this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
         })
     },
@@ -452,6 +455,7 @@ export default {
       }
     },
     getUsetTime () {
+      console.log("this.isapprove",this.isapprove)
       clearInterval(this.pageTimer)
       this.pageTimer = setInterval(() => {
         let nowTime = parseInt(new Date().getTime() / 1000)
@@ -466,6 +470,7 @@ export default {
           }
         }
         if(this.startTime > 0){
+          console.log("this.isapprove",this.isapprove)
           // 售卖前的倒计时
           if(nowTime < this.startTime){
             this.btntxt = 'message.acticePage.txt23'
@@ -580,6 +585,7 @@ export default {
             ido().getWhiteListExistence(idoID,this.getAccount).then(res1 => { 
               // console.log('判断某用户是否在某IDO的白名单: ', res1);
               this.userIsWhiteList = res1
+              this.new_userIsWhiteList = res1
             })
           }
         })
@@ -764,7 +770,7 @@ export default {
           .Onegroup {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            // align-items: center;
             span {
               &:nth-child(1) {
                 font-weight: 500;
@@ -776,6 +782,10 @@ export default {
                 color: #ced3d9;
                 line-height: 29px;
                 margin-top: 15px;
+              }
+              &:nth-child(2) {
+                font-weight: bold;
+                color: #ced3d9;
               }
             }
           }
@@ -895,12 +905,11 @@ export default {
           color: #ced3d9;
           line-height: 29px;
         }
-        &:nth-child(2) {
+        &:nth-child(2),&:nth-child(3) {
           font-weight: 500;
           color: #ced3d9;
           line-height: 19px;
           margin-top: 13px;
-          cursor: pointer;
           .add_img{
             width: 10px;
           }
