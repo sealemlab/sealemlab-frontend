@@ -439,15 +439,16 @@ export default {
       }
     },
     maxClick(){
-      // console.log('this.userRemaining: ', this.userRemaining);
-        // console.log('this.nowPrice: ', this.nowPrice);
-        // console.log('this.getUserCoin.busd: ', this.getUserCoin.busd);
+      //this.userRemaining //用户剩余购买限额
+        console.log('用户剩余额度this.userRemaining: ', this.userRemaining);
       if(this.userRemaining * this.nowPrice <= this.getUserCoin.busd){
         this.inputvalue = this.userRemaining * this.nowPrice
         this.userbuyst = this.userRemaining
+        console.log('用户购买的数量this.userbuyst: ', this.userbuyst);
       }else{
         this.inputvalue = this.getUserCoin.busd
         this.userbuyst = this.getUserCoin.busd / this.nowPrice
+        console.log('用户购买的数量this.userbuyst: ', this.userbuyst);
       }
     },
     getUsetTime () {
@@ -585,7 +586,7 @@ export default {
       }
       // 获取某用户某IDO的剩余购买限额
       ido().getUserTokenLeftSupply(idoID,this.getAccount).then(res => { 
-        // console.log('获取某用户某IDO的剩余购买限额: ', res);
+        console.log('获取某用户某IDO的剩余购买限额: ', res);
         this.userRemaining = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
       })
     },
@@ -610,7 +611,7 @@ export default {
           return
         }
         this.buy_isloading = true
-          console.log('this.userbuyst: ',this.$utils.convertNormalToBigNumber(648.7079203730402, 18), this.userbuyst);
+        console.log('this.userbuyst: ',this.$utils.convertNormalToBigNumber(this.userbuyst, 18), this.userbuyst);
         ido().connect(getSigner()).buyToken(this.$utils.convertNormalToBigNumber(this.userbuyst, 18),this.idoID).then(async res => {
           // console.log('购买idores: ', res);
           this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
