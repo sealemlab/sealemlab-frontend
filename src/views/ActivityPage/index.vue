@@ -61,7 +61,7 @@
               :class="isEnLang ? 'en_Bold' : 'cn_lang'"
               >{{ $t("message.acticePage.txt1") }}</span
             >
-            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="arr[0].num == arr[2].num || !startAndEnd">{{ $t("message.tip.self_sold") }}</span>
+            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="arr[0].num == arr[2].num">{{ $t("message.tip.self_sold") }}</span>
             <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="!startAndEnd">{{$t("message.tip.self_Nobegin")}}</span>
             <span class="font12" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="startAndEnd">{{
               $t("message.acticePage.txt2")
@@ -77,8 +77,11 @@
               <span
                 class="font24 mobile_font18"
                 :class="isEnLang ? 'en_Bold' : 'cn_lang'"
-                >$ {{ item.busdnum | PriceConversion}} (≈ {{item.num | PriceConversion}} ST)</span
-              >
+                >$ {{ item.busdnum | PriceConversion}}</span>
+              <span
+                class="font24 mobile_font18"
+                :class="isEnLang ? 'en_Bold' : 'cn_lang'"
+                >≈ {{item.num | PriceConversion}} ST</span>
             </div>
           </div>
           <div class="progress_box">
@@ -197,8 +200,8 @@
           :class="isEnLang ? 'en_medium' : ''"
         >
           <div>
-            <span class="span1">{{ $t("message.acticePage.txt19") }}</span>
-            <span class="span2">{{ $t("message.acticePage.txt16") }} {{getUserCoin.busd | PriceConversion}} BUSD</span>
+            <span class="span1">{{ $t("message.acticePage.txt16") }}</span>
+            <span class="span2">{{getUserCoin.busd | PriceConversion}} BUSD</span>
           </div>
           <div>
             <!-- <span class="span1">0.345</span> -->
@@ -218,7 +221,7 @@
               <span class="span2">BUSD</span>
             </p>
           </div>
-          <div class="add_box_st" v-if="inputvalue">{{ $t("message.acticePage.txt24") }}:{{userbuyst | PriceConversion(4)}}</div>
+          <div class="add_box_st" v-if="inputvalue">{{ $t("message.acticePage.txt24") }}{{userbuyst | PriceConversion(4)}}</div>
         </div>
         <div class="tip_txt font12" :class="isEnLang ? 'en_medium' : ''">
           <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img" />
@@ -298,7 +301,7 @@ export default {
   },
   data () {
     return {
-      btntxt:'acticePage.txt23',
+      btntxt:'message.acticePage.txt23',
       buy_isloading: false, // 按钮loading
       isapprove: false, //是否授权
       allLoading:true,// 授权/操作按钮在没有进行判断之前,全部转圈圈状态
@@ -452,7 +455,8 @@ export default {
       this.pageTimer = setInterval(() => {
         let nowTime = parseInt(new Date().getTime() / 1000)
         if(this.getEndTimeStatus){
-          console.log("获取到结束时间",this.endTime,nowTime)
+          // console.log("获取到结束时间",this.endTime,nowTime)
+          // 活动已结束
           if(this.endTime < nowTime){
             this.btntxt = 'message.tip.self_sold'
             this.startAndEnd = false
@@ -461,6 +465,7 @@ export default {
           }
         }
         if(this.startTime > 0){
+          // 售卖前的倒计时
           if(nowTime < this.startTime){
             this.btntxt = 'message.acticePage.txt23'
             this.startAndEnd = false
@@ -474,8 +479,8 @@ export default {
               }
               this.countTime = data.countTime
             });
-          }else if(this.startTime <= nowTime < this.endTime){
-            this.btntxt = 'message.acticePage.txt23'
+          }else if(this.startTime <= nowTime < this.endTime){//正在售卖中
+            this.btntxt = this.userIsWhiteList ?'message.acticePage.txt23':'message.acticePage.txt31'
             clearInterval(this.countTimeOBJ)
             this.startAndEnd = true
             this.$utils.customTime(this.endTime, data => {
@@ -488,22 +493,10 @@ export default {
               this.countTime = data.countTime
             });
           }
-          console.log("获取到开始时间",this.startTime)
+          // console.log("获取到开始时间",this.startTime)
         }
-        console.log("页面倒计时中")
+        // console.log("页面倒计时中")
       },1000)
-
-
-
-      // clearInterval(this.countTimeOBJ)
-      // this.$utils.customTime(endtime, data => {
-      //   console.log('data: ', data);
-      //   this.countTimeOBJ = data.countdownObject
-      //   if(this.countTimeOBJ == 0){
-      //     this.userIsWhiteList = false
-      //   }
-      //   this.countTime = data.countTime
-      // });
     },
     getIdoInfo(idoID){
       // console.log("获取ido信息")
@@ -617,6 +610,7 @@ export default {
           return
         }
         this.buy_isloading = true
+          console.log('this.userbuyst: ',this.$utils.convertNormalToBigNumber(648.7079203730402, 18), this.userbuyst);
         ido().connect(getSigner()).buyToken(this.$utils.convertNormalToBigNumber(this.userbuyst, 18),this.idoID).then(async res => {
           // console.log('购买idores: ', res);
           this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
@@ -895,7 +889,7 @@ export default {
       border: 1px solid rgba(68, 67, 67, 0.47);
       p {
         &:nth-child(1) {
-          font-weight: bold;
+          font-weight: 500;
           color: #ced3d9;
           line-height: 29px;
         }
