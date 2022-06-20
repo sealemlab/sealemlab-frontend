@@ -611,8 +611,9 @@ export default {
           return
         }
         this.buy_isloading = true
-        console.log('this.userbuyst: ',this.$utils.convertNormalToBigNumber(this.userbuyst, 18), this.userbuyst);
-        ido().connect(getSigner()).buyToken(this.$utils.convertNormalToBigNumber(this.userbuyst, 18),this.idoID).then(async res => {
+        let subNum = this.$utils.getBit(this.userbuyst,8)
+        console.log('this.userbuyst: ',this.$utils.convertNormalToBigNumber(subNum, 18), subNum);
+        ido().connect(getSigner()).buyToken(this.$utils.convertNormalToBigNumber(subNum, 18),this.idoID).then(async res => {
           // console.log('购买idores: ', res);
           this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
           const etReceipt = await res.wait();
