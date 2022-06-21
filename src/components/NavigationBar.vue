@@ -130,11 +130,11 @@ export default {
             this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
             this.$store.commit("setNoticeNum", true);
           }
-        }else{
-          this.$router.push(item.link)
-          this.routeArr.push(item)
-          localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
+          return
         }
+        this.$router.push(item.link)
+        this.routeArr.push(item)
+        localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
       }else{
         this.$router.push(item.link)
         this.routeArr.push(item)
