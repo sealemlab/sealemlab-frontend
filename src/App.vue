@@ -483,7 +483,20 @@ export default {
     window.addEventListener("scroll", this.scrollingFun);
     window.addEventListener("load", this.setRem);
     window.addEventListener("resize", this.setRem);
-  },
+
+    let beginTime = 0;//开始时间
+    let differTime = 0;//时间差
+    window.onunload = function (){
+      differTime = new Date().getTime() - beginTime;
+      if(differTime <= 5){
+        console.log("页面关闭")
+        localStorage.removeItem('routeArr')
+      }
+    };
+    window.onbeforeunload = function (){
+      beginTime = new Date().getTime();
+    };
+  }
 };
 </script>
 

@@ -8,7 +8,7 @@
         </li>
       </ul>
     </div>
-    <div class="buy_box" :class="{activepage:navActive == 8}" @click="buybox">
+    <div class="buy_box" :class="{activepage:navActive == 6}" @click="buybox">
       <span>{{ $t("message.nav.txt14") }}</span>
     </div>
     <div class="nav_right">
@@ -66,56 +66,62 @@ export default {
     return {
       navActive: 0,
       navArr: [
-        { label: "message.nav.txt1", link: "/bond",status:true },
-        // { label: "message.nav.txt2", link: "" },
-        { label: "message.nav.txt3", link: "/nft",status:true },
-        { label: "message.nav.txt4", link: "/market",status:true },
-        { label: "message.nav.txt5", link: "/game/game",status:true },
-        // { label: "message.nav.txt6", link: "" },
-        { label: "message.nav.txt6", link: "/user/assets/0",status:true },
+        { label: "message.nav.txt1", link: "/bond",id:0},
+        { label: "message.nav.txt2", link: "/staking",id:1},
+        { label: "message.nav.txt3", link: "/nft",id:2},
+        { label: "message.nav.txt4", link: "/market",id:3},
+        { label: "message.nav.txt5", link: "/game/game",id:4},
+        { label: "message.nav.txt6", link: "/user/assets/0",id:5},
         // { label: "message.nav.txt7", link: "" }
       ],
       showLangSelect: false,
       language: "",
       langArr: ["EN", "ZH"],
+      routeArr:[]
     };
   },
   computed: { ...mapGetters(["getProduction","getNoticeNum", "isEnLang", "getLogin","getUserCoin","getSubtringAccount", "getIstrue"]) },
   watch: {
-    $route(to, from) {
+    $route(to) {
       window.scrollTo(0, 0);
       // if (from.matched.length && to.matched[0].path != from.matched[0].path) {
       //   window.scrollTo(0, 0);
       // }
       
       // 不是正式环境的话,展示
-      if(!this.getProduction){
-        if (to.path == "/market") {
-          this.navActive = 2;
+      if(this.getProduction){
+        if (to.path == "/market" || to.path == "/staking") {
+          this.navActive = -1
+          if (!this.getNoticeNum) {
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+            this.$store.commit("setNoticeNum", true);
+          }
           return
         }
       }
-      if (to.path == "/home") {
-        this.navActive = -1;
-      } else if (to.path == "/bond") {
-        this.navActive = 0;
-      }else if (to.path.indexOf("/activepage/") !== -1) {
-        this.navActive = 8;
-      }else if (to.path.indexOf("/nft/") !== -1) {
-        this.navActive = 1;
-      }
-      else if (to.path.indexOf("/game/") !== -1) {
-        this.navActive = 3;
-      } else if (to.path.indexOf("/user/") !== -1) {
-        this.navActive = 4;
-      } else if (to.path.indexOf("/signin/") !== -1 || to.path.indexOf("/myaccount/") !== -1) {
-        this.navActive = 7;
-      } else {
-        if (!this.getNoticeNum) {
-          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-          this.$store.commit("setNoticeNum", true);
-        }
-      }
+      this.navActive = this.callArray(to.path)
+
+      // if (to.path == "/home") {
+      //   this.navActive = -1;
+      // } else if (to.path == "/bond") {
+      //   this.navActive = 0;
+      // }else if (to.path.indexOf("/activepage/") !== -1) {
+      //   this.navActive = 8;
+      // }else if (to.path.indexOf("/nft/") !== -1) {
+      //   this.navActive = 1;
+      // }
+      // else if (to.path.indexOf("/game/") !== -1) {
+      //   this.navActive = 3;
+      // } else if (to.path.indexOf("/user/") !== -1) {
+      //   this.navActive = 4;
+      // } else if (to.path.indexOf("/signin/") !== -1 || to.path.indexOf("/myaccount/") !== -1) {
+      //   this.navActive = 7;
+      // } else {
+      //   if (!this.getNoticeNum) {
+      //     this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+      //     this.$store.commit("setNoticeNum", true);
+      //   }
+      // }
     },
   },
   created() {
@@ -123,6 +129,17 @@ export default {
     wallet.onDisconnect(this.signOutFun);
   },
   methods: {
+    // 调用数组,返回对应id
+    callArray(data){
+      if(data == '/home'){
+        return -1
+      }
+      let localeArr = JSON.parse(localStorage.getItem('routeArr'))
+      let arr = localeArr.filter(item => {
+        return data.indexOf(item.link) != -1
+      })
+      return arr[0].id
+    },
     // 退出钱包
     async signOutFun() {
       sessionStorage.removeItem("setnewinfo");
@@ -133,30 +150,29 @@ export default {
       this.$store.commit("setnewinfo", JSON.stringify({}));
     },
     toRoute(item) {
-      if(item.status){
-        if(this.getProduction){
-          if(item.link == '/market'){
-            if (!this.getNoticeNum) {
-              this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-              this.$store.commit("setNoticeNum", true);
-            }
-          }else{
-            this.$router.push(item.link);
+      if(this.getProduction){
+        if(item.link == '/market'){
+          if (!this.getNoticeNum) {
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+            this.$store.commit("setNoticeNum", true);
           }
         }else{
-          this.$router.push(item.link);
+          this.$router.push(item.link)
+          this.routeArr.push(item)
+          localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
         }
       }else{
-        if (!this.getNoticeNum) {
-          this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-          this.$store.commit("setNoticeNum", true);
-        }
+        this.$router.push(item.link)
+        this.routeArr.push(item)
+        localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
       }
     },
     goHome(){
       this.$router.push('/home');
     },
     loginClick(data) {
+      this.routeArr.push({link: "/myaccount",id:7},{link: "/signin",id:7})
+      localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
       switch (data) {
         case "myaccout":
           this.$router.push("/myaccount/information");
@@ -183,6 +199,8 @@ export default {
       this.$store.commit("setwalletstatus", true);
     },
     buybox(){
+      this.routeArr.push({link: "/activepage",id:6})
+      localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
       this.$router.push('/activepage/0');
     }
   },

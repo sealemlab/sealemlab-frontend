@@ -135,7 +135,12 @@ const routes: Array<RouteConfig> = [
     path: "/market",
     name: "Market",
     component: () => import("../views/Market/index.vue"),
-  }
+  },
+  {
+    path: "/staking",
+    name: "Staking",
+    component: () => import("../views/Staking/index.vue"),
+  },
 ];
 
 const router = new VueRouter({
