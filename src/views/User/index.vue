@@ -79,6 +79,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { token } from "sealemlab-sdk";
 export default {
   computed: {
     ...mapGetters(["isEnLang","getUserCoin","getAccountStatus"])
@@ -121,7 +122,7 @@ export default {
         num1_money:0,
         num2_money:0,
         name3:'message.user.txt7',
-        address:'0x********'
+        address:this.$utils.getSubStr(token().ST, 6)
       },
       {
         coin_logo:`${this.$store.state.imgUrl}srlogo.webp`,
@@ -131,7 +132,7 @@ export default {
         num1_money:0,
         num2_money:0,
         name3:'message.user.txt7',
-        address:'0x********'
+        address:this.$utils.getSubStr(token().SR, 6)
       }
       ],
       menuArr:[

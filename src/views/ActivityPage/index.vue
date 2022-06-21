@@ -911,6 +911,7 @@ export default {
           color: #ced3d9;
           line-height: 19px;
           margin-top: 13px;
+          cursor: pointer;
           .add_img{
             width: 10px;
           }
