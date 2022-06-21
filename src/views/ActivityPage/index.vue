@@ -856,6 +856,7 @@ export default {
             color: #ced3d9;
             line-height: 24px;
             padding-left: 20px;
+            white-space:nowrap;
           }
         }
       }
