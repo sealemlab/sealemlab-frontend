@@ -872,6 +872,11 @@ export const message = {
     txt29:"The event is over",
     txt30:"Address",
     txt31:"You're not in whitelist.",
+    txt32:"DAYS",
+    txt33:"HRS",
+    txt34:"MIN.",
+    txt35:"SEC."
+
 
     // txt24:"可获得ST数量",
     // txt25:"请输入购买金额",

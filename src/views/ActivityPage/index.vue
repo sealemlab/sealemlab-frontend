@@ -15,7 +15,7 @@
             :class="isEnLang ? 'en_Bold' : ''"
             >{{ countTime.d }}</span
           >
-          <span class="font14" :class="isEnLang ? 'en_Bold' : ''">DAYS</span>
+          <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{ $t("message.acticePage.txt32") }}</span>
         </div>
         <div class="line font45 mobile_font24">:</div>
         <div class="onebox">
@@ -24,7 +24,7 @@
             :class="isEnLang ? 'en_Bold' : ''"
             >{{ countTime.h }}</span
           >
-          <span class="font14" :class="isEnLang ? 'en_Bold' : ''">HRS</span>
+          <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{ $t("message.acticePage.txt33") }}</span>
         </div>
         <div class="line font45 mobile_font24">:</div>
         <div class="onebox">
@@ -33,7 +33,7 @@
             :class="isEnLang ? 'en_Bold' : ''"
             >{{ countTime.m }}</span
           >
-          <span class="font14" :class="isEnLang ? 'en_Bold' : ''">MIN</span>
+          <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{ $t("message.acticePage.txt34") }}</span>
         </div>
         <div class="line font45 mobile_font24">:</div>
         <div class="onebox">
@@ -42,7 +42,7 @@
             :class="isEnLang ? 'en_Bold' : ''"
             >{{ countTime.s }}</span
           >
-          <span class="font14" :class="isEnLang ? 'en_Bold' : ''">SEC</span>
+          <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{ $t("message.acticePage.txt35") }}</span>
         </div>
       </div>
       <!-- 倒计时开始前文案 -->
