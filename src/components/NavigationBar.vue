@@ -68,7 +68,7 @@ export default {
         { label: "message.nav.txt1", link: "/bond",status:true },
         // { label: "message.nav.txt2", link: "" },
         { label: "message.nav.txt3", link: "/nft",status:true },
-        { label: "message.nav.txt4", link: "/market",status:true },
+        { label: "message.nav.txt4", link: "/market",status:false },
         { label: "message.nav.txt5", link: "/game/game",status:true },
         // { label: "message.nav.txt6", link: "" },
         { label: "message.nav.txt6", link: "/user/assets/0",status:true },
@@ -94,9 +94,10 @@ export default {
         this.navActive = 8;
       }else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
-      }else if (to.path == "/market") {
-        this.navActive = 2;
       }
+      // else if (to.path == "/market") {
+      //   this.navActive = 2;
+      // }
       else if (to.path.indexOf("/game/") !== -1) {
         this.navActive = 3;
       } else if (to.path.indexOf("/user/") !== -1) {
