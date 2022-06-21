@@ -1644,7 +1644,7 @@ export default {
     },
     // sdk方法买盒子
     sdkBuyFun(item){
-      market().connect(getSigner()).buy([item.nft],[item.nftId],localStorage.getItem('Invitee')?localStorage.getItem('Invitee'):'0x0000000000000000000000000000000000000000').then(async res1 => {
+      market().connect(getSigner()).buy([item.nft],[item.nftId],localStorage.getItem('Invitee')).then(async res1 => {
         // console.log('用户购买nft或者盒子res: ', res1);
         const etReceipt = await res1.wait();
         if(etReceipt.status == 1){

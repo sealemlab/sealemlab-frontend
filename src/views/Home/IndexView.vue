@@ -304,6 +304,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { util } from 'sealemlab-sdk'
 export default {
   computed: {
     ...mapGetters(["isEnLang","getIsMobile"])
@@ -774,10 +775,12 @@ export default {
     this.$refs.video.addEventListener('canplaythrough',function(){
       that.videoStatus = false
     });
-    // console.log('this.$route.query: ', this.$route.query,localStorage.getItem('Invitee') == true);
-    if(this.$route.query.ref){
-      localStorage.setItem('Invitee',this.$route.query.ref)
-    }
+    try{ 
+      let istrue = util.getAddress(this.$route.query.ref)
+      localStorage.setItem('Invitee',istrue)
+    } catch(error){
+      localStorage.setItem('Invitee','0x0000000000000000000000000000000000000000')
+    } 
   },
 }
 </script>

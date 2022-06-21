@@ -296,8 +296,7 @@ export default {
       }
       this.buy_isloading = true
       // 0x0000000000000000000000000000000000000000
-      console.log('this.sliderValue,this.bindboxType: ', this.sliderValue,this.bindboxType,localStorage.getItem('Invitee'));
-      sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType,localStorage.getItem('Invitee')?localStorage.getItem('Invitee'):'0x0000000000000000000000000000000000000000').then(async (res) => {
+      sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType,localStorage.getItem('Invitee')).then(async (res) => {
         // 进度条
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
         const etReceipt = await res.wait();
