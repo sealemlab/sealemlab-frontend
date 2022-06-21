@@ -32,7 +32,6 @@
 <script>
 import { mapGetters } from "vuex";
 import { sb,getSigner } from "sealemlab-sdk";
-import BoxComponents from "@/components/BoxComponents.vue"
 export default {
   computed: {
     ...mapGetters(["getNoticeNum","getAccount","getIstrue","getUserBoxInfo","isEnLang"]),
@@ -51,9 +50,6 @@ export default {
         return newValue;
       }
     },
-  },
-  components:{
-    BoxComponents
   },
   props: {
     openStatus: {

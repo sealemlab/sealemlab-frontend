@@ -128,6 +128,9 @@ export default new Vuex.Store({
     getAccountStatus(state) {
       return state.newWalletInfo.changeAccount;
     },
+    getProduction(){
+      return process.env.NODE_ENV === "production" 
+    }
   },
   mutations: {
     // 设置用户的币的余额

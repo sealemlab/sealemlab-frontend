@@ -88,6 +88,9 @@ Vue.component("Input", Input);
 import WalletComponents from "@/components/walletcomponents.vue";
 Vue.component("WalletComponents", WalletComponents);
 
+import BoxComponents from "@/components/BoxComponents.vue"
+Vue.component("BoxComponents", BoxComponents);
+
 import utils from "./utils/index";
 Vue.prototype.$utils = utils;
 

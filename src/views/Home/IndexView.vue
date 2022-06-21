@@ -282,6 +282,23 @@
         </div>
       </div>
     </div>
+    <!-- 邀请者 -->
+    <div class="characteristic_box display_flex">
+      <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt78")}}</div>
+      <div class="gamebox">
+        <div class="partener_box display_flex">
+          <div class="one_partener display_flex" v-for="(item, index) in inviteArr" :key="index">
+            <img :src="item.src" 
+              :class="{
+                inviter_par1:index == 0,
+                inviter_par2:index == 1,
+                inviter_par3:index == 2
+              }"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -683,6 +700,20 @@ export default {
           },
         },
       },
+      inviteArr:[
+        {
+          id:1,//coinhub
+          src:`${this.$store.state.imgUrl}inviter_1.webp`
+        },
+        {
+          id:2,//coinhub
+          src:`${this.$store.state.imgUrl}inviter_2.webp`
+        },
+        {
+          id:3,//coinhub
+          src:`${this.$store.state.imgUrl}inviter_3.webp`
+        }
+      ]
     }
   },
   watch: {
@@ -1217,6 +1248,15 @@ export default {
           margin-bottom:50px;
           img{
             cursor: pointer;
+          }
+          .inviter_par1{
+            width: 59px;
+          }
+          .inviter_par2{
+            width: 147px;
+          }
+          .inviter_par3{
+            width: 247px;
           }
           .par1{
             width: 236px;
@@ -1935,6 +1975,15 @@ export default {
             margin-bottom:0.2rem;
             img{
               cursor: pointer;
+            }
+            .inviter_par1{
+              width: 0.35rem;
+            }
+            .inviter_par2{
+              width: 0.7rem;
+            }
+            .inviter_par3{
+              width: 1rem;
             }
             .par1{
               width: 0.94rem;

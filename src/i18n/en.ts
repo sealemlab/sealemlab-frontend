@@ -125,6 +125,8 @@ export const message = {
     txt75: "ST Price",
     txt76: "SR Price",
     txt77: "OVERVIEW",
+
+    txt78:"INVESTOR"
   },// 主页
   footer: {
     txt1: "ABOUT",

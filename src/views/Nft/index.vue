@@ -93,7 +93,7 @@ export default {
       min-height: calc(100vh - 80px);
       padding-bottom: 30px;
       padding-left: 150px;
-      padding-right: 10vw;
+      // padding-right: 10vw;
     }
   }
 }

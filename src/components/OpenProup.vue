@@ -61,7 +61,7 @@
         </div>
       </div> -->
 
-      <BoxComponents :centr="true" :nftArr="boxarr" @nftFun="nftFun"></BoxComponents>
+      <BoxComponents :selfBoxCentr="true" :centr="true" :nftArr="boxarr" @nftFun="nftFun"></BoxComponents>
     </div>
     <!-- <div class="Suspension_btnbox">
       <span class="bottom_title fontsize12_400">按钮上方提示信息</span>

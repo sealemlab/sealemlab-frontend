@@ -153,9 +153,9 @@ export default {
       }
       .line_{
         margin-top: 14px;
-        width: auto;
+        width: 100%;
         max-width: 204px;
-        padding:8px;
+        padding:8px 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

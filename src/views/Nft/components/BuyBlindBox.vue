@@ -69,7 +69,7 @@
     </div>
     <!-- 盲盒概率 -->
     <div class="blindbox_introduce">
-      <p class="font30 introduce_title_txt mobile_font18">{{$t("message.nft.txt216")}}</p>
+      <p class="font30 introduce_title_txt mobile_font18" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt216")}}</p>
       <div class="box_probability font20" :class="isEnLang?'en_Bold':''">
         <div class="top_one_line">
           <div class="small_box">
@@ -96,7 +96,7 @@
       <!-- 盲盒概率--移动端 -->
       <div class="mobile_box_probability" :class="isEnLang?'en_Bold':''">
         <div class="oneline">
-          <span class="mobile_font14">{{$t("message.nft.txt217")}}</span>
+          <span class="mobile_font14" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt217")}}</span>
           <p v-for="(item,index) in probabilityArr1" :key="index">
             <span>{{item.lv}}</span>
             <img :src="`${$store.state.imgUrl}start.webp`" />
@@ -125,7 +125,7 @@
     </div>
     <!-- 盲盒介绍 -->
     <div class="blindbox_introduce">
-      <p class="font30 introduce_title_txt mobile_font18">{{$t("message.nft.txt29")}}</p>
+      <p class="font30 introduce_title_txt mobile_font18" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt29")}}</p>
       <div class="introduce_content">
         <div class="introduce_onebox">
           <p class="title font16 mobile_font16" :class="isEnLang?'en_Bold':''">{{$t("message.nft.txt32")}}</p>
@@ -408,6 +408,7 @@ export default {
 .buy_blind_box{
   width: 100%;
   height: 100%;
+  padding-right: 10vw;
 }
 .title_box {
   width: 100%;

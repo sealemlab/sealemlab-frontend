@@ -1,7 +1,7 @@
 <template>
   <!-- 穿戴展示 -->
   <div class="show_box">
-    <p class="wear_show font30 mobile_font18">
+    <p class="wear_show font30 mobile_font18" :class="isEnLang?'en_Bold':''">
       {{$t("message.nft.txt31")}}
     </p>
     <div class="content">

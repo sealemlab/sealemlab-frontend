@@ -16,15 +16,16 @@
         <img :src="`${$store.state.imgUrl}stlogo.webp`" class="st_price_img" />
         <span class="font_price font16">$ {{getUserCoin.stPrice | PriceConversion(2)}}</span>
       </div>
-      <div class="login_box">
-        <!-- <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
+      <div class="login_box" v-if="!getProduction">
+        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
           {{ $t("message.nav.txt8") }}
         </div>
         <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
           <span @click="loginClick('register')">{{ $t("message.nav.txt8_1") }}</span> /
           <span @click="loginClick('login')">{{ $t("message.nav.txt8_2") }}</span>
-        </div> -->
+        </div>
       </div>
+      <div class="login_box" v-else></div>
       <!-- 链接钱包 -->
       <div class="walletBox font16" v-if="getIstrue">
         <div class="connect_triangle">
@@ -68,7 +69,7 @@ export default {
         { label: "message.nav.txt1", link: "/bond",status:true },
         // { label: "message.nav.txt2", link: "" },
         { label: "message.nav.txt3", link: "/nft",status:true },
-        { label: "message.nav.txt4", link: "/market",status:false },
+        { label: "message.nav.txt4", link: "/market",status:true },
         { label: "message.nav.txt5", link: "/game/game",status:true },
         // { label: "message.nav.txt6", link: "" },
         { label: "message.nav.txt6", link: "/user/assets/0",status:true },
@@ -79,13 +80,21 @@ export default {
       langArr: ["EN", "ZH"],
     };
   },
-  computed: { ...mapGetters(["getNoticeNum", "isEnLang", "getLogin","getUserCoin","getSubtringAccount", "getIstrue"]) },
+  computed: { ...mapGetters(["getProduction","getNoticeNum", "isEnLang", "getLogin","getUserCoin","getSubtringAccount", "getIstrue"]) },
   watch: {
     $route(to, from) {
       window.scrollTo(0, 0);
       // if (from.matched.length && to.matched[0].path != from.matched[0].path) {
       //   window.scrollTo(0, 0);
       // }
+      
+      // 不是正式环境的话,展示
+      if(!this.getProduction){
+        if (to.path == "/market") {
+          this.navActive = 2;
+          return
+        }
+      }
       if (to.path == "/home") {
         this.navActive = -1;
       } else if (to.path == "/bond") {
@@ -95,9 +104,6 @@ export default {
       }else if (to.path.indexOf("/nft/") !== -1) {
         this.navActive = 1;
       }
-      // else if (to.path == "/market") {
-      //   this.navActive = 2;
-      // }
       else if (to.path.indexOf("/game/") !== -1) {
         this.navActive = 3;
       } else if (to.path.indexOf("/user/") !== -1) {
@@ -128,7 +134,18 @@ export default {
     },
     toRoute(item) {
       if(item.status){
-        this.$router.push(item.link);
+        if(this.getProduction){
+          if(item.link == '/market'){
+            if (!this.getNoticeNum) {
+              this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+              this.$store.commit("setNoticeNum", true);
+            }
+          }else{
+            this.$router.push(item.link);
+          }
+        }else{
+          this.$router.push(item.link);
+        }
       }else{
         if (!this.getNoticeNum) {
           this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));

@@ -1,5 +1,5 @@
 <template>
-  <div class="self_box">
+  <div class="self_box" :class="selfBoxCentr?'self_box_center':''">
     <div
       class="out_box_one"
       :class="centr?'out_center':''"
@@ -176,14 +176,13 @@ export default {
       type:Boolean,
       default:false
     },
+    selfBoxCentr:{
+      type:Boolean,
+      default:false
+    },
   },
   computed: {
     ...mapGetters(["isEnLang"])
-  },
-  data(){
-    return {
-
-    }
   },
   methods:{
     nftFun(item){
@@ -197,8 +196,10 @@ export default {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  // justify-content: center;
   padding-bottom: 30px;
+}
+.self_box_center{
+  justify-content: center;
 }
 .out_center{
   align-items: center;
