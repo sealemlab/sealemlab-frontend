@@ -84,10 +84,6 @@ export default {
   watch: {
     $route(to) {
       window.scrollTo(0, 0);
-      // if (from.matched.length && to.matched[0].path != from.matched[0].path) {
-      //   window.scrollTo(0, 0);
-      // }
-      
       // 不是正式环境的话,展示
       if(this.getProduction){
         if (to.path == "/market" || to.path == "/staking") {
@@ -100,28 +96,6 @@ export default {
         }
       }
       this.navActive = this.callArray(to.path)
-
-      // if (to.path == "/home") {
-      //   this.navActive = -1;
-      // } else if (to.path == "/bond") {
-      //   this.navActive = 0;
-      // }else if (to.path.indexOf("/activepage/") !== -1) {
-      //   this.navActive = 8;
-      // }else if (to.path.indexOf("/nft/") !== -1) {
-      //   this.navActive = 1;
-      // }
-      // else if (to.path.indexOf("/game/") !== -1) {
-      //   this.navActive = 3;
-      // } else if (to.path.indexOf("/user/") !== -1) {
-      //   this.navActive = 4;
-      // } else if (to.path.indexOf("/signin/") !== -1 || to.path.indexOf("/myaccount/") !== -1) {
-      //   this.navActive = 7;
-      // } else {
-      //   if (!this.getNoticeNum) {
-      //     this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-      //     this.$store.commit("setNoticeNum", true);
-      //   }
-      // }
     },
   },
   created() {
@@ -151,7 +125,7 @@ export default {
     },
     toRoute(item) {
       if(this.getProduction){
-        if(item.link == '/market'){
+        if(item.link == '/market' || item.llink == "/staking"){
           if (!this.getNoticeNum) {
             this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
             this.$store.commit("setNoticeNum", true);
