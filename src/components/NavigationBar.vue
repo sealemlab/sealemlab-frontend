@@ -14,16 +14,16 @@
     <div class="nav_right">
       <div class="st_price">
         <img :src="`${$store.state.imgUrl}stlogo.webp`" class="st_price_img" />
-        <span class="font_price font16">$ {{getUserCoin.stPrice | PriceConversion(4)}}</span>
+        <span class="font_price font16">$ {{getUserCoin.stPrice | PriceConversion(2)}}</span>
       </div>
       <div class="login_box">
-        <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
+        <!-- <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
           {{ $t("message.nav.txt8") }}
         </div>
         <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
           <span @click="loginClick('register')">{{ $t("message.nav.txt8_1") }}</span> /
           <span @click="loginClick('login')">{{ $t("message.nav.txt8_2") }}</span>
-        </div>
+        </div> -->
       </div>
       <!-- 链接钱包 -->
       <div class="walletBox font16" v-if="getIstrue">
@@ -393,7 +393,7 @@ export default {
 }
 @media screen and (max-width: 980px) {
   .nav {
-    padding: 0 0.2rem;
+    padding: 0 0.15rem;
     background: linear-gradient(180deg, #1b1919 0%, #000000 100%);
     border-radius: 0px 0px 17px 17px;
     border: 1px solid #eccf83;
@@ -408,6 +408,12 @@ export default {
       display: none;
     }
   }
+  .buy_box{
+    width: auto;
+    padding: 0 0.16rem;
+    height: 0.26rem;
+    line-height: 0.26rem;
+  }
   .nav_right {
     justify-content: space-between;
     .st_price {
@@ -420,7 +426,7 @@ export default {
       }
     }
     .login_box {
-      margin: 0 0.1rem;
+      margin: 0 0.05rem;
       .font_login {
         font-weight: bold;
         line-height: 0.14rem;
@@ -440,7 +446,7 @@ export default {
       border: 1px solid #4f4e53;
       border-radius: 0.08rem;
       margin-right: 0;
-      padding: 0.05rem 0.1rem;
+      padding: 0.05rem 0.05rem;
       .connect_triangle {
         width: fit-content;
         display: flex;

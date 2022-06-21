@@ -45,9 +45,11 @@
           <span class="font14" :class="isEnLang ? 'en_Bold' : ''">SEC</span>
         </div>
       </div>
+      <!-- 倒计时开始前文案 -->
       <p class="font24" :class="isEnLang ? 'en_medium' : ''" v-if="!startAndEnd">
         {{ $t("message.acticePage.title2") }}
       </p>
+      <!-- 倒计时正在进行时文案 -->
       <p class="font24" :class="isEnLang ? 'en_medium' : ''" v-else>
         {{ $t("message.acticePage.title2_1") }}
       </p>
@@ -57,12 +59,12 @@
         <div class="onebox">
           <p>
             <span
-              class="font24 mobile_font20"
+              class="font24 mobile_font16"
               :class="isEnLang ? 'en_Bold' : 'cn_lang'"
               >{{ $t("message.acticePage.txt1") }}</span
             >
-            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="arr[0].num == arr[2].num">{{ $t("message.tip.self_sold") }}</span>
-            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="!startAndEnd">{{$t("message.tip.self_Nobegin")}}</span>
+            <!-- <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="arr[0].num == arr[2].num">{{ $t("message.tip.self_sold") }}</span> -->
+            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="!startAndEnd">{{$t("message.tip.self_Nobegin")}}</span>
             <span class="font12" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="startAndEnd">{{
               $t("message.acticePage.txt2")
             }}</span>
@@ -177,7 +179,7 @@
         </div>
       </div>
       <div class="right_box">
-        <p class="font24 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">
+        <p class="font24 mobile_font16" :class="isEnLang ? 'en_Bold' : ''">
           {{ $t("message.acticePage.txt15") }}
         </p>
         <p class="font16 mobile_font14" :class="isEnLang ? 'en_medium' : ''" @click="addAddress">
@@ -320,7 +322,7 @@ export default {
         { title: 'message.acticePage.txt10', num: "message.acticePage.txt11" },
       ],
       nowPrice:0,
-      nowPriceStatus:false,
+      nowPriceStatus:true, // 上线要改成false
       userBuyMax:0,
       idoAddress:'',
       payAddress:'',// 获取某IDO的支付代币地址
@@ -331,11 +333,10 @@ export default {
       setIntervalOBJ:null,
       userbuyst:0,//用户输入u换成的st数量
       idoID:0,//本期售卖id
-      disableBth:true,// 按钮禁止点击
       percentage:0,
       width:0,
       progressTimer:null,
-      startTime:0,
+      startTime:1656417600,// 6.28 20:00
       endTime:0,
       pageTimer:null,
       getEndTimeStatus:false,
@@ -350,6 +351,7 @@ export default {
           this.userConnectInfo(this.idoID)
           this.userIsWhiteList = false
         }else if(newValue > 0){
+          console.log('newValue: ', newValue);
           this.$utils.antiShakeFun(() => {
             this.userConnectInfo(this.idoID)
           },2000)()
@@ -361,7 +363,7 @@ export default {
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
-          this.allLoading = true
+          this.allLoading = false // 现在取消加载(正式上线要改成true)
           clearInterval(this.setIntervalOBJ);
           this.setIntervalOBJ = setInterval(() => {
             // if(this.countTimeOBJ == 0){
@@ -381,7 +383,6 @@ export default {
                 
               });
             }
-            // console.log("判断是否授权中")
           }, 1000);
         }else{
           this.allLoading = false
@@ -455,7 +456,6 @@ export default {
       }
     },
     getUsetTime () {
-      console.log("this.isapprove",this.isapprove)
       clearInterval(this.pageTimer)
       this.pageTimer = setInterval(() => {
         let nowTime = parseInt(new Date().getTime() / 1000)
@@ -663,7 +663,7 @@ export default {
   },
   mounted () {
     this.idoID = this.$route.params.id
-    this.getIdoInfo(this.idoID)
+    // this.getIdoInfo(this.idoID)
     this.getUsetTime()
   },
   beforeDestroy () {
@@ -1180,7 +1180,6 @@ export default {
         border: 1px solid rgba(68, 67, 67, 0.47);
         p {
           &:nth-child(1) {
-            font-weight: bold;
             color: #ced3d9;
             line-height: 0.24rem;
           }

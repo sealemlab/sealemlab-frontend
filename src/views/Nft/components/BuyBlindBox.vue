@@ -437,18 +437,18 @@ export default {
   .treasure_chest_box {
     position: relative;
     width: 100%;
+    max-width: 848px;
     min-height: 400px;
     display: flex;
     align-items: flex-end;
     .base_img{
       width: 100%;
-      max-width: 848px;
     }
     .bind_box_img{
       position: absolute;
       top: -4%;
-      left: 15%;
-      // transform: translate(-50%,-50%);
+      left: 50%;
+      // transform: translateX(-50%);
       width: 340px;
       animation: topbottom 4s linear 0s infinite alternate;
     }
@@ -641,13 +641,13 @@ export default {
 }
 @keyframes topbottom {
   0%{
-    transform: translateY(-20px);
+    transform:translateX(-55%) translateY(-20px);
   }
   50%{
-    transform: translateY(30px);
+    transform:translateX(-55%) translateY(30px);
   }
   100%{
-    transform: translateY(-20px);
+    transform:translateX(-55%) translateY(-20px);
   }
 }
 @media screen and (max-width: 980px) {
