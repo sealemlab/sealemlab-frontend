@@ -322,7 +322,7 @@ export default {
         { title: 'message.acticePage.txt10', num: "message.acticePage.txt11" },
       ],
       nowPrice:0,
-      nowPriceStatus:false, // 上线要改成false
+      nowPriceStatus:true, // 上线要改成false
       userBuyMax:0,
       idoAddress:'',
       payAddress:'',// 获取某IDO的支付代币地址
@@ -336,7 +336,7 @@ export default {
       percentage:0,
       width:0,
       progressTimer:null,
-      startTime:0,// 上线前改成 6.28 20:00(1656417600)
+      startTime:1656417600,// 上线前改成 6.28 20:00(1656417600)
       endTime:0,
       pageTimer:null,
       getEndTimeStatus:false,
@@ -363,7 +363,7 @@ export default {
     'getIstrue': {
       handler: function (newValue) {
         if (newValue) {
-          this.allLoading = true // 现在取消加载(正式上线要改成true)
+          this.allLoading = false // 现在取消加载(正式上线要改成true)
           clearInterval(this.setIntervalOBJ);
           this.setIntervalOBJ = setInterval(() => {
             // if(this.countTimeOBJ == 0){
@@ -663,7 +663,7 @@ export default {
   },
   mounted () {
     this.idoID = this.$route.params.id
-    this.getIdoInfo(this.idoID) // 上线前要解开
+    // this.getIdoInfo(this.idoID) // 上线前要解开
     this.getUsetTime()
   },
   beforeDestroy () {
