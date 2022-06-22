@@ -21,7 +21,7 @@
               </div>
               <div class="onelin display_flex" v-if="item.name3">
                 <span class="font14">{{$t(item.name3)}}</span>
-                <div class="address display_flex">
+                <div class="address display_flex" @click="addressClick(item)">
                   <span class="font14">{{item.address}}</span>
                   <img :src="`${$store.state.imgUrl}add.webp`" class="copy_img" />
                 </div>
@@ -79,7 +79,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { token } from "sealemlab-sdk";
+import { token,wallet } from "sealemlab-sdk";
 export default {
   computed: {
     ...mapGetters(["isEnLang","getUserCoin","getAccountStatus"])
@@ -122,7 +122,8 @@ export default {
         num1_money:0,
         num2_money:0,
         name3:'message.user.txt7',
-        address:this.$utils.getSubStr(token().ST, 6)
+        address:this.$utils.getSubStr(token().ST, 6),
+        type:'st'
       },
       {
         coin_logo:`${this.$store.state.imgUrl}srlogo.webp`,
@@ -132,7 +133,8 @@ export default {
         num1_money:0,
         num2_money:0,
         name3:'message.user.txt7',
-        address:this.$utils.getSubStr(token().SR, 6)
+        address:this.$utils.getSubStr(token().SR, 6),
+        type:'sr'
       }
       ],
       menuArr:[
@@ -146,6 +148,14 @@ export default {
     liClick(item,index){
       this.li_index = index
       this.$router.push(item.link)
+    },
+    addressClick(item){
+      console.log('item: ', item);
+      if(item.type == 'st'){
+        wallet.addST(`https:${this.$store.state.imgUrl}new_stlogo.webp`)
+      }else if(item.type == 'sr'){
+        wallet.addSR(`https:${this.$store.state.imgUrl}new_srlogo.webp`)
+      }
     }
   },
   mounted(){
@@ -242,6 +252,7 @@ export default {
               align-items: center;
               justify-content: space-between;
               .address{
+                cursor: pointer;
                 align-items: center;
                 .copy_img{
                   width: 11px;

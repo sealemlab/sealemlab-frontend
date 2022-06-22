@@ -400,7 +400,7 @@ export default {
   },
   methods: {
     addAddress(){
-      wallet.addST(`https:${this.$store.state.imgUrl}stlogo.webp`)
+      wallet.addST(`https:${this.$store.state.imgUrl}new_stlogo.webp`)
     },
     // 去授权
     sonapprove() {

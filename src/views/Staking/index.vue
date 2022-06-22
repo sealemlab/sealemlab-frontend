@@ -9,7 +9,7 @@
     <div class="dataBox">
       <div class="onebox" v-for="(item, index) in dataArr" :key="index">
         <span class="font24" :class="isEnLang?'en_medium':''">{{item.title}}</span>
-        <span class="font35" :class="isEnLang?'en_heavy':''">$ {{item.num}}</span>
+        <span class="font35" :class="isEnLang?'en_heavy':''">$ {{item.num | PriceConversion}}</span>
       </div>
     </div>
     <div class="staking_box">
@@ -90,9 +90,9 @@ export default {
   data(){
     return {
       dataArr:[
-        {title:"Total staked",num:12567.97},
-        {title:"Total earned",num:12567.97},
-        {title:"Most staked time",num:12567.97}
+        {title:"Total staked",num:0},
+        {title:"Total earned",num:0},
+        {title:"Most staked time",num:0}
       ],
       datacontent:'',
       clientX:0,
@@ -147,6 +147,7 @@ export default {
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
         console.log('获取池子总质押ST数量: ', res);
+        this.dataArr[0].num = res / 1e18
       })
       // 获取池子总已产出SR
       stStaking().releasedSR().then(res => {
@@ -396,8 +397,7 @@ export default {
         }
         .tip_{
           width: 206px;
-          margin: 0 auto;
-          margin-top: 12px;
+          margin: 12px auto;
           display: flex;
           justify-content: space-between;
           align-items: center;
