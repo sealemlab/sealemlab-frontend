@@ -499,7 +499,7 @@ export default {
     .span1 {
       position: absolute;
       left: 5vw;
-      top: 35%;
+      top: 25%;
       font-weight: 800;
       color: #ffffff;
       line-height: 41px;
@@ -519,7 +519,7 @@ export default {
     .span3 {
       position: absolute;
       left: 5vw;
-      top: 55%;
+      top: 66%;
       font-weight: 500;
       color: #ECCF83;
       cursor: pointer;
