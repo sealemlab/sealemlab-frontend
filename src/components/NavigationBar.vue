@@ -64,7 +64,7 @@ import { wallet } from "sealemlab-sdk";
 export default {
   data() {
     return {
-      navActive: 0,
+      navActive: -1,
       navArr: [
         { label: "message.nav.txt1", link: "/bond",id:0},
         { label: "message.nav.txt2", link: "/staking",id:1},

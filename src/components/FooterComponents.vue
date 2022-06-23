@@ -58,25 +58,25 @@ export default {
           id:2,
           children:[
             {title:"message.footer.txt20"},
-            {title:"message.footer.txt7",link:'https://t.me/sealemglobal'},
+            {title:"message.footer.txt7",link:'https://t.me/SealemCommunity'},
             {title:"message.footer.txt8",link:'https://twitter.com/SealemLab'},
             {title:"message.footer.txt9",link:'https://discord.gg/s747pMMBzq'},
             {title:"message.footer.txt10",link:'https://medium.com/@sealemlab'}
           ]
         },
         {
-          id:4,
+          id:3,
           children:[
             {title:"message.footer.txt14",link:''},
             {title:"message.footer.txt15",link:''},
             {title:"message.footer.txt16",link:''},
-            {title:"message.footer.txt17",link:''},
+            // {title:"message.footer.txt17",link:''},
             {title:"message.footer.txt18",link:''},
             {title:"message.footer.txt19",link:''}
           ]
         },
         {
-          id:3,
+          id:4,
           children:[
             {title:"message.footer.txt11"},
             {title:"message.footer.txt12",link:'https://github.com/sealemlab'},

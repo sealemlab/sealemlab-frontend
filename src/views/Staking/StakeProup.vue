@@ -1,10 +1,10 @@
 <template>
   <div class="stake_proup" v-if="stakedStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24 mobile_font18" :class="isEnLang?'en_Bold':''">{{$t("message.stake.txt2")}}</p>
+      <p class="propu_title_txt font24 mobile_font18" :class="isEnLang?'en_Bold':''">{{$t("message.stake.txt16")}}</p>
       <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click.stop="closeProup"/>
       <div class="box">
-        <p class="title font14 mobile_font14" :class="isEnLang?'en_Bold':''">ST to stake</p>
+        <p class="title font14 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t("message.stake.txt17") }}</p>
         <div class="inputbox">
           <div class="inputdiv" :class="isEnLang?'en_Bold':''">
             <Input :isright="true" :modelValue="STmsg" type="number" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
@@ -24,7 +24,7 @@
           <div class="onebox" :class="{activeClass:index == IndexPage}" v-for="(item,index) in arr" :key="index" @click="selectFun(item,index)">{{item}}%</div>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>ST to stake</span>
+          <span>{{ $t("message.stake.txt17") }}</span>
           <span>$ {{STmsg * getUserCoin.stPrice | PriceConversion | Thousandths}}</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
@@ -32,23 +32,23 @@
           <span>{{APY | MultiplyBySquare}} %</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>7 days estimated interest</span>
+          <span>{{ $t("message.stake.txt18") }}</span>
           <span>$ {{interestInfo.sevenDays | PriceConversion}}</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>14 days estimated interest</span>
+          <span>{{ $t("message.stake.txt19") }}</span>
           <span>$ {{interestInfo.fourteenDays | PriceConversion}}</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>30 days estimated interest</span>
+          <span>{{ $t("message.stake.txt20") }}</span>
           <span>$ {{interestInfo.thirtyDays | PriceConversion}}</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span> Estimated rate for bond</span>
+          <span>{{ $t("message.stake.txt21") }}</span>
           <span>{{additionalTaxRate | MultiplyBySquare}} %</span>
         </div>
         <div class="stake_btn font18" :class="isEnLang?'en_Bold':''" @click="userStakedFun">
-          Staked
+          {{ $t("message.stake.txt1") }}
           <BtnLoading :isloading="userStakedLoading"></BtnLoading>
         </div>
       </div>
@@ -136,21 +136,21 @@ export default {
     },
     userStakedFun(){
       if(!this.openPoolStatus){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'池子暂未开启'}));
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt24'}));
         return
       }
       if(this.userStakedLoading)return
       if(this.getUserCoin.st < 0){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'没有st'}));
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt25'}));
         return
       }
       if(!this.STmsg){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'输入要质押的st'}));
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt26'}));
         return
       }
       this.userStakedLoading = true
       stStaking().connect(getSigner()).deposit(this.$utils.convertNormalToBigNumber(this.STmsg, 18),localStorage.getItem('Invitee')).then(async res => {
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'质押中','link':res.hash}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt27','link':res.hash}));
         this.$store.commit("setProgressInfo", JSON.stringify({'speed':50}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
@@ -162,7 +162,7 @@ export default {
           console.log('this.passValue: ', this.passValue);
           this.sliderValue = 0
           this.userReadyStaked = true
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'质押成功'}));
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt28'}));
         }else{
           this.userStakedLoading = false
         }

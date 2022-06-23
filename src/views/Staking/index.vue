@@ -12,7 +12,7 @@
     <div class="dataBox">
       <div class="onebox" v-for="(item, index) in dataArr" :key="index">
         <span class="font24" :class="isEnLang ? 'en_medium' : ''">{{
-          item.title
+          $t(item.title)
         }}</span>
         <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''"
           >$ {{ item.num | PriceConversion | Thousandths}}</span
@@ -23,7 +23,7 @@
       <div class="otu_onebox">
         <div class="onebox">
           <div class="label font16 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">
-            ST POOL
+            {{$t("message.stake.txt5")}}
           </div>
           <div class="out_top_box">
             <div class="top_box">
@@ -34,7 +34,7 @@
                 />
                 <div class="right_cen">
                   <span class="font16" :class="isEnLang ? 'en_Bold' : ''"
-                    >Total staked</span
+                    >{{$t("message.stake.txt6")}}</span
                   >
                   <span class="font32 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">{{
                     poolInfo.totalStaked | PriceConversion | Thousandths
@@ -57,8 +57,8 @@
                     >{{APY | MultiplyBySquare}} %</span
                   >
                 </div>
-                <div class="left">
-                  <span class="span1 font12">View Contract</span>
+                <div class="left right" @click="viewContract">
+                  <span class="span1 font12">{{$t("message.stake.txt7")}}</span>
                   <svg
                     t="1655894703771"
                     class="icon"
@@ -88,7 +88,7 @@
           <div class="coin">
             <div class="left">
               <span class="font14" :class="isEnLang ? 'en_medium' : ''"
-                >Available ST</span
+                >{{$t("message.stake.txt8")}}</span
               >
               <div class="num">
                 <img
@@ -100,13 +100,13 @@
                 }}</span>
               </div>
             </div>
-            <div class="btn mobile_font16" :class="isEnLang ? 'en_Bold' : ''">Get ST</div>
+            <div class="btn mobile_font16" :class="isEnLang ? 'en_Bold' : ''" @click="getST">{{$t("message.stake.txt9")}}</div>
           </div>
           <!-- 用户质押st -->
           <div class="coin">
             <div class="left">
               <span class="font14" :class="isEnLang ? 'en_medium' : ''"
-                >ST Staked</span
+                >{{$t("message.stake.txt10")}}</span
               >
               <div class="num">
                 <img
@@ -136,7 +136,7 @@
           <div class="coin">
             <div class="left">
               <span class="font14" :class="isEnLang ? 'en_medium' : ''"
-                >SR Earned</span
+                >{{$t("message.stake.txt11")}}</span
               >
               <div class="num mobile_font16">
                 <img
@@ -164,22 +164,22 @@
               :class="isEnLang ? 'en_Bold' : ''"
               @click="ClaimFun"
             >
-              Claim
+              {{$t("message.stake.txt12")}}
               <BtnLoading :isloading="SRBtnLoading"></BtnLoading>
             </div>
           </div>
           <div class="out_btn btn_normal" @click="ClaimSTFun">
-            Withdraw<BtnLoading :isloading="STBtnLoading"></BtnLoading>
+            {{$t("message.stake.txt13")}}<BtnLoading :isloading="STBtnLoading"></BtnLoading>
           </div>
           <p
             class="font12 mobile_font12 tip_"
-            @click="AddQuesFun('message.bond.txt_tax', $event)"
+            @click="AddQuesFun('message.stake.txt14_1', $event)"
             :class="isEnLang ? 'en_medium' : ''"
           >
             <span
               class="page_has_question_icon"
-              :title="$t('message.bond.txt_tax')"
-              >{{ $t("message.bond.txt32") }}</span
+              :title="$t('message.stake.txt14_1')"
+              >{{ $t("message.stake.txt14") }}</span
             >
             <span>{{ userTaxRate }}%</span>
           </p>
@@ -188,13 +188,13 @@
       <div class="otu_onebox">
         <div class="onebox nodata" :class="isEnLang ? 'en_Bold' : ''">
           <svg t="1655965712914" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3421" width="128" height="128"><path d="M931.392 96v832H96v-832h835.392z m-85.568 88.32H181.504v655.36h664.192l0.128-655.36z m-118.272 236.992l59.776 65.408-234.816 228.992L435.392 601.6 289.728 743.68l-59.776-65.408 205.568-200.448 117.12 114.176 174.976-170.688zM586.368 309.44c34.368 0 62.208 28.8 62.208 64.256s-27.84 64.256-62.208 64.256c-34.368 0-62.208-28.8-62.208-64.256s27.84-64.256 62.208-64.256z" fill="#333333" p-id="3422"></path></svg>
-          <span>More pool coming soon</span>
+          <span>{{ $t("message.stake.txt15") }}</span>
         </div>
       </div>
       <div class="otu_onebox">
         <div class="onebox nodata" :class="isEnLang ? 'en_Bold' : ''">
           <svg t="1655965712914" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3421" width="128" height="128"><path d="M931.392 96v832H96v-832h835.392z m-85.568 88.32H181.504v655.36h664.192l0.128-655.36z m-118.272 236.992l59.776 65.408-234.816 228.992L435.392 601.6 289.728 743.68l-59.776-65.408 205.568-200.448 117.12 114.176 174.976-170.688zM586.368 309.44c34.368 0 62.208 28.8 62.208 64.256s-27.84 64.256-62.208 64.256c-34.368 0-62.208-28.8-62.208-64.256s27.84-64.256 62.208-64.256z" fill="#333333" p-id="3422"></path></svg>
-          <span>More pool coming soon</span>
+          <span>{{ $t("message.stake.txt15") }}</span>
         </div>
       </div>
     </div>
@@ -229,9 +229,9 @@ export default {
       SRBtnLoading: false,
       STBtnLoading: false,
       dataArr: [
-        { title: "Total staked", num: 0 },
-        { title: "Total earned", num: 0 },
-        { title: "Most staked time", num: 0 }
+        { title: "message.stake.txt2", num: 0 },
+        { title: "message.stake.txt3", num: 0 },
+        { title: "message.stake.txt4", num: 0 }
       ],
       datacontent: '',
       clientX: 0,
@@ -292,6 +292,7 @@ export default {
     close (data) {
       if (data) {
         this.getUserInfo()
+        this.getSdkInfo()
         this.getCurrencyETFun()
       }
       this.stakedStatus = false
@@ -340,39 +341,6 @@ export default {
       stStaking().openStatus().then(res => {
         this.openPoolStatus = res
       })
-
-      // 获取每区块SR产量
-      // stStaking().srPerBlock().then(res => {
-      //   console.log('获取每区块SR产量: ', res);
-      // })
-
-      // 获取用户质押后每经过一天提现时可减免的税率----有问题
-      // stStaking().taxDynamicRateTotalStaked().then(res => {
-      //   console.log('获取用户质押后每经过一天提现时可减免的税率: ', res);
-      // })
-
-      // 获取用户质押的第1天提现时的基础税率
-      // stStaking().taxBaseRate().then(res => {
-      //   console.log('获取每区块SR产量: ', res);
-      // })
-
-      // 获取池子总质押ST数量
-      stStaking().stakedST().then(res => {
-        // console.log('获取池子总质押ST数量: ', res);
-        this.dataArr[0].num = res / 1e18
-        this.poolInfo.totalStaked = res / 1e18
-      })
-
-      // 获取池子总已产出SR
-      // stStaking().releasedSR().then(res => {
-      //   console.log('获取池子总已产出SR: ', res);
-      // })
-
-      // 获取池子总已提取SR
-      // stStaking().harvestedSR().then(res => {
-      //   console.log('获取池子总已提取SR: ', res);
-      // })
-
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
       let srPrice = 0
       if(!this.getProduction){
@@ -384,12 +352,22 @@ export default {
       }).catch(() => {
         this.APY = 0
       })
+      // 获取池子总质押ST数量
+      stStaking().stakedST().then(res => {
+        // console.log('获取池子总质押ST数量: ', res);
+        this.dataArr[0].num = res / 1e18
+        this.poolInfo.totalStaked = res / 1e18
+      })
     },
     getUserInfo () {
       // 获取某用户的质押的ST数量
       stStaking().userStakedST(this.getAccount).then(res => {
-        // console.log('获取某用户的质押的ST数量: ', res);
-        this.poolInfo.userStaked = res / 1e18
+        console.log('获取某用户的质押的ST数量: ', res);
+        if(res / 1e18 <= 1e-8){
+          this.poolInfo.userStaked = 0
+        }else{
+          this.poolInfo.userStaked = res / 1e18
+        }
       })
       // 获取某用户的下级的质押的ST数量
       // stStaking().affiliateStakedST(this.getAccount).then(res => {
@@ -454,7 +432,7 @@ export default {
         const etReceipt = await res.wait();
         if (etReceipt.status == 1) {
           this.SRBtnLoading = false
-          this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': '提取成功' }));
+          this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt22' }));
           this.getCurrencyETFun()
         } else {
           this.SRBtnLoading = false
@@ -465,7 +443,7 @@ export default {
     },
     ClaimSTFun () {
       if (this.poolInfo.userStaked == 0) {
-        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': '没有可提取数量' }));
+        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt23' }));
         return
       }
       if (this.STBtnLoading) return
@@ -478,8 +456,9 @@ export default {
         if (etReceipt.status == 1) {
           this.STBtnLoading = false
           this.getUserInfo()
+          this.getSdkInfo()
           this.$utils.getUserCoinQuantity(token().ST, 'st', this.getAccount)
-          this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': '提取成功' }));
+          this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt22' }));
           clearInterval(this.userSrYieldTimer)
         } else {
           this.STBtnLoading = false
@@ -487,6 +466,12 @@ export default {
       }).catch(() => {
         this.STBtnLoading = false
       })
+    },
+    getST(){
+      window.open(`https://pancakeswap.finance/swap?outputCurrency=${token().ST}`)
+    },
+    viewContract(){
+      window.open(`${this.$store.state.BSC_BROWSER}${token().ST}`)
     }
   },
   mounted () {
@@ -688,6 +673,9 @@ export default {
                 .span2 {
                   margin-right: 31px;
                 }
+              }
+              .right{
+                cursor: pointer;
               }
             }
           }

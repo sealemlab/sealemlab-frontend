@@ -12,7 +12,7 @@
             <p class="font_2 demo_font_color font45 mobile_font28" :class="isEnLang?'en_heavy':''">{{$t("message.home.add_txt1")}}</p>
             <div class="btnbox font20 mobile_font16">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
-              <span>{{$t("message.home.txt4")}}</span>
+              <span @click="buyST">{{$t("message.home.txt4")}}</span>
             </div>
           </div>
           <div class="rightbox">
@@ -304,7 +304,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { util } from 'sealemlab-sdk'
+import { token, util } from 'sealemlab-sdk'
 export default {
   computed: {
     ...mapGetters(["isEnLang","getIsMobile"])
@@ -327,7 +327,7 @@ export default {
       comminicateArr:[
         {
           src:`${this.$store.state.imgUrl}tel_1.webp`,
-          link:'https://t.me/sealemglobal'
+          link:'https://t.me/SealemCommunity'
         },
         {
           src:`${this.$store.state.imgUrl}tel_2.webp`,
@@ -740,12 +740,13 @@ export default {
     gamesFun(){
       this.$router.push('/game/game')
     },
+    buyST(){
+      window.open(`https://pancakeswap.finance/swap?outputCurrency=${token().ST}`)
+    },
     enter() {
-      // console.log("鼠标移入")
       this.$refs.mySwiper.swiper.autoplay.stop()
     },
     leave() {
-      // console.log("鼠标移除除")
       this.$refs.mySwiper.swiper.autoplay.start()
     },
     videoPlay() {
