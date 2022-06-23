@@ -377,10 +377,14 @@ export default {
       this.isShowMore = false;
       switch (index) {
         case 0:
-          this.$router.push("/market");
+          if(!this.getProduction){
+            this.$router.push("/market");
+          }
           break;
         case 1:
-          this.$router.push("/staking");
+          if(!this.getProduction){
+            this.$router.push("/staking");
+          }
           break;
         case 2:
           this.$router.push("/user/assets/0");
