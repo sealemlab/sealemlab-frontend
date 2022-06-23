@@ -3,6 +3,7 @@
     :type="type"
     :value="modelValue"
     class="input"
+    :class="isright?'text_right':''"
     :style="{ color: fontColor,background:background,fontSize:fontSize}"
     :placeholder='placeholder'
     :readonly="readonly"
@@ -42,7 +43,11 @@ export default {
     readonly:{
       type:Boolean,
       default:false
-    }
+    },
+    isright:{
+      type:Boolean,
+      default:false
+    },
   },
   methods:{
     focusEvent(){
@@ -65,5 +70,8 @@ export default {
   height: 100%;
   // padding-right:15px;
   width:100%;
+}
+.text_right{
+  text-align: right;
 }
 </style>

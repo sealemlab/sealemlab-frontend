@@ -1,19 +1,10 @@
 <template>
-    <div class="slider" ref="slider">
-      <div class="process" :style="{ width }" ref="progress"></div>
-      <div class="thunk" ref="trunk" :style="{ left }">
-        <div class="block"></div>
-        <!-- <div class="tips">
-          <span>{{ scale * 100 }}</span>
-          <i class="fas fa-caret-down"></i>
-        </div> -->
-      </div>
+  <div class="slider" ref="slider" :style="{ height }">
+    <div class="process" :style="{ width,height }" ref="progress"></div>
+    <div class="thunk" ref="trunk" :style="{ left,top }">
+      <div class="block" :style="blockobj"></div>
     </div>
-    <!-- <div>
-      <button @click="() => {this.per++;}">+</button>
-      {{ per }}%
-      <button @click="() => { if (this.per > 0) {this.per--;}}">-</button>
-    </div> -->
+  </div>
 </template>
 <script>
 /*
@@ -23,7 +14,7 @@
  * 
 */
 export default {
-  props: ["min", "max", "value","resetdata"],
+  props: ["min", "max", "value","resetdata","height","blockobj","top","incomingData"],
   data () {
     return {
       slider: null, //滚动条DOM元素
@@ -55,7 +46,7 @@ export default {
     scale () {
       return (this.per - this.min) / (this.max - this.min);
     },
-    width () {
+    width(){
       if (this.slider) {
         return this.slider.offsetWidth * this.scale + "px";
       } else {
@@ -76,17 +67,21 @@ export default {
     load(){
       this.slider = this.$refs.slider;
       this.thunk = this.$refs.trunk;
-      var _this = this;
+      let _this = this;
       this.thunk.onmousedown = function (e) {
-        var width = parseInt(_this.width);
-        var disX = e.clientX;
+        let width = parseInt(_this.width);
+        // console.log('(_this.width: ', _this.width);
+        let disX = e.clientX;
+        // console.log('disX: ', disX);
         document.onmousemove = function (e) {
           // value, left, width
           // 当value变化的时候，会通过计算属性修改left，width
           // 拖拽的时候获取的新width
-          var newWidth = e.clientX - disX + width;
+          let newWidth = e.clientX - disX + width;
+          // console.log('newWidth: ', newWidth);
           // 拖拽的时候得到新的百分比
-          var scale = newWidth / _this.slider.offsetWidth;
+          let scale = newWidth / _this.slider.offsetWidth;
+          // console.log('scale: ', scale);
           _this.per = Math.ceil((_this.max - _this.min) * scale + _this.min);
           _this.per = Math.max(_this.per, _this.min);
           _this.per = Math.min(_this.per, _this.max);

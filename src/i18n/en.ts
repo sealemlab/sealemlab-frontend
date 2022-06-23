@@ -901,6 +901,10 @@ export const message = {
     txt20_1: "Rarity low to high", //
     sell_btn:'Complete listing'
   },
+  stake:{
+    txt1:'Stake',
+    txt2:'ST Staking'
+  },
   
   tip: {
     txt1: "The account was created successfully, please go to the email to activate the account.",

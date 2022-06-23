@@ -208,24 +208,24 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
 import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
-import { token,util,erc20,bondDepository } from  "sealemlab-sdk";
+import { token,erc20,bondDepository } from  "sealemlab-sdk";
 export default { 
   computed: {
-    ...mapGetters(["getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
+    ...mapGetters(["getProduction","getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
   },
   data () {
     return {
       navArr: [
-        { label: "message.nav.txt10", link: "/home", status: true },
-        { label: "message.nav.txt1", link: "/bond", status: false },
-        { label: "message.nav.txt3", link: "/nft", status: false },
-        { label: "message.nav.txt5", link: "/game/game", status: false },
-        { label: "message.nav.txt13", link: "", status: false },
+        { label: "message.nav.txt10", link: "/home", status: true,id:-1 },
+        { label: "message.nav.txt1", link: "/bond", status: false,id:0 },
+        { label: "message.nav.txt3", link: "/nft", status: false,id:2 },
+        { label: "message.nav.txt5", link: "/game/game", status: false,id:4 },
+        { label: "message.nav.txt13", link: "", status: false,id:8 }, // more
       ],
       ortherNavArr: [
-        { label: "message.nav.txt4", link: "", status: false },
-        { label: "message.nav.txt2", link: "", status: false },
-        { label: "message.nav.txt6", link: "", status: false }
+        { label: "message.nav.txt4", link: "/market", status: false,id:3 },
+        { label: "message.nav.txt2", link: "/staking", status: false,id:1 },
+        { label: "message.nav.txt6", link: "/user", status: false,id:5  }
       ],
       isShowMore: false,
       // startX:0,
@@ -291,6 +291,17 @@ export default {
       this.ortherNavArr.forEach((item) => {
         item.status = false;
       });
+
+      if(this.getProduction){
+        if (to.path == "/market" || to.path == "/staking") {
+          if (!this.getNoticeNum) {
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+            this.$store.commit("setNoticeNum", true);
+          }
+          return
+        }
+      }
+
       if (to.path == "/home") {
         this.navArr[0].status = true
       }else if (to.path == "/bond") {
@@ -301,6 +312,12 @@ export default {
         this.navArr[3].status = true
       } else if (to.path.indexOf("/user/") !== -1) {
         this.ortherNavArr[2].status = true
+        this.navArr[4].status = true
+      }else if (to.path == "/market") {
+        this.ortherNavArr[0].status = true
+        this.navArr[4].status = true
+      } else if (to.path == "/staking") {
+        this.ortherNavArr[1].status = true
         this.navArr[4].status = true
       } else {
         this.navArr[4].status = true
@@ -359,12 +376,12 @@ export default {
     routeFun (index) {
       this.isShowMore = false;
       switch (index) {
-        // case 0:
-        //   // this.$router.push('')
-        //   break;
-        // case 1:
-        //   // this.$router.push("");
-        //   break;
+        case 0:
+          this.$router.push("/market");
+          break;
+        case 1:
+          this.$router.push("/staking");
+          break;
         case 2:
           this.$router.push("/user/assets/0");
           break;

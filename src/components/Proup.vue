@@ -90,6 +90,7 @@ export default {
           this.width = this.getProgressInfo.value + '%';
         }
         if(this.getProgressInfo.value >= 100){
+          this.progressTXt = 100
           clearInterval(this.timer);
           setTimeout(() => {
             this.$emit('closetimer')

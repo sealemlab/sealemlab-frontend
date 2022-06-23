@@ -143,38 +143,59 @@ export default {
     }
   }
 }
+.out_box_hidden::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 @media screen and (max-width: 980px) {
   .record_page {
     .boxarr {
       width: 90%;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       padding: 0.2rem;
       max-height: 6rem;
-      overflow-y: auto;
+      // overflow-y: auto;
       margin-top: 0.27rem;
-      .onebox {
-        cursor: pointer;
+      .out_box_hidden {
         width: 100%;
-        height: 0.52rem;
-        padding: 0 0.2rem 0 0.09rem;
-        border-radius: 0.15rem;
-        margin-top: 0.2rem;
-        .imgcard {
-          width: 0.24rem;
-          object-fit: contain;
+        max-height: 5rem;
+        overflow-y: auto;
+        padding: 0.1rem 0 0.1rem;
+        .onebox {
+          cursor: pointer;
+          width: 100%;
+          height: 0.52rem;
+          padding: 0 0.2rem 0 0.09rem;
+          border-radius: 0.15rem;
+          margin-top: 0.2rem;
+          .imgcard {
+            width: 0.24rem;
+            object-fit: contain;
+          }
+          .wallet_txt {
+            color: #ced3d9;
+          }
         }
-        .wallet_txt {
-          color: #ced3d9;
+      }
+      .new_cry {
+        width: 100%;
+        text-align: center;
+        margin-top: 0.2rem;
+        span {
+          cursor: pointer;
         }
       }
       .title {
-        margin-top: 0.2rem 0;
-        width: 100%;
-        text-align: center;
+        position: absolute;
+        top: 0.1rem;
         color: #ced3d9;
+        width: 100%;
+        background: #171717;
+        text-align: center;
+        padding-bottom: 0.1rem;
       }
       .close_img {
         position: absolute;
@@ -185,9 +206,5 @@ export default {
       }
     }
   }
-}
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
 }
 </style>

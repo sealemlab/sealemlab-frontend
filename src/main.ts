@@ -79,6 +79,10 @@ Vue.component("LoadingAnmation", LoadingAnmation);
 import Proup from "@/components/Proup.vue";
 Vue.component("Proup", Proup);
 
+// @ts-ignore
+import countTo from 'vue-count-to';
+Vue.component('countTo', countTo);
+
 import Notice from "@/components/Notice.vue";
 Vue.component("Notice", Notice);
 
