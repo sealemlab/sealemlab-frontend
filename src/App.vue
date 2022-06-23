@@ -379,11 +379,21 @@ export default {
         case 0:
           if(!this.getProduction){
             this.$router.push("/market");
+          }else{
+            if (!this.getNoticeNum) {
+              this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+              this.$store.commit("setNoticeNum", true);
+            }
           }
           break;
         case 1:
           if(!this.getProduction){
             this.$router.push("/staking");
+          }else{
+            if (!this.getNoticeNum) {
+              this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+              this.$store.commit("setNoticeNum", true);
+            }
           }
           break;
         case 2:
@@ -599,6 +609,7 @@ export default {
           font-weight: 600;
           line-height: 14px;
           margin-left: 0.05rem;
+          white-space:nowrap
         }
       }
       p{
