@@ -7,6 +7,7 @@
     :style="{ color: fontColor,background:background,fontSize:fontSize}"
     :placeholder='placeholder'
     :readonly="readonly"
+    step="0.00000001"
     oninput="value=value.replace(/[^\d.]/g, '').replace(/\.{2,}/g, '.').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.').replace(/^(\-)*(\d+)\.(\d\d\d\d\d\d\d\d).*$/, '$1$2.$3').replace(/^\./g, '')"
     @blur="blurEvent"
     @focus="focusEvent"
