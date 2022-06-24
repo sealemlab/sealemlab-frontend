@@ -402,8 +402,10 @@ export default {
     },
     $route(to) {
       this.idoID = to.params.id
+      clearInterval(this.pageTimer)
       this.startTime = 0
       this.endTime = 0
+      this.countTime = { d: "00", h: "00", m: "00", s: "00" }
       setTimeout(() => {
         this.getIdoInfo(to.params.id)
         this.userConnectInfo(to.params.id)
