@@ -522,12 +522,12 @@ export default {
     getIdoInfo(idoID){
       // 获取某IDO的开始时间
       ido().startTimes(idoID).then(res => { 
-        // console.log('获取某IDO的开始时间: ', res);
+        console.log('获取某IDO的开始时间: ', res);
         this.startTime = Number(res)
       })
       
       ido().endTimes(idoID).then(res1 => { 
-        // console.log('获取某IDO的结束时间: ', res1);
+        console.log('获取某IDO的结束时间: ', res1);
         this.endTime = Number(res1)
         this.getEndTimeStatus = true
       })
