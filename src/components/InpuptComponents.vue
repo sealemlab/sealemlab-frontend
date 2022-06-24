@@ -8,12 +8,13 @@
     :placeholder='placeholder'
     :readonly="readonly"
     step="0.00000001"
-    oninput="value=value.replace(/[^\d.]/g, '').replace(/\.{2,}/g, '.').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.').replace(/^(\-)*(\d+)\.(\d\d\d\d\d\d\d\d).*$/, '$1$2.$3').replace(/^\./g, '')"
     @blur="blurEvent"
     @focus="focusEvent"
     @input="inpChange"
     @keyup.enter="enterClick"
   />
+  <!-- 
+    oninput="value=value.replace(/[^\d.]/g, '').replace(/\.{2,}/g, '.').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.').replace(/^(\-)*(\d+)\.(\d\d\d\d\d\d\d\d).*$/, '$1$2.$3').replace(/^\./g, '')" -->
 </template>
 <script>
 export default {
