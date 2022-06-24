@@ -229,9 +229,10 @@
           <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img" />
           {{ $t("message.acticePage.txt22") }}
         </div>
-        <!-- 购买 --><!-- v-show="arr[0].num != arr[2].num"-->
-        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:(userIsWhiteList?false:true) || !startAndEnd}">
-          <!-- {{ $t("message.acticePage.txt23") }} -->
+        <div class="main_button font18 mobile_font16 disable_bnb" v-if="userIsWhiteList">
+          {{ $t("message.acticePage.txt31" )}}
+        </div>
+        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:!startAndEnd}" v-else>
           <FunBtn
             :allLoading="allLoading"
             :isapprove="isapprove"
