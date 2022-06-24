@@ -483,15 +483,21 @@ export default {
       erc20(arr[0]).balanceOf(this.getAccount).then(res => {
         obj.st = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         count++
+      }).catch(() => {
+        count++
       })
       erc20(arr[1]).balanceOf(this.getAccount).then(res => {
         obj.sr = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        count++
+      }).catch(() => {
         count++
       })
       erc20(arr[2]).balanceOf(this.getAccount).then(res => {
         // console.log('用户的busd余额res: ', res);
         obj.busd = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         // console.log('obj.busd: ', obj.busd);
+        count++
+      }).catch(() => {
         count++
       })
       bondDepository().getStPrice().then(res => {
@@ -503,7 +509,6 @@ export default {
           obj.stPrice = 0
           count++
         }
-        
       }).catch(() => {
         obj.stPrice = 0
         count++
