@@ -54,7 +54,6 @@ module.exports = {
       },
     };
     if (isProd) {
-      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
       Object.assign(config, {
         output: {
           // 生产环境时给js文件添加时间戳，避免浏览器使用旧版js文件
