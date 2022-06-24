@@ -531,7 +531,7 @@ export default {
 
       // 获取某IDO的用户最大可购买数量限制
       ido().userBuyLimits(idoID).then(res => { 
-        // console.log('获取某IDO的用户最大可购买数量限制: ', res);
+        console.log('获取某IDO的用户最大可购买数量限制: ', res,idoID);
         this.userBuyMax = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
       })
 
@@ -587,7 +587,7 @@ export default {
       }
       // 获取某用户某IDO的剩余购买限额
       ido().getUserTokenLeftSupply(idoID,this.getAccount).then(res => { 
-        console.log('获取某用户某IDO的剩余购买限额: ', res);
+        console.log('获取某用户某IDO的剩余购买限额: ', res,idoID);
         this.userRemaining = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
       })
     },
