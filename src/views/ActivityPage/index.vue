@@ -406,6 +406,7 @@ export default {
       this.startTime = 0
       this.endTime = 0
       this.countTime = { d: "00", h: "00", m: "00", s: "00" }
+      clearInterval(this.pageTimer)
       setTimeout(() => {
         this.getIdoInfo(to.params.id)
         this.userConnectInfo(to.params.id)
