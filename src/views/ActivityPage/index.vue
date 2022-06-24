@@ -497,6 +497,9 @@ export default {
             this.$utils.customTime(this.endTime, data => {
               // console.log('data: ', data);
               this.countTimeOBJ = data.countdownObject
+              if(this.arr[0].num == this.arr[1].num){
+                this.startAndEnd = false
+              }
               if(this.countTimeOBJ == 0){
                 this.startAndEnd = false
                 // this.userIsWhiteList = false
