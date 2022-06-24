@@ -666,11 +666,12 @@ export default {
   },
   mounted () {
     this.idoID = this.$route.params.id
-    if(this.getProduction){
-      this.nowPriceStatus = true // 上线要改成false
-      this.startTime = 1656417600
-      this.getIdoInfo(this.idoID) // 上线前要解开
-    }
+    // if(this.getProduction){
+    //   this.nowPriceStatus = true // 上线要改成false
+    //   this.startTime = 1656417600
+    //   this.getIdoInfo(this.idoID) // 上线前要解开
+    // }
+    this.getIdoInfo(this.idoID) // 上线解开
     this.getUsetTime()
   },
   beforeDestroy () {
