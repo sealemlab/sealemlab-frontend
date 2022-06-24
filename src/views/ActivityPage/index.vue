@@ -296,7 +296,7 @@
 import { mapGetters } from "vuex";
 import { ido,contract,getSigner,token,wallet } from 'sealemlab-sdk'
 export default {
-  computed: { ...mapGetters(["getUserCoin","isEnLang", "getAccountStatus", "getIstrue","getAccount"]),
+  computed: { ...mapGetters(["getProduction","getUserCoin","isEnLang", "getAccountStatus", "getIstrue","getAccount"]),
     stAddress(){
       return this.$utils.getSubStr(token().ST, 6);
     }
@@ -321,14 +321,11 @@ export default {
         { title: 'message.acticePage.txt9', num: "message.acticePage.txt9_1" },
         { title: 'message.acticePage.txt10', num: "message.acticePage.txt11" },
       ],
-      nowPrice:0,
-      nowPriceStatus:true, // 上线要改成false
       userBuyMax:0,
       idoAddress:'',
       payAddress:'',// 获取某IDO的支付代币地址
       userIsWhiteList:false,// 默认用户不在白名单
       new_userIsWhiteList:false,// 授权按钮可以点击 ,此变量存用户是否在白名单状态
-      // userBuynum:0,// 用户已经购买的数量
       userRemaining:0,// 用户剩余购买量
       setIntervalOBJ:null,
       userbuyst:0,//用户输入u换成的st数量
@@ -336,7 +333,9 @@ export default {
       percentage:0,
       width:0,
       progressTimer:null,
-      startTime:1656417600,// 上线前改成 6.28 20:00(1656417600)
+      nowPrice:0,
+      nowPriceStatus:false, // 上线要改成false
+      startTime:0,// 上线前改成0   开始时间:6.28 20:00(1656417600)
       endTime:0,
       pageTimer:null,
       getEndTimeStatus:false,
@@ -544,8 +543,12 @@ export default {
     // 刷新占比进度条
     async refresh(idoID){
       // 获取某IDO的支付代币单价
-      let price = await ido().tokenPrices(idoID)
+      let price = await ido().tokenPrices(idoID).catch(() => {
+        this.nowPriceStatus = true
+      })
+      console.log('price: ', price);
       this.nowPrice = this.$utils.convertBigNumberToNormal(Number(price),0,18,true)
+      console.log('this.nowPrice: ', this.nowPrice);
       this.nowPriceStatus = true
       
       // 获取某IDO的最大供应量
@@ -663,7 +666,11 @@ export default {
   },
   mounted () {
     this.idoID = this.$route.params.id
-    // this.getIdoInfo(this.idoID) // 上线前要解开
+    if(this.getProduction){
+      this.nowPriceStatus = true // 上线要改成false
+      this.startTime = 1656417600
+      this.getIdoInfo(this.idoID) // 上线前要解开
+    }
     this.getUsetTime()
   },
   beforeDestroy () {

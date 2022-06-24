@@ -77,10 +77,11 @@
         </div>
         <span class="span3 font12" :class="isEnLang?'en_medium':''">{{$t("message.home.txt68")}}</span>
         <div class="add_box">
+          <!-- 移动端展示部分 -->
           <div class="left right mobile_game_box" :class="isEnLang?'en_medium':''">
             <div class="before_box">
               <div class="add_out_box">
-                <img :src="`${$store.state.imgUrl}new_game2.webp`" class="game2" />
+                <img :src="`${$store.state.imgUrl}new_game2.webp`" class="add_game2" />
               </div>
               <!-- <span>{{$t("message.tip.txt5")}}</span> -->
             </div>
@@ -93,6 +94,7 @@
               <span>{{$t("message.tip.txt5")}}</span>
             </div>
           </div>
+          <!-- 轮播 -->
           <div class="left">
             <div class="bottom_swiper">
               <swiper :options="gameMaxSwiperOption" ref="gameMaxSwiper" class="gameMax_swiper">
@@ -112,12 +114,11 @@
               <div class="swiper-button-next"></div> -->
             </div>
           </div>
+          <!-- pc端展示部分 -->
           <div class="left right pc_box font16" :class="isEnLang?'en_medium':''">
             <div class="before_box">
-              <div class="add_out_box">
-                <img :src="`${$store.state.imgUrl}new_game2.webp`" class="game2" />
-              </div>
-              <!-- <span>{{$t("message.tip.txt5")}}</span> -->
+              <div class="add_out_box"></div>
+              <img :src="`${$store.state.imgUrl}new_game2.webp`" class="add_game2" />
             </div>
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
@@ -1389,7 +1390,7 @@ export default {
                   }
                 }
                 .active_oneimgbox{
-                  background: linear-gradient(270deg, rgba(232, 199, 120, 0.24) 0%, rgba(255, 178, 69, 0.34) 47%, rgba(234, 181, 100, 0.35) 100%);
+                  // background: linear-gradient(270deg, rgba(232, 199, 120, 0.24) 0%, rgba(255, 178, 69, 0.34) 47%, rgba(234, 181, 100, 0.35) 100%);
                 }
               }
             }
@@ -1407,11 +1408,19 @@ export default {
             margin-bottom: 37px;
             .add_out_box{
               width: 100%;
-              padding: 4px;
-              align-items: center;
-              justify-content: center;
-              display: flex;
+              min-height: 241px;
               background: linear-gradient(270deg, rgba(232, 199, 120, 0.24) 0%, rgba(255, 178, 69, 0.34) 47%, rgba(234, 181, 100, 0.35) 100%);
+              border: 4px solid;
+              border-image: linear-gradient(270deg, rgba(232, 199, 120, 0.24), rgba(255, 178, 69, 0.34), rgba(234, 181, 100, 0.35)) 4 4;
+              filter: blur(3px);
+            }
+            .add_game2{
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%,-50%);
+              width: 98%;
+              border-radius: 5px;
             }
             .game2{
               width: 100%;

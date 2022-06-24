@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="staking_content_box">
-      <div class="otu_onebox">
+      <div class="out_onebox">
         <div class="onebox">
           <div class="label font16 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">
             {{$t("message.stake.txt5")}}
@@ -185,18 +185,13 @@
           </p>
         </div>
       </div>
-      <div class="otu_onebox">
+      <div class="out_onebox">
         <div class="onebox nodata" :class="isEnLang ? 'en_Bold' : ''">
           <svg t="1655965712914" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3421" width="128" height="128"><path d="M931.392 96v832H96v-832h835.392z m-85.568 88.32H181.504v655.36h664.192l0.128-655.36z m-118.272 236.992l59.776 65.408-234.816 228.992L435.392 601.6 289.728 743.68l-59.776-65.408 205.568-200.448 117.12 114.176 174.976-170.688zM586.368 309.44c34.368 0 62.208 28.8 62.208 64.256s-27.84 64.256-62.208 64.256c-34.368 0-62.208-28.8-62.208-64.256s27.84-64.256 62.208-64.256z" fill="#333333" p-id="3422"></path></svg>
           <span>{{ $t("message.stake.txt15") }}</span>
         </div>
       </div>
-      <div class="otu_onebox">
-        <div class="onebox nodata" :class="isEnLang ? 'en_Bold' : ''">
-          <svg t="1655965712914" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3421" width="128" height="128"><path d="M931.392 96v832H96v-832h835.392z m-85.568 88.32H181.504v655.36h664.192l0.128-655.36z m-118.272 236.992l59.776 65.408-234.816 228.992L435.392 601.6 289.728 743.68l-59.776-65.408 205.568-200.448 117.12 114.176 174.976-170.688zM586.368 309.44c34.368 0 62.208 28.8 62.208 64.256s-27.84 64.256-62.208 64.256c-34.368 0-62.208-28.8-62.208-64.256s27.84-64.256 62.208-64.256z" fill="#333333" p-id="3422"></path></svg>
-          <span>{{ $t("message.stake.txt15") }}</span>
-        </div>
-      </div>
+      <div class="out_nodata"></div>
     </div>
     <StakedProup
       :rate="rate"
@@ -242,7 +237,6 @@ export default {
         userStaked: 0,
         userClaimSR: 0
       },
-      isapprove: false,
       allLoading: true,
       buy_isloading: false, // 按钮loading
       isapprove: false, //是否授权
@@ -261,7 +255,7 @@ export default {
         if (newValue) {
           this.allLoading = true
           setTimeout(() => {
-            this.isApprove()
+            this.isApproveFun()
           }, 1500)
         } else {
           this.allLoading = this.srLoading = false
@@ -300,7 +294,7 @@ export default {
       this.stakedStatus = false
     },
     // 判断授权
-    isApprove () {
+    isApproveFun () {
       this.$refs.mychild.isApproveFun(token().ST, contract().STStaking).then((res) => {
         if (res) {
           this.isapprove = true;
@@ -344,11 +338,7 @@ export default {
         this.openPoolStatus = res
       })
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
-      let srPrice = 0
-      if(!this.getProduction){
-        srPrice = 0.00001
-      }
-      stStakingInfo.getApr(this.getUserCoin.stPrice,srPrice).then(res => {
+      stStakingInfo.getApr(this.getUserCoin.stPrice,this.$store.state.srPrice).then(res => {
         console.log('获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%res: ', res);
         this.APY = Math.pow((1 + res / 100 / 365),365) - 1
       }).catch(() => {
@@ -558,7 +548,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    .otu_onebox {
+    .out_onebox {
       width: 344px;
       height: 539px;
       padding: 2px;
@@ -754,6 +744,9 @@ export default {
         }
       }
     }
+    .out_nodata{
+      width: 344px;
+    }
   }
 }
 @media screen and (max-width: 980px) {
@@ -839,7 +832,7 @@ export default {
       flex-direction: column;
       flex-wrap: nowrap;
       justify-content: space-between;
-      .otu_onebox {
+      .out_onebox {
         width: 90%;
         margin: 0 auto;
         margin-bottom: 0.2rem;
@@ -1034,6 +1027,9 @@ export default {
             }
           }
         }
+      }
+      .out_nodata{
+        display: none;
       }
     }
   }

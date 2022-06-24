@@ -123,7 +123,8 @@ export default {
         sevenDays:0,
         fourteenDays:0,
         thirtyDays:0
-      }
+      },
+      yearValue:0
     }
   },
   methods: {
@@ -135,6 +136,16 @@ export default {
         this.sliderValue = data
         let nums = this.getUserCoin.st * (data / 100)
         this.STmsg = this.$utils.getBit(nums,8)
+      }
+    },
+    inputClick(data){
+      if(Number(this.getUserCoin.st) < Number(1e-8)){
+        this.STmsg = 0
+      }else if(Number(data) > Number(this.getUserCoin.st)){
+        this.STmsg = this.$utils.getBit(this.getUserCoin.st,8)
+        // console.log('this.STmsg: ', this.STmsg);
+      }else{
+        this.STmsg = this.$utils.getBit(data,8)
       }
     },
     userStakedFun(){
@@ -179,16 +190,6 @@ export default {
         this.userStakedLoading = false
       })
     },
-    inputClick(data){
-      if(Number(this.getUserCoin.st) < Number(1e-8)){
-        this.STmsg = 0
-      }else if(Number(data) > Number(this.getUserCoin.st)){
-        this.STmsg = this.$utils.getBit(this.getUserCoin.st,8)
-        // console.log('this.STmsg: ', this.STmsg);
-      }else{
-        this.STmsg = this.$utils.getBit(data,8)
-      }
-    },
     selectFun(item){
       this.passValue = item
       this.sliderValue = item
@@ -208,18 +209,25 @@ export default {
     },
     // 获取用户ROI
     getUserROI(){
-      let srPrice = 0
-      if(!this.getProduction){
-        srPrice = 0.00001
-      }
       // 获取质押池用户ROI（用户年度投资回报率），需要在返回结果前面加上$
-      stStakingInfo.getRoi(this.getAccount,srPrice).then(res => {
+      stStakingInfo.getRoi(this.getAccount,this.$store.state.srPrice).then(res => {
         console.log('获取质押池用户ROI（用户年度投资回报率），需要在返回结果前面加上$res: ', res);
         this.interestInfo.sevenDays = 7 / 365 * res
         this.interestInfo.fourteenDays = 14 / 365 * res
         this.interestInfo.thirtyDays = 30 / 365 * res
       })
+    },
+    // 预计用户质押的st收益
+    expectedIncome(){
+      console.log('this.$store.state.srPrice: ', this.$store.state.srPrice)
+      stStakingInfo.getSRValuePerYear(this.$store.state.srPrice).then(res => {
+        console.log('一年产出价值 ', res);
+        this.yearValue = res
+      })
     }
+  },
+  mounted(){
+    this.expectedIncome()
   }
 }
 </script>
