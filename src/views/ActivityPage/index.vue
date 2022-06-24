@@ -325,7 +325,7 @@ export default {
       userBuyMax:0,
       idoAddress:'',
       payAddress:'',// 获取某IDO的支付代币地址
-      userIsWhiteList:false,// 默认用户不在白名单
+      userIsWhiteList:true,// 默认用户在白名单(不开启白名单的情况下.也可以购买)
       new_userIsWhiteList:false,// 授权按钮可以点击 ,此变量存用户是否在白名单状态
       userRemaining:0,// 用户剩余购买量
       setIntervalOBJ:null,
@@ -349,7 +349,7 @@ export default {
       handler: function (newValue) {
         if(newValue == 0){
           this.userConnectInfo(this.idoID)
-          this.userIsWhiteList = false
+          this.userIsWhiteList = true
         }else if(newValue > 0){
           console.log('newValue: ', newValue);
           this.$utils.antiShakeFun(() => {
@@ -424,7 +424,7 @@ export default {
             this.isapprove = false;
           }
           this.allLoading = false
-          this.userIsWhiteList = this.new_userIsWhiteList
+          // this.userIsWhiteList = this.new_userIsWhiteList
           // this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
         })
     },
@@ -482,7 +482,7 @@ export default {
               this.countTimeOBJ = data.countdownObject
               if(this.countTimeOBJ == 0){
                 this.startAndEnd = true
-                this.userIsWhiteList = false
+                // this.userIsWhiteList = false
               }
               this.countTime = data.countTime
             });
@@ -495,7 +495,7 @@ export default {
               this.countTimeOBJ = data.countdownObject
               if(this.countTimeOBJ == 0){
                 this.startAndEnd = false
-                this.userIsWhiteList = false
+                // this.userIsWhiteList = false
               }
               this.countTime = data.countTime
             });
