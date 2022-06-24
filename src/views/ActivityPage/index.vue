@@ -64,7 +64,7 @@
               >{{ $t("message.acticePage.txt1") }}</span
             >
             <!-- 售卖完 -->
-            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : ''" v-if="outStatus">{{ $t("message.tip.self_sold") }}</span>
+            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : ''" v-if="outStatus || finshed">{{ $t("message.tip.self_sold") }}</span>
             <!-- 售卖前 -->
             <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : ''" v-else-if="beforeBegin">{{$t("message.tip.self_Nobegin")}}</span>
             <!-- 售卖中 -->
@@ -164,7 +164,7 @@
                 {{ $t(item.title) }}
               </p>
             </div>
-            <p class="font20" :class="isEnLang ? 'en_Bold' : ''">
+            <p class="font13" :class="isEnLang ? 'en_Bold' : ''">
               {{ $t(item.num) }}
             </p>
           </div>
@@ -235,7 +235,7 @@
           {{ $t("message.acticePage.txt31" )}}
         </div>
         <!-- 其他逻辑判断-->
-        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:outStatus}" v-else>
+        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:outStatus || finshed}" v-else>
           <FunBtn
             :allLoading="allLoading"
             :isapprove="isapprove"
@@ -349,6 +349,7 @@ export default {
       getEndTimeStatus:false,
       beforeBegin:true,// 开始售卖前
       selling:false,// 售卖中
+      finshed:false,// 倒计时结束时候此变量为真
     }
   },
   watch:{
@@ -477,6 +478,7 @@ export default {
           // 活动已结束
           if(this.endTime < nowTime){
             this.btntxt = 'message.tip.self_sold'
+            this.finshed = true
             this.beforeBegin = false//已经到结束时间,状态为false  售卖前
             this.selling = false// 已经到结束时间,状态为false  售卖中
             clearInterval(this.pageTimer)
@@ -842,7 +844,7 @@ export default {
           display: flex;
           flex-direction: column;
           justify-content: space-evenly;
-          padding: 20px 15px;
+          padding: 20px 9px;
           .package_box {
             display: flex;
             align-items: center;
