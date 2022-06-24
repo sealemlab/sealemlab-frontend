@@ -211,7 +211,7 @@ import { mapGetters } from "vuex";
 import { token,erc20,bondDepository } from  "sealemlab-sdk";
 export default { 
   computed: {
-    ...mapGetters(["getProduction","getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
+    ...mapGetters(["getAccountStatus","getProduction","getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
   },
   data () {
     return {
@@ -236,6 +236,17 @@ export default {
     };
   },
   watch: {
+    getAccountStatus: {
+      handler: function (newValue) {
+        if(newValue > 0){
+          this.$utils.antiShakeFun(() => {
+            this.getUserCoinInfo()
+          },2000)()
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
     getIstrue: {
       handler: function (newValue) {
         if (newValue) {
