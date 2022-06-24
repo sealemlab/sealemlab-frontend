@@ -493,16 +493,19 @@ export default {
           }else if(this.startTime <= nowTime < this.endTime){//正在售卖中
             // this.btntxt = this.userIsWhiteList ?'message.acticePage.txt23':'message.acticePage.txt31'
             clearInterval(this.countTimeOBJ)
-            this.startAndEnd = true
             this.$utils.customTime(this.endTime, data => {
               // console.log('data: ', data);
               this.countTimeOBJ = data.countdownObject
               if(Number(this.arr[0].num) == Number(this.arr[1].num)){
                 this.startAndEnd = false
+                this.btntxt = "message.tip.self_sold"
+              }else{
+                this.startAndEnd = true
               }
               if(this.countTimeOBJ == 0){
                 this.startAndEnd = false
                 // this.userIsWhiteList = false
+                this.btntxt = "message.tip.self_sold"
               }
               this.countTime = data.countTime
             });
