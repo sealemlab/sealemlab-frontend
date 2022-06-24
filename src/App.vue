@@ -508,11 +508,12 @@ export default {
         obj.stPrice = 0
         count++
       })
+      clearInterval(this.timer)
       this.timer = setInterval(() => {
         if(count == 4){
           clearInterval(this.timer)
           this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
-          // console.log("获取用户代币余额结束",count)
+          console.log("获取用户代币余额结束",count)
         }
         // console.log("获取用户代币余额中",count)
       },1000)

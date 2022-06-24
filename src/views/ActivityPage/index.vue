@@ -470,7 +470,7 @@ export default {
           }
         }
         if(this.startTime > 0){
-          console.log("this.isapprove",this.isapprove)
+          // console.log("this.isapprove",this.isapprove)
           // 售卖前的倒计时
           if(nowTime < this.startTime){
             this.btntxt = 'message.acticePage.txt23'
