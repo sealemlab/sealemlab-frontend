@@ -21,7 +21,7 @@
         </div>
         <!-- 百分比 -->
         <div class="percentageBox">
-          <div class="onebox" :class="{activeClass:index == IndexPage}" v-for="(item,index) in arr" :key="index" @click="selectFun(item,index)">{{item}}%</div>
+          <div class="onebox" :class="{activeClass:index == IndexPage}" v-for="(item,index) in arr" :key="index" @click="selectFun(item)">{{item}}%</div>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
           <span>{{ $t("message.stake.txt17") }}</span>
@@ -67,8 +67,7 @@ export default {
     ...mapGetters(["getProduction","isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
     additionalTaxRate(){ // 用户已经购买额加上即将要购买额是否超过额定额度(每1000增加0.1%---(0.001))
       let num = Math.floor( (Number(this.STmsg) * this.getUserCoin.stPrice ) / 1000) * 0.001
-      // console.log('num: ', num);
-      return num
+      return num + this.rate
     },
   },
   watch:{
@@ -103,6 +102,10 @@ export default {
       default: false
     },
     APY:{
+      type: Number,
+      default: 0
+    },
+    rate:{
       type: Number,
       default: 0
     }
@@ -148,6 +151,12 @@ export default {
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt26'}));
         return
       }
+        // console.log('Number(this.STmsg): ', Number(this.STmsg));
+        // console.log('Number(this.getUserCoin.st): ', Number(this.getUserCoin.st));
+      if(Number(this.STmsg) > Number(this.getUserCoin.st)){
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt29'}));
+        return
+      }
       this.userStakedLoading = true
       stStaking().connect(getSigner()).deposit(this.$utils.convertNormalToBigNumber(this.STmsg, 18),localStorage.getItem('Invitee')).then(async res => {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt27','link':res.hash}));
@@ -159,7 +168,7 @@ export default {
           this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
           this.STmsg = ''
           this.passValue = 0
-          console.log('this.passValue: ', this.passValue);
+          // console.log('this.passValue: ', this.passValue);
           this.sliderValue = 0
           this.userReadyStaked = true
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt28'}));
@@ -171,19 +180,23 @@ export default {
       })
     },
     inputClick(data){
-      if(this.getUserCoin.st < 1e-8){
+      if(Number(this.getUserCoin.st) < Number(1e-8)){
         this.STmsg = 0
+      }else if(Number(data) > Number(this.getUserCoin.st)){
+        this.STmsg = this.$utils.getBit(this.getUserCoin.st,8)
+        // console.log('this.STmsg: ', this.STmsg);
       }else{
         this.STmsg = this.$utils.getBit(data,8)
       }
     },
-    selectFun(item,index){
+    selectFun(item){
       this.passValue = item
       this.sliderValue = item
-      if(this.getUserCoin.st < 1e-8){
+      if(Number(this.getUserCoin.st) < 1e-8){
         this.STmsg = 0
       }else{
         let nums = this.getUserCoin.st * (item / 100)
+        // console.log('nums: ', nums);
         this.STmsg = this.$utils.getBit(nums,8)
       }
     },

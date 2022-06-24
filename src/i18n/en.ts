@@ -924,13 +924,16 @@ export const message = {
     txt19:'14 days estimated interest',
     txt20:'30 days estimated interest',
     txt21:'Estimated rate for bond',
-    txt22:'提取成功',
-    txt23:'没有可提取数量',
-    txt24:'池子暂未开启',
-    txt25:'当前账号没有STT',
-    txt26:'输入要质押的st数量',
-    txt27:'质押中...',
-    txt28:'质押成功'
+
+    txt22:'Withdrawal Success',
+    txt23:'No Balance',
+    txt24:'The pool is currently closed ',
+    txt25:'The current address has no $ST ',
+    txt26:'Enter the amount of $ST you want to stake',
+    txt27:'Staking...',
+    txt28:'Stake Success',
+
+    txt29:'Insufficient balance'
   },
   
   tip: {

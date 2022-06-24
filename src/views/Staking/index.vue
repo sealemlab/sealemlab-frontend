@@ -199,6 +199,7 @@
       </div>
     </div>
     <StakedProup
+      :rate="rate"
       :APY="APY"
       :openPoolStatus="openPoolStatus"
       :stakedStatus="stakedStatus"
@@ -216,7 +217,7 @@
 import { mapGetters } from "vuex";
 import MessageBox from "@/views/Bond/MessageBox.vue";
 import StakedProup from './StakeProup.vue'
-import { stStaking, token, contract, getSigner, stStakingInfo } from 'sealemlab-sdk'
+import { stStaking, token, contract, getSigner, stStakingInfo, bondDepository } from 'sealemlab-sdk'
 export default {
   computed: { ...mapGetters(["getProduction","getAccountStatus", "getAccount", "getIsMobile", "getIstrue", "getNoticeNum", "isEnLang", "getUserCoin"]), },
   data () {
@@ -247,7 +248,8 @@ export default {
       isapprove: false, //是否授权
       setIntervalOBJ: null,
       stakedStatus: false,
-      userSrYieldTimer: null
+      userSrYieldTimer: null,
+      rate:0 // 用户的质押利率
     }
   },
   components: {
@@ -362,38 +364,30 @@ export default {
     getUserInfo () {
       // 获取某用户的质押的ST数量
       stStaking().userStakedST(this.getAccount).then(res => {
-        console.log('获取某用户的质押的ST数量: ', res);
+        // console.log('获取某用户的质押的ST数量: ', res);
         if(res / 1e18 <= 1e-8){
           this.poolInfo.userStaked = 0
         }else{
           this.poolInfo.userStaked = res / 1e18
         }
       })
-      // 获取某用户的下级的质押的ST数量
-      // stStaking().affiliateStakedST(this.getAccount).then(res => {
-      //   console.log('获取某用户的下级的质押的ST数量: ', res);
-      // })
-
+      
       // 获取某用户已提取的SR数量
       stStaking().userHarvestedSR(this.getAccount).then(res => {
         // console.log('获取某用户已提取的SR数量: ', res);
         this.dataArr[1].num = res / 1e18
       })
 
-      // 获取某用户上次质押的时间戳
-      // stStaking().userLastStakeTime(this.getAccount).then(res => {
-      //   console.log('获取某用户上次质押的时间戳: ', res);
-      // })
-
-      // 获取用户总SR奖励数量（已提取+可提取）
-      // stStaking().getTokenTotalRewards(this.getAccount).then(res => {
-      //   console.log('获取用户总SR奖励数量（已提取+可提取）: ', res);
-      // })
-
       // 获取用户提现时要扣的税率
       stStaking().getUserTaxRate(this.getAccount).then(res => {
         // console.log('获取用户提现时要扣的税率 ', res);
         this.userTaxRate = res / 100
+      })
+
+      // 获取某用户的质押利率等级信息
+      bondDepository().getUserStakeLevelInfo(this.getAccount).then(res => {
+        // console.log('质押利率res1: ', res);
+        this.rate = Number(res[0]) / 1e4
       })
     },
     // 实时刷新可提取的sr数量
