@@ -444,6 +444,10 @@ export default {
       }
     },
     maxClick(){
+      if(Number(this.arr[1].num) <= Number(this.userRemaining)){
+        this.userRemaining = this.arr[1].num
+      }
+      console.log('this.arr[1].num: ', this.arr[1].num);
       //this.userRemaining //用户剩余购买限额
         console.log('用户剩余额度this.userRemaining: ', this.userRemaining);
       if(this.userRemaining * this.nowPrice <= this.getUserCoin.busd){
