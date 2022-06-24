@@ -63,8 +63,8 @@
               :class="isEnLang ? 'en_Bold' : 'cn_lang'"
               >{{ $t("message.acticePage.txt1") }}</span
             >
-            <!-- <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="arr[0].num == arr[2].num">{{ $t("message.tip.self_sold") }}</span> -->
-            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="!startAndEnd">{{$t("message.tip.self_Nobegin")}}</span>
+            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="arr[0].num == arr[2].num && !startAndEnd">{{ $t("message.tip.self_sold") }}</span>
+            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="!startAndEnd">{{$t("message.tip.self_Nobegin")}}</span>
             <span class="font12" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="startAndEnd">{{
               $t("message.acticePage.txt2")
             }}</span>
@@ -326,7 +326,6 @@ export default {
       idoAddress:'',
       payAddress:'',// 获取某IDO的支付代币地址
       userIsWhiteList:true,// 默认用户在白名单(不开启白名单的情况下.也可以购买)
-      new_userIsWhiteList:false,// 授权按钮可以点击 ,此变量存用户是否在白名单状态
       userRemaining:0,// 用户剩余购买量
       setIntervalOBJ:null,
       userbuyst:0,//用户输入u换成的st数量
@@ -426,7 +425,6 @@ export default {
             this.isapprove = false;
           }
           this.allLoading = false
-          // this.userIsWhiteList = this.new_userIsWhiteList
           // this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
         })
     },
@@ -493,7 +491,7 @@ export default {
               this.countTime = data.countTime
             });
           }else if(this.startTime <= nowTime < this.endTime){//正在售卖中
-            this.btntxt = this.userIsWhiteList ?'message.acticePage.txt23':'message.acticePage.txt31'
+            // this.btntxt = this.userIsWhiteList ?'message.acticePage.txt23':'message.acticePage.txt31'
             clearInterval(this.countTimeOBJ)
             this.startAndEnd = true
             this.$utils.customTime(this.endTime, data => {
@@ -589,7 +587,6 @@ export default {
             ido().getWhiteListExistence(idoID,this.getAccount).then(res1 => { 
               // console.log('判断某用户是否在某IDO的白名单: ', res1);
               this.userIsWhiteList = res1
-              this.new_userIsWhiteList = res1
             })
           }
         })
