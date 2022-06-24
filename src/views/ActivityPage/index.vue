@@ -394,6 +394,7 @@ export default {
     $route(to) {
       this.idoID = to.params.id
       this.getIdoInfo(this.idoID)
+      this.userConnectInfo(this.idoID)
       this.inputvalue = ''
     }
   },
