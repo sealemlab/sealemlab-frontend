@@ -307,7 +307,7 @@ export default {
     outStatus(){
       this.beforeBegin = false// 开始售卖前
       this.selling = false // 售卖中
-      return arr[0].num == arr[2].num 
+      return this.arr[0].num == this.arr[2].num 
     }
   },
   data () {
