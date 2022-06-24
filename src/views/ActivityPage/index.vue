@@ -394,8 +394,10 @@ export default {
     },
     $route(to) {
       this.idoID = to.params.id
-      this.getIdoInfo(to.params.id)
-      this.userConnectInfo(to.params.id)
+      setTimeout(() => {
+        this.getIdoInfo(to.params.id)
+        this.userConnectInfo(to.params.id)
+      },1500)
       this.inputvalue = ''
     }
   },
@@ -497,7 +499,7 @@ export default {
             this.$utils.customTime(this.endTime, data => {
               // console.log('data: ', data);
               this.countTimeOBJ = data.countdownObject
-              if(this.arr[0].num == this.arr[1].num){
+              if(Number(this.arr[0].num) == Number(this.arr[1].num)){
                 this.startAndEnd = false
               }
               if(this.countTimeOBJ == 0){
