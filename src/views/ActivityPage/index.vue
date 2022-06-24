@@ -402,6 +402,8 @@ export default {
     },
     $route(to) {
       this.idoID = to.params.id
+      this.startTime = 0
+      this.endTime = 0
       setTimeout(() => {
         this.getIdoInfo(to.params.id)
         this.userConnectInfo(to.params.id)
