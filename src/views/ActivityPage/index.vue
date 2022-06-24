@@ -394,8 +394,8 @@ export default {
     },
     $route(to) {
       this.idoID = to.params.id
-      this.getIdoInfo(this.idoID)
-      this.userConnectInfo(this.idoID)
+      this.getIdoInfo(to.params.id)
+      this.userConnectInfo(to.params.id)
       this.inputvalue = ''
     }
   },
@@ -506,15 +506,10 @@ export default {
       },1000)
     },
     getIdoInfo(idoID){
-      // console.log("获取ido信息")
       // 获取某IDO的开始时间
       ido().startTimes(idoID).then(res => { 
         // console.log('获取某IDO的开始时间: ', res);
         this.startTime = Number(res)
-        // let nowTime = parseInt(new Date().getTime() / 1000)
-        // if(nowTime <= res){
-        //   this.getUsetTime(res)
-        // }
       })
       
       ido().endTimes(idoID).then(res1 => { 
@@ -548,9 +543,9 @@ export default {
       let price = await ido().tokenPrices(idoID).catch(() => {
         this.nowPriceStatus = true
       })
-      console.log('price: ', price);
+      // console.log('price: ', price);
       this.nowPrice = this.$utils.convertBigNumberToNormal(Number(price),0,18,true)
-      console.log('this.nowPrice: ', this.nowPrice);
+      // console.log('this.nowPrice: ', this.nowPrice);
       this.nowPriceStatus = true
       
       // 获取某IDO的最大供应量
@@ -576,11 +571,6 @@ export default {
     },
     userConnectInfo(idoID,iswhite = true){
       // console.log("获取用户信息")
-      // // 获取某用户某IDO的已购买数量
-      // ido().userTokenPurchased(this.getAccount,this.idoID).then(res => { 
-      //   console.log('获取某用户某IDO的已购买数量: ', res);
-      //   this.userBuynum = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-      // })
       // 判断某用户是否在某IDO的白名单
       if(iswhite){
         // 获取某IDO的是否开启白名单
@@ -668,11 +658,6 @@ export default {
   },
   mounted () {
     this.idoID = this.$route.params.id
-    // if(this.getProduction){
-    //   this.nowPriceStatus = true // 上线要改成false
-    //   this.startTime = 1656417600
-    //   this.getIdoInfo(this.idoID) // 上线前要解开
-    // }
     this.getIdoInfo(this.idoID) // 上线解开
     this.getUsetTime()
   },

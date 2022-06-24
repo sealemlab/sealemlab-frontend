@@ -839,14 +839,14 @@ export const message = {
   },//游戏
   acticePage:{
     title1:"IDO sale",
-    title2:"IDO begains in",
+    title2:"IDO begins in",
     title2_1:"IDO ends in",
     txt1:"IDO PROGRESS",
     txt2:"Sale live",
     txt3:"Sold in current",
-    txt4:"Avaliable for sale",
+    txt4:"Available for sale",
     txt5:"Participated",
-    txt6:"Total avaliable",
+    txt6:"Total available",
     txt7:"Who can join the presale?",
     txt8:"Anyone in whitelist",
     txt9:"How much ST can I buy?",
