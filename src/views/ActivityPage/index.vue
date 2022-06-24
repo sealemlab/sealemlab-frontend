@@ -46,11 +46,11 @@
         </div>
       </div>
       <!-- 倒计时开始前文案 -->
-      <p class="font24" :class="isEnLang ? 'en_medium' : ''" v-if="!startAndEnd">
+      <p class="font24" :class="isEnLang ? 'en_medium' : ''" v-if="beforeBegin">
         {{ $t("message.acticePage.title2") }}
       </p>
       <!-- 倒计时正在进行时文案 -->
-      <p class="font24" :class="isEnLang ? 'en_medium' : ''" v-else>
+      <p class="font24" :class="isEnLang ? 'en_medium' : ''" v-else-if="selling">
         {{ $t("message.acticePage.title2_1") }}
       </p>
     </div>
@@ -63,11 +63,12 @@
               :class="isEnLang ? 'en_Bold' : 'cn_lang'"
               >{{ $t("message.acticePage.txt1") }}</span
             >
-            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-if="arr[0].num == arr[2].num && !startAndEnd">{{ $t("message.tip.self_sold") }}</span>
-            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="!startAndEnd">{{$t("message.tip.self_Nobegin")}}</span>
-            <span class="font12" :class="isEnLang ? 'en_Bold' : 'cn_lang'" v-else-if="startAndEnd">{{
-              $t("message.acticePage.txt2")
-            }}</span>
+            <!-- 售卖完 -->
+            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : ''" v-if="outStatus">{{ $t("message.tip.self_sold") }}</span>
+            <!-- 售卖前 -->
+            <span class="font12 btn_black" :class="isEnLang ? 'en_Bold' : ''" v-else-if="beforeBegin">{{$t("message.tip.self_Nobegin")}}</span>
+            <!-- 售卖中 -->
+            <span class="font12" :class="isEnLang ? 'en_Bold' : ''" v-else-if="selling">{{$t("message.acticePage.txt2")}}</span>
           </p>
           <div class="allbox">
             <div class="Onegroup" v-for="(item, index) in arr" :key="index">
@@ -229,10 +230,12 @@
           <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img" />
           {{ $t("message.acticePage.txt22") }}
         </div>
+        <!-- 用户不在白名单 -->
         <div class="main_button font18 mobile_font16 disable_bnb" v-if="!userIsWhiteList">
           {{ $t("message.acticePage.txt31" )}}
         </div>
-        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:!startAndEnd}" v-else>
+        <!-- 其他逻辑判断-->
+        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:outStatus}" v-else>
           <FunBtn
             :allLoading="allLoading"
             :isapprove="isapprove"
@@ -244,7 +247,6 @@
             @dosomething="userBuyIdo"
           />
         </div>
-        <!-- (arr[0].num == arr[2].num || !startAndEnd) ?'message.tip.self_sold': 'message.acticePage.txt23' -->
       </div>
       <div class="mobile_three_box">
         <div v-for="(item, index) in arr1" :key="index">
@@ -300,6 +302,12 @@ export default {
   computed: { ...mapGetters(["getProduction","getUserCoin","isEnLang", "getAccountStatus", "getIstrue","getAccount"]),
     stAddress(){
       return this.$utils.getSubStr(token().ST, 6);
+    },
+    // 售卖完
+    outStatus(){
+      this.beforeBegin = false// 开始售卖前
+      this.selling = false // 售卖中
+      return arr[0].num == arr[2].num 
     }
   },
   data () {
@@ -339,8 +347,8 @@ export default {
       endTime:0,
       pageTimer:null,
       getEndTimeStatus:false,
-      startAndEnd:true,// 开始售卖前 跟结束售卖后 此变量为假
-      showNoSellStatus:false,// 没有开始售卖前  此状态为假
+      beforeBegin:true,// 开始售卖前
+      selling:false,// 售卖中
     }
   },
   watch:{
@@ -465,46 +473,39 @@ export default {
       this.pageTimer = setInterval(() => {
         let nowTime = parseInt(new Date().getTime() / 1000)
         if(this.getEndTimeStatus){
-          // console.log("获取到结束时间",this.endTime,nowTime)
           // 活动已结束
           if(this.endTime < nowTime){
             this.btntxt = 'message.tip.self_sold'
-            this.startAndEnd = false
+            this.beforeBegin = false//已经到结束时间,状态为false  售卖前
+            this.selling = false// 已经到结束时间,状态为false  售卖中
             clearInterval(this.pageTimer)
             return
           }
         }
         if(this.startTime > 0){
-          // console.log("this.isapprove",this.isapprove)
           // 售卖前的倒计时
           if(nowTime < this.startTime){
             this.btntxt = 'message.acticePage.txt23'
-            this.startAndEnd = false
+
+            this.beforeBegin = true//  售卖前
+            this.selling = false// 售卖中
+
             clearInterval(this.countTimeOBJ)
             this.$utils.customTime(this.startTime, data => {
-              // console.log('data: ', data);
               this.countTimeOBJ = data.countdownObject
               if(this.countTimeOBJ == 0){
-                this.startAndEnd = true
-                // this.userIsWhiteList = false
+                this.beforeBegin = false//  售卖前
+                this.selling = true// 售卖中
               }
               this.countTime = data.countTime
             });
           }else if(this.startTime <= nowTime < this.endTime){//正在售卖中
-            // this.btntxt = this.userIsWhiteList ?'message.acticePage.txt23':'message.acticePage.txt31'
+            this.beforeBegin = false//  售卖前
+            this.selling = true// 售卖中
             clearInterval(this.countTimeOBJ)
             this.$utils.customTime(this.endTime, data => {
-              // console.log('data: ', data);
               this.countTimeOBJ = data.countdownObject
-              if(Number(this.arr[0].num) == Number(this.arr[1].num)){
-                this.startAndEnd = false
-                this.btntxt = "message.tip.self_sold"
-              }else{
-                this.startAndEnd = true
-              }
               if(this.countTimeOBJ == 0){
-                this.startAndEnd = false
-                // this.userIsWhiteList = false
                 this.btntxt = "message.tip.self_sold"
               }
               this.countTime = data.countTime
