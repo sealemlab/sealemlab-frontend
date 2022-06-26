@@ -409,6 +409,7 @@ export default {
       // clearInterval(this.sellingTimeer)
       this.startTime = -1
       this.getEndTimeStatus = false
+      this.getUsetTime()
       setTimeout(() => {
         this.getIdoInfo(to.params.id)
         this.userConnectInfo(to.params.id)
