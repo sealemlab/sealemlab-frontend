@@ -778,7 +778,7 @@ export const message = {
     txt11: "Total reward",
     txt12: "Claimable rewards",
     txt13: "Note: You need at least one NFT in your account to earn referral rewards.",
-    txt14: "Suggestions to the official email: 123456@gmail.com",
+    txt14: "Suggestions to the official email: business@sealemlab.com",
     txt15: "Invitation Total",
     txt16: "Invitation Ranking",
     txt17: "To buy",
