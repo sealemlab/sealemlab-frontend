@@ -350,6 +350,7 @@ export default {
       beforeBegin:true,// 开始售卖前
       selling:false,// 售卖中
       finshed:false,// 倒计时结束时候此变量为真
+      sellingTimeer:null,//正在售卖倒计时对象
     }
   },
   watch:{
@@ -402,11 +403,10 @@ export default {
     },
     $route(to) {
       this.idoID = to.params.id
-      clearInterval(this.pageTimer)
-      this.startTime = 0
-      this.endTime = 0
       this.countTime = { d: "00", h: "00", m: "00", s: "00" }
       clearInterval(this.pageTimer)
+      clearInterval(this.countTimeOBJ)
+      clearInterval(this.sellingTimeer)
       setTimeout(() => {
         this.getIdoInfo(to.params.id)
         this.userConnectInfo(to.params.id)
@@ -510,10 +510,10 @@ export default {
           }else if(this.startTime <= nowTime < this.endTime){//正在售卖中
             this.beforeBegin = false//  售卖前
             this.selling = true// 售卖中
-            clearInterval(this.countTimeOBJ)
+            clearInterval(this.sellingTimeer)
             this.$utils.customTime(this.endTime, data => {
-              this.countTimeOBJ = data.countdownObject
-              if(this.countTimeOBJ == 0){
+              this.sellingTimeer = data.countdownObject
+              if(this.sellingTimeer == 0){
                 this.btntxt = "message.tip.self_sold"
               }
               this.countTime = data.countTime
@@ -682,6 +682,7 @@ export default {
   beforeDestroy () {
     clearInterval(this.countTimeOBJ)
     clearInterval(this.pageTimer)
+    clearInterval(this.sellingTimeer)
   }
 }
 </script>
