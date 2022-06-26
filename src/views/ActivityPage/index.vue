@@ -412,7 +412,6 @@ export default {
       setTimeout(() => {
         this.getIdoInfo(to.params.id)
         this.userConnectInfo(to.params.id)
-        this.getUsetTime()
       },1500)
       this.inputvalue = ''
     }
