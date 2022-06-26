@@ -12,7 +12,7 @@
             <img :src="`${$store.state.imgUrl}add.webp`" class="add_img" />
           </div>
         </div>
-        <div class="add_buybtn font16" :class="isEnLang?'en_medium':''">{{$t("message.user.txt17")}}</div>
+        <div class="add_buybtn font16" @click="toBuy" :class="isEnLang?'en_medium':''">{{$t("message.user.txt17")}}</div>
         <div class="menu display_flex">
           <div class="onebox font14" :class="{ activeMenu: menuIndex == index }" v-for="(item, index) in menuArr" :key="index" @click="menuClick(item,index)">{{$t(item.title)}}</div>
         </div>
@@ -29,21 +29,7 @@ export default {
     NftCompontent
   },
   computed: {
-    ...mapGetters(["getAccount","getIstrue","getAccountStatus","isEnLang"])
-  },
-  watch: {
-    // 'getAccountStatus': {
-    //   handler: function (newValue) {
-    //     if(newValue == -1 || newValue == undefined){
-    //     }else if(newValue == 0){
-          
-    //     }else if(newValue > 0){
-          
-    //     }
-    //   },
-    //   deep: true,
-    //   immediate: true,
-    // },
+    ...mapGetters(["getNoticeNum","getAccount","getIstrue","getAccountStatus","isEnLang"])
   },
   data(){
     return{
@@ -60,6 +46,12 @@ export default {
     menuClick(item,index){
       this.menuIndex = index
     },
+    toBuy(){
+      if (!this.getNoticeNum) {
+        this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+        this.$store.commit("setNoticeNum", true);
+      }
+    }
   }
 }
 </script>
@@ -92,6 +84,7 @@ export default {
         }
       }
       .add_buybtn{
+        cursor: pointer;
         width: 163px;
         height: 48px;
         background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
