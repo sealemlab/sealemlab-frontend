@@ -350,8 +350,6 @@ export default {
       beforeBegin:true,// 开始售卖前
       selling:false,// 售卖中
       finshed:false,// 倒计时结束时候此变量为真
-      sellingTimeer:null,//正在售卖倒计时对象
-      routeTTimer:null,//路由切换倒计时对象
     }
   },
   watch:{
@@ -403,24 +401,13 @@ export default {
       immediate: true,
     },
     $route(to) {
-      this.inputvalue = ''
       this.idoID = to.params.id
-      this.countTime = { d: "00", h: "00", m: "00", s: "00" }
-      // clearInterval(this.pageTimer)
-      // clearInterval(this.countTimeOBJ)
-      // clearInterval(this.sellingTimeer)
-      this.startTime = -1
-      this.getEndTimeStatus = false
-      this.getUsetTime()
-
-      clearInterval(this.routeTTimer)
-      this.routeTTimer = setInterval(() => {
-        if(to.params.id){
-          clearInterval(this.routeTTimer)
-          this.getIdoInfo(to.params.id)
-          this.userConnectInfo(to.params.id)
-        }
-      },1000)
+      setTimeout(() => {
+        this.getIdoInfo(to.params.id)
+        this.userConnectInfo(to.params.id)
+        this.getUsetTime()
+      },1500)
+      this.inputvalue = ''
     }
   },
   methods: {
@@ -484,31 +471,29 @@ export default {
       }
     },
     getUsetTime () {
-      console.log("倒计时函数")
       clearInterval(this.pageTimer)
       this.pageTimer = setInterval(() => {
         let nowTime = parseInt(new Date().getTime() / 1000)
         if(this.getEndTimeStatus){
+          console.log("活动已结束")
           // 活动已结束
           if(this.endTime < nowTime){
             this.btntxt = 'message.tip.self_sold'
             this.finshed = true
             this.beforeBegin = false//已经到结束时间,状态为false  售卖前
             this.selling = false// 已经到结束时间,状态为false  售卖中
-            clearInterval(this.countTimeOBJ)
-            clearInterval(this.sellingTimeer)
             clearInterval(this.pageTimer)
             return
           }
         }
         if(this.startTime > 0){
+          console.log("startTime > 0)")
           // 售卖前的倒计时
           if(nowTime < this.startTime){
+            console.log("现在时间小于开始时间")
             this.btntxt = 'message.acticePage.txt23'
-
             this.beforeBegin = true//  售卖前
             this.selling = false// 售卖中
-
             clearInterval(this.countTimeOBJ)
             this.$utils.customTime(this.startTime, data => {
               this.countTimeOBJ = data.countdownObject
@@ -519,12 +504,13 @@ export default {
               this.countTime = data.countTime
             });
           }else if(this.startTime <= nowTime < this.endTime){//正在售卖中
+            console.log("现在时间大于开始时间,小于结束时间")
             this.beforeBegin = false//  售卖前
             this.selling = true// 售卖中
-            clearInterval(this.sellingTimeer)
+            clearInterval(this.countTimeOBJ)
             this.$utils.customTime(this.endTime, data => {
-              this.sellingTimeer = data.countdownObject
-              if(this.sellingTimeer == 0){
+              this.countTimeOBJ = data.countdownObject
+              if(this.countTimeOBJ == 0){
                 this.btntxt = "message.tip.self_sold"
               }
               this.countTime = data.countTime
@@ -532,18 +518,18 @@ export default {
           }
           // console.log("获取到开始时间",this.startTime)
         }
-        console.log("页面倒计时中")
+        // console.log("页面倒计时中")
       },1000)
     },
     getIdoInfo(idoID){
       // 获取某IDO的开始时间
       ido().startTimes(idoID).then(res => { 
-        console.log('获取某IDO的开始时间: ', res);
+        // console.log('获取某IDO的开始时间: ', res);
         this.startTime = Number(res)
       })
       
       ido().endTimes(idoID).then(res1 => { 
-        console.log('获取某IDO的结束时间: ', res1);
+        // console.log('获取某IDO的结束时间: ', res1);
         this.endTime = Number(res1)
         this.getEndTimeStatus = true
       })
@@ -558,13 +544,11 @@ export default {
         // console.log('获取某IDO的支付代币地址: ', res);
         this.payAddress = res
       })
-
       // 获取某IDO的用户最大可购买数量限制
       ido().userBuyLimits(idoID).then(res => { 
         console.log('获取某IDO的用户最大可购买数量限制: ', res,idoID);
         this.userBuyMax = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
       })
-
       this.refresh(idoID)
     },
     // 刷新占比进度条
@@ -582,7 +566,6 @@ export default {
       let maxnum = await ido().tokenMaxSupplys(idoID)
       this.arr[2].num = this.$utils.convertBigNumberToNormal(Number(maxnum),0,18,true)
       this.arr[2].busdnum = maxnum / 1e18 * this.nowPrice
-
       // 获取某IDO的已售出数量
       ido().tokenSoldout(idoID).then(res => { 
         // console.log('获取某IDO的已售出数量: ', res);
@@ -693,7 +676,6 @@ export default {
   beforeDestroy () {
     clearInterval(this.countTimeOBJ)
     clearInterval(this.pageTimer)
-    clearInterval(this.sellingTimeer)
   }
 }
 </script>
