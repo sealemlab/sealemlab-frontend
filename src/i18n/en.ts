@@ -589,7 +589,7 @@ export const message = {
     txt_tax: "The floor tax rate is 1.0%, increasing by 0.1% per 1k USD.", //bond弹窗tax的问号内容
     txt1: "Bond",
     add_txt1:"Asset",
-    add_txt_btn:"Mint",
+    add_txt_btn:"Buy",
     add_txt_disable_btn:"Sold out",
     txt2_1: "Buy bond to earn stable ST rewards ",
     txt2_2: "Each bond offering is limited",

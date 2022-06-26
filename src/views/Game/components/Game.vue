@@ -21,8 +21,8 @@
           </div>
         </div>
         <div class="btnbox">
-          <div class="btn">{{ $t("message.gamepage.text13") }}</div>
-          <div class="btn">{{ $t("message.gamepage.text14") }}</div>
+          <div class="btn" @click="enter">{{ $t("message.gamepage.text13") }}</div>
+          <div class="btn" @click="download">{{ $t("message.gamepage.text14") }}</div>
         </div>
       </div>
     </div>
@@ -54,8 +54,26 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters(["getNoticeNum"])
+  },
   name: "Game",
+  methods:{
+    download(){
+      if (!this.getNoticeNum) {
+        this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+        this.$store.commit("setNoticeNum", true);
+      }
+    },
+    enter(){
+      if (!this.getNoticeNum) {
+        this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+        this.$store.commit("setNoticeNum", true);
+      }
+    },
+  }
 };
 </script>
 

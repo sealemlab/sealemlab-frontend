@@ -45,13 +45,6 @@ div {
   width: 100%;
   position: relative;
 }
-// .rangeValue {
-//   position: relative;
-//   display: block;
-//   text-align: center;
-//   font-size: 6em;
-//   color: #999;
-// }
 input {
   width: 100%;
   height: 15px;

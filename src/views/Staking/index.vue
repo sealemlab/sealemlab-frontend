@@ -194,6 +194,7 @@
       <div class="out_nodata"></div>
     </div>
     <StakedProup
+      :totalStaked="poolInfo.totalStaked"
       :rate="rate"
       :APY="APY"
       :openPoolStatus="openPoolStatus"
@@ -362,10 +363,11 @@ export default {
         }
       })
       
-      // 获取某用户已提取的SR数量
-      stStaking().userHarvestedSR(this.getAccount).then(res => {
-        // console.log('获取某用户已提取的SR数量: ', res);
-        this.dataArr[1].num = res / 1e18
+      // 获取用户总SR奖励数量（已提取+可提取）
+      stStaking().getTokenTotalRewards(this.getAccount).then(res => {
+        // console.log('获取用户总SR奖励数量（已提取+可提取）: ', res);
+        this.dataArr[1].num = res / 1e18 * this.$store.state.srPrice
+        // console.log('this.dataArr[1].num: ', this.dataArr[1].num);
       })
 
       // 获取用户提现时要扣的税率
@@ -692,7 +694,7 @@ export default {
           .btn {
             cursor: pointer;
             width: 130px;
-            height: 30px;
+            height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -703,13 +705,12 @@ export default {
         .out_btn {
           cursor: pointer;
           width: 206px;
-          height: 40px;
+          min-height: 40px;
           box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
           border-radius: 4px;
           backdrop-filter: blur(14px);
           font-weight: 600;
           color: #0e0d0d;
-          line-height: 22px;
           display: flex;
           justify-content: center;
           align-items: center;

@@ -33,15 +33,15 @@
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
           <span>{{ $t("message.stake.txt18") }}</span>
-          <span>$ {{interestInfo.sevenDays | PriceConversion}}</span>
+          <span>$ {{sevenDays | PriceConversion}}</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
           <span>{{ $t("message.stake.txt19") }}</span>
-          <span>$ {{interestInfo.fourteenDays | PriceConversion}}</span>
+          <span>$ {{fourteenDays | PriceConversion}}</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
           <span>{{ $t("message.stake.txt20") }}</span>
-          <span>$ {{interestInfo.thirtyDays | PriceConversion}}</span>
+          <span>$ {{thirtyDays | PriceConversion}}</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
           <span>{{ $t("message.stake.txt21") }}</span>
@@ -69,6 +69,15 @@ export default {
       let num = Math.floor( (Number(this.STmsg) * this.getUserCoin.stPrice ) / 1000) * 0.001
       return num + this.rate
     },
+    sevenDays(){
+      return Number(this.interestInfo.sevenDays) + (this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 7 ) / 365
+    },
+    fourteenDays(){
+      return Number(this.interestInfo.fourteenDays) + (this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 14 ) / 365
+    },
+    thirtyDays(){
+      return Number(this.interestInfo.thirtyDays) + (this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 30) / 365
+    }
   },
   watch:{
     'stakedStatus'(newvala){
@@ -108,7 +117,11 @@ export default {
     rate:{
       type: Number,
       default: 0
-    }
+    },
+    totalStaked:{
+      type: Number,
+      default: 0
+    },
   },
   data(){
     return {
@@ -200,6 +213,7 @@ export default {
         // console.log('nums: ', nums);
         this.STmsg = this.$utils.getBit(nums,8)
       }
+      console.log('this.sevenDays',this.sevenDays)
     },
     closeProup(){
       this.sliderValue = 0
@@ -221,7 +235,7 @@ export default {
     expectedIncome(){
       console.log('this.$store.state.srPrice: ', this.$store.state.srPrice)
       stStakingInfo.getSRValuePerYear(this.$store.state.srPrice).then(res => {
-        console.log('一年产出价值 ', res);
+        console.log('一年产出价值 ', res,this.totalStaked);
         this.yearValue = res
       })
     }

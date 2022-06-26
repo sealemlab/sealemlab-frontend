@@ -13,7 +13,7 @@
     </div>
     <div class="nav_right">
       <div class="st_price">
-        <img :src="`${$store.state.imgUrl}stlogo.webp`" class="st_price_img" />
+        <img :src="`${$store.state.imgUrl}new_stlogo.webp`" class="st_price_img" />
         <span class="font_price font16">$ {{getUserCoin.stPrice | PriceConversion(2)}}</span>
       </div>
       <div class="login_box" v-if="!getProduction">

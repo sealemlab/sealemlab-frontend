@@ -28,7 +28,7 @@
         <span class="font30 mobile_font16 margin_top">{{$t("message.home.txt6")}}</span>
       </div>
       <div class="btnbox font20 mobile_font16" :class="isEnLang?'en_Bold':''">
-        <span>{{$t("message.home.txt7")}}</span>
+        <span @click="tradingNftFun">{{$t("message.home.txt7")}}</span>
         <span @click="gamesFun">{{$t("message.home.txt8")}}</span>
       </div>
     </div>
@@ -80,10 +80,8 @@
           <!-- 移动端展示部分 -->
           <div class="left right mobile_game_box" :class="isEnLang?'en_medium':''">
             <div class="before_box">
-              <div class="add_out_box">
-                <img :src="`${$store.state.imgUrl}new_game2.webp`" class="add_game2" />
-              </div>
-              <!-- <span>{{$t("message.tip.txt5")}}</span> -->
+              <div class="add_out_box"></div>
+              <img :src="`${$store.state.imgUrl}new_game2.webp`" class="add_game2" ref="addimg" />
             </div>
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
@@ -117,8 +115,8 @@
           <!-- pc端展示部分 -->
           <div class="left right pc_box font16" :class="isEnLang?'en_medium':''">
             <div class="before_box">
-              <div class="add_out_box"></div>
-              <img :src="`${$store.state.imgUrl}new_game2.webp`" class="add_game2" />
+              <div class="add_out_box" :style="{height}"></div>
+              <img :src="`${$store.state.imgUrl}new_game2.webp`" class="add_game2" ref="addimg" />
             </div>
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
@@ -308,10 +306,11 @@ import { mapGetters } from "vuex";
 import { token, util } from 'sealemlab-sdk'
 export default {
   computed: {
-    ...mapGetters(["isEnLang","getIsMobile"])
+    ...mapGetters(["isEnLang","getIsMobile","getNoticeNum"])
   },
   data(){
     return{
+      height:0,
       haveVoice:false,//声音
       swiperVisible:true,
       addArr:[
@@ -715,7 +714,8 @@ export default {
           id:3,//coinhub
           src:`${this.$store.state.imgUrl}inviter_3.webp`
         }
-      ]
+      ],
+      imgTimer:null
     }
   },
   watch: {
@@ -740,6 +740,12 @@ export default {
   methods:{
     gamesFun(){
       this.$router.push('/game/game')
+    },
+    tradingNftFun(){
+      if (!this.getNoticeNum) {
+        this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+        this.$store.commit("setNoticeNum", true);
+      }
     },
     buyST(){
       window.open(`https://pancakeswap.finance/swap?outputCurrency=${token().ST}`)
@@ -773,6 +779,15 @@ export default {
     }
   },
   mounted(){
+    if(!this.getIsMobile){
+      clearInterval(this.imgTimer)
+      this.imgTimer = setInterval(() => {
+        if(this.$refs.addimg.complete){
+          this.height = this.$refs.addimg.clientHeight  + 10 + 'px'
+          clearInterval(this.imgTimer)
+        }
+      },10)
+    }
     let that = this
     this.$refs.video.addEventListener('canplaythrough',function(){
       that.videoStatus = false
@@ -846,7 +861,7 @@ export default {
         width: fit-content;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        // align-items: center;
         .add_top_content{
           display: flex;
           align-items: center;
@@ -871,12 +886,14 @@ export default {
           color: #CED3D9;
           line-height: 41px;
           margin-top: 25px;
-          text-align: center;
+          padding-left: 50px;
+          // text-align: center;
         }
       }
     }
     .add_top_content_center{
-      justify-content: center;
+      // justify-content: center;
+      padding-left: 10%;
     }
     .add_top_content_end{
       justify-content: flex-end;
@@ -1015,10 +1032,11 @@ export default {
         padding: 50px 0 50px 15px;
         .add_outbox{
           width: 20%;
+          min-height: 84px;
           display: flex;
           justify-content: center;
-          align-items: center;
-          border-right:1px solid #D4BA76;
+          // align-items: center;
+          // border-right:1px solid #D4BA76;
           &:nth-child(1){
             justify-content: flex-start;
           }
@@ -1033,6 +1051,7 @@ export default {
             }
             .add_content{
               width: 100%;
+              min-height: 32px;
               display: flex;
               align-items: center;
               color: #D4BA76;
@@ -1049,19 +1068,19 @@ export default {
               color: #8F8E8E;
               line-height: 24px;
               margin-top: 10px;
-              padding-left: 41px;
+              // padding-left: 41px;
             }
             .add_txt1{
-              padding-left: 35px;
+              // padding-left: 35px;
             }
             .add_txt2{
-              padding-left: 42px;
+              // padding-left: 42px;
             }
             .add_txt3{
-              padding-left: 36px;
+              // padding-left: 36px;
             }
             .add_txt4{
-              padding-left: 44px;
+              // padding-left: 44px;
             }
           }
         }
@@ -1408,7 +1427,8 @@ export default {
             margin-bottom: 37px;
             .add_out_box{
               width: 100%;
-              min-height: 241px;
+              // min-height: 241px;
+              min-height: 180px;
               background: linear-gradient(270deg, rgba(232, 199, 120, 0.24) 0%, rgba(255, 178, 69, 0.34) 47%, rgba(234, 181, 100, 0.35) 100%);
               border: 4px solid;
               border-image: linear-gradient(270deg, rgba(232, 199, 120, 0.24), rgba(255, 178, 69, 0.34), rgba(234, 181, 100, 0.35)) 4 4;
@@ -2141,6 +2161,22 @@ export default {
               max-width: 33%;
               width: 30%;
               margin-bottom: 0;
+              .add_out_box{
+                width: 100%;
+                min-height: 0.42rem;
+                background: linear-gradient(270deg, rgba(232, 199, 120, 0.24) 0%, rgba(255, 178, 69, 0.34) 47%, rgba(234, 181, 100, 0.35) 100%);
+                border: 0.04rem solid;
+                border-image: linear-gradient(270deg, rgba(232, 199, 120, 0.24), rgba(255, 178, 69, 0.34), rgba(234, 181, 100, 0.35)) 4 4;
+                filter: blur(3px);
+              }
+              .add_game2{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 98%;
+                border-radius: 0.04rem;
+              }
               .game2{
                 width: 100%;
               }
