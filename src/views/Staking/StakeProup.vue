@@ -196,6 +196,7 @@ export default {
           // console.log('this.passValue: ', this.passValue);
           this.sliderValue = 0
           this.userReadyStaked = true
+          this.getUserROI()
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt28'}));
         }else{
           this.userStakedLoading = false
