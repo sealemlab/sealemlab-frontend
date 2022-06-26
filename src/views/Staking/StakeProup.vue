@@ -70,13 +70,13 @@ export default {
       return num + this.rate
     },
     sevenDays(){
-      return Number(this.interestInfo.sevenDays) + (this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 7 ) / 365
+      return Number(this.interestInfo.sevenDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 7 ) / 365)
     },
     fourteenDays(){
-      return Number(this.interestInfo.fourteenDays) + (this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 14 ) / 365
+      return Number(this.interestInfo.fourteenDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 14 ) / 365)
     },
     thirtyDays(){
-      return Number(this.interestInfo.thirtyDays) + (this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 30) / 365
+      return Number(this.interestInfo.thirtyDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 30) / 365)
     }
   },
   watch:{
@@ -160,6 +160,7 @@ export default {
       }else{
         this.STmsg = this.$utils.getBit(data,8)
       }
+      console.log("this.sevenDays",this.sevenDays)
     },
     userStakedFun(){
       if(!this.openPoolStatus){

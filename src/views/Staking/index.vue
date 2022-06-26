@@ -388,7 +388,7 @@ export default {
       clearInterval(this.userSrYieldTimer)
       this.userSrYieldTimer = setInterval(() => {
         stStaking().getTokenRewards(this.getAccount).then(res => {
-          console.log('获取用户可提取SR数量', Number(res / 1e18));
+          // console.log('获取用户可提取SR数量', Number(res / 1e18));
           if (res / 1e18 < 1e-8) {
             this.poolInfo.userClaimSR = 0
             this.srLoading = false
