@@ -63,17 +63,19 @@ module.exports = {
         },
       });
       Object.assign(config, {
-        minimizer:[
-          {
-            options:{
-              terserOptions:{
-                compress:{
-                  drop_console:true
+        optimization:{
+          minimizer:[
+            {
+              options:{
+                terserOptions:{
+                  compress:{
+                    drop_console:true
+                  }
                 }
               }
             }
-          }
-        ]
+          ]
+        }
       });
     }
   },
