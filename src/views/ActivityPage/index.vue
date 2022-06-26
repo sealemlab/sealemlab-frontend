@@ -351,6 +351,7 @@ export default {
       selling:false,// 售卖中
       finshed:false,// 倒计时结束时候此变量为真
       sellingTimeer:null,//正在售卖倒计时对象
+      routeTTimer:null,//路由切换倒计时对象
     }
   },
   watch:{
@@ -402,6 +403,7 @@ export default {
       immediate: true,
     },
     $route(to) {
+      this.inputvalue = ''
       this.idoID = to.params.id
       this.countTime = { d: "00", h: "00", m: "00", s: "00" }
       // clearInterval(this.pageTimer)
@@ -410,11 +412,15 @@ export default {
       this.startTime = -1
       this.getEndTimeStatus = false
       this.getUsetTime()
-      setTimeout(() => {
-        this.getIdoInfo(to.params.id)
-        this.userConnectInfo(to.params.id)
-      },1500)
-      this.inputvalue = ''
+
+      clearInterval(this.routeTTimer)
+      this.routeTTimer = setInterval(() => {
+        if(to.params.id){
+          clearInterval(this.routeTTimer)
+          this.getIdoInfo(to.params.id)
+          this.userConnectInfo(to.params.id)
+        }
+      },1000)
     }
   },
   methods: {
