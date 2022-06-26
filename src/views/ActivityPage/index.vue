@@ -478,6 +478,7 @@ export default {
       }
     },
     getUsetTime () {
+      console.log("倒计时函数")
       clearInterval(this.pageTimer)
       this.pageTimer = setInterval(() => {
         let nowTime = parseInt(new Date().getTime() / 1000)
@@ -525,7 +526,7 @@ export default {
           }
           // console.log("获取到开始时间",this.startTime)
         }
-        // console.log("页面倒计时中")
+        console.log("页面倒计时中")
       },1000)
     },
     getIdoInfo(idoID){
