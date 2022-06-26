@@ -403,10 +403,10 @@ export default {
     },
     $route(to) {
       this.idoID = to.params.id
-      this.countTime = { d: "00", h: "00", m: "00", s: "00" }
-      clearInterval(this.pageTimer)
-      clearInterval(this.countTimeOBJ)
-      clearInterval(this.sellingTimeer)
+      // this.countTime = { d: "00", h: "00", m: "00", s: "00" }
+      // clearInterval(this.pageTimer)
+      // clearInterval(this.countTimeOBJ)
+      // clearInterval(this.sellingTimeer)
       setTimeout(() => {
         this.getIdoInfo(to.params.id)
         this.userConnectInfo(to.params.id)
@@ -486,6 +486,8 @@ export default {
             this.finshed = true
             this.beforeBegin = false//已经到结束时间,状态为false  售卖前
             this.selling = false// 已经到结束时间,状态为false  售卖中
+            clearInterval(this.countTimeOBJ)
+            clearInterval(this.sellingTimeer)
             clearInterval(this.pageTimer)
             return
           }
