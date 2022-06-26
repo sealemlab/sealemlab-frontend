@@ -556,12 +556,10 @@ export default {
           this.getUserOrder() // 获取订单信息
           this.getUserInvite() // 邀请人地址
         }else{
-          // clearInterval(this.counrnull)
-          // clearInterval(this.bondinfo.addtimeobj)
           this.orderArr.forEach(item => {
             clearInterval(item.selfTimeOBJ)
           })
-          // this.bondinfo = this.lastBondInfo
+          this.bondinfo = this.lastBondInfo
           this.loadMoreStatus = false
           this.orderArr = []
           this.bondStatus = true

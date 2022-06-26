@@ -32,7 +32,6 @@ module.exports = {
     : {}, // 生产环境时给css文件添加时间戳，避免浏览器使用旧版css文件
 
   configureWebpack: (config) => {
-    config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
     // 开启分离打包js文件
     config.optimization = {
       runtimeChunk: "single", // 'single': 会生成一个唯一单独的runtime.js文件，就是manifest。
@@ -62,6 +61,7 @@ module.exports = {
           chunkFilename: `js/[name].[chunkhash].js`,
         },
       });
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
     }
   },
 };
