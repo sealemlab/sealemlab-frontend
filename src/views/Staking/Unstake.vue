@@ -52,7 +52,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { stStaking,getSigner } from 'sealemlab-sdk'
+import { stStaking,getSigner,token } from 'sealemlab-sdk'
 import progressBar from './slider.vue'
 export default {
   components:{
