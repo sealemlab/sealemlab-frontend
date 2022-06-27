@@ -417,7 +417,7 @@ export default {
     })
   },
   // 函数防抖
-  antiShakeFun(fn:any,delay:number,args:any){
+  antiShakeFun(fn:any,delay:number){
     let timer:any= null
     return function() {
       // @ts-ignore
@@ -428,7 +428,7 @@ export default {
         clearTimeout(timer)
       }
       timer = setTimeout(function(){
-        fn.apply(that,...args)
+        fn.apply(that)
       },delay)
     }
   },

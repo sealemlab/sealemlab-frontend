@@ -3,7 +3,7 @@
     <div class="home_bgbox">
       <LoadingAnmation v-if="videoStatus"></LoadingAnmation>
       <video class="video_" ref="video" loop autoplay muted v-show="!videoStatus">
-        <source :src="`${$store.state.videoUrl}home_sacredrealm.mp4`" type="video/mp4" />
+        <source :src="`${$store.state.videoUrl}sacredrealm.mp4`" type="video/mp4" />
       </video>
       <div class="content">
         <div class="content_center">
@@ -665,8 +665,8 @@ export default {
         },
         {
           id:3,
-          src:`${this.$store.state.imgUrl}new_smallgame3.webp`,
-          maxSrc:`${this.$store.state.imgUrl}new2_maxgame3.webp`
+          src:`${this.$store.state.imgUrl}new_smallgame_tag1.webp`,
+          maxSrc:`${this.$store.state.imgUrl}maxgame_ag1.webp`
         },
         {
           id:4,
@@ -1576,7 +1576,7 @@ export default {
   right: 5vw;
   top: 100px;
   cursor: pointer;
-  width: 75px;
+  width: 60px;
 }
 @media screen and (max-width: 980px) {
   .home{

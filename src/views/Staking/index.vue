@@ -3,10 +3,25 @@
     <!-- 背景图 -->
     <div class="img_bg font16">
       <img :src="`${$store.state.imgUrl}staking.webp`" class="pc_staking_bg" />
-      <img :src="`${$store.state.imgUrl}mobile_staking.webp`" class="mobile_staking_bg">
-      <span class="span1 font35 mobile_font22" :class="isEnLang ? 'en_heavy' : ''">STAKING</span>
-      <span class="span2 font16 mobile_font12" :class="isEnLang ? 'en_medium' : ''">Sacred Farms offer multiple farming opportunities to you. Get double rewards by staking your ST tokens in return for additional SR tokens and earning high income.</span>
-      <span class="span3 font14 mobile_font12" :class="isEnLang ? 'en_medium' : ''">Learn how to start</span>
+      <img
+        :src="`${$store.state.imgUrl}mobile_staking.webp`"
+        class="mobile_staking_bg"
+      />
+      <span
+        class="span1 font35 mobile_font22"
+        :class="isEnLang ? 'en_heavy' : ''"
+        >{{ $t("message.stake.txt30") }}</span
+      >
+      <span
+        class="span2 font16 mobile_font12"
+        :class="isEnLang ? 'en_medium' : ''"
+        >{{ $t("message.stake.txt31") }}</span
+      >
+      <span
+        class="span3 font14 mobile_font12"
+        :class="isEnLang ? 'en_medium' : ''"
+        >{{ $t("message.stake.txt32") }}</span
+      >
     </div>
     <!-- 数据 -->
     <div class="dataBox">
@@ -15,15 +30,18 @@
           $t(item.title)
         }}</span>
         <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''"
-          >$ {{ item.num | PriceConversion | Thousandths}}</span
+          >$ {{ item.num | PriceConversion | Thousandths }}</span
         >
       </div>
     </div>
     <div class="staking_content_box">
       <div class="out_onebox">
         <div class="onebox">
-          <div class="label font16 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">
-            {{$t("message.stake.txt5")}}
+          <div
+            class="label font16 mobile_font14"
+            :class="isEnLang ? 'en_Bold' : ''"
+          >
+            {{ $t("message.stake.txt5") }}
           </div>
           <div class="out_top_box">
             <div class="top_box">
@@ -33,17 +51,22 @@
                   class="logo_img"
                 />
                 <div class="right_cen">
-                  <span class="font16" :class="isEnLang ? 'en_Bold' : ''"
-                    >{{$t("message.stake.txt6")}}</span
-                  >
-                  <span class="font32 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">{{
-                    poolInfo.totalStaked | PriceConversion | Thousandths
+                  <span class="font16" :class="isEnLang ? 'en_Bold' : ''">{{
+                    $t("message.stake.txt6")
                   }}</span>
+                  <span
+                    class="font32 mobile_font20"
+                    :class="isEnLang ? 'en_Bold' : ''"
+                    >{{
+                      poolInfo.totalStaked | PriceConversion | Thousandths
+                    }}</span
+                  >
                   <span class="font12" :class="isEnLang ? 'en_medium' : ''"
                     >≈ $
                     {{
                       (poolInfo.totalStaked * getUserCoin.stPrice)
-                        | PriceConversion | Thousandths
+                        | PriceConversion
+                        | Thousandths
                     }}</span
                   >
                 </div>
@@ -54,11 +77,13 @@
                     >APY</span
                   >
                   <span class="font16" :class="isEnLang ? 'en_Bold' : ''"
-                    >{{APY | MultiplyBySquare}} %</span
+                    >{{ APY | MultiplyBySquare }} %</span
                   >
                 </div>
                 <div class="left right" @click="viewContract">
-                  <span class="span1 font12">{{$t("message.stake.txt7")}}</span>
+                  <span class="span1 font12">{{
+                    $t("message.stake.txt7")
+                  }}</span>
                   <svg
                     t="1655894703771"
                     class="icon"
@@ -87,35 +112,47 @@
           <!-- 用户的st余额 -->
           <div class="coin">
             <div class="left">
-              <span class="font14" :class="isEnLang ? 'en_medium' : ''"
-                >{{$t("message.stake.txt8")}}</span
-              >
+              <span class="font14" :class="isEnLang ? 'en_medium' : ''">{{
+                $t("message.stake.txt8")
+              }}</span>
               <div class="num">
                 <img
                   :src="`${$store.state.imgUrl}new_stlogo.webp`"
                   class="coin_img"
                 />
-                <span class="font20 mobile_font16" :class="isEnLang ? 'en_Bold' : ''">{{
-                  getUserCoin.st | PriceConversion | Thousandths
-                }}</span>
+                <span
+                  class="font20 mobile_font16"
+                  :class="isEnLang ? 'en_Bold' : ''"
+                  >{{ getUserCoin.st | PriceConversion | Thousandths }}</span
+                >
               </div>
             </div>
-            <div class="btn mobile_font16" :class="isEnLang ? 'en_Bold' : ''" @click="getST">{{$t("message.stake.txt9")}}</div>
+            <div
+              class="btn mobile_font16"
+              :class="isEnLang ? 'en_Bold' : ''"
+              @click="getST"
+            >
+              {{ $t("message.stake.txt9") }}
+            </div>
           </div>
           <!-- 用户质押st -->
           <div class="coin">
             <div class="left">
-              <span class="font14" :class="isEnLang ? 'en_medium' : ''"
-                >{{$t("message.stake.txt10")}}</span
-              >
+              <span class="font14" :class="isEnLang ? 'en_medium' : ''">{{
+                $t("message.stake.txt10")
+              }}</span>
               <div class="num">
                 <img
                   :src="`${$store.state.imgUrl}new_stlogo.webp`"
                   class="coin_img"
                 />
-                <span class="font20 mobile_font16" :class="isEnLang ? 'en_Bold' : ''">{{
-                  poolInfo.userStaked | PriceConversion | Thousandths
-                }}</span>
+                <span
+                  class="font20 mobile_font16"
+                  :class="isEnLang ? 'en_Bold' : ''"
+                  >{{
+                    poolInfo.userStaked | PriceConversion | Thousandths
+                  }}</span
+                >
               </div>
             </div>
             <div class="btn">
@@ -135,9 +172,9 @@
           <!-- 质押st得到的sr -->
           <div class="coin">
             <div class="left">
-              <span class="font14" :class="isEnLang ? 'en_medium' : ''"
-                >{{$t("message.stake.txt11")}}</span
-              >
+              <span class="font14" :class="isEnLang ? 'en_medium' : ''">{{
+                $t("message.stake.txt11")
+              }}</span>
               <div class="num mobile_font16">
                 <img
                   :src="`${$store.state.imgUrl}new_srlogo.webp`"
@@ -164,12 +201,13 @@
               :class="isEnLang ? 'en_Bold' : ''"
               @click="ClaimFun"
             >
-              {{$t("message.stake.txt12")}}
+              {{ $t("message.stake.txt12") }}
               <BtnLoading :isloading="SRBtnLoading"></BtnLoading>
             </div>
           </div>
           <div class="out_btn btn_normal" @click="ClaimSTFun">
-            {{$t("message.stake.txt13")}}<BtnLoading :isloading="STBtnLoading"></BtnLoading>
+            {{ $t("message.stake.txt13")
+            }}<BtnLoading :isloading="STBtnLoading"></BtnLoading>
           </div>
           <p
             class="font12 mobile_font12 tip_"
@@ -185,13 +223,61 @@
           </p>
         </div>
       </div>
-      <div class="out_onebox">
-        <div class="onebox nodata" :class="isEnLang ? 'en_Bold' : ''">
-          <svg t="1655965712914" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3421" width="128" height="128"><path d="M931.392 96v832H96v-832h835.392z m-85.568 88.32H181.504v655.36h664.192l0.128-655.36z m-118.272 236.992l59.776 65.408-234.816 228.992L435.392 601.6 289.728 743.68l-59.776-65.408 205.568-200.448 117.12 114.176 174.976-170.688zM586.368 309.44c34.368 0 62.208 28.8 62.208 64.256s-27.84 64.256-62.208 64.256c-34.368 0-62.208-28.8-62.208-64.256s27.84-64.256 62.208-64.256z" fill="#333333" p-id="3422"></path></svg>
-          <span>{{ $t("message.stake.txt15") }}</span>
+      <div class="out_nodata">
+        <div class="onebox" :class="isEnLang ? 'en_Bold' : ''">
+          <div
+            class="label font16 mobile_font14"
+            :class="isEnLang ? 'en_Bold' : ''"
+          >
+            {{ $t("message.stake.txt5_1") }}
+          </div>
+          <div class="content_nodata">
+            <svg
+              t="1656313087586"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="4604"
+              width="200"
+              height="200"
+            >
+              <path
+                d="M102.4 896a409.6 51.2 0 1 0 819.2 0 409.6 51.2 0 1 0-819.2 0Z"
+                fill="#8F8E8E"
+                opacity=".1"
+                p-id="4605"
+              ></path>
+              <path
+                d="M101.376 817.152c0 8.704 6.656 15.36 15.36 15.36s15.36-6.656 15.36-15.36-6.656-15.36-15.36-15.36c-8.192 0-15.36 7.168-15.36 15.36zM921.6 842.752c-15.36 4.096-18.944 7.168-23.04 23.04-4.096-15.36-7.168-18.944-23.04-23.04 15.36-4.096 18.944-7.68 23.04-23.04 4.096 15.36 7.168 18.944 23.04 23.04zM276.48 136.704c-19.456 5.12-23.552 9.216-29.184 29.184-5.12-19.456-9.216-23.552-29.184-29.184 19.456-5.12 23.552-9.216 29.184-29.184 5.632 19.456 9.728 23.552 29.184 29.184zM182.272 765.44c-21.504 5.632-26.112 10.24-31.744 31.744-5.632-21.504-10.24-26.112-31.744-31.744 21.504-5.632 26.112-10.24 31.744-31.744 6.144 21.504 10.752 26.112 31.744 31.744zM215.04 197.12c-39.936 10.24-48.128 18.944-58.88 58.88-10.24-39.936-18.944-48.128-58.88-58.88 39.936-10.24 48.128-18.944 58.88-58.88 10.24 39.424 18.944 48.128 58.88 58.88z"
+                fill="#8F8E8E"
+                opacity=".5"
+                p-id="4606"
+              ></path>
+              <path
+                d="M760.32 473.088v4.608l37.376 35.84 145.92-71.168-131.584 84.48v41.472l20.992-20.48v-0.512l0.512 0.512 20.992 20.48L967.68 430.592v-5.12z"
+                fill="#8F8E8E"
+                opacity=".2"
+                p-id="4607"
+              ></path>
+              <path
+                d="M768 808.96h-35.84v-77.824c0-83.456-48.128-159.232-120.832-196.096 72.704-36.864 120.832-113.152 120.832-196.096V261.12h35.84c8.704 0 15.36-6.656 15.36-15.36s-6.656-15.36-15.36-15.36H256c-8.704 0-15.36 6.656-15.36 15.36s6.656 15.36 15.36 15.36h35.84v77.824c0 83.456 48.128 159.232 120.832 196.096-72.704 36.864-120.832 113.152-120.832 196.096V808.96h-35.84c-8.704 0-15.36 6.656-15.36 15.36s6.656 15.36 15.36 15.36h512c8.704 0 15.36-6.656 15.36-15.36s-6.656-15.36-15.36-15.36z m-445.44 0v-77.824c0-83.456 55.808-158.208 135.68-181.76 6.656-2.048 10.752-7.68 10.752-14.848s-4.608-12.8-10.752-14.848C378.368 496.64 322.56 421.888 322.56 338.944V261.12h378.88v77.824c0 83.456-55.808 158.208-135.68 181.76-6.656 2.048-10.752 7.68-10.752 14.848s4.608 12.8 10.752 14.848c79.872 23.552 135.68 98.304 135.68 181.76v76.8H322.56z"
+                fill="#8F8E8E"
+                opacity=".5"
+                p-id="4608"
+              ></path>
+              <path
+                d="M662.528 701.44H517.12V497.152l38.912-11.264c56.832-16.896 98.304-65.536 108.032-122.368H360.448c9.728 57.344 51.2 105.472 108.032 122.368l38.912 11.264V701.44H361.472c-2.048 9.728-3.072 19.968-3.072 29.696v41.984h307.2v-41.984c0-9.728-1.024-19.968-3.072-29.696z"
+                fill="#8F8E8E"
+                opacity=".2"
+                p-id="4609"
+              ></path>
+            </svg>
+            <span class="font12" :class="isEnLang ? 'en_medium' : ''">{{ $t("message.stake.txt15") }}</span>
+          </div>
         </div>
       </div>
-      <div class="out_nodata"></div>
+      <div class="seize_a_seat"></div>
     </div>
     <StakedProup
       :totalStaked="poolInfo.totalStaked"
@@ -215,10 +301,10 @@ import MessageBox from "@/views/Bond/MessageBox.vue";
 import StakedProup from './StakeProup.vue'
 import { stStaking, token, contract, getSigner, stStakingInfo, bondDepository } from 'sealemlab-sdk'
 export default {
-  computed: { ...mapGetters(["getProduction","getAccountStatus", "getAccount", "getIsMobile", "getIstrue", "getNoticeNum", "isEnLang", "getUserCoin"]), },
+  computed: { ...mapGetters(["getProduction", "getAccountStatus", "getAccount", "getIsMobile", "getNoticeNum", "isEnLang", "getUserCoin"]), },
   data () {
     return {
-      APY:0,
+      APY: 0,
       userTaxRate: 0,
       endValue: 0,
       openPoolStatus: false,
@@ -244,34 +330,33 @@ export default {
       setIntervalOBJ: null,
       stakedStatus: false,
       userSrYieldTimer: null,
-      rate:0 // 用户的质押利率
+      rate: 0, // 用户的质押利率
+      approveTimer: null
     }
   },
   components: {
     MessageBox, StakedProup
   },
   watch: {
-    'getIstrue': {
-      handler: function (newValue) {
-        if (newValue) {
-          this.allLoading = true
-          setTimeout(() => {
-            this.isApproveFun()
-          }, 1500)
-        } else {
-          this.allLoading = this.srLoading = false
-          clearInterval(this.userSrYieldTimer)
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
     'getAccountStatus': {
       handler: function (newValue) {
-        if (newValue == 0) {
+        if (newValue == -1 || newValue == undefined) {
+          this.allLoading = this.srLoading = false
+          clearInterval(this.userSrYieldTimer)
+        } else if (newValue == 0) {
+          this.allLoading = true
           this.getUserInfo()
           this.getCurrencyETFun()
+          this.isApproveFun()
         } else if (newValue > 0) {
+          // Object.assign(this.poolInfo,{
+          //   userStaked: 0,
+          //   userClaimSR: 0
+          // })
+          this.poolInfo.userStaked = 0
+          this.poolInfo.userClaimSR = 0
+          this.isApproveFun()
+          this.allLoading = true
           this.$utils.antiShakeFun(() => {
             this.getUserInfo()
             this.getCurrencyETFun()
@@ -296,14 +381,24 @@ export default {
     },
     // 判断授权
     isApproveFun () {
-      this.$refs.mychild.isApproveFun(token().ST, contract().STStaking).then((res) => {
-        if (res) {
-          this.isapprove = true;
-        } else {
-          this.isapprove = false;
+      clearInterval(this.approveTimer)
+      this.approveTimer = setInterval(() => {
+        if (this.$refs.mychild) {
+          clearInterval(this.approveTimer)
+          this.$refs.mychild.isApproveFun(token().ST, contract().STStaking).then((res) => {
+            console.log('是否授权res: ', res);
+            if (res) {
+              this.isapprove = true;
+            } else {
+              this.isapprove = false;
+            }
+            this.allLoading = false
+          }).catch(() => {
+            this.isapprove = this.allLoading = false
+          })
         }
-        this.allLoading = false
-      })
+        // console.log("判断授权函数",this.$refs.mychild)
+      }, 1000)
     },
     // 去授权
     sonapprove () {
@@ -312,6 +407,7 @@ export default {
       this.buy_isloading = true;
       this.$refs.mychild.goApproveFun(token().ST, contract().STStaking)
         .then((res) => {
+          console.log('授权结果res: ', res);
           this.buy_isloading = false;
           if (res) {
             this.isapprove = true;
@@ -339,9 +435,9 @@ export default {
         this.openPoolStatus = res
       })
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
-      stStakingInfo.getApr(this.getUserCoin.stPrice,this.$store.state.srPrice).then(res => {
+      stStakingInfo.getApr(this.getUserCoin.stPrice, this.$store.state.srPrice).then(res => {
         console.log('获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%res: ', res);
-        this.APY = Math.pow((1 + res / 100 / 365),365) - 1
+        this.APY = Math.pow((1 + res / 100 / 365), 365) - 1
       }).catch(() => {
         this.APY = 0
       })
@@ -355,14 +451,14 @@ export default {
     getUserInfo () {
       // 获取某用户的质押的ST数量
       stStaking().userStakedST(this.getAccount).then(res => {
-        // console.log('获取某用户的质押的ST数量: ', res);
-        if(res / 1e18 <= 1e-8){
+        console.log('获取某用户的质押的ST数量: ', res);
+        if (res / 1e18 <= 1e-8) {
           this.poolInfo.userStaked = 0
-        }else{
+        } else {
           this.poolInfo.userStaked = res / 1e18
         }
       })
-      
+
       // 获取用户总SR奖励数量（已提取+可提取）
       stStaking().getTokenTotalRewards(this.getAccount).then(res => {
         // console.log('获取用户总SR奖励数量（已提取+可提取）: ', res);
@@ -453,10 +549,10 @@ export default {
         this.STBtnLoading = false
       })
     },
-    getST(){
+    getST () {
       window.open(`https://pancakeswap.finance/swap?outputCurrency=${token().ST}`)
     },
-    viewContract(){
+    viewContract () {
       window.open(`${this.$store.state.BSC_BROWSER}${token().ST}`)
     }
   },
@@ -479,7 +575,7 @@ export default {
       width: 100%;
       min-height: 350px;
     }
-    .mobile_staking_bg{
+    .mobile_staking_bg {
       display: none;
     }
     .span1 {
@@ -499,7 +595,7 @@ export default {
       top: 45%;
       max-width: 40vw;
       font-weight: 500;
-      color: #CED3D9;
+      color: #ced3d9;
       line-height: 22px;
     }
     .span3 {
@@ -507,7 +603,7 @@ export default {
       left: 5vw;
       top: 66%;
       font-weight: 500;
-      color: #ECCF83;
+      color: #eccf83;
       cursor: pointer;
       line-height: 16px;
     }
@@ -562,16 +658,6 @@ export default {
         rgba(237, 213, 180, 0.13) 68%,
         rgba(131, 102, 77, 0.21) 100%
       );
-      .nodata{
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        color: #8F8E8E;
-        line-height: 22px;
-        span{
-          margin-top: 14px;
-        }
-      }
       .onebox {
         width: 100%;
         height: 100%;
@@ -660,7 +746,7 @@ export default {
                   margin-right: 31px;
                 }
               }
-              .right{
+              .right {
                 cursor: pointer;
               }
             }
@@ -745,7 +831,51 @@ export default {
         }
       }
     }
-    .out_nodata{
+    .out_nodata {
+      width: 344px;
+      height: 539px;
+      padding: 2px;
+      border-radius: 12px;
+      background: linear-gradient(
+        135deg,
+        rgba(149, 127, 93, 0.19) 0%,
+        rgba(226, 202, 169, 0.58) 46%,
+        rgba(237, 213, 180, 0.13) 68%,
+        rgba(131, 102, 77, 0.21) 100%
+      );
+      .onebox {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        background: linear-gradient(132deg, #0e0e0e 0%, #0b0a0a 100%);
+        .label {
+          width: 135px;
+          height: 31px;
+          background: linear-gradient(311deg, rgba(151, 150, 145, 0) 0%, #3E3E3C 100%);
+          backdrop-filter: blur(0px);
+          font-weight: bold;
+          color: #8F8E8E;
+          line-height: 31px;
+          text-align: center;
+          margin-left: -1px;
+        }
+        .content_nodata{
+          width: 100%;
+          padding-top: 50px;
+          // height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          span{
+            color: #8F8E8E;
+          }
+        }
+      }
+    }
+    .seize_a_seat{
       width: 344px;
     }
   }
@@ -760,7 +890,7 @@ export default {
       .pc_staking_bg {
         display: none;
       }
-      .mobile_staking_bg{
+      .mobile_staking_bg {
         display: block;
         width: 100%;
       }
@@ -781,15 +911,15 @@ export default {
         top: 25%;
         max-width: 80vw;
         font-weight: 500;
-        color: #CED3D9;
+        color: #ced3d9;
         line-height: 0.15rem;
       }
       .span3 {
         position: absolute;
         left: 5vw;
-        top:75%;
+        top: 75%;
         font-weight: 500;
-        color: #ECCF83;
+        color: #eccf83;
         cursor: pointer;
         line-height: 0.12rem;
       }
@@ -837,7 +967,7 @@ export default {
         width: 90%;
         margin: 0 auto;
         margin-bottom: 0.2rem;
-        height:auto;
+        height: auto;
         min-height: 4.2rem;
         padding: 2px;
         border-radius: 0.12rem;
@@ -848,21 +978,11 @@ export default {
           rgba(237, 213, 180, 0.13) 68%,
           rgba(131, 102, 77, 0.21) 100%
         );
-        .nodata{
-          justify-content: center;
-          align-items: center;
-          font-weight: bold;
-          color: #8F8E8E;
-          line-height: 22px;
-          span{
-            margin-top: 14px;
-          }
-        }
         .onebox {
           width: 100%;
           min-height: 4.2rem;
           border-radius: 0.12rem;
-          padding:0 0.06rem;
+          padding: 0 0.06rem;
           background: linear-gradient(132deg, #0e0e0e 0%, #0b0a0a 100%);
           display: flex;
           flex-direction: column;
@@ -919,7 +1039,7 @@ export default {
                     }
                     &:nth-child(3) {
                       font-weight: 500;
-                      color: #8F8E8E;
+                      color: #8f8e8e;
                     }
                   }
                 }
@@ -1029,7 +1149,52 @@ export default {
           }
         }
       }
-      .out_nodata{
+      .out_nodata {
+        width: 90%;
+        margin: 0 auto;
+        height: 4.58rem;
+        // min-height: 4.58rem;
+        padding: 2px;
+        border-radius: 0.12rem;
+        background: linear-gradient(
+          135deg,
+          rgba(149, 127, 93, 0.19) 0%,
+          rgba(226, 202, 169, 0.58) 46%,
+          rgba(237, 213, 180, 0.13) 68%,
+          rgba(131, 102, 77, 0.21) 100%
+        );
+        .onebox {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          border-radius: 12px;
+          background: linear-gradient(132deg, #0e0e0e 0%, #0b0a0a 100%);
+          .label {
+            width: 0.87rem;
+            height: 0.23rem;
+            background: linear-gradient(311deg, rgba(151, 150, 145, 0) 0%, #3E3E3C 100%);
+            backdrop-filter: blur(0px);
+            font-weight: bold;
+            color: #8F8E8E;
+            line-height: 0.23rem;
+            text-align: center;
+            margin-left: 0;
+          }
+          .content_nodata{
+            width: 100%;
+            padding-top: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            span{
+              color: #8F8E8E;
+            }
+          }
+        }
+      }
+      .seize_a_seat{
         display: none;
       }
     }

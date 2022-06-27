@@ -235,7 +235,7 @@ export default {
     },
     // 预计用户质押的st收益
     expectedIncome(){
-      console.log('this.$store.state.srPrice: ', this.$store.state.srPrice)
+      // console.log('this.$store.state.srPrice: ', this.$store.state.srPrice)
       stStakingInfo.getSRValuePerYear(this.$store.state.srPrice).then(res => {
         console.log('一年产出价值 ', res,this.totalStaked);
         this.yearValue = res

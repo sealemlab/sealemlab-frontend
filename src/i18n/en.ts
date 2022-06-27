@@ -907,6 +907,7 @@ export const message = {
     txt3:'Total earned',
     txt4:'Most staked time',
     txt5:'ST POOL',
+    txt5_1:'Later',
     txt6:'Total staked',
     txt7:'View Contract',
     txt8:'Available ST',
@@ -933,7 +934,10 @@ export const message = {
     txt27:'Staking...',
     txt28:'Stake Success',
 
-    txt29:'Insufficient balance'
+    txt29:'Insufficient balance',
+    txt30:'STAKING',
+    txt31:'Sacred Farms offer multiple farming opportunities to you. Get double rewards by staking your ST tokens in return for additional SR tokens and earning high income.',
+    txt32:'Learn how to start'
   },
   
   tip: {
