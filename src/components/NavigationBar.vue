@@ -16,7 +16,7 @@
         <img :src="`${$store.state.imgUrl}new_stlogo.webp`" class="st_price_img" />
         <span class="font_price font16">$ {{getUserCoin.stPrice | PriceConversion(2)}}</span>
       </div>
-      <div class="login_box" v-if="!getProduction">
+      <div class="login_box">
         <div class="font_login font16" :class="{ active: navActive == 7 }" @click="loginClick('myaccout')" v-if="getLogin.loginStatus">
           {{ $t("message.nav.txt8") }}
         </div>
@@ -25,9 +25,8 @@
           <span @click="loginClick('login')">{{ $t("message.nav.txt8_2") }}</span>
         </div>
       </div>
-      <div class="login_box" v-else></div>
       <!-- 链接钱包 -->
-      <div class="walletBox font16">
+      <div class="walletBox font16" v-if="getIstrue">
         <div class="connect_triangle">
           <span class="span2">{{ getSubtringAccount }}</span>
           <span class="connect_icon"></span>
@@ -41,6 +40,7 @@
           </div>
         </div>
       </div>
+      <div class="walletBox font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div>
       <!-- <div class="connect font16" v-if="getIstrue">{{getSubtringAccount}}</div>
       <div class="connect font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div> -->
       <div class="lang_box mobile_lang">
