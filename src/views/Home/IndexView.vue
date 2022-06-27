@@ -903,6 +903,7 @@ export default {
     position: relative;
     width: 100vw;
     height: 100vh;
+    padding-top: 80px;
     .video_{
       width: 100vw;
       height: 100vh;
@@ -1636,6 +1637,7 @@ export default {
     .home_bgbox{
       height: auto;
       min-height:0;
+      padding-top: 0;
       .video_{
         width: 100%;
         height: auto;

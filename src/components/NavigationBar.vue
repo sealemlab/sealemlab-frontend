@@ -27,7 +27,7 @@
       </div>
       <div class="login_box" v-else></div>
       <!-- 链接钱包 -->
-      <div class="walletBox font16" v-if="getIstrue">
+      <div class="walletBox font16">
         <div class="connect_triangle">
           <span class="span2">{{ getSubtringAccount }}</span>
           <span class="connect_icon"></span>
@@ -41,7 +41,6 @@
           </div>
         </div>
       </div>
-      <div class="walletBox font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div>
       <!-- <div class="connect font16" v-if="getIstrue">{{getSubtringAccount}}</div>
       <div class="connect font16" v-else @click="commonLink">{{ $t("message.nav.txt9") }}</div> -->
       <div class="lang_box mobile_lang">
