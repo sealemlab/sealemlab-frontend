@@ -196,7 +196,9 @@
             <span v-if="nowPriceStatus"> 1 ST = {{nowPrice | PriceConversion}} BUSD</span>
             <BtnLoading :isloading="true" v-else></BtnLoading>
           </p>
-          <p>{{ $t("message.acticePage.txt18") }} {{userRemaining | PriceConversion(2)}} ST / {{userBuyMax | PriceConversion(2)}} ST</p>
+          <p>{{ $t("message.acticePage.txt18") }} 1250 ST</p>
+          <!-- 废弃需求 -->
+          <!-- <p>{{ $t("message.acticePage.txt18") }} {{userRemaining | PriceConversion(2)}} ST / {{userBuyMax | PriceConversion(2)}} ST</p> -->
         </div>
         <div
           class="box2 box1 font16 mobile_font16"

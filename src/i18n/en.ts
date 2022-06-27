@@ -850,7 +850,7 @@ export const message = {
     txt7:"Who can join the presale?",
     txt8:"Anyone in whitelist.",
     txt9:"How much ST can I buy?",
-    txt9_1:"No more than 20000 BUSD.",
+    txt9_1:"No more than 1250 ST.",
     txt10:"What can I do when i gain ST?",
     txt11:"Staking, buy bond and mystery box.",
     txt12:"More information?",
