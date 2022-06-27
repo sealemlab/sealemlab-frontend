@@ -305,8 +305,8 @@ export default {
     },
     // 售卖完
     outStatus(){
-      this.beforeBegin = false// 开始售卖前
-      this.selling = false // 售卖中
+      // this.beforeBegin = false// 开始售卖前
+      // this.selling = false // 售卖中
       return this.arr[0].num == this.arr[2].num 
     }
   },

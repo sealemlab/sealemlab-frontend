@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import store from "../store/index";
 Vue.use(VueRouter);
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location: any) {
@@ -146,16 +145,4 @@ const routes: Array<RouteConfig> = [
 const router = new VueRouter({
   routes,
 });
-
-// router.beforeEach((to: any, from: any, next: any) => {
-//   if (to.path.indexOf("/myaccount/") !== -1) {
-//     if (store.state.userInfo.loginStatus) {
-//       next();
-//     } else {
-//       next("/signin/login");
-//     }
-//   } else {
-//     next();
-//   }
-// });
 export default router;

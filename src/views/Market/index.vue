@@ -1593,17 +1593,16 @@ export default {
   watch: {
     'getAccountStatus': {
       handler: function (newValue) {
-        if (newValue == -1 || newValue == undefined) {
-        } else if (newValue == 0) {
+        if (newValue == 0) {
           this.loadMoreStatus = true
-          this.integrationBoxAnsNft('nft') // 获取用户的nft跟盒子
+          this.integrationBoxAnsNft() // 获取用户的nft跟盒子
           this.isApproveFunPage() // 是否授权
         } else if (newValue > 0) {
           this.loadMoreStatus = true
           localStorage.removeItem('nftInfo')
           this.nftArr = []
           this.$utils.antiShakeFun(() => {
-            this.integrationBoxAnsNft('nft')
+            this.integrationBoxAnsNft()
             this.isApproveFunPage()
           }, 2000)()
         }
@@ -2193,33 +2192,7 @@ export default {
       this.orderStatus = false
     },
     // 整合盲盒数据跟nft数据
-    integrationBoxAnsNft (type) {
-      // // this.nftArr = []
-      // if(type == 'nft'){
-      //   let userNftArr = JSON.parse(localStorage.getItem("nftInfo"))
-      //   if(userNftArr){
-      //     sn().tokensOfOwnerBySize(this.getAccount, 0, 100000000).then(res2 => {
-      //       if(userNftArr.length != res2[0].length){
-      //         this.$utils.getUserBindbox(this.getAccount, 0, 10000000).then(res3 => {
-      //           this.userNftAndBoxArr = res3
-      //         })
-      //       }else{
-      //         this.userNftAndBoxArr = userNftArr
-      //       }
-      //     })
-      //   }
-      // }else if(type == 'box'){
-      //   let userBoxArr = JSON.parse(sessionStorage.getItem("setBoxInfo"))
-      //   if(userBoxArr){
-      //     this.userNftAndBoxArr = userBoxArr
-      //   }else{
-      //     this.userNftAndBoxArr = []
-      //   }
-      // }
-
-
-
-
+    integrationBoxAnsNft () {
       this.userNftAndBoxArr = []
       let userBoxArr = JSON.parse(sessionStorage.getItem("setBoxInfo"))
       let userNftArr = JSON.parse(localStorage.getItem("nftInfo"))
@@ -2310,8 +2283,7 @@ export default {
           this.busdApprove = false
           this.busdallLoading = false
         }
-      }).catch(err => {
-        // console.log('11err: ', err);
+      }).catch(() => {
         this.busdApprove = false
         this.busdallLoading = false
       })
@@ -2324,8 +2296,7 @@ export default {
           this.stApprove = false
           this.stallLoading = false
         }
-      }).catch(err => {
-        // console.log('22err: ', err);
+      }).catch(() => {
         this.stApprove = false
         this.stallLoading = false
       })
@@ -2416,8 +2387,8 @@ export default {
         this.arr2[3].num = res.data.counters[0].transactions
         this.arr2[2].num = res.data.counters[0].items
         this.arr2[0].num = res.data.counters[0].volume / 1e18
-      }).catch(err => {
-        console.log('市场统计信息err: ', err);
+      }).catch(() => {
+        console.log('市场统计信息err: ');
       })
     }
   },
