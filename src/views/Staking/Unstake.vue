@@ -1,17 +1,17 @@
 <template>
-  <div class="stake_proup" v-if="stakedStatus">
+  <div class="stake_proup" v-if="unStakedStatus">
     <div class="proup_boxs">
-      <p class="propu_title_txt font24 mobile_font18" :class="isEnLang?'en_Bold':''">{{$t("message.stake.txt16")}}</p>
+      <p class="propu_title_txt font24 mobile_font18" :class="isEnLang?'en_Bold':''">{{$t("message.stake.txt33")}}</p>
       <img :src="`${$store.state.imgUrl}close.webp`" class="close_img" @click.stop="closeProup"/>
       <div class="box">
-        <p class="title font14 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t("message.stake.txt17") }}</p>
+        <p class="title font14 mobile_font14" :class="isEnLang?'en_Bold':''">{{ $t("message.stake.txt34") }}</p>
         <div class="inputbox">
           <div class="inputdiv" :class="isEnLang?'en_Bold':''">
             <Input :isright="true" :modelValue="STmsg" type="number" :placeholder='$t("message.bond.txt23")' @input="inputClick"></Input>
           </div>
           <p :class="isEnLang?'en_Bold':''">≈ $ {{STmsg * getUserCoin.stPrice | PriceConversion | Thousandths}}</p>
         </div>
-        <p class="balance" :class="isEnLang?'en_medium':''">{{$t("message.acticePage.txt16")}}: {{getUserCoin.st | PriceConversion | Thousandths}} ST</p>
+        <p class="balance" :class="isEnLang?'en_medium':''">{{$t("message.acticePage.txt16")}}: {{ userStaked | PriceConversion | Thousandths}} ST</p>
         <!-- 滑动块 -->
         <div class="line_onebox font16 mobile_font14">
           <div class="btns">
@@ -24,32 +24,27 @@
           <div class="onebox" :class="{activeClass:index == IndexPage}" v-for="(item,index) in arr" :key="index" @click="selectFun(item)">{{item}}%</div>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>{{ $t("message.stake.txt17") }}</span>
-          <span>$ {{STmsg * getUserCoin.stPrice | PriceConversion | Thousandths}}</span>
+          <span class="has_question_icon">{{ $t("message.stake.txt36") }}</span>
+          <span>{{userTaxRate}} %</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>APY</span>
-          <span>{{APY | MultiplyBySquare}} %</span>
+          <span>{{ $t("message.stake.txt37") }}</span>
+          <span>{{twenty | PriceConversion }} d</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>{{ $t("message.stake.txt18") }}</span>
-          <span>$ {{sevenDays | PriceConversion}}</span>
+          <span>{{ $t("message.stake.txt38") }}</span>
+          <span>{{ten | PriceConversion}} d</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>{{ $t("message.stake.txt19") }}</span>
-          <span>$ {{fourteenDays | PriceConversion}}</span>
+          <span>{{ $t("message.stake.txt39") }}</span>
+          <span>{{zero | PriceConversion}} d</span>
         </div>
-        <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>{{ $t("message.stake.txt20") }}</span>
-          <span>$ {{thirtyDays | PriceConversion}}</span>
+        <div class="stake_btn font18" :class="isEnLang?'en_Bold':''" @click="userUnStakedFun">
+          {{ $t("message.stake.txt35") }}
+          <BtnLoading :isloading="userUnStakedLoading"></BtnLoading>
         </div>
-        <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>{{ $t("message.stake.txt21") }}</span>
-          <span>{{additionalTaxRate | MultiplyBySquare}} %</span>
-        </div>
-        <div class="stake_btn font18" :class="isEnLang?'en_Bold':''" @click="userStakedFun">
-          {{ $t("message.stake.txt1") }}
-          <BtnLoading :isloading="userStakedLoading"></BtnLoading>
+        <div class="btn_tip font12" :class="isEnLang?'en_medium':''">
+          <span>{{ $t("message.stake.txt40") }}</span>
         </div>
       </div>
     </div>
@@ -57,7 +52,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { stStaking,token,getSigner,stStakingInfo } from 'sealemlab-sdk'
+import { stStaking,getSigner } from 'sealemlab-sdk'
 import progressBar from './slider.vue'
 export default {
   components:{
@@ -65,22 +60,25 @@ export default {
   },
   computed: {
     ...mapGetters(["getProduction","isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
-    additionalTaxRate(){ // 用户已经购买额加上即将要购买额是否超过额定额度(每1000增加0.1%---(0.001))
-      let num = Math.floor( (Number(this.STmsg) * this.getUserCoin.stPrice ) / 1000) * 0.001
-      return num + this.rate
+    twenty(){
+      if(this.userTaxRate >= 20){
+        console.log('this.userTaxRate - 20: ', this.userTaxRate - 20);
+        return Number((this.userTaxRate - Number(20)) / 0.1).toFixed(2)
+      }
+      return 0
     },
-    sevenDays(){
-      return Number(this.interestInfo.sevenDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 7 ) / 365)
+    ten(){
+      if(this.userTaxRate >= 10){
+        return Number((this.userTaxRate - Number(10)) / 0.1).toFixed(2)
+      }
+      return 0
     },
-    fourteenDays(){
-      return Number(this.interestInfo.fourteenDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 14 ) / 365)
-    },
-    thirtyDays(){
-      return Number(this.interestInfo.thirtyDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 30) / 365)
+    zero(){
+      return Number(this.userTaxRate / 0.1).toFixed(2)
     }
   },
   watch:{
-    'stakedStatus'(newvala){
+    'unStakedStatus'(newvala){
       if(newvala){
         document.body.style.overflow='hidden'
       }else{
@@ -90,10 +88,10 @@ export default {
     'getAccountStatus': {
       handler: function (newValue) {
         if (newValue == 0) {
-          this.getUserROI()
+          this.getUserStaked()
         } else if (newValue > 0) {
           this.$utils.antiShakeFun(() => {
-            this.getUserROI()
+            this.getUserStaked()
           }, 2000)()
         }
       },
@@ -102,148 +100,102 @@ export default {
     },
   },
   props: {
-    stakedStatus: {
+    unStakedStatus: {
       type: Boolean,
       default: false
-    },
-    openPoolStatus: {
-      type: Boolean,
-      default: false
-    },
-    APY:{
-      type: Number,
-      default: 0
-    },
-    rate:{
-      type: Number,
-      default: 0
-    },
-    totalStaked:{
-      type: Number,
-      default: 0
-    },
+    }
   },
   data(){
     return {
       passValue:0, // 给滑块传的值
-      userReadyStaked:false,
-      userStakedLoading:false,
+      userUnstakedSuccess:false,
+      userUnStakedLoading:false, // 解除质押按钮loading
       IndexPage:-1,
       arr:[25,50,75,100],
       STmsg:'',
       sliderValue:0,// 拖动条value
-      interestInfo:{
-        sevenDays:0,
-        fourteenDays:0,
-        thirtyDays:0
-      },
-      yearValue:0
+      userStaked:0,//用户质押数量
+      userTaxRate:0,//提现税率
     }
   },
   methods: {
     inputFun(data){
-      if(this.getUserCoin.st < 1e-8){
-        this.sliderValue = 0
-        this.STmsg = 0
-      }else{
-        this.sliderValue = data
-        let nums = this.getUserCoin.st * (data / 100)
-        this.STmsg = this.$utils.getBit(nums,8)
-      }
+      this.sliderValue = data
+      let nums = this.userStaked * (data / 100)
+      this.STmsg = this.$utils.getBit(nums,8)
     },
     inputClick(data){
-      if(Number(this.getUserCoin.st) < Number(1e-8)){
-        this.STmsg = 0
-      }else if(Number(data) > Number(this.getUserCoin.st)){
-        this.STmsg = this.$utils.getBit(this.getUserCoin.st,8)
-        // console.log('this.STmsg: ', this.STmsg);
+      if(Number(data) > Number(this.userStaked)){
+        this.STmsg = this.$utils.getBit(this.userStaked,8)
       }else{
         this.STmsg = this.$utils.getBit(data,8)
       }
-      console.log("this.sevenDays",this.sevenDays)
     },
-    userStakedFun(){
-      if(!this.openPoolStatus){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt24'}));
-        return
-      }
-      if(this.userStakedLoading)return
-      if(this.getUserCoin.st < 0){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt25'}));
+    userUnStakedFun(){
+      if (this.userStaked == 0) {
+        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': '没有质押,无需解除' }));
         return
       }
       if(!this.STmsg){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt26'}));
+        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': '请输入要解压的st数量' }));
         return
       }
-        // console.log('Number(this.STmsg): ', Number(this.STmsg));
-        // console.log('Number(this.getUserCoin.st): ', Number(this.getUserCoin.st));
-      if(Number(this.STmsg) > Number(this.getUserCoin.st)){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt29'}));
-        return
-      }
-      this.userStakedLoading = true
-      stStaking().connect(getSigner()).deposit(this.$utils.convertNormalToBigNumber(this.STmsg, 18),localStorage.getItem('Invitee')).then(async res => {
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt27','link':res.hash}));
-        this.$store.commit("setProgressInfo", JSON.stringify({'speed':50}));
+      if (this.userUnStakedLoading) return
+      this.userUnStakedLoading = true
+      let subNum = this.$utils.getBit(this.STmsg, 8)
+      stStaking().connect(getSigner()).withdraw(this.$utils.convertNormalToBigNumber(subNum, 18)).then(async res => {
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'解除中....','link':res.hash}));
+        this.$store.commit("setProgressInfo", JSON.stringify({'speed':30}));
         const etReceipt = await res.wait();
-        if(etReceipt.status == 1){
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
-          this.userStakedLoading = false
-          this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
+        if (etReceipt.status == 1) {
+          this.userUnstakedSuccess = true
           this.STmsg = ''
           this.passValue = 0
-          // console.log('this.passValue: ', this.passValue);
           this.sliderValue = 0
-          this.userReadyStaked = true
-          this.getUserROI()
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt28'}));
-        }else{
-          this.userStakedLoading = false
+          this.userUnStakedLoading = false
+          this.getUserStaked()
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
+          this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
+          this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': '解除成功' }));
+          
+        } else {
+          this.userUnStakedLoading = false
         }
       }).catch(() => {
-        this.userStakedLoading = false
+        this.userUnStakedLoading = false
       })
     },
     selectFun(item){
       this.passValue = item
       this.sliderValue = item
-      if(Number(this.getUserCoin.st) < 1e-8){
+      if(Number(this.userStaked) < 1e-8){
         this.STmsg = 0
       }else{
-        let nums = this.getUserCoin.st * (item / 100)
-        // console.log('nums: ', nums);
+        let nums = this.userStaked * (item / 100)
         this.STmsg = this.$utils.getBit(nums,8)
       }
-      console.log('this.sevenDays',this.sevenDays)
     },
     closeProup(){
       this.sliderValue = 0
       this.IndexPage = -1
       this.STmsg = ''
-      this.$emit('close',this.userReadyStaked)
+      this.$emit('closeUnstake',this.userUnstakedSuccess)
     },
-    // 获取用户ROI
-    getUserROI(){
-      // 获取质押池用户ROI（用户年度投资回报率），需要在返回结果前面加上$
-      stStakingInfo.getRoi(this.getAccount,this.$store.state.srPrice).then(res => {
-        console.log('获取质押池用户ROI（用户年度投资回报率），需要在返回结果前面加上$res: ', res);
-        this.interestInfo.sevenDays = 7 / 365 * res
-        this.interestInfo.fourteenDays = 14 / 365 * res
-        this.interestInfo.thirtyDays = 30 / 365 * res
+    getUserStaked(){
+      stStaking().userStakedST(this.getAccount).then(res => {
+        console.log('获取某用户的质押的ST数量: ', res);
+        if (res / 1e18 <= 1e-8) {
+          this.userStaked = 0
+        } else {
+          this.userStaked = Number(res / 1e18)
+        }
       })
-    },
-    // 预计用户质押的st收益
-    expectedIncome(){
-      // console.log('this.$store.state.srPrice: ', this.$store.state.srPrice)
-      stStakingInfo.getSRValuePerYear(this.$store.state.srPrice).then(res => {
-        console.log('一年产出价值 ', res,this.totalStaked);
-        this.yearValue = res
+      // 获取用户提现时要扣的税率
+      stStaking().getUserTaxRate(this.getAccount).then(res => {
+        this.userTaxRate = res / 100
+        console.log('this.userTaxRate: ', this.userTaxRate);
       })
     }
-  },
-  mounted(){
-    this.expectedIncome()
   }
 }
 </script>
@@ -389,12 +341,20 @@ export default {
     background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
     border-radius: 4px;
     backdrop-filter: blur(14px);
-    margin: 40px auto;
+    margin: 40px auto 0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 600;
     color: #000000;
+  }
+  .btn_tip{
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+    color: #8F8E8E;
+    line-height: 14px;
+    margin-top: 17px;
   }
 }
 .box::-webkit-scrollbar {

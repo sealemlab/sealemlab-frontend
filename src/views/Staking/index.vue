@@ -37,6 +37,7 @@
     <div class="staking_content_box">
       <div class="out_onebox">
         <div class="onebox">
+          <!-- 池子名字 -->
           <div
             class="label font16 mobile_font14"
             :class="isEnLang ? 'en_Bold' : ''"
@@ -71,14 +72,41 @@
                   >
                 </div>
               </div>
+              <!-- APY -->
               <div class="line_txt">
                 <div class="left">
-                  <span class="font16 span2" :class="isEnLang ? 'en_Bold' : ''"
+                  <span
+                    @click="AddQuesFun('message.stake.txt14_1', $event)"
+                    class="page_has_question_icon font16 span2"
+                    :class="isEnLang ? 'en_Bold' : ''"
                     >APY</span
                   >
-                  <span class="font16" :class="isEnLang ? 'en_Bold' : ''"
-                    >{{ APY | MultiplyBySquare }} %</span
-                  >
+                  <p>
+                    <span class="font16" :class="isEnLang ? 'en_Bold' : ''"
+                      >{{ APY | MultiplyBySquare }} %</span
+                    >
+                    <svg
+                      t="1655894703771"
+                      class="icon"
+                      viewBox="0 0 1024 1024"
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      p-id="1998"
+                      width="16"
+                      height="16"
+                    >
+                      <path
+                        d="M892 928.1H134c-19.9 0-36-16.1-36-36v-758c0-19.9 16.1-36 36-36h314.1c19.9 0 36 16.1 36 36s-16.1 36-36 36H170v686h686V579.6c0-19.9 16.1-36 36-36s36 16.1 36 36v312.5c0 19.9-16.1 36-36 36z"
+                        p-id="1999"
+                        fill="#8F8E8E"
+                      ></path>
+                      <path
+                        d="M927.9 131.6v-0.5c-0.1-1.7-0.4-3.3-0.7-4.9 0-0.1 0-0.2-0.1-0.3-0.4-1.7-0.9-3.3-1.5-4.9v-0.1c-0.6-1.6-1.4-3.1-2.2-4.6 0-0.1-0.1-0.1-0.1-0.2-0.8-1.4-1.7-2.8-2.7-4.1-0.1-0.1-0.2-0.3-0.3-0.4-0.5-0.6-0.9-1.1-1.4-1.7 0-0.1-0.1-0.1-0.1-0.2-0.5-0.6-1-1.1-1.6-1.6l-0.4-0.4c-0.5-0.5-1.1-1-1.6-1.5l-0.1-0.1c-0.6-0.5-1.2-1-1.9-1.4-0.1-0.1-0.3-0.2-0.4-0.3-1.4-1-2.8-1.8-4.3-2.6l-0.1-0.1c-1.6-0.8-3.2-1.5-4.9-2-1.6-0.5-3.3-1-5-1.2-0.1 0-0.2 0-0.3-0.1l-2.4-0.3h-0.3c-0.7-0.1-1.3-0.1-2-0.1H640.1c-19.9 0-36 16.1-36 36s16.1 36 36 36h165L487.6 487.6c-14.1 14.1-14.1 36.9 0 50.9 7 7 16.2 10.5 25.5 10.5 9.2 0 18.4-3.5 25.5-10.5L856 221v162.8c0 19.9 16.1 36 36 36s36-16.1 36-36V134.1c0-0.8 0-1.7-0.1-2.5z"
+                        p-id="2000"
+                        fill="#8F8E8E"
+                      ></path>
+                    </svg>
+                  </p>
                 </div>
                 <div class="left right" @click="viewContract">
                   <span class="span1 font12">{{
@@ -126,6 +154,16 @@
                   >{{ getUserCoin.st | PriceConversion | Thousandths }}</span
                 >
               </div>
+              <span
+                class="font14 span_money"
+                :class="isEnLang ? 'en_medium' : ''"
+                >$
+                {{
+                  (getUserCoin.st * $store.state.srPrice)
+                    | PriceConversion
+                    | Thousandths
+                }}</span
+              >
             </div>
             <div
               class="btn mobile_font16"
@@ -154,9 +192,54 @@
                   }}</span
                 >
               </div>
+              <span
+                class="font14 span_money"
+                :class="isEnLang ? 'en_medium' : ''"
+                >$
+                {{
+                  (poolInfo.userStaked * $store.state.srPrice)
+                    | PriceConversion
+                    | Thousandths
+                }}</span
+              >
             </div>
-            <div class="btn">
-              <!-- Approve/Stake -->
+            <div class="Symbol_btn" v-if="poolInfo.userStaked > 0">
+              <svg
+                t="1656315671397"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="10166"
+                width="32"
+                height="32"
+                @click="btnFun('add')"
+              >
+                <path
+                  d="M896.062469 0h-767.625183C57.771791 0 0.499756 57.272035 0.499756 127.937531v767.625183c0 70.665495 57.272035 127.937531 127.93753 127.93753h767.625183c70.665495 0 127.937531-57.272035 127.937531-127.93753v-767.625183c0-70.665495-57.272035-127.937531-127.937531-127.937531zM831.593948 513.149439c-0.499756 17.391508-15.192582 31.084822-32.684041 31.084822H559.726696c-8.795705 0-15.992191 7.196486-15.992191 15.992191v239.183211c0 17.391508-13.693314 32.184285-31.084822 32.684041-18.091166 0.499756-32.883943-13.993167-32.883944-31.984382V560.226452c0-8.795705-7.196486-15.992191-15.992191-15.992191H224.590337c-17.391508 0-32.184285-13.693314-32.684041-31.084822-0.499756-18.091166 13.993167-32.883943 31.984382-32.883944h239.88287c8.795705 0 15.992191-7.196486 15.992191-15.992191V225.090093c0-17.391508 13.693314-32.184285 31.084822-32.684041 18.091166-0.499756 32.883943 13.993167 32.883944 31.984382v239.88287c0 8.795705 7.196486 15.992191 15.992191 15.992191h239.88287c17.991215 0 32.484139 14.792777 31.984382 32.883944z"
+                  p-id="10167"
+                  fill="#F7E9B9"
+                ></path>
+              </svg>
+              <svg
+                t="1656321953305"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="11745"
+                width="32"
+                height="32"
+                @click="btnFun('reduce')"
+              >
+                <path
+                  d="M896.062469 0h-767.625183C57.771791 0 0.499756 57.272035 0.499756 127.937531v767.625183c0 70.665495 57.272035 127.937531 127.93753 127.93753h767.625183c70.665495 0 127.937531-57.272035 127.937531-127.93753v-767.625183c0-70.665495-57.272035-127.937531-127.937531-127.937531zM799.609566 544.234261H223.890678c-17.691362 0-31.984383-14.293021-31.984382-31.984383s14.293021-31.984383 31.984382-31.984383h575.718888c17.691362 0 31.984383 14.293021 31.984382 31.984383s-14.293021 31.984383-31.984382 31.984383z"
+                  p-id="11746"
+                  fill="#F7E9B9"
+                ></path>
+              </svg>
+            </div>
+            <div class="btn" v-else>
               <FunBtn
                 :allLoading="allLoading"
                 :isapprove="isapprove"
@@ -165,7 +248,7 @@
                 :word="'message.stake.txt1'"
                 ref="mychild"
                 @sonapprove="sonapprove"
-                @dosomething="stakedSTFun"
+                @dosomething="btnFun('add')"
               />
             </div>
           </div>
@@ -195,6 +278,16 @@
                   :duration="2000"
                 ></countTo>
               </div>
+              <span
+                class="font14 span_money"
+                :class="isEnLang ? 'en_medium' : ''"
+                >$
+                {{
+                  endValue * $store.state.srPrice
+                    | PriceConversion
+                    | Thousandths
+                }}</span
+              >
             </div>
             <div
               class="btn mobile_font16"
@@ -205,12 +298,13 @@
               <BtnLoading :isloading="SRBtnLoading"></BtnLoading>
             </div>
           </div>
-          <div class="out_btn btn_normal" @click="ClaimSTFun">
+          <!-- 解除质押的ST按钮 -->
+          <!-- <div class="out_btn btn_normal" @click="ClaimSTFun">
             {{ $t("message.stake.txt13")
             }}<BtnLoading :isloading="STBtnLoading"></BtnLoading>
-          </div>
+          </div> -->
           <p
-            class="font12 mobile_font12 tip_"
+            class="font14 mobile_font12 tip_"
             @click="AddQuesFun('message.stake.txt14_1', $event)"
             :class="isEnLang ? 'en_medium' : ''"
           >
@@ -219,10 +313,11 @@
               :title="$t('message.stake.txt14_1')"
               >{{ $t("message.stake.txt14") }}</span
             >
-            <span>{{ userTaxRate }}%</span>
+            <span class="userRate">{{ userTaxRate }}%</span>
           </p>
         </div>
       </div>
+      <!-- noData -->
       <div class="out_nodata">
         <div class="onebox" :class="isEnLang ? 'en_Bold' : ''">
           <div
@@ -273,12 +368,18 @@
                 p-id="4609"
               ></path>
             </svg>
-            <span class="font12" :class="isEnLang ? 'en_medium' : ''">{{ $t("message.stake.txt15") }}</span>
+            <span class="font12" :class="isEnLang ? 'en_medium' : ''">{{
+              $t("message.stake.txt15")
+            }}</span>
           </div>
         </div>
       </div>
       <div class="seize_a_seat"></div>
     </div>
+    <Unstake 
+      :unStakedStatus="unStakedStatus"
+      @closeUnstake="closeUnstake"
+    ></Unstake>
     <StakedProup
       :totalStaked="poolInfo.totalStaked"
       :rate="rate"
@@ -299,6 +400,7 @@
 import { mapGetters } from "vuex";
 import MessageBox from "@/views/Bond/MessageBox.vue";
 import StakedProup from './StakeProup.vue'
+import Unstake from './Unstake.vue'
 import { stStaking, token, contract, getSigner, stStakingInfo, bondDepository } from 'sealemlab-sdk'
 export default {
   computed: { ...mapGetters(["getProduction", "getAccountStatus", "getAccount", "getIsMobile", "getNoticeNum", "isEnLang", "getUserCoin"]), },
@@ -328,14 +430,15 @@ export default {
       buy_isloading: false, // 按钮loading
       isapprove: false, //是否授权
       setIntervalOBJ: null,
-      stakedStatus: false,
+      stakedStatus: false,// 质押弹窗
+      unStakedStatus:false,// 解除质押弹窗
       userSrYieldTimer: null,
       rate: 0, // 用户的质押利率
       approveTimer: null
     }
   },
   components: {
-    MessageBox, StakedProup
+    MessageBox, StakedProup,Unstake
   },
   watch: {
     'getAccountStatus': {
@@ -368,8 +471,12 @@ export default {
     },
   },
   methods: {
-    stakedSTFun () {
-      this.stakedStatus = true
+    btnFun(data){
+      if(data == 'add'){
+        this.stakedStatus = true
+      }else if(data == 'reduce'){
+        this.unStakedStatus = true
+      }
     },
     close (data) {
       if (data) {
@@ -378,6 +485,14 @@ export default {
         this.getCurrencyETFun()
       }
       this.stakedStatus = false
+    },
+    closeUnstake(data){
+      if (data) {
+        this.getUserInfo()
+        this.getSdkInfo()
+        this.getCurrencyETFun()
+      }
+      this.unStakedStatus = false
     },
     // 判断授权
     isApproveFun () {
@@ -492,13 +607,14 @@ export default {
             let nums = this.$utils.convertBigNumberToNormal(Number(res), 2)
             this.poolInfo.userClaimSR = this.endValue
             this.endValue = Number(nums)
+            console.log('this.endValue: ', this.endValue);
             this.srLoading = false
           }
           if (this.endValue != 0 && this.poolInfo.userStaked == 0) {
             let nums = this.$utils.convertBigNumberToNormal(Number(res), 2)
             this.poolInfo.userClaimSR = this.endValue
             this.endValue = Number(nums)
-            // console.log('清空定时器this.endValue: ', this.endValue);
+            console.log('清空定时器this.endValue: ', this.endValue);
             clearInterval(this.userSrYieldTimer)
           }
         })
@@ -521,32 +637,6 @@ export default {
         }
       }).catch(() => {
         this.SRBtnLoading = false
-      })
-    },
-    ClaimSTFun () {
-      if (this.poolInfo.userStaked == 0) {
-        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt23' }));
-        return
-      }
-      if (this.STBtnLoading) return
-      this.STBtnLoading = true
-      let subNum = this.$utils.getBit(this.poolInfo.userStaked, 8)
-      // console.log('subNum: ', subNum);
-      stStaking().connect(getSigner()).withdraw(this.$utils.convertNormalToBigNumber(subNum, 18)).then(async res => {
-        // console.log('res: ', res);
-        const etReceipt = await res.wait();
-        if (etReceipt.status == 1) {
-          this.STBtnLoading = false
-          this.getUserInfo()
-          this.getSdkInfo()
-          this.$utils.getUserCoinQuantity(token().ST, 'st', this.getAccount)
-          this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt22' }));
-          clearInterval(this.userSrYieldTimer)
-        } else {
-          this.STBtnLoading = false
-        }
-      }).catch(() => {
-        this.STBtnLoading = false
       })
     },
     getST () {
@@ -648,7 +738,7 @@ export default {
     justify-content: space-between;
     .out_onebox {
       width: 344px;
-      height: 539px;
+      // height: 539px;
       padding: 2px;
       border-radius: 12px;
       background: linear-gradient(
@@ -776,6 +866,10 @@ export default {
                 margin-right: 3px;
               }
             }
+            .span_money {
+              color: #8f8e8e;
+              margin-top: 5px;
+            }
           }
           .btn {
             cursor: pointer;
@@ -786,6 +880,12 @@ export default {
             align-items: center;
             border-radius: 4px;
             border: 1px solid #918256;
+          }
+          .Symbol_btn {
+            cursor: pointer;
+            width: 130px;
+            display: flex;
+            justify-content: space-between;
           }
         }
         .out_btn {
@@ -804,29 +904,17 @@ export default {
           margin-top: 34px;
         }
         .tip_ {
-          width: 206px;
+          width: 100%;
+          padding: 0 14px;
           margin: 12px auto;
           display: flex;
           justify-content: space-between;
           align-items: center;
           font-weight: 500;
-          color: #8f8e8e;
+          color: #CED3D9;
           line-height: 22px;
-          .page_has_question_icon {
-            position: relative;
-            cursor: pointer;
-            &::after {
-              content: "";
-              width: 12px;
-              height: 12px;
-              filter: blur(0px);
-              background: url(//cdn.sealemlab.com/sealemlab_assets_test/images/ques_new.webp)
-                no-repeat;
-              background-size: 100% 100%;
-              position: absolute;
-              right: -15px;
-              top: 5px;
-            }
+          .userRate{
+            width: 130px;
           }
         }
       }
@@ -853,15 +941,19 @@ export default {
         .label {
           width: 135px;
           height: 31px;
-          background: linear-gradient(311deg, rgba(151, 150, 145, 0) 0%, #3E3E3C 100%);
+          background: linear-gradient(
+            311deg,
+            rgba(151, 150, 145, 0) 0%,
+            #3e3e3c 100%
+          );
           backdrop-filter: blur(0px);
           font-weight: bold;
-          color: #8F8E8E;
+          color: #8f8e8e;
           line-height: 31px;
           text-align: center;
           margin-left: -1px;
         }
-        .content_nodata{
+        .content_nodata {
           width: 100%;
           padding-top: 50px;
           // height: 100%;
@@ -869,14 +961,30 @@ export default {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          span{
-            color: #8F8E8E;
+          span {
+            color: #8f8e8e;
           }
         }
       }
     }
-    .seize_a_seat{
+    .seize_a_seat {
       width: 344px;
+    }
+  }
+  .page_has_question_icon {
+    position: relative;
+    cursor: pointer;
+    &::after {
+      content: "";
+      width: 12px;
+      height: 12px;
+      filter: blur(0px);
+      background: url(//cdn.sealemlab.com/sealemlab_assets_test/images/ques_new.webp)
+        no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      right: -15px;
+      top: 0;
     }
   }
 }
@@ -1173,28 +1281,32 @@ export default {
           .label {
             width: 0.87rem;
             height: 0.23rem;
-            background: linear-gradient(311deg, rgba(151, 150, 145, 0) 0%, #3E3E3C 100%);
+            background: linear-gradient(
+              311deg,
+              rgba(151, 150, 145, 0) 0%,
+              #3e3e3c 100%
+            );
             backdrop-filter: blur(0px);
             font-weight: bold;
-            color: #8F8E8E;
+            color: #8f8e8e;
             line-height: 0.23rem;
             text-align: center;
             margin-left: 0;
           }
-          .content_nodata{
+          .content_nodata {
             width: 100%;
             padding-top: 0.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            span{
-              color: #8F8E8E;
+            span {
+              color: #8f8e8e;
             }
           }
         }
       }
-      .seize_a_seat{
+      .seize_a_seat {
         display: none;
       }
     }

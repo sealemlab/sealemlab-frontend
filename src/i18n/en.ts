@@ -910,13 +910,13 @@ export const message = {
     txt5_1:'Later',
     txt6:'Total staked',
     txt7:'View Contract',
-    txt8:'Available ST',
+    txt8:'Available',
     txt9:'Get ST',
     txt10:'ST Staked',
     txt11:'SR Earned',
     txt12:'Claim',
     txt13:'Withdraw',
-    txt14:'Unstaking fee',
+    txt14:'Early quit tax',
     txt14_1:'提示内容',
     txt15:'More pool coming soon',
     txt16:'ST Staking',
@@ -937,7 +937,16 @@ export const message = {
     txt29:'Insufficient balance',
     txt30:'STAKING',
     txt31:'Sacred Farms offer multiple farming opportunities to you. Get double rewards by staking your ST tokens in return for additional SR tokens and earning high income.',
-    txt32:'Learn how to start'
+    txt32:'Learn how to start',
+
+    txt33:'Unstaking',
+    txt34:'ST to unstake',
+    txt35:'Unstake',
+    txt36:'Early quit tax',
+    txt37:'Early quit tax to 20% after',
+    txt38:'Early quit tax to 10% after',
+    txt39:'Early quit tax fee to 0% after',
+    txt40:'Unstaking fee will reset after staking again',
   },
   
   tip: {

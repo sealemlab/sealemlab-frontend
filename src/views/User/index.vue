@@ -3,7 +3,7 @@
     <div class="user_info display_flex">
       <div class="user_head_portrait display_flex">
         <span class="font20 user_name">xxxx@xx.xx</span>
-        <div class="invitation_code out_btn font16" :class="isEnLang?'en_Bold':''">{{ $t("message.user.txt5") }}</div>
+        <div class="invitation_code out_btn font16" :class="isEnLang?'en_Bold':''" @click="copyLink">{{ $t("message.user.txt5") }}</div>
       </div>
       <div class="content display_flex" v-if="li_index == 0">
         <div class="outbox" v-for="(item, index) in walletArr" :key="index">
@@ -82,7 +82,7 @@ import { mapGetters } from "vuex";
 import { token,wallet } from "sealemlab-sdk";
 export default {
   computed: {
-    ...mapGetters(["isEnLang","getUserCoin","getAccountStatus"])
+    ...mapGetters(["getNoticeNum","isEnLang","getUserCoin","getAccountStatus"])
   },
   watch: {
     'getAccountStatus': {
@@ -155,6 +155,12 @@ export default {
         wallet.addST(`https:${this.$store.state.imgUrl}new_stlogo.webp`)
       }else if(item.type == 'sr'){
         wallet.addSR(`https:${this.$store.state.imgUrl}new_srlogo.webp`)
+      }
+    },
+    copyLink(){
+      if (!this.getNoticeNum) {
+        this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+        this.$store.commit("setNoticeNum", true);
       }
     }
   },
