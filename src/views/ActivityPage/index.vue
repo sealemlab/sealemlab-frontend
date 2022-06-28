@@ -581,7 +581,7 @@ export default {
       // 获取某IDO的最大供应量
       let maxnum = await ido().tokenMaxSupplys(idoID)
       this.arr[2].num = 1500000 // this.$utils.convertBigNumberToNormal(Number(maxnum),0,18,true)
-      this.arr[2].busdnum = 1500000 //maxnum / 1e18 * this.nowPrice
+      this.arr[2].busdnum = 600000 //maxnum / 1e18 * this.nowPrice
       // 获取某IDO的已售出数量
       ido().tokenSoldout(idoID).then(res => { 
         // console.log('获取某IDO的已售出数量: ', res);
