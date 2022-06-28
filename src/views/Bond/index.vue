@@ -1083,8 +1083,8 @@ export default {
       align-items: center;
       margin-top: 60px;
       li {
-        max-width: 220px;
-        padding: 0 10px;
+        // max-width: 220px;
+        padding: 0 8px;
         height: 60px;
         background: rgba(163, 159, 148, 0.23);
         border-radius: 14px;
@@ -1092,7 +1092,7 @@ export default {
         .txt1 {
           width: 100%;
           height: calc(100% - 4px);
-          padding: 10px;
+          padding: 10px 0;
           font-weight: 600;
           color: #CED3D9;
           display: flex;
