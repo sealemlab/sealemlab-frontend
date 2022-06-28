@@ -85,7 +85,8 @@ export default {
       window.scrollTo(0, 0);
       // 不是正式环境的话,展示
       if(this.getProduction){
-        if (to.path == "/market" || to.path == "/staking") {
+        // || to.path == "/staking"
+        if (to.path == "/market") {
           this.navActive = -1
           if (!this.getNoticeNum) {
             this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));

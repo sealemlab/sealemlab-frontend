@@ -304,7 +304,8 @@ export default {
       });
 
       if(this.getProduction){
-        if (to.path == "/market" || to.path == "/staking") {
+        // || to.path == "/staking"
+        if (to.path == "/market") {
           if (!this.getNoticeNum) {
             this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
             this.$store.commit("setNoticeNum", true);
