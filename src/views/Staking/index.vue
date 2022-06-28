@@ -31,7 +31,7 @@
           $t(item.title)
         }}</span>
         <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-if="index == 1">
-          {{ item.num | PriceConversion | Thousandths }}
+          {{ item.num | PriceConversion | Thousandths }} SR
         </span>
         <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-else
           >$ {{ item.num | PriceConversion | Thousandths }}</span>
