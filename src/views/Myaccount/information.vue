@@ -44,7 +44,7 @@
         <div class="right_line">
           <span class="account_status font24" :class="isEnLang ? 'en_Bold' : ''">{{ $t("message.account.txt16") }}</span>
           <div class="_status font14" :class="isEnLang ? 'en_medium' : ''">
-            {{ getLogin.lastLogin.indexOf("T") !== -1 ? getLogin.lastLogin.replace("T", "\n") : "" }}
+            {{ getLogin.lastLogin ? (getLogin.lastLogin.indexOf("T") !== -1 ? getLogin.lastLogin.replace("T", "\n") : "") : "" }}
           </div>
         </div>
       </div>
