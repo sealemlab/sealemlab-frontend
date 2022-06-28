@@ -1449,7 +1449,7 @@ export default {
         margin-top: 0.2rem;
         li {
           width: auto;
-          max-width: 2.3rem;
+          // max-width: 2.3rem;
           padding: 0.05rem;
           height: 0.21rem;
           background: rgba(248, 229, 186, 0.09);

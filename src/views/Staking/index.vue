@@ -578,8 +578,8 @@ export default {
         this.APY = Math.pow((1 + res / 100 / 365), 365) - 1
         console.log('ApY::::', this.APY);
       }).catch(() => {
-        this.APY = 0
-        
+        this.APY = 0.00
+        this.APR = 0.00
       })
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
