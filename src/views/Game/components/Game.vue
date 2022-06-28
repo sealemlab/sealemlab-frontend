@@ -3,7 +3,7 @@
     <div class="game_title">{{ $t("message.gamepage.text5") }}</div>
     <div class="boxin">
       <div class="title mobile">{{ $t("message.gamepage.text6") }}</div>
-      <img :src="`${$store.state.imgUrl}game_SacredRealm.webp`" alt="" />
+      <img :src="`${$store.state.imgUrl}showgame.webp`" alt="" />
       <div class="content">
         <div class="title pc">{{ $t("message.gamepage.text6") }}</div>
         <div class="textbox">
@@ -141,7 +141,7 @@ export default {
       justify-content: space-between;
       .btn {
         cursor: pointer;
-        width: 11rem;
+        width: 45%;
         height: 2.5rem;
         background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
         border-radius: 4px;

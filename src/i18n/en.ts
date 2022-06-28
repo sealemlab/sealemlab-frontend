@@ -813,7 +813,7 @@ export const message = {
     text14: "Download",
     text15: "Psyche",
     text16: "Account",
-    text17: "Binding Adress",
+    text17: "Binding Address",
     text18: "Wallet Balance",
     text19: "Recharge",
     text20: "Claimable",

@@ -151,7 +151,7 @@ export default {
   flex-wrap: wrap;
   > div {
     width: 50%;
-    padding-right: 3rem;
+    padding-right: 1rem;
     padding-bottom: 2rem;
     font-size: 24px;
     display: flex;
@@ -161,16 +161,17 @@ export default {
     }
   }
   .label {
-    width: 180px;
+    min-width: 180px;
   }
   .content {
+    width: calc(100% - 180px);
     font-size: 18px;
     // font-family: SFCompactDisplay-Medium, SFCompactDisplay;
     font-weight: 500;
     display: flex;
     align-items: center;
     .inputbox {
-      width: 16rem;
+      width: 100%;
       height: 2rem;
       background: #171718;
       box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
@@ -195,14 +196,14 @@ export default {
         width: 100%;
         height: 100%;
         background: none;
-        padding: 0 6.5rem 0 3.5rem;
+        padding: 0 5.5rem 0 3.5rem;
         font-size: 18px;
         color: #ced3d9;
         text-align: right;
       }
       .btn {
         cursor: pointer;
-        width: 6rem;
+        width: 5rem;
         height: 100%;
         position: absolute;
         right: 0;
@@ -338,12 +339,13 @@ export default {
       font-size: 0.14rem;
     }
     .label {
-      width: 1.5rem;
+      min-width: 1.2rem;
     }
     .content {
+      width: calc(100% - 1.2rem);
       font-size: 0.12rem;
       .inputbox {
-        width: 2rem;
+        width: 100%;
         height: 0.3rem;
         .left {
           img {
