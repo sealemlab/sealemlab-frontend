@@ -23,8 +23,8 @@
         <div class="percentageBox">
           <div class="onebox" :class="{activeClass:index == IndexPage}" v-for="(item,index) in arr" :key="index" @click="selectFun(item)">{{item}}%</div>
         </div>
-        <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span class="has_question_icon">{{ $t("message.stake.txt36") }}</span>
+        <div class="tipbox add_pointer font14" :class="isEnLang?'en_medium':''">
+          <span class="has_question_icon" @click="AddQuesFun('message.stake.rate_tip', $event)">{{ $t("message.stake.txt36") }}</span>
           <span>{{userTaxRate}} %</span>
         </div>
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
@@ -48,15 +48,22 @@
         </div>
       </div>
     </div>
+    <MessageBox
+      ref="mychildAdd"
+      :clientX="clientX"
+      :clientY="clientY"
+      :content="datacontent"
+    ></MessageBox>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
 import { stStaking,getSigner,token } from 'sealemlab-sdk'
 import progressBar from './slider.vue'
+import MessageBox from "@/views/Bond/MessageBox.vue";
 export default {
   components:{
-    progressBar
+    progressBar,MessageBox
   },
   computed: {
     ...mapGetters(["getProduction","isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
@@ -107,6 +114,9 @@ export default {
   },
   data(){
     return {
+      datacontent: '',
+      clientX: 0,
+      clientY: 0,
       passValue:0, // 给滑块传的值
       userUnstakedSuccess:false,
       userUnStakedLoading:false, // 解除质押按钮loading
@@ -119,6 +129,14 @@ export default {
     }
   },
   methods: {
+    AddQuesFun (data, e) {
+      this.datacontent = data
+      this.clientX = e.clientX
+      this.clientY = e.clientY + 5
+      setTimeout(() => {
+        this.$refs.mychildAdd.titleFun()
+      }, 400)
+    },
     inputFun(data){
       this.sliderValue = data
       let nums = this.userStaked * (data / 100)
@@ -332,6 +350,9 @@ export default {
     justify-content:space-between;
     align-items: center;
     margin-bottom: 10px;
+  }
+  .add_pointer{
+    cursor: pointer;
   }
   .stake_btn{
     cursor: pointer;
