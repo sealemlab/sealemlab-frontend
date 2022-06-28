@@ -233,12 +233,20 @@
           <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img" />
           {{ $t("message.acticePage.txt22") }}
         </div>
-        <!-- 用户不在白名单 -->
-        <div class="main_button font18 mobile_font16 disable_bnb" v-if="!userIsWhiteList">
+
+
+        <!-- 手动更改直接卖完 -->
+        <div class="main_button font18 mobile_font16 disable_bnb">
           {{ $t("message.acticePage.txt31" )}}
         </div>
+
+        <!-- 正常逻辑 -->
+        <!-- 用户不在白名单 -->
+        <!-- <div class="main_button font18 mobile_font16 disable_bnb" v-if="!userIsWhiteList">
+          {{ $t("message.acticePage.txt31" )}}
+        </div> -->
         <!-- 其他逻辑判断-->
-        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:outStatus || finshed}" v-else>
+        <!-- <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:outStatus || finshed}" v-else>
           <FunBtn
             :allLoading="allLoading"
             :isapprove="isapprove"
@@ -249,7 +257,7 @@
             @sonapprove="sonapprove"
             @dosomething="userBuyIdo"
           />
-        </div>
+        </div> -->
       </div>
       <div class="mobile_three_box">
         <div v-for="(item, index) in arr1" :key="index">
