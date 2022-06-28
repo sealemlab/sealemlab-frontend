@@ -119,7 +119,7 @@ export default {
       default: 0
     },
     totalStaked:{
-      type: Number,
+      type: [Number,String],
       default: 0
     },
   },

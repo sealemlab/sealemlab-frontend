@@ -133,18 +133,18 @@ export default {
     },
     userUnStakedFun(){
       if (this.userStaked == 0) {
-        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': '没有质押,无需解除' }));
+        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt41' }));
         return
       }
       if(!this.STmsg){
-        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': '请输入要解压的st数量' }));
+        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt42' }));
         return
       }
       if (this.userUnStakedLoading) return
       this.userUnStakedLoading = true
       let subNum = this.$utils.getBit(this.STmsg, 8)
       stStaking().connect(getSigner()).withdraw(this.$utils.convertNormalToBigNumber(subNum, 18)).then(async res => {
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'解除中....','link':res.hash}));
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt43','link':res.hash}));
         this.$store.commit("setProgressInfo", JSON.stringify({'speed':30}));
         const etReceipt = await res.wait();
         if (etReceipt.status == 1) {
@@ -156,7 +156,7 @@ export default {
           this.getUserStaked()
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
-          this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': '解除成功' }));
+          this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt44' }));
           
         } else {
           this.userUnStakedLoading = false
@@ -187,13 +187,12 @@ export default {
         if (res / 1e18 <= 1e-8) {
           this.userStaked = 0
         } else {
-          this.userStaked = Number(res / 1e18)
+          this.userStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
         }
       })
       // 获取用户提现时要扣的税率
       stStaking().getUserTaxRate(this.getAccount).then(res => {
         this.userTaxRate = res / 100
-        console.log('this.userTaxRate: ', this.userTaxRate);
       })
     }
   }
@@ -484,7 +483,7 @@ export default {
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
       border-radius: 0.04rem;
       backdrop-filter: blur(14px);
-      margin: 0.4rem auto;
+      margin: 0.2rem auto 0;
       display: flex;
       justify-content: center;
       align-items: center;

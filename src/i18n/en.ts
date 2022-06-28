@@ -747,7 +747,7 @@ export const message = {
     txt17: "Add Address connection",
     txt18: "In order to view your NFT products in the game, you need to complete the signing process.",
     txt19: "You can access your in-game NFT products by using the metamask plug-in signature.",
-    txt20: "Binding Adress",
+    txt20: "Binding Address",
     txt21: "Remove",
     txt22: "Enter email",
     txt23: "Enter verification code",
@@ -905,7 +905,7 @@ export const message = {
     txt1:'Stake',
     txt2:'Total staked',
     txt3:'Total earned',
-    txt4:'Most staked time',
+    txt4:'Daily output',
     txt5:'ST POOL',
     txt5_1:'Later',
     txt6:'Total staked',
@@ -946,7 +946,15 @@ export const message = {
     txt37:'Early quit tax to 20% after',
     txt38:'Early quit tax to 10% after',
     txt39:'Early quit tax fee to 0% after',
-    txt40:'Unstaking fee will reset after staking again',
+    txt40:'Early quit tax will reset after staking again',
+
+    txt41:'There is currently no amount to unstake',
+    txt42:'Please enter the $ST amount you want to unstake',
+    txt43:'Unstaking....',
+    txt44:'Unstake Success',
+  
+    apr_tip:'APY and APR calculate in $0.001',
+    rate_tip:'The early quit tax will reset after staking again. Early quit tax = 30%-n*0.1%, n means days.',
   },
   
   tip: {

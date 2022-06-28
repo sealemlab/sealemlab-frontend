@@ -17,11 +17,12 @@
         :class="isEnLang ? 'en_medium' : ''"
         >{{ $t("message.stake.txt31") }}</span
       >
-      <span
-        class="span3 font14 mobile_font12"
-        :class="isEnLang ? 'en_medium' : ''"
-        >{{ $t("message.stake.txt32") }}</span
-      >
+      <a href="https://lab-sealem.gitbook.io/sealem-lab/basic/staking" target="_blank" rel="noopener noreferrer">
+        <span
+          class="span3 font14 mobile_font12"
+          :class="isEnLang ? 'en_medium' : ''"
+          >{{ $t("message.stake.txt32") }}</span>
+      </a>
     </div>
     <!-- 数据 -->
     <div class="dataBox">
@@ -29,9 +30,11 @@
         <span class="font24" :class="isEnLang ? 'en_medium' : ''">{{
           $t(item.title)
         }}</span>
-        <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''"
-          >$ {{ item.num | PriceConversion | Thousandths }}</span
-        >
+        <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-if="index == 1">
+          {{ item.num | PriceConversion | Thousandths }}
+        </span>
+        <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-else
+          >$ {{ item.num | PriceConversion | Thousandths }}</span>
       </div>
     </div>
     <div class="staking_content_box">
@@ -44,6 +47,7 @@
           >
             {{ $t("message.stake.txt5") }}
           </div>
+          <!-- APY 及 池子数据 -->
           <div class="out_top_box">
             <div class="top_box">
               <div class="top_content">
@@ -76,6 +80,54 @@
               <div class="line_txt">
                 <div class="left">
                   <span
+                    v-if="apyStatus"
+                    @click="AddQuesFun('message.stake.apr_tip', $event)"
+                    class="page_has_question_icon font16 span2"
+                    :class="isEnLang ? 'en_Bold' : ''"
+                    >APY</span
+                  >
+                  <span
+                    v-if="!apyStatus"
+                    @click="AddQuesFun('message.stake.apr_tip', $event)"
+                    class="page_has_question_icon font16 span2"
+                    :class="isEnLang ? 'en_Bold' : ''"
+                    >APR</span
+                  >
+                  <p>
+                    <span
+                      v-if="apyStatus"
+                      class="font16 span3"
+                      :class="isEnLang ? 'en_Bold' : ''"
+                      >{{ APY | MultiplyBySquare }} %</span
+                    >
+                    <span
+                      v-if="!apyStatus"
+                      class="font16 span3"
+                      :class="isEnLang ? 'en_Bold' : ''"
+                      >{{ APR | MultiplyBySquare }} %</span
+                    >
+                    <svg
+                      @click="changeApy"
+                      style="cursor: pointer"
+                      t="1656322005289"
+                      class="icon"
+                      viewBox="0 0 1024 1024"
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      p-id="12615"
+                      width="16"
+                      height="16"
+                    >
+                      <path
+                        d="M96 416h832c0.32 0 0.576-0.192 0.896-0.192a30.656 30.656 0 0 0 30.976-30.976C959.808 384.576 960 384.32 960 384a31.424 31.424 0 0 0-14.912-26.368l-188.48-188.48a30.72 30.72 0 1 0-43.456 43.456L852.544 352H96a32 32 0 0 0 0 64zM928 608h-832c-0.32 0-0.576 0.192-0.896 0.192a30.528 30.528 0 0 0-30.976 30.976C64.192 639.424 64 639.68 64 640c0 11.264 6.144 20.672 14.912 26.368l188.48 188.48a30.72 30.72 0 1 0 43.456-43.456L171.456 672H928a32 32 0 0 0 0-64z"
+                        p-id="12616"
+                        fill="#8F8E8E"
+                      ></path>
+                    </svg>
+                  </p>
+                </div>
+                <!-- <div class="left">
+                  <span
                     @click="AddQuesFun('message.stake.txt14_1', $event)"
                     class="page_has_question_icon font16 span2"
                     :class="isEnLang ? 'en_Bold' : ''"
@@ -107,7 +159,7 @@
                       ></path>
                     </svg>
                   </p>
-                </div>
+                </div> -->
                 <div class="left right" @click="viewContract">
                   <span class="span1 font12">{{
                     $t("message.stake.txt7")
@@ -283,14 +335,14 @@
                 :class="isEnLang ? 'en_medium' : ''"
                 >$
                 {{
-                  endValue * $store.state.srPrice
+                  (endValue * $store.state.srPrice)
                     | PriceConversion
                     | Thousandths
                 }}</span
               >
             </div>
             <div
-              class="btn mobile_font16"
+              class="btn mobile_font16 btn_normal"
               :class="isEnLang ? 'en_Bold' : ''"
               @click="ClaimFun"
             >
@@ -305,12 +357,11 @@
           </div> -->
           <p
             class="font14 mobile_font12 tip_"
-            @click="AddQuesFun('message.stake.txt14_1', $event)"
+            @click="AddQuesFun('message.stake.rate_tip', $event)"
             :class="isEnLang ? 'en_medium' : ''"
           >
             <span
               class="page_has_question_icon"
-              :title="$t('message.stake.txt14_1')"
               >{{ $t("message.stake.txt14") }}</span
             >
             <span class="userRate">{{ userTaxRate }}%</span>
@@ -376,7 +427,7 @@
       </div>
       <div class="seize_a_seat"></div>
     </div>
-    <Unstake 
+    <Unstake
       :unStakedStatus="unStakedStatus"
       @closeUnstake="closeUnstake"
     ></Unstake>
@@ -406,7 +457,9 @@ export default {
   computed: { ...mapGetters(["getProduction", "getAccountStatus", "getAccount", "getIsMobile", "getNoticeNum", "isEnLang", "getUserCoin"]), },
   data () {
     return {
+      apyStatus: true,
       APY: 0,
+      APR: 0,
       userTaxRate: 0,
       endValue: 0,
       openPoolStatus: false,
@@ -415,8 +468,8 @@ export default {
       STBtnLoading: false,
       dataArr: [
         { title: "message.stake.txt2", num: 0 },
+        { title: "message.stake.txt4", num: 0 },
         { title: "message.stake.txt3", num: 0 },
-        { title: "message.stake.txt4", num: 0 }
       ],
       datacontent: '',
       clientX: 0,
@@ -431,14 +484,14 @@ export default {
       isapprove: false, //是否授权
       setIntervalOBJ: null,
       stakedStatus: false,// 质押弹窗
-      unStakedStatus:false,// 解除质押弹窗
+      unStakedStatus: false,// 解除质押弹窗
       userSrYieldTimer: null,
       rate: 0, // 用户的质押利率
       approveTimer: null
     }
   },
   components: {
-    MessageBox, StakedProup,Unstake
+    MessageBox, StakedProup, Unstake
   },
   watch: {
     'getAccountStatus': {
@@ -471,10 +524,13 @@ export default {
     },
   },
   methods: {
-    btnFun(data){
-      if(data == 'add'){
+    changeApy () {
+      this.apyStatus = !this.apyStatus
+    },
+    btnFun (data) {
+      if (data == 'add') {
         this.stakedStatus = true
-      }else if(data == 'reduce'){
+      } else if (data == 'reduce') {
         this.unStakedStatus = true
       }
     },
@@ -486,7 +542,7 @@ export default {
       }
       this.stakedStatus = false
     },
-    closeUnstake(data){
+    closeUnstake (data) {
       if (data) {
         this.getUserInfo()
         this.getSdkInfo()
@@ -545,12 +601,18 @@ export default {
       }, 400)
     },
     getSdkInfo () {
+      // 池子总产出
+      stStaking().releasedSR().then(res => {
+        console.log('池子总产出res: ', res);
+        this.dataArr[1].num = res / 1e18
+      })
       // 获取池子是否已开启
       stStaking().openStatus().then(res => {
         this.openPoolStatus = res
       })
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
       stStakingInfo.getApr(this.getUserCoin.stPrice, this.$store.state.srPrice).then(res => {
+        this.APR = res
         console.log('获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%res: ', res);
         this.APY = Math.pow((1 + res / 100 / 365), 365) - 1
       }).catch(() => {
@@ -559,26 +621,25 @@ export default {
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
         // console.log('获取池子总质押ST数量: ', res);
-        this.dataArr[0].num = res / 1e18
-        this.poolInfo.totalStaked = res / 1e18
+        this.dataArr[0].num = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
+        this.poolInfo.totalStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
       })
     },
     getUserInfo () {
       // 获取某用户的质押的ST数量
       stStaking().userStakedST(this.getAccount).then(res => {
         console.log('获取某用户的质押的ST数量: ', res);
-        if (res / 1e18 <= 1e-8) {
+        if (res / 1e18 < 1e-8) {
           this.poolInfo.userStaked = 0
         } else {
-          this.poolInfo.userStaked = res / 1e18
+          this.poolInfo.userStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
         }
       })
 
       // 获取用户总SR奖励数量（已提取+可提取）
       stStaking().getTokenTotalRewards(this.getAccount).then(res => {
         // console.log('获取用户总SR奖励数量（已提取+可提取）: ', res);
-        this.dataArr[1].num = res / 1e18 * this.$store.state.srPrice
-        // console.log('this.dataArr[1].num: ', this.dataArr[1].num);
+        this.dataArr[2].num = res / 1e18 * this.$store.state.srPrice
       })
 
       // 获取用户提现时要扣的税率
@@ -607,7 +668,7 @@ export default {
             let nums = this.$utils.convertBigNumberToNormal(Number(res), 2)
             this.poolInfo.userClaimSR = this.endValue
             this.endValue = Number(nums)
-            console.log('this.endValue: ', this.endValue);
+            // console.log('this.endValue: ', this.endValue);
             this.srLoading = false
           }
           if (this.endValue != 0 && this.poolInfo.userStaked == 0) {
@@ -788,7 +849,7 @@ export default {
             height: 100%;
             background: linear-gradient(132deg, #0e0e0e 0%, #0b0a0a 100%);
             border-radius: 5px;
-            padding: 11px 16px;
+            padding: 11px 10px;
             .top_content {
               display: flex;
               align-items: center;
@@ -834,6 +895,14 @@ export default {
                 }
                 .span2 {
                   margin-right: 31px;
+                }
+                .span3 {
+                  margin-right: 8px;
+                }
+                p{
+                  display: flex;
+                  align-items: center;
+                  margin-left: 5px;
                 }
               }
               .right {
@@ -911,9 +980,9 @@ export default {
           justify-content: space-between;
           align-items: center;
           font-weight: 500;
-          color: #CED3D9;
+          color: #ced3d9;
           line-height: 22px;
-          .userRate{
+          .userRate {
             width: 130px;
           }
         }
@@ -1154,7 +1223,7 @@ export default {
               }
               .line_txt {
                 width: 100%;
-                padding: 0 8px;
+                padding: 0;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -1173,6 +1242,9 @@ export default {
                   }
                   .span2 {
                     margin-right: 0.19rem;
+                  }
+                  p{
+                    margin-left: 0.05rem;
                   }
                 }
               }
@@ -1213,6 +1285,12 @@ export default {
               border-radius: 0.04rem;
               border: 1px solid #918256;
             }
+            .Symbol_btn {
+              cursor: pointer;
+              width: 1.1rem;
+              display: flex;
+              justify-content: space-between;
+            }
           }
           .out_btn {
             cursor: pointer;
@@ -1230,29 +1308,16 @@ export default {
             margin-top: 0.25rem;
           }
           .tip_ {
-            width: 1.5rem;
-            margin: 0.12rem auto;
+            width:100%;
             display: flex;
+            padding: 0 0.1rem;
             justify-content: space-between;
             align-items: center;
             font-weight: 500;
             color: #8f8e8e;
             line-height: 0.12rem;
-            .page_has_question_icon {
-              position: relative;
-              cursor: pointer;
-              &::after {
-                content: "";
-                width: 0.1rem;
-                height: 0.1rem;
-                filter: blur(0px);
-                background: url(//cdn.sealemlab.com/sealemlab_assets_test/images/ques_new.webp)
-                  no-repeat;
-                background-size: 100% 100%;
-                position: absolute;
-                right: -15px;
-                top: 0;
-              }
+            .userRate {
+              width: 1.1rem;
             }
           }
         }
@@ -1309,6 +1374,22 @@ export default {
       .seize_a_seat {
         display: none;
       }
+    }
+  }
+  .page_has_question_icon {
+    position: relative;
+    cursor: pointer;
+    &::after {
+      content: "";
+      width: 0.1rem;
+      height: 0.1rem;
+      filter: blur(0px);
+      background: url(//cdn.sealemlab.com/sealemlab_assets_test/images/ques_new.webp)
+        no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      right: -15px;
+      top: 0;
     }
   }
 }

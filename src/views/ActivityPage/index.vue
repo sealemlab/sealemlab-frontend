@@ -215,6 +215,7 @@
               type="number"
               :placeholder="$t('message.bond.txt23')"
               @input="InputClick"
+              @focusEvent="focusEvent"
             ></Input>
             <p>
               <span
@@ -415,6 +416,11 @@ export default {
   methods: {
     addAddress(){
       wallet.addST(`https:${this.$store.state.imgUrl}new_stlogo.webp`)
+    },
+    focusEvent(){
+      if(!this.getIstrue){
+        this.$store.commit("setwalletstatus", true);
+      }
     },
     // 去授权
     sonapprove() {
