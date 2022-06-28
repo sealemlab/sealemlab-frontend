@@ -104,7 +104,7 @@
                       v-if="!apyStatus"
                       class="font16 span3"
                       :class="isEnLang ? 'en_Bold' : ''"
-                      >{{ APR | MultiplyBySquare }} %</span
+                      >{{ APR | PriceConversion }} %</span
                     >
                     <svg
                       @click="changeApy"
@@ -613,8 +613,9 @@ export default {
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
       stStakingInfo.getApr(this.getUserCoin.stPrice, this.$store.state.srPrice).then(res => {
         this.APR = res
-        console.log('获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%res: ', res);
+        console.log('Apr::::', res);
         this.APY = Math.pow((1 + res / 100 / 365), 365) - 1
+        console.log('ApY::::', this.APY);
       }).catch(() => {
         this.APY = 0
       })
