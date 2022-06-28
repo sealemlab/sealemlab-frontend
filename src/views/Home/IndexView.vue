@@ -81,7 +81,7 @@
           <div class="left right mobile_game_box" :class="isEnLang?'en_medium':''">
             <div class="before_box">
               <div class="add_out_box"></div>
-              <img :src="`${$store.state.imgUrl}new_game2.webp`" class="add_game2" ref="addimg" />
+              <img :src="`${$store.state.imgUrl}showgame.webp`" class="add_game2" ref="addimg" />
             </div>
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
@@ -116,7 +116,7 @@
           <div class="left right pc_box font16" :class="isEnLang?'en_medium':''">
             <div class="before_box">
               <div class="add_out_box" :style="{height}"></div>
-              <img :src="`${$store.state.imgUrl}new_game2.webp`" class="add_game2" ref="addimg" />
+              <img :src="`${$store.state.imgUrl}showgame.webp`" class="add_game2" ref="addimg" />
             </div>
             <div class="before_box">
               <img :src="`${$store.state.imgUrl}game3.webp`" class="game2" />
@@ -953,7 +953,7 @@ export default {
     width: 90vw;
     margin: 0 auto;
     height: 146px;
-    margin-top: 22px;
+    margin-top: 115px;
     display: flex;;
     justify-content: space-between;
     align-items: center;

@@ -990,7 +990,7 @@ export default {
     }
     .out_nodata {
       width: 344px;
-      height: 539px;
+      height: 557px;
       padding: 2px;
       border-radius: 12px;
       background: linear-gradient(

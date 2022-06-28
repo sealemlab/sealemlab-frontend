@@ -3,6 +3,7 @@
     <div class="user_info display_flex">
       <div class="user_head_portrait display_flex">
         <span class="font20 user_name">xxxx@xx.xx</span>
+        <!-- <span class="font20 user_name">{{getLogin.mailAccount?getLogin.mailAccount:'xxxx@xx.xx'}}</span> -->
         <div class="invitation_code out_btn font16" :class="isEnLang?'en_Bold':''" @click="copyLink">{{ $t("message.user.txt5") }}</div>
       </div>
       <div class="content display_flex" v-if="li_index == 0">
@@ -82,7 +83,7 @@ import { mapGetters } from "vuex";
 import { token,wallet } from "sealemlab-sdk";
 export default {
   computed: {
-    ...mapGetters(["getNoticeNum","isEnLang","getUserCoin","getAccountStatus"])
+    ...mapGetters(["getLogin","getNoticeNum","isEnLang","getUserCoin","getAccountStatus"])
   },
   watch: {
     'getAccountStatus': {
