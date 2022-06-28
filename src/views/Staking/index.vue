@@ -81,7 +81,7 @@
                 <div class="left">
                   <span
                     v-if="apyStatus"
-                    @click="AddQuesFun('message.stake.apr_tip', $event)"
+                    @click="AddQuesFun('message.stake.apy_tip', $event)"
                     class="page_has_question_icon font16 span2"
                     :class="isEnLang ? 'en_Bold' : ''"
                     >APY</span

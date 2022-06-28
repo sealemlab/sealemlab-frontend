@@ -955,8 +955,9 @@ export const message = {
     
     txt_claim:'Claim...',
   
-    apr_tip:'APY and APR calculate in $0.001',
-    rate_tip:'The early quit tax will reset after staking again. Early quit tax = 30%-n*0.1%, n means days.',
+    apr_tip:'APR calculated in $0.001 of SR price APR=Nominal interest rate',
+    apy_tip:'APY calculated in $0.001 of SR price APY = (1+APR/365)^365-1 {APR= Nominal interest rate;}',
+    rate_tip:'The early quit tax will reset after staking again. Early quit tax = 30%-StakingDays*0.1%',
   },
   
   tip: {
