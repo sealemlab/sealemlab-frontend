@@ -708,7 +708,7 @@ export default {
       window.open(`https://pancakeswap.finance/swap?outputCurrency=${token().ST}`)
     },
     viewContract () {
-      window.open(`${this.$store.state.BSC_BROWSER}${token().ST}`)
+      window.open(`${this.$store.state.BSC_BROWSER}${contract().STStaking}`)
     }
   },
   mounted () {
