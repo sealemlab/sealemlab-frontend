@@ -161,10 +161,10 @@ export default {
     }
   }
   .label {
-    min-width: 180px;
+    min-width: 200px;
   }
   .content {
-    width: calc(100% - 180px);
+    width: calc(100% - 200px);
     font-size: 18px;
     // font-family: SFCompactDisplay-Medium, SFCompactDisplay;
     font-weight: 500;
