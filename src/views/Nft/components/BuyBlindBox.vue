@@ -651,6 +651,9 @@ export default {
   }
 }
 @media screen and (max-width: 980px) {
+  .buy_blind_box{
+    padding-right: 0;
+  }
   .title_box {
     width: 100%;
     li {
@@ -808,6 +811,7 @@ export default {
         flex-direction: column;
         max-width: 100%;
         margin-bottom: 0.1rem;
+        min-height: 0.5rem;
         .title{
           font-weight: bold;
           color: #ECCF83;

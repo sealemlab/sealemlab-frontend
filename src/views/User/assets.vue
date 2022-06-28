@@ -7,10 +7,10 @@
       <div class="title_box display_flex">
         <div class="address_box display_flex">
           <span class="font32 mobile_font16" :class="isEnLang?'en_Bold':''">0 NFT</span>
-          <div class="add_address_metamask">
+          <!-- <div class="add_address_metamask">
             <span class="font16" :class="isEnLang?'en_Bold':''">{{$t("message.user.txt7")}}:0x*********</span>
             <img :src="`${$store.state.imgUrl}add.webp`" class="add_img" />
-          </div>
+          </div> -->
         </div>
         <div class="add_buybtn font16" @click="toBuy" :class="isEnLang?'en_medium':''">{{$t("message.user.txt17")}}</div>
         <div class="menu display_flex">

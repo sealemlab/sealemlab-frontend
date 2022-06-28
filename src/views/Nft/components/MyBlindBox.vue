@@ -224,7 +224,7 @@ export default {
         }
         .line_{
           margin-top: 0.14rem;
-          width: auto;
+          width: 99%;
           max-width: 2.04rem;
           padding:0.08rem;
           display: flex;

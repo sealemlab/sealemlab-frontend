@@ -2,7 +2,7 @@
   <div class="user_center_page">
     <div class="user_info display_flex">
       <div class="user_head_portrait display_flex">
-        <span class="font20 user_name">xxxx@xx.xx</span>
+        <!-- <span class="font20 user_name">xxxx@xx.xx</span> -->
         <!-- <span class="font20 user_name">{{getLogin.mailAccount?getLogin.mailAccount:'xxxx@xx.xx'}}</span> -->
         <div class="invitation_code out_btn font16" :class="isEnLang?'en_Bold':''" @click="copyLink">{{ $t("message.user.txt5") }}</div>
       </div>
@@ -17,8 +17,8 @@
             </div>
             <div class="outbox_add">
               <div class="onelin display_flex">
-                <span class="mobile_font16 font16">{{$t(item.name1)}}</span>
-                <span class="mobile_font16 font16">{{item.num1 | PriceConversion}} ( ≈ $ {{item.num1_money | PriceConversion}})</span>
+                <span class="font16">{{$t(item.name1)}}</span>
+                <span class="font16">{{item.num1 | PriceConversion}} ( ≈ $ {{item.num1_money | PriceConversion}})</span>
               </div>
               <div class="onelin display_flex" v-if="item.name3">
                 <span class="font14">{{$t(item.name3)}}</span>
@@ -542,7 +542,7 @@ export default {
       .ul_calss{
         position: absolute;
         right: 0;
-        top: 0.3rem;
+        top: 0.2rem;
         display: flex;
         li{
           font-weight: normal;

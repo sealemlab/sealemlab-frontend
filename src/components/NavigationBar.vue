@@ -21,7 +21,7 @@
           {{ $t("message.nav.txt8") }}
         </div>
         <div class="font_login font16" :class="{ active: navActive == 7 }" v-else>
-          <span @click="loginClick('register')">{{ $t("message.nav.txt8_1") }}</span> /
+          <!-- <span @click="loginClick('register')">{{ $t("message.nav.txt8_1") }}</span> / -->
           <span @click="loginClick('login')">{{ $t("message.nav.txt8_2") }}</span>
         </div>
       </div>

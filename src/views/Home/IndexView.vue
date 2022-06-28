@@ -893,7 +893,7 @@ export default {
     }
     .add_top_content_center{
       // justify-content: center;
-      padding-left: 10%;
+      // padding-left: 10%;
     }
     .add_top_content_end{
       justify-content: flex-end;

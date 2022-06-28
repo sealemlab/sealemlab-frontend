@@ -8,11 +8,11 @@
         <img :src="`${$store.state.imgUrl}BOND.webp`" class="bond_img" />
         <ul :class="isEnLang?'en_medium':''">
           <li>
-            <div class="txt1">{{ $t("message.bond.txt2_1") }}</div>
+            <div class="txt1">{{ $t("message.bond.txt2_2") }}</div>
             <!-- <div class="line"></div> -->
           </li>
           <li>
-            <div class="txt1">{{ $t("message.bond.txt2_2") }}</div>
+            <div class="txt1">{{ $t("message.bond.txt2_1") }}</div>
             <!-- <div class="line"></div> -->
           </li>
           <li>
@@ -1098,6 +1098,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
+          white-space:nowrap;
         }
         // .line {
         //   width: 50%;
@@ -1144,7 +1145,7 @@ export default {
       font-weight: 600;
       color: #eccf83;
       line-height: 33px;
-      text-align: center;
+      text-align: left;
       &:nth-child(1){
         text-align: left;
       }
@@ -1804,6 +1805,9 @@ export default {
           align-items: center;
           margin-right: 0.1rem;
           margin-top: 0.03rem;
+        }
+        .link_{
+          width:85%;
         }
         div{
           p{
