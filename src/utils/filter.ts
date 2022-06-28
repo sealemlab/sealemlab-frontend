@@ -9,7 +9,7 @@ const SquareRoot = (val :any,bit = 2) => {
 	return utils.getBit(Number(val) / 1e2, bit)
 }
 const MultiplyBySquare = (val :any,bit = 2) => {
-	if (!val) return '0';
+	if (!val) return '0.00';
 	return utils.getBit(Number(val) * 1e2, bit)
 }
 const Thousandths = (val :any) => {
