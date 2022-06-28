@@ -106,7 +106,7 @@ export default {
       width: 100%;
       display: flex;
       flex-direction: column;
-      margin-top: 60px;
+      margin-top: 36px;
       background: linear-gradient(311deg, #121212 0%, #0C0C0C 100%);
       box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39);
       border-radius: 8px;

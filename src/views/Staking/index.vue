@@ -31,7 +31,7 @@
           $t(item.title)
         }}</span>
         <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-if="index == 1">
-          {{ item.num | PriceConversion | Thousandths }}
+          {{ item.num | PriceConversion | Thousandths }} SR
         </span>
         <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-else
           >$ {{ item.num | PriceConversion | Thousandths }}</span>
@@ -81,7 +81,7 @@
                 <div class="left">
                   <span
                     v-if="apyStatus"
-                    @click="AddQuesFun('message.stake.apr_tip', $event)"
+                    @click="AddQuesFun('message.stake.apy_tip', $event)"
                     class="page_has_question_icon font16 span2"
                     :class="isEnLang ? 'en_Bold' : ''"
                     >APY</span
@@ -104,7 +104,7 @@
                       v-if="!apyStatus"
                       class="font16 span3"
                       :class="isEnLang ? 'en_Bold' : ''"
-                      >{{ APR | MultiplyBySquare }} %</span
+                      >{{ APR | PriceConversion }} %</span
                     >
                     <svg
                       @click="changeApy"
@@ -126,40 +126,6 @@
                     </svg>
                   </p>
                 </div>
-                <!-- <div class="left">
-                  <span
-                    @click="AddQuesFun('message.stake.txt14_1', $event)"
-                    class="page_has_question_icon font16 span2"
-                    :class="isEnLang ? 'en_Bold' : ''"
-                    >APY</span
-                  >
-                  <p>
-                    <span class="font16" :class="isEnLang ? 'en_Bold' : ''"
-                      >{{ APY | MultiplyBySquare }} %</span
-                    >
-                    <svg
-                      t="1655894703771"
-                      class="icon"
-                      viewBox="0 0 1024 1024"
-                      version="1.1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      p-id="1998"
-                      width="16"
-                      height="16"
-                    >
-                      <path
-                        d="M892 928.1H134c-19.9 0-36-16.1-36-36v-758c0-19.9 16.1-36 36-36h314.1c19.9 0 36 16.1 36 36s-16.1 36-36 36H170v686h686V579.6c0-19.9 16.1-36 36-36s36 16.1 36 36v312.5c0 19.9-16.1 36-36 36z"
-                        p-id="1999"
-                        fill="#8F8E8E"
-                      ></path>
-                      <path
-                        d="M927.9 131.6v-0.5c-0.1-1.7-0.4-3.3-0.7-4.9 0-0.1 0-0.2-0.1-0.3-0.4-1.7-0.9-3.3-1.5-4.9v-0.1c-0.6-1.6-1.4-3.1-2.2-4.6 0-0.1-0.1-0.1-0.1-0.2-0.8-1.4-1.7-2.8-2.7-4.1-0.1-0.1-0.2-0.3-0.3-0.4-0.5-0.6-0.9-1.1-1.4-1.7 0-0.1-0.1-0.1-0.1-0.2-0.5-0.6-1-1.1-1.6-1.6l-0.4-0.4c-0.5-0.5-1.1-1-1.6-1.5l-0.1-0.1c-0.6-0.5-1.2-1-1.9-1.4-0.1-0.1-0.3-0.2-0.4-0.3-1.4-1-2.8-1.8-4.3-2.6l-0.1-0.1c-1.6-0.8-3.2-1.5-4.9-2-1.6-0.5-3.3-1-5-1.2-0.1 0-0.2 0-0.3-0.1l-2.4-0.3h-0.3c-0.7-0.1-1.3-0.1-2-0.1H640.1c-19.9 0-36 16.1-36 36s16.1 36 36 36h165L487.6 487.6c-14.1 14.1-14.1 36.9 0 50.9 7 7 16.2 10.5 25.5 10.5 9.2 0 18.4-3.5 25.5-10.5L856 221v162.8c0 19.9 16.1 36 36 36s36-16.1 36-36V134.1c0-0.8 0-1.7-0.1-2.5z"
-                        p-id="2000"
-                        fill="#8F8E8E"
-                      ></path>
-                    </svg>
-                  </p>
-                </div> -->
                 <div class="left right" @click="viewContract">
                   <span class="span1 font12">{{
                     $t("message.stake.txt7")
@@ -211,9 +177,9 @@
                 :class="isEnLang ? 'en_medium' : ''"
                 >$
                 {{
-                  (getUserCoin.st * $store.state.srPrice)
+                  (getUserCoin.st * getUserCoin.stPrice)
                     | PriceConversion
-                    | Thousandths
+                    | Thou sandths
                 }}</span
               >
             </div>
@@ -249,7 +215,7 @@
                 :class="isEnLang ? 'en_medium' : ''"
                 >$
                 {{
-                  (poolInfo.userStaked * $store.state.srPrice)
+                  (poolInfo.userStaked * getUserCoin.stPrice)
                     | PriceConversion
                     | Thousandths
                 }}</span
@@ -350,11 +316,6 @@
               <BtnLoading :isloading="SRBtnLoading"></BtnLoading>
             </div>
           </div>
-          <!-- 解除质押的ST按钮 -->
-          <!-- <div class="out_btn btn_normal" @click="ClaimSTFun">
-            {{ $t("message.stake.txt13")
-            }}<BtnLoading :isloading="STBtnLoading"></BtnLoading>
-          </div> -->
           <p
             class="font14 mobile_font12 tip_"
             @click="AddQuesFun('message.stake.rate_tip', $event)"
@@ -602,9 +563,9 @@ export default {
     },
     getSdkInfo () {
       // 池子总产出
-      stStaking().releasedSR().then(res => {
+      stStaking().srPerBlock().then(res => {
         console.log('池子总产出res: ', res);
-        this.dataArr[1].num = res / 1e18
+        this.dataArr[1].num = res / 1e18 * 28800
       })
       // 获取池子是否已开启
       stStaking().openStatus().then(res => {
@@ -613,15 +574,18 @@ export default {
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
       stStakingInfo.getApr(this.getUserCoin.stPrice, this.$store.state.srPrice).then(res => {
         this.APR = res
-        console.log('获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%res: ', res);
+        console.log('Apr::::', res);
         this.APY = Math.pow((1 + res / 100 / 365), 365) - 1
+        console.log('ApY::::', this.APY);
       }).catch(() => {
         this.APY = 0
+        
       })
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
-        // console.log('获取池子总质押ST数量: ', res);
-        this.dataArr[0].num = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
+        console.log('获取池子总质押ST数量: ', res);
+        this.dataArr[0].num = res / 1e18 * this.getUserCoin.stPrice
+        console.log('this.dataArr[0].num : ', this.dataArr[0].num );
         this.poolInfo.totalStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
       })
     },
@@ -688,8 +652,10 @@ export default {
       this.SRBtnLoading = true
       stStaking().connect(getSigner()).harvestToken().then(async res => {
         // console.log('res: ', res);
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt_claim','link':res.hash}));
         const etReceipt = await res.wait();
         if (etReceipt.status == 1) {
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.SRBtnLoading = false
           this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt22' }));
           this.getCurrencyETFun()
@@ -704,7 +670,7 @@ export default {
       window.open(`https://pancakeswap.finance/swap?outputCurrency=${token().ST}`)
     },
     viewContract () {
-      window.open(`${this.$store.state.BSC_BROWSER}${token().ST}`)
+      window.open(`${this.$store.state.BSC_BROWSER}address/${contract().STStaking}`)
     }
   },
   mounted () {
@@ -718,7 +684,7 @@ export default {
 <style lang="scss" scoped>
 .staking_box {
   width: 100vw;
-  padding-bottom: 198px;
+  padding-bottom: 40px;
   .img_bg {
     width: 100%;
     position: relative;
@@ -894,7 +860,7 @@ export default {
                   margin-right: 3px;
                 }
                 .span2 {
-                  margin-right: 31px;
+                  margin-right: 15px;
                 }
                 .span3 {
                   margin-right: 8px;

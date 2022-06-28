@@ -83,7 +83,7 @@ import { mapGetters } from "vuex";
 import { token,wallet } from "sealemlab-sdk";
 export default {
   computed: {
-    ...mapGetters(["getLogin","getNoticeNum","isEnLang","getUserCoin","getAccountStatus"])
+    ...mapGetters(["getIstrue","getLogin","getNoticeNum","isEnLang","getUserCoin","getAccountStatus",""])
   },
   watch: {
     'getAccountStatus': {
@@ -113,7 +113,11 @@ export default {
         company:'BUSD',
         name1:'message.user.txt6',
         num1:0,
-        num1_money:0
+        num1_money:0,
+        num2_money:0,
+        name3:'message.user.txt7',
+        address:this.$utils.getSubStr(token().BUSD, 6),
+        type:'busd'
       },
       {
         coin_logo:`${this.$store.state.imgUrl}stlogo.webp`,
@@ -152,10 +156,16 @@ export default {
     },
     addressClick(item){
       console.log('item: ', item);
+      if(!this.getIstrue){
+        this.$store.commit("setwalletstatus", true);
+        return
+      }
       if(item.type == 'st'){
         wallet.addST(`https:${this.$store.state.imgUrl}new_stlogo.webp`)
       }else if(item.type == 'sr'){
         wallet.addSR(`https:${this.$store.state.imgUrl}new_srlogo.webp`)
+      }else if(item.type == 'busd'){
+        wallet.addBUSD(`https:${this.$store.state.imgUrl}busd.webp`)
       }
     },
     copyLink(){

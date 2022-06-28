@@ -141,7 +141,7 @@ export default {
       justify-content: space-between;
       .btn {
         cursor: pointer;
-        width: 11rem;
+        width: 45%;
         height: 2.5rem;
         background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
         border-radius: 4px;
