@@ -237,7 +237,7 @@
 
         <!-- 手动更改直接卖完 -->
         <div class="main_button font18 mobile_font16 disable_bnb">
-          {{ $t("message.acticePage.txt31" )}}
+          {{ $t("message.tip.self_sold" )}}
         </div>
 
         <!-- 正常逻辑 -->
