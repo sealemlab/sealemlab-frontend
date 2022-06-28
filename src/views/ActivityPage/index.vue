@@ -572,13 +572,13 @@ export default {
       
       // 获取某IDO的最大供应量
       let maxnum = await ido().tokenMaxSupplys(idoID)
-      this.arr[2].num = this.$utils.convertBigNumberToNormal(Number(maxnum),0,18,true)
-      this.arr[2].busdnum = maxnum / 1e18 * this.nowPrice
+      this.arr[2].num = 1500000 // this.$utils.convertBigNumberToNormal(Number(maxnum),0,18,true)
+      this.arr[2].busdnum = 1500000 //maxnum / 1e18 * this.nowPrice
       // 获取某IDO的已售出数量
       ido().tokenSoldout(idoID).then(res => { 
         // console.log('获取某IDO的已售出数量: ', res);
-        this.arr[0].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        this.arr[0].busdnum = res / 1e18 * this.nowPrice
+        this.arr[0].num = 1500000 // this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.arr[0].busdnum = 1500000 * this.nowPrice //res / 1e18 * this.nowPrice
         
         this.percentage = parseInt(Number(this.arr[0].num) / Number(this.arr[2].num) * 100) 
         this.progressFun()
@@ -586,8 +586,8 @@ export default {
       // 获取某IDO的剩余可销售数量
       ido().getTokenLeftSupply(idoID).then(res => { 
         // console.log('获取某IDO的剩余可销售数量: ', res);
-        this.arr[1].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        this.arr[1].busdnum = res / 1e18 * this.nowPrice
+        this.arr[1].num = 0 //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.arr[1].busdnum = 0 //res / 1e18 * this.nowPrice
       })
     },
     userConnectInfo(idoID,iswhite = true){
