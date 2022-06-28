@@ -177,9 +177,9 @@
                 :class="isEnLang ? 'en_medium' : ''"
                 >$
                 {{
-                  (getUserCoin.st * $store.state.srPrice)
+                  (getUserCoin.st * getUserCoin.stPrice)
                     | PriceConversion
-                    | Thousandths
+                    | Thou sandths
                 }}</span
               >
             </div>
@@ -215,7 +215,7 @@
                 :class="isEnLang ? 'en_medium' : ''"
                 >$
                 {{
-                  (poolInfo.userStaked * $store.state.srPrice)
+                  (poolInfo.userStaked * getUserCoin.stPrice)
                     | PriceConversion
                     | Thousandths
                 }}</span
@@ -683,7 +683,7 @@ export default {
 <style lang="scss" scoped>
 .staking_box {
   width: 100vw;
-  padding-bottom: 198px;
+  padding-bottom: 40px;
   .img_bg {
     width: 100%;
     position: relative;
