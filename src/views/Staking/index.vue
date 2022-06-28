@@ -602,9 +602,9 @@ export default {
     },
     getSdkInfo () {
       // 池子总产出
-      stStaking().releasedSR().then(res => {
+      stStaking().srPerBlock().then(res => {
         console.log('池子总产出res: ', res);
-        this.dataArr[1].num = res / 1e18
+        this.dataArr[1].num = res / 1e18 * 28800
       })
       // 获取池子是否已开启
       stStaking().openStatus().then(res => {
@@ -618,6 +618,7 @@ export default {
         console.log('ApY::::', this.APY);
       }).catch(() => {
         this.APY = 0
+        
       })
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
@@ -689,8 +690,10 @@ export default {
       this.SRBtnLoading = true
       stStaking().connect(getSigner()).harvestToken().then(async res => {
         // console.log('res: ', res);
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt_claim','link':res.hash}));
         const etReceipt = await res.wait();
         if (etReceipt.status == 1) {
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.SRBtnLoading = false
           this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt22' }));
           this.getCurrencyETFun()

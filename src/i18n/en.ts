@@ -952,6 +952,8 @@ export const message = {
     txt42:'Please enter the $ST amount you want to unstake',
     txt43:'Unstaking....',
     txt44:'Unstake Success',
+    
+    txt_claim:'Claim...',
   
     apr_tip:'APY and APR calculate in $0.001',
     rate_tip:'The early quit tax will reset after staking again. Early quit tax = 30%-n*0.1%, n means days.',
