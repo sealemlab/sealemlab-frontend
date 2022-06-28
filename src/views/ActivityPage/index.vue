@@ -594,8 +594,8 @@ export default {
       // 获取某IDO的剩余可销售数量
       ido().getTokenLeftSupply(idoID).then(res => { 
         // console.log('获取某IDO的剩余可销售数量: ', res);
-        this.arr[1].num = 0 //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        this.arr[1].busdnum = 0 //res / 1e18 * this.nowPrice
+        this.arr[1].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.arr[1].busdnum = res / 1e18 * this.nowPrice
       })
     },
     userConnectInfo(idoID,iswhite = true){
