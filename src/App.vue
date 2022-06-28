@@ -399,14 +399,15 @@ export default {
           }
           break;
         case 1:
-          if(!this.getProduction){
-            this.$router.push("/staking");
-          }else{
-            if (!this.getNoticeNum) {
-              this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-              this.$store.commit("setNoticeNum", true);
-            }
-          }
+          // if(!this.getProduction){
+          //   this.$router.push("/staking");
+          // }else{
+          //   if (!this.getNoticeNum) {
+          //     this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+          //     this.$store.commit("setNoticeNum", true);
+          //   }
+          // }
+          this.$router.push("/staking");
           break;
         case 2:
           this.$router.push("/user/assets/0");

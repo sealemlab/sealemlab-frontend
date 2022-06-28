@@ -125,7 +125,8 @@ export default {
     },
     toRoute(item) {
       if(this.getProduction){
-        if(item.link == '/market' || item.link == "/staking"){
+        // || item.link == "/staking"
+        if(item.link == '/market'){
           if (!this.getNoticeNum) {
             this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
             this.$store.commit("setNoticeNum", true);
