@@ -236,17 +236,17 @@
 
 
         <!-- 手动更改直接卖完 -->
-        <div class="main_button font18 mobile_font16 disable_bnb">
+        <!-- <div class="main_button font18 mobile_font16 disable_bnb">
           {{ $t("message.tip.self_sold" )}}
-        </div>
+        </div> -->
 
         <!-- 正常逻辑 -->
         <!-- 用户不在白名单 -->
-        <!-- <div class="main_button font18 mobile_font16 disable_bnb" v-if="!userIsWhiteList">
+        <div class="main_button font18 mobile_font16 disable_bnb" v-if="!userIsWhiteList">
           {{ $t("message.acticePage.txt31" )}}
-        </div> -->
+        </div>
         <!-- 其他逻辑判断-->
-        <!-- <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:outStatus || finshed}" v-else>
+        <div class="main_button font18 mobile_font16" :class="{ en_Bold: isEnLang,disable_bnb:outStatus || finshed}" v-else>
           <FunBtn
             :allLoading="allLoading"
             :isapprove="isapprove"
@@ -257,7 +257,7 @@
             @sonapprove="sonapprove"
             @dosomething="userBuyIdo"
           />
-        </div> -->
+        </div>
       </div>
       <div class="mobile_three_box">
         <div v-for="(item, index) in arr1" :key="index">
@@ -580,13 +580,13 @@ export default {
       
       // 获取某IDO的最大供应量
       let maxnum = await ido().tokenMaxSupplys(idoID)
-      this.arr[2].num = 1500000 // this.$utils.convertBigNumberToNormal(Number(maxnum),0,18,true)
-      this.arr[2].busdnum = 1500000 //maxnum / 1e18 * this.nowPrice
+      this.arr[2].num = this.$utils.convertBigNumberToNormal(Number(maxnum),0,18,true)
+      this.arr[2].busdnum = maxnum / 1e18 * this.nowPrice
       // 获取某IDO的已售出数量
       ido().tokenSoldout(idoID).then(res => { 
         // console.log('获取某IDO的已售出数量: ', res);
-        this.arr[0].num = 1500000 // this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        this.arr[0].busdnum = 1500000 * this.nowPrice //res / 1e18 * this.nowPrice
+        this.arr[0].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.arr[0].busdnum = res / 1e18 * this.nowPrice
         
         this.percentage = parseInt(Number(this.arr[0].num) / Number(this.arr[2].num) * 100) 
         this.progressFun()
