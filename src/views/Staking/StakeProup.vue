@@ -31,20 +31,57 @@
           <span>APY</span>
           <span>{{APY | MultiplyBySquare}} %</span>
         </div>
-        <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>{{ $t("message.stake.txt18") }}</span>
-          <span>$ {{sevenDays | PriceConversion}}</span>
-        </div>
-        <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>{{ $t("message.stake.txt19") }}</span>
-          <span>$ {{fourteenDays | PriceConversion}}</span>
-        </div>
+        <!-- 30天 -->
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
           <span>{{ $t("message.stake.txt20") }}</span>
           <span>$ {{thirtyDays | PriceConversion}}</span>
         </div>
+        <!-- 60天 -->
         <div class="tipbox font14" :class="isEnLang?'en_medium':''">
-          <span>{{ $t("message.stake.txt21") }}</span>
+          <span>{{ $t("message.stake.txt20_1") }}</span>
+          <span>$ {{sixty | PriceConversion}}</span>
+        </div>
+        <!-- 90天 -->
+        <div class="tipbox font14" :class="isEnLang?'en_medium':''">
+          <span>{{ $t("message.stake.txt20_2") }}</span>
+          <span>$ {{ninety | PriceConversion}}</span>
+        </div>
+        <!-- 180天 -->
+        <div class="tipbox font14" :class="isEnLang?'en_medium':''">
+          <span>{{ $t("message.stake.txt20_3") }}</span>
+          <span>$ {{hundredEighty | PriceConversion}}</span>
+        </div>
+        <!-- 360天 -->
+        <div class="tipbox font14" :class="isEnLang?'en_medium':''">
+          <span>{{ $t("message.stake.txt20_4") }}</span>
+          <span>$ {{hundredSixty | PriceConversion}}</span>
+        </div>
+
+        <div class="tipbox font14 color4" :class="isEnLang?'en_medium':''">
+          <p @click="jumpFun">
+            <span class="link_txt">{{ $t("message.stake.txt21") }}</span>
+            <svg
+              t="1655894703771"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="1998"
+              width="16"
+              height="16"
+            >
+              <path
+                d="M892 928.1H134c-19.9 0-36-16.1-36-36v-758c0-19.9 16.1-36 36-36h314.1c19.9 0 36 16.1 36 36s-16.1 36-36 36H170v686h686V579.6c0-19.9 16.1-36 36-36s36 16.1 36 36v312.5c0 19.9-16.1 36-36 36z"
+                p-id="1999"
+                fill="#8F8E8E"
+              ></path>
+              <path
+                d="M927.9 131.6v-0.5c-0.1-1.7-0.4-3.3-0.7-4.9 0-0.1 0-0.2-0.1-0.3-0.4-1.7-0.9-3.3-1.5-4.9v-0.1c-0.6-1.6-1.4-3.1-2.2-4.6 0-0.1-0.1-0.1-0.1-0.2-0.8-1.4-1.7-2.8-2.7-4.1-0.1-0.1-0.2-0.3-0.3-0.4-0.5-0.6-0.9-1.1-1.4-1.7 0-0.1-0.1-0.1-0.1-0.2-0.5-0.6-1-1.1-1.6-1.6l-0.4-0.4c-0.5-0.5-1.1-1-1.6-1.5l-0.1-0.1c-0.6-0.5-1.2-1-1.9-1.4-0.1-0.1-0.3-0.2-0.4-0.3-1.4-1-2.8-1.8-4.3-2.6l-0.1-0.1c-1.6-0.8-3.2-1.5-4.9-2-1.6-0.5-3.3-1-5-1.2-0.1 0-0.2 0-0.3-0.1l-2.4-0.3h-0.3c-0.7-0.1-1.3-0.1-2-0.1H640.1c-19.9 0-36 16.1-36 36s16.1 36 36 36h165L487.6 487.6c-14.1 14.1-14.1 36.9 0 50.9 7 7 16.2 10.5 25.5 10.5 9.2 0 18.4-3.5 25.5-10.5L856 221v162.8c0 19.9 16.1 36 36 36s36-16.1 36-36V134.1c0-0.8 0-1.7-0.1-2.5z"
+                p-id="2000"
+                fill="#8F8E8E"
+              ></path>
+            </svg>
+          </p>
           <span>{{additionalTaxRate | MultiplyBySquare}} %</span>
         </div>
         <div class="stake_btn font18" :class="isEnLang?'en_Bold':''" @click="userStakedFun">
@@ -69,14 +106,20 @@ export default {
       let num = Math.floor( (Number(this.STmsg) * this.getUserCoin.stPrice ) / 1000) * 0.001
       return num + this.rate
     },
-    sevenDays(){
-      return Number(this.interestInfo.sevenDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 7 ) / 365)
-    },
-    fourteenDays(){
-      return Number(this.interestInfo.fourteenDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 14 ) / 365)
-    },
     thirtyDays(){
       return Number(this.interestInfo.thirtyDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 30) / 365)
+    },
+    sixty(){
+      return Number(this.interestInfo.sixtyDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 60) / 365)
+    },
+    ninety(){
+      return Number(this.interestInfo.ninetyDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 90) / 365)
+    },
+    hundredEighty(){
+      return Number(this.interestInfo.hundredEightyDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 180) / 365)
+    },
+    hundredSixty(){
+      return Number(this.interestInfo.hundredSixtyDays) + ((this.yearValue * (this.STmsg / ( Number(this.totalStaked) + Number(this.STmsg) )) * 360) / 365)
     }
   },
   watch:{
@@ -133,14 +176,23 @@ export default {
       STmsg:'',
       sliderValue:0,// 拖动条value
       interestInfo:{
-        sevenDays:0,
-        fourteenDays:0,
-        thirtyDays:0
+        thirtyDays:0,
+        sixtyDays:0,
+        ninetyDays:0,
+        hundredEightyDays:0,
+        hundredSixtyDays:0
       },
       yearValue:0
     }
   },
   methods: {
+    jumpFun(){
+      let arr = []
+      arr.push({link: "/bond",id:0})
+      localStorage.setItem('routeArr',JSON.stringify(arr))
+      this.closeProup()
+      this.$router.push('/bond')
+    },
     inputFun(data){
       if(this.getUserCoin.st < 1e-8){
         this.sliderValue = 0
@@ -228,9 +280,11 @@ export default {
       // 获取质押池用户ROI（用户年度投资回报率），需要在返回结果前面加上$
       stStakingInfo.getRoi(this.getAccount,this.$store.state.srPrice).then(res => {
         console.log('获取质押池用户ROI（用户年度投资回报率），需要在返回结果前面加上$res: ', res);
-        this.interestInfo.sevenDays = 7 / 365 * res
-        this.interestInfo.fourteenDays = 14 / 365 * res
         this.interestInfo.thirtyDays = 30 / 365 * res
+        this.interestInfo.sixtyDays = 60 / 365 * res
+        this.interestInfo.ninetyDays = 90 / 365 * res
+        this.interestInfo.hundredEightyDays = 180 / 365 * res
+        this.interestInfo.hundredSixtyDays = 360 / 365 * res
       })
     },
     // 预计用户质押的st收益
@@ -381,6 +435,14 @@ export default {
     justify-content:space-between;
     align-items: center;
     margin-bottom: 10px;
+    p{
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      .link_txt{
+        margin-right: 5px;
+      }
+    }
   }
   .stake_btn{
     cursor: pointer;

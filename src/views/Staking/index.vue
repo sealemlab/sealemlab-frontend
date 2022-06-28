@@ -583,8 +583,9 @@ export default {
       })
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
-        // console.log('获取池子总质押ST数量: ', res);
-        this.dataArr[0].num = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
+        console.log('获取池子总质押ST数量: ', res);
+        this.dataArr[0].num = res / 1e18 * this.getUserCoin.stPrice
+        console.log('this.dataArr[0].num : ', this.dataArr[0].num );
         this.poolInfo.totalStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
       })
     },
@@ -669,7 +670,7 @@ export default {
       window.open(`https://pancakeswap.finance/swap?outputCurrency=${token().ST}`)
     },
     viewContract () {
-      window.open(`${this.$store.state.BSC_BROWSER}${contract().STStaking}`)
+      window.open(`${this.$store.state.BSC_BROWSER}address/${contract().STStaking}`)
     }
   },
   mounted () {
@@ -859,7 +860,7 @@ export default {
                   margin-right: 3px;
                 }
                 .span2 {
-                  margin-right: 31px;
+                  margin-right: 15px;
                 }
                 .span3 {
                   margin-right: 8px;
