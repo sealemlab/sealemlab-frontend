@@ -255,12 +255,6 @@ export default {
           })
           this.getUserCoinInfo()
         }
-        // else{
-        //   let setIntervalOBJ = setInterval(function (){},1)
-        //   for (let index = 0; index < setIntervalOBJ; index++) {
-        //     clearInterval(index)
-        //   }
-        // }
       },
       deep: true,
       immediate: true,
@@ -474,10 +468,6 @@ export default {
       }
     },
     getUserCoinInfo(){
-      bondDepository().getStPrice().then(res => {
-        let stPrice = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
-      })
       erc20(token().ST).balanceOf(this.getAccount).then(res => {
         let st = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{st:st}));
@@ -512,6 +502,10 @@ export default {
     window.onbeforeunload = function (){
       beginTime = new Date().getTime();
     };
+    bondDepository().getStPrice().then(res => {
+      let stPrice = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+      this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
+    })
   }
 };
 </script>
