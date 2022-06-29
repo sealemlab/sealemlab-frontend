@@ -121,6 +121,7 @@
         <div class="box">
           <div class="text1 font12" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt40") }}</div>
           <ul class="list_title1">
+            <!-- 第一个圆 -->
             <li>
               <ul class="list_title2">
                 <li :title='$t("message.bond.txt73")' style="cursor:pointer" @click="quesFun('message.bond.txt73',$event)">
@@ -420,7 +421,8 @@
         <div class="content">
           <div class="databox" :class="isEnLang?'en_Bold':''" v-for="(item,index) in inviteArr" :key="index">
             <span class="font18 mobile_font14">{{ $t(item.title) }}</span>
-            <span class="font35 mobile_font22">{{item.num}}</span>
+            <span class="font35 mobile_font22" v-if="index == 0 || index == 1">{{item.num}}</span>
+            <span class="font35 mobile_font22" v-else>$ {{item.num | PriceConversion}}</span>
           </div>
         </div>
       </div>
@@ -794,18 +796,21 @@ export default {
       })
       // 获取某用户的下级的质押的ST数量
       stStaking().affiliateStakedST(this.getAccount).then(res => {
-        console.log('获取某用户的下级的质押的ST数量res: ', res);
-        this.inviteArr[3].num = util.formatEther(res)// this.$utils.convertBigNumberToNormal(Number(res), 2)
+        this.inviteArr[3].num = this.getUserCoin.stPrice * util.formatEther(res) // this.$utils.convertBigNumberToNormal(Number(res), 2)
       })
-      
-      // 获取邀请统计信息
-      invitingInfo.getCounters({
-        first:10,
-        skip: 0,
-        orderBy: '',
-        orderDirection: '',
-        inviter: this.getAccount}).then(res => {
-          console.log('获取邀请统计信息res: ', res);
+      // 获取用户邀请的人数
+        console.log('this.getAccount.toUpperCase(: ', this.getAccount.toLowerCase());
+      invitingInfo.getCounters(10,0,'usersCount','desc',this.getAccount.toLowerCase()).then(res => {
+        console.log('获取用户邀请的人数: ', res);
+        if(res.data.counters.length > 0){
+          this.inviteArr[0].num = res.data.counters[0].usersCount // 邀请下级数
+        }else{
+          this.inviteArr[0].num = 0
+        }
+      })
+      // 排行榜
+      invitingInfo.getCounters(50,0,'usersCount','desc').then(res => {
+        console.log('获取邀请统计信息排行榜res: ', res);
       })
     },
     // 获取用户的下属某期债券的税前购买USD金额

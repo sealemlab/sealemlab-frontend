@@ -1,4 +1,4 @@
-import {wallet, network,sb,sn,getSourceUrl,erc20,getSigner,bondDepository} from "sealemlab-sdk";
+import {wallet, network,sb,sn,getSourceUrl,erc20,getSigner,bondDepository,util} from "sealemlab-sdk";
 import BigNumber from "bignumber.js";
 import store from "@/store";
 export default {
@@ -522,27 +522,25 @@ export default {
   },
   // 刷新代币余额
   getUserCoinQuantity(address:any,name:string,account:string){
-    let that = this
     erc20(address).balanceOf(account).then((res:any)=> {
       if(name == 'busd'){
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'busd':that.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'busd':util.formatEther(res)}));
       }else if(name == 'st'){
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'st':that.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'st':util.formatEther(res)}));
       }else if(name == 'sr'){
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'sr':that.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'sr':util.formatEther(res)}));
       }
     })
   },
   // 刷新代币价格
   refreshPrice(type:string,bondID = ''){
-    let that = this
     if(type == 'st'){
       bondDepository().getStPrice().then((res:any) => {
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stPrice':that.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stPrice':util.formatEther(res)}));
       })
     }else if(type == 'stlp'){
       bondDepository().getLpPrice(bondID).then((res:any) => {
-        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stlpPrice':that.convertBigNumberToNormal(Number(res),0,18,true)}));
+        store.commit("setUserCoin",Object.assign(store.state.userCoin,{'stlpPrice':util.formatEther(res)}));
       })
     }
   }

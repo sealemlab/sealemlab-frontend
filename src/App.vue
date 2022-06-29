@@ -469,7 +469,6 @@ export default {
     },
     getUserCoinInfo(){
       erc20(token().ST).balanceOf(this.getAccount).then(res => {
-        console.log('用户st余额res: ', res);
         let st = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{st:st}));
       })

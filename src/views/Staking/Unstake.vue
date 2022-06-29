@@ -58,7 +58,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { stStaking,getSigner,token } from 'sealemlab-sdk'
+import { stStaking,getSigner,token,util } from 'sealemlab-sdk'
 import progressBar from './slider.vue'
 import MessageBox from "@/views/Bond/MessageBox.vue";
 export default {
@@ -162,7 +162,7 @@ export default {
       this.userUnStakedLoading = true
       let subNum = this.$utils.getBit(this.STmsg, 8)
       // this.$utils.convertNormalToBigNumber(subNum, 18)
-      stStaking().connect(getSigner()).withdraw(util.parseUnits(this.subNum)).then(async res => {
+      stStaking().connect(getSigner()).withdraw(util.parseUnits(subNum)).then(async res => {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt43','link':res.hash}));
         this.$store.commit("setProgressInfo", JSON.stringify({'speed':30}));
         const etReceipt = await res.wait();

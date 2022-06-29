@@ -662,8 +662,8 @@ export const message = {
     txt65: "Your referral link",
     txt66: "Invitation Stats",
     txt67: "Invited",
-    txt68: "Invitee's liquidity increase",
-    txt69: "Ranking",
+    txt68: "Ranking",
+    txt69: "Invitees buy bond within 14 days",
     add_txt69:"Invitees staking",
     txt70: "Bond bought within 30 days",
 

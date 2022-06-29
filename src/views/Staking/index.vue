@@ -394,7 +394,7 @@ import { mapGetters } from "vuex";
 import MessageBox from "@/views/Bond/MessageBox.vue";
 import StakedProup from './StakeProup.vue'
 import Unstake from './Unstake.vue'
-import { stStaking, token, contract, getSigner, stStakingInfo, bondDepository } from 'sealemlab-sdk'
+import { stStaking, token, contract, getSigner, stStakingInfo, bondDepository, util } from 'sealemlab-sdk'
 export default {
   computed: { ...mapGetters(["getProduction", "getAccountStatus", "getAccount", "getIsMobile", "getNoticeNum", "isEnLang", "getUserCoin"]), },
   data () {
