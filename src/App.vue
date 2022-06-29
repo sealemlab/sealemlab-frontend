@@ -474,6 +474,10 @@ export default {
       }
     },
     getUserCoinInfo(){
+      bondDepository().getStPrice().then(res => {
+        let stPrice = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
+      })
       erc20(token().ST).balanceOf(this.getAccount).then(res => {
         let st = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{st:st}));
@@ -485,10 +489,6 @@ export default {
       erc20(token().BUSD).balanceOf(this.getAccount).then(res => {
         let busd = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{busd:busd}))
-      })
-      bondDepository().getStPrice().then(res => {
-        let stPrice = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
       })
     }
   },
