@@ -236,40 +236,8 @@
               >
             </div>
             <div class="Symbol_btn" v-if="poolInfo.userStaked > 0">
-              <svg
-                t="1656315671397"
-                class="icon"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="10166"
-                width="32"
-                height="32"
-                @click="btnFun('add')"
-              >
-                <path
-                  d="M896.062469 0h-767.625183C57.771791 0 0.499756 57.272035 0.499756 127.937531v767.625183c0 70.665495 57.272035 127.937531 127.93753 127.93753h767.625183c70.665495 0 127.937531-57.272035 127.937531-127.93753v-767.625183c0-70.665495-57.272035-127.937531-127.937531-127.937531zM831.593948 513.149439c-0.499756 17.391508-15.192582 31.084822-32.684041 31.084822H559.726696c-8.795705 0-15.992191 7.196486-15.992191 15.992191v239.183211c0 17.391508-13.693314 32.184285-31.084822 32.684041-18.091166 0.499756-32.883943-13.993167-32.883944-31.984382V560.226452c0-8.795705-7.196486-15.992191-15.992191-15.992191H224.590337c-17.391508 0-32.184285-13.693314-32.684041-31.084822-0.499756-18.091166 13.993167-32.883943 31.984382-32.883944h239.88287c8.795705 0 15.992191-7.196486 15.992191-15.992191V225.090093c0-17.391508 13.693314-32.184285 31.084822-32.684041 18.091166-0.499756 32.883943 13.993167 32.883944 31.984382v239.88287c0 8.795705 7.196486 15.992191 15.992191 15.992191h239.88287c17.991215 0 32.484139 14.792777 31.984382 32.883944z"
-                  p-id="10167"
-                  fill="#F7E9B9"
-                ></path>
-              </svg>
-              <svg
-                t="1656321953305"
-                class="icon"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="11745"
-                width="32"
-                height="32"
-                @click="btnFun('reduce')"
-              >
-                <path
-                  d="M896.062469 0h-767.625183C57.771791 0 0.499756 57.272035 0.499756 127.937531v767.625183c0 70.665495 57.272035 127.937531 127.93753 127.93753h767.625183c70.665495 0 127.937531-57.272035 127.937531-127.93753v-767.625183c0-70.665495-57.272035-127.937531-127.937531-127.937531zM799.609566 544.234261H223.890678c-17.691362 0-31.984383-14.293021-31.984382-31.984383s14.293021-31.984383 31.984382-31.984383h575.718888c17.691362 0 31.984383 14.293021 31.984382 31.984383s-14.293021 31.984383-31.984382 31.984383z"
-                  p-id="11746"
-                  fill="#F7E9B9"
-                ></path>
-              </svg>
+              <div class="border_ mobile_font16 font22" @click="btnFun('add')">+</div>
+              <div class="border_ mobile_font16 font22" @click="btnFun('reduce')">-</div>
             </div>
             <div class="btn" v-else>
               <FunBtn
@@ -586,11 +554,11 @@ export default {
       })
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
       console.log('this.getUserCoin.stPrice, this.getUserCoin.srPrice): ', this.getUserCoin, this.getUserCoin.srPrice);
-      stStakingInfo.getApr(this.getUserCoin.stPrice,this.getUserCoin.srPrice).then(res => {
-        if(isNaN(res)){
+      stStakingInfo.getApr(this.getUserCoin.stPrice, this.getUserCoin.srPrice).then(res => {
+        if (isNaN(res)) {
           this.APR = 'Infinity'
           this.APY = 'Infinity'
-        }else{
+        } else {
           this.APR = res
           console.log('合约直接返回Apr::::', res);
           this.APY = Math.pow((1 + res / 100 / 365), 365) - 1
@@ -781,7 +749,7 @@ export default {
     justify-content: space-between;
     .out_onebox {
       width: 344px;
-      // height: 539px;
+      height: 100%;
       padding: 2px;
       border-radius: 12px;
       background: linear-gradient(
@@ -899,12 +867,13 @@ export default {
           margin-top: 27px;
           padding: 0 14px;
           justify-content: space-between;
+          align-items: center;
           .left {
             display: flex;
             flex-direction: column;
             font-weight: 500;
             color: #ced3d9;
-            line-height: 22px;
+            line-height: 14px;
             .num {
               display: flex;
               align-items: center;
@@ -924,7 +893,7 @@ export default {
           }
           .btn {
             cursor: pointer;
-            width: 130px;
+            width: 109px;
             height: 40px;
             display: flex;
             justify-content: center;
@@ -934,25 +903,18 @@ export default {
           }
           .Symbol_btn {
             cursor: pointer;
-            width: 130px;
+            width: 109px;
             display: flex;
             justify-content: space-between;
+            .border_{
+              width: 40px;
+              height: 40px;
+              border: 1px solid #918256;
+              line-height: 38px;
+              text-align: center;
+              border-radius: 4px;
+            }
           }
-        }
-        .out_btn {
-          cursor: pointer;
-          width: 206px;
-          min-height: 40px;
-          box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
-          border-radius: 4px;
-          backdrop-filter: blur(14px);
-          font-weight: 600;
-          color: #0e0d0d;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 0 auto;
-          margin-top: 34px;
         }
         .tip_ {
           width: 100%;
@@ -972,7 +934,7 @@ export default {
     }
     .out_nodata {
       width: 344px;
-      height: 557px;
+      // height: 507px;
       padding: 2px;
       border-radius: 12px;
       background: linear-gradient(
@@ -1273,21 +1235,6 @@ export default {
               display: flex;
               justify-content: space-between;
             }
-          }
-          .out_btn {
-            cursor: pointer;
-            width: 1.5rem;
-            height: 0.26rem;
-            box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
-            border-radius: 0.04rem;
-            backdrop-filter: blur(14px);
-            font-weight: 600;
-            color: #0e0d0d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto;
-            margin-top: 0.25rem;
           }
           .tip_ {
             width: 100%;

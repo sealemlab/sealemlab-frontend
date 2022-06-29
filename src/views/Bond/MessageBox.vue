@@ -115,4 +115,8 @@ export default {
     }
   }
 }
+.out_title_box::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 </style>
