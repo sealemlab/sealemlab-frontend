@@ -161,7 +161,8 @@ export default {
       if (this.userUnStakedLoading) return
       this.userUnStakedLoading = true
       let subNum = this.$utils.getBit(this.STmsg, 8)
-      stStaking().connect(getSigner()).withdraw(this.$utils.convertNormalToBigNumber(subNum, 18)).then(async res => {
+      // this.$utils.convertNormalToBigNumber(subNum, 18)
+      stStaking().connect(getSigner()).withdraw(util.parseUnits(this.subNum)).then(async res => {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt43','link':res.hash}));
         this.$store.commit("setProgressInfo", JSON.stringify({'speed':30}));
         const etReceipt = await res.wait();
@@ -205,7 +206,7 @@ export default {
         if (res / 1e18 <= 1e-8) {
           this.userStaked = 0
         } else {
-          this.userStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
+          this.userStaked = util.formatEther(res)// this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
         }
       })
       // 获取用户提现时要扣的税率

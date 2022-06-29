@@ -332,7 +332,7 @@ export default {
       // 获取某类型的盲盒的支付代币单价
       sb().boxTokenPrices(boxtypeInfo).then(res => {
         // console.log('res: ', util.formatEther(res),Number(res));
-        this.stPrice = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        this.stPrice = util.formatEther(res)// this.$utils.convertBigNumberToNormal(Number(res), 2)
         this.priceStatus = false
       }).catch(() => {
         this.priceStatus = false

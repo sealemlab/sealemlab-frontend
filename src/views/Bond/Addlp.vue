@@ -122,7 +122,7 @@
 import { mapGetters } from "vuex";
 import MessageBox from "./MessageBox.vue";
 import ToolTip from "./Tooltip.vue";
-import { bondDepository,token,contract,getSigner } from 'sealemlab-sdk'
+import { bondDepository,token,contract,getSigner,util } from 'sealemlab-sdk'
 export default {
   watch:{
     'addlpDis'(newvala){
@@ -275,20 +275,20 @@ export default {
         if(!this.STmsg || !this.BUSDmsg){
           return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
         }
-        token0 = this.$utils.convertNormalToBigNumber(this.STmsg, 18)
-        token1 = this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
+        token0 = util.parseUnits(this.STmsg)  //this.$utils.convertNormalToBigNumber(this.STmsg, 18)
+        token1 = util.parseUnits(this.BUSDmsg) //this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
       }else if(this.activetype == 1){
         if(!this.BUSDmsg){
           return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
         }
-        token1 = this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
+        token1 = util.parseUnits(this.BUSDmsg) //this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
         token0 = 0
       }else if(this.activetype == 2){
         if(!this.STmsg){
           return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
         }
         token1 = 0
-        token0 = this.$utils.convertNormalToBigNumber(this.STmsg, 18)
+        token0 = util.parseUnits(this.STmsg) //this.$utils.convertNormalToBigNumber(this.STmsg, 18)
       }
       this.buyLoading = true
       console.log('this.newBondID,token0,token1,0,address: ', this.newBondID,token0,token1,0,address);
@@ -539,7 +539,7 @@ export default {
       // 获取某用户某期债券剩余可购买LP数量
       bondDepository().getUserLeftLpCanBuy(this.getAccount,this.newBondID).then(res => {
         console.log('获取某用户某期债券剩余可购买LP数量res: ', res);
-        obj.userSurplusNum = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        obj.userSurplusNum = util.formatEther(res)  //this.$utils.convertBigNumberToNormal(Number(res), 2)
         calback(Object.assign({},obj))
       })
       // 个人税率
@@ -551,7 +551,7 @@ export default {
       // 获取用户某期债券的税前购买USD金额
       bondDepository().userEpochUsdPayinBeforeTax(this.getAccount,this.newBondID).then(res => {
         // console.log('获取用户某期债券的税前购买USD金额: ', res);
-        obj.useReadyBy = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        obj.useReadyBy = util.formatEther(res)  //this.$utils.convertBigNumberToNormal(Number(res), 2)
         calback(Object.assign({},obj))
       })
       // 获取某用户的某期债券的个人额外利率数组，数组元素分别为邀请购买利率、邀请质押利率、质押利率、总个人额外利率（以上3个利率之和，最大30%）
@@ -566,8 +566,7 @@ export default {
       // 获取用户某期债券的LP购买量
       bondDepository().userEpochLpBuyAmount(this.getAccount,this.newBondID).then(res => {
         console.log('获取用户某期债券的LP购买量: ', res);
-        obj.userbuylp = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        console.log('obj.userbuylp: ', obj.userbuylp);
+        obj.userbuylp = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         calback(Object.assign({},obj))
       })
     },

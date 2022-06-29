@@ -2247,7 +2247,7 @@ export default {
           if (res.data.sellInfos.length > 0) {
             const arr = JSON.parse(JSON.stringify(res.data.sellInfos));
             arr.forEach((element) => {
-              element.price = this.$utils.convertBigNumberToNormal(Number(element.price),0,18,true)
+              element.price = util.formatEther(element.price) //this.$utils.convertBigNumberToNormal(Number(element.price),0,18,true)
               element.isnft = (element.nft).toLowerCase() == (token('production').SN).toLowerCase()?true:false
               element.buyloading = false
               if((element.token).toLowerCase() == (token().ST).toLowerCase()){

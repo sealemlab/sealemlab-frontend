@@ -663,7 +663,7 @@ export const message = {
     txt66: "Invitation Stats",
     txt67: "Invited",
     txt68: "Invitee's liquidity increase",
-    txt69: "Invitees buy bond within 14 days",
+    txt69: "Ranking",
     add_txt69:"Invitees staking",
     txt70: "Bond bought within 30 days",
 
@@ -765,7 +765,7 @@ export const message = {
     txt33: "Connect wallet firstly",
   },//账号
   user: {
-    txt1: "Raking",
+    txt1: "Ranking",
     txt2: "Address",
     txt3: "Invited",
     txt4: "Total reward",

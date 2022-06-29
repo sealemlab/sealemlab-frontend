@@ -572,7 +572,7 @@ export default {
       stStaking().stakedST().then(res => {
         // console.log('获取池子总质押ST数量: ', res);
         this.dataArr[0].num = res / 1e18 * this.getUserCoin.stPrice
-        this.poolInfo.totalStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
+        this.poolInfo.totalStaked = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
       })
     },
     getUserInfo () {
@@ -581,7 +581,7 @@ export default {
         if (res / 1e18 < 1e-8) {
           this.poolInfo.userStaked = 0
         } else {
-          this.poolInfo.userStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
+          this.poolInfo.userStaked = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
         }
       })
 
@@ -614,14 +614,14 @@ export default {
             this.poolInfo.userClaimSR = 0
             this.srLoading = false
           } else {
-            let nums = this.$utils.convertBigNumberToNormal(Number(res), 2)
+            let nums = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res), 2)
             this.poolInfo.userClaimSR = this.endValue
             this.endValue = Number(nums)
             // console.log('this.endValue: ', this.endValue);
             this.srLoading = false
           }
           if (this.endValue != 0 && this.poolInfo.userStaked == 0) {
-            let nums = this.$utils.convertBigNumberToNormal(Number(res), 2)
+            let nums = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res), 2)
             this.poolInfo.userClaimSR = this.endValue
             this.endValue = Number(nums)
             // console.log('清空定时器this.endValue: ', this.endValue);

@@ -437,7 +437,7 @@ import { mapGetters } from "vuex";
 import AddLp from "./Addlp.vue";
 import InviteProup from "./InviteProup.vue";
 import MessageBox from "./MessageBox.vue";
-import { bondDepository,erc20,token,getSigner,inviting,stStaking} from 'sealemlab-sdk'
+import { bondDepository,erc20,token,getSigner,inviting,stStaking,invitingInfo} from 'sealemlab-sdk'
 export default {
   components: {
     AddLp,InviteProup,MessageBox,circleProgressbar
@@ -795,14 +795,23 @@ export default {
       // 获取某用户的下级的质押的ST数量
       stStaking().affiliateStakedST(this.getAccount).then(res => {
         console.log('获取某用户的下级的质押的ST数量res: ', res);
-        this.inviteArr[3].num = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        this.inviteArr[3].num = util.formatEther(res)// this.$utils.convertBigNumberToNormal(Number(res), 2)
+      })
+      
+      // 获取邀请统计信息
+      invitingInfo.getCounters({first:10,
+        skip: 0,
+        orderBy: '',
+        orderDirection: '',
+        inviter: this.getAccount}).then(res => {
+          console.log('获取邀请统计信息res: ', res);
       })
     },
     // 获取用户的下属某期债券的税前购买USD金额
     getUserSubordinateMoney(){
       bondDepository().affiliateEpochUsdPayinBeforeTax(this.getAccount,this.newBondID).then(res => {
         console.log('获取用户的下属某期债券的税前购买USD金额res: ', res);
-        this.inviteArr[2].num = this.$utils.convertBigNumberToNormal(Number(res), 2)
+        this.inviteArr[2].num = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res), 2)
       })
     },
     getNEWPrice(){

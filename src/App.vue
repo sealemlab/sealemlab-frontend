@@ -208,7 +208,7 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
 import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
-import { token,erc20,bondDepository } from  "sealemlab-sdk";
+import { token,erc20,bondDepository,util } from  "sealemlab-sdk";
 export default { 
   computed: {
     ...mapGetters(["getAccountStatus","getProduction","getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
@@ -469,15 +469,16 @@ export default {
     },
     getUserCoinInfo(){
       erc20(token().ST).balanceOf(this.getAccount).then(res => {
-        let st = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        console.log('用户st余额res: ', res);
+        let st = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{st:st}));
       })
       erc20(token().SR).balanceOf(this.getAccount).then(res => {
-        let sr = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        let sr = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{sr:sr}));
       })
       erc20(token().BUSD).balanceOf(this.getAccount).then(res => {
-        let busd = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        let busd = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{busd:busd}))
       })
     }
@@ -503,7 +504,7 @@ export default {
       beginTime = new Date().getTime();
     };
     bondDepository().getStPrice().then(res => {
-      let stPrice = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+      let stPrice = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
       this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
     })
   }
