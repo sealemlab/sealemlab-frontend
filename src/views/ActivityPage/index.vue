@@ -258,6 +258,7 @@
             @dosomething="userBuyIdo"
           />
         </div> -->
+        
       </div>
       <div class="mobile_three_box">
         <div v-for="(item, index) in arr1" :key="index">
@@ -316,8 +317,6 @@ export default {
     },
     // 售卖完
     outStatus(){
-      // this.beforeBegin = false// 开始售卖前
-      // this.selling = false // 售卖中
       return this.arr[0].num == this.arr[2].num 
     }
   },
@@ -354,7 +353,7 @@ export default {
       progressTimer:null,
       nowPrice:0,
       nowPriceStatus:false, // 上线要改成false
-      startTime:0,// 上线前改成0   开始时间:6.28 20:00(1656417600)
+      startTime:0,//   开始时间:6.28 20:00(1656417600)
       endTime:0,
       pageTimer:null,
       getEndTimeStatus:false,
@@ -385,11 +384,6 @@ export default {
           this.allLoading = false // 现在取消加载(正式上线要改成true)
           clearInterval(this.setIntervalOBJ);
           this.setIntervalOBJ = setInterval(() => {
-            // if(this.countTimeOBJ == 0){
-            //   this.allLoading = false
-            //   clearInterval(this.setIntervalOBJ);
-            //   return
-            // }
             if (this.payAddress) {
               clearInterval(this.setIntervalOBJ);
               this.$refs.mychild.isApproveFun(this.payAddress, contract().IDO).then((res) => {
@@ -416,7 +410,7 @@ export default {
       setTimeout(() => {
         this.getIdoInfo(to.params.id)
         this.userConnectInfo(to.params.id)
-        this.getUsetTime()
+        // this.getUsetTime() // 倒计时直接写死 后续用在解开
       },1500)
       this.inputvalue = ''
     }
@@ -432,10 +426,6 @@ export default {
     },
     // 去授权
     sonapprove() {
-      // if(!this.userIsWhiteList){
-      //   this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt26'}));
-      //   return
-      // }
       if (this.buy_isloading) return;
       this.buy_isloading = true;
       this.$refs.mychild.goApproveFun(this.payAddress, contract().IDO)
@@ -443,20 +433,14 @@ export default {
           this.buy_isloading = false;
           if(res){
             this.isapprove = true;
-            // if(!this.getNoticeNum){
-            //   this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
-            //   this.$store.commit("setNoticeNum",true)
-            // }
           }else{
             this.isapprove = false;
           }
           this.allLoading = false
-          // this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
         })
     },
     InputClick (data) {
       if(!data){this.userbuyst = 0}
-      // console.log('input输入框', data)
       if(Number(data) > Number(this.getUserCoin.busd)){
         this.inputvalue = this.getUserCoin.busd
         this.userbuyst = this.getUserCoin.busd / this.nowPrice
@@ -529,6 +513,9 @@ export default {
               if(this.countTimeOBJ == 0){
                 this.btntxt = "message.tip.self_sold"
               }
+              if(this.outStatus){
+                this.btntxt = 'message.tip.self_sold'
+              }
               this.countTime = data.countTime
             });
           }
@@ -580,13 +567,13 @@ export default {
       
       // 获取某IDO的最大供应量
       let maxnum = await ido().tokenMaxSupplys(idoID)
-      this.arr[2].num = 1500000 // this.$utils.convertBigNumberToNormal(Number(maxnum),0,18,true)
-      this.arr[2].busdnum = 600000 //maxnum / 1e18 * this.nowPrice
+      this.arr[2].num = this.$utils.convertBigNumberToNormal(Number(maxnum),0,18,true)
+      this.arr[2].busdnum = maxnum / 1e18 * this.nowPrice
       // 获取某IDO的已售出数量
       ido().tokenSoldout(idoID).then(res => { 
         // console.log('获取某IDO的已售出数量: ', res);
-        this.arr[0].num = 1500000 // this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        this.arr[0].busdnum = 1500000 * this.nowPrice //res / 1e18 * this.nowPrice
+        this.arr[0].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.arr[0].busdnum = res / 1e18 * this.nowPrice
         
         this.percentage = parseInt(Number(this.arr[0].num) / Number(this.arr[2].num) * 100) 
         this.progressFun()
@@ -594,8 +581,8 @@ export default {
       // 获取某IDO的剩余可销售数量
       ido().getTokenLeftSupply(idoID).then(res => { 
         // console.log('获取某IDO的剩余可销售数量: ', res);
-        this.arr[1].num = 0 //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        this.arr[1].busdnum = 0 //res / 1e18 * this.nowPrice
+        this.arr[1].num = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.arr[1].busdnum = res / 1e18 * this.nowPrice
       })
     },
     userConnectInfo(idoID,iswhite = true){
@@ -621,6 +608,7 @@ export default {
     },
     // 用户购买
     userBuyIdo(){
+      if(this.outStatus)return
       if (this.buy_isloading) return;
       if(this.countTimeOBJ != 0){
         if(!this.userIsWhiteList){
@@ -686,8 +674,8 @@ export default {
   },
   mounted () {
     this.idoID = this.$route.params.id
-    this.getIdoInfo(this.idoID) // 上线解开
-    this.getUsetTime()
+    this.getIdoInfo(this.idoID)
+    // this.getUsetTime() // 倒计时直接写死 后续用在解开
   },
   beforeDestroy () {
     clearInterval(this.countTimeOBJ)

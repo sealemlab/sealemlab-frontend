@@ -179,7 +179,7 @@
                 {{
                   (getUserCoin.st * getUserCoin.stPrice)
                     | PriceConversion
-                    | Thou sandths
+                    | Thousandths
                 }}</span
               >
             </div>
