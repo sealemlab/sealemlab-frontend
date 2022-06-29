@@ -529,6 +529,9 @@ export default {
               if(this.countTimeOBJ == 0){
                 this.btntxt = "message.tip.self_sold"
               }
+              if(this.outStatus){
+                this.btntxt = 'message.tip.self_sold'
+              }
               this.countTime = data.countTime
             });
           }
