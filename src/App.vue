@@ -255,12 +255,6 @@ export default {
           })
           this.getUserCoinInfo()
         }
-        // else{
-        //   let setIntervalOBJ = setInterval(function (){},1)
-        //   for (let index = 0; index < setIntervalOBJ; index++) {
-        //     clearInterval(index)
-        //   }
-        // }
       },
       deep: true,
       immediate: true,
@@ -474,56 +468,18 @@ export default {
       }
     },
     getUserCoinInfo(){
-      let arr = [token().ST,token().SR,token().BUSD]
-      let count = 0
-      let obj = {
-        st:0,
-        sr:0,
-        busd:0,
-        stPrice:0
-      }
-      erc20(arr[0]).balanceOf(this.getAccount).then(res => {
-        obj.st = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        count++
-      }).catch(() => {
-        count++
+      erc20(token().ST).balanceOf(this.getAccount).then(res => {
+        let st = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{st:st}));
       })
-      erc20(arr[1]).balanceOf(this.getAccount).then(res => {
-        obj.sr = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        count++
-      }).catch(() => {
-        count++
+      erc20(token().SR).balanceOf(this.getAccount).then(res => {
+        let sr = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{sr:sr}));
       })
-      erc20(arr[2]).balanceOf(this.getAccount).then(res => {
-        // console.log('用户的busd余额res: ', res);
-        obj.busd = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-        // console.log('obj.busd: ', obj.busd);
-        count++
-      }).catch(() => {
-        count++
+      erc20(token().BUSD).balanceOf(this.getAccount).then(res => {
+        let busd = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+        this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{busd:busd}))
       })
-      bondDepository().getStPrice().then(res => {
-        // st价格
-        if(res){
-          obj.stPrice = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
-          count++
-        }else{
-          obj.stPrice = 0
-          count++
-        }
-      }).catch(() => {
-        obj.stPrice = 0
-        count++
-      })
-      clearInterval(this.timer)
-      this.timer = setInterval(() => {
-        if(count == 4){
-          clearInterval(this.timer)
-          this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,obj));
-          console.log("获取用户代币余额结束",count)
-        }
-        // console.log("获取用户代币余额中",count)
-      },1000)
     }
   },
   mounted () {
@@ -546,6 +502,10 @@ export default {
     window.onbeforeunload = function (){
       beginTime = new Date().getTime();
     };
+    bondDepository().getStPrice().then(res => {
+      let stPrice = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+      this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
+    })
   }
 };
 </script>

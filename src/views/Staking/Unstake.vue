@@ -69,7 +69,7 @@ export default {
     ...mapGetters(["getProduction","isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
     twenty(){
       if(this.userTaxRate >= 20){
-        console.log('this.userTaxRate - 20: ', this.userTaxRate - 20);
+        // console.log('this.userTaxRate - 20: ', this.userTaxRate - 20);
         return Number((this.userTaxRate - Number(20)) / 0.1).toFixed(2)
       }
       return 0
@@ -201,7 +201,7 @@ export default {
     },
     getUserStaked(){
       stStaking().userStakedST(this.getAccount).then(res => {
-        console.log('获取某用户的质押的ST数量: ', res);
+        // console.log('获取某用户的质押的ST数量: ', res);
         if (res / 1e18 <= 1e-8) {
           this.userStaked = 0
         } else {

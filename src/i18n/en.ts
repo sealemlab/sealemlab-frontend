@@ -947,7 +947,7 @@ export const message = {
     txt36:'Early quit tax',
     txt37:'Early quit tax to 20% after',
     txt38:'Early quit tax to 10% after',
-    txt39:'Early quit tax fee to 0% after',
+    txt39:'Early quit tax to 0% after',
     txt40:'Early quit tax will reset after staking again',
 
     txt41:'There is currently no amount to unstake',

@@ -17,11 +17,16 @@
         :class="isEnLang ? 'en_medium' : ''"
         >{{ $t("message.stake.txt31") }}</span
       >
-      <a href="https://lab-sealem.gitbook.io/sealem-lab/basic/staking" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://lab-sealem.gitbook.io/sealem-lab/basic/staking"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <span
           class="span3 font14 mobile_font12"
           :class="isEnLang ? 'en_medium' : ''"
-          >{{ $t("message.stake.txt32") }}</span>
+          >{{ $t("message.stake.txt32") }}</span
+        >
       </a>
     </div>
     <!-- 数据 -->
@@ -30,11 +35,19 @@
         <span class="font24" :class="isEnLang ? 'en_medium' : ''">{{
           $t(item.title)
         }}</span>
-        <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-if="index == 1">
+        <span
+          class="font35 mobile_font16"
+          :class="isEnLang ? 'en_heavy' : ''"
+          v-if="index == 1"
+        >
           {{ item.num | PriceConversion | Thousandths }} SR
         </span>
-        <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-else
-          >$ {{ item.num | PriceConversion | Thousandths }}</span>
+        <span
+          class="font35 mobile_font16"
+          :class="isEnLang ? 'en_heavy' : ''"
+          v-else
+          >$ {{ item.num | PriceConversion | Thousandths }}</span
+        >
       </div>
     </div>
     <div class="staking_content_box">
@@ -94,6 +107,7 @@
                     >APR</span
                   >
                   <p>
+                    <span></span>
                     <span
                       v-if="apyStatus"
                       class="font16 span3"
@@ -222,40 +236,8 @@
               >
             </div>
             <div class="Symbol_btn" v-if="poolInfo.userStaked > 0">
-              <svg
-                t="1656315671397"
-                class="icon"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="10166"
-                width="32"
-                height="32"
-                @click="btnFun('add')"
-              >
-                <path
-                  d="M896.062469 0h-767.625183C57.771791 0 0.499756 57.272035 0.499756 127.937531v767.625183c0 70.665495 57.272035 127.937531 127.93753 127.93753h767.625183c70.665495 0 127.937531-57.272035 127.937531-127.93753v-767.625183c0-70.665495-57.272035-127.937531-127.937531-127.937531zM831.593948 513.149439c-0.499756 17.391508-15.192582 31.084822-32.684041 31.084822H559.726696c-8.795705 0-15.992191 7.196486-15.992191 15.992191v239.183211c0 17.391508-13.693314 32.184285-31.084822 32.684041-18.091166 0.499756-32.883943-13.993167-32.883944-31.984382V560.226452c0-8.795705-7.196486-15.992191-15.992191-15.992191H224.590337c-17.391508 0-32.184285-13.693314-32.684041-31.084822-0.499756-18.091166 13.993167-32.883943 31.984382-32.883944h239.88287c8.795705 0 15.992191-7.196486 15.992191-15.992191V225.090093c0-17.391508 13.693314-32.184285 31.084822-32.684041 18.091166-0.499756 32.883943 13.993167 32.883944 31.984382v239.88287c0 8.795705 7.196486 15.992191 15.992191 15.992191h239.88287c17.991215 0 32.484139 14.792777 31.984382 32.883944z"
-                  p-id="10167"
-                  fill="#F7E9B9"
-                ></path>
-              </svg>
-              <svg
-                t="1656321953305"
-                class="icon"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="11745"
-                width="32"
-                height="32"
-                @click="btnFun('reduce')"
-              >
-                <path
-                  d="M896.062469 0h-767.625183C57.771791 0 0.499756 57.272035 0.499756 127.937531v767.625183c0 70.665495 57.272035 127.937531 127.93753 127.93753h767.625183c70.665495 0 127.937531-57.272035 127.937531-127.93753v-767.625183c0-70.665495-57.272035-127.937531-127.937531-127.937531zM799.609566 544.234261H223.890678c-17.691362 0-31.984383-14.293021-31.984382-31.984383s14.293021-31.984383 31.984382-31.984383h575.718888c17.691362 0 31.984383 14.293021 31.984382 31.984383s-14.293021 31.984383-31.984382 31.984383z"
-                  p-id="11746"
-                  fill="#F7E9B9"
-                ></path>
-              </svg>
+              <div class="border_ mobile_font16 font22" @click="btnFun('add')">+</div>
+              <div class="border_ mobile_font16 font22" @click="btnFun('reduce')">-</div>
             </div>
             <div class="btn" v-else>
               <FunBtn
@@ -301,7 +283,7 @@
                 :class="isEnLang ? 'en_medium' : ''"
                 >$
                 {{
-                  (endValue * $store.state.srPrice)
+                  (endValue * getUserCoin.srPrice)
                     | PriceConversion
                     | Thousandths
                 }}</span
@@ -321,10 +303,9 @@
             @click="AddQuesFun('message.stake.rate_tip', $event)"
             :class="isEnLang ? 'en_medium' : ''"
           >
-            <span
-              class="page_has_question_icon"
-              >{{ $t("message.stake.txt14") }}</span
-            >
+            <span class="page_has_question_icon">{{
+              $t("message.stake.txt14")
+            }}</span>
             <span class="userRate">{{ userTaxRate }}%</span>
           </p>
         </div>
@@ -518,7 +499,7 @@ export default {
         if (this.$refs.mychild) {
           clearInterval(this.approveTimer)
           this.$refs.mychild.isApproveFun(token().ST, contract().STStaking).then((res) => {
-            console.log('是否授权res: ', res);
+            // console.log('是否授权res: ', res);
             if (res) {
               this.isapprove = true;
             } else {
@@ -539,7 +520,7 @@ export default {
       this.buy_isloading = true;
       this.$refs.mychild.goApproveFun(token().ST, contract().STStaking)
         .then((res) => {
-          console.log('授权结果res: ', res);
+          // console.log('授权结果res: ', res);
           this.buy_isloading = false;
           if (res) {
             this.isapprove = true;
@@ -564,7 +545,7 @@ export default {
     getSdkInfo () {
       // 池子总产出
       stStaking().srPerBlock().then(res => {
-        console.log('池子总产出res: ', res);
+        // console.log('池子总产出res: ', res);
         this.dataArr[1].num = res / 1e18 * 28800
       })
       // 获取池子是否已开启
@@ -572,27 +553,31 @@ export default {
         this.openPoolStatus = res
       })
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
-      stStakingInfo.getApr(this.getUserCoin.stPrice, this.$store.state.srPrice).then(res => {
-        this.APR = res
-        console.log('Apr::::', res);
-        this.APY = Math.pow((1 + res / 100 / 365), 365) - 1
-        console.log('ApY::::', this.APY);
+      console.log('this.getUserCoin.stPrice, this.getUserCoin.srPrice): ', this.getUserCoin, this.getUserCoin.srPrice);
+      stStakingInfo.getApr(this.getUserCoin.stPrice, this.getUserCoin.srPrice).then(res => {
+        if (isNaN(res)) {
+          this.APR = 'Infinity'
+          this.APY = 'Infinity'
+        } else {
+          this.APR = res
+          console.log('合约直接返回Apr::::', res);
+          this.APY = Math.pow((1 + res / 100 / 365), 365) - 1
+          console.log('算出来的ApY::::', this.APY);
+        }
       }).catch(() => {
-        this.APY = 0.00
-        this.APR = 0.00
+        this.APY = 0
+        this.APR = 0
       })
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
-        console.log('获取池子总质押ST数量: ', res);
+        // console.log('获取池子总质押ST数量: ', res);
         this.dataArr[0].num = res / 1e18 * this.getUserCoin.stPrice
-        console.log('this.dataArr[0].num : ', this.dataArr[0].num );
         this.poolInfo.totalStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
       })
     },
     getUserInfo () {
       // 获取某用户的质押的ST数量
       stStaking().userStakedST(this.getAccount).then(res => {
-        console.log('获取某用户的质押的ST数量: ', res);
         if (res / 1e18 < 1e-8) {
           this.poolInfo.userStaked = 0
         } else {
@@ -603,12 +588,12 @@ export default {
       // 获取用户总SR奖励数量（已提取+可提取）
       stStaking().getTokenTotalRewards(this.getAccount).then(res => {
         // console.log('获取用户总SR奖励数量（已提取+可提取）: ', res);
-        this.dataArr[2].num = res / 1e18 * this.$store.state.srPrice
+        this.dataArr[2].num = res / 1e18 * this.getUserCoin.srPrice
       })
 
       // 获取用户提现时要扣的税率
       stStaking().getUserTaxRate(this.getAccount).then(res => {
-        // console.log('获取用户提现时要扣的税率 ', res);
+        console.log('获取用户提现时要扣的税率 ', res);
         this.userTaxRate = res / 100
       })
 
@@ -639,23 +624,22 @@ export default {
             let nums = this.$utils.convertBigNumberToNormal(Number(res), 2)
             this.poolInfo.userClaimSR = this.endValue
             this.endValue = Number(nums)
-            console.log('清空定时器this.endValue: ', this.endValue);
+            // console.log('清空定时器this.endValue: ', this.endValue);
             clearInterval(this.userSrYieldTimer)
           }
         })
       }, 3000)
     },
     ClaimFun () {
-      // console.log('this.poolInfo.userClaimSR: ', this.poolInfo.userClaimSR,this.endValue);
       if (this.poolInfo.userClaimSR == 0 && this.endValue == 0) return
       if (this.SRBtnLoading) return
       this.SRBtnLoading = true
       stStaking().connect(getSigner()).harvestToken().then(async res => {
         // console.log('res: ', res);
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt_claim','link':res.hash}));
+        this.$store.commit("setProupStatus", JSON.stringify({ 'status': true, 'isProgress': false, 'title': 'message.stake.txt_claim', 'link': res.hash }));
         const etReceipt = await res.wait();
         if (etReceipt.status == 1) {
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({ 'value': 100, 'title': 'message.tip.self_txt7' }));
           this.SRBtnLoading = false
           this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt22' }));
           this.getCurrencyETFun()
@@ -765,7 +749,7 @@ export default {
     justify-content: space-between;
     .out_onebox {
       width: 344px;
-      // height: 539px;
+      height: 100%;
       padding: 2px;
       border-radius: 12px;
       background: linear-gradient(
@@ -865,7 +849,7 @@ export default {
                 .span3 {
                   margin-right: 8px;
                 }
-                p{
+                p {
                   display: flex;
                   align-items: center;
                   margin-left: 5px;
@@ -883,12 +867,13 @@ export default {
           margin-top: 27px;
           padding: 0 14px;
           justify-content: space-between;
+          align-items: center;
           .left {
             display: flex;
             flex-direction: column;
             font-weight: 500;
             color: #ced3d9;
-            line-height: 22px;
+            line-height: 14px;
             .num {
               display: flex;
               align-items: center;
@@ -908,7 +893,7 @@ export default {
           }
           .btn {
             cursor: pointer;
-            width: 130px;
+            width: 109px;
             height: 40px;
             display: flex;
             justify-content: center;
@@ -918,25 +903,18 @@ export default {
           }
           .Symbol_btn {
             cursor: pointer;
-            width: 130px;
+            width: 109px;
             display: flex;
             justify-content: space-between;
+            .border_{
+              width: 40px;
+              height: 40px;
+              border: 1px solid #918256;
+              line-height: 38px;
+              text-align: center;
+              border-radius: 4px;
+            }
           }
-        }
-        .out_btn {
-          cursor: pointer;
-          width: 206px;
-          min-height: 40px;
-          box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
-          border-radius: 4px;
-          backdrop-filter: blur(14px);
-          font-weight: 600;
-          color: #0e0d0d;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 0 auto;
-          margin-top: 34px;
         }
         .tip_ {
           width: 100%;
@@ -956,7 +934,7 @@ export default {
     }
     .out_nodata {
       width: 344px;
-      height: 557px;
+      // height: 507px;
       padding: 2px;
       border-radius: 12px;
       background: linear-gradient(
@@ -1209,7 +1187,7 @@ export default {
                   .span2 {
                     margin-right: 0.19rem;
                   }
-                  p{
+                  p {
                     margin-left: 0.05rem;
                   }
                 }
@@ -1258,23 +1236,8 @@ export default {
               justify-content: space-between;
             }
           }
-          .out_btn {
-            cursor: pointer;
-            width: 1.5rem;
-            height: 0.26rem;
-            box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
-            border-radius: 0.04rem;
-            backdrop-filter: blur(14px);
-            font-weight: 600;
-            color: #0e0d0d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto;
-            margin-top: 0.25rem;
-          }
           .tip_ {
-            width:100%;
+            width: 100%;
             display: flex;
             padding: 0 0.1rem;
             justify-content: space-between;

@@ -306,7 +306,7 @@ import { mapGetters } from "vuex";
 import { token, util } from 'sealemlab-sdk'
 export default {
   computed: {
-    ...mapGetters(["isEnLang","getIsMobile","getNoticeNum"])
+    ...mapGetters(["isEnLang","getIsMobile","getNoticeNum","getUserCoin"])
   },
   data(){
     return{
@@ -797,7 +797,8 @@ export default {
       localStorage.setItem('Invitee',istrue)
     } catch(error){
       localStorage.setItem('Invitee','0x0000000000000000000000000000000000000000')
-    } 
+    }
+    this.addArr[4].num = '$ ' + this.$utils.getBit(Number(this.getUserCoin.stPrice), 2)
   },
 }
 </script>
