@@ -594,13 +594,13 @@ export default {
       })
       // 正式情况下  国库地址加ox地址的余额显示
       if(process.env.NODE_ENV == "production"){
-        erc20(token().STLP).balanceOf('0x0000000000000000000000000000000000000000').then(res => {
+        erc20(token().STLP).balanceOf('0xDD64B8826bEb586053e55d586234283d7F186feF').then(res => {
           console.log('销毁地址国库金额res: ', res);
           this.treasuryMoney = this.$utils.convertBigNumberToNormal((Number(res) * this.getUserCoin.stlpPrice), 2)
-          // erc20(token().STLP).balanceOf('0x0000000000000000000000000000000000000000').then(res1 => {
-          //   console.log('国库金额res: ', res1);
-          //   // this.treasuryMoney = this.$utils.convertBigNumberToNormal(Number(res), 2)
-          // })
+          erc20(token().STLP).balanceOf('0x000000000000000000000000000000000000dEaD').then(res1 => {
+            console.log('国库金额res: ', res1);
+            // this.treasuryMoney = this.$utils.convertBigNumberToNormal(Number(res), 2)
+          })
         })
       }else{
         erc20(token().STLP).balanceOf('0xBC45dC703694831510bE20A64005e1C39fd34a36').then(res => {
