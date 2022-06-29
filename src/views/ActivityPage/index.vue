@@ -316,8 +316,6 @@ export default {
     },
     // 售卖完
     outStatus(){
-      // this.beforeBegin = false// 开始售卖前
-      // this.selling = false // 售卖中
       return this.arr[0].num == this.arr[2].num 
     }
   },
@@ -354,7 +352,7 @@ export default {
       progressTimer:null,
       nowPrice:0,
       nowPriceStatus:false, // 上线要改成false
-      startTime:0,// 上线前改成0   开始时间:6.28 20:00(1656417600)
+      startTime:0,//   开始时间:6.28 20:00(1656417600)
       endTime:0,
       pageTimer:null,
       getEndTimeStatus:false,
@@ -385,11 +383,6 @@ export default {
           this.allLoading = false // 现在取消加载(正式上线要改成true)
           clearInterval(this.setIntervalOBJ);
           this.setIntervalOBJ = setInterval(() => {
-            // if(this.countTimeOBJ == 0){
-            //   this.allLoading = false
-            //   clearInterval(this.setIntervalOBJ);
-            //   return
-            // }
             if (this.payAddress) {
               clearInterval(this.setIntervalOBJ);
               this.$refs.mychild.isApproveFun(this.payAddress, contract().IDO).then((res) => {
@@ -416,7 +409,7 @@ export default {
       setTimeout(() => {
         this.getIdoInfo(to.params.id)
         this.userConnectInfo(to.params.id)
-        this.getUsetTime()
+        // this.getUsetTime() // 倒计时直接写死 后续用在解开
       },1500)
       this.inputvalue = ''
     }
@@ -432,10 +425,6 @@ export default {
     },
     // 去授权
     sonapprove() {
-      // if(!this.userIsWhiteList){
-      //   this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.acticePage.txt26'}));
-      //   return
-      // }
       if (this.buy_isloading) return;
       this.buy_isloading = true;
       this.$refs.mychild.goApproveFun(this.payAddress, contract().IDO)
@@ -443,20 +432,14 @@ export default {
           this.buy_isloading = false;
           if(res){
             this.isapprove = true;
-            // if(!this.getNoticeNum){
-            //   this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
-            //   this.$store.commit("setNoticeNum",true)
-            // }
           }else{
             this.isapprove = false;
           }
           this.allLoading = false
-          // this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
         })
     },
     InputClick (data) {
       if(!data){this.userbuyst = 0}
-      // console.log('input输入框', data)
       if(Number(data) > Number(this.getUserCoin.busd)){
         this.inputvalue = this.getUserCoin.busd
         this.userbuyst = this.getUserCoin.busd / this.nowPrice
@@ -690,8 +673,8 @@ export default {
   },
   mounted () {
     this.idoID = this.$route.params.id
-    this.getIdoInfo(this.idoID) // 上线解开
-    this.getUsetTime()
+    this.getIdoInfo(this.idoID)
+    // this.getUsetTime() // 倒计时直接写死 后续用在解开
   },
   beforeDestroy () {
     clearInterval(this.countTimeOBJ)
