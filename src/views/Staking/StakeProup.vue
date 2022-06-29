@@ -208,11 +208,9 @@ export default {
         this.STmsg = 0
       }else if(Number(data) > Number(this.getUserCoin.st)){
         this.STmsg = this.$utils.getBit(this.getUserCoin.st,8)
-        // console.log('this.STmsg: ', this.STmsg);
       }else{
         this.STmsg = this.$utils.getBit(data,8)
       }
-      console.log("this.sevenDays",this.sevenDays)
     },
     userStakedFun(){
       if(!this.openPoolStatus){
@@ -228,8 +226,6 @@ export default {
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt26'}));
         return
       }
-        // console.log('Number(this.STmsg): ', Number(this.STmsg));
-        // console.log('Number(this.getUserCoin.st): ', Number(this.getUserCoin.st));
       if(Number(this.STmsg) > Number(this.getUserCoin.st)){
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt29'}));
         return
@@ -245,7 +241,6 @@ export default {
           this.$utils.getUserCoinQuantity(token().ST,'st',this.getAccount)
           this.STmsg = ''
           this.passValue = 0
-          // console.log('this.passValue: ', this.passValue);
           this.sliderValue = 0
           this.userReadyStaked = true
           this.getUserROI()
@@ -264,10 +259,8 @@ export default {
         this.STmsg = 0
       }else{
         let nums = this.getUserCoin.st * (item / 100)
-        // console.log('nums: ', nums);
         this.STmsg = this.$utils.getBit(nums,8)
       }
-      console.log('this.sevenDays',this.sevenDays)
     },
     closeProup(){
       this.sliderValue = 0
@@ -278,8 +271,8 @@ export default {
     // 获取用户ROI
     getUserROI(){
       // 获取质押池用户ROI（用户年度投资回报率），需要在返回结果前面加上$
-      stStakingInfo.getRoi(this.getAccount,this.$store.state.srPrice).then(res => {
-        console.log('获取质押池用户ROI（用户年度投资回报率），需要在返回结果前面加上$res: ', res);
+      stStakingInfo.getRoi(this.getAccount,this.getUserCoin.srPrice).then(res => {
+        // console.log('获取质押池用户ROI（用户年度投资回报率），需要在返回结果前面加上$res: ', res);
         this.interestInfo.thirtyDays = 30 / 365 * res
         this.interestInfo.sixtyDays = 60 / 365 * res
         this.interestInfo.ninetyDays = 90 / 365 * res
@@ -289,9 +282,8 @@ export default {
     },
     // 预计用户质押的st收益
     expectedIncome(){
-      // console.log('this.$store.state.srPrice: ', this.$store.state.srPrice)
-      stStakingInfo.getSRValuePerYear(this.$store.state.srPrice).then(res => {
-        console.log('一年产出价值 ', res,this.totalStaked);
+      stStakingInfo.getSRValuePerYear(this.getUserCoin.srPrice).then(res => {
+        // console.log('一年产出价值 ', res,this.totalStaked);
         this.yearValue = res
       })
     }

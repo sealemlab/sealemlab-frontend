@@ -64,8 +64,7 @@ export default new Vuex.Store({
     mobileInfo:{
       direction:'top',//默认上滑(true)
     },
-    srPrice:process.env.NODE_ENV === "production"?0:0.001,
-    userCoin:{st: 0, sr: 0, busd: 0, stPrice: "0.00",stlpPrice:"0.00",srPrice:"0.00"},//用户各种币的余额
+    userCoin:{st: 0, sr: 0, busd: 0, stPrice: "0.00",stlpPrice:"0.00",srPrice:0.001},//用户各种币的余额
   },
   getters: {
     // 获取用户的币的余额

@@ -17,11 +17,16 @@
         :class="isEnLang ? 'en_medium' : ''"
         >{{ $t("message.stake.txt31") }}</span
       >
-      <a href="https://lab-sealem.gitbook.io/sealem-lab/basic/staking" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://lab-sealem.gitbook.io/sealem-lab/basic/staking"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <span
           class="span3 font14 mobile_font12"
           :class="isEnLang ? 'en_medium' : ''"
-          >{{ $t("message.stake.txt32") }}</span>
+          >{{ $t("message.stake.txt32") }}</span
+        >
       </a>
     </div>
     <!-- 数据 -->
@@ -30,11 +35,19 @@
         <span class="font24" :class="isEnLang ? 'en_medium' : ''">{{
           $t(item.title)
         }}</span>
-        <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-if="index == 1">
+        <span
+          class="font35 mobile_font16"
+          :class="isEnLang ? 'en_heavy' : ''"
+          v-if="index == 1"
+        >
           {{ item.num | PriceConversion | Thousandths }} SR
         </span>
-        <span class="font35 mobile_font16" :class="isEnLang ? 'en_heavy' : ''" v-else
-          >$ {{ item.num | PriceConversion | Thousandths }}</span>
+        <span
+          class="font35 mobile_font16"
+          :class="isEnLang ? 'en_heavy' : ''"
+          v-else
+          >$ {{ item.num | PriceConversion | Thousandths }}</span
+        >
       </div>
     </div>
     <div class="staking_content_box">
@@ -94,6 +107,7 @@
                     >APR</span
                   >
                   <p>
+                    <span></span>
                     <span
                       v-if="apyStatus"
                       class="font16 span3"
@@ -301,7 +315,7 @@
                 :class="isEnLang ? 'en_medium' : ''"
                 >$
                 {{
-                  (endValue * $store.state.srPrice)
+                  (endValue * getUserCoin.srPrice)
                     | PriceConversion
                     | Thousandths
                 }}</span
@@ -321,10 +335,9 @@
             @click="AddQuesFun('message.stake.rate_tip', $event)"
             :class="isEnLang ? 'en_medium' : ''"
           >
-            <span
-              class="page_has_question_icon"
-              >{{ $t("message.stake.txt14") }}</span
-            >
+            <span class="page_has_question_icon">{{
+              $t("message.stake.txt14")
+            }}</span>
             <span class="userRate">{{ userTaxRate }}%</span>
           </p>
         </div>
@@ -518,7 +531,7 @@ export default {
         if (this.$refs.mychild) {
           clearInterval(this.approveTimer)
           this.$refs.mychild.isApproveFun(token().ST, contract().STStaking).then((res) => {
-            console.log('是否授权res: ', res);
+            // console.log('是否授权res: ', res);
             if (res) {
               this.isapprove = true;
             } else {
@@ -539,7 +552,7 @@ export default {
       this.buy_isloading = true;
       this.$refs.mychild.goApproveFun(token().ST, contract().STStaking)
         .then((res) => {
-          console.log('授权结果res: ', res);
+          // console.log('授权结果res: ', res);
           this.buy_isloading = false;
           if (res) {
             this.isapprove = true;
@@ -564,7 +577,7 @@ export default {
     getSdkInfo () {
       // 池子总产出
       stStaking().srPerBlock().then(res => {
-        console.log('池子总产出res: ', res);
+        // console.log('池子总产出res: ', res);
         this.dataArr[1].num = res / 1e18 * 28800
       })
       // 获取池子是否已开启
@@ -572,27 +585,25 @@ export default {
         this.openPoolStatus = res
       })
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
-      stStakingInfo.getApr(this.getUserCoin.stPrice, this.$store.state.srPrice).then(res => {
+      stStakingInfo.getApr(this.getUserCoin.stPrice, this.getUserCoin.srPrice).then(res => {
         this.APR = res
-        console.log('Apr::::', res);
+        console.log('合约直接返回Apr::::', res);
         this.APY = Math.pow((1 + res / 100 / 365), 365) - 1
-        console.log('ApY::::', this.APY);
+        console.log('算出来的ApY::::', this.APY);
       }).catch(() => {
-        this.APY = 0.00
-        this.APR = 0.00
+        this.APY = 0
+        this.APR = 0
       })
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
-        console.log('获取池子总质押ST数量: ', res);
+        // console.log('获取池子总质押ST数量: ', res);
         this.dataArr[0].num = res / 1e18 * this.getUserCoin.stPrice
-        console.log('this.dataArr[0].num : ', this.dataArr[0].num );
         this.poolInfo.totalStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
       })
     },
     getUserInfo () {
       // 获取某用户的质押的ST数量
       stStaking().userStakedST(this.getAccount).then(res => {
-        console.log('获取某用户的质押的ST数量: ', res);
         if (res / 1e18 < 1e-8) {
           this.poolInfo.userStaked = 0
         } else {
@@ -603,12 +614,12 @@ export default {
       // 获取用户总SR奖励数量（已提取+可提取）
       stStaking().getTokenTotalRewards(this.getAccount).then(res => {
         // console.log('获取用户总SR奖励数量（已提取+可提取）: ', res);
-        this.dataArr[2].num = res / 1e18 * this.$store.state.srPrice
+        this.dataArr[2].num = res / 1e18 * this.getUserCoin.srPrice
       })
 
       // 获取用户提现时要扣的税率
       stStaking().getUserTaxRate(this.getAccount).then(res => {
-        // console.log('获取用户提现时要扣的税率 ', res);
+        console.log('获取用户提现时要扣的税率 ', res);
         this.userTaxRate = res / 100
       })
 
@@ -639,23 +650,22 @@ export default {
             let nums = this.$utils.convertBigNumberToNormal(Number(res), 2)
             this.poolInfo.userClaimSR = this.endValue
             this.endValue = Number(nums)
-            console.log('清空定时器this.endValue: ', this.endValue);
+            // console.log('清空定时器this.endValue: ', this.endValue);
             clearInterval(this.userSrYieldTimer)
           }
         })
       }, 3000)
     },
     ClaimFun () {
-      // console.log('this.poolInfo.userClaimSR: ', this.poolInfo.userClaimSR,this.endValue);
       if (this.poolInfo.userClaimSR == 0 && this.endValue == 0) return
       if (this.SRBtnLoading) return
       this.SRBtnLoading = true
       stStaking().connect(getSigner()).harvestToken().then(async res => {
         // console.log('res: ', res);
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt_claim','link':res.hash}));
+        this.$store.commit("setProupStatus", JSON.stringify({ 'status': true, 'isProgress': false, 'title': 'message.stake.txt_claim', 'link': res.hash }));
         const etReceipt = await res.wait();
         if (etReceipt.status == 1) {
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
+          this.$store.dispatch("setProgressInfo", JSON.stringify({ 'value': 100, 'title': 'message.tip.self_txt7' }));
           this.SRBtnLoading = false
           this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.stake.txt22' }));
           this.getCurrencyETFun()
@@ -865,7 +875,7 @@ export default {
                 .span3 {
                   margin-right: 8px;
                 }
-                p{
+                p {
                   display: flex;
                   align-items: center;
                   margin-left: 5px;
@@ -1209,7 +1219,7 @@ export default {
                   .span2 {
                     margin-right: 0.19rem;
                   }
-                  p{
+                  p {
                     margin-left: 0.05rem;
                   }
                 }
@@ -1274,7 +1284,7 @@ export default {
             margin-top: 0.25rem;
           }
           .tip_ {
-            width:100%;
+            width: 100%;
             display: flex;
             padding: 0 0.1rem;
             justify-content: space-between;

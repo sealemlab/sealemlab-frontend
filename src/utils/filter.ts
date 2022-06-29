@@ -18,4 +18,9 @@ const Thousandths = (val :any) => {
   if(val == '0.00')return'0.00'
 	return utils.numFormat(val)
 }
-export default { PriceConversion,SquareRoot,MultiplyBySquare,Thousandths};
+// 有问题待研究
+const NumDelimiter = (val :Number) => {
+	if (!val) return '0.00';
+	return val.toLocaleString('en-US')
+}
+export default { PriceConversion,SquareRoot,MultiplyBySquare,Thousandths,NumDelimiter};
