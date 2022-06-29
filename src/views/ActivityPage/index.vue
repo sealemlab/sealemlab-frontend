@@ -624,6 +624,7 @@ export default {
     },
     // 用户购买
     userBuyIdo(){
+      if(this.outStatus)return
       if (this.buy_isloading) return;
       if(this.countTimeOBJ != 0){
         if(!this.userIsWhiteList){
