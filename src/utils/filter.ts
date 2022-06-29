@@ -23,8 +23,8 @@ const Thousandths = (val :any) => {
 	return utils.numFormat(val)
 }
 // 有问题待研究
-const NumDelimiter = (val :Number) => {
-	if (!val) return '0.00';
-	return val.toLocaleString('en-US')
-}
-export default { PriceConversion,SquareRoot,MultiplyBySquare,Thousandths,NumDelimiter};
+// const NumDelimiter = (val :Number) => {
+// 	if (!val) return '0.00';
+// 	return val.toLocaleString('en-US')
+// }
+export default { PriceConversion,SquareRoot,MultiplyBySquare,Thousandths};
