@@ -10,6 +10,10 @@ const SquareRoot = (val :any,bit = 2) => {
 }
 const MultiplyBySquare = (val :any,bit = 2) => {
 	if (!val) return '0.00';
+  let str = val.toString()
+	if(str.indexOf('e') != -1){
+    return str.substring(0,str.indexOf('.') + 4) + str.substring(str.indexOf('e'))
+  }
 	return utils.getBit(Number(val) * 1e2, bit)
 }
 const Thousandths = (val :any) => {

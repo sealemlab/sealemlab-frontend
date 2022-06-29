@@ -480,7 +480,8 @@ export default {
         st:0,
         sr:0,
         busd:0,
-        stPrice:0
+        stPrice:0,
+        srPrice:0.001
       }
       erc20(arr[0]).balanceOf(this.getAccount).then(res => {
         obj.st = this.$utils.convertBigNumberToNormal(Number(res),0,18,true)

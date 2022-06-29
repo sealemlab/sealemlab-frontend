@@ -585,6 +585,7 @@ export default {
         this.openPoolStatus = res
       })
       // 获取质押池APR（年度百分比利率），已经乘了100，所以只需要在返回结果后面加上百分号%
+      console.log('this.getUserCoin.stPrice, this.getUserCoin.srPrice): ', this.getUserCoin, this.getUserCoin.srPrice);
       stStakingInfo.getApr(this.getUserCoin.stPrice, this.getUserCoin.srPrice).then(res => {
         this.APR = res
         console.log('合约直接返回Apr::::', res);
