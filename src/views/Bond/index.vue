@@ -437,7 +437,7 @@ import { mapGetters } from "vuex";
 import AddLp from "./Addlp.vue";
 import InviteProup from "./InviteProup.vue";
 import MessageBox from "./MessageBox.vue";
-import { bondDepository,erc20,token,getSigner,inviting,stStaking,invitingInfo} from 'sealemlab-sdk'
+import { bondDepository,erc20,token,getSigner,inviting,stStaking,invitingInfo,util} from 'sealemlab-sdk'
 export default {
   components: {
     AddLp,InviteProup,MessageBox,circleProgressbar
@@ -799,7 +799,8 @@ export default {
       })
       
       // 获取邀请统计信息
-      invitingInfo.getCounters({first:10,
+      invitingInfo.getCounters({
+        first:10,
         skip: 0,
         orderBy: '',
         orderDirection: '',
