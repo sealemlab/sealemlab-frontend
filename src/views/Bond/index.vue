@@ -602,10 +602,10 @@ export default {
     getMoney(){
       // 正式情况下  国库地址加ox地址的余额显示
       if(process.env.NODE_ENV == "production"){
-        erc20(token('production').STLP).balanceOf('0xDD64B8826bEb586053e55d586234283d7F186feF').then(res => {
+        erc20(token().STLP).balanceOf('0xDD64B8826bEb586053e55d586234283d7F186feF').then(res => {
           console.log('销毁地址国库金额res: ', res);
           let money1 = util.formatEther(res) * this.getUserCoin.stlpPrice
-          erc20(token('production').STLP).balanceOf('0x000000000000000000000000000000000000dEaD').then(res1 => {
+          erc20(token().STLP).balanceOf('0x000000000000000000000000000000000000dEaD').then(res1 => {
             console.log('国库金额res: ', res1);
             let money2 = util.formatEther(res1) * this.getUserCoin.stlpPrice // this.$utils.convertBigNumberToNormal(Number(res), 2)
             this.treasuryMoney = Number(money1) + Number(money2)

@@ -60,7 +60,7 @@ export default new Vuex.Store({
       speed:100
     }, // 给进度条传值
     noticeNum: false, // 轻提示弹窗只弹一次
-    BSC_BROWSER: process.env.NODE_ENV === "production" ? "https://www.bscscan.com/" : "https://testnet.bscscan.com/",
+    BSC_BROWSER: process.env.NODE_ENV === "production" ? "https://bscscan.com/" : "https://testnet.bscscan.com/",
     mobileInfo:{
       direction:'top',//默认上滑(true)
     },
