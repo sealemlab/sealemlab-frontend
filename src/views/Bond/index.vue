@@ -284,15 +284,19 @@
         <div class="box">
           <div class="top font24" :class="isEnLang?'en_Bold':''">
             <div :title='$t("message.bond.txt77")' style="cursor:pointer" @click="quesFun('message.bond.txt77',$event)">
+              <!-- Bond balance -->
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
             <div>
+              <!-- 获取用户未提取（包括到期可提取及未到期不可提取）的订单ID数组及总USD金额获取用户未提取（包括到期可提取及未到期不可提取）的订单ID数组及总USD金额获取用户未提取（包括到期可提取及未到期不可提取）的订单ID数组及总USD金额 -->
               <span>$ {{NotExtractedBUSDMoney | PriceConversion }} ( ≈ {{ Not_BUSDchangeST | PriceConversion }} ST)</span>
             </div>
             <div :title='$t("message.bond.txt78")' style="cursor:pointer" @click="quesFun('message.bond.txt78',$event)">
+              <!-- Claimable -->
               <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
             <div>
+              <!-- 获取用户可提取的订单ID数组及总USD金额 -->
               <span>$ {{userClaimeMoney | PriceConversion }} ( ≈ {{Ready_BUSDchangeST | PriceConversion }} ST)</span>
             </div>
             <div class="add_btnbox">
@@ -682,7 +686,7 @@ export default {
     getUserOrder(){
       // 获取用户未提取（包括到期可提取及未到期不可提取）的订单ID数组及总USD金额
       bondDepository().getUserUnclaimedOrders(this.getAccount).then(res => {
-          this.userOrderIDInfo = res[0]
+          // this.userOrderIDInfo = res[0]
           this.NotExtractedBUSDMoney = util.formatEther(res[1]) //this.$utils.convertBigNumberToNormal(Number(res[1]), 2)
           this.Not_BUSDchangeST = this.NotExtractedBUSDMoney / this.getUserCoin.stPrice// this.$utils.convertBigNumberToNormal(Number(res[1]) / this.getUserCoin.stPrice, 2)
           if(res[0].length == 0){
@@ -725,6 +729,7 @@ export default {
       // 获取用户可提取的订单ID数组及总USD金额
       bondDepository().getUserClaimableOrders(this.getAccount).then(res => {
         // console.log('获取用户可提取的订单ID数组及总USD金额: ', res);
+        this.userOrderIDInfo = res[0]
         this.userClaimeMoney = util.formatEther(res[1])// this.$utils.convertBigNumberToNormal(Number(res[1]), 2)
         this.Ready_BUSDchangeST = this.userClaimeMoney /  this.getUserCoin.stPrice //this.$utils.convertBigNumberToNormal(Number(res[1]) / this.getUserCoin.stPrice, 2)
       })

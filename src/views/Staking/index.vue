@@ -631,6 +631,7 @@ export default {
       }, 3000)
     },
     ClaimFun () {
+      if(process.env.NODE_ENV == "production")return
       if (this.poolInfo.userClaimSR == 0 && this.endValue == 0) return
       if (this.SRBtnLoading) return
       this.SRBtnLoading = true
@@ -927,7 +928,7 @@ export default {
           color: #ced3d9;
           line-height: 22px;
           .userRate {
-            width: 130px;
+            width: 109px;
           }
         }
       }
