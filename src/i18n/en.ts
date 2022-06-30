@@ -904,7 +904,7 @@ export const message = {
   stake:{
     txt1:'Stake',
     txt2:'Total staked',
-    txt3:'Total earned',
+    txt3:'Your earned',
     txt4:'Daily output',
     txt5:'ST POOL',
     txt5_1:'Later',
