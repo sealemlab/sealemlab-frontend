@@ -845,7 +845,7 @@ export default {
     },
     mountedFun(){
       this.addArr[4].num = this.getUserCoin.stPrice
-      this.addArr[5].num = 0.001
+      this.addArr[5].num = 'N/A'
 
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
