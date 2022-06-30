@@ -49,11 +49,14 @@
               </div>
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
-            <p class="font35" :class="isEnLang?'en_heavy':''">{{item.num}}</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num}} ST</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-else-if="index == 5"> $ 0.001</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion}}</p>
           </div>
         </div>
       </div>
     </div>
+    <!-- <div style="width:100%;heibackground:#fff;color:#000">{{dsjhfkjsdsjhfkjs}}</div> -->
     <!-- 希莱姆简介 -->
     <div class="character_introduction">
       <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt9")}}</div>
@@ -303,7 +306,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { token, util } from 'sealemlab-sdk'
+import { token, util, st, bondDepository,stStaking } from 'sealemlab-sdk'
 export default {
   computed: {
     ...mapGetters(["isEnLang","getIsMobile","getNoticeNum","getUserCoin"])
@@ -314,12 +317,12 @@ export default {
       haveVoice:false,//声音
       swiperVisible:true,
       addArr:[
-        {src:`${this.$store.state.imgUrl}home1.webp`,num:'$ 0',title:'message.home.txt71',icon:'boxes-packing'},
-        {src:`${this.$store.state.imgUrl}home2.webp`,num:'$ 0',title:'message.home.txt72',icon:'building-flag'},
-        {src:`${this.$store.state.imgUrl}home3.webp`,num:'$ 0',title:'message.home.txt73',icon:'coins'},
+        {src:`${this.$store.state.imgUrl}home1.webp`,num:0,title:'message.home.txt71',icon:'boxes-packing'},
+        {src:`${this.$store.state.imgUrl}home2.webp`,num:0,title:'message.home.txt72',icon:'building-flag'},
+        {src:`${this.$store.state.imgUrl}home3.webp`,num:0,title:'message.home.txt73',icon:'coins'},
         {src:`${this.$store.state.imgUrl}home4.webp`,num:0,title:'message.home.txt74',icon:'boxes'},
-        {src:`${this.$store.state.imgUrl}home5.webp`,num:'$ 0',title:'message.home.txt75',icon:'boxes'},
-        {src:`${this.$store.state.imgUrl}home6.webp`,num:'$ 0',title:'message.home.txt76',icon:'registered'},
+        {src:`${this.$store.state.imgUrl}home5.webp`,num:0,title:'message.home.txt75',icon:'boxes'},
+        {src:`${this.$store.state.imgUrl}home6.webp`,num:0,title:'message.home.txt76',icon:'registered'},
       ],
       activeIndex:0,//swiper索引
       videoStatus:true,//视频加载
@@ -715,7 +718,9 @@ export default {
           src:`${this.$store.state.imgUrl}inviter_3.webp`
         }
       ],
-      imgTimer:null
+      imgTimer:null,
+      getuserbalanceTimer:null,
+      dsjhfkjs:{}
     }
   },
   watch: {
@@ -776,6 +781,102 @@ export default {
     },
     gameClick(item){
       this.gameIndex = item.id
+    },
+    // 获取7个地址的余额
+    getSTBalance(calback){
+      clearInterval(this.getuserbalanceTimer)
+      let count = 1
+      let obj = {}
+      // Seed（种子轮）
+      st().balanceOf('0xf2F0D04E4ecF1E0ef3c3C95B9Ad7376218a185eF').then(res => {
+        count++
+        Object.assign(obj,{Speed:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Speed:util.formatEther(res)})
+      })
+      // Private(私募轮)
+      st().balanceOf('0x6Da48f41319fd8023e7886F55AB15DaE927F49b4').then(res => {
+        count++
+        Object.assign(obj,{Private:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Private:util.formatEther(res)})
+      })
+      // Public（公募轮）
+      st().balanceOf('0x09EA50F13CFF6f4fD964cF1f4a1A5962985f2D9C').then(res => {
+        count++
+        Object.assign(obj,{Public:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Public:util.formatEther(res)})
+      })
+      // Team（团队）
+      st().balanceOf('0xB830656B5A9de339086e175E3C570C0Dd7A6Ed30').then(res => {
+        count++
+        Object.assign(obj,{Team:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Team:util.formatEther(res)})
+      })
+      //Market（市场） 
+      st().balanceOf('0x4eC43757Bd35EFAD892799dE846Dcf15B1fdEf9e').then(res => {
+        count++
+        Object.assign(obj,{Market:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Market:util.formatEther(res)})
+      })
+      // CEX（交易所）
+      st().balanceOf('0x3dAd3dD5686EbDcF9f0773D28ff4267bB0a2aAD5').then(res => {
+        count++
+        Object.assign(obj,{CEX:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{CEX:util.formatEther(res)})
+      })
+      // Bond（债券）
+      st().balanceOf('0x09627963fEB32DDe5c122A47726f80Ad067F019F').then(res => {
+        count++
+        Object.assign(obj,{Bond:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Bond:util.formatEther(res)})
+      })
+
+      this.getuserbalanceTimer = setInterval(() => {
+        if(count == 8){
+          clearInterval(this.getuserbalanceTimer)
+          let moeney = obj.Speed + obj.Private + obj.Public + obj.Team + obj.Market + obj.CEX + obj.Bond
+          calback({data:obj,moeney:moeney})
+        }
+        calback(-1)
+      },500)
+    },
+    mountedFun(){
+      this.addArr[4].num = this.getUserCoin.stPrice
+      this.addArr[5].num = 0.001
+
+      this.getSTBalance(res => {
+        if(res != -1){
+          this.dsjhfkjs = res.data
+          this.addArr[3].num = 100000000 - res.moeney
+          this.addArr[0].num = this.getUserCoin.stPrice * (100000000 - res.moeney)
+        }
+      })
+      // 获取池子总质押ST数量
+      stStaking().stakedST().then(res => {
+        // console.log('获取池子总质押ST数量: ', res);
+        this.addArr[2].num = util.formatEther(res) * this.getUserCoin.stPrice
+      }).catch(() => {
+        this.addArr[2].num = 0 
+      })
+      // 写死第0期债券
+      bondDepository().getLpLiquidity(0).then( res => {
+        this.addArr[1].num = util.formatEther(res)
+      }).catch(() => {
+        this.addArr[1].num = 0 
+      })
     }
   },
   mounted(){
@@ -798,7 +899,7 @@ export default {
     } catch(error){
       localStorage.setItem('Invitee','0x0000000000000000000000000000000000000000')
     }
-    this.addArr[4].num = '$ ' + this.$utils.getBit(Number(this.getUserCoin.stPrice), 2)
+    // this.mountedFun()
   },
 }
 </script>
