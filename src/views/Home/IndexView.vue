@@ -49,7 +49,8 @@
               </div>
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
-            <p class="font35" :class="isEnLang?'en_heavy':''">{{item.num}}</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="3">{{item.num}} ST</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion}}</p>
           </div>
         </div>
       </div>
@@ -303,7 +304,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { token, util } from 'sealemlab-sdk'
+import { token, util, st, bondDepository } from 'sealemlab-sdk'
 export default {
   computed: {
     ...mapGetters(["isEnLang","getIsMobile","getNoticeNum","getUserCoin"])
@@ -715,7 +716,8 @@ export default {
           src:`${this.$store.state.imgUrl}inviter_3.webp`
         }
       ],
-      imgTimer:null
+      imgTimer:null,
+      getuserbalanceTimer:null
     }
   },
   watch: {
@@ -776,18 +778,110 @@ export default {
     },
     gameClick(item){
       this.gameIndex = item.id
+    },
+    // 获取7个地址的余额
+    getSTBalance(calback){
+      clearInterval(this.getuserbalanceTimer)
+      let count = 1
+      let obj = {}
+      // Seed（种子轮）
+      st().balanceOf('0xf2F0D04E4ecF1E0ef3c3C95B9Ad7376218a185eF').then(res => {
+        count++
+        Object.assign(obj,{Speed:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Speed:util.formatEther(res)})
+      })
+      // Private(私募轮)
+      st().balanceOf('0x6Da48f41319fd8023e7886F55AB15DaE927F49b4').then(res => {
+        count++
+        Object.assign(obj,{Private:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Private:util.formatEther(res)})
+      })
+      // Public（公募轮）
+      st().balanceOf('0x09EA50F13CFF6f4fD964cF1f4a1A5962985f2D9C').then(res => {
+        count++
+        Object.assign(obj,{Public:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Public:util.formatEther(res)})
+      })
+      // Team（团队）
+      st().balanceOf('0xB830656B5A9de339086e175E3C570C0Dd7A6Ed30').then(res => {
+        count++
+        Object.assign(obj,{Team:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Team:util.formatEther(res)})
+      })
+      //Market（市场） 
+      st().balanceOf('0x4eC43757Bd35EFAD892799dE846Dcf15B1fdEf9e').then(res => {
+        count++
+        Object.assign(obj,{Market:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Market:util.formatEther(res)})
+      })
+      // CEX（交易所）
+      st().balanceOf('0x3dAd3dD5686EbDcF9f0773D28ff4267bB0a2aAD5').then(res => {
+        count++
+        Object.assign(obj,{CEX:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{CEX:util.formatEther(res)})
+      })
+      // Bond（债券）
+      st().balanceOf('0x09627963fEB32DDe5c122A47726f80Ad067F019F').then(res => {
+        count++
+        Object.assign(obj,{Bond:util.formatEther(res)})
+      }).catch(() => {
+        count++
+        Object.assign(obj,{Bond:util.formatEther(res)})
+      })
+
+      this.getuserbalanceTimer = setInterval(() => {
+        if(count == 8){
+          clearInterval(this.getuserbalanceTimer)
+          let moeney = obj.Speed + obj.Private + obj.Public + obj.Team + obj.Market + obj.CEX + obj.Bond
+          calback(moeney)
+        }
+        calback(-1)
+      })
+    },
+    mountedFun(){
+      if(!this.getIsMobile){
+        clearInterval(this.imgTimer)
+        this.imgTimer = setInterval(() => {
+          if(this.$refs.addimg.complete){
+            this.height = this.$refs.addimg.clientHeight  + 10 + 'px'
+            clearInterval(this.imgTimer)
+          }
+        },10)
+      }
+      
+      this.getSTBalance(res => {
+        if(res != -1){
+          this.addArr[3].num = 100000000 - res
+          this.addArr[0].num = this.getUserCoin.stPrice * (100000000 - res)
+        }
+      })
+      // 获取池子总质押ST数量
+      stStaking().stakedST().then(res => {
+        // console.log('获取池子总质押ST数量: ', res);
+        this.addArr[2].num = util.formatEther(res) * this.getUserCoin.stPrice
+      })
+      // 写死第0期债券
+      bondDepository().getLpLiquidity(0).then( res => {
+        this.addArr[1].num = util.formatEther(res)
+      })
+
+      this.addArr[4].num = this.getUserCoin.stPrice
+      this.addArr[5].num = this.getUserCoin.srPrice
     }
   },
   mounted(){
-    if(!this.getIsMobile){
-      clearInterval(this.imgTimer)
-      this.imgTimer = setInterval(() => {
-        if(this.$refs.addimg.complete){
-          this.height = this.$refs.addimg.clientHeight  + 10 + 'px'
-          clearInterval(this.imgTimer)
-        }
-      },10)
-    }
     let that = this
     this.$refs.video.addEventListener('canplaythrough',function(){
       that.videoStatus = false
@@ -798,7 +892,7 @@ export default {
     } catch(error){
       localStorage.setItem('Invitee','0x0000000000000000000000000000000000000000')
     }
-    this.addArr[4].num = '$ ' + this.$utils.getBit(Number(this.getUserCoin.stPrice), 2)
+    this.mountedFun()
   },
 }
 </script>

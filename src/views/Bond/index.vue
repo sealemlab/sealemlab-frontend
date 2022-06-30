@@ -720,7 +720,7 @@ export default {
               orderObj.countTime = null
               insetArr.push(orderObj)
               if(orderCount == res[0].length){
-                this.orderArr = insetArr
+                this.orderArr = insetArr.sort((n1,n2) =>{ return n1.bondID - n2.bondID })
                 this.loadMoreStatus = false
                 this.getUsetTime()
               }
