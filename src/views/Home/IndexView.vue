@@ -845,13 +845,16 @@ export default {
         if(count == 8){
           clearInterval(this.getuserbalanceTimer)
           let moeney = obj.Speed + obj.Private + obj.Public + obj.Team + obj.Market + obj.CEX + obj.Bond
-          this.addArr[3].num = Number(100000000) - Number(moeney)
-          // let num3 = Number(100000000) - Number(moeney)
-          // let num0 = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
-          this.addArr[0].num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
-          // this.$set(this.addArr,3,{num:num3})
-          // this.$set(this.addArr,0,{num:num0})
-          this.$forceUpdate()
+          // this.addArr[3].num = Number(100000000) - Number(moeney)
+          // this.addArr[0].num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
+          
+          let num3 = this.addArr[3]
+          num3.num = Number(100000000) - Number(moeney)
+          this.$set(this.addArr,3,num3)
+
+          let num0 = this.addArr[0]
+          num0.num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
+          this.$set(this.addArr,0,num0)
         }
       },500)
     },
