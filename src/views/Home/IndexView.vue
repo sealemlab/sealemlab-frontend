@@ -50,12 +50,13 @@
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num}} ST</p>
-            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 5"> $ 0.001</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-else-if="index == 5"> $ 0.001</p>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion}}</p>
           </div>
         </div>
       </div>
     </div>
+    <!-- <div style="width:100%;heibackground:#fff;color:#000">{{dsjhfkjsdsjhfkjs}}</div> -->
     <!-- 希莱姆简介 -->
     <div class="character_introduction">
       <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt9")}}</div>
@@ -316,12 +317,12 @@ export default {
       haveVoice:false,//声音
       swiperVisible:true,
       addArr:[
-        {src:`${this.$store.state.imgUrl}home1.webp`,num:'$ 0',title:'message.home.txt71',icon:'boxes-packing'},
-        {src:`${this.$store.state.imgUrl}home2.webp`,num:'$ 0',title:'message.home.txt72',icon:'building-flag'},
-        {src:`${this.$store.state.imgUrl}home3.webp`,num:'$ 0',title:'message.home.txt73',icon:'coins'},
+        {src:`${this.$store.state.imgUrl}home1.webp`,num:0,title:'message.home.txt71',icon:'boxes-packing'},
+        {src:`${this.$store.state.imgUrl}home2.webp`,num:0,title:'message.home.txt72',icon:'building-flag'},
+        {src:`${this.$store.state.imgUrl}home3.webp`,num:0,title:'message.home.txt73',icon:'coins'},
         {src:`${this.$store.state.imgUrl}home4.webp`,num:0,title:'message.home.txt74',icon:'boxes'},
-        {src:`${this.$store.state.imgUrl}home5.webp`,num:'$ 0',title:'message.home.txt75',icon:'boxes'},
-        {src:`${this.$store.state.imgUrl}home6.webp`,num:'$ 0',title:'message.home.txt76',icon:'registered'},
+        {src:`${this.$store.state.imgUrl}home5.webp`,num:0,title:'message.home.txt75',icon:'boxes'},
+        {src:`${this.$store.state.imgUrl}home6.webp`,num:0,title:'message.home.txt76',icon:'registered'},
       ],
       activeIndex:0,//swiper索引
       videoStatus:true,//视频加载
@@ -718,7 +719,8 @@ export default {
         }
       ],
       imgTimer:null,
-      getuserbalanceTimer:null
+      getuserbalanceTimer:null,
+      dsjhfkjs:{}
     }
   },
   watch: {
@@ -846,28 +848,20 @@ export default {
         if(count == 8){
           clearInterval(this.getuserbalanceTimer)
           let moeney = obj.Speed + obj.Private + obj.Public + obj.Team + obj.Market + obj.CEX + obj.Bond
-          calback(moeney)
+          calback({data:obj,moeney:moeney})
         }
         calback(-1)
       },500)
     },
     mountedFun(){
-      if(!this.getIsMobile){
-        clearInterval(this.imgTimer)
-        this.imgTimer = setInterval(() => {
-          if(this.$refs.addimg.complete){
-            this.height = this.$refs.addimg.clientHeight  + 10 + 'px'
-            clearInterval(this.imgTimer)
-          }
-        },10)
-      }
       this.addArr[4].num = this.getUserCoin.stPrice
       this.addArr[5].num = 0.001
 
       this.getSTBalance(res => {
         if(res != -1){
-          this.addArr[3].num = 100000000 - res
-          this.addArr[0].num = this.getUserCoin.stPrice * (100000000 - res)
+          this.dsjhfkjs = res.data
+          this.addArr[3].num = 100000000 - res.moeney
+          this.addArr[0].num = this.getUserCoin.stPrice * (100000000 - res.moeney)
         }
       })
       // 获取池子总质押ST数量
@@ -886,6 +880,15 @@ export default {
     }
   },
   mounted(){
+    if(!this.getIsMobile){
+      clearInterval(this.imgTimer)
+      this.imgTimer = setInterval(() => {
+        if(this.$refs.addimg.complete){
+          this.height = this.$refs.addimg.clientHeight  + 10 + 'px'
+          clearInterval(this.imgTimer)
+        }
+      },10)
+    }
     let that = this
     this.$refs.video.addEventListener('canplaythrough',function(){
       that.videoStatus = false
@@ -896,7 +899,7 @@ export default {
     } catch(error){
       localStorage.setItem('Invitee','0x0000000000000000000000000000000000000000')
     }
-    this.mountedFun()
+    // this.mountedFun()
   },
 }
 </script>
