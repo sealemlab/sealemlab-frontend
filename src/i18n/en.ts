@@ -119,7 +119,7 @@ export const message = {
     txt70: "Go to play game",
 
     txt71: "Market Cap",
-    txt72: "Locked Liquidity",
+    txt72: "Liquidity",
     txt73: "Staking",
     txt74: "Circulating Supply",
     txt75: "ST Price",
