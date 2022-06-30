@@ -841,13 +841,16 @@ export default {
         count++
         Object.assign(obj,{Bond:util.formatEther(res)})
       })
-
       this.getuserbalanceTimer = setInterval(() => {
         if(count == 8){
           clearInterval(this.getuserbalanceTimer)
           let moeney = obj.Speed + obj.Private + obj.Public + obj.Team + obj.Market + obj.CEX + obj.Bond
-          this.addArr[3].num = Number(100000000) - Number(moeney)
-          this.addArr[0].num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
+          // this.addArr[3].num = Number(100000000) - Number(moeney)
+          let num3 = Number(100000000) - Number(moeney)
+          let num0 = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
+          // this.addArr[0].num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
+          this.$set(this.addArr,3,{num:num3})
+          this.$set(this.addArr,0,{num:num0})
         }
       },500)
     },
@@ -855,7 +858,6 @@ export default {
       this.addArr[4].num = this.getUserCoin.stPrice
       this.addArr[5].num = 0.001
 
-      this.getSTBalance()
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
         // console.log('获取池子总质押ST数量: ', res);
@@ -892,6 +894,7 @@ export default {
       localStorage.setItem('Invitee','0x0000000000000000000000000000000000000000')
     }
     this.mountedFun()
+    this.getSTBalance()
   },
 }
 </script>
