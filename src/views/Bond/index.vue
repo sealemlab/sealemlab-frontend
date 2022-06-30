@@ -490,6 +490,7 @@ export default {
         additional2:'0',//附加利率1
         additional3:'0',//附加利率
         purchaseRate:'0',
+        percentage:0,
         lp:'',
         maxSupplyLp:'',
         cycle:'',
@@ -539,6 +540,7 @@ export default {
         additional2:'0',//附加利率1
         additional3:'0',//附加利率
         purchaseRate:'0',
+        percentage:0,
         lp:'',
         maxSupplyLp:0,
         cycle:14,
