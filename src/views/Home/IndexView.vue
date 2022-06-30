@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    <!-- <div style="width:100%;heibackground:#fff;color:#000">{{dsjhfkjsdsjhfkjs}}</div> -->
+    <div style="width:100%;height:60px;background:#fff;color:#000">{{dsjhfkjsdsjhfkjs}}</div>
     <!-- 希莱姆简介 -->
     <div class="character_introduction">
       <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt9")}}</div>
@@ -899,7 +899,7 @@ export default {
     } catch(error){
       localStorage.setItem('Invitee','0x0000000000000000000000000000000000000000')
     }
-    // this.mountedFun()
+    this.mountedFun()
   },
 }
 </script>
