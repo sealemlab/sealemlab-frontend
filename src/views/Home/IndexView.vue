@@ -843,20 +843,10 @@ export default {
       })
       this.getuserbalanceTimer = setInterval(() => {
         if(count == 8){
-          console.log("获取完成")
           clearInterval(this.getuserbalanceTimer)
           let moeney = Number(obj.Speed) + Number(obj.Private) + Number(obj.Public) + Number(obj.Team) + Number(obj.Market) + Number(obj.CEX) + Number(obj.Bond)
-          console.log('moeney: ', moeney);
           this.addArr[3].num = Number(100000000) - Number(moeney)
           this.addArr[0].num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
-          
-          // let num3 = this.addArr[3]
-          // num3.num = Number(100000000) - Number(moeney)
-          // this.$set(this.addArr,3,num3)
-
-          // let num0 = this.addArr[0]
-          // num0.num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
-          // this.$set(this.addArr,0,num0)
         }
         console.log("获取7个地址余额中")
       },500)
