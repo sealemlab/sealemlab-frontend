@@ -546,7 +546,7 @@ export default {
       // 池子总产出
       stStaking().srPerBlock().then(res => {
         // console.log('池子总产出res: ', res);
-        this.dataArr[1].num = res / 1e18 * 28800
+        this.dataArr[1].num = util.formatEther(res) * 28800
       })
       // 获取池子是否已开启
       stStaking().openStatus().then(res => {
@@ -571,7 +571,7 @@ export default {
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
         // console.log('获取池子总质押ST数量: ', res);
-        this.dataArr[0].num = res / 1e18 * this.getUserCoin.stPrice
+        this.dataArr[0].num = util.formatEther(res) * this.getUserCoin.stPrice
         this.poolInfo.totalStaked = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
       })
     },
@@ -588,7 +588,7 @@ export default {
       // 获取用户总SR奖励数量（已提取+可提取）
       stStaking().getTokenTotalRewards(this.getAccount).then(res => {
         // console.log('获取用户总SR奖励数量（已提取+可提取）: ', res);
-        this.dataArr[2].num = res / 1e18 * this.getUserCoin.srPrice
+        this.dataArr[2].num = util.formatEther(res) * this.getUserCoin.srPrice
       })
 
       // 获取用户提现时要扣的税率
