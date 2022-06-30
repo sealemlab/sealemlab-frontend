@@ -269,7 +269,7 @@ export default {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin: 0 8px 0 22px;
+    margin: 0 10px;
     .font_login {
       font-weight: bold;
       line-height: 19px;

@@ -601,10 +601,12 @@ export default {
       if(process.env.NODE_ENV == "production"){
         erc20(token().STLP).balanceOf('0xDD64B8826bEb586053e55d586234283d7F186feF').then(res => {
           console.log('销毁地址国库金额res: ', res);
-          this.treasuryMoney = util.formatEther(res * this.getUserCoin.stlpPrice) // this.$utils.convertBigNumberToNormal((Number(res) * this.getUserCoin.stlpPrice), 2)
+          // this.treasuryMoney = util.formatEther(res * this.getUserCoin.stlpPrice) // this.$utils.convertBigNumberToNormal((Number(res) * this.getUserCoin.stlpPrice), 2)
+          let money1 = util.formatEther(res * this.getUserCoin.stlpPrice)
           erc20(token().STLP).balanceOf('0x000000000000000000000000000000000000dEaD').then(res1 => {
             console.log('国库金额res: ', res1);
-            // this.treasuryMoney = this.$utils.convertBigNumberToNormal(Number(res), 2)
+            let money2 = util.formatEther(res)// this.$utils.convertBigNumberToNormal(Number(res), 2)
+            this.treasuryMoney = Number(money1) + Number(money2)
           })
         })
       }else{
@@ -628,7 +630,7 @@ export default {
         obj.soldLpNum = util.formatEther(res.soldLpAmount) //this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount), 2)//已卖出lp数量
         obj.purchaseRate = obj.soldLpNum / obj.maxSupplyLp * 100 //this.$utils.getBit(obj.soldLpNum / obj.maxSupplyLp / 1e2)
         // console.log('进度条数值obj.purchaseRate: ', obj.purchaseRate);
-        obj.percentage = parseInt(obj.purchaseRate) // 进度条
+        obj.percentage = parseInt(obj.purchaseRate) + 'px' // 进度条
         // console.log('进度条的百分比obj.percentage: ',  obj.percentage);
         calback(obj)
       })
@@ -792,7 +794,7 @@ export default {
         }
       },1000)
     },
-    // 获取邀请人地址
+    // 获取邀请相关信息
     getUserInvite(){
       inviting().userInviter(this.getAccount).then(res => {
         if(res == '0x0000000000000000000000000000000000000000'){
@@ -803,10 +805,12 @@ export default {
       })
       // 获取某用户的下级的质押的ST数量
       stStaking().affiliateStakedST(this.getAccount).then(res => {
+        console.log('获取某用户的下级的质押的ST数量res: ', res);
         this.inviteArr[3].num = this.getUserCoin.stPrice * util.formatEther(res) // this.$utils.convertBigNumberToNormal(Number(res), 2)
       })
       // 获取用户邀请的人数
       invitingInfo.getCounters(10,0,'usersCount','desc',this.getAccount.toLowerCase()).then(res => {
+        console.log('获取用户邀请的人数res: ', res);
         if(res.data.counters.length > 0){
           this.inviteArr[0].num = res.data.counters[0].usersCount // 邀请下级数
         }else{
