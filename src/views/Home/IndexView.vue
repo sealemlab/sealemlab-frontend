@@ -49,7 +49,7 @@
               </div>
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
-            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num}} ST</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num | PriceConversion}} ST</p>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-else-if="index == 5"> $ 0.001</p>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion}}</p>
           </div>
