@@ -87,6 +87,7 @@ export default {
   watch:{
     'unStakedStatus'(newvala){
       if(newvala){
+        this.getUserStaked()
         document.body.style.overflow='hidden'
       }else{
         document.body.style.overflow='visible'
@@ -202,7 +203,7 @@ export default {
     },
     getUserStaked(){
       stStaking().userStakedST(this.getAccount).then(res => {
-        // console.log('获取某用户的质押的ST数量: ', res);
+        console.log('获取某用户的质押的ST数量: ', res);
         if (res / 1e18 <= 1e-8) {
           this.userStaked = 0
         } else {

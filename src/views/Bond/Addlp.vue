@@ -103,11 +103,11 @@
           </p>
           <p class="font14 mobile_font14" @click="AddQuesFun('message.bond.txt_80_ques',$event)" :class="isEnLang?'en_Bold':''">
             <span class="has_question_icon" :title='$t("message.bond.txt_80_ques")'>{{$t("message.bond.txt80")}}</span>
-            <span>{{userSurplusNum}} ST-BUSD LP</span>
+            <span>{{userSurplusNum | PriceConversion}} ST-BUSD LP</span>
           </p>
           <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''">
             <span>{{$t("message.bond.txt33")}}</span>
-            <span>{{userbuylp | PriceConversion}} ST-BUSD LP (≈ $ {{useReadyBy}})</span>
+            <span>{{userbuylp | PriceConversion}} ST-BUSD LP (≈ $ {{useReadyBy | PriceConversion}})</span>
           </p>
           <p>{{$t("message.bond.txt34")}}</p>
         </div>
@@ -291,7 +291,7 @@ export default {
         token0 = util.parseUnits(this.STmsg) //this.$utils.convertNormalToBigNumber(this.STmsg, 18)
       }
       this.buyLoading = true
-      console.log('this.newBondID,token0,token1,0,address: ', this.newBondID,token0,token1,0,address);
+      // console.log('this.newBondID,token0,token1,0,address: ', this.newBondID,token0,token1,0,address);
       bondDepository().connect(getSigner()).swapAndAddLiquidityAndBond(this.newBondID,token0,token1,0,address).then(async res => {
         // console.log('购买债券res: ', res);
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
@@ -309,7 +309,7 @@ export default {
           this.isWriteStatus = true // 是否可以输入
           let that = this
           that.getUserSurplusNum(res => {
-            console.log("购买成功以后刷新用户的税率等等")
+            // console.log("购买成功以后刷新用户的税率等等")
             that.userSurplusNum = res.userSurplusNum
             that.useBuyNumStatus = true
             that.useReadyBy = res.useReadyBy
@@ -496,8 +496,8 @@ export default {
         if(data == 'busd'){
           let userBusdNum = this.getUserCoin.busd > 1e-8?this.getUserCoin.busd:0
           let changest_ = Number(userBusdNum) / this.getUserCoin.stPrice
-          console.log('max点击时转换的st数量changest_: ', changest_)
-          console.log("用户拥有的st数量:",this.getUserCoin.st)
+          // console.log('max点击时转换的st数量changest_: ', changest_)
+          // console.log("用户拥有的st数量:",this.getUserCoin.st)
           if(changest_ > this.getUserCoin.st){
             this.BUSDmsg = this.getUserCoin.st * this.getUserCoin.stPrice
             this.STmsg = this.getUserCoin.st
@@ -538,7 +538,7 @@ export default {
       this.userTaxRateStatus = false
       // 获取某用户某期债券剩余可购买LP数量
       bondDepository().getUserLeftLpCanBuy(this.getAccount,this.newBondID).then(res => {
-        console.log('获取某用户某期债券剩余可购买LP数量res: ', res);
+        // console.log('获取某用户某期债券剩余可购买LP数量res: ', res);
         obj.userSurplusNum = util.formatEther(res)  //this.$utils.convertBigNumberToNormal(Number(res), 2)
         calback(Object.assign({},obj))
       })
@@ -565,7 +565,7 @@ export default {
       })
       // 获取用户某期债券的LP购买量
       bondDepository().userEpochLpBuyAmount(this.getAccount,this.newBondID).then(res => {
-        console.log('获取用户某期债券的LP购买量: ', res);
+        // console.log('获取用户某期债券的LP购买量: ', res);
         obj.userbuylp = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         calback(Object.assign({},obj))
       })

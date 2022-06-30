@@ -74,7 +74,7 @@
             <ul class="list_title2 font16" :class="isEnLang?'en_medium':''">
               <li>
                 <span>{{ bondinfo.bondName }}</span>
-                <span>{{ bondinfo.maxSupplyLp }}</span>
+                <span>{{ bondinfo.maxSupplyLp | PriceConversion }}</span>
                 <span>{{ bondinfo.baseRate | SquareRoot}} %</span>
                 <span>
                   <span class="color2">{{ bondinfo.additional1 | SquareRoot}}%</span>
@@ -91,8 +91,8 @@
                   {{ bondinfo.countTime.s }}
                 </span>
                 <span>
-                  <div class="progressbar"><div :style="{ width: bondinfo.purchaseRate }"></div></div>
-                  {{ bondinfo.purchaseRate }} %
+                  <div class="progressbar"><div :style="{ width: bondinfo.percentage }"></div></div>
+                  {{ bondinfo.purchaseRate | PriceConversion}} %
                 </span>
                 <span :class="isEnLang?'en_Bold':''">
                   <div class="btn_txt mobile_btn disable_bnb" v-if="(bondinfo.maxSupplyLp == bondinfo.soldLpNum || bondinfo.addtimeobj == 0) && bondStatus" @click="BondClick(false)">{{ $t("message.bond.add_txt_disable_btn") }}</div>
@@ -149,7 +149,7 @@
                 </li>
                 <li :class="isEnLang?'en_Bold':''">
                   <span class="color1 font18">{{ $t("message.bond.txt43") }}:</span>
-                  <span class="color1 font18">&nbsp;${{baseInterestRateInfo.num3}}</span>
+                  <span class="color1 font18">&nbsp;${{baseInterestRateInfo.num3 | PriceConversion}}</span>
                 </li>
               </ul>
             </li>
@@ -187,7 +187,7 @@
                 </li> -->
                 <li :class="isEnLang?'en_Bold':''">
                   <span class="color2 font18">{{ $t("message.bond.txt45") }}:</span>
-                  <span class="color2 font18">&nbsp;${{inviteBuy.num3}}</span>
+                  <span class="color2 font18">&nbsp;${{inviteBuy.num3 | PriceConversion}}</span>
                 </li>
                 <li>
                   <!-- <div @click="showBox =! showBox"><img :src="`${$store.state.imgUrl}accrow.webp`" alt="" /></div>
@@ -228,7 +228,7 @@
                 </li> -->
                 <li :class="isEnLang?'en_Bold':''">
                   <span class="color3 font18">{{ $t("message.bond.txt47") }}:</span>
-                  <span class="color3 font18">&nbsp;${{invitePledge.num3}} (≈ {{invitePledge.num5 | PriceConversion}} ST)</span>
+                  <span class="color3 font18">&nbsp;${{invitePledge.num3 | PriceConversion}} (≈ {{invitePledge.num5 | PriceConversion}} ST)</span>
                 </li>
               </ul>
             </li>
@@ -265,7 +265,7 @@
                 </li> -->
                 <li :class="isEnLang?'en_Bold':''">
                   <span class="color4 font18">{{ $t("message.bond.txt49") }}:</span>
-                  <span class="color4 font18">&nbsp;${{Pledge.num3}} (≈ {{Pledge.num5 | PriceConversion}} ST)</span>
+                  <span class="color4 font18">&nbsp;${{Pledge.num3 | PriceConversion}} (≈ {{Pledge.num5 | PriceConversion}} ST)</span>
                 </li>
               </ul>
             </li>
@@ -287,13 +287,13 @@
               <span class="has_question_icon">{{ $t("message.bond.txt52") }}</span>
             </div>
             <div>
-              <span>$ {{NotExtractedBUSDMoney}} (≈{{ Not_BUSDchangeST }} ST)</span>
+              <span>$ {{NotExtractedBUSDMoney | PriceConversion }} ( ≈ {{ Not_BUSDchangeST | PriceConversion }} ST)</span>
             </div>
             <div :title='$t("message.bond.txt78")' style="cursor:pointer" @click="quesFun('message.bond.txt78',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt53") }} </span>
             </div>
             <div>
-              <span>$ {{userClaimeMoney}} (≈{{Ready_BUSDchangeST}} ST)</span>
+              <span>$ {{userClaimeMoney | PriceConversion }} ( ≈ {{Ready_BUSDchangeST | PriceConversion }} ST)</span>
             </div>
             <div class="add_btnbox">
               <div class="btn_txt bg3 mobile_btn_es" @click="userClaimSt" :class="isEnLang?'en_Bold':''">
@@ -337,7 +337,7 @@
                     <svg t="1654321191240" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2336" width="16" height="16"><path d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z" p-id="2337" fill="#CED3D9"></path></svg>
                   </div>
                   <div class="add_small_angle" v-if="item.status">
-                    <span>$ {{item.lpPrice}} * {{ item.lpAmount }}</span>
+                    <span>$ {{item.lpPrice | PriceConversion}} * {{ item.lpAmount | PriceConversion}}</span>
                   </div>
                 </span>
                 <span>{{ item.bondRate}} %</span>
@@ -358,7 +358,7 @@
                   <span class="color3">{{ item.personalArr[1] | SquareRoot}}%</span> + 
                   <span class="color4">{{ item.personalArr[2] | SquareRoot}}%</span>
                 </span>
-                <span>$ {{ item.usdPayout}} (≈ {{item.changeSt | PriceConversion}} ST)</span>
+                <span>$ {{ item.usdPayout | PriceConversion}} (≈ {{item.changeSt | PriceConversion}} ST)</span>
                 <span v-if="item.countTime">
                   {{ item.countTime.d}}&nbsp;:
                   {{ item.countTime.h }}&nbsp;:
@@ -572,6 +572,7 @@ export default {
     },
   },
   methods: {
+    // 获取当前正在发售的债券
     getBondInfo(){
       // 获取发行中(还未到结束时间)的债券ID数组
       bondDepository().getActiveBonds().then(res => {
@@ -598,7 +599,7 @@ export default {
       if(process.env.NODE_ENV == "production"){
         erc20(token().STLP).balanceOf('0xDD64B8826bEb586053e55d586234283d7F186feF').then(res => {
           console.log('销毁地址国库金额res: ', res);
-          this.treasuryMoney = this.$utils.convertBigNumberToNormal((Number(res) * this.getUserCoin.stlpPrice), 2)
+          this.treasuryMoney = util.formatEther(res * this.getUserCoin.stlpPrice) // this.$utils.convertBigNumberToNormal((Number(res) * this.getUserCoin.stlpPrice), 2)
           erc20(token().STLP).balanceOf('0x000000000000000000000000000000000000dEaD').then(res1 => {
             console.log('国库金额res: ', res1);
             // this.treasuryMoney = this.$utils.convertBigNumberToNormal(Number(res), 2)
@@ -612,18 +613,21 @@ export default {
         })
       }
     },
-    // 获取某债券的全部信息
+    // 获取sdk提供的某债券的全部信息
     getCertainBondInfo(bondId,calback){
       bondDepository().markets(bondId).then(res => {
         // console.log('获取某债券的全部信息res: ', res);
         let obj = {}
         obj.lp = res.LP
-        obj.maxSupplyLp = this.$utils.convertBigNumberToNormal(Number(res.maxSupplyLp), 2) //本期最大供应数量
-        obj.maxUseBuylP = this.$utils.convertBigNumberToNormal(Number(res.userMaxLpBuyAmount), 2)//用户最大购买量
+        obj.maxSupplyLp = util.formatEther(res.maxSupplyLp) //this.$utils.convertBigNumberToNormal(Number(res.maxSupplyLp), 2) //本期最大供应数量
+        obj.maxUseBuylP = util.formatEther(res.userMaxLpBuyAmount) //this.$utils.convertBigNumberToNormal(Number(res.userMaxLpBuyAmount), 2)//用户最大购买量
         obj.cycle = this.$utils.getBit(Number(res.term) / (24 * 3600))//利息周期
         obj.conclusion = Number(res.conclusion) // 结束时间
-        obj.soldLpNum = this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount), 2)//已卖出lp数量
-        obj.purchaseRate = this.$utils.getBit(obj.soldLpNum / obj.maxSupplyLp / 1e2)
+        obj.soldLpNum = util.formatEther(res.soldLpAmount) //this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount), 2)//已卖出lp数量
+        obj.purchaseRate = obj.soldLpNum / obj.maxSupplyLp * 100 //this.$utils.getBit(obj.soldLpNum / obj.maxSupplyLp / 1e2)
+        // console.log('进度条数值obj.purchaseRate: ', obj.purchaseRate);
+        obj.percentage = parseInt(obj.purchaseRate) // 进度条
+        // console.log('进度条的百分比obj.percentage: ',  obj.percentage);
         calback(obj)
       })
     },
@@ -631,10 +635,10 @@ export default {
     getUserRate(bondID){
       // 获取某债券的基础利率等级信息
       bondDepository().getBasicRateLevelInfo(bondID).then(res => {
-        console.log('获取某债券的基础利率等级信息res: ', res);
+        // console.log('获取某债券的基础利率等级信息res: ', res);
         this.baseInterestRateInfo.num1 = Number(res[0])
         this.baseInterestRateInfo.num2 = Number(res[1])
-        this.baseInterestRateInfo.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.baseInterestRateInfo.num3 = util.formatEther(res[2]) //this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
         this.baseInterestRateInfo.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
         this.bondinfo.baseRate = this.baseInterestRateInfo.num1 // 基础利率
       })
@@ -643,28 +647,28 @@ export default {
         // console.log('邀请购买利率res1: ', res);
         this.inviteBuy.num1 = Number(res[0])
         this.inviteBuy.num2 = Number(res[1])
-        this.inviteBuy.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.inviteBuy.num3 = util.formatEther(res[2]) //this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
         this.inviteBuy.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
         this.bondinfo.additional1 = this.inviteBuy.num1//邀请购买利率
       })
       // 获取某用户的邀请质押利率等级信息
       bondDepository().getUserInviteStakeLevelInfo(this.getAccount).then(res => {
-        console.log('邀请质押利率res1: ', res);
+        // console.log('邀请质押利率res1: ', res);
         this.invitePledge.num1 = Number(res[0])
         this.invitePledge.num2 = Number(res[1])
-        this.invitePledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.invitePledge.num3 = util.formatEther(res[2]) //this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
         this.invitePledge.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
-        this.invitePledge.num5 = Number(res[2]) / 1e18 / this.getUserCoin.stPrice
+        this.invitePledge.num5 = this.invitePledge.num3 / this.getUserCoin.stPrice
         this.bondinfo.additional2 = this.invitePledge.num1//邀请质押利率
       })
       // 获取某用户的质押利率等级信息
       bondDepository().getUserStakeLevelInfo(this.getAccount).then(res => {
-        console.log('质押利率res1: ', res);
+        // console.log('质押利率res1: ', res);
         this.Pledge.num1 = Number(res[0])
         this.Pledge.num2 = Number(res[1])
-        this.Pledge.num3 = this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
+        this.Pledge.num3 = util.formatEther(res[2]) //this.$utils.convertBigNumberToNormal(Number(res[2]), 2)
         this.Pledge.num4 = this.$utils.getBit(Number(res[3]) / 1e2,0)
-        this.Pledge.num5 = Number(res[2]) / 1e18 / this.getUserCoin.stPrice
+        this.Pledge.num5 = this.Pledge.num3 / this.getUserCoin.stPrice
         this.bondinfo.additional3 = this.Pledge.num1//你的质押利率
       })
     },
@@ -673,8 +677,8 @@ export default {
       // 获取用户未提取（包括到期可提取及未到期不可提取）的订单ID数组及总USD金额
       bondDepository().getUserUnclaimedOrders(this.getAccount).then(res => {
           this.userOrderIDInfo = res[0]
-          this.NotExtractedBUSDMoney = this.$utils.convertBigNumberToNormal(Number(res[1]), 2)
-          this.Not_BUSDchangeST = this.$utils.convertBigNumberToNormal(Number(res[1]) / this.getUserCoin.stPrice, 2)
+          this.NotExtractedBUSDMoney = util.formatEther(res[1]) //this.$utils.convertBigNumberToNormal(Number(res[1]), 2)
+          this.Not_BUSDchangeST = this.NotExtractedBUSDMoney / this.getUserCoin.stPrice// this.$utils.convertBigNumberToNormal(Number(res[1]) / this.getUserCoin.stPrice, 2)
           if(res[0].length == 0){
             this.orderArr = []
             this.loadMoreStatus = false
@@ -690,10 +694,10 @@ export default {
               orderObj.bondID = Number(sdkObj.bondId)
               orderObj.title = "ST-BUSD LP"
               orderObj.personalArr = personalInterestRate
-              orderObj.lpAmount = this.$utils.convertBigNumberToNormal(Number(sdkObj.lpAmount), 2)
-              orderObj.lpPrice = this.$utils.convertBigNumberToNormal(Number(sdkObj.lpPrice), 2)
+              orderObj.lpAmount = util.formatEther(sdkObj.lpAmount) //this.$utils.convertBigNumberToNormal(Number(sdkObj.lpAmount), 2)
+              orderObj.lpPrice = util.formatEther(sdkObj.lpPrice) //this.$utils.convertBigNumberToNormal(Number(sdkObj.lpPrice), 2)
               orderObj.buyMoney = this.$utils.getBit(orderObj.lpAmount * orderObj.lpPrice)
-              orderObj.usdPayout = this.$utils.convertBigNumberToNormal(Number(sdkObj.usdPayout), 2)
+              orderObj.usdPayout = util.formatEther(sdkObj.usdPayout) //this.$utils.convertBigNumberToNormal(Number(sdkObj.usdPayout), 2)
               orderObj.changeSt = Number(sdkObj.usdPayout) / 1e18 / this.getUserCoin.stPrice
               orderObj.bondRate = sdkObj.bondRate / 1e2
               orderObj.expiry = Number(sdkObj.expiry)
@@ -715,8 +719,8 @@ export default {
       // 获取用户可提取的订单ID数组及总USD金额
       bondDepository().getUserClaimableOrders(this.getAccount).then(res => {
         // console.log('获取用户可提取的订单ID数组及总USD金额: ', res);
-        this.userClaimeMoney = this.$utils.convertBigNumberToNormal(Number(res[1]), 2)
-        this.Ready_BUSDchangeST = this.$utils.convertBigNumberToNormal(Number(res[1]) / this.getUserCoin.stPrice, 2)
+        this.userClaimeMoney = util.formatEther(res[1])// this.$utils.convertBigNumberToNormal(Number(res[1]), 2)
+        this.Ready_BUSDchangeST = this.userClaimeMoney /  this.getUserCoin.stPrice //this.$utils.convertBigNumberToNormal(Number(res[1]) / this.getUserCoin.stPrice, 2)
       })
     },
     // 用户批量提取订单ST收益
@@ -727,6 +731,7 @@ export default {
       }
       if(this.claimLoading)return
       this.claimLoading = true
+        console.log('this.userOrderIDInfo: ', this.userOrderIDInfo);
       bondDepository().connect(getSigner()).claim(this.userOrderIDInfo).then(async res => {
         // console.log('提取结果res1: ', res);
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_calim','link':res.hash}));
@@ -799,9 +804,7 @@ export default {
         this.inviteArr[3].num = this.getUserCoin.stPrice * util.formatEther(res) // this.$utils.convertBigNumberToNormal(Number(res), 2)
       })
       // 获取用户邀请的人数
-        console.log('this.getAccount.toUpperCase(: ', this.getAccount.toLowerCase());
       invitingInfo.getCounters(10,0,'usersCount','desc',this.getAccount.toLowerCase()).then(res => {
-        console.log('获取用户邀请的人数: ', res);
         if(res.data.counters.length > 0){
           this.inviteArr[0].num = res.data.counters[0].usersCount // 邀请下级数
         }else{
@@ -824,7 +827,9 @@ export default {
       clearInterval(this.lpTimer)
       this.lpTimer = setInterval(() => {
         this.$utils.refreshPrice('st')
-        this.$utils.refreshPrice('stlp',this.newBondID)
+        if(this.newBondID){
+          this.$utils.refreshPrice('stlp',this.newBondID)
+        }
         console.log("1分钟刷新一次价格(st,stlp)")
       },60000)
     },
