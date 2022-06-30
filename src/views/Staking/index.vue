@@ -290,7 +290,7 @@
               >
             </div>
             <div
-              class="btn mobile_font16 btn_normal"
+              class="btn disable_bnb mobile_font16 btn_normal"
               :class="isEnLang ? 'en_Bold' : ''"
               @click="ClaimFun"
             >
