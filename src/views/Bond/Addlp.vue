@@ -324,6 +324,7 @@ export default {
           })
         }else{
           this.buyLoading = false
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
         }
       }).catch(() => {
         this.buyLoading = false

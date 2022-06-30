@@ -638,7 +638,7 @@ export default {
         obj.soldLpNum = util.formatEther(res.soldLpAmount) //this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount), 2)//已卖出lp数量
         obj.purchaseRate = obj.soldLpNum / obj.maxSupplyLp * 100 //this.$utils.getBit(obj.soldLpNum / obj.maxSupplyLp / 1e2)
         // console.log('进度条数值obj.purchaseRate: ', obj.purchaseRate);
-        obj.percentage =  parseInt(this.$refs.progressbarRefs.clientWidth * (obj.purchaseRate / 100) ) + 'px' // 进度条
+        obj.percentage = this.$refs.progressbarRefs.clientWidth * (obj.purchaseRate / 100) + 'px' // 进度条
         // console.log('进度条的百分比obj.percentage: ',  obj.percentage);
         calback(obj)
       })
@@ -720,7 +720,7 @@ export default {
               orderObj.countTime = null
               insetArr.push(orderObj)
               if(orderCount == res[0].length){
-                this.orderArr = insetArr.sort((n1,n2) =>{return n1.bondID - n2.bondID})
+                this.orderArr = insetArr
                 this.loadMoreStatus = false
                 this.getUsetTime()
               }
