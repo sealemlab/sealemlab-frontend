@@ -49,7 +49,7 @@
               </div>
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
-            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="3">{{item.num}} ST</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num}} ST</p>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion}}</p>
           </div>
         </div>
@@ -304,7 +304,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { token, util, st, bondDepository } from 'sealemlab-sdk'
+import { token, util, st, bondDepository,stStaking } from 'sealemlab-sdk'
 export default {
   computed: {
     ...mapGetters(["isEnLang","getIsMobile","getNoticeNum","getUserCoin"])
@@ -860,7 +860,9 @@ export default {
           }
         },10)
       }
-      
+      this.addArr[4].num = this.getUserCoin.stPrice
+      this.addArr[5].num = this.getUserCoin.srPrice
+
       this.getSTBalance(res => {
         if(res != -1){
           this.addArr[3].num = 100000000 - res
@@ -871,14 +873,15 @@ export default {
       stStaking().stakedST().then(res => {
         // console.log('获取池子总质押ST数量: ', res);
         this.addArr[2].num = util.formatEther(res) * this.getUserCoin.stPrice
+      }).catch(() => {
+        this.addArr[2].num = 0 
       })
       // 写死第0期债券
       bondDepository().getLpLiquidity(0).then( res => {
         this.addArr[1].num = util.formatEther(res)
+      }).catch(() => {
+        this.addArr[1].num = 0 
       })
-
-      this.addArr[4].num = this.getUserCoin.stPrice
-      this.addArr[5].num = this.getUserCoin.srPrice
     }
   },
   mounted(){
