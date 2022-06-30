@@ -50,6 +50,7 @@
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num}} ST</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 5"> $ 0.001</p>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion}}</p>
           </div>
         </div>
@@ -848,7 +849,7 @@ export default {
           calback(moeney)
         }
         calback(-1)
-      })
+      },500)
     },
     mountedFun(){
       if(!this.getIsMobile){
@@ -861,7 +862,7 @@ export default {
         },10)
       }
       this.addArr[4].num = this.getUserCoin.stPrice
-      this.addArr[5].num = this.getUserCoin.srPrice
+      this.addArr[5].num = 0.001
 
       this.getSTBalance(res => {
         if(res != -1){
