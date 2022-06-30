@@ -186,7 +186,7 @@
   </div>
 </template>
 <script>
-import { market,contract,token, getSigner } from 'sealemlab-sdk'
+import { market, contract,token, getSigner, util } from 'sealemlab-sdk'
 import { mapGetters } from "vuex";
 export default {
   props: {
@@ -263,7 +263,8 @@ export default {
       }
       this.buyLoading = true
       // console.log('选中的nft/box: ', this.selectarr.arr);
-      this.processingArrayFun(this.selectarr.arr,this.selectCoin,this.$utils.convertNormalToBigNumber(Number(this.Pricevalue), 18)).then(info => {
+      // this.$utils.convertNormalToBigNumber(Number(this.Pricevalue), 18)
+      this.processingArrayFun(this.selectarr.arr,this.selectCoin,util.parseUnits(this.Pricevalue)).then(info => {
         console.log('处理好的数组res: ', info);
         let idArr = info.map(item => {
           return item.id

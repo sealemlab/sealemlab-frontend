@@ -58,7 +58,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { stStaking,getSigner,token } from 'sealemlab-sdk'
+import { stStaking,getSigner,token,util } from 'sealemlab-sdk'
 import progressBar from './slider.vue'
 import MessageBox from "@/views/Bond/MessageBox.vue";
 export default {
@@ -87,6 +87,7 @@ export default {
   watch:{
     'unStakedStatus'(newvala){
       if(newvala){
+        this.getUserStaked()
         document.body.style.overflow='hidden'
       }else{
         document.body.style.overflow='visible'
@@ -161,7 +162,8 @@ export default {
       if (this.userUnStakedLoading) return
       this.userUnStakedLoading = true
       let subNum = this.$utils.getBit(this.STmsg, 8)
-      stStaking().connect(getSigner()).withdraw(this.$utils.convertNormalToBigNumber(subNum, 18)).then(async res => {
+      // this.$utils.convertNormalToBigNumber(subNum, 18)
+      stStaking().connect(getSigner()).withdraw(util.parseUnits(subNum)).then(async res => {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt43','link':res.hash}));
         this.$store.commit("setProgressInfo", JSON.stringify({'speed':30}));
         const etReceipt = await res.wait();
@@ -201,11 +203,11 @@ export default {
     },
     getUserStaked(){
       stStaking().userStakedST(this.getAccount).then(res => {
-        // console.log('获取某用户的质押的ST数量: ', res);
+        console.log('获取某用户的质押的ST数量: ', res);
         if (res / 1e18 <= 1e-8) {
           this.userStaked = 0
         } else {
-          this.userStaked = this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
+          this.userStaked = util.formatEther(res)// this.$utils.convertBigNumberToNormal(Number(res), 0, 18, true)
         }
       })
       // 获取用户提现时要扣的税率
