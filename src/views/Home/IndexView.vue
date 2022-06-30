@@ -836,7 +836,7 @@ export default {
       this.getuserbalanceTimer = setInterval(() => {
         if(count == 7){
           clearInterval(this.getuserbalanceTimer)
-          let moeney = Number(obj.Speed) + Number(obj.Private) + Number(obj.Public) + Number(obj.Team) + Number(obj.Market) + Number(obj.CEX) + Number(obj.Bond)
+          let moeney = Number(obj.Speed) + Number(obj.Private) + Number(obj.Team) + Number(obj.Market) + Number(obj.CEX) + Number(obj.Bond)
           this.addArr[3].num = Number(100000000) - Number(moeney)
           this.addArr[0].num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
         }
