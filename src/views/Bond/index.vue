@@ -638,7 +638,7 @@ export default {
         obj.soldLpNum = util.formatEther(res.soldLpAmount) //this.$utils.convertBigNumberToNormal(Number(res.soldLpAmount), 2)//已卖出lp数量
         obj.purchaseRate = obj.soldLpNum / obj.maxSupplyLp * 100 //this.$utils.getBit(obj.soldLpNum / obj.maxSupplyLp / 1e2)
         // console.log('进度条数值obj.purchaseRate: ', obj.purchaseRate);
-        obj.percentage = parseInt(obj.purchaseRate) + 'px' // 进度条
+        obj.percentage =  parseInt(this.$refs.progressbarRefs.clientWidth * (obj.purchaseRate / 100) ) + 'px' // 进度条
         // console.log('进度条的百分比obj.percentage: ',  obj.percentage);
         calback(obj)
       })
