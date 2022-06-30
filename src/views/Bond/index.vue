@@ -34,7 +34,7 @@
             <div :title='$t("message.bond.txt71")' style="cursor:pointer" @click="quesFun('message.bond.txt71',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
             </div>
-            <div><span>$&nbsp;{{treasuryMoney}}</span></div>
+            <div><span>$&nbsp;{{treasuryMoney | PriceConversion}}</span></div>
             <div>
               <span>ST{{ $t("message.bond.txt4") }} </span>
             </div>
@@ -556,7 +556,7 @@ export default {
         if (newValue) {
           this.loadMoreStatus = true
           this.orderArr = []
-          this.getBondInfo() // 最新债券信息
+          // this.getBondInfo() // 最新债券信息
           this.getUserOrder() // 获取订单信息
           this.getUserInvite() // 邀请人地址
         }else{
@@ -895,6 +895,7 @@ export default {
   },
   mounted(){
     this.getNEWPrice() // 获取最新st,stlp价格
+    this.getBondInfo()
   },
   beforeDestroy(){
     clearInterval(this.lpTimer)
