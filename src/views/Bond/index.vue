@@ -607,7 +607,7 @@ export default {
           let money1 = util.formatEther(res) * this.getUserCoin.stlpPrice
           erc20(token('production').STLP).balanceOf('0x000000000000000000000000000000000000dEaD').then(res1 => {
             console.log('国库金额res: ', res1);
-            let money2 = util.formatEther(res1)// this.$utils.convertBigNumberToNormal(Number(res), 2)
+            let money2 = util.formatEther(res1) * this.getUserCoin.stlpPrice // this.$utils.convertBigNumberToNormal(Number(res), 2)
             this.treasuryMoney = Number(money1) + Number(money2)
           })
         })
