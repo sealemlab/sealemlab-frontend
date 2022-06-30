@@ -97,8 +97,8 @@
             <span class="has_question_icon" :title='$t("message.bond.txt_tax")'>{{$t("message.bond.txt32")}}</span>
             <span class="userTaxRateStatus">
               <span>{{userTaxRate}}%</span>
-              <span v-if="(isThan1000 && BUSDmsg) || (isThan1000 && STmsg)">(+{{additionalTaxRate | MultiplyBySquare}}%)</span>
-              <span v-else>(+0.0%)</span>
+              <span v-if="(isThan1000 && BUSDmsg) || (isThan1000 && STmsg)">( + {{additionalTaxRate | MultiplyBySquare}}%)</span>
+              <span v-else>( + 0.0%)</span>
             </span>
           </p>
           <p class="font14 mobile_font14" @click="AddQuesFun('message.bond.txt_80_ques',$event)" :class="isEnLang?'en_Bold':''">
@@ -107,7 +107,7 @@
           </p>
           <p class="font14 mobile_font14" :class="isEnLang?'en_Bold':''">
             <span>{{$t("message.bond.txt33")}}</span>
-            <span>{{userbuylp | PriceConversion}} ST-BUSD LP (≈ $ {{useReadyBy | PriceConversion}})</span>
+            <span>{{userbuylp | PriceConversion}} ST-BUSD LP ( ≈ $ {{useReadyBy | PriceConversion}})</span>
           </p>
           <p>{{$t("message.bond.txt34")}}</p>
         </div>
@@ -275,23 +275,20 @@ export default {
         if(!this.STmsg || !this.BUSDmsg){
           return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
         }
-        token0 = util.parseUnits(this.STmsg)  //this.$utils.convertNormalToBigNumber(this.STmsg, 18)
-        console.log('token0: ', token0);
-        console.log('this.BUSDmsg: ', this.BUSDmsg);
+        token0 = util.parseUnits(this.STmsg + '')  //this.$utils.convertNormalToBigNumber(this.STmsg, 18)
         token1 = util.parseUnits(this.BUSDmsg + '') //this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
-        console.log('token1: ', token1);
       }else if(this.activetype == 1){
         if(!this.BUSDmsg){
           return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
         }
-        token1 = util.parseUnits(this.BUSDmsg) //this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
+        token1 = util.parseUnits(this.BUSDmsg + '') //this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
         token0 = 0
       }else if(this.activetype == 2){
         if(!this.STmsg){
           return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
         }
         token1 = 0
-        token0 = util.parseUnits(this.STmsg) //this.$utils.convertNormalToBigNumber(this.STmsg, 18)
+        token0 = util.parseUnits(this.STmsg + '') //this.$utils.convertNormalToBigNumber(this.STmsg, 18)
       }
       this.buyLoading = true
       // console.log('this.newBondID,token0,token1,0,address: ', this.newBondID,token0,token1,0,address);
