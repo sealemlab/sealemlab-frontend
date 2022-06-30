@@ -836,7 +836,7 @@ export default {
         if(arr.length > 0){
           arr.forEach((item,index) => {
             if(item.inviter.toLowerCase() == this.getAccount.toLowerCase()){
-              this.inviteArr[1].num = index
+              this.inviteArr[1].num = index + 1
             }else{
               this.inviteArr[1].txt = 'message.bond.txt_out_of_Ranking'
               // this.inviteArr[1].num = 'Out of Ranking' //未上榜
