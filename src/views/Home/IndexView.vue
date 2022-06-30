@@ -801,14 +801,6 @@ export default {
         count++
         Object.assign(obj,{Private:util.formatEther(res)})
       })
-      // Public（公募轮）
-      st().balanceOf('0x09EA50F13CFF6f4fD964cF1f4a1A5962985f2D9C').then(res => {
-        count++
-        Object.assign(obj,{Public:util.formatEther(res)})
-      }).catch(() => {
-        count++
-        Object.assign(obj,{Public:util.formatEther(res)})
-      })
       // Team（团队）
       st().balanceOf('0xB830656B5A9de339086e175E3C570C0Dd7A6Ed30').then(res => {
         count++
@@ -842,9 +834,9 @@ export default {
         Object.assign(obj,{Bond:util.formatEther(res)})
       })
       this.getuserbalanceTimer = setInterval(() => {
-        if(count == 8){
+        if(count == 7){
           clearInterval(this.getuserbalanceTimer)
-          let moeney = Number(obj.Speed) + Number(obj.Private) + Number(obj.Public) + Number(obj.Team) + Number(obj.Market) + Number(obj.CEX) + Number(obj.Bond)
+          let moeney = Number(obj.Speed) + Number(obj.Private) + Number(obj.Team) + Number(obj.Market) + Number(obj.CEX) + Number(obj.Bond)
           this.addArr[3].num = Number(100000000) - Number(moeney)
           this.addArr[0].num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
         }
@@ -853,7 +845,7 @@ export default {
     },
     mountedFun(){
       this.addArr[4].num = this.getUserCoin.stPrice
-      this.addArr[5].num = 0.001
+      this.addArr[5].num = 'N/A'
 
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {

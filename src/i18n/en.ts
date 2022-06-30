@@ -680,7 +680,9 @@ export const message = {
     txt79:"Estimated ST-BUSD LP:",
     txt80:"Max you can buy within 14 days",
     txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally.",
-    txt_81_ques:"Each wallet enjoys a maximum of 30% extra rate."
+    txt_81_ques:"Each wallet enjoys a maximum of 30% extra rate.",
+
+    txt_out_of_Ranking:"Out of Ranking"
   },//债券
   signin: {
     txt1: "Create Account",
