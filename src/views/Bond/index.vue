@@ -839,7 +839,6 @@ export default {
               this.inviteArr[1].num = index + 1
             }else{
               this.inviteArr[1].txt = 'message.bond.txt_out_of_Ranking'
-              // this.inviteArr[1].num = 'Out of Ranking' //未上榜
             }
           })
         }
@@ -1097,7 +1096,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 16px;
   color: #000;
   box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
   border-radius: 4px;

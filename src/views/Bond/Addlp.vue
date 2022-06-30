@@ -53,7 +53,7 @@
         <div class="main_button" v-if="allLoading">
           <BtnLoading :isloading="true"></BtnLoading>
         </div>
-        <div v-else>
+        <div v-else :class="isEnLang?'en_Bold':''">
           <div v-if="activetype == 0">
             <div class="main_button font16 mobile_font16" @click="buyBondFun" v-if="isApproveBUSD && isApproveST">
               {{$t("message.tip.self_buy")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
