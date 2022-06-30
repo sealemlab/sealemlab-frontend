@@ -427,7 +427,10 @@
         <div class="content">
           <div class="databox" :class="isEnLang?'en_Bold':''" v-for="(item,index) in inviteArr" :key="index">
             <span class="font18 mobile_font14">{{ $t(item.title) }}</span>
-            <span class="font35 mobile_font22" v-if="index == 0 || index == 1">{{item.num}}</span>
+            <span class="font35 mobile_font22" v-if="index == 0 || index == 1">
+              <span v-if="item.txt">{{$t(item.txt)}}</span>
+              <span v-else>{{item.num}}</span>
+            </span>
             <span class="font35 mobile_font22" v-else>$ {{item.num | PriceConversion}}</span>
           </div>
         </div>
@@ -829,6 +832,17 @@ export default {
       // 排行榜
       invitingInfo.getCounters(50,0,'usersCount','desc').then(res => {
         console.log('获取邀请统计信息排行榜res: ', res);
+        let arr = res.data.counters
+        if(arr.length > 0){
+          arr.forEach((item,index) => {
+            if(item.inviter.toLowerCase() == this.getAccount.toLowerCase()){
+              this.inviteArr[1].num = index
+            }else{
+              this.inviteArr[1].txt = 'message.bond.txt_out_of_Ranking'
+              // this.inviteArr[1].num = 'Out of Ranking' //未上榜
+            }
+          })
+        }
       })
     },
     // 获取用户的下属某期债券的税前购买USD金额
