@@ -846,8 +846,8 @@ export default {
         if(count == 8){
           clearInterval(this.getuserbalanceTimer)
           let moeney = obj.Speed + obj.Private + obj.Public + obj.Team + obj.Market + obj.CEX + obj.Bond
-          this.addArr[3].num = 100000000 - moeney
-          this.addArr[0].num = this.getUserCoin.stPrice * (100000000 - moeney)
+          this.addArr[3].num = Number(100000000) - Number(moeney)
+          this.addArr[0].num = this.getUserCoin.stPrice * (Number(100000000) - Number(moeney))
         }
       },500)
     },
@@ -981,16 +981,17 @@ export default {
           line-height: 41px;
           margin-top: 25px;
           padding-left: 50px;
-          // text-align: center;
         }
       }
     }
     .add_top_content_center{
-      // justify-content: center;
-      // padding-left: 10%;
+      padding-left: 10%;
     }
     .add_top_content_end{
       justify-content: flex-end;
+      .whole{
+        min-width: 167px;
+      }
     }
   }
   .home_bgbox{
