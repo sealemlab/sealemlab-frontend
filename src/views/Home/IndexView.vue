@@ -56,7 +56,6 @@
         </div>
       </div>
     </div>
-    <div style="width:100%;height:60px;background:#fff;color:#000">{{dsjhfkjs}}</div>
     <!-- 希莱姆简介 -->
     <div class="character_introduction">
       <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt9")}}</div>
@@ -719,8 +718,7 @@ export default {
         }
       ],
       imgTimer:null,
-      getuserbalanceTimer:null,
-      dsjhfkjs:{}
+      getuserbalanceTimer:null
     }
   },
   watch: {
@@ -783,7 +781,7 @@ export default {
       this.gameIndex = item.id
     },
     // 获取7个地址的余额
-    getSTBalance(calback){
+    getSTBalance(){
       clearInterval(this.getuserbalanceTimer)
       let count = 1
       let obj = {}
@@ -848,22 +846,16 @@ export default {
         if(count == 8){
           clearInterval(this.getuserbalanceTimer)
           let moeney = obj.Speed + obj.Private + obj.Public + obj.Team + obj.Market + obj.CEX + obj.Bond
-          calback({data:obj,moeney:moeney})
+          this.addArr[3].num = 100000000 - moeney
+          this.addArr[0].num = this.getUserCoin.stPrice * (100000000 - moeney)
         }
-        calback(-1)
       },500)
     },
     mountedFun(){
       this.addArr[4].num = this.getUserCoin.stPrice
       this.addArr[5].num = 0.001
 
-      this.getSTBalance(res => {
-        if(res != -1){
-          this.dsjhfkjs = res.data
-          this.addArr[3].num = 100000000 - res.moeney
-          this.addArr[0].num = this.getUserCoin.stPrice * (100000000 - res.moeney)
-        }
-      })
+      this.getSTBalance()
       // 获取池子总质押ST数量
       stStaking().stakedST().then(res => {
         // console.log('获取池子总质押ST数量: ', res);
