@@ -276,7 +276,10 @@ export default {
           return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
         }
         token0 = util.parseUnits(this.STmsg)  //this.$utils.convertNormalToBigNumber(this.STmsg, 18)
-        token1 = util.parseUnits(this.BUSDmsg) //this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
+        console.log('token0: ', token0);
+        console.log('this.BUSDmsg: ', this.BUSDmsg);
+        token1 = util.parseUnits(this.BUSDmsg + '') //this.$utils.convertNormalToBigNumber(this.BUSDmsg, 18)
+        console.log('token1: ', token1);
       }else if(this.activetype == 1){
         if(!this.BUSDmsg){
           return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_write'}));
