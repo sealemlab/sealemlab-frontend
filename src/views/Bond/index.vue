@@ -121,7 +121,7 @@
           <span>{{ $t("message.bond.txt5") }}</span>
         </div>
         <div class="box">
-          <div class="text1 font12" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt40") }}</div>
+          <!-- <div class="text1 font12" :class="isEnLang?'en_Bold':''">{{ $t("message.bond.txt40") }}</div> -->
           <ul class="list_title1">
             <!-- 第一个圆 -->
             <li>
@@ -307,9 +307,9 @@
                 <BtnLoading :isloading="claimLoading"></BtnLoading>
               </div>
             </div>
-            <div class="his font12" @click="tipFun">
+            <!-- <div class="his font12" @click="tipFun">
               <span>{{ $t("message.bond.txt55") }}</span>
-            </div>
+            </div> -->
           </div>
           <div class="bottom">
             <ul class="list_title font20" :class="isEnLang?'en_Bold':''">

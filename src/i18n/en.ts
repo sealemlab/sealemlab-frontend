@@ -583,7 +583,7 @@ export const message = {
   },
   bond: {
     tip_title_txt:'Risk Warning',
-    tip_content_txt:"There is a risk of loss when purchasing bond in ST or BUSD when the token price fluctuates greatly. You can go to Pancake Swap to buy token and then pay ST and BUSD to buy bond.",
+    tip_content_txt:"We provide swift channel to buy bond, but price may change greatly due to the sandwich attack. It is recommended to buy tokens on DEX when buying lots of bonds, and then come back to buy bonds.",
     tip_btn_txt:"I've known the risk",
     tip_txt:"Please confirm that you have known this risk.",
     txt_tax: "The floor tax rate is 1.0%, increasing by 0.1% per 1k USD.", //bond弹窗tax的问号内容
@@ -595,7 +595,7 @@ export const message = {
     txt2_2: "The ST-BUSD LP bonds sold will be burned",
     txt2_3: "Users withdraw anytime when expired",
     txt3: "Locked Liquidity",
-    txt4: "Price",
+    txt4: " Price",
     txt5: "Interest Rate",
     txt6: "Duration",
     txt7: "Get lp",
@@ -626,7 +626,7 @@ export const message = {
     txt32: "Estimated tax rate",
     txt33: "Purchased within 14 days",
     txt34:
-      "After the bond expires, the principal and interest will be claimed in ST; the payment token will automatically be formed an LP; the tax will be reset to the initial value of 0.1% every 14 days;each wallet enjoys a maximum of 30% extra rate.",
+      "Bond will be claimed in ST when expired; tax will be reset to the initial of 1% every 14 days. If the purchase quantity exceeds the stock or the maximum, the excess will be returned as ST-BUSD LP. You can go to pancake to remove liquidity.",
     txt35: "Capacity",
     txt36: "Extra rate",
     txt37: "Duration",
@@ -642,7 +642,7 @@ export const message = {
     txt47: "Need invitees stake",
     txt48: "To stake",
     txt49: "Need you stake",
-    txt50: "Interest rate = Base rate + Invite to buy bond + Invite to stake+ Your staking",
+    txt50: "Interest rate = Base rate + Invite to buy bond + Invite to stake + Your staking",
     txt51:
       "The Base rate changes according to the liquidity; each account enjoys a maximum of 30% extra rate; the staking interest rate changes according to the staked amount. ",
     txt52: "Bond balance",
