@@ -137,7 +137,7 @@ export default {
       position: absolute;
       top: 10px;
       right: 20px;
-      width: 44px;
+      width: 32px;
       cursor: pointer;
     }
   }

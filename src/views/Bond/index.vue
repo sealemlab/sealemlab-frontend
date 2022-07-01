@@ -1221,11 +1221,7 @@ export default {
       line-height: 28px;
       padding: 10px 0;
       li {
-        // width: 160px;
         width: calc(100% / 8);
-        &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
-          // text-align: center;
-        }
       }
     }
     .list_title2 {
@@ -1239,12 +1235,7 @@ export default {
         justify-content: space-between;
         padding: 10px 0;
         > span {
-          // width: 160px;
-          
           width: calc(100% / 8);
-          &:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7){
-            // text-align: center;
-          }
         }
       }
     }
@@ -1344,7 +1335,6 @@ export default {
       }
     }
     .his {
-      // width: fit-content;
       font-weight: 400;
       color: #b79d53;
       line-height: 14px;
@@ -1372,24 +1362,11 @@ export default {
       line-height: 28px;
       padding: 10px 0;
       li {
-        
         width: calc(100% / 6);
-        // min-width: 160px;
         &:nth-child(2){
           >div{
             display: none;
           }
-        }
-        &:nth-child(2),&:nth-child(3),&:nth-child(5){
-          // text-align: center;
-        }
-        &:nth-child(4){
-          // width: 200px;
-          // text-align: center;
-        }
-        &:nth-child(6){
-          // width: 250px;
-          // text-align: center;
         }
       }
     }
@@ -1404,22 +1381,8 @@ export default {
         padding: 10px 0;
         > span {
           cursor: pointer;
-          // min-width: 160px;
           width: calc(100% / 6);
-          &:nth-child(2),&:nth-child(3),&:nth-child(5){
-            // text-align: center;
-          }
-          &:nth-child(4){
-            // width: 200px;
-            // text-align: center;
-          }
-          &:nth-child(6){
-            // width: 250px;
-            // text-align: center;
-          }
           .add_small_angle{
-            // width: 100%;
-            // text-align: left;
             margin-top: 10px;
           }
         }

@@ -38,7 +38,7 @@
             <span class="font24 mobile_font14">{{$t("message.user.txt11")}}</span>
             <div class="income_box display_flex font20">
               <div class="imgbox display_flex">
-                <img :src="`${$store.state.imgUrl}srlogo.webp`" class="homebg" />
+                <img :src="`${$store.state.imgUrl}new_srlogo.webp`" class="homebg" />
                 <span>SR</span>
               </div>
               <span>0</span>
@@ -48,7 +48,7 @@
             <span class="font24 mobile_font14">{{$t("message.user.txt12")}}</span>
             <div class="income_box mobile_padding display_flex font20">
               <div class="imgbox display_flex">
-                <img :src="`${$store.state.imgUrl}srlogo.webp`" class="homebg" />
+                <img :src="`${$store.state.imgUrl}new_srlogo.webp`" class="homebg" />
                 <span>SR</span>
               </div>
               <div class="btn_content">
@@ -116,7 +116,7 @@ export default {
     return {
       li_index:0,
       walletArr:[{
-        coin_logo:`${this.$store.state.imgUrl}busd.webp`,
+        coin_logo:`${this.$store.state.imgUrl}new_busd.webp`,
         company:'BUSD',
         name1:'message.user.txt6',
         num1:0,
@@ -127,7 +127,7 @@ export default {
         type:'busd'
       },
       {
-        coin_logo:`${this.$store.state.imgUrl}stlogo.webp`,
+        coin_logo:`${this.$store.state.imgUrl}new_stlogo.webp`,
         company:'ST',
         name1:'message.user.txt6',
         num1:0,
@@ -138,7 +138,7 @@ export default {
         type:'st'
       },
       {
-        coin_logo:`${this.$store.state.imgUrl}srlogo.webp`,
+        coin_logo:`${this.$store.state.imgUrl}new_srlogo.webp`,
         company:'SR',
         name1:'message.user.txt6',
         num1:0,
@@ -213,7 +213,7 @@ export default {
     .out_btn{
       padding: 0 25px;
       height: 48px;
-      margin-top: 32px;
+      // margin-top: 32px;
       font-weight: bold;
       color: #000000;
       line-height: 48px;

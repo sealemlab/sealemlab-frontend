@@ -693,7 +693,7 @@ export default {
       color: #ffffff;
       line-height: 41px;
       background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-      -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .span2 {
@@ -1043,7 +1043,7 @@ export default {
         color: #ffffff;
         line-height: 0.2rem;
         background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-        -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
       }
       .span2 {
