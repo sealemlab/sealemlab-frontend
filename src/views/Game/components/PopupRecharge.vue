@@ -4,31 +4,42 @@
       <div class="close_img" @click="closePopup"></div>
       <div class="content">
         <div class="title">{{ $t("message.gamepage.text19") }}</div>
+        <div class="friends">
+
+        </div>
         <div class="box">
           <div class="title">{{ $t("message.gamepage.text31") }}</div>
           <div class="inputbox">
-            <input type="number" value="" :placeholder="$t('message.gamepage.text32')" />
+            <Input :modelValue="SRmsg" type="number" :placeholder='$t("message.gamepage.text32")' @input="busdInputClick"></Input>
+            <!-- <input type="number" value="" :placeholder="$t('message.gamepage.text32')" /> -->
             <div class="sr">
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
             </div>
-            <div class="inputbtn">{{ $t("message.gamepage.text33") }}</div>
-            <div class="tip">{{ $t("message.gamepage.text34") }}: 345678</div>
+            <div class="inputbtn" @click="maxClick">{{ $t("message.gamepage.text33") }}</div>
+            <div class="tip">{{ $t("message.gamepage.text34") }}: {{getUserCoin.sr | PriceConversion}}</div>
           </div>
         </div>
         <div class="box">
           <div class="title">{{ $t("message.gamepage.text35") }}</div>
           <div class="list">
-            <span>30000</span>
-            <span>60000</span>
-            <span>120000</span>
-            <span>240000</span>
-            <span>480000</span>
+            <span v-for="(item,index) in rechargeArr" :key="index" @click="selectFun(item)">
+              {{item}}
+            </span>
+            
           </div>
         </div>
-        <div class="box">
-          <div class="btn">{{ $t("message.gamepage.text36") }}</div>
-          <!-- {{ $t("message.gamepage.text19") }} -->
+        <div class="btn">
+          <FunBtn
+            :allLoading="allLoading"
+            :isapprove="isapprove"
+            :approveloading="doingLoading"
+            :isloading="doingLoading"
+            :word="'message.gamepage.text19'"
+            ref="mychild"
+            @sonapprove="sonapprove"
+            @dosomething="funbtning"
+          />
         </div>
       </div>
     </div>
@@ -36,12 +47,119 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { token, contract, getSigner, srDeposit, util } from 'sealemlab-sdk'
 export default {
+  computed: {
+    ...mapGetters(["isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
+  },
   name: "PopupRecharge",
+  data(){
+    return {
+      allLoading:true,
+      isapprove:false,
+      doingLoading:false,
+      SRmsg:'',
+      approveTimer:null,
+      rechargeArr:[30000,60000,120000,240000,480000]
+    }
+  },
+  watch: {
+    'getAccountStatus': {
+      handler: function (newValue) {
+        if (newValue == -1 || newValue == undefined) {
+          this.allLoading = false
+        } else if (newValue == 0) {
+          this.allLoading = true
+          this.isApproveFun()
+        } else if (newValue > 0) {
+          this.allLoading = true
+          this.$utils.antiShakeFun(() => {
+            this.isApproveFun()
+          }, 2000)()
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
   methods: {
     closePopup() {
       this.$parent.isShowRechargePopup = false;
     },
+    maxClick(){
+      this.SRmsg = this.getUserCoin.sr > 1e-8?this.getUserCoin.sr:0
+    },
+    busdInputClick(data){
+      if(Number(this.getUserCoin.sr) >= Number(data)){
+        this.SRmsg = data
+      }else{
+        this.SRmsg = this.getUserCoin.sr
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'余额不足'}));
+      }
+    },
+    // 判断授权
+    isApproveFun () {
+      clearInterval(this.approveTimer)
+      this.approveTimer = setInterval(() => {
+        if (this.$refs.mychild) {
+          clearInterval(this.approveTimer)
+          this.$refs.mychild.isApproveFun(token().SR, contract().SRDeposit).then((res) => {
+            if (res) {
+              this.isapprove = true;
+            } else {
+              this.isapprove = false;
+            }
+            this.allLoading = false
+          }).catch(() => {
+            this.isapprove = this.allLoading = false
+          })
+        }
+      }, 1000)
+    },
+    // 去授权
+    sonapprove () {
+      if (this.doingLoading) return;
+      this.doingLoading = true;
+      this.$refs.mychild.goApproveFun(token().SR, contract().SRDeposit)
+        .then((res) => {
+          this.doingLoading = false;
+          if (res) {
+            this.isapprove = true;
+          } else {
+            this.isapprove = false;
+          }
+        })
+    },
+    selectFun(item){
+      if(Number(this.getUserCoin.sr) >= Number(item)){
+        this.SRmsg = item
+      }else{
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'余额不足'}));
+      }
+    },
+    funbtning(){
+      if (this.doingLoading) return;
+      if(!this.SRmsg){
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'请输入充值金额'}));
+        return
+      }
+      this.doingLoading = true;
+      srDeposit().connect(getSigner()).deposit(this.getAccount,util.parseUnits(this.SRmsg)).then(async res => {
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt27','link':res.hash}));
+        this.$store.commit("setProgressInfo", JSON.stringify({'speed':50}));
+        const etReceipt = await res.wait();
+        if(etReceipt.status == 1){
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
+          this.doingLoading = false
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt28'}));
+        }else{
+          this.doingLoading = false
+        }
+      }).catch(() => {
+        this.doingLoading = false
+      })
+    }
   },
 };
 </script>
@@ -81,7 +199,6 @@ export default {
     .title {
       text-align: center;
       font-size: 24px;
-
       font-weight: 600;
       color: #eccf83;
       margin-bottom: 2rem;
@@ -177,22 +294,17 @@ export default {
           }
         }
       }
-      .btn {
-        margin: 0 auto;
-        width: 18rem;
-        height: 2.5rem;
-        background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-        border-radius: 4px;
-        backdrop-filter: blur(14px);
-        font-size: 18px;
-
-        font-weight: 600;
-        color: #000000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-      }
+    }
+    .btn {
+      margin: 0 auto;
+      width: 18rem;
+      height: 2.5rem;
+      background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+      border-radius: 4px;
+      backdrop-filter: blur(14px);
+      font-weight: 600;
+      color: #000000;
+      cursor: pointer;
     }
   }
 }
@@ -248,11 +360,11 @@ export default {
             padding: 0.05rem;
           }
         }
-        .btn {
-          width: 1.8rem;
-          height: 0.35rem;
-          font-size: 0.16rem;
-        }
+      }
+      .btn {
+        width: 1.8rem;
+        height: 0.35rem;
+        font-size: 0.16rem;
       }
     }
   }

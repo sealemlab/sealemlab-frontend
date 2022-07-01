@@ -19,8 +19,8 @@
               <span>SR</span>
             </div>
             <input type="number" value="0" disabled />
-            <!-- <div class="btn disable" @click="openRecharge">{{ $t("message.gamepage.text19") }}</div> -->
-            <div class="btn disable">Coming</div>
+            <div class="btn" @click="openRecharge">{{ $t("message.gamepage.text19") }}</div>
+            <!-- <div class="btn disable">Coming</div> -->
           </div>
         </div>
       </div>
@@ -33,8 +33,8 @@
               <span>SR</span>
             </div>
             <input type="number" value="0" disabled />
-            <!-- <div class="btn disable">{{ $t("message.gamepage.text21") }}</div> -->
-            <div class="btn disable">Coming</div>
+            <div class="btn">{{ $t("message.gamepage.text21") }}</div>
+            <!-- <div class="btn disable">Coming</div> -->
           </div>
           <!-- {{ $t("message.gamepage.text22") }} -->
           <!-- {{ $t("message.gamepage.text13") }} -->
