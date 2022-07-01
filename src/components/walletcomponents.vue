@@ -84,19 +84,18 @@ export default {
   .boxarr {
     position: relative;
     margin: 0 auto;
-    height: 80%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 60px 20px 10px;
+    padding: 70px 20px 10px;
     border-radius: 5px;
     background: #171717;
-    padding-bottom: 40px;
     .out_box_hidden {
       width: 100%;
-      max-height: 560px;
+      max-height: 100%;
       overflow-y: auto;
-      padding: 0 0 10px;
+      // padding: 0 0 10px;
       .onebox {
         cursor: pointer;
         width: 432px;
@@ -107,7 +106,7 @@ export default {
         justify-content: space-between;
         background: rgba(63, 65, 71, 0.5);
         border-radius: 15px;
-        margin-top: 32px;
+        margin-bottom: 32px;
         .imgcard {
           width: 41px;
         }
@@ -122,7 +121,7 @@ export default {
     .new_cry {
       width: 100%;
       text-align: center;
-      margin-top: 30px;
+      margin-top: 10px;
       span {
         cursor: pointer;
       }

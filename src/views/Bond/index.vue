@@ -307,7 +307,7 @@
                 <BtnLoading :isloading="claimLoading"></BtnLoading>
               </div>
             </div>
-            <div class="his font12">
+            <div class="his font12" @click="tipFun">
               <span>{{ $t("message.bond.txt55") }}</span>
             </div>
           </div>
@@ -339,7 +339,7 @@
                 <span class="has_select">
                   <div class="small_angle" @click="showBuy(item)">
                   $ {{ item.buyMoney }}
-                    &nbsp;&nbsp;
+                    &nbsp;
                     <svg t="1654321191240" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2336" width="16" height="16"><path d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z" p-id="2337" fill="#CED3D9"></path></svg>
                   </div>
                   <div class="add_small_angle" v-if="item.status">
@@ -350,7 +350,7 @@
                 <span class="has_select" v-if="item.personalArr[3] == 3000">
                   <div class="small_angle" @click="showRate(item)">
                     {{ item.personalArr[3] | SquareRoot}}%
-                    &nbsp;&nbsp;
+                    &nbsp;
                     <svg t="1654321191240" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2336" width="16" height="16"><path d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z" p-id="2337" fill="#CED3D9"></path></svg>
                   </div>
                   <div class="add_small_angle" v-if="item.rateStatus">
@@ -365,7 +365,7 @@
                   <span class="color4">{{ item.personalArr[2] | SquareRoot}}%</span>
                 </span>
                 <span>$ {{ item.usdPayout | PriceConversion}} (≈ {{item.changeSt | PriceConversion}} ST)</span>
-                <span v-if="item.countTime">
+                <span v-if="item.countTime" :class="item.timeFinshed?'color4':''">
                   {{ item.countTime.d}}&nbsp;:
                   {{ item.countTime.h }}&nbsp;:
                   {{ item.countTime.m }}&nbsp;:
@@ -392,7 +392,7 @@
       <div class="dashboard_box" v-if="!dashboard">
         <div class="top font24 mobile_font16" :class="isEnLang?'en_heavy':''">
           <span class="color3">{{ $t("message.bond.txt62") }}</span>
-          <span>{{ $t("message.bond.txt63") }}</span>
+          <span @click="tipFun">{{ $t("message.bond.txt63") }}</span>
         </div>
         <div class="content">
           <div>
@@ -583,6 +583,12 @@ export default {
     },
   },
   methods: {
+    tipFun(){
+      if (!this.getNoticeNum) {
+        this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+        this.$store.commit("setNoticeNum", true);
+      }
+    },
     // 获取当前正在发售的债券
     getBondInfo(){
       // 获取发行中(还未到结束时间)的债券ID数组
@@ -721,6 +727,7 @@ export default {
               orderObj.rateStatus = false
               orderObj.selfTimeOBJ = null
               orderObj.countTime = null
+              orderObj.timeFinshed = false // 倒计时完成状态为true
               insetArr.push(orderObj)
               if(orderCount == res[0].length){
                 this.orderArr = insetArr.sort((n1,n2) =>{ return n1.orderID - n2.orderID })
@@ -800,6 +807,7 @@ export default {
           this.orderArr.forEach(item => {
             this.$utils.customTime(item.expiry,(data) => {
               item.selfTimeOBJ = data.countdownObject 
+              item.timeFinshed = data.countdownObject == 0?true:false
               item.countTime = data.countTime
             });//结束时间
           })
@@ -942,13 +950,12 @@ export default {
   transform: translate(-50%,-50%);
   text-align: center;
 }
-/* @media screen and (max-width: 980px) {
-  .center_text{
-    min-width: 0.7rem;
-  }
-} */
 </style>
 <style lang="scss" scoped>
+.small_angle{
+  display: flex;
+  align-items: center;
+}
 .nodata_add{
   margin-top: 20px;
   li{

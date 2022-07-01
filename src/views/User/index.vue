@@ -83,7 +83,14 @@ import { mapGetters } from "vuex";
 import { token,wallet } from "sealemlab-sdk";
 export default {
   computed: {
-    ...mapGetters(["getIstrue","getLogin","getNoticeNum","isEnLang","getUserCoin","getAccountStatus",""])
+    ...mapGetters(["getAccount","getIstrue","getLogin","getNoticeNum","isEnLang","getUserCoin","getAccountStatus",""]),
+    invitelink(){
+      if(process.env.NODE_ENV == "production"){
+        return `https://sealemlab.com/#/home?ref=${this.getAccount}`
+      }else{
+        return `https://test.sealemlab.com/#/home?ref=${this.getAccount}`
+      }
+    }
   },
   watch: {
     'getAccountStatus': {
@@ -169,9 +176,11 @@ export default {
       }
     },
     copyLink(){
-      if (!this.getNoticeNum) {
-        this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-        this.$store.commit("setNoticeNum", true);
+      if(this.getIstrue){
+        this.$utils.copyClick(this.invitelink)
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+      }else{
+        this.$store.commit("setwalletstatus", true);
       }
     }
   },

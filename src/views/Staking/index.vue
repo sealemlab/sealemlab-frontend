@@ -299,11 +299,16 @@
             </div>
           </div>
           <p
-            class="font14 mobile_font12 tip_"
-            @click="AddQuesFun('message.stake.rate_tip', $event)"
+            class="font12 mobile_font12 tip_noclaim"
             :class="isEnLang ? 'en_medium' : ''"
           >
-            <span class="page_has_question_icon">{{
+            <span class="userRate">{{ $t("message.stake.txt_unclaim")}}</span>
+          </p>
+          <p
+            class="font14 mobile_font12 tip_"
+            :class="isEnLang ? 'en_medium' : ''"
+          >
+            <span class="page_has_question_icon" @click="AddQuesFun('message.stake.rate_tip', $event)">{{
               $t("message.stake.txt14")
             }}</span>
             <span class="userRate">{{ userTaxRate }}%</span>
@@ -920,7 +925,7 @@ export default {
         .tip_ {
           width: 100%;
           padding: 0 14px;
-          margin: 12px auto;
+          margin: 0 auto 12px;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -929,6 +934,20 @@ export default {
           line-height: 22px;
           .userRate {
             width: 109px;
+          }
+        }
+        .tip_noclaim{
+          width: 100%;
+          padding: 0 14px;
+          margin: 12px auto 6px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-weight: 500;
+          color: #ced3d9;
+          line-height: 22px;
+          .userRate {
+            width: 100%;
           }
         }
       }
@@ -1248,6 +1267,19 @@ export default {
             line-height: 0.12rem;
             .userRate {
               width: 1.1rem;
+            }
+          }
+          .tip_noclaim{
+            width: 100%;
+            display: flex;
+            padding: 0 0.1rem;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #8f8e8e;
+            line-height: 0.12rem;
+            .userRate {
+              width: 100%;
             }
           }
         }

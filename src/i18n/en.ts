@@ -662,7 +662,7 @@ export const message = {
     txt65: "Your referral link",
     txt66: "Invitation Stats",
     txt67: "Invited",
-    txt68: "Ranking",
+    txt68: "Ranking of invitees",
     txt69: "Invitees buy bond within 14 days",
     add_txt69:"Invitees staking",
     txt70: "Bond bought within 30 days",
@@ -958,7 +958,8 @@ export const message = {
     txt44:'Unstake Success',
     
     txt_claim:'Claim...',
-  
+    txt_unclaim:'SR can be claimed after SR launched on DEX.',
+    
     apr_tip:'For example, if users stake $1000 and APR is 10%, users can claim $1100 one year later. APR = Annual Percentage Rate',
     apy_tip:'APY takes into account compound interest in one year. For example, if apr is 365%, APY is equal to 3678.34%. APY = (1 + APR / 365) ^ 365 - 1',
     rate_tip:'Early quit tax = 30% - StakingDays * 0.1%. The early quit tax will reset after staking again. Early quit tax will be deducted and sent to treasury when users withdraw from pools.',
