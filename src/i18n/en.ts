@@ -592,7 +592,7 @@ export const message = {
     add_txt_btn:"Buy",
     add_txt_disable_btn:"Sold out",
     txt2_1: "Bond rewards on USD standard stably",
-    txt2_2: "The ST-BUSD LP bonds sold will be burned",
+    txt2_2: "The bonds sold will be burned",
     txt2_3: "Users withdraw anytime when expired",
     txt3: "Locked Liquidity",
     txt4: " Price",

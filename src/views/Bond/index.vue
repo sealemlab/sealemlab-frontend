@@ -1195,17 +1195,15 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 2px solid #242222;
     padding: 20px;
     > div {
-      width: calc(100% / 6);
+      // width: calc(100% / 6);
+      min-width: 100px;
       font-weight: 600;
       color: #eccf83;
       line-height: 33px;
-      text-align: left;
-      &:nth-child(1){
-        text-align: left;
-      }
     }
   }
   .bottom {
@@ -1321,7 +1319,7 @@ export default {
     border-bottom: 2px solid #242222;
     padding: 40px 0;
     > div {
-      min-width: 200px;
+      min-width: 100px;
       font-weight: 600;
       color: #eccf83;
       line-height: 33px;
@@ -1677,7 +1675,7 @@ export default {
       border-bottom: 2px solid #242222;
       padding: 40px 0;
       > div {
-        width:50%;
+        // width:50%;
         min-width: 0.1rem;
         font-size: 0.14rem;
         font-weight: 600;
