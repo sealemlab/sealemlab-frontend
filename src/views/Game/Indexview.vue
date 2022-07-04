@@ -49,6 +49,8 @@ export default {
     liClick(item) {
       if (item.status) {
         this.$router.push(item.link);
+        let arr = [{link: "/game",id:4}]
+        localStorage.setItem('routeArr',JSON.stringify(arr))
       } else {
         if (!this.getNoticeNum) {
           this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
