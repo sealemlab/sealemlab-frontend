@@ -23,10 +23,9 @@
         <div class="box">
           <div class="title">{{ $t("message.gamepage.text35") }}</div>
           <div class="list">
-            <span v-for="(item,index) in rechargeArr" :key="index" @click="selectFun(item)">
+            <span :class="index == selectIndex?'active_span':''" v-for="(item,index) in rechargeArr" :key="index" @click="selectFun(item,index)">
               {{item}}
             </span>
-            
           </div>
         </div>
         <div class="btn">
@@ -61,7 +60,8 @@ export default {
       doingLoading:false,
       SRmsg:'',
       approveTimer:null,
-      rechargeArr:[30000,60000,120000,240000,480000]
+      rechargeArr:[30000,60000,120000,240000,480000],
+      selectIndex:-1
     }
   },
   watch: {
@@ -88,7 +88,8 @@ export default {
       this.$parent.isShowRechargePopup = false;
     },
     maxClick(){
-      this.SRmsg = this.getUserCoin.sr > 1e-8?this.getUserCoin.sr:0
+      // this.SRmsg = this.getUserCoin.sr > 1e-8?this.getUserCoin.sr:0
+      this.SRmsg = this.getUserCoin.sr
     },
     busdInputClick(data){
       if(Number(this.getUserCoin.sr) >= Number(data)){
@@ -119,6 +120,7 @@ export default {
     },
     // 去授权
     sonapprove () {
+      if (this.allLoading) return;
       if (this.doingLoading) return;
       this.doingLoading = true;
       this.$refs.mychild.goApproveFun(token().SR, contract().SRDeposit)
@@ -129,11 +131,15 @@ export default {
           } else {
             this.isapprove = false;
           }
+          this.allLoading = false
+        }).catch(() => {
+          this.allLoading = false
         })
     },
-    selectFun(item){
+    selectFun(item,index){
       if(Number(this.getUserCoin.sr) >= Number(item)){
         this.SRmsg = item
+        this.selectIndex = index
       }else{
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'余额不足'}));
       }
@@ -152,6 +158,8 @@ export default {
         if(etReceipt.status == 1){
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.doingLoading = false
+          this.SRmsg = ''
+          this.$utils.getUserCoinQuantity(token().SR,'sr',this.getAccount)
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt28'}));
         }else{
           this.doingLoading = false
@@ -292,6 +300,13 @@ export default {
             border-radius: 4px;
             border: 1px solid #373636;
           }
+        }
+        .active_span{
+          color: #edd07e;
+          background: #171718;
+          box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39), inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+          border-radius: 4px;
+          border: 1px solid #373636;
         }
       }
     }
