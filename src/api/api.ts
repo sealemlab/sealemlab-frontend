@@ -26,4 +26,7 @@ export default {
   bindWallet: (data: any, headers: any) => {
     return service.postAndHeaders(`${BASE_API}api/user/verify`, data, headers);
   },
+  getUserSRBalance: (data: any, headers: any) => {
+    return service.postAndHeaders(`${BASE_API}api/user/tokenBalance`, data, headers);
+  },
 };

@@ -98,7 +98,7 @@
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-else-if="item.status == 2">In review</div>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-else>Review failed</div>
             </td>
-            <td :class="istrue?'tdWidth':''" v-if="item.hash">
+            <td :class="istrue?'tdWidth':''" v-if="item.hash && istrue">
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.status == 1">Success</div>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.status == 3">Failed</div>
             </td>
@@ -152,29 +152,7 @@ export default {
       isShowRechargePopup: false,
       isShowRechargeList: true,// calim / recharge
       applyHistory:true,// apply / calim 
-      list:[
-        {
-          time:'2022-12-17 16:23:23',
-          num:20,
-          status:1,// 1 可提取 2 审核中 3 审核失败
-        },
-        {
-          time:'2022-12-17 16:23:23',
-          num:20,
-          status:2,// 1 可提取 2 审核中 3 审核失败
-        },
-        {
-          time:'2022-12-17 16:23:23',
-          num:20,
-          status:3,// 1 可提取 2 审核中 3 审核失败
-        },
-        {
-          time:'2022-12-17 16:23:23',
-          num:20,
-          status:1,// 1 可提取 2 审核中 3 审核失败
-          hash:true
-        }
-      ]
+      list:[]
     };
   },
   created() {
@@ -184,6 +162,43 @@ export default {
     ClaimFun(data){
       this.isShowRechargeList = data
       this.applyHistory = true
+      if(data){
+        this.list = [
+          {
+          time:'2022-12-17 16:23:23',
+          num:20,
+          status:1,// 1 可提取 2 审核中 3 审核失败
+          hash:false,
+        },
+        {
+          time:'2022-12-17 16:23:23',
+          num:20,
+          status:2,// 1 可提取 2 审核中 3 审核失败
+          hash:false,
+        },
+        {
+          time:'2022-12-17 16:23:23',
+          num:20,
+          status:3,// 1 可提取 2 审核中 3 审核失败
+          hash:false,
+        },
+        ]
+      }else{
+        this.list = [
+          {
+            time:'2022-12-17 16:23:23',
+            num:20,
+            status:1,// 1 可提取 2 审核中 3 审核失败
+            hash:true,
+          },
+          {
+            time:'2022-12-17 16:23:23',
+            num:20,
+            status:3,// 1 可提取 2 审核中 3 审核失败
+            hash:true,
+          }
+        ]
+      }
     },
     openRecharge() {
       this.isShowRechargePopup = true;

@@ -59,7 +59,7 @@ import { mapGetters } from "vuex";
 import { token, contract, getSigner, srDeposit, util } from 'sealemlab-sdk'
 export default {
   computed: {
-    ...mapGetters(["isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
+    ...mapGetters(["getLogin","isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
   },
   name: "PopupRecharge",
   data(){
@@ -193,8 +193,22 @@ export default {
       }).catch(() => {
         this.doingLoading = false
       })
+    },
+    // 获取用户在游戏中得到的代币
+    getGameCoin(){
+      this.$api.getUserSRBalance({}, { headers: { Authorization: "Bearer " + this.getLogin.token } })
+        .then(res => {
+          console.log('res: ', res);
+          
+        })
+        .catch(err => {
+          console.log('err: ', err);
+        });
     }
   },
+  mounted(){
+    this.getGameCoin()
+  }
 };
 </script>
 
