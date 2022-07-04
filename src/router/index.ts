@@ -125,11 +125,11 @@ const routes: Array<RouteConfig> = [
       },
     ],
   },
-  {
-    path: "/activepage/:id",
-    name: "ActivePage",
-    component: () => import("../views/ActivityPage/index.vue"),
-  },
+  // {
+  //   path: "/activepage/:id",
+  //   name: "ActivePage",
+  //   component: () => import("../views/ActivityPage/index.vue"),
+  // },
   {
     path: "/market",
     name: "Market",

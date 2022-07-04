@@ -37,8 +37,8 @@
             <div class="max_btn font16" @click="maxClick('st')">MAX</div>
           </div>
         </div>
-        <p class="font12 balance_ add_balance_" :class="isEnLang?'en_medium':''" v-if="changeLpNum > 0">
-          {{$t("message.bond.txt79")}} {{changeLpNum}}
+        <p class="font12 balance_ add_balance_" :class="isEnLang?'en_medium':''" v-if="BUSDmsg || STmsg">
+          {{$t("message.bond.txt79")}} {{changeLpNum | PriceConversion}}
         </p>
         <!-- 投入以及收益 -->
         <div class="profit_box">
@@ -328,6 +328,7 @@ export default {
         }
       }).catch(() => {
         this.buyLoading = false
+        this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
       })
     },
     // 去授权
@@ -586,7 +587,9 @@ export default {
         this.moneyArr[1].num = this.$utils.getBit(((Number(this.userRate) / 1e4) - 0.01) * this.moneyArr[0].num,2)
       }
       this.moneyArr[2].num = this.$utils.getBit(Number(this.moneyArr[0].num) + Number(this.moneyArr[1].num))
-      this.changeLpNum = this.$utils.getBit( Number(this.moneyArr[0].num) / this.getUserCoin.stlpPrice)
+      let calculate_num = Number(this.moneyArr[0].num) / this.getUserCoin.stlpPrice
+      console.log('calculate_num: ', calculate_num);
+      this.changeLpNum = Number(calculate_num) > Number(0.001)? calculate_num : 0
     },
     resetData(){
       this.changeLpNum = 0

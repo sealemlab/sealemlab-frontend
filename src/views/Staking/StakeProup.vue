@@ -248,9 +248,11 @@ export default {
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.stake.txt28'}));
         }else{
           this.userStakedLoading = false
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
         }
       }).catch(() => {
         this.userStakedLoading = false
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
       })
     },
     selectFun(item){

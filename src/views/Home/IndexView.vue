@@ -49,9 +49,9 @@
               </div>
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
-            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num | PriceConversion}} ST</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num | PriceConversion | Thousandths}} ST</p>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-else-if="index == 5">N/A</p>
-            <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion}}</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion | Thousandths}}</p>
           </div>
         </div>
       </div>
@@ -1720,6 +1720,9 @@ export default {
           }
         }
       }
+      .add_top_content_center{
+        padding-left: 0;
+      }
     }
     .home_bgbox{
       height: auto;
@@ -1902,6 +1905,7 @@ export default {
             align-items: center;
             border-right:none;
             margin-bottom: 0.3rem;
+            min-height: 0.1rem;
             padding:0;
             .onebox{
               flex-direction: column;

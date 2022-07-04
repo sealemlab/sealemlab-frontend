@@ -24,7 +24,7 @@
         <div class="line_onebox font16 mobile_font14">
           <span class="lefttxt">{{$t("message.nft.txt24")}}</span>
           <BtnLoading :isloading="true" v-if="priceStatus"></BtnLoading>
-          <span class="righttxt no_border" v-else>{{stPrice}}</span>
+          <span class="righttxt no_border" v-else>{{stPrice | PriceConversion}}</span>
           <span class="unit_class">ST</span>
           <!-- <span class="unit_class" v-if="bindboxType == 0">HC</span>
           <span class="unit_class" v-if="bindboxType == 1">BNB</span> -->
@@ -46,7 +46,7 @@
         <div class="balance_txt">
           {{$t("message.nft.txt27")}}&nbsp;
           <BtnLoading :isloading="true" v-if="balanceStatus"></BtnLoading>
-          <span v-else>{{balance}}</span>
+          <span v-else>{{balance | Thousandths}}</span>
           <span>&nbsp;ST</span>
           <!-- <span v-if="bindboxType == 0">HC</span>
           <span v-if="bindboxType == 1">BNB</span> -->
