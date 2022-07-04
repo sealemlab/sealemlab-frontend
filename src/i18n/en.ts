@@ -20,7 +20,7 @@ export const message = {
   home: {
     add_txt1: "High APY",
     txt1: "New generation DeFi + Gamefi protocol",
-    txt2: "Purchase Bond, earn ",
+    txt2: "Purchase Bond, earn highest",
     txt3: "Bond",
     txt4: "Buy ST",
     txt5: "Buy NFT to enjoy games",
