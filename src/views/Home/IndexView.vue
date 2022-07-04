@@ -9,7 +9,10 @@
         <div class="content_center">
           <div class="leftbox" :class="isEnLang?'en_Bold':''">
             <p class="font_1 font26 mobile_font16">{{$t("message.home.txt2")}}</p>
-            <p class="font_2 demo_font_color font45 mobile_font28" :class="isEnLang?'en_heavy':''">{{$t("message.home.add_txt1")}}</p>
+            <p class="font_2 demo_font_color font45 mobile_font28" :class="isEnLang?'en_heavy':''">
+              <!-- {{$t("message.home.add_txt1")}} -->
+              {{maxAPY | MultiplyBySquare}}% APY
+            </p>
             <div class="btnbox font20 mobile_font16">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>
               <span @click="buyST">{{$t("message.home.txt4")}}</span>
@@ -49,9 +52,9 @@
               </div>
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
-            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num | PriceConversion}} ST</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num | PriceConversion | Thousandths}} ST</p>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-else-if="index == 5">N/A</p>
-            <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion}}</p>
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion | Thousandths}}</p>
           </div>
         </div>
       </div>
@@ -312,6 +315,7 @@ export default {
   },
   data(){
     return{
+      maxAPY:0,
       height:0,
       haveVoice:false,//声音
       swiperVisible:true,
@@ -860,6 +864,23 @@ export default {
       }).catch(() => {
         this.addArr[1].num = 0 
       })
+
+      // 获取最新债券
+      bondDepository().getActiveBonds().then(res => {
+        if(res.length > 0){
+          bondDepository().getBasicRateLevelInfo(Number(res[0])).then(res1 => {
+            let maxBaseRate = (Number(res1[0]) / 1e4 + Number(0.3)) / 14 * 365
+            this.maxAPY = Math.pow((1 + maxBaseRate / 26), 26) - 1
+            console.log('maxAPY: ', this.maxAPY);
+          })
+        }else{
+          bondDepository().getBasicRateLevelInfo(0).then(res1 => {
+            let maxBaseRate = (Number(res1[0]) / 1e4 + Number(0.3)) / 14 * 365
+            this.maxAPY = Math.pow((1 + maxBaseRate / 26), 26) - 1
+            console.log('maxAPY: ', this.maxAPY);
+          })
+        }
+      })
     }
   },
   mounted(){
@@ -982,7 +1003,7 @@ export default {
     .add_top_content_end{
       justify-content: flex-end;
       .whole{
-        min-width: 167px;
+        min-width: 250px;
       }
     }
   }
@@ -1156,19 +1177,6 @@ export default {
               color: #8F8E8E;
               line-height: 24px;
               margin-top: 10px;
-              // padding-left: 41px;
-            }
-            .add_txt1{
-              // padding-left: 35px;
-            }
-            .add_txt2{
-              // padding-left: 42px;
-            }
-            .add_txt3{
-              // padding-left: 36px;
-            }
-            .add_txt4{
-              // padding-left: 44px;
             }
           }
         }
@@ -1720,6 +1728,9 @@ export default {
           }
         }
       }
+      .add_top_content_center{
+        padding-left: 0;
+      }
     }
     .home_bgbox{
       height: auto;
@@ -1902,6 +1913,7 @@ export default {
             align-items: center;
             border-right:none;
             margin-bottom: 0.3rem;
+            min-height: 0.1rem;
             padding:0;
             .onebox{
               flex-direction: column;

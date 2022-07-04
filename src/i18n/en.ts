@@ -20,7 +20,7 @@ export const message = {
   home: {
     add_txt1: "High APY",
     txt1: "New generation DeFi + Gamefi protocol",
-    txt2: "Purchase Bond, earn ",
+    txt2: "Purchase Bond, earn highest",
     txt3: "Bond",
     txt4: "Buy ST",
     txt5: "Buy NFT to enjoy games",
@@ -626,7 +626,7 @@ export const message = {
     txt32: "Estimated tax rate",
     txt33: "Purchased within 14 days",
     txt34:
-      "Bond will be claimed in ST when expired; tax will be reset to the initial of 1% every 14 days. If the purchase quantity exceeds the stock or the maximum, the excess will be returned as ST-BUSD LP. You can go to pancake to remove liquidity.",
+      "Bond will be claimed in ST when expired; tax and invite to buy bond will be reset every 14 daystax and invite to buy bond will be reset every 14 days. If the purchase quantity exceeds the stock or the maximum, the excess will be returned as ST-BUSD LP. You can go to pancake to remove liquidity.",
     txt35: "Capacity",
     txt36: "Extra rate",
     txt37: "Duration",
@@ -679,7 +679,7 @@ export const message = {
 
     txt79:"Estimated ST-BUSD LP:",
     txt80:"Max you can buy within 14 days",
-    txt_80_ques:"Users can buy maximum 1000 ST-BUSD LP totally.",
+    txt_80_ques:"Users can buy maximum 10000 ST-BUSD LP totally.",
     txt_81_ques:"Each wallet enjoys a maximum of 30% extra rate.",
 
     txt_out_of_Ranking:"Out of Ranking"
@@ -792,7 +792,7 @@ export const message = {
     txt22: "Invitation",
     txt23: "Your referral link",
     txt24: "Invitation Rules",
-    txt25: "1. The binding is successful only after users enter the official website through the link to purchase the bond.",
+    txt25: "1. The invitation is successful only after users stake, purchase bond,mystery box or NFT through your referral link.",
     txt26: "2. The interest rate increases by 0.1% per 1K USD of bonds purchased or  staking by the invitee.",
     txt27: "3. The invitation staking interest rate changes according to the actual staking amount of the invitee.",
   },//用户中心

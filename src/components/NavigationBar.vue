@@ -8,9 +8,9 @@
         </li>
       </ul>
     </div>
-    <div class="buy_box" :class="{activepage:navActive == 6}" @click="buybox">
+    <!-- <div class="buy_box" :class="{activepage:navActive == 6}" @click="buybox">
       <span>{{ $t("message.nav.txt14") }}</span>
-    </div>
+    </div> -->
     <div class="nav_right">
       <div class="st_price">
         <img :src="`${$store.state.imgUrl}new_stlogo.webp`" class="st_price_img" />

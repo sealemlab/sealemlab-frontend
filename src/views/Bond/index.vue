@@ -34,7 +34,7 @@
             <div :title='$t("message.bond.txt71")' style="cursor:pointer" @click="quesFun('message.bond.txt71',$event)">
               <span class="has_question_icon">{{ $t("message.bond.txt3") }}</span>
             </div>
-            <div><span>$&nbsp;{{treasuryMoney | PriceConversion}}</span></div>
+            <div><span>$&nbsp;{{treasuryMoney | PriceConversion | Thousandths}}</span></div>
             <div>
               <span>ST{{ $t("message.bond.txt4") }} </span>
             </div>
@@ -74,7 +74,7 @@
             <ul class="list_title2 font16" :class="isEnLang?'en_medium':''">
               <li>
                 <span>{{ bondinfo.bondName }}</span>
-                <span>{{ bondinfo.maxSupplyLp | PriceConversion }}</span>
+                <span>{{ bondinfo.maxSupplyLp | PriceConversion | Thousandths}}</span>
                 <span>{{ bondinfo.baseRate | SquareRoot}} %</span>
                 <span>
                   <span class="color2">{{ bondinfo.additional1 | SquareRoot}}%</span>
@@ -870,10 +870,10 @@ export default {
       },60000)
     },
     toPledge(){
-      if (!this.getNoticeNum) {
-        this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-        this.$store.commit("setNoticeNum", true);
-      }
+      let arr = []
+      arr.push({link: "/staking",id:1})
+      localStorage.setItem('routeArr',JSON.stringify(arr))
+      this.$router.push('/staking')
     },
     closeLP(data) {
       this.addlpDis = false;
@@ -1675,7 +1675,7 @@ export default {
       border-bottom: 2px solid #242222;
       padding: 40px 0;
       > div {
-        // width:50%;
+        width:50%;
         min-width: 0.1rem;
         font-size: 0.14rem;
         font-weight: 600;
