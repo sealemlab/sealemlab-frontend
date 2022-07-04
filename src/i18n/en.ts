@@ -816,13 +816,14 @@ export const message = {
     text15: "Psyche",
     text16: "Account",
     text17: "Binding Address",
-    text18: "Wallet Balance",
+    text18: "Balance",
     text19: "Recharge",
     text20: "Claimable",
+    txt20_1:"Locked",
     text21: "Apply",
     text22: "In Review",
     text23: "Claim",
-    text24: "Recharge/Claim History",
+    text24: "History",
     text25: "Date",
     text26: "Quantity",
     text27: "Status",
@@ -838,6 +839,12 @@ export const message = {
     text37: "No Data",
     text38: "Recharge and Claim",
     text39: "Please log in to view the information",
+
+    txt40:'Apply History',
+    txt41:'Claim History',
+    txt42:'Enter the address',
+    txt43:'Address'
+    
   },//游戏
   acticePage:{
     title1:"IDO sale",

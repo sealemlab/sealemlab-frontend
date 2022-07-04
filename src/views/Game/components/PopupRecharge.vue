@@ -4,22 +4,31 @@
       <div class="close_img" @click="closePopup"></div>
       <div class="content">
         <div class="title">{{ $t("message.gamepage.text19") }}</div>
-        <div class="friends">
-
+        <div class="friends font12" :class="isEnLang?'en_medium':''" @click="friendsStatus = !friendsStatus">
+          <span v-if="friendsStatus">Recharge for friends</span>
+          <span v-else>Recharge for yourself</span>
         </div>
+        <!-- 给别人充值 -->
+        <div class="box" v-if="!friendsStatus">
+          <div class="title">{{ $t("message.gamepage.txt43") }}</div>
+          <div class="inputbox">
+            <Input class="friends_inputbox" :modelValue="friendAddress" :placeholder='$t("message.gamepage.txt42")' @input="addressInputClick"></Input>
+          </div>
+        </div>
+        <!-- 给自己充值 -->
         <div class="box">
           <div class="title">{{ $t("message.gamepage.text31") }}</div>
           <div class="inputbox">
-            <Input :modelValue="SRmsg" type="number" :placeholder='$t("message.gamepage.text32")' @input="busdInputClick"></Input>
-            <!-- <input type="number" value="" :placeholder="$t('message.gamepage.text32')" /> -->
+            <Input :modelValue="SRmsg" type="number" :placeholder='$t("message.gamepage.text32")' @input="busdInputClick" class="me_input"></Input>
             <div class="sr">
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
             </div>
             <div class="inputbtn" @click="maxClick">{{ $t("message.gamepage.text33") }}</div>
-            <div class="tip">{{ $t("message.gamepage.text34") }}: {{getUserCoin.sr | PriceConversion}}</div>
+            <div class="tip font12" :class="isEnLang?'en_medium':''">{{ $t("message.gamepage.text34") }}: {{getUserCoin.sr | PriceConversion}}</div>
           </div>
         </div>
+        <!-- shortcut -->
         <div class="box">
           <div class="title">{{ $t("message.gamepage.text35") }}</div>
           <div class="list">
@@ -55,6 +64,8 @@ export default {
   name: "PopupRecharge",
   data(){
     return {
+      friendAddress:'',
+      friendsStatus:true,
       allLoading:true,
       isapprove:false,
       doingLoading:false,
@@ -98,6 +109,9 @@ export default {
         this.SRmsg = this.getUserCoin.sr
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'余额不足'}));
       }
+    },
+    addressInputClick(data){
+      this.friendAddress = data
     },
     // 判断授权
     isApproveFun () {
@@ -150,8 +164,20 @@ export default {
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'请输入充值金额'}));
         return
       }
+      let addres = ''
+      if(!this.friendsStatus){
+        try{ 
+          addres = util.getAddress(this.friendAddress)
+        } catch(error){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'请输入正确的地址'}));
+          return
+        }
+      }else{
+        addres = this.getAccount
+      }
       this.doingLoading = true;
-      srDeposit().connect(getSigner()).deposit(this.getAccount,util.parseUnits(this.SRmsg)).then(async res => {
+      console.log('addres,util.parseUnits(this.SRmsg): ', addres,util.parseUnits(this.SRmsg));
+      srDeposit().connect(getSigner()).deposit(addres,util.parseUnits(this.SRmsg)).then(async res => {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.stake.txt27','link':res.hash}));
         this.$store.commit("setProgressInfo", JSON.stringify({'speed':50}));
         const etReceipt = await res.wait();
@@ -211,17 +237,25 @@ export default {
       color: #eccf83;
       margin-bottom: 2rem;
     }
+    .friends{
+      text-align: right;
+      font-weight: 500;
+      color: #ECCF83;
+      line-height: 14px;
+      cursor: pointer;
+    }
     .box {
       margin-bottom: 2rem;
       .title {
         text-align: left;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
       }
       .inputbox {
         width: 25rem;
         height: 2.5rem;
         position: relative;
-        input {
+        margin-top: 0.5rem;
+        .me_input {
           width: 100%;
           height: 100%;
           background: #171718;
@@ -229,6 +263,18 @@ export default {
           border-radius: 8px;
           border: 1px solid #373636;
           padding: 0 5rem;
+          font-size: 16px;
+          color: #ced3d9;
+          font-weight: 600;
+        }
+        .friends_inputbox{
+          width: 100%;
+          height: 100%;
+          background: #171718;
+          box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+          border-radius: 8px;
+          border: 1px solid #373636;
+          padding: 0 0.5rem;
           font-size: 16px;
           color: #ced3d9;
           font-weight: 600;
@@ -271,12 +317,10 @@ export default {
           cursor: pointer;
         }
         .tip {
-          font-size: 12px;
-          font-family: SFCompactDisplay-Semibold, SFCompactDisplay;
           font-weight: 400;
           color: #8b8484;
           position: absolute;
-          top: -1rem;
+          top: -1.2rem;
           right: 0;
         }
       }
