@@ -119,7 +119,7 @@
       </table>
     </div>  
     <MessageBox ref="mychildAdd" :clientX='clientX' :clientY="clientY" :content="datacontent"></MessageBox>
-    <PopupRecharge v-if="isShowRechargePopup"></PopupRecharge>
+    <PopupRecharge @closeRecharge="closeRecharge" :proupRecharge="proupRecharge"></PopupRecharge>
     <ProupApply @closeApply="closeApply" :proupClaimStatus="proupClaimStatus" :usernum="claimValue"></ProupApply>
   </div>
 </template>
@@ -148,7 +148,7 @@ export default {
       claimLoading:false,//提现按钮loading
       claimValue:0,//可提取余额
       lockedValue:0,//冻结余额
-      isShowRechargePopup: false,
+      proupRecharge: false,
       proupClaimStatus:false,
       isShowClaimList: true,// calim / recharge
       // applyHistory:true,// apply / calim 
@@ -188,8 +188,14 @@ export default {
       }
       this.proupClaimStatus = false
     },
+    closeRecharge(data){
+      if(data){
+        this.getUserGameBalance()
+      }
+      this.proupRecharge = false
+    },
     openRecharge() {
-      this.isShowRechargePopup = true;
+      this.proupRecharge = true;
     },
     ClaimFun(data){
       if(data == 'claim'){

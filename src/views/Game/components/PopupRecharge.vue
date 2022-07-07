@@ -1,5 +1,5 @@
 <template>
-  <div class="popup">
+  <div class="popup" v-if="proupRecharge">
     <div class="inset">
       <div class="close_img" @click="closePopup"></div>
       <div class="content">
@@ -61,6 +61,12 @@ export default {
   computed: {
     ...mapGetters(["getLogin","getIsMobile","isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
   },
+  props: {
+    proupRecharge:{
+      type:Boolean,
+      default:false
+    }
+  },
   name: "PopupRecharge",
   data(){
     return {
@@ -72,7 +78,8 @@ export default {
       SRmsg:'',
       approveTimer:null,
       rechargeArr:[30000,60000,120000,240000,480000],
-      selectIndex:-1
+      selectIndex:-1,
+      rechargeStatus:false
     }
   },
   watch: {
@@ -96,7 +103,7 @@ export default {
   },
   methods: {
     closePopup() {
-      this.$parent.isShowRechargePopup = false;
+      this.$emit('closeRecharge',this.rechargeStatus)
     },
     maxClick(){
       // this.SRmsg = this.getUserCoin.sr > 1e-8?this.getUserCoin.sr:0
@@ -185,6 +192,7 @@ export default {
           this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
           this.doingLoading = false
           this.SRmsg = ''
+          this.rechargeStatus = true
           this.$utils.getUserCoinQuantity(token().SR,'sr',this.getAccount)
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt55'}));
         }else{
