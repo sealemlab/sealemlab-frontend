@@ -104,7 +104,7 @@ export default {
   .main_content {
     width: 100%;
     height: 100%;
-    padding-left: 12rem;
+    padding-left: 9rem;
   }
 }
 
@@ -125,6 +125,7 @@ export default {
       align-items: center;
       overflow-x: auto;
       white-space: nowrap;
+      justify-content: space-between;
       &::-webkit-scrollbar {
         width: 0;
         height: 0;
@@ -135,7 +136,7 @@ export default {
         line-height: 0.3rem;
         font-size: 0.12rem;
         font-weight: 500;
-        margin: 0 0.2rem 0 0;
+        margin: 0;
       }
     }
   }

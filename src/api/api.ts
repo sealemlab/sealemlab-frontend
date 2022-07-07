@@ -26,7 +26,24 @@ export default {
   bindWallet: (data: any, headers: any) => {
     return service.postAndHeaders(`${BASE_API}api/user/verify`, data, headers);
   },
+  // 获取用户游戏内代币余额
   getUserSRBalance: (data: any, headers: any) => {
     return service.postAndHeaders(`${BASE_API}api/user/tokenBalance`, data, headers);
+  },
+  // 充值记录
+  rechargeRecord: (data: any, headers: any) => {
+    return service.postAndHeaders(`${BASE_API}api/user/deposit`, data, headers);
+  },
+  //提现申请
+  applyFun: (data: any, headers: any) => {
+    return service.postAndHeaders(`${BASE_API}api/user/apply`, data, headers);
+  },
+  //绑定提现订单签名
+  withdrawFun: (data: any, headers: any) => {
+    return service.postAndHeaders(`${BASE_API}api/user/withdraw`, data, headers);
+  },
+  //提现记录
+  WithdrawalsRecord: (data: any, headers: any) => {
+    return service.postAndHeaders(`${BASE_API}api/user/record`, data, headers);
   },
 };

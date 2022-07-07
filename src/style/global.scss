@@ -93,6 +93,7 @@ img {
 }
 .has_question_icon {
   position: relative;
+  cursor: pointer;
   &::after {
     content: "";
     width: 16px;

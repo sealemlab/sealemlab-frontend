@@ -846,7 +846,26 @@ export const message = {
     txt40:'Apply History',
     txt41:'Claim History',
     txt42:'Enter the address',
-    txt43:'Address'
+    txt43:'Address',
+
+    txt44:'locked提示文案',
+    txt45:'Review failed',
+    txt46:'In review',
+    txt47:'Claim',
+    txt48:'Success',
+    txt49:'Failed',
+    txt50:'提现成功',
+    txt51:'余额不足',
+    txt52:'请输入充值金额',
+    txt53:'请输入正确的地址',
+    txt54:'充值中...',
+    txt55:'充值成功',
+    txt56:'请输入提现数量',
+
+    txt57:'Recharge for friends',
+    txt58:'Recharge for yourself',
+    txt59:'Apply'
+
     
   },//游戏
   acticePage:{

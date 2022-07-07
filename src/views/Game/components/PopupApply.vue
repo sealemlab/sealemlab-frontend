@@ -1,20 +1,9 @@
 <template>
-  <div class="popup">
+  <div class="popup" v-if="proupClaimStatus">
     <div class="inset">
       <div class="close_img" @click="closePopup"></div>
       <div class="content">
-        <div class="title">{{ $t("message.gamepage.text19") }}</div>
-        <div class="friends font12" :class="isEnLang?'en_medium':''" @click="friendsStatus = !friendsStatus">
-          <span v-if="friendsStatus">{{ $t("message.gamepage.txt57") }}</span>
-          <span v-else>{{ $t("message.gamepage.txt58") }}</span>
-        </div>
-        <!-- 给别人充值 -->
-        <div class="box" v-if="!friendsStatus">
-          <div class="title">{{ $t("message.gamepage.txt43") }}</div>
-          <div class="inputbox">
-            <Input :fontSize="getIsMobile?'0.14rem':'16px'" class="friends_inputbox" :modelValue="friendAddress" :placeholder='$t("message.gamepage.txt42")' @input="addressInputClick"></Input>
-          </div>
-        </div>
+        <div class="title">{{ $t("message.gamepage.txt59") }}</div>
         <!-- 给自己充值 -->
         <div class="box">
           <div class="title">{{ $t("message.gamepage.text31") }}</div>
@@ -25,7 +14,9 @@
               <span>SR</span>
             </div>
             <div class="inputbtn" @click="maxClick">{{ $t("message.gamepage.text33") }}</div>
-            <div class="tip font12" :class="isEnLang?'en_medium':''">{{ $t("message.gamepage.text34") }}: {{getUserCoin.sr | PriceConversion}}</div>
+            <div class="tip font12" :class="isEnLang?'en_medium':''">
+              {{ $t("message.gamepage.text34") }}: {{usernum | PriceConversion}}
+            </div>
           </div>
         </div>
         <!-- shortcut -->
@@ -37,17 +28,9 @@
             </span>
           </div>
         </div>
-        <div class="btn">
-          <FunBtn
-            :allLoading="allLoading"
-            :isapprove="isapprove"
-            :approveloading="doingLoading"
-            :isloading="doingLoading"
-            :word="'message.gamepage.text19'"
-            ref="mychild"
-            @sonapprove="sonapprove"
-            @dosomething="funbtning"
-          />
+        <div class="btn" @click="applyClick">
+          {{ $t("message.gamepage.txt59") }}
+          <BtnLoading :isloading="doingLoading"></BtnLoading>
         </div>
       </div>
     </div>
@@ -56,38 +39,36 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { token, contract, getSigner, srDeposit, util } from 'sealemlab-sdk'
 export default {
   computed: {
-    ...mapGetters(["getLogin","getIsMobile","isEnLang","getUserCoin","getNoticeNum","getAccount","getAccountStatus"]),
+    ...mapGetters(["getIsMobile","getLogin","isEnLang","getNoticeNum","getAccount","getAccountStatus"]),
   },
-  name: "PopupRecharge",
+  props: {
+    usernum:{
+      type: [String,Number],
+      default: 0
+    },
+    proupClaimStatus:{
+      type:Boolean,
+      default:false
+    }
+  },
   data(){
     return {
-      friendAddress:'',
-      friendsStatus:true,
-      allLoading:true,
-      isapprove:false,
       doingLoading:false,
       SRmsg:'',
-      approveTimer:null,
       rechargeArr:[30000,60000,120000,240000,480000],
-      selectIndex:-1
+      selectIndex:-1,
+      applyStatus:false
     }
   },
   watch: {
     'getAccountStatus': {
       handler: function (newValue) {
         if (newValue == -1 || newValue == undefined) {
-          this.allLoading = false
-        } else if (newValue == 0) {
-          this.allLoading = true
-          this.isApproveFun()
+          this.$parent.proupClaimStatus = false;
         } else if (newValue > 0) {
-          this.allLoading = true
-          this.$utils.antiShakeFun(() => {
-            this.isApproveFun()
-          }, 2000)()
+          this.$parent.proupClaimStatus = false;
         }
       },
       deep: true,
@@ -96,105 +77,58 @@ export default {
   },
   methods: {
     closePopup() {
-      this.$parent.isShowRechargePopup = false;
+      this.SRmsg = ''
+      this.$emit('closeApply',this.applyStatus)
     },
     maxClick(){
-      // this.SRmsg = this.getUserCoin.sr > 1e-8?this.getUserCoin.sr:0
-      this.SRmsg = this.getUserCoin.sr
+      this.SRmsg = this.usernum
     },
     busdInputClick(data){
-      if(Number(this.getUserCoin.sr) >= Number(data)){
+      if(Number(this.usernum) >= Number(data)){
         this.SRmsg = data
       }else{
-        this.SRmsg = this.getUserCoin.sr
+        this.SRmsg = this.usernum
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt51'}));
       }
     },
-    addressInputClick(data){
-      this.friendAddress = data
-    },
-    // 判断授权
-    isApproveFun () {
-      clearInterval(this.approveTimer)
-      this.approveTimer = setInterval(() => {
-        if (this.$refs.mychild) {
-          clearInterval(this.approveTimer)
-          this.$refs.mychild.isApproveFun(token().SR, contract().SRDeposit).then((res) => {
-            if (res) {
-              this.isapprove = true;
-            } else {
-              this.isapprove = false;
-            }
-            this.allLoading = false
-          }).catch(() => {
-            this.isapprove = this.allLoading = false
-          })
-        }
-      }, 1000)
-    },
-    // 去授权
-    sonapprove () {
-      if (this.allLoading) return;
-      if (this.doingLoading) return;
-      this.doingLoading = true;
-      this.$refs.mychild.goApproveFun(token().SR, contract().SRDeposit)
-        .then((res) => {
-          this.doingLoading = false;
-          if (res) {
-            this.isapprove = true;
-          } else {
-            this.isapprove = false;
-          }
-          this.allLoading = false
-        }).catch(() => {
-          this.allLoading = false
-        })
-    },
     selectFun(item,index){
-      if(Number(this.getUserCoin.sr) >= Number(item)){
+      if(Number(this.usernum) >= Number(item)){
         this.SRmsg = item
         this.selectIndex = index
       }else{
+        this.SRmsg = this.usernum
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt51'}));
       }
     },
-    funbtning(){
+    applyClick(){
       if (this.doingLoading) return;
       if(!this.SRmsg){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt52'}));
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt56'}));
         return
       }
-      let addres = ''
-      if(!this.friendsStatus){
-        try{ 
-          addres = util.getAddress(this.friendAddress)
-        } catch(error){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt53'}));
-          return
-        }
-      }else{
-        addres = this.getAccount
+      if(Number(this.SRmsg) > Number(this.usernum)){
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt51'}));
+        return
       }
       this.doingLoading = true;
-      console.log('addres,util.parseUnits(this.SRmsg): ', addres,util.parseUnits(this.SRmsg));
-      srDeposit().connect(getSigner()).deposit(addres,util.parseUnits(this.SRmsg)).then(async res => {
-        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.gamepage.txt54','link':res.hash}));
-        this.$store.commit("setProgressInfo", JSON.stringify({'speed':50}));
-        const etReceipt = await res.wait();
-        if(etReceipt.status == 1){
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
-          this.doingLoading = false
+      // 提现申请
+      this.$api.applyFun({amount:this.SRmsg}, { headers: { Authorization: "Bearer " + this.getLogin.token } })
+        .then(res => {
+          console.log('提现申请res: ', res);
+          this.doingLoading = false;
+          if(res.code != 200){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':res.msg}));
+            return
+          }
           this.SRmsg = ''
-          this.$utils.getUserCoinQuantity(token().SR,'sr',this.getAccount)
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt55'}));
-        }else{
-          this.doingLoading = false
-          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
-        }
-      }).catch(() => {
-        this.doingLoading = false
-        this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
-      })
+          this.applyStatus = true
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':res.msg}));
+        })
+        .catch(err => {
+          console.log('提现申请err: ', err);
+          this.doingLoading = false;
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':res.msg}));
+        });
     },
   }
 };
@@ -239,13 +173,6 @@ export default {
       color: #eccf83;
       margin-bottom: 2rem;
     }
-    .friends{
-      text-align: right;
-      font-weight: 500;
-      color: #ECCF83;
-      line-height: 14px;
-      cursor: pointer;
-    }
     .box {
       margin-bottom: 2rem;
       .title {
@@ -265,17 +192,6 @@ export default {
           border-radius: 8px;
           border: 1px solid #373636;
           padding: 0 5rem;
-          color: #ced3d9;
-          font-weight: 600;
-        }
-        .friends_inputbox{
-          width: 100%;
-          height: 100%;
-          background: #171718;
-          box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
-          border-radius: 8px;
-          border: 1px solid #373636;
-          padding: 0 0.5rem;
           color: #ced3d9;
           font-weight: 600;
         }
@@ -358,6 +274,9 @@ export default {
       margin: 0 auto;
       width: 18rem;
       height: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
       border-radius: 4px;
       backdrop-filter: blur(14px);
@@ -390,23 +309,8 @@ export default {
         .inputbox {
           width: 2.5rem;
           height: 0.3rem;
-          margin-top: 0.2rem;
-          input {
-            padding: 0 0.6rem;
-            font-size: 0.12rem;
-          }
+          margin-top: 0.1rem;
           .me_input {
-            width: 100%;
-            height: 100%;
-            background: #171718;
-            box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
-            border-radius: 8px;
-            border: 1px solid #373636;
-            padding: 0 0.1rem 0 0.55rem;
-            color: #ced3d9;
-            font-weight: 600;
-          }
-          .friends_inputbox{
             width: 100%;
             height: 100%;
             background: #171718;

@@ -429,7 +429,7 @@ export default {
     justify-content: space-between;
     .st_price {
       .st_price_img {
-        width: 0.19rem;
+        width: 0.3rem;
       }
       .font_price {
         line-height: 0.14rem;
@@ -437,7 +437,7 @@ export default {
       }
     }
     .login_box {
-      margin: 0 0.05rem;
+      margin: 0 0.1rem;
       .font_login {
         font-weight: bold;
         line-height: 0.14rem;
