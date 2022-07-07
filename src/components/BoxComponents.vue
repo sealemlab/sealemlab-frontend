@@ -1,8 +1,8 @@
 <template>
-  <div class="self_box" :class="selfBoxCentr?'self_box_center':''">
+  <div class="self_box" :class="{'self_box_center':selfBoxCentr,'column':isColumn}">
     <div
       class="out_box_one"
-      :class="centr?'out_center':''"
+      :class="{'out_center':centr,'children_column':isColumn}"
       v-for="(item, index) in nftArr"
       :key="index"
       @click="nftFun(item)"
@@ -180,6 +180,10 @@ export default {
       type:Boolean,
       default:false
     },
+    isColumn:{
+      type:Boolean,
+      default:false
+    },// 竖的排
   },
   computed: {
     ...mapGetters(["isEnLang"])
@@ -203,6 +207,13 @@ export default {
 }
 .out_center{
   align-items: center;
+}
+.column{
+  flex-direction: column;
+  .children_column{
+    width: 100%;
+    align-items: center;
+  }
 }
 .out_box_one {
   width: 25%;

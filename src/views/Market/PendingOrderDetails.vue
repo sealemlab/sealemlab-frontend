@@ -49,7 +49,7 @@
           <BtnLoading :isloading="true"></BtnLoading>
         </div>
         <div v-else :class="isEnLang ? 'en_Bold' : ''">
-          <div v-if="selectarr.isnft && selectarr.isbox">
+          <div v-if="userselectarr.isnft && userselectarr.isbox">
             <div class="btn btn_normal font16 mobile_font16" @click="sellfun" v-if="isApproveBox && isApproveNft">
               {{$t("message.market.sell_btn")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
             </div>
@@ -60,7 +60,7 @@
               NFT {{$t("message.approve")}}<BtnLoading :isloading="nftisloading"></BtnLoading>
             </div>
           </div>
-          <div v-else-if="selectarr.isnft">
+          <div v-else-if="userselectarr.isnft">
             <div class="btn btn_normal font16 mobile_font16" @click="sellfun" v-if="isApproveNft">
               {{$t("message.market.sell_btn")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
             </div>
@@ -68,7 +68,7 @@
               NFT {{$t("message.approve")}}<BtnLoading :isloading="nftisloading"></BtnLoading>
             </div>
           </div>
-          <div v-else-if="selectarr.isbox">
+          <div v-else-if="userselectarr.isbox">
             <div class="btn btn_normal font16 mobile_font16" @click="sellfun" v-if="isApproveBox">
               {{$t("message.market.sell_btn")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
             </div>
@@ -81,9 +81,10 @@
       <div class="right_">
         <p class="p_positon font32" :class="isEnLang ? 'en_Bold' : ''">Preview</p>
         <div class="showbox">
-          <div
+          <BoxComponents :nftArr="userselectarr.arr" :isColumn="true"></BoxComponents>
+          <!-- <div
             class="out_box_one"
-            v-for="(item, index) in selectarr.arr"
+            v-for="(item, index) in userselectarr.arr"
             :key="index"
           >
             <div class="onebox" v-if="item.isnft">
@@ -179,7 +180,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -194,7 +195,7 @@ export default {
       type: Boolean,
       default: false
     },
-    selectarr:{
+    userselectarr:{
       type:Object,
       default:function(){return {}}
     }
@@ -262,12 +263,12 @@ export default {
         return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_txt'}));
       }
       this.buyLoading = true
-      // console.log('选中的nft/box: ', this.selectarr.arr);
+      // console.log('选中的nft/box: ', this.userselectarr.arr);
       // this.$utils.convertNormalToBigNumber(Number(this.Pricevalue), 18)
-      this.processingArrayFun(this.selectarr.arr,this.selectCoin,util.parseUnits(this.Pricevalue)).then(info => {
+      this.processingArrayFun(this.userselectarr.arr,this.selectCoin,util.parseUnits(this.Pricevalue)).then(info => {
         console.log('处理好的数组res: ', info);
         let idArr = info.map(item => {
-          return item.id
+          return item.nftId
         })
         let priceArr = info.map(item => {
           return item.prices
@@ -286,13 +287,13 @@ export default {
             that.buyLoading = false
             that.alredaySellStatus = true
             that.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
-            if(that.selectarr.isbox){
+            if(that.userselectarr.isbox){
               console.log("刷新box")
               that.$utils.newgetUserBoxInfoFun(that.getAccount).then((res) => {
                 sessionStorage.setItem("sb_count", res);
               })
             }
-            if(that.selectarr.isnft){
+            if(that.userselectarr.isnft){
               console.log("刷新nft")
             }
             that.Pricevalue = ''
@@ -314,11 +315,11 @@ export default {
         arr.map(async item => {
           let obj = {
             type:'',// 支付代币合约地址数组
-            id:'',//NFT的ID数组
+            nftId:'',//NFT的ID数组
             prices:price,//价格数组
             address:'', // NFT合约地址数组
           }
-          obj.id = item.id
+          obj.nftId = item.nftId
           if(type == 'ST'){
             obj.type = token().ST
           }else if(type == 'BUSD'){
@@ -620,137 +621,137 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .out_box_one {
-      width:80%;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-      .onebox {
-        position: relative;
-        cursor: pointer;
-        width: 100%;
-        max-width: 204px;
-        height: 292px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: url($bg_url + "nftbg6.webp") no-repeat;
-        background-size: contain;
-        .out_img {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          .imgcard {
-            height: 184px;
-          }
-        }
-        .box_out_img {
-          width: 100%;
-        }
-        .huxing_bg_box {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          .huxing_img {
-            width: 100%;
-          }
-          .huxing_content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 47px 13px 10px;
-            .start {
-              position: absolute;
-              top: 42px;
-              width: 100%;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              margin-bottom: 5px;
-              .span1 {
-                font-weight: 800;
-                color: #efb045;
-                line-height: 29px;
-                margin-right: 5px;
-              }
-              img {
-                width: 24px;
-              }
-            }
-            .people_type {
-              margin-top: 7px;
-              width: 100%;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              img {
-                width: 24px;
-              }
-              .leftimgbox {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-              }
-              .left_content {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                .scale_box {
-                  white-space: nowrap;
-                  zoom: 0.8;
-                  font-weight: 800;
-                  line-height: 14px;
-                }
-                .box_3d {
-                  margin-top: 5px;
-                  width: 100%;
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  span {
-                    font-weight: 800;
-                    line-height: 14px;
-                    transform: scale(0.95);
-                    zoom: 0.9;
-                  }
-                  .img_3d {
-                    width: 30px;
-                  }
-                }
-              }
-            }
-          }
-          .box_id {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 90px 13px 0;
-            span {
-              &:nth-child(1) {
-                font-weight: bold;
-                color: #ced3d9;
-                line-height: 16px;
-              }
-              &:nth-child(2) {
-                font-weight: 500;
-                color: #ced3d9;
-                line-height: 14px;
-                margin-top: 8px;
-              }
-            }
-          }
-        }
-      }
-    }
+    // .out_box_one {
+    //   width:80%;
+    //   display: flex;
+    //   flex-direction: column;
+    //   margin-bottom: 20px;
+    //   .onebox {
+    //     position: relative;
+    //     cursor: pointer;
+    //     width: 100%;
+    //     max-width: 204px;
+    //     height: 292px;
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     background: url($bg_url + "nftbg6.webp") no-repeat;
+    //     background-size: contain;
+    //     .out_img {
+    //       width: 100%;
+    //       display: flex;
+    //       align-items: center;
+    //       justify-content: center;
+    //       .imgcard {
+    //         height: 184px;
+    //       }
+    //     }
+    //     .box_out_img {
+    //       width: 100%;
+    //     }
+    //     .huxing_bg_box {
+    //       position: absolute;
+    //       bottom: 0;
+    //       left: 0;
+    //       width: 100%;
+    //       .huxing_img {
+    //         width: 100%;
+    //       }
+    //       .huxing_content {
+    //         position: absolute;
+    //         top: 0;
+    //         left: 0;
+    //         width: 100%;
+    //         display: flex;
+    //         flex-direction: column;
+    //         align-items: center;
+    //         padding: 47px 13px 10px;
+    //         .start {
+    //           position: absolute;
+    //           top: 42px;
+    //           width: 100%;
+    //           display: flex;
+    //           justify-content: center;
+    //           align-items: center;
+    //           margin-bottom: 5px;
+    //           .span1 {
+    //             font-weight: 800;
+    //             color: #efb045;
+    //             line-height: 29px;
+    //             margin-right: 5px;
+    //           }
+    //           img {
+    //             width: 24px;
+    //           }
+    //         }
+    //         .people_type {
+    //           margin-top: 7px;
+    //           width: 100%;
+    //           display: flex;
+    //           justify-content: space-between;
+    //           align-items: center;
+    //           img {
+    //             width: 24px;
+    //           }
+    //           .leftimgbox {
+    //             display: flex;
+    //             flex-direction: column;
+    //             align-items: center;
+    //           }
+    //           .left_content {
+    //             width: 100%;
+    //             display: flex;
+    //             flex-direction: column;
+    //             .scale_box {
+    //               white-space: nowrap;
+    //               zoom: 0.8;
+    //               font-weight: 800;
+    //               line-height: 14px;
+    //             }
+    //             .box_3d {
+    //               margin-top: 5px;
+    //               width: 100%;
+    //               display: flex;
+    //               justify-content: space-between;
+    //               align-items: center;
+    //               span {
+    //                 font-weight: 800;
+    //                 line-height: 14px;
+    //                 transform: scale(0.95);
+    //                 zoom: 0.9;
+    //               }
+    //               .img_3d {
+    //                 width: 30px;
+    //               }
+    //             }
+    //           }
+    //         }
+    //       }
+    //       .box_id {
+    //         position: absolute;
+    //         top: 0;
+    //         left: 0;
+    //         width: 100%;
+    //         display: flex;
+    //         flex-direction: column;
+    //         padding: 90px 13px 0;
+    //         span {
+    //           &:nth-child(1) {
+    //             font-weight: bold;
+    //             color: #ced3d9;
+    //             line-height: 16px;
+    //           }
+    //           &:nth-child(2) {
+    //             font-weight: 500;
+    //             color: #ced3d9;
+    //             line-height: 14px;
+    //             margin-top: 8px;
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
 .left_::-webkit-scrollbar {

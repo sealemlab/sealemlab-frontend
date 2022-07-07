@@ -38,7 +38,7 @@
             </div>
             <div class="balance">{{claimValue | PriceConversion | Thousandths}}</div>
             <!-- <input type="number" :value="claimValue" disabled /> -->
-            <div class="btn" @click="ClaimableFun">{{ $t("message.gamepage.text21") }}</div>
+            <div class="btn" @click="ApplyFun">{{ $t("message.gamepage.text21") }}</div>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == 0">{{ $t("message.gamepage.txt46") }}</div>
               <div class="claim_btn btn_normal font12" :class="isEnLang?'en_Bold':''" v-if="item.tbStatus == 1" @click="userClaim(item)">
                 {{ $t("message.gamepage.txt47") }}
-                <BtnLoading :isloading="claimLoading"></BtnLoading>
+                <BtnLoading :isloading="item.claimLoading"></BtnLoading>
               </div>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == 2">{{ $t("message.gamepage.txt48") }}</div>
             </td>
@@ -145,7 +145,6 @@ export default {
       busy: false, // 为true则第一次不执行loadmore
 
       loadMoreStatus:true,
-      claimLoading:false,//提现按钮loading
       claimValue:0,//可提取余额
       lockedValue:0,//冻结余额
       proupRecharge: false,
@@ -153,8 +152,6 @@ export default {
       isShowClaimList: true,// calim / recharge
       // applyHistory:true,// apply / calim 
       list:[],
-      rechargeArr:[],//充值记录
-      withdrawalArr:[],//申请提现记录
       datacontent:'',
       clientX:0,
       clientY:0,
@@ -163,14 +160,25 @@ export default {
     };
   },
   created() {
-    if (!this.getLogin.loginStatus) this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: this.$t("message.gamepage.text39") }));
+    if (!this.getLogin.loginStatus) {
+      this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: this.$t("message.gamepage.text39") }));
+    }else{
+      this.getUserGameBalance()
+      this.ApplyForWithdrawal(1,callbackData => {
+        this.list = JSON.parse(callbackData)
+      })
+    }
   },
   methods: {
     loadMore() {
-      console.log('loadMore: ');
       this.busy = true;
       if(this.loadMoreStatus && this.isOneLoading) {
         console.log("loadmore加载更多")
+        if(this.isShowClaimList){
+          console.log("调用提现记录方法")
+        }else{
+          console.log("调用充值记录方法")
+        }
       }
     },
     AddQuesFun(data,e){
@@ -183,7 +191,9 @@ export default {
     },
     closeApply(data){
       if(data){
-        this.ApplyForWithdrawal(1)
+        this.ApplyForWithdrawal(1,callbackData => {
+          this.list = JSON.parse(callbackData)
+        })
         this.getUserGameBalance()
       }
       this.proupClaimStatus = false
@@ -200,7 +210,10 @@ export default {
     ClaimFun(data){
       if(data == 'claim'){
         this.isShowClaimList = true
-        this.list = this.withdrawalArr
+        this.list = []
+        this.ApplyForWithdrawal(1,callbackData => {
+          this.list = JSON.parse(callbackData)
+        })
       }else{
         this.isShowClaimList = false
         this.list = []
@@ -210,14 +223,8 @@ export default {
       }
       // this.applyHistory = true
     },
-    ClaimableFun(){
+    ApplyFun(){
       this.proupClaimStatus = true;
-    },
-    // 获取接口各个数据
-    getGameCoin(){
-      this.getUserGameBalance()
-      this.ApplyForWithdrawal(1)
-      // this.RechargeFun(1)
     },
     // 获取用户游戏内代币余额
     getUserGameBalance(){
@@ -228,11 +235,12 @@ export default {
             this.claimValue = res.data.data.holdingAmount // 可用余额
             this.lockedValue = res.data.data.frezeeAmount // 冻结数量
           }
+        }).catch(() => {
+          console.log('获取用户游戏内代币余额错误');
         })
     },
     // 充值记录
     RechargeFun(page,calback){
-      this.loadMoreStatus = true
       this.$api.rechargeRecord({page:page}, { headers: { Authorization: "Bearer " + this.getLogin.token } })
         .then(res => {
           console.log('充值记录res: ', res);
@@ -243,7 +251,6 @@ export default {
                 element.createTime = element.createTime.replace("T", "\n")
                 element.tbStatus = 2
               });
-              // this.rechargeArr = arr
               this.loadMoreStatus = this.isOneLoading = true
               this.busy = false
               calback(JSON.stringify(arr))
@@ -259,8 +266,7 @@ export default {
         });
     },
     // 提现记录
-    ApplyForWithdrawal(page){
-      this.withdrawalArr = []
+    ApplyForWithdrawal(page,calback){
       this.$api.WithdrawalsRecord({page:page}, { headers: { Authorization: "Bearer " + this.getLogin.token } })
       .then(res => { // 0 审核中  1 审核通过  2 订单完成  -1 审核拒绝
         console.log('提现记录res: ', res);
@@ -269,13 +275,15 @@ export default {
           if(arr.length > 0){
             arr.forEach(element => {
               element.createTime = element.createTime.replace("T", "\n")
+              element.claimLoading = false
             });
-            this.list = this.withdrawalArr = this.withdrawalArr.concat(arr)
+            calback(JSON.stringify(arr))
             this.loadMoreStatus = this.isOneLoading = true
             this.busy = false
           }else{
             this.loadMoreStatus = this.isOneLoading = false
             this.busy = true
+            calback(JSON.stringify([]))
           }
         }
       })
@@ -286,8 +294,8 @@ export default {
     // 用户提取游戏中的sr
     userClaim(item){
       console.log('item: ', item);
-      if(this.claimLoading)return
-      this.claimLoading = true
+      if(item.claimLoading)return
+      item.claimLoading = true
       // 绑定提现订单签名
       this.$api.withdrawFun({id:item.id}, { headers: { Authorization: "Bearer " + this.getLogin.token } })
         .then(res => {
@@ -297,22 +305,25 @@ export default {
               const etReceipt = await res1.wait();
               if(etReceipt.status == 1){
                 this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt50'}));
-                this.claimLoading = false
+                item.claimLoading = false
                 this.$utils.getUserCoinQuantity(token().SR,'sr',this.getAccount)
-                this.ApplyForWithdrawal(1)
+                this.ApplyForWithdrawal(1,callbackData => {
+                  this.list = JSON.parse(callbackData)
+                })
+                this.getUserGameBalance()
               }else{
-                this.claimLoading = false
+                item.claimLoading = false
               }
             }).catch(() => {
-              this.claimLoading = false
+              item.claimLoading = false
             })
           }else{
-            this.claimLoading = false
+            item.claimLoading = false
           }
         })
         .catch(err => {
           console.log('绑定提现订单签名err: ', err);
-          this.claimLoading = false
+          item.claimLoading = false
         });
     }
   },
@@ -328,9 +339,6 @@ export default {
       const index2 = value.indexOf("@");
       return value.slice(0, 2) + "***" + value.slice(index2, index);
     },
-  },
-  mounted(){
-    this.getGameCoin()
   }
 };
 </script>
@@ -342,7 +350,7 @@ export default {
   justify-content: center;
   align-items: center;
   color: #CED3D9;
-  margin: 15px 0;
+  margin-top: 15px;
 }
 .gamebox {
   width: 100%;
@@ -578,9 +586,9 @@ export default {
     border-radius: 8px;
     border: 1px solid rgba(68, 67, 67, 0.47);
     overflow: hidden;
-    padding-left: 7rem;
+    padding:0 0 1rem 7rem;
     thead {
-      width: calc(100% - 7.2rem);
+      width: calc(100% - 7.5rem);
       // padding-right: 10px;
       background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
       position: absolute;

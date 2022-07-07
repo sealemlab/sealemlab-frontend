@@ -1262,7 +1262,7 @@
       />
     </div>
     <OrderDetails
-      :selectarr="NftandBoxarr"
+      :userselectarr="NftandBoxarr"
       :orderStatus="orderStatus"
       @closeOrder="closeOrder"
     ></OrderDetails>
@@ -1292,7 +1292,6 @@ export default {
       busdApprove:false,//busd是否授权
       stApprove:false,//st是否授权
       priceCoin:'ST',
-      // loadMoreStatus: true,
       NftandBoxarr: { isnft: false, isbox: false, arr: [] },// 选择以后的盲盒或者nft数据
       orderStatus: false,// sell弹窗详情页面状态
       selectAll: false,//全选
@@ -1473,7 +1472,6 @@ export default {
         boxType:'',//盲盒类型
       },
       userNftAndBoxArr:[],//获取回来用户的盒子跟nft信息数组
-      // marketArr:[],//市场数据信息
       filterInfo:{
         type:'',
         children:'',
@@ -2090,7 +2088,6 @@ export default {
     },
     sellPageClick () {
       this.sellPageStatus = false
-      // this.marketArr = this.nftArr
       this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
       this.clearBtn()
     },
