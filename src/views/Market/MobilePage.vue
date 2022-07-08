@@ -1,184 +1,128 @@
 <template>
   <div class="mobile_market_page">
-    
+    <div class="mobile_top">
+      <!-- 筛选 -->
+      <div class="filter_box">
+        <svg
+          t="1655286410673"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="57945"
+          :width="getIsMobile ? 16 : 32"
+          :height="getIsMobile ? 16 : 32"
+        >
+          <path
+            d="M671.631 408.599v588.449c0 14.892-13.109 26.952-29.285 26.952-16.175 0-29.285-12.061-29.285-26.952V403.949c0-0.864 0.189-1.683 0.274-2.527-0.852-7.057 1.453-14.386 7.247-20.078L886.709 120.14c-5.188-38.51-42.206-68.378-87.168-68.378v-0.352c-1.305 0.157-2.597 0.352-3.953 0.352H151.32c-1.676 0-3.289-0.197-4.884-0.435v0.435c-44.963 0-81.981 29.869-87.168 68.378l266.126 261.204c5.691 5.585 8.031 12.748 7.31 19.683 0.051 0.622 0.211 1.213 0.211 1.845v362.327c0 14.295-13.115 25.881-29.285 25.881-16.175 0-29.285-11.586-29.285-25.881V408.594L7.532 146.72c-0.435-0.427-0.732-0.917-1.133-1.362-0.641-0.718-1.275-1.431-1.83-2.207-0.503-0.713-0.921-1.446-1.344-2.189-0.429-0.753-0.852-1.501-1.195-2.295-0.354-0.821-0.618-1.65-0.875-2.492-0.24-0.776-0.48-1.542-0.635-2.346-0.183-0.933-0.258-1.868-0.32-2.811-0.04-0.544-0.189-1.062-0.189-1.615C0.011 57.938 65.57 0 146.436 0v0.435C148.032 0.197 149.644 0 151.32 0h644.268c1.356 0 2.648 0.195 3.953 0.351V0c80.865 0 146.419 57.938 146.419 129.403 0 0.553-0.144 1.071-0.184 1.617-0.068 0.943-0.137 1.878-0.32 2.811-0.16 0.804-0.4 1.57-0.635 2.346-0.258 0.841-0.521 1.67-0.875 2.492-0.349 0.794-0.772 1.542-1.201 2.295-0.418 0.743-0.835 1.476-1.344 2.189-0.556 0.776-1.185 1.488-1.831 2.207-0.395 0.444-0.691 0.935-1.126 1.362L671.631 408.599z m59.53 33.958c0 14.295 13.11 25.881 29.285 25.881h234.279c16.176 0 29.285-11.586 29.285-25.881s-13.109-25.88-29.285-25.88H760.447c-16.175 0-29.286 11.585-29.286 25.88z m29.28 291.586h234.279c16.176 0 29.285-11.585 29.285-25.88s-13.109-25.881-29.285-25.881H760.441c-16.175 0-29.285 11.586-29.285 25.881s13.11 25.88 29.285 25.88z m234.285 238.096H760.447c-16.175 0-29.285 11.585-29.285 25.88S744.272 1024 760.447 1024h234.279c16.176 0 29.285-11.586 29.285-25.881s-13.109-25.88-29.285-25.88z"
+            fill="#CED3D9"
+            p-id="57946"
+          ></path>
+        </svg>
+        <span class="mobile_font14" :class="isEnLang ? 'en_Bold' : ''">Filter</span>
+      </div>
+      <!-- 排序 -->
+      <div class="sort_box" :class="[disablehover ? 'clear_hover' : '']">
+        <span class="mobile_font14" :class="isEnLang ? 'en_medium' : ''">{{ $t(sortTXT) }}</span>
+        <svg
+          t="1654321191240"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="2336"
+          width="16"
+          height="16"
+        >
+          <path
+            d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z"
+            p-id="2337"
+            fill="#CED3D9"
+          ></path>
+        </svg>
+        <div class="left_content_hover">
+          <span
+            class="span1 mobile_font14"
+            v-for="(ele, index1) in sortByArr"
+            :key="index1"
+            @click="sortClik(ele)"
+          >
+            {{ $t(ele.name) }}
+          </span>
+        </div>
+      </div>
+      <!-- sell 按钮 -->
+      <div class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="SellClick">Sell</div>
+    </div>
+    <div class="mobile_bottom">
+      <div class="seach mobile_font14" :class="isEnLang ? 'en_medium' : ''">
+        <svg
+          t="1655113375644"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="17389"
+          width="16"
+          height="16"
+        >
+          <path
+            d="M953.474215 908.234504l-152.576516-163.241391c61.92508-74.48211 95.81186-167.36973 95.81186-265.073744 0-229.294809-186.63531-415.930119-416.102133-415.930119-229.294809 0-415.930119 186.63531-415.930119 415.930119s186.63531 415.930119 415.930119 415.930119c60.032925 0 118.00168-12.55703 172.186125-37.327062 16.169326-7.396607 23.221905-26.318159 15.825298-42.315471-7.396607-16.169326-26.318159-23.221905-42.315471-15.825298-45.927768 20.813707-94.951789 31.478582-145.695952 31.478582-194.031917 0-351.94087-157.908953-351.94087-351.94087 0-194.031917 157.908953-351.94087 351.94087-351.94087 194.031917 0 351.94087 157.908953 351.94087 351.94087 0 91.339493-34.918864 177.86259-98.048043 243.743995-12.213002 12.729044-11.868974 33.026709 0.860071 45.239711 1.032085 0.860071 2.236183 1.204099 3.268268 2.064169 0.860071 1.204099 1.376113 2.752226 2.408198 3.956325l165.477574 177.00252c6.192508 6.70855 14.793214 10.148833 23.393919 10.148833 7.912649 0 15.653284-2.92424 21.845792-8.600706C964.827146 941.433227 965.515202 921.135562 953.474215 908.234504z"
+            p-id="17390"
+            fill="#CED3D9"
+          ></path>
+        </svg>
+        <div class="inputbox">
+          <Input
+            :fontSize="'14px'"
+            :modelValue="SearchInputvalue"
+            type="number"
+            :placeholder="$t('message.market.txt1')"
+            @input="InputClick('search',$event)"
+          ></Input>
+        </div>
+      </div>
+      <!-- history 按钮 -->
+      <div class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''">History</div>
+    </div>
+    <div class="mobile_select" v-if="showSelectStatus">
+      <!-- 选择框 -->
+      <div
+        @click="singleChoiceFun"
+        class="sell_content font16"
+        :class="isEnLang ? 'en_medium' : ''"
+      >
+        <div class="radious">
+          <div v-if="singleChoice"></div>
+        </div>
+        Multi-Select
+      </div>
+      <!-- 全选 -->
+      <div
+        @click="selectAllClick"
+        class="sell_content font16"
+        :class="isEnLang ? 'en_medium' : ''"
+      >
+        <div class="radious">
+          <div v-if="selectAll"></div>
+        </div>
+        Select all/Unselect
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import OrderDetails from "./PendingOrderDetails.vue";
 import { mapGetters } from "vuex";
 import { marketInfo,getSigner,token,getSourceUrl,market,sn,sb,contract } from 'sealemlab-sdk'
 export default {
-  components: {
-    OrderDetails
-  },
   computed: {
     ...mapGetters(["getIstrue", "getIsMobile", "isEnLang", "getUserCoin", "getNoticeNum", "getAccount", "getAccountStatus"])
   },
   data () {
     return {
-      isOneLoading:false,//第一次是否加载
-      loadMoreStatus:true,
-      busy: false, // 为true则第一次不执行loadmore
-
-      busdallLoading:true,// busd总的loading
-      stallLoading:true,//st总loading
-      busdApproveLoading:false,//busd授权loading
-      stApproveLoading:false,// st授权loading
-      busdApprove:false,//busd是否授权
-      stApprove:false,//st是否授权
-      priceCoin:'ST',
-      NftandBoxarr: { isnft: false, isbox: false, arr: [] },// 选择以后的盲盒或者nft数据
-      orderStatus: false,// sell弹窗详情页面状态
-      selectAll: false,//全选
-      showSelect: false,//展示选择框
-      sellPageStatus: true,// sell页面时 为假
-      historyStatus: true,// history页面时 为假
-      videoStatus: '',
-      nftArr: [],
+      SearchInputvalue:'',
       sortTXT: 'message.market.sortTXT',
       disablehover: false,
-      SearchInputvalue: '',
-      MinInputvalue: '',
-      MaxInputvalue: '',
-      arr2: [
-        { num: 0, title: "Total volume" },
-        { num: 0, title: "Floor price" },
-        { num: 0, title: "Items" },
-        { num: 0, title: "Transactions" },
-        { num: 0, title: "Holders" },
-      ],
-      coinArr:[
-        {title:'ST'},
-        {title:'BUSD'}
-      ],
-      navArr: [
-        {
-          id: 1,
-          title: 'Game',
-          showStatus: false,
-          arr: [
-            {
-              title: 'Sacred Realm',
-              status: true
-            }
-          ]
-        },
-        {
-          id: 2,
-          title: 'Type',
-          showStatus: true,
-          arr: [
-            {
-              title: 'Mystery Box',
-              status: false,
-              disable:false
-            },
-            {
-              title: 'NFT',
-              status: true,
-              disable:true
-            }
-          ]
-        },
-        {
-          id: 3,
-          title: 'Price',
-          showStatus: false,
-          arr: [
-            {
-              title: 'ST',
-              status: false
-            },
-          ]
-        },
-        {
-          id: 5,
-          title: 'Character',
-          showStatus: false,
-          arr: [
-            { title: 'Gladiator', status: false,content:1 },
-            { title: 'Assassin', status: false,content:2 },
-            { title: 'Wizard', status: false,content:3 },
-            { title: 'Fighter', status: false, content:4 }
-          ]
-        },
-        {
-          id: 6,
-          title: 'Suit',
-          showStatus: false,
-          arr: [
-            { title: 'Sacred light', status: false,content:1 },
-            { title: 'Ancient mysteries', status: false,content:2 },
-            { title: 'Iron', status: false,content:3 },
-            { title: 'Conquerors silence', status: false,content:4 }
-          ]
-        },
-        {
-          id: 7,
-          title: 'Part',
-          showStatus: false,
-          arr: [
-            { title: 'Weapon', status: false,content:1},
-            { title: 'Helm', status: false,content:2},
-            { title: 'Plate', status: false,content:3},
-            { title: 'Gauntlet', status: false,content:4},
-            { title: 'Boots', status: false,content:5},
-            { title: 'Belt', status: false,content:6},
-            { title: 'Necklace', status: false,content:7},
-            { title: 'Ring', status: false,content:8},
-          ]
-        },
-        {
-          id: 8,
-          title: 'Stars',
-          showStatus: false,
-          arr: [
-            { title: '4', status: false,content:4 },
-            { title: '5', status: false,content:5 },
-            { title: '6', status: false,content:6 },
-            { title: '7', status: false,content:7},
-            { title: '8', status: false,content:8 },
-          ]
-        },
-        {
-          id: 9,
-          title: 'Rarity',
-          showStatus: false,
-          arr: [
-            { title: 'Normal', status: false,content:1 },
-            { title: 'Medium', status: false,content:2 },
-            { title: 'Rare', status: false,content:3 },
-            { title: 'Epic', status: false,content:4 },
-            { title: 'Legend', status: false,content:5 }
-          ]
-        }
-      ],
-      historyArr: [
-        {
-          id: 1,
-          title: 'Game',
-          showStatus: true,
-          arr: [
-            {
-              title: 'Sacred Realm',
-              status: true
-            }
-          ]
-        },
-        {
-          id: 2,
-          title: 'Selling'
-        },
-        {
-          id: 3,
-          title: 'Selled'
-        },
-        {
-          id: 4,
-          title: 'Bought'
-        },
-      ],
-      selectArr: [],
       sortByArr: [
         { name: "message.market.txt17", describe: "time_desc" },//最新上架
         { name: "message.market.txt17_1", describe: "time_asc" },
@@ -206,468 +150,13 @@ export default {
         suit: '',//套装
         boxType:'',//盲盒类型
       },
-      userNftAndBoxArr:[],//获取回来用户的盒子跟nft信息数组
-      filterInfo:{
-        type:'',
-        children:'',
-        value:''
-      }, //左侧菜单栏 筛选时候传的信息
-      dataInfo:{
-        first: 4,
-        skip: 0,
-        orderBy: 'transactions',
-        orderDirection: 'desc',
-        nft: '',
-        token: '',
-      },
-      navOldArr:[
-        {
-          id: 1,
-          title: 'Game',
-          showStatus: false,
-          arr: [
-            {
-              title: 'Sacred Realm',
-              status: true
-            }
-          ]
-        },
-        {
-          id: 2,
-          title: 'Type',
-          showStatus: true,
-          arr: [
-            {
-              title: 'Mystery Box',
-              status: false,
-              disable:false
-            },
-            {
-              title: 'NFT',
-              status: true,
-              disable:true
-            }
-          ]
-        },
-        {
-          id: 3,
-          title: 'Price',
-          showStatus: false,
-          arr: [
-            {
-              title: 'ST',
-              status: false
-            },
-          ]
-        },
-        {
-          id: 5,
-          title: 'Character',
-          showStatus: false,
-          arr: [
-            { title: 'Gladiator', status: false,content:1 },
-            { title: 'Assassin', status: false,content:2 },
-            { title: 'Wizard', status: false,content:3 },
-            { title: 'Fighter', status: false, content:4 }
-          ]
-        },
-        {
-          id: 6,
-          title: 'Suit',
-          showStatus: false,
-          arr: [
-            { title: 'Sacred light', status: false,content:1 },
-            { title: 'Ancient mysteries', status: false,content:2 },
-            { title: 'Iron', status: false,content:3 },
-            { title: 'Conquerors silence', status: false,content:4 }
-          ]
-        },
-        {
-          id: 7,
-          title: 'Part',
-          showStatus: false,
-          arr: [
-            { title: 'Weapon', status: false,content:1},
-            { title: 'Helm', status: false,content:2},
-            { title: 'Plate', status: false,content:3},
-            { title: 'Gauntlet', status: false,content:4},
-            { title: 'Boots', status: false,content:5},
-            { title: 'Belt', status: false,content:6},
-            { title: 'Necklace', status: false,content:7},
-            { title: 'Ring', status: false,content:8},
-          ]
-        },
-        {
-          id: 8,
-          title: 'Stars',
-          showStatus: false,
-          arr: [
-            { title: '4', status: false,content:4 },
-            { title: '5', status: false,content:5 },
-            { title: '6', status: false,content:6 },
-            { title: '7', status: false,content:7},
-            { title: '8', status: false,content:8 },
-          ]
-        },
-        {
-          id: 9,
-          title: 'Rarity',
-          showStatus: false,
-          arr: [
-            { title: 'Normal', status: false,content:1 },
-            { title: 'Medium', status: false,content:2 },
-            { title: 'Rare', status: false,content:3 },
-            { title: 'Epic', status: false,content:4 },
-            { title: 'Legend', status: false,content:5 }
-          ]
-      }]
+      showSelect:false,
+      selectAll:false,//全选按钮
+      showSelectStatus:false,// 点击sell 展示选择框
+      singleChoice:false,// 选择框选中状态
     }
   },
-  watch: {
-    'getAccountStatus': {
-      handler: function (newValue) {
-        if (newValue == 0) {
-          this.loadMoreStatus = true
-          this.integrationBoxAnsNft() // 获取用户的nft跟盒子
-          this.isApproveFunPage() // 是否授权
-        } else if (newValue > 0) {
-          this.loadMoreStatus = true
-          localStorage.removeItem('nftInfo')
-          this.nftArr = []
-          this.$utils.antiShakeFun(() => {
-            this.integrationBoxAnsNft()
-            this.isApproveFunPage()
-          }, 2000)()
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
-  },
-  methods: {
-    // 用户购买nft或者盒子
-    userBuyFun(item){
-      // console.log('item: ', item);
-      if(item.isnft){
-        sn().ownerOf(item.nftId).then(res => {
-          // console.log('res: ', res);
-          if(res != contract().Market){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
-          }else{
-            // console.log("买盒子")
-            if(item.buyloading)return
-            item.buyloading = true
-            this.sdkBuyFun(item)
-          }
-        })
-      }else{
-        // console.log("买盒子")
-        sb().ownerOf(item.nftId).then(res => {
-          // console.log('res: ', res);
-          if(res != contract().Market){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
-          }else{
-            if(item.buyloading)return
-            item.buyloading = true
-            this.sdkBuyFun(item)
-          }
-        })
-      }
-    },
-    // sdk方法买盒子
-    sdkBuyFun(item){
-      market().connect(getSigner()).buy([item.nft],[item.nftId],localStorage.getItem('Invitee')).then(async res1 => {
-        // console.log('用户购买nft或者盒子res: ', res1);
-        const etReceipt = await res1.wait();
-        if(etReceipt.status == 1){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
-          item.buyloading = false
-        }else{
-          item.buyloading = false
-        }
-      }).catch(() => {
-        item.buyloading = false
-      })
-    },
-    goSellFun () {
-      this.NftandBoxarr.isnft = this.NftandBoxarr.isbox = false
-      this.NftandBoxarr.arr = []
-      this.nftArr.forEach(item => {
-        if (item.selectStatus) {
-          this.NftandBoxarr.arr.push(item)
-          if (item.isnft) {
-            this.NftandBoxarr.isnft = true
-          } else {
-            this.NftandBoxarr.isbox = true
-          }
-        }
-      })
-      // console.log('this.NftandBoxarr: ', this.NftandBoxarr);
-      if (this.NftandBoxarr.arr.length > 0) {
-        this.orderStatus = true
-      } else {
-        this.$store.commit("setNoticeStatus", JSON.stringify({ 'status': true, 'word': 'message.tip.self_select' }));
-      }
-    },
-    // 进入histor页面
-    historyClick () {
-      this.historyStatus = false
-    },
-    historyNavClick(item,index){
-      console.log('item,index: ', item,index);
-      switch(item.id){
-        case 2:
-          console.log('id--2');
-          break;
-        case 3:
-          console.log('id--3');
-          break;
-        case 4:
-          console.log('id--4');
-          break;
-        default:
-          break;
-      }
-    },
-    showItem (item) {
-      item.showStatus = !item.showStatus
-    },
-    itemClick (item, item1, index) {
-      item.arr.forEach(element => {
-        element.status = false
-      });
-      switch(item.id){
-        case 1:
-          console.log("id为1")
-          item1.status = true
-          return
-        case 2:
-          console.log("id为2")
-          if(index == 0){
-            item1.status = true
-            if(item1.disable)return
-            item1.disable = true
-            this.navArr[1].arr[1].disable = false
-
-            this.deleteItem('box')
-            this.navArr.push({id: 4,title: 'Mystery Box',showStatus: false,arr: [{ title: 'Common mystery box',status:true }]},)
-            
-            if(!this.sellPageStatus){
-              this.clearStstus()
-              this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
-            }else{
-              this.sortObj.nft = (token().SB).toLowerCase()
-              this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
-              this.encapsulationFun()
-
-              this.dataInfo.nft = (token().SB).toLowerCase()
-              this.dataInfo.token = (token()[this.priceCoin]).toLowerCase()
-              this.getMarketStatistics(this.dataInfo)
-
-              let newSortObj = JSON.parse(JSON.stringify(this.sortObj))
-              this.getMarketInfo(Object.assign(newSortObj,{orderBy: "price", orderDirection: "asc"})).then(newres => {
-                if(newres.status == 1){
-                  this.arr2[1].num = 0.00
-                }else{
-                  this.arr2[1].num = newres.arr[0].price
-                }
-              }).catch(() => {
-                this.arr2[1].num = 0.00
-              })
-            }
-          }else if(index == 1){
-            item1.status = true
-            this.navArr[1].arr[0].disable = false
-            if(item1.disable)return
-            item1.disable = true
-
-            this.deleteItem('nft')
-            this.navArr.push(
-              {
-                id: 5,
-                title: 'Character',
-                showStatus: false,
-                arr: [
-                  { title: 'Gladiator', status: false,content:1 },
-                  { title: 'Assassin', status: false,content:2 },
-                  { title: 'Wizard', status: false,content:3 },
-                  { title: 'Fighter', status: false, content:4 }
-                ]
-              },
-              {
-                id: 6,
-                title: 'Suit',
-                showStatus: false,
-                arr: [
-                  { title: 'Sacred light', status: false,content:1 },
-                  { title: 'Ancient mysteries', status: false,content:2 },
-                  { title: 'Iron', status: false,content:3 },
-                  { title: 'Conquerors silence', status: false,content:4 }
-                ]
-              },
-              {
-                id: 7,
-                title: 'Part',
-                showStatus: false,
-                arr: [
-                  { title: 'Weapon', status: false,content:1},
-                  { title: 'Helm', status: false,content:2},
-                  { title: 'Plate', status: false,content:3},
-                  { title: 'Gauntlet', status: false,content:4},
-                  { title: 'Boots', status: false,content:5},
-                  { title: 'Belt', status: false,content:6},
-                  { title: 'Necklace', status: false,content:7},
-                  { title: 'Ring', status: false,content:8},
-                ]
-              },
-              {
-                id: 8,
-                title: 'Stars',
-                showStatus: false,
-                arr: [
-                  { title: '4', status: false,content:4 },
-                  { title: '5', status: false,content:5 },
-                  { title: '6', status: false,content:6 },
-                  { title: '7', status: false,content:7},
-                  { title: '8', status: false,content:8 },
-                ]
-              },
-              {
-                id: 9,
-                title: 'Rarity',
-                showStatus: false,
-                arr: [
-                  { title: 'Normal', status: false,content:1 },
-                  { title: 'Medium', status: false,content:2 },
-                  { title: 'Rare', status: false,content:3 },
-                  { title: 'Epic', status: false,content:4 },
-                  { title: 'Legend', status: false,content:5 }
-                ]
-              },
-            )
-            
-            if(!this.sellPageStatus){
-              this.clearStstus()
-              this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-            }else{
-              this.sortObj.nft = (token().SN).toLowerCase()
-              this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
-              this.encapsulationFun()
-              
-              this.dataInfo.nft = (token().SN).toLowerCase()
-              this.dataInfo.token = (token()[this.priceCoin]).toLowerCase()
-              this.getMarketStatistics(this.dataInfo)
-  
-              let newSortObj = JSON.parse(JSON.stringify(this.sortObj))
-              this.getMarketInfo(Object.assign(newSortObj,{orderBy: "price", orderDirection: "asc"})).then(newres => {
-                if(newres.status == 1){
-                  this.arr2[1].num = 0.00
-                }else{
-                  this.arr2[1].num = newres.arr[0].price
-                }
-              }).catch(() => {
-                this.arr2[1].num = 0.00
-              })
-            }
-            
-          }
-          break;
-        case 3:
-          console.log("id为3")
-          break;
-        case 4:// 盒子类型
-          console.log("id为4")
-          item1.status = true
-          return
-        case 5://英雄
-          console.log("id为5")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'role',value:item1.content}))
-          this.sortObj.role = item1.content
-          this.encapsulationFun()
-          break;
-        case 6:// 套装
-          console.log("id为6")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'suit',value:item1.content}))
-          this.sortObj.suit = item1.content
-          this.encapsulationFun()
-          break;
-        case 7:// 部位
-          console.log("id为7")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'part',value:item1.content}))
-          this.sortObj.part = item1.content
-          this.encapsulationFun()
-          break;
-        case 8://星级
-          console.log("id为8")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'stars',value:item1.content}))
-          this.sortObj.stars = item1.content
-          this.encapsulationFun()
-          break;
-        case 9:// 稀有度
-          console.log("id为9")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'power',value:item1.content}))
-          this.sortObj.rarity = item1.content
-          this.encapsulationFun()
-          break;
-        default:
-          break;
-      }
-      this.addSelect(item,item1,index)
-      item1.status = true
-    },
-    // 添加筛选项(带x的,可以关闭)
-    addSelect(item,item1,index){
-      this.selectArr.forEach((data, index) => {
-        if (data.id == item.id) {
-          this.selectArr.splice(index, 1)
-        }
-      })
-      let obj = {}
-      obj.title = item1.title
-      obj.id = item.id
-      obj.index = index
-      obj.selectItem = true
-      this.selectArr.unshift(obj)
-    },
-    // 删除nft/box 所对应的子选项
-    deleteItem(type){
-      if(type == 'box'){
-        this.navArr.forEach((ele, i) => {
-          if (ele.id == 5) {
-            this.navArr.splice(i, 5)
-          }
-        })
-      }else if(type == 'nft'){
-        this.navArr.forEach((ele, i) => {
-          if (ele.id == 4) {
-            this.navArr.splice(i, 1)
-          }
-        })
-      }
-    },
-    // 筛选展示对应的数组
-    filterArr(filterInfo){
-      if(!this.sellPageStatus){
-        if(filterInfo.type == 'box'){
-          let need_boxArr = this.userNftAndBoxArr.filter(item => {
-            return !item.isnft
-          })
-          this.nftArr = need_boxArr
-        }
-        if(filterInfo.type == 'nft'){
-          let need_NftArr = this.userNftAndBoxArr.filter(item => {
-            return item.isnft
-          })
-          if(!filterInfo.children){
-            this.nftArr = need_NftArr
-          }else{
-            this.nftArr = need_NftArr.filter(item => {
-              return item[filterInfo.children] == filterInfo.value
-            })
-          }
-        }
-      }
-    },
+  methods:{
     InputClick(type,data){
       if(type == 'mint'){
         this.MinInputvalue = data
@@ -679,478 +168,71 @@ export default {
         this.SearchInputvalue = data
       }
     },
-    closeSelect (item, index) {
-      // console.log('item, index: ', item, index);
-      if (item.selectItem) {
-        this.navArr.forEach(ele => {
-          if (ele.id == item.id) {
-            ele.arr[item.index].status = false
-          }
-        })
-      }
-      if (item.id == 2) {
-        this.navArr.forEach((a, i) => {
-          if (a.id == 4) {
-            this.navArr.splice(i, 1)
-          }
-          if (a.id == 5) {
-            this.navArr.splice(i, 5)
-          }
-        })
-        if(!this.sellPageStatus){
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-        }
-      }
-      this.selectArr.splice(index, 1)
-    },
-    clearBtn () {
-      this.selectArr = []
-      this.navArr = JSON.parse(JSON.stringify(this.navOldArr))
-      if(!this.sellPageStatus){
-        this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-      }else{
-        this.sortObj = {
-          first: 8, //查询结果数量，比如填10，就展示前10个结果
-          skip: 0, //跳过结果数量，用于分页，比如填50，相当于从第6页开始
-          orderBy: "sellTime", // 排序字段，填字段名，所有字段见下文查询结果
-          orderDirection: "desc", // 降序or升序，填desc或asc
-          seller: '',// 卖家地址
-          nft:(token().SN).toLowerCase(),//nft地址
-          token:(token().ST).toLowerCase(), // 代币地址
-          price_gte:'',//最小价格
-          price_lte:'',//最大价格
-          stars:'',
-          rarity: '',
-          role: '',//职业
-          part: '',//部位
-          suit: '',//套装
-          boxType:'',//盲盒类型
-        }
-        this.encapsulationFun()
-      }
-    },
     sortClik (data) {
       this.disablehover = true;
       setTimeout(() => {
         this.disablehover = false;
       }, 600);
       this.sortTXT = data.name
-      switch (data.describe) {
-        case "time_desc":
-          this.sortObj.orderBy = "sellTime";
-          this.sortObj.orderDirection = "desc";
-          this.encapsulationFun()
-          break;
-        case "time_asc":
-          this.sortObj.orderBy = "sellTime";
-          this.sortObj.orderDirection = "asc";
-          this.encapsulationFun()
-          break;
-        case "price_desc":
-          this.sortObj.orderBy = "price";
-          this.sortObj.orderDirection = "desc";
-          this.encapsulationFun()
-          break;
-        case "price_asc":
-          this.sortObj.orderBy = "price";
-          this.sortObj.orderDirection = "asc";
-          this.encapsulationFun()
-          break;
-        case "start_desc":
-          this.sortObj.orderBy = "stars";
-          this.sortObj.orderDirection = "desc";
-          this.encapsulationFun()
-          break;
-        case "start_asc":
-          this.sortObj.orderBy = "stars";
-          this.sortObj.orderDirection = "asc";
-          this.encapsulationFun()
-          break;
-        case "rarity_desc":
-          this.sortObj.orderBy = "rarity";
-          this.sortObj.orderDirection = "desc";
-          this.encapsulationFun()
-          break;
-        case "rarity_asc":
-          this.sortObj.orderBy = "rarity";
-          this.sortObj.orderDirection = "asc";
-          this.encapsulationFun()
-          break;
-        default:
-          break;
-      }
+      // switch (data.describe) {
+      //   case "time_desc":
+      //     this.sortObj.orderBy = "sellTime";
+      //     this.sortObj.orderDirection = "desc";
+      //     this.encapsulationFun()
+      //     break;
+      //   case "time_asc":
+      //     this.sortObj.orderBy = "sellTime";
+      //     this.sortObj.orderDirection = "asc";
+      //     this.encapsulationFun()
+      //     break;
+      //   case "price_desc":
+      //     this.sortObj.orderBy = "price";
+      //     this.sortObj.orderDirection = "desc";
+      //     this.encapsulationFun()
+      //     break;
+      //   case "price_asc":
+      //     this.sortObj.orderBy = "price";
+      //     this.sortObj.orderDirection = "asc";
+      //     this.encapsulationFun()
+      //     break;
+      //   case "start_desc":
+      //     this.sortObj.orderBy = "stars";
+      //     this.sortObj.orderDirection = "desc";
+      //     this.encapsulationFun()
+      //     break;
+      //   case "start_asc":
+      //     this.sortObj.orderBy = "stars";
+      //     this.sortObj.orderDirection = "asc";
+      //     this.encapsulationFun()
+      //     break;
+      //   case "rarity_desc":
+      //     this.sortObj.orderBy = "rarity";
+      //     this.sortObj.orderDirection = "desc";
+      //     this.encapsulationFun()
+      //     break;
+      //   case "rarity_asc":
+      //     this.sortObj.orderBy = "rarity";
+      //     this.sortObj.orderDirection = "asc";
+      //     this.encapsulationFun()
+      //     break;
+      //   default:
+      //     break;
+      // }
     },
-    selectCoin(data) {
-      this.disablehover = true;
-      setTimeout(() => {
-        this.disablehover = false;
-      }, 600);
-
-      this.priceCoin = data.title
-      this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
-      this.encapsulationFun()
-
-      this.dataInfo.token = (token()[this.priceCoin]).toLowerCase()
-      this.getMarketStatistics(this.dataInfo)
-
-      let newSortObj = JSON.parse(JSON.stringify(this.sortObj))
-      this.getMarketInfo(Object.assign(newSortObj,{orderBy: "price", orderDirection: "asc"})).then(newres => {
-        // console.log('newres: ', newres);
-        if(newres.status == 1){
-          this.arr2[1].num = 0.00
-        }else{
-          this.arr2[1].num = newres.arr[0].price
-        }
-      }).catch(() => {
-        this.arr2[1].num = 0.00
-      })
+    // 展示选择框
+    SellClick(){
+      this.showSelectStatus = true
+      this.selectAll = false
     },
-    nftFun (item) {
-      if (this.showSelect) {
-        item.selectStatus = !item.selectStatus
-      } else {
-        if (item.isnft) {
-          this.videoStatus = true
-          this.videoSrc = item.videoSrc
-        }
-      }
+    // 选择框选中状态
+    singleChoiceFun(){
+      this.singleChoice = !this.singleChoice
     },
-    sellPageClick () {
-      this.sellPageStatus = false
-      this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-      this.clearBtn()
-    },
-    inputAppply(){
-      this.selectArr.forEach((item,i) => {
-        if(item.priceStatus){
-          this.selectArr.splice(i,1)
-        }
-      })
-      let obj = {}
-      obj.priceStatus = true
-      obj.title = this.priceCoin + ' Min: ' + this.MinInputvalue + ' to ' + 'Max: ' + this.MaxInputvalue
-      this.selectArr.unshift(obj)
-
-      this.sortObj.price_gte = this.MinInputvalue
-      this.sortObj.price_lte = this.MaxInputvalue
-      this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
-      this.encapsulationFun()
-    },
-    // 全选按钮
+    //全选
     selectAllClick(){
       this.selectAll = !this.selectAll
-      if(this.selectAll){
-        this.showSelect = true
-        this.nftArr.forEach(item => {
-          item.showSelect = true
-          item.selectStatus = true
-        })
-      }else{
-        this.showSelect = false
-        this.nftArr.forEach(item => {
-          item.showSelect = false
-          item.selectStatus = false
-        })
-      }
-    },
-    // 是否展示选择框方法
-    showSelectClick () {
-      this.showSelect = !this.showSelect
-      this.selectAll = false
-      this.nftArr.forEach(item => {
-        item.showSelect = this.showSelect
-        item.selectStatus = false
-      })
-    },
-    // 清空挂单时候选择的选择框以及 按钮的选中状态
-    clearStstus(){
-      this.selectAll = this.showSelect = false
-      this.nftArr.forEach(item => {
-        item.showSelect = false
-        item.selectStatus = false
-      })
-    },
-    enterClick(){
-      // console.log('enter事件')
-      this.selectArr.forEach((item,i) => {
-        if(item.searchStatus){
-          this.selectArr.splice(i,1)
-        }
-      })
-      let obj = {}
-      obj.searchStatus = true
-      obj.title = this.SearchInputvalue
-      this.selectArr.unshift(obj)
-    },
-    // 返回市场页面
-    backClick () {
-      this.clearBtn()
-      this.showSelect = false
-      this.sellPageStatus = this.historyStatus = true
-      this.navArr = this.navOldArr
-      this.sortObj = {
-        first: 8, //查询结果数量，比如填10，就展示前10个结果
-        skip: 0, //跳过结果数量，用于分页，比如填50，相当于从第6页开始
-        orderBy: "sellTime", // 排序字段，填字段名，所有字段见下文查询结果
-        orderDirection: "desc", // 降序or升序，填desc或asc
-        seller: '',// 卖家地址
-        nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().ST).toLowerCase(), // 代币地址
-        price_gte:'',//最小价格
-        price_lte:'',//最大价格
-        stars:'',
-        rarity: '',
-        role: '',//职业
-        part: '',//部位
-        suit: '',//套装
-        boxType:'',//盲盒类型
-      }
-      this.encapsulationFun()
-    },
-    closeOrder (data) {
-      if (data) {
-        // this.nftArr.forEach(item => {
-        //   item.showSelect = true
-        //   item.selectStatus = false
-        // })
-        this.integrationBoxAnsNft()
-      }
-      this.orderStatus = false
-    },
-    // 整合盲盒数据跟nft数据
-    integrationBoxAnsNft () {
-      this.userNftAndBoxArr = []
-      let userBoxArr = JSON.parse(sessionStorage.getItem("setBoxInfo"))
-      let userNftArr = JSON.parse(localStorage.getItem("nftInfo"))
-      if (userNftArr) {
-        sn().tokensOfOwnerBySize(this.getAccount, 0, 100000000).then(res2 => {
-          // console.log("公共函数:获取用户的装备信息:",res2)
-          if(userNftArr.length != res2[0].length){
-            this.$utils.getUserBindbox(this.getAccount, 0, 10000000).then(res3 => {
-              this.userNftAndBoxArr =  res3.concat(userBoxArr)
-            })
-          }else{
-            this.userNftAndBoxArr =  userNftArr.concat(userBoxArr)
-          }
-          // this.loadMoreStatus = false
-        })
-      } else {
-        this.$utils.getUserBindbox(this.getAccount, 0, 10000000).then(res => {
-          // console.log('用户有的总的nft的数量res: ', res);
-          if (res.length > 0) {
-            this.userNftAndBoxArr = res.concat(userBoxArr)
-            localStorage.setItem('nftInfo', JSON.stringify(res))
-            // this.loadMoreStatus = false
-          } else {
-            this.userNftAndBoxArr = userBoxArr
-            // this.loadMoreStatus = false
-          }
-        })
-      }
-    },
-    // 获取市场信息
-    getMarketInfo(sortObj){
-      // console.log('直接给sdk传的参数sortObj: ', sortObj);
-      return new Promise(resolve => {
-        marketInfo.getSellInfos(
-          sortObj.first,
-          sortObj.skip,
-          sortObj.orderBy,
-          sortObj.orderDirection,
-          sortObj.seller,
-          sortObj.nft,
-          sortObj.token,
-          sortObj.price_gte,
-          sortObj.price_lte,
-          sortObj.stars,
-          sortObj.rarity,
-          sortObj.role,
-          sortObj.part,
-          sortObj.suit,
-          sortObj.boxType
-          ).then(res => {
-          // console.log('sdk获取市场NFT成交信息res: ', res);
-          if (res.data.sellInfos.length > 0) {
-            const arr = JSON.parse(JSON.stringify(res.data.sellInfos));
-            arr.forEach((element) => {
-              element.price = util.formatEther(element.price) //this.$utils.convertBigNumberToNormal(Number(element.price),0,18,true)
-              element.isnft = (element.nft).toLowerCase() == (token('production').SN).toLowerCase()?true:false
-              element.buyloading = false
-              if((element.token).toLowerCase() == (token().ST).toLowerCase()){
-                element.price_currency = 'ST'
-              }else if((element.token).toLowerCase() == (token().BUSD).toLowerCase()){
-                element.price_currency = 'BUSD'
-              }else{
-                element.price_currency = '0X'
-              }
-              if(element.isnft){
-                element.src = getSourceUrl([element.stars,element.power,element.role,element.part,element.suit]) + '.png'
-                element.videoSrc = getSourceUrl([element.stars,element.power,element.role,element.part,element.suit]) + '.mp4'
-              }else{
-                element.title = 'Mysterybox'
-                element.src = '//cdn.sealemlab.com/sealemlab_assets_test/images/mybox1.webp'
-              }
-            });
-            resolve({ status: 0, arr: arr, msg: "Success" });
-          } else {
-            resolve({ status: 1, msg: "No data" });
-          }
-        })
-      })
-    },
-    // 判断是否授权
-    isApproveFunPage(){
-      this.$utils.isApproveFun(this.getAccount,token().BUSD,contract().Market).then(res => {
-        // console.log('busd是否授权res: ', res);
-        if(res){
-          this.busdApprove = true
-          this.busdallLoading = false
-        }else{
-          this.busdApprove = false
-          this.busdallLoading = false
-        }
-      }).catch(() => {
-        this.busdApprove = false
-        this.busdallLoading = false
-      })
-      this.$utils.isApproveFun(this.getAccount,token().ST,contract().Market).then(res => {
-        // console.log('st是否授权res: ', res); 
-        if(res){
-          this.stApprove = true
-          this.stallLoading = false
-        }else{
-          this.stApprove = false
-          this.stallLoading = false
-        }
-      }).catch(() => {
-        this.stApprove = false
-        this.stallLoading = false
-      })
-    },
-    // 去授权
-    ApproveFun(data){
-      if(data == 'busd'){
-        if(this.busdApproveLoading)return
-        this.busdApproveLoading = true
-        this.$utils.goApproveFun(token().BUSD,contract().Market).then(res => {
-          if(res){
-            this.busdApprove = true
-            this.busdApproveLoading = false
-          }else{
-            this.busdApprove = false
-            this.busdApproveLoading = false
-          }
-        }).catch(() => {
-          this.busdApprove = false
-          this.busdApproveLoading = false
-        })
-      }else if(data == 'st'){
-        if(this.stApproveLoading)return
-        this.stApproveLoading = true
-        this.$utils.goApproveFun(token().ST,contract().Market).then(res => {
-          if(res){
-            this.stApprove = true
-            this.stApproveLoading = false
-          }else{
-            this.stApprove = false
-            this.stApproveLoading = false
-          }
-        }).catch(() => {
-          this.stApprove = false
-          this.stApproveLoading = false
-        })
-      }
-    },
-    // 加载更多
-    loadMore() {
-      this.busy = true;
-      if(this.loadMoreStatus && this.isOneLoading) {
-        // console.log("loadmore加载更多")
-        this.encapsulationFun(false)
-      }
-    },
-    // 排序--筛选--封装函数
-    encapsulationFun(istrue = true){
-      // console.log("筛选")
-      if(!this.sellPageStatus)return
-      if(istrue){
-        this.sortObj.skip = 0
-        this.nftArr = []
-      }
-      this.loadMoreStatus = true
-      this.getMarketInfo(this.sortObj).then((res) => {
-
-        console.log('筛选以后的结果res: ', res);
-        this.sortObj.skip += this.sortObj.first;
-        istrue = false
-        if (res.status == 0) {
-          this.nftArr = this.nftArr.concat(res.arr)
-          this.loadMoreStatus = true
-          this.isOneLoading = true
-          this.busy = false
-        } else if (res.status == 1) {
-          this.loadMoreStatus = false
-          this.isOneLoading = false
-          this.busy = true
-        }
-      }).catch(() => {
-        this.nftArr = [];
-        this.isOneLoading = false
-        this.busy = true
-      });
-    },
-    // 市场的统计信息
-    getMarketStatistics(obj){
-      if(!this.sellPageStatus)return
-      marketInfo.getCounters(obj.first,
-      obj.skip,
-      obj.orderBy,
-      obj.orderDirection,
-      obj.nft,
-      obj.token).then(res => {
-        // console.log('获取市场NFT统计信息res: ', res);
-
-        this.arr2[3].num = res.data.counters[0].transactions
-        this.arr2[2].num = res.data.counters[0].items
-        this.arr2[0].num = res.data.counters[0].volume / 1e18
-      }).catch(() => {
-        console.log('市场统计信息err: ');
-      })
+      this.singleChoice = this.selectAll
     }
-  },
-  mounted(){
-    this.encapsulationFun(false)
-
-    // 地板价
-    this.getMarketInfo({
-        first: 8, //查询结果数量，比如填10，就展示前10个结果
-        skip: 0, //跳过结果数量，用于分页，比如填50，相当于从第6页开始
-        orderBy: "price", // 排序字段，填字段名，所有字段见下文查询结果
-        orderDirection: "asc", // 降序or升序，填desc或asc
-        seller: '',// 卖家地址
-        nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().ST).toLowerCase(), // 代币地址
-        price_gte:'',//最小价格
-        price_lte:'',//最大价格
-        stars:'',
-        rarity: '',
-        role: '',//职业
-        part: '',//部位
-        suit: '',//套装
-        boxType:'',//盲盒类型
-      }).then(newres => {
-        if(newres.status == 1){
-          this.arr2[1].num = 0.00
-        }else{
-          this.arr2[1].num = newres.arr[0].price
-        }
-      }).catch(() => {
-        this.arr2[1].num = 0.00
-      })
-    // 市场统计 ----
-    this.dataInfo.nft = (token().SN).toLowerCase()
-    this.dataInfo.token = (token()[this.priceCoin]).toLowerCase()
-    this.getMarketStatistics(this.dataInfo)
   }
 }
 </script>
@@ -1159,13 +241,141 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  
-}
-@media screen and (max-width: 980px) {
-  .mobile_market_page {
+  .mobile_top{
     width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    .filter_box{
+      width: 0.97rem;
+      height: 0.35rem;
+      background: #171718;
+      box-shadow: 0px 20px 20px 0px rgba(0,0,0,0.3900), inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+      border-radius: 0.04rem;
+      border: 1px solid #373636;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0.08rem;
+      span{
+        margin-left: 0.1rem;
+      }
+    }
+    .sort_box {
+      position: relative;
+      width: 1.51rem;
+      height: 0.35rem;
+      background: #171718;
+      box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
+        inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
+      border-radius: 0.04rem;
+      border: 1px solid #373636;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.09rem;
+      span {
+        font-weight: 500;
+        color: #8f8e8e;
+      }
+      .left_content_hover {
+        position: absolute;
+        top: 0;
+        left: -1px;
+        z-index: 9;
+        width: 101.5%;
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        background: #171718;
+        filter: blur(0px);
+        border: 1px solid #373636;
+        border-top: none;
+        border-radius: 0.04rem;
+        padding: 0 0.09rem 0.1rem;
+        margin-top: 0.34rem;
+        line-height: 39px;
+        .span1 {
+          cursor: pointer;
+        }
+      }
+      &:hover {
+        box-shadow: none;
+        border-bottom: none;
+        border-radius: 0.04rem 0.04rem 0 0;
+        .left_content_hover {
+          display: flex;
+          border-radius: 0 0 0.04rem 0.04rem;
+        }
+      }
+    }
+  }
+  .sell_btn {
+    cursor: pointer;
+    width: 0.69rem;
+    height: 0.35rem;
+    box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+    border-radius: 0.04rem;
+    backdrop-filter: blur(14px);
+    text-align: center;
+    line-height: 0.35rem;
+    font-weight: bold;
+  }
+  .mobile_bottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.1rem;
+    .seach {
+      width: 77%;
+      height: 0.35rem;
+      background: #2c2b2b;
+      box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
+        inset 0px 3px 8px 0px rgba(17, 16, 16, 0.5),
+        inset 0px -1px 3px 0px rgba(0, 0, 0, 0.5);
+      border-radius: 0.2rem;
+      border: 1px solid #373636;
+      padding-left: 0.1rem;
+      font-weight: 500;
+      color: #8f8e8e;
+      display: flex;
+      align-items: center;
+      .inputbox {
+        margin-left: 0.05rem;
+      }
+    }
+  }
+  .mobile_select{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 23%;
+    margin-top: 0.1rem;
+    .sell_content {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      .radious {
+        width: 0.16rem;
+        height: 0.16rem;
+        border-radius: 50%;
+        border: 1px solid #eccf83;
+        font-weight: 500;
+        color: #ced3d9;
+        line-height: 0.32rem;
+        margin-right: 0.07rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div {
+          width: 50%;
+          height: 50%;
+          background: #eccf83;
+          border-radius: 50%;
+        }
+      }
+    }
   }
 }
 </style>

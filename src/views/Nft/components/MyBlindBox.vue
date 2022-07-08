@@ -34,9 +34,9 @@ export default {
       openStatus:false,// 打开盲盒详情页面状态
       list:[
         {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt53',status:true,type:0},
-        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt54',status:true,type:1},
-        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt55',status:true,type:2},
-        {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt56',status:true,type:3},
+        // {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt54',status:true,type:1},
+        // {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt55',status:true,type:2},
+        // {src:`${this.$store.state.imgUrl}mybox1.webp`,num:0,title:'message.nft.txt56',status:true,type:3},
       ],
       timerll:null,
     }
@@ -125,10 +125,7 @@ export default {
   .title_box{
     position: absolute;
     top: 0;
-    
     left: 0;
-    // left: 50%;
-    // transform: translateX(-50%);
     font-weight: 600;
     color: #CED3D9;
     line-height: 63px;
@@ -144,7 +141,7 @@ export default {
       width: 25%;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      // align-items: center;
       cursor: pointer;
       .img_{
         width: 95%;

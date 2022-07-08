@@ -103,6 +103,10 @@ export default {
   },
   methods: {
     closePopup() {
+      this.friendAddress = ''
+      this.friendsStatus = true
+      this.allLoading = true
+      this.SRmsg = ''
       this.$emit('closeRecharge',this.rechargeStatus)
     },
     maxClick(){

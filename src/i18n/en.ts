@@ -821,7 +821,7 @@ export const message = {
     text17: "Binding Address",
     text18: "Balance",
     text19: "Recharge",
-    text20: "Claimable",
+    text20: "Withdrawable",
     txt20_1:"Locked",
     text21: "Apply",
     text22: "In Review",
@@ -848,25 +848,28 @@ export const message = {
     txt42:'Enter the address',
     txt43:'Address',
 
-    txt44:'locked提示文案',
+    txt44:'The withdrawal SR will be locked if the amount withdrawn exceeds 30,000.',
     txt45:'Review failed',
     txt46:'In review',
-    txt47:'Claim',
+    txt47:'Withdraw',
     txt48:'Success',
     txt49:'Failed',
-    txt50:'提现成功',
-    txt51:'余额不足',
-    txt52:'请输入充值金额',
-    txt53:'请输入正确的地址',
-    txt54:'充值中...',
-    txt55:'充值成功',
-    txt56:'请输入提现数量',
+
+    txt50:'Withdrawal Success',
+    txt51:'Insufficient Balance',
+    txt52:'Please enter the amount you want to recharge',
+    txt53:'Please enter the correct address',
+    txt54:'Recharging…',
+    txt55:'Recharge Success',
+    txt56:'Please enter the amount you want to withdraw',
 
     txt57:'Recharge for friends',
     txt58:'Recharge for yourself',
-    txt59:'Apply'
+    txt59:'Apply',
 
-    
+    txt60:'Switch to the binding address under current account to withdraw.',
+    txt61:'Log in account',
+    txt62:'The binding address and connecting address are different.'
   },//游戏
   acticePage:{
     title1:"IDO sale",

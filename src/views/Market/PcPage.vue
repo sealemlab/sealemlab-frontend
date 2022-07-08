@@ -1,35 +1,5 @@
 <template>
-  <div class="market_page">
-    <!-- 背景图 -->
-    <div class="bg_">
-      <div class="change_txt font35 mobile_font28" :class="isEnLang ? 'en_heavy' : ''">
-        <span v-if="sellPageStatus && historyStatus">Welcome to NFTs mark</span>
-        <span v-else-if="!sellPageStatus">Sell</span>
-        <span v-else-if="!historyStatus">History</span>
-      </div>
-    </div>
-    <!-- 数据总结 -->
-    <div class="data_display" v-if="sellPageStatus && historyStatus">
-      <div class="onebox" v-for="(item, index) in arr2" :key="index">
-        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-if="index == 0 || index == 1">$ {{
-          item.num | PriceConversion
-        }}</span>
-        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-else>{{
-          item.num
-        }}</span>
-        <span class="font16" :class="isEnLang ? 'en_medium' : ''">{{
-          item.title
-        }}</span>
-      </div>
-    </div>
-    <!-- 返回 -->
-    <div class="data_display" v-else>
-      <img
-        :src="`${$store.state.imgUrl}back.webp`"
-        class="back_img"
-        @click="backClick"
-      />
-    </div>
+  <div class="pc_market_page">
     <!-- 导航栏 -->
     <div class="page">
       <!-- 市场 以及挂单时候的菜单栏 -->
@@ -1246,38 +1216,12 @@
         </div>
       </div>
     </div>
-    <div class="video_proup" v-if="videoStatus">
-      <video
-        class="video_"
-        :src="videoSrc"
-        loop
-        autoplay
-        muted
-        controls
-      ></video>
-      <img
-        :src="`${$store.state.imgUrl}close.webp`"
-        class="close_img"
-        @click="videoStatus = false"
-      />
-    </div>
-    <OrderDetails
-      :userselectarr="NftandBoxarr"
-      :orderStatus="orderStatus"
-      @closeOrder="closeOrder"
-    ></OrderDetails>
-    <MobilePage class="mobile_content"></MobilePage>
   </div>
 </template>
 <script>
-import OrderDetails from "./PendingOrderDetails.vue";
-import MobilePage from "./MobilePage.vue";
 import { mapGetters } from "vuex";
 import { marketInfo,getSigner,token,getSourceUrl,market,sn,sb,contract } from 'sealemlab-sdk'
 export default {
-  components: {
-    OrderDetails,MobilePage
-  },
   computed: {
     ...mapGetters(["getIstrue", "getIsMobile", "isEnLang", "getUserCoin", "getNoticeNum", "getAccount", "getAccountStatus"])
   },
@@ -2428,57 +2372,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.market_page {
+.pc_market_page {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 120px;
-  .bg_ {
-    width: 100%;
-    min-height: 393px;
-    background: url($bg_url + "marketbg.webp") no-repeat #000;
-    // background-size:100% 100%;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 5vw 60px;
-    .change_txt {
-      width: 100%;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 41px;
-      background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  }
-  .data_display {
-    width: 90vw;
-    margin: 63px auto 70px;
-    display: flex;
-    .onebox {
-      display: flex;
-      flex-direction: column;
-      margin-right: 50px;
-      span {
-        &:nth-child(1) {
-          font-weight: bold;
-          color: #ced3d9;
-          line-height: 29px;
-        }
-        &:nth-child(2) {
-          font-weight: 500;
-          color: #ced3d9;
-          line-height: 19px;
-        }
-      }
-    }
-    .back_img {
-      width: 55px;
-      cursor: pointer;
-    }
-  }
   .page {
     width: 90vw;
     margin: 0 auto;
@@ -3051,61 +2948,5 @@ export default {
 }
 .market_{
   min-height: 10vh;
-}
-.mobile_content{
-  display: none;
-}
-@media screen and (max-width: 980px) {
-  .market_page {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 5vw 0.2rem;
-    .bg_ {
-      width: 100%;
-      min-height: 1.3rem;
-      background: url($bg_url + "marketbg.webp") no-repeat #000;
-      background-size:100% 100%;
-      padding: 0;
-      .change_txt {
-        line-height: 0.4rem;
-      }
-    }
-    .data_display {
-      width: 100%;
-      margin: 0.25rem auto;
-      display: flex;
-      flex-wrap: wrap;
-      .onebox {
-        width: 33%;
-        display: flex;
-        flex-direction: column;
-        margin-right: 0;
-        margin-bottom: 0.15rem;
-        span {
-          &:nth-child(1) {
-            font-weight: bold;
-            color: #ced3d9;
-            line-height: 29px;
-          }
-          &:nth-child(2) {
-            font-weight: 500;
-            color: #ced3d9;
-            line-height: 19px;
-          }
-        }
-      }
-      .back_img {
-        width: 0.3rem;
-        cursor: pointer;
-      }
-    }
-    .page{
-      display: none;
-    }
-  }
-  .mobile_content{
-    display: flex;
-  }
 }
 </style>

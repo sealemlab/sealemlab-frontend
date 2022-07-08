@@ -206,18 +206,35 @@ export default {
     },
     closeRecharge(data){
       if(data){
-        this.getUserGameBalance()
-        
-        setTimeout(() => {
-          this.RechargeFun(1,res => {
-            this.list = JSON.parse(res)
-          })
-        },7000)
+        this.getUserGameBalance().then(res1 => {
+          console.log('balannce接口返回的res1: ', res1);
+          if(res1){
+            setTimeout(() => {
+              this.recgargePage = 1
+              this.RechargeFun(1,res => {
+                this.list = JSON.parse(res)
+              })
+            },1500)
+          }
+        })
       }
       this.proupRecharge = false
     },
     openRecharge() {
-      this.proupRecharge = true;
+      if (!this.getLogin.loginStatus) {
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt61'}));
+        setTimeout(() => {
+          this.proupRecharge = true;
+        },2000)
+      }else if(this.getLogin.addr.toLowerCase() != this.getAccount.toLowerCase()){
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt62'}));
+        setTimeout(() => {
+          this.proupRecharge = true;
+        },2000)
+      }else{
+        this.proupRecharge = true;
+      }
+      
     },
     ClaimFun(data){
       this.loadMoreStatus = true
@@ -242,16 +259,22 @@ export default {
     },
     // 获取用户游戏内代币余额
     getUserGameBalance(){
-      this.$api.getUserSRBalance({}, { headers: { Authorization: "Bearer " + this.getLogin.token } })
-        .then(res => {
-          console.log('获取用户游戏内代币余额res: ', res);
-          if(res.code == 200){
-            this.claimValue = res.data.data.holdingAmount // 可用余额
-            this.lockedValue = res.data.data.frezeeAmount // 冻结数量
-          }
-        }).catch(() => {
-          console.log('获取用户游戏内代币余额错误');
-        })
+      return new Promise((resolve,reject) => {
+        this.$api.getUserSRBalance({}, { headers: { Authorization: "Bearer " + this.getLogin.token } })
+          .then(res => {
+            console.log('获取用户游戏内代币余额res: ', res);
+            if(res.code == 200){
+              this.claimValue = res.data.data.holdingAmount // 可用余额
+              this.lockedValue = res.data.data.frezeeAmount // 冻结数量
+              resolve(true)
+            }else{
+              resolve(false)
+            }
+          }).catch(() => {
+            console.log('获取用户游戏内代币余额错误');
+            reject(false)
+          })
+      })
     },
     // 充值记录
     RechargeFun(page,calback){
@@ -309,6 +332,10 @@ export default {
     userClaim(item){
       console.log('item: ', item);
       if(item.claimLoading)return
+      if(this.getLogin.addr.toLowerCase() != this.getAccount.toLowerCase()){
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt60'}));
+        return
+      }
       item.claimLoading = true
       // 绑定提现订单签名
       this.$api.withdrawFun({id:item.id}, { headers: { Authorization: "Bearer " + this.getLogin.token } })
