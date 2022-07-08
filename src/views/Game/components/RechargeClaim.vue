@@ -173,11 +173,17 @@ export default {
     loadMore() {
       this.busy = true;
       if(this.loadMoreStatus && this.isOneLoading) {
-        console.log("loadmore加载更多")
+        // console.log("loadmore加载更多")
         if(this.isShowClaimList){
           console.log("调用提现记录方法")
+          this.ApplyForWithdrawal(++this.claimPage,callbackData => {
+            this.list = this.list.concat(JSON.parse(callbackData))
+          })
         }else{
           console.log("调用充值记录方法")
+          this.RechargeFun(++this.recgargePage,res => {
+            this.list = this.list.concat(JSON.parse(res))
+          })
         }
       }
     },
@@ -201,6 +207,12 @@ export default {
     closeRecharge(data){
       if(data){
         this.getUserGameBalance()
+        
+        setTimeout(() => {
+          this.RechargeFun(1,res => {
+            this.list = JSON.parse(res)
+          })
+        },7000)
       }
       this.proupRecharge = false
     },
@@ -208,17 +220,19 @@ export default {
       this.proupRecharge = true;
     },
     ClaimFun(data){
+      this.loadMoreStatus = true
+      this.list = []
       if(data == 'claim'){
         this.isShowClaimList = true
-        this.list = []
+        this.claimPage = 1
         this.ApplyForWithdrawal(1,callbackData => {
           this.list = JSON.parse(callbackData)
         })
       }else{
         this.isShowClaimList = false
-        this.list = []
+        this.recgargePage = 1
         this.RechargeFun(1,res => {
-          this.list = this.list.concat(JSON.parse(res))
+          this.list = JSON.parse(res)
         })
       }
       // this.applyHistory = true
@@ -241,7 +255,7 @@ export default {
     },
     // 充值记录
     RechargeFun(page,calback){
-      this.$api.rechargeRecord({page:page}, { headers: { Authorization: "Bearer " + this.getLogin.token } })
+      this.$api.rechargeRecord({page:page}, { headers: { Authorization: "Bearer " + this.getLogin.token} })
         .then(res => {
           console.log('充值记录res: ', res);
           if(res.code == 200){

@@ -183,7 +183,7 @@ export default {
         addres = this.getAccount
       }
       this.doingLoading = true;
-      console.log('addres,util.parseUnits(this.SRmsg): ', addres,util.parseUnits(this.SRmsg));
+      // console.log('addres,util.parseUnits(this.SRmsg): ', addres,util.parseUnits(this.SRmsg));
       srDeposit().connect(getSigner()).deposit(addres,util.parseUnits(this.SRmsg)).then(async res => {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.gamepage.txt54','link':res.hash}));
         this.$store.commit("setProgressInfo", JSON.stringify({'speed':50}));
