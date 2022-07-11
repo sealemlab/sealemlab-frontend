@@ -8,6 +8,22 @@
         <div class="box">
           <div class="type" :class="[disablehover ? 'clear_hover' : '']">
             {{selectCoin}}
+            <svg
+              t="1654321191240"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2336"
+              :width="getIsMobile ? 16 : 16"
+              :height="getIsMobile ? 16 : 16"
+            >
+              <path
+                d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z"
+                p-id="2337"
+                fill="#CED3D9"
+              ></path>
+            </svg>
             <div class="left_content_hover">
               <span
                 class="span1 font14"
@@ -81,7 +97,7 @@
       <div class="right_">
         <p class="p_positon font32" :class="isEnLang ? 'en_Bold' : ''">Preview</p>
         <div class="showbox">
-          <BoxComponents :nftArr="userselectarr.arr" :isColumn="true"></BoxComponents>
+          <BoxComponents :nftArr="orderArr" :isColumn="true"></BoxComponents>
           <!-- <div
             class="out_box_one"
             v-for="(item, index) in userselectarr.arr"
@@ -230,8 +246,20 @@ export default {
       deep: true,
       immediate: true,
     },
+    'userselectarr': {
+      handler: function (newValue) {
+        if(newValue.arr.length > 0){
+          this.orderArr = JSON.parse(JSON.stringify(newValue.arr))
+          this.orderArr.forEach(element => {
+            element.showSelect = false
+          });
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
-  computed: { ...mapGetters(["getAccount","getNoticeNum","isEnLang","getAccountStatus"])},
+  computed: { ...mapGetters(["getAccount","getIsMobile","getNoticeNum","isEnLang","getAccountStatus"])},
   data(){
     return{
       nft_code:1,
@@ -253,7 +281,8 @@ export default {
         { name: "ST" },
       ],
       btntimernull:null,
-      alredaySellStatus:false
+      alredaySellStatus:false,
+      orderArr:[]
     }
   },
   methods:{
@@ -400,8 +429,8 @@ export default {
               this.boxisloading = false
             }
           }).catch(() => {
-            this.isApproveBUSD = false
-            this.busdisloading = false
+            this.boxisloading = false
+            this.isApproveBox = false
           })
         }
       }else{
@@ -520,6 +549,9 @@ export default {
       line-height: 50px;
       padding: 0 10px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       .left_content_hover {
         position: absolute;
         top: 0;

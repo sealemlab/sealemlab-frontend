@@ -8,7 +8,8 @@
       @click="nftFun(item)"
     >
       <div class="onebox" v-if="item.isnft">
-        <div class="out_img"><img :src="item.src" class="imgcard" /></div>
+        <div class="box_out_img">
+          <img :src="item.src" class="imgcard" /></div>
         <div class="huxing_bg_box">
           <img :src="`${$store.state.imgUrl}huxing6.webp`" class="huxing_img" />
           <div class="huxing_content">
@@ -100,11 +101,7 @@
           <div v-if="item.selectStatus"></div>
         </div>
       </div>
-      <div
-        class="bottom_box"
-        v-if="sellPageStatus"
-        @click.stop="userBuyFun(item)"
-      >
+      <div class="bottom_box" v-if="sellPageStatus && !cancleStatus" @click.stop="userBuyFun(item)">
         <div class="left_price">
           <span class="span1 fontsize16"
             >{{ item.price | PriceConversion }} {{ item.price_currency }}</span
@@ -123,7 +120,7 @@
               buy<BtnLoading :isloading="item.buyloading"></BtnLoading>
             </div>
             <div
-              @click="ApproveFun('busd')"
+              @click.stop="ApproveFun('busd')"
               class="btn add_btnn_loading btn_normal font12"
               :class="isEnLang ? 'en_Bold' : ''"
               v-else
@@ -145,7 +142,7 @@
               buy<BtnLoading :isloading="item.buyloading"></BtnLoading>
             </div>
             <div
-              @click="ApproveFun('st')"
+              @click.stop="ApproveFun('st')"
               class="btn add_btnn_loading btn_normal font12"
               :class="isEnLang ? 'en_Bold' : ''"
               v-else
@@ -155,11 +152,22 @@
           </div>
         </div>
       </div>
+      <div class="bottom_box" v-if="cancleStatus" @click.stop="userCancleFun(item)">
+        <div class="left_price">
+          <span class="span1 fontsize16"
+            >{{ item.price | PriceConversion }} {{ item.price_currency }}</span
+          >
+        </div>
+        <div class="btn btn_normal font12" :class="isEnLang ? 'en_Bold' : ''" v-if="showCancle">
+          Cancle<BtnLoading :isloading="item.buyloading"></BtnLoading>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { marketInfo,getSigner,token,getSourceUrl,market,sn,sb,contract,util } from 'sealemlab-sdk'
 export default {
   props:{
     nftArr:{
@@ -184,13 +192,170 @@ export default {
       type:Boolean,
       default:false
     },// 竖的排
+    cancleStatus:{
+      type:Boolean,
+      default:false
+    },// 用户取消挂单按钮显示状态
+    showCancle:{
+      type:Boolean,
+      default:true
+    },// 用户取消挂单按钮 默认显示 ()
   },
   computed: {
-    ...mapGetters(["isEnLang"])
+    ...mapGetters(["isEnLang","getAccount",])
+  },
+  watch:{
+    'nftArr': {
+      handler: function (newValue) {
+        if (newValue.length > 0) {
+          if(this.sellPageStatus){
+            this.isApproveFunPage() // 是否授权
+          }
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
+  data(){
+    return {
+      busdallLoading:true,// busd总的loading
+      stallLoading:true,//st总loading
+      busdApproveLoading:false,//busd授权loading
+      stApproveLoading:false,// st授权loading
+      busdApprove:false,//busd是否授权
+      stApprove:false,//st是否授权
+    }
   },
   methods:{
     nftFun(item){
       this.$emit("nftFun",item)
+    },
+    // 判断是否授权
+    isApproveFunPage(){
+      this.$utils.isApproveFun(this.getAccount,token().BUSD,contract().Market).then(res => {
+        // console.log('busd是否授权res: ', res);
+        if(res){
+          this.busdApprove = true
+          this.busdallLoading = false
+        }else{
+          this.busdApprove = false
+          this.busdallLoading = false
+        }
+      }).catch(() => {
+        this.busdApprove = false
+        this.busdallLoading = false
+      })
+      this.$utils.isApproveFun(this.getAccount,token().ST,contract().Market).then(res => {
+        // console.log('st是否授权res: ', res); 
+        if(res){
+          this.stApprove = true
+          this.stallLoading = false
+        }else{
+          this.stApprove = false
+          this.stallLoading = false
+        }
+      }).catch(() => {
+        this.stApprove = false
+        this.stallLoading = false
+      })
+    },
+    // 去授权
+    ApproveFun(data){
+      if(data == 'busd'){
+        if(this.busdApproveLoading)return
+        this.busdApproveLoading = true
+        this.$utils.goApproveFun(token().BUSD,contract().Market).then(res => {
+          if(res){
+            this.busdApprove = true
+            this.busdApproveLoading = false
+          }else{
+            this.busdApprove = false
+            this.busdApproveLoading = false
+          }
+        }).catch(() => {
+          this.busdApprove = false
+          this.busdApproveLoading = false
+        })
+      }else if(data == 'st'){
+        if(this.stApproveLoading)return
+        this.stApproveLoading = true
+        this.$utils.goApproveFun(token().ST,contract().Market).then(res => {
+          if(res){
+            this.stApprove = true
+            this.stApproveLoading = false
+          }else{
+            this.stApprove = false
+            this.stApproveLoading = false
+          }
+        }).catch(() => {
+          this.stApprove = false
+          this.stApproveLoading = false
+        })
+      }
+    },
+    // 用户购买nft或者盒子
+    userBuyFun(item){
+      console.log("用户购买")
+      // console.log('item: ', item);
+      if(item.isnft){
+        sn().ownerOf(item.nftId).then(res => {
+          // console.log('res: ', res);
+          if(res != contract().Market){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
+          }else{
+            // console.log("买盒子")
+            if(item.buyloading)return
+            item.buyloading = true
+            this.sdkBuyFun(item)
+          }
+        })
+      }else{
+        // console.log("买盒子")
+        sb().ownerOf(item.nftId).then(res => {
+          // console.log('res: ', res);
+          if(res != contract().Market){
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
+          }else{
+            if(item.buyloading)return
+            item.buyloading = true
+            this.sdkBuyFun(item)
+          }
+        })
+      }
+    },
+    // sdk方法买盒子
+    sdkBuyFun(item){
+      market().connect(getSigner()).buy([item.nft],[item.nftId],localStorage.getItem('Invitee')).then(async res1 => {
+        // console.log('用户购买nft或者盒子res: ', res1);
+        const etReceipt = await res1.wait();
+        if(etReceipt.status == 1){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
+          item.buyloading = false
+        }else{
+          item.buyloading = false
+        }
+      }).catch(() => {
+        item.buyloading = false
+      })
+    },
+    // 取消挂单
+    userCancleFun(item){
+      console.log('取消挂单item: ', item)
+      if(item.buyloading)return
+      item.buyloading = true
+      market().connect(getSigner()).cancel([item.nft],[item.nftId]).then(async res1 => {
+        // console.log('用户批量取消挂单NFTres: ', res1);
+        const etReceipt = await res1.wait();
+        if(etReceipt.status == 1){
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'取消挂单成功'}));
+          item.buyloading = false
+        }else{
+          item.buyloading = false
+        }
+      }).catch(() => {
+        item.buyloading = false
+      })
     }
   }
 }
@@ -240,9 +405,6 @@ export default {
         height: 184px;
       }
     }
-    .box_out_img {
-      width: 100%;
-    }
     .huxing_bg_box {
       position: absolute;
       bottom: 0;
@@ -250,6 +412,7 @@ export default {
       width: 100%;
       .huxing_img {
         width: 100%;
+        min-height: 50px;
       }
       .huxing_content {
         position: absolute;

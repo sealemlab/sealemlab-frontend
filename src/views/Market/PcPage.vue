@@ -1,5 +1,35 @@
 <template>
-  <div class="pc_market_page">
+  <div class="pc_page">
+    <!-- 背景图 -->
+    <div class="bg_">
+      <div class="change_txt font35 mobile_font28" :class="isEnLang ? 'en_heavy' : ''">
+        <span v-if="sellPageStatus && historyStatus">Welcome to NFTs mark</span>
+        <span v-else-if="!sellPageStatus">Sell</span>
+        <span v-else-if="!historyStatus">History</span>
+      </div>
+    </div>
+    <!-- 数据总结 -->
+    <div class="data_display" v-if="sellPageStatus && historyStatus">
+      <div class="onebox" v-for="(item, index) in arr2" :key="index">
+        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-if="index == 0 || index == 1">$ {{
+          item.num | PriceConversion
+        }}</span>
+        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-else>{{
+          item.num
+        }}</span>
+        <span class="font16" :class="isEnLang ? 'en_medium' : ''">{{
+          item.title
+        }}</span>
+      </div>
+    </div>
+    <!-- 返回 -->
+    <div class="data_display" v-else>
+      <img
+        :src="`${$store.state.imgUrl}back.webp`"
+        class="back_img"
+        @click="backClick"
+      />
+    </div>
     <!-- 导航栏 -->
     <div class="page">
       <!-- 市场 以及挂单时候的菜单栏 -->
@@ -829,7 +859,7 @@
                   ></path>
                 </svg>
               </div>
-              <span class="font16" :class="isEnLang ? 'en_Bold' : ''">{{
+              <span class="font16" :class="{'en_Bold':isEnLang,'active_history':item.id == historyID}">{{
                 item.title
               }}</span>
             </div>
@@ -851,6 +881,7 @@
               ></path>
             </svg>
           </div>
+          <!-- game 下的 二级菜单 -->
           <div class="out_content" v-if="item.showStatus">
             <div class="id_box">
               <div
@@ -998,7 +1029,7 @@
           <span>0 items</span>
         </div>
         <!-- 选择项 盲盒还是nft  套装 部位 职业 等等 -->
-        <div class="select_item" v-if="selectArr.length > 0">
+        <div class="select_item" v-if="selectArr.length > 0 ">
           <div
             class="oneitem font20"
             :class="isEnLang ? 'en_Bold' : ''"
@@ -1035,143 +1066,7 @@
         <!-- 盲盒跟nft装备 -->
         <div class="box" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
           <div class="page_show_content">
-            <div
-              class="out_box_one"
-              v-for="(item, index) in nftArr"
-              :key="index"
-              @click="nftFun(item)"
-            >
-              <div class="onebox" v-if="item.isnft">
-                <div class="out_img"><img :src="item.src" class="imgcard" /></div>
-                <div class="huxing_bg_box">
-                  <img
-                    :src="`${$store.state.imgUrl}huxing6.webp`"
-                    class="huxing_img"
-                  />
-                  <div class="huxing_content">
-                    <div class="start">
-                      <span class="span1 font24">{{ item.stars }}</span>
-                      <img :src="`${$store.state.imgUrl}start.webp`" />
-                    </div>
-                    <div class="people_type">
-                      <div class="leftimgbox" v-if="item.role == 1">
-                        <img :src="`${$store.state.imgUrl}type_jds.webp`" />
-                        <span class="font12">{{ $t("message.nft.txt9") }}</span>
-                      </div>
-                      <div class="leftimgbox" v-if="item.role == 2">
-                        <img :src="`${$store.state.imgUrl}type_cike.webp`" />
-                        <span class="font12">{{ $t("message.nft.txt11") }}</span>
-                      </div>
-                      <div class="leftimgbox" v-if="item.role == 3">
-                        <img :src="`${$store.state.imgUrl}type_wushi.webp`" />
-                        <span class="font12">{{ $t("message.nft.txt10") }}</span>
-                      </div>
-                      <div class="leftimgbox" v-if="item.role == 4">
-                        <img :src="`${$store.state.imgUrl}type_zs.webp`" />
-                        <span class="font12">{{ $t("message.nft.txt8") }}</span>
-                      </div>
-                      <div class="leftimgbox">
-                        <img
-                          :src="`${$store.state.imgUrl}power1.webp`"
-                          v-if="item.power <= 20"
-                        />
-                        <img
-                          :src="`${$store.state.imgUrl}power2.webp`"
-                          v-else-if="item.power <= 40 && item.power > 20"
-                        />
-                        <img
-                          :src="`${$store.state.imgUrl}power3.webp`"
-                          v-else-if="item.power <= 60 && item.power > 40"
-                        />
-                        <img
-                          :src="`${$store.state.imgUrl}power4.webp`"
-                          v-else-if="item.power <= 80 && item.power > 60"
-                        />
-                        <img
-                          :src="`${$store.state.imgUrl}power5.webp`"
-                          v-else-if="item.power <= 100 && item.power > 80"
-                        />
-                        <span class="font12">{{ item.power }}</span>
-                      </div>
-                    </div>
-                    <div class="people_type">
-                      <div class="left_content">
-                        <span class="font14 scale_box">
-                          {{
-                            $t(
-                              `message.nft.type${item.role}.suit${item.suit}.position${item.part}`
-                            )
-                          }}
-                        </span>
-                        <div class="box_3d">
-                          <span class="font12"># {{ item.nftId }}</span>
-                          <img
-                            :src="`${$store.state.imgUrl}new_3dimg.webp`"
-                            class="img_3d"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="select_border" v-if="item.showSelect">
-                  <div v-if="item.selectStatus"></div>
-                </div>
-              </div>
-              <div class="onebox" v-else>
-                <div class="box_out_img">
-                  <img :src="item.src" class="imgcard" />
-                </div>
-                <div class="huxing_bg_box">
-                  <img
-                    :src="`${$store.state.imgUrl}huxing6.webp`"
-                    class="huxing_img"
-                  />
-                  <div class="box_id">
-                    <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{
-                      item.title
-                    }}</span>
-                    <span class="font12" :class="isEnLang ? 'en_medium' : ''"
-                      >#{{ item.nftId }}</span
-                    >
-                  </div>
-                </div>
-                <div class="select_border" v-if="item.showSelect">
-                  <div v-if="item.selectStatus"></div>
-                </div>
-              </div>
-              <div class="bottom_box" v-if="sellPageStatus" @click.stop="userBuyFun(item)">
-                <div class="left_price">
-                  <span class="span1 fontsize16">{{item.price | PriceConversion}} {{item.price_currency}}</span>
-                </div>
-                <div v-if="item.price_currency == 'BUSD'">
-                  <div class="btn add_btnn_loading btn_normal" v-if="busdallLoading">
-                    <BtnLoading :isloading="true"></BtnLoading>
-                  </div>
-                  <div v-else>
-                    <div class="btn btn_normal font12" :class="isEnLang ? 'en_Bold' : ''" v-if="busdApprove">
-                      buy<BtnLoading :isloading="item.buyloading"></BtnLoading>
-                    </div>
-                    <div @click="ApproveFun('busd')" class="btn add_btnn_loading btn_normal font12" :class="isEnLang ? 'en_Bold' : ''" v-else>
-                      approve<BtnLoading :isloading="busdApproveLoading"></BtnLoading>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="item.price_currency == 'ST'">
-                  <div class="btn add_btnn_loading btn_normal" v-if="stallLoading">
-                    <BtnLoading :isloading="true"></BtnLoading>
-                  </div>
-                  <div v-else>
-                    <div class="btn btn_normal font12" :class="isEnLang ? 'en_Bold' : ''" v-if="stApprove">
-                      buy<BtnLoading :isloading="item.buyloading"></BtnLoading>
-                    </div>
-                    <div @click="ApproveFun('st')" class="btn add_btnn_loading btn_normal font12" :class="isEnLang ? 'en_Bold' : ''" v-else>
-                      approve<BtnLoading :isloading="stApproveLoading"></BtnLoading>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <BoxComponents :showCancle="showCancle" :sellPageStatus="sellPageStatus" :cancleStatus="cancleStatus" :nftArr="nftArr" @nftFun="nftFun"></BoxComponents>
           </div>
           <div class="bottom_loading font16" :class="isEnLang ? 'en_heavy' : ''" v-if="nftArr.length > 7">
             <span v-if="loadMoreStatus">Loading...</span>
@@ -1216,12 +1111,37 @@
         </div>
       </div>
     </div>
+    <div class="video_proup" v-if="videoStatus">
+      <video
+        class="video_"
+        :src="videoSrc"
+        loop
+        autoplay
+        muted
+        controls
+      ></video>
+      <img
+        :src="`${$store.state.imgUrl}close.webp`"
+        class="close_img"
+        @click="videoStatus = false"
+      />
+    </div>
+    <OrderDetails
+      :userselectarr="NftandBoxarr"
+      :orderStatus="orderStatus"
+      @closeOrder="closeOrder"
+    ></OrderDetails>
   </div>
 </template>
 <script>
+import BoxComponents from "@/components/BoxComponents.vue"
+import OrderDetails from "./PendingOrderDetails.vue";
 import { mapGetters } from "vuex";
-import { marketInfo,getSigner,token,getSourceUrl,market,sn,sb,contract } from 'sealemlab-sdk'
+import { marketInfo,getSigner,token,getSourceUrl,market,sn,sb,contract,util } from 'sealemlab-sdk'
 export default {
+  components: {
+    OrderDetails,BoxComponents
+  },
   computed: {
     ...mapGetters(["getIstrue", "getIsMobile", "isEnLang", "getUserCoin", "getNoticeNum", "getAccount", "getAccountStatus"])
   },
@@ -1389,6 +1309,9 @@ export default {
           title: 'Bought'
         },
       ],
+      historyID:2,
+      cancleStatus:false,
+      showCancle:true,// 挂单的取消按钮默认显示
       selectArr: [],
       sortByArr: [
         { name: "message.market.txt17", describe: "time_desc" },//最新上架
@@ -1416,7 +1339,25 @@ export default {
         part: '',//部位
         suit: '',//套装
         boxType:'',//盲盒类型
-      },
+      },// 市场上正在售卖的盲盒跟nft的信息
+      BothsortObj: {
+        first: 8, //查询结果数量，比如填10，就展示前10个结果
+        skip: 0, //跳过结果数量，用于分页，比如填50，相当于从第6页开始
+        orderBy: "buyTime", // 排序字段，填字段名，所有字段见下文查询结果
+        orderDirection: "desc", // 降序or升序，填desc或asc
+        buyer:'',
+        seller: '',// 卖家地址
+        nft:'',//nft地址
+        token:'', // 代币地址
+        price_gte:'',//最小价格
+        price_lte:'',//最大价格
+        stars:'',
+        rarity: '',
+        role: '',//职业
+        part: '',//部位
+        suit: '',//套装
+        boxType:'',//盲盒类型
+      },// 市场上成交的买卖双方的信息
       userNftAndBoxArr:[],//获取回来用户的盒子跟nft信息数组
       filterInfo:{
         type:'',
@@ -1540,14 +1481,14 @@ export default {
         if (newValue == 0) {
           this.loadMoreStatus = true
           this.integrationBoxAnsNft() // 获取用户的nft跟盒子
-          this.isApproveFunPage() // 是否授权
+          // this.isApproveFunPage() // 是否授权
         } else if (newValue > 0) {
           this.loadMoreStatus = true
           localStorage.removeItem('nftInfo')
           this.nftArr = []
           this.$utils.antiShakeFun(() => {
             this.integrationBoxAnsNft()
-            this.isApproveFunPage()
+            // this.isApproveFunPage()
           }, 2000)()
         }
       },
@@ -1600,7 +1541,9 @@ export default {
         item.buyloading = false
       })
     },
+    //去挂单按钮
     goSellFun () {
+      this.cancleStatus = false
       this.NftandBoxarr.isnft = this.NftandBoxarr.isbox = false
       this.NftandBoxarr.arr = []
       this.nftArr.forEach(item => {
@@ -1622,19 +1565,48 @@ export default {
     },
     // 进入histor页面
     historyClick () {
+      this.selectArr = []
       this.historyStatus = false
+      this.showCancle = true
+
+      this.cancleStatus = true
+      this.nftArr = []
+      this.sortObj.nft = ''
+      this.sortObj.token = ''
+      this.sortObj.seller = this.getAccount
+      this.encapsulationFun()
     },
     historyNavClick(item,index){
-      console.log('item,index: ', item,index);
+      // console.log('item,index: ', item,index);
+      this.cancleStatus = true
       switch(item.id){
         case 2:
-          console.log('id--2');
+          console.log('id--2---正在挂单中');
+          this.nftArr = []
+          this.showCancle = true
+          this.historyID = 2
+          this.sortObj.nft = ''
+          this.sortObj.token = ''
+          this.sortObj.seller = this.getAccount
+          this.encapsulationFun()
           break;
         case 3:
-          console.log('id--3');
+          console.log('id--3----卖出的记录信息');
+          this.historyID = 3
+          this.showCancle = false
+          this.nftArr = []
+          this.BothsortObj.seller = this.getAccount
+          this.BothsortObj.buyer = ''
+          this.BothSidesEncapsulationFun()
           break;
         case 4:
-          console.log('id--4');
+          console.log('id--4----购买记录');
+          this.historyID = 4
+          this.showCancle = false
+          this.nftArr = []
+          this.BothsortObj.seller = ''
+          this.BothsortObj.buyer = this.getAccount
+          this.BothSidesEncapsulationFun()
           break;
         default:
           break;
@@ -1763,6 +1735,7 @@ export default {
             }else{
               this.sortObj.nft = (token().SN).toLowerCase()
               this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
+              console.log('筛选nft的参数this.sortObj: ', this.sortObj);
               this.encapsulationFun()
               
               this.dataInfo.nft = (token().SN).toLowerCase()
@@ -2032,7 +2005,9 @@ export default {
         }
       }
     },
+    // 显示可挂单的数据的sell按钮
     sellPageClick () {
+      this.cancleStatus = false //不显示历史记录的取消按钮
       this.sellPageStatus = false
       this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
       this.clearBtn()
@@ -2102,6 +2077,7 @@ export default {
     // 返回市场页面
     backClick () {
       this.clearBtn()
+      this.historyID = 2
       this.showSelect = false
       this.sellPageStatus = this.historyStatus = true
       this.navArr = this.navOldArr
@@ -2153,7 +2129,7 @@ export default {
         })
       } else {
         this.$utils.getUserBindbox(this.getAccount, 0, 10000000).then(res => {
-          // console.log('用户有的总的nft的数量res: ', res);
+          console.log('用户有的总的nft的数量res: ', res);
           if (res.length > 0) {
             this.userNftAndBoxArr = res.concat(userBoxArr)
             localStorage.setItem('nftInfo', JSON.stringify(res))
@@ -2165,7 +2141,7 @@ export default {
         })
       }
     },
-    // 获取市场信息
+    // 获取市场信息(当前市场上边正在售卖中的nft跟box信息)
     getMarketInfo(sortObj){
       // console.log('直接给sdk传的参数sortObj: ', sortObj);
       return new Promise(resolve => {
@@ -2215,68 +2191,55 @@ export default {
         })
       })
     },
-    // 判断是否授权
-    isApproveFunPage(){
-      this.$utils.isApproveFun(this.getAccount,token().BUSD,contract().Market).then(res => {
-        // console.log('busd是否授权res: ', res);
-        if(res){
-          this.busdApprove = true
-          this.busdallLoading = false
-        }else{
-          this.busdApprove = false
-          this.busdallLoading = false
-        }
-      }).catch(() => {
-        this.busdApprove = false
-        this.busdallLoading = false
-      })
-      this.$utils.isApproveFun(this.getAccount,token().ST,contract().Market).then(res => {
-        // console.log('st是否授权res: ', res); 
-        if(res){
-          this.stApprove = true
-          this.stallLoading = false
-        }else{
-          this.stApprove = false
-          this.stallLoading = false
-        }
-      }).catch(() => {
-        this.stApprove = false
-        this.stallLoading = false
-      })
-    },
-    // 去授权
-    ApproveFun(data){
-      if(data == 'busd'){
-        if(this.busdApproveLoading)return
-        this.busdApproveLoading = true
-        this.$utils.goApproveFun(token().BUSD,contract().Market).then(res => {
-          if(res){
-            this.busdApprove = true
-            this.busdApproveLoading = false
-          }else{
-            this.busdApprove = false
-            this.busdApproveLoading = false
+    // 获取市场信息(获取买卖双方的成交信息)
+    getBothSidesInfo(sortObj){
+      return new Promise(resolve => {
+        marketInfo.getBuyInfos(
+          sortObj.first,
+          sortObj.skip,
+          sortObj.orderBy,
+          sortObj.orderDirection,
+          sortObj.buyer,
+          sortObj.seller,
+          sortObj.nft,
+          sortObj.token,
+          sortObj.price_gte,
+          sortObj.price_lte,
+          sortObj.stars,
+          sortObj.rarity,
+          sortObj.role,
+          sortObj.part,
+          sortObj.suit,
+          sortObj.boxType
+          ).then(res => {
+          console.log('获取买卖双方的成交信息: ', res);
+          if (res.data.buyInfos.length > 0) {
+            const arr = JSON.parse(JSON.stringify(res.data.buyInfos));
+            arr.forEach((element) => {
+              element.price = util.formatEther(element.price) //this.$utils.convertBigNumberToNormal(Number(element.price),0,18,true)
+              element.isnft = (element.nft).toLowerCase() == (token('production').SN).toLowerCase()?true:false
+              element.buyloading = false
+              if((element.token).toLowerCase() == (token().ST).toLowerCase()){
+                element.price_currency = 'ST'
+              }else if((element.token).toLowerCase() == (token().BUSD).toLowerCase()){
+                element.price_currency = 'BUSD'
+              }else{
+                element.price_currency = '0X'
+              }
+              if(element.isnft){
+                element.src = getSourceUrl([element.stars,element.power,element.role,element.part,element.suit]) + '.png'
+                element.videoSrc = getSourceUrl([element.stars,element.power,element.role,element.part,element.suit]) + '.mp4'
+              }else{
+                element.title = 'Mysterybox'
+                element.src = '//cdn.sealemlab.com/sealemlab_assets_test/images/mybox1.webp'
+              }
+            });
+            resolve({ status: 0, arr: arr, msg: "Success" });
+          } else {
+            resolve({ status: 1, msg: "No data" });
           }
-        }).catch(() => {
-          this.busdApprove = false
-          this.busdApproveLoading = false
         })
-      }else if(data == 'st'){
-        if(this.stApproveLoading)return
-        this.stApproveLoading = true
-        this.$utils.goApproveFun(token().ST,contract().Market).then(res => {
-          if(res){
-            this.stApprove = true
-            this.stApproveLoading = false
-          }else{
-            this.stApprove = false
-            this.stApproveLoading = false
-          }
-        }).catch(() => {
-          this.stApprove = false
-          this.stApproveLoading = false
-        })
-      }
+      })
     },
     // 加载更多
     loadMore() {
@@ -2286,7 +2249,7 @@ export default {
         this.encapsulationFun(false)
       }
     },
-    // 排序--筛选--封装函数
+    // 排序--筛选--封装函数(当前市场上边正在售卖中的nft跟box信息)
     encapsulationFun(istrue = true){
       // console.log("筛选")
       if(!this.sellPageStatus)return
@@ -2297,9 +2260,31 @@ export default {
       this.loadMoreStatus = true
       this.getMarketInfo(this.sortObj).then((res) => {
 
-        console.log('筛选以后的结果res: ', res);
+        console.log('正在售卖的----筛选以后的结果res: ', res);
         this.sortObj.skip += this.sortObj.first;
         istrue = false
+        if (res.status == 0) {
+          this.nftArr = this.nftArr.concat(res.arr)
+          this.loadMoreStatus = true
+          this.isOneLoading = true
+          this.busy = false
+        } else if (res.status == 1) {
+          this.loadMoreStatus = false
+          this.isOneLoading = false
+          this.busy = true
+        }
+      }).catch(() => {
+        this.nftArr = [];
+        this.isOneLoading = false
+        this.busy = true
+      });
+    },
+    // 排序--筛选--封装函数(市场上买卖双方的信息)
+    BothSidesEncapsulationFun(){
+      this.loadMoreStatus = true
+      this.getBothSidesInfo(this.BothsortObj).then((res) => {
+        console.log('市场上买卖双方的信息--筛选以后的结果res: ', res);
+        this.BothsortObj.skip += this.BothsortObj.first;
         if (res.status == 0) {
           this.nftArr = this.nftArr.concat(res.arr)
           this.loadMoreStatus = true
@@ -2326,14 +2311,78 @@ export default {
       obj.nft,
       obj.token).then(res => {
         // console.log('获取市场NFT统计信息res: ', res);
-
-        this.arr2[3].num = res.data.counters[0].transactions
-        this.arr2[2].num = res.data.counters[0].items
-        this.arr2[0].num = res.data.counters[0].volume / 1e18
-      }).catch(() => {
-        console.log('市场统计信息err: ');
+        if(res.data.counters.length > 0){
+          this.arr2[3].num = res.data.counters[0].transactions
+          this.arr2[2].num = res.data.counters[0].items
+          this.arr2[0].num = res.data.counters[0].volume / 1e18
+        }
+      }).catch(err => {
+        console.log('市场统计信息err: ',err);
       })
     }
+    // 判断是否授权
+    // isApproveFunPage(){
+    //   this.$utils.isApproveFun(this.getAccount,token().BUSD,contract().Market).then(res => {
+    //     // console.log('busd是否授权res: ', res);
+    //     if(res){
+    //       this.busdApprove = true
+    //       this.busdallLoading = false
+    //     }else{
+    //       this.busdApprove = false
+    //       this.busdallLoading = false
+    //     }
+    //   }).catch(() => {
+    //     this.busdApprove = false
+    //     this.busdallLoading = false
+    //   })
+    //   this.$utils.isApproveFun(this.getAccount,token().ST,contract().Market).then(res => {
+    //     // console.log('st是否授权res: ', res); 
+    //     if(res){
+    //       this.stApprove = true
+    //       this.stallLoading = false
+    //     }else{
+    //       this.stApprove = false
+    //       this.stallLoading = false
+    //     }
+    //   }).catch(() => {
+    //     this.stApprove = false
+    //     this.stallLoading = false
+    //   })
+    // },
+    // 去授权
+    // ApproveFun(data){
+    //   if(data == 'busd'){
+    //     if(this.busdApproveLoading)return
+    //     this.busdApproveLoading = true
+    //     this.$utils.goApproveFun(token().BUSD,contract().Market).then(res => {
+    //       if(res){
+    //         this.busdApprove = true
+    //         this.busdApproveLoading = false
+    //       }else{
+    //         this.busdApprove = false
+    //         this.busdApproveLoading = false
+    //       }
+    //     }).catch(() => {
+    //       this.busdApprove = false
+    //       this.busdApproveLoading = false
+    //     })
+    //   }else if(data == 'st'){
+    //     if(this.stApproveLoading)return
+    //     this.stApproveLoading = true
+    //     this.$utils.goApproveFun(token().ST,contract().Market).then(res => {
+    //       if(res){
+    //         this.stApprove = true
+    //         this.stApproveLoading = false
+    //       }else{
+    //         this.stApprove = false
+    //         this.stApproveLoading = false
+    //       }
+    //     }).catch(() => {
+    //       this.stApprove = false
+    //       this.stApproveLoading = false
+    //     })
+    //   }
+    // },
   },
   mounted(){
     this.encapsulationFun(false)
@@ -2372,10 +2421,56 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.pc_market_page {
+.pc_page {
   width: 100%;
   display: flex;
   flex-direction: column;
+  .bg_ {
+    width: 100%;
+    min-height: 393px;
+    background: url($bg_url + "marketbg.webp") no-repeat #000;
+    // background-size:100% 100%;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 5vw 60px;
+    .change_txt {
+      width: 100%;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 41px;
+      background: linear-gradient(180deg, #f7e9b9 0%, #f0ce75 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  .data_display {
+    width: 90vw;
+    margin: 63px auto 70px;
+    display: flex;
+    .onebox {
+      display: flex;
+      flex-direction: column;
+      margin-right: 50px;
+      span {
+        &:nth-child(1) {
+          font-weight: bold;
+          color: #ced3d9;
+          line-height: 29px;
+        }
+        &:nth-child(2) {
+          font-weight: 500;
+          color: #ced3d9;
+          line-height: 19px;
+        }
+      }
+    }
+    .back_img {
+      width: 55px;
+      cursor: pointer;
+    }
+  }
   .page {
     width: 90vw;
     margin: 0 auto;
@@ -2423,6 +2518,9 @@ export default {
               font-weight: bold;
               color: #ced3d9;
               line-height: 19px;
+            }
+            .active_history{
+              color: #edd083;
             }
           }
           .select_img {
@@ -2777,12 +2875,14 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      .imgcard {
-        height: 184px;
-      }
     }
     .box_out_img {
       width: 100%;
+      display: flex;
+      justify-content: center;
+      .imgcard {
+        height: 184px;
+      }
     }
     .huxing_bg_box {
       position: absolute;

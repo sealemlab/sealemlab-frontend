@@ -1,5 +1,27 @@
 <template>
   <div class="mobile_market_page">
+    <!-- 背景图 -->
+    <div class="bg_">
+      <div class="change_txt font35 mobile_font28" :class="isEnLang ? 'en_heavy' : ''">
+        <span v-if="sellPageStatus && historyStatus">Welcome to NFTs mark</span>
+        <span v-else-if="!sellPageStatus">Sell</span>
+        <span v-else-if="!historyStatus">History</span>
+      </div>
+    </div>
+    <!-- 数据总结 -->
+    <div class="data_display">
+      <div class="onebox" v-for="(item, index) in arr2" :key="index">
+        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-if="index == 0 || index == 1">$ {{
+          item.num | PriceConversion
+        }}</span>
+        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-else>{{
+          item.num
+        }}</span>
+        <span class="font16" :class="isEnLang ? 'en_medium' : ''">{{
+          item.title
+        }}</span>
+      </div>
+    </div>
     <div class="mobile_top">
       <!-- 筛选 -->
       <div class="filter_box">
@@ -120,6 +142,8 @@ export default {
   },
   data () {
     return {
+      sellPageStatus: true,// sell页面时 为假
+      historyStatus: true,// history页面时 为假
       SearchInputvalue:'',
       sortTXT: 'message.market.sortTXT',
       disablehover: false,
@@ -150,6 +174,13 @@ export default {
         suit: '',//套装
         boxType:'',//盲盒类型
       },
+      arr2: [
+        { num: 0, title: "Total volume" },
+        { num: 0, title: "Floor price" },
+        { num: 0, title: "Items" },
+        { num: 0, title: "Transactions" },
+        { num: 0, title: "Holders" },
+      ],
       showSelect:false,
       selectAll:false,//全选按钮
       showSelectStatus:false,// 点击sell 展示选择框
@@ -241,6 +272,48 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
+  .bg_ {
+    width: 100%;
+    min-height: 1.3rem;
+    background: url($bg_url + "marketbg.webp") no-repeat #000;
+    background-size:100% 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    .change_txt {
+      line-height: 0.4rem;
+    }
+  }
+  .data_display {
+    width: 100%;
+    margin: 0.25rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    .onebox {
+      width: 33%;
+      display: flex;
+      flex-direction: column;
+      margin-right: 0;
+      margin-bottom: 0.15rem;
+      span {
+        &:nth-child(1) {
+          font-weight: bold;
+          color: #ced3d9;
+          line-height: 29px;
+        }
+        &:nth-child(2) {
+          font-weight: 500;
+          color: #ced3d9;
+          line-height: 19px;
+        }
+      }
+    }
+    .back_img {
+      width: 0.3rem;
+      cursor: pointer;
+    }
+  }
   .mobile_top{
     width: 100%;
     display: flex;

@@ -77,9 +77,9 @@ export default {
         if(sessionStorage.getItem('sb_count')){
           clearInterval(this.timerll)
           this.list[0].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 0}).length
-          this.list[1].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 1}).length
-          this.list[2].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 2}).length
-          this.list[3].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 3}).length
+          // this.list[1].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 1}).length
+          // this.list[2].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 2}).length
+          // this.list[3].num = JSON.parse(this.getUserBoxInfo).filter(data => {return data.type == 3}).length
           this.list.forEach(item => {
             item.status = false
           })
