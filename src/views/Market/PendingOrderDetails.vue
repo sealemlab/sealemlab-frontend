@@ -3,8 +3,8 @@
     <img :src="`${$store.state.imgUrl}back.webp`" class="back_img" @click="closeOrder" />
     <div class="content">
       <div class="left_">
-        <p class="font32 p1" :class="isEnLang ? 'en_Bold' : ''">List item for sale</p>
-        <p class="font24 p2" :class="isEnLang ? 'en_Bold' : ''">Price</p>
+        <p class="font32 p1 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">List item for sale</p>
+        <p class="font24 p2 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">Price</p>
         <div class="box">
           <div class="type" :class="[disablehover ? 'clear_hover' : '']">
             {{selectCoin}}
@@ -46,14 +46,14 @@
             ></Input>
           </div>
         </div>
-        <p class="font24 p2" :class="isEnLang ? 'en_Bold' : ''">Fees</p>
+        <p class="font24 p2 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">Fees</p>
         <div class="box">
           <div class="input_" v-if="feeStatus">
             <BtnLoading :isloading="true"></BtnLoading>
           </div>
           <div class="input_" v-else>{{fee | MultiplyBySquare}} %</div>
         </div>
-        <p class="font24 p2" :class="isEnLang ? 'en_Bold' : ''">You will get</p>
+        <p class="font24 p2 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">You will get</p>
         <div class="box">
           <div class="input_">{{getValue | PriceConversion}}</div>
         </div>
@@ -66,137 +66,38 @@
         </div>
         <div v-else :class="isEnLang ? 'en_Bold' : ''">
           <div v-if="userselectarr.isnft && userselectarr.isbox">
-            <div class="btn btn_normal font16 mobile_font16" @click="sellfun" v-if="isApproveBox && isApproveNft">
+            <div class="btn btn_normal font16 mobile_font14" @click="sellfun" v-if="isApproveBox && isApproveNft">
               {{$t("message.market.sell_btn")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
             </div>
-            <div class="btn btn_normal font16 mobile_font16" @click="authorizationClick('box')" v-else-if="!isApproveBox">
+            <div class="btn btn_normal font16 mobile_font14" @click="authorizationClick('box')" v-else-if="!isApproveBox">
               BOX {{$t("message.approve")}}<BtnLoading :isloading="boxisloading"></BtnLoading>
             </div>
-            <div class="btn btn_normal font16 mobile_font16" @click="authorizationClick('nft')" v-else-if="!isApproveNft">
+            <div class="btn btn_normal font16 mobile_font14" @click="authorizationClick('nft')" v-else-if="!isApproveNft">
               NFT {{$t("message.approve")}}<BtnLoading :isloading="nftisloading"></BtnLoading>
             </div>
           </div>
           <div v-else-if="userselectarr.isnft">
-            <div class="btn btn_normal font16 mobile_font16" @click="sellfun" v-if="isApproveNft">
+            <div class="btn btn_normal font16 mobile_font14" @click="sellfun" v-if="isApproveNft">
               {{$t("message.market.sell_btn")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
             </div>
-            <div class="btn btn_normal font16 mobile_font16" @click="authorizationClick('nft')" v-else-if="!isApproveNft">
+            <div class="btn btn_normal font16 mobile_font14" @click="authorizationClick('nft')" v-else-if="!isApproveNft">
               NFT {{$t("message.approve")}}<BtnLoading :isloading="nftisloading"></BtnLoading>
             </div>
           </div>
           <div v-else-if="userselectarr.isbox">
-            <div class="btn btn_normal font16 mobile_font16" @click="sellfun" v-if="isApproveBox">
+            <div class="btn btn_normal font16 mobile_font14" @click="sellfun" v-if="isApproveBox">
               {{$t("message.market.sell_btn")}}<BtnLoading :isloading="buyLoading"></BtnLoading>
             </div>
-            <div class="btn btn_normal font16 mobile_font16" @click="authorizationClick('box')" v-else-if="!isApproveBox">
+            <div class="btn btn_normal font16 mobile_font14" @click="authorizationClick('box')" v-else-if="!isApproveBox">
               BOX {{$t("message.approve")}}<BtnLoading :isloading="boxisloading"></BtnLoading>
             </div>
           </div>
         </div>
       </div>
       <div class="right_">
-        <p class="p_positon font32" :class="isEnLang ? 'en_Bold' : ''">Preview</p>
+        <p class="p_positon font32 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">Preview</p>
         <div class="showbox">
           <BoxComponents :nftArr="orderArr" :isColumn="true"></BoxComponents>
-          <!-- <div
-            class="out_box_one"
-            v-for="(item, index) in userselectarr.arr"
-            :key="index"
-          >
-            <div class="onebox" v-if="item.isnft">
-              <div class="out_img"><img :src="item.src" class="imgcard" /></div>
-              <div class="huxing_bg_box">
-                <img
-                  :src="`${$store.state.imgUrl}huxing6.webp`"
-                  class="huxing_img"
-                />
-                <div class="huxing_content">
-                  <div class="start">
-                    <span class="span1 font24">{{ item.stars }}</span>
-                    <img :src="`${$store.state.imgUrl}start.webp`" />
-                  </div>
-                  <div class="people_type">
-                    <div class="leftimgbox" v-if="item.role == 1">
-                      <img :src="`${$store.state.imgUrl}type_jds.webp`" />
-                      <span class="font12">{{ $t("message.nft.txt9") }}</span>
-                    </div>
-                    <div class="leftimgbox" v-if="item.role == 2">
-                      <img :src="`${$store.state.imgUrl}type_cike.webp`" />
-                      <span class="font12">{{ $t("message.nft.txt11") }}</span>
-                    </div>
-                    <div class="leftimgbox" v-if="item.role == 3">
-                      <img :src="`${$store.state.imgUrl}type_wushi.webp`" />
-                      <span class="font12">{{ $t("message.nft.txt10") }}</span>
-                    </div>
-                    <div class="leftimgbox" v-if="item.role == 4">
-                      <img :src="`${$store.state.imgUrl}type_zs.webp`" />
-                      <span class="font12">{{ $t("message.nft.txt8") }}</span>
-                    </div>
-                    <div class="leftimgbox">
-                      <img
-                        :src="`${$store.state.imgUrl}power1.webp`"
-                        v-if="item.power <= 20"
-                      />
-                      <img
-                        :src="`${$store.state.imgUrl}power2.webp`"
-                        v-else-if="item.power <= 40 && item.power > 20"
-                      />
-                      <img
-                        :src="`${$store.state.imgUrl}power3.webp`"
-                        v-else-if="item.power <= 60 && item.power > 40"
-                      />
-                      <img
-                        :src="`${$store.state.imgUrl}power4.webp`"
-                        v-else-if="item.power <= 80 && item.power > 60"
-                      />
-                      <img
-                        :src="`${$store.state.imgUrl}power5.webp`"
-                        v-else-if="item.power <= 100 && item.power > 80"
-                      />
-                      <span class="font12">{{ item.power }}</span>
-                    </div>
-                  </div>
-                  <div class="people_type">
-                    <div class="left_content">
-                      <span class="font14 scale_box">
-                        {{
-                          $t(
-                            `message.nft.type${item.role}.suit${item.suit}.position${item.part}`
-                          )
-                        }}
-                      </span>
-                      <div class="box_3d">
-                        <span class="font12"># {{ item.nftId }}</span>
-                        <img
-                          :src="`${$store.state.imgUrl}new_3dimg.webp`"
-                          class="img_3d"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="onebox" v-else>
-              <div class="box_out_img">
-                <img :src="item.src" class="imgcard" />
-              </div>
-              <div class="huxing_bg_box">
-                <img
-                  :src="`${$store.state.imgUrl}huxing6.webp`"
-                  class="huxing_img"
-                />
-                <div class="box_id">
-                  <span class="font14" :class="isEnLang ? 'en_Bold' : ''"
-                    >{{item.title}}</span
-                  >
-                  <span class="font12" :class="isEnLang ? 'en_medium' : ''"
-                    >#{{item.nftId}}</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
@@ -506,8 +407,6 @@ export default {
 .content{
   position: relative;
   width: 80vw;
-  // max-height: 100%;
-  // overflow: auto;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -789,5 +688,185 @@ export default {
 .left_::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+@media screen and (max-width: 980px) {
+  .ordeDetails{
+    width: 100%;
+    min-height: 100vh;
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9;
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    .back_img{
+      position: fixed;
+      top: 0.2rem;
+      left: 5vw;
+      width: 0.3rem;
+      cursor: pointer;
+    }
+  }
+  .ordeDetails::-webkit-scrollbar {
+    width: 0;
+  }
+  .content{
+    position: relative;
+    width: 85vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0.6rem;
+    padding-bottom: 0.1rem;
+  }
+  .left_{
+    width:100%;
+    max-height: 100vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+    .p1{
+      font-weight: bold;
+      color: #CED3D9;
+      line-height: 0.28rem;
+    }
+    .p2{
+      font-weight: bold;
+      color: #CED3D9;
+      line-height: 0.22rem;
+      margin-top: 0.23rem;
+    }
+    .box{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.08rem;
+      .type{
+        position: relative;
+        width: 1.07rem;
+        height: 0.35rem;
+        background: #2C2B2B;
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39), inset 0px 3px 8px 0px rgba(17, 16, 16, 0.5), inset 0px -1px 3px 0px rgba(0, 0, 0, 0.5);
+        border-radius: 0.02rem;
+        border: 1px solid #373636;
+        line-height: 0.35rem;
+        padding: 0 0.08rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .left_content_hover {
+          position: absolute;
+          top: 0;
+          left: -1px;
+          z-index: 9;
+          width: 1.07rem;
+          display: none;
+          flex-direction: column;
+          justify-content: space-between;
+          background: #2C2B2B;
+          filter: blur(0px);
+          border: 1px solid #373636;
+          border-top: none;
+          border-radius: 0.02rem;
+          padding: 0 0.08rem 0.08rem;
+          margin-top: 0.3rem;
+          line-height:  0.35rem;
+          .span1 {
+            cursor: pointer;
+          }
+        }
+        &:hover {
+          box-shadow: none;
+          border-bottom: none;
+          border-radius:  0.02rem 0.02rem 0 0;
+          .left_content_hover {
+            display: flex;
+            border-radius: 0 0 0.02rem 0.02rem;
+          }
+        }
+      }
+      .input_num{
+        width: 1.99rem;
+        height: 0.35rem;
+        background: #2C2B2B;
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39), inset 0px 3px 8px 0px rgba(17, 16, 16, 0.5), inset 0px -1px 3px 0px rgba(0, 0, 0, 0.5);
+        border-radius: 0.02rem;
+        border: 1px solid #373636;
+        padding: 0 0.12rem;
+      }
+      .input_{
+        width: 100%;
+        height: 0.35rem;
+        background: #171718;
+        box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+        border-radius: 0.02rem;
+        border: 1px solid #373636;
+        text-align: center;
+        line-height: 0.35rem;
+      }
+    }
+    .tip_txt{
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      color: #8F8E8E;
+      line-height: 19px;
+      margin-top: 22px;
+      .ques_img{
+        width: 11px;
+        margin-right: 5px;
+      }
+    }
+  }
+  .btn{
+    width: 2rem;
+    min-height: 0.34rem;
+    background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.36);
+    backdrop-filter: blur(14px);
+    margin: 0.3rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .right_{
+    position: relative;
+    width: 100%;
+    max-height: 5rem;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+    padding-top: 0.45rem;
+    .p_positon{
+      position: absolute;
+      top: 0;
+      z-index: 9;
+      font-weight: bold;
+      color: #CED3D9;
+      line-height: 0.28rem;
+      width: fit-content;
+      height: 0.28rem;
+      background: rgba(0, 0, 0, 1);
+    }
+    .showbox{
+      width: 100%;
+      max-height: 5rem;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 25%;
+    }
+  }
 }
 </style>

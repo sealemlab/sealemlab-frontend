@@ -197,8 +197,6 @@ export default {
       flex-direction: column;
       align-items: center;
       padding: 0.2rem;
-      // background-image: url($bg_url + "proupbg.webp");
-      // background-size: 100% 100%;
       .propu_title_txt{
         font-weight: bold;
         color: #ECCF83;
@@ -219,9 +217,47 @@ export default {
         position: absolute;
         top: 10px;
         right: 10px;
-        width: 34px;
+        width: 0.25rem;
         cursor: pointer;
       }
+    }
+  }
+  .progress{
+    width: 100%;
+    margin-top: 0.2rem;
+    .bscscan{
+      cursor: pointer;
+      width: 100%;
+      padding-right: 0.2rem;
+      text-align: right;
+      font-weight: 400;
+      color: #969090;
+      line-height: 0.19rem;
+      margin-bottom: 0.15rem;
+      .link_img{
+        width: 0.12rem;
+        margin-left: 0.05rem;
+      }
+    }
+    .box{
+      width: 100%;
+      height: 0.12rem;
+      background: #000;
+      box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
+      border-radius: 0.13rem;
+      .load{
+        width:0;
+        height: 0.12rem;
+        background: linear-gradient(180deg, #F2D47B 0%, #F7E9B9 52%, #F0CE75 100%);
+        border-radius: 0.13rem;
+      }
+    }
+    .txt{
+      display: inline-block;
+      color: #F2D47B;
+      margin-top: 0.2rem;
+      width: 100%;
+      text-align: center;
     }
   }
 }

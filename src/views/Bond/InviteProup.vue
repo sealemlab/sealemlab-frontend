@@ -189,7 +189,7 @@ export default {
       position: absolute;
       top: 0.1rem;
       right: 0.1rem;
-      width: 0.28rem;
+      width: 0.25rem;
       cursor: pointer;
     }
   }

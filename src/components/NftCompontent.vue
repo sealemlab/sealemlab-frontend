@@ -180,13 +180,6 @@ export default {
     padding-bottom: 20px;
   }
 }
-.bottom_loading {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #CED3D9;
-}
 .box::-webkit-scrollbar {
   width: 0;
   height: 0;

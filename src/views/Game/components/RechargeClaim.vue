@@ -385,14 +385,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bottom_loading {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #CED3D9;
-  margin-top: 15px;
-}
 .gamebox {
   width: 100%;
   height: auto;

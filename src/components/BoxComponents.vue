@@ -1,5 +1,5 @@
 <template>
-  <div class="self_box" :class="{'self_box_center':selfBoxCentr,'column':isColumn}">
+  <div class="self_box" :class="{'self_box_center':selfBoxCentr,'self_box_between':selfBoxBetween,'column':isColumn}">
     <div
       class="out_box_one"
       :class="{'out_center':centr,'children_column':isColumn}"
@@ -167,7 +167,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { marketInfo,getSigner,token,getSourceUrl,market,sn,sb,contract,util } from 'sealemlab-sdk'
+import { getSigner,token,market,sn,sb,contract } from 'sealemlab-sdk'
 export default {
   props:{
     nftArr:{
@@ -185,6 +185,10 @@ export default {
       default:false
     },
     selfBoxCentr:{
+      type:Boolean,
+      default:false
+    },
+    selfBoxBetween:{
       type:Boolean,
       default:false
     },
@@ -365,10 +369,12 @@ export default {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 30px;
 }
 .self_box_center{
   justify-content: center;
+}
+.self_box_between{
+  justify-content: space-between;
 }
 .out_center{
   align-items: center;
@@ -554,6 +560,190 @@ export default {
     .add_btnn_loading{
       min-width:65px;
       padding:5px;
+    }
+  }
+}
+@media screen and (max-width: 980px) {
+  .self_box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .out_box_one {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.2rem;
+    .onebox {
+      position: relative;
+      cursor: pointer;
+      width: 100%;
+      max-width: 100%;
+      height: 2.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: url($bg_url + "nftbg6.webp") no-repeat;
+      background-size: contain;
+      .box_out_img {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .imgcard {
+          height: 1.38rem;
+        }
+      }
+      .huxing_bg_box {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        .huxing_img {
+          width: 100%;
+          min-height: 0.5rem;
+        }
+        .huxing_content {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 0.3rem 0.1rem 0.1rem;
+          .start {
+            position: absolute;
+            top: 0.3rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.05rem;
+            .span1 {
+              font-weight: 800;
+              color: #efb045;
+              line-height: 0.29rem;
+              margin-right: 0.05rem;
+            }
+            img {
+              width: 0.16rem;
+            }
+          }
+          .people_type {
+            margin-top: 0.1rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            img {
+              width: 0.16rem;
+            }
+            .leftimgbox {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+            .left_content {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              .scale_box {
+                white-space: nowrap;
+                zoom: 0.8;
+                font-weight: 800;
+                line-height: 0.14rem;
+              }
+              .box_3d {
+                margin-top: 0.05rem;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                span {
+                  font-weight: 800;
+                  line-height: 0.14rem;
+                  transform: scale(0.95);
+                  zoom: 0.9;
+                }
+                .img_3d {
+                  width: 0.2rem;
+                }
+              }
+            }
+          }
+        }
+        .box_id {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          padding: 0.6rem 0.13rem 0;
+          span {
+            &:nth-child(1) {
+              font-weight: bold;
+              color: #ced3d9;
+              line-height: 0.16rem;
+            }
+            &:nth-child(2) {
+              font-weight: 500;
+              color: #ced3d9;
+              line-height: 0.14rem;
+              margin-top: 0.08rem;
+            }
+          }
+        }
+      }
+      .select_border {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 0.16rem;
+        height: 0.16rem;
+        border-radius: 50%;
+        border: 1px solid #eccf83;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div {
+          width: 50%;
+          height: 50%;
+          background: #eccf83;
+          border-radius: 50%;
+        }
+      }
+    }
+    .bottom_box {
+      width: 100%;
+      max-width: 100%;
+      margin-top: 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background: url($bg_url + "boxs_border.webp") no-repeat;
+      background-size: 100% 100%;
+      padding: 0.09rem 0.08rem;
+      .left_price {
+        display: flex;
+        align-items: center;
+      }
+      .btn {
+        padding:0.05rem 0.07rem;
+        box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
+        border-radius: 0.04rem;
+        backdrop-filter: blur(14px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .add_btnn_loading{
+        min-width:0.6rem;
+        padding:0.05rem;
+      }
     }
   }
 }

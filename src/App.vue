@@ -290,6 +290,7 @@ export default {
       }
     },
     $route (to) {
+      window.scrollTo(0, 0);
       this.navArr.forEach((item) => {
         item.status = false;
       });

@@ -1,7 +1,22 @@
 <template>
   <div class="market_page">
-    <PcPage class="pc_content"></PcPage>
-    <MobilePage class="mobile_content"></MobilePage>
+    <PcPage class="pc_content" @openVideo="openVideo"></PcPage>
+    <MobilePage class="mobile_content" @openVideo="openVideo"></MobilePage>
+    <div class="video_proup" v-if="videoStatus">
+      <video
+        class="video_"
+        :src="videoSrc"
+        loop
+        autoplay
+        muted
+        controls
+      ></video>
+      <img
+        :src="`${$store.state.imgUrl}close.webp`"
+        class="close_img"
+        @click="videoStatus = false"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -10,6 +25,18 @@ import PcPage from "./PcPage.vue";
 export default {
   components: {
     MobilePage,PcPage
+  },
+  data(){
+    return{
+      videoStatus: '',
+      videoSrc:'',
+    }
+  },
+  methods:{
+    openVideo(data){
+      this.videoStatus = true
+      this.videoSrc = data
+    }
   }
 }
 </script>

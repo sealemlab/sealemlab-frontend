@@ -82,7 +82,6 @@ export default {
   computed: { ...mapGetters(["getProduction","getNoticeNum", "isEnLang", "getLogin","getUserCoin","getSubtringAccount", "getIstrue"]) },
   watch: {
     $route(to) {
-      window.scrollTo(0, 0);
       // 不是正式环境的话,展示
       if(this.getProduction){
         // || to.path == "/staking"
@@ -95,7 +94,9 @@ export default {
           return
         }
       }
-      this.navActive = this.callArray(to.path)
+      if(document.body.clientWidth > 980){
+        this.navActive = this.callArray(to.path)
+      }
     },
   },
   created() {

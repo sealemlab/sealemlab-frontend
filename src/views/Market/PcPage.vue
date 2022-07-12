@@ -44,8 +44,8 @@
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               p-id="57945"
-              :width="getIsMobile ? 16 : 32"
-              :height="getIsMobile ? 16 : 32"
+              width="32"
+              height="32"
             >
               <path
                 d="M671.631 408.599v588.449c0 14.892-13.109 26.952-29.285 26.952-16.175 0-29.285-12.061-29.285-26.952V403.949c0-0.864 0.189-1.683 0.274-2.527-0.852-7.057 1.453-14.386 7.247-20.078L886.709 120.14c-5.188-38.51-42.206-68.378-87.168-68.378v-0.352c-1.305 0.157-2.597 0.352-3.953 0.352H151.32c-1.676 0-3.289-0.197-4.884-0.435v0.435c-44.963 0-81.981 29.869-87.168 68.378l266.126 261.204c5.691 5.585 8.031 12.748 7.31 19.683 0.051 0.622 0.211 1.213 0.211 1.845v362.327c0 14.295-13.115 25.881-29.285 25.881-16.175 0-29.285-11.586-29.285-25.881V408.594L7.532 146.72c-0.435-0.427-0.732-0.917-1.133-1.362-0.641-0.718-1.275-1.431-1.83-2.207-0.503-0.713-0.921-1.446-1.344-2.189-0.429-0.753-0.852-1.501-1.195-2.295-0.354-0.821-0.618-1.65-0.875-2.492-0.24-0.776-0.48-1.542-0.635-2.346-0.183-0.933-0.258-1.868-0.32-2.811-0.04-0.544-0.189-1.062-0.189-1.615C0.011 57.938 65.57 0 146.436 0v0.435C148.032 0.197 149.644 0 151.32 0h644.268c1.356 0 2.648 0.195 3.953 0.351V0c80.865 0 146.419 57.938 146.419 129.403 0 0.553-0.144 1.071-0.184 1.617-0.068 0.943-0.137 1.878-0.32 2.811-0.16 0.804-0.4 1.57-0.635 2.346-0.258 0.841-0.521 1.67-0.875 2.492-0.349 0.794-0.772 1.542-1.201 2.295-0.418 0.743-0.835 1.476-1.344 2.189-0.556 0.776-1.185 1.488-1.831 2.207-0.395 0.444-0.691 0.935-1.126 1.362L671.631 408.599z m59.53 33.958c0 14.295 13.11 25.881 29.285 25.881h234.279c16.176 0 29.285-11.586 29.285-25.881s-13.109-25.88-29.285-25.88H760.447c-16.175 0-29.286 11.585-29.286 25.88z m29.28 291.586h234.279c16.176 0 29.285-11.585 29.285-25.88s-13.109-25.881-29.285-25.881H760.441c-16.175 0-29.285 11.586-29.285 25.881s13.11 25.88 29.285 25.88z m234.285 238.096H760.447c-16.175 0-29.285 11.585-29.285 25.88S744.272 1024 760.447 1024h234.279c16.176 0 29.285-11.586 29.285-25.881s-13.109-25.88-29.285-25.88z"
@@ -71,8 +71,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="2643"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M1278.7257 634l-56-364c-16-102-92-184-190-206C774.7257 6 506.7257 6 248.7257 64 148.7257 86 74.7257 168 58.7257 270L2.7257 634c-22 148 92 282 240 282 94 0 178-52 218-136l28-56h304l28 56c40 84 124 136 216 136h2c148 0 262-134 240-282z m-130 136c-28 32-68 50-112 50-54 0-104-30-130-82l-36-74c-12-22-34-36-58-36H468.7257c-24 0-48 14-58 36l-36 74c-26 52-76 82-132 82-42 0-82-18-110-50-28-34-42-78-34-122l54-362c10-64 56-114 118-128 244-56 496-56 740 0 62 14 108 64 118 128l54 362c6 44-6 88-34 122zM800.7257 436c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z m-304-80h-64v-64c0-26-22-48-48-48s-48 22-48 48v64h-64c-26 0-48 22-48 48s22 48 48 48h64v64c0 26 22 48 48 48s48-22 48-48v-64h64c26 0 48-22 48-48s-22-48-48-48z m432-112c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z"
@@ -88,8 +88,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="5506"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M592.659602 463.749679h415.180425a16.103071 16.103071 0 0 0 16.01772-18.094618A516.350959 516.350959 0 0 0 578.491175 0.146236 16.074621 16.074621 0 0 0 560.48191 16.163956v415.180425A32.263044 32.263044 0 0 0 592.659602 463.749679zM463.749679 431.344381V16.163956a16.074621 16.074621 0 0 0-18.236871-16.01772A516.350959 516.350959 0 0 0 0.146236 445.512808 16.074621 16.074621 0 0 0 16.163956 463.749679h415.180425A32.263044 32.263044 0 0 0 463.749679 431.344381zM431.344381 560.48191H16.163956a16.074621 16.074621 0 0 0-16.01772 18.094617 516.350959 516.350959 0 0 0 445.366572 445.28122 16.103071 16.103071 0 0 0 18.094617-16.01772V592.659602A32.263044 32.263044 0 0 0 431.344381 560.48191zM560.48191 592.659602v415.180425a16.103071 16.103071 0 0 0 18.094617 16.01772 516.350959 516.350959 0 0 0 445.28122-445.366572 16.103071 16.103071 0 0 0-16.01772-18.094617H592.659602A32.234593 32.234593 0 0 0 560.48191 592.659602z"
@@ -105,8 +105,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="10366"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M570.7 492.4h-97.8c-20.2 0-39.1-16.7-39.1-39.1 0-22.4 19.9-39.1 48.9-39.1h136.9v-39.1h-88v-68.4h-39.1v68.4h-19.6c-41.9 0-78.2 26.1-78.2 78.2s43 78.2 68.4 78.2h88c24.2 0 39.1 21.6 39.1 39.1s-19.9 39.1-39.1 39.1H404.4v39.1h88v68.4h39.1v-68.4h29.3c26 0 68.4-34.5 68.4-78.2s-28.6-78.2-58.5-78.2zM512 169.8C323 169.8 169.8 323 169.8 512S323 854.2 512 854.2 854.2 701 854.2 512 701 169.8 512 169.8z m0 645.3c-167.4 0-303.1-135.7-303.1-303.1S344.6 208.9 512 208.9 815.1 344.6 815.1 512 679.4 815.1 512 815.1zM512 72C269 72 72 269 72 512s197 440 440 440 440-197 440-440S755 72 512 72z m0 840.9c-221.4 0-400.9-179.5-400.9-400.9S290.6 111.1 512 111.1 912.9 290.6 912.9 512 733.4 912.9 512 912.9z"
@@ -123,8 +123,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="3350"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M85.333333 307.029333a42.666667 42.666667 0 0 1 21.333334-36.949333L170.666667 233.130667 426.666667 85.333333l64-36.949333a42.666667 42.666667 0 0 1 42.666666 0L597.333333 85.333333l255.957334 147.797334v-0.042667l64 36.949333a42.666667 42.666667 0 0 1 21.333333 36.949334V341.333333H938.666667v375.637334a42.666667 42.666667 0 0 1-21.333334 36.949333l-14.506666 8.362667-369.493334 213.333333a42.666667 42.666667 0 0 1-42.666666 0L426.666667 938.666667l-305.493334-176.384-14.506666-8.362667a42.666667 42.666667 0 0 1-21.333334-36.949333V307.029333z m85.333334 57.173334v328.106666l298.666666 172.458667v-328.149333L170.666667 364.202667z m682.666666 0l-298.666666 172.373333v328.192l298.666666-172.458667v-328.106666z m-341.333333-229.589334L227.84 298.666667 512 462.72 796.16 298.666667 512 134.613333z"
@@ -141,8 +141,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="38018"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M621.696 590.933333c105.130667 0 190.506667 84.181333 195.157333 189.354667l0.213334 9.045333V853.333333a49.066667 49.066667 0 0 1-97.834667 5.333334L718.933333 853.333333v-64c0-53.290667-40.192-96.512-90.581333-100.053333l-6.656-0.213333H402.346667c-51.242667 0-93.568 41.002667-97.024 93.397333l-0.213334 6.869333V853.333333a49.066667 49.066667 0 0 1-97.834666 5.333334L206.933333 853.333333v-64c0-106.325333 82.474667-193.450667 186.410667-198.186666l8.96-0.213334h219.392zM510.464 153.344l10.538667 0.256a210.858667 210.858667 0 1 1-21.76 0l11.221333-0.256z m0 102.4l-8.874667 0.341333a108.458667 108.458667 0 1 0 16.64-0.085333l-7.765333-0.256z"
@@ -159,8 +159,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="56077"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M812.898462 482.067692l92.947692-67.741538-23.630769-28.356923h-119.729231zM215.827692 482.067692l-92.947692-67.741538 25.206154-28.356923h118.153846z"
@@ -557,8 +557,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="51418"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M864 32a128 128 0 0 1 32.064 251.968v456.064a128 128 0 1 1-156.032 156.032H283.968a128 128 0 1 1-156.096-155.968V283.904a128 128 0 1 1 156.032-156.032h456.192A128 128 0 0 1 864 32zM168 800.512L160 800l-9.472 0.64-6.656 1.408-3.712 1.088-6.4 2.432a64 64 0 1 0 85.76 81.856l2.432-7.296 1.088-5.12c0.64-3.584 0.96-7.232 0.96-11.008l-0.64-9.472-1.408-6.656-2.368-7.296-3.584-7.552 2.432 4.864a64.192 64.192 0 0 0-35.008-33.472l-7.296-2.368-4.032-0.896-4.096-0.64z m704 0L864 800l-9.472 0.64-6.656 1.408-7.296 2.368-7.552 3.584 4.864-2.432a64.192 64.192 0 0 0-33.472 35.008l-1.536 4.48-0.832 2.816-1.088 5.12c-0.64 3.584-0.96 7.232-0.96 11.008l0.64 9.472 1.408 6.656 2.368 7.296 3.584 7.552-2.432-4.864a64 64 0 1 0 81.856-85.696l-7.296-2.368-4.032-0.896-4.096-0.64zM740.032 192H283.968A128.256 128.256 0 0 1 192 283.968v456.064A128.256 128.256 0 0 1 283.968 832h456.064A128.256 128.256 0 0 1 832 740.032V283.968a128.256 128.256 0 0 1-88.768-81.728l-3.136-10.176zM160 96a64 64 0 0 0-23.424 123.52l7.296 2.432 4.096 0.896 4.096 0.64 7.936 0.512 9.472-0.64 6.656-1.408 7.296-2.368 7.552-3.584-4.864 2.432c15.232-6.784 27.328-19.392 33.472-35.008l2.368-7.296 1.088-5.12c0.64-3.584 0.96-7.232 0.96-11.008l-0.64-9.472-1.408-6.656-0.768-2.816-1.6-4.48-1.152-2.752A64 64 0 0 0 160 96z m704 0a64 64 0 0 0-59.52 40.576l-1.6 4.48-0.832 2.816-1.088 5.12c-0.64 3.584-0.96 7.232-0.96 11.008l0.64 9.472 1.408 6.656 2.368 7.296 3.584 7.552-2.432-4.864c6.784 15.232 19.392 27.328 35.008 33.472l7.296 2.368 4.096 0.896 4.096 0.64 7.936 0.512 9.472-0.64 6.656-1.408 7.296-2.368 7.552-3.584-4.864 2.432A64 64 0 0 0 864 96z"
@@ -575,8 +575,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="12433"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M777.035294 668.611765s18.070588 138.541176 30.117647 240.941176c6.023529 48.188235-30.117647 72.282353-72.282353 54.211765-78.305882-36.141176-192.752941-96.376471-216.847059-108.42353-24.094118 12.047059-144.564706 72.282353-222.870588 108.42353-42.164706 18.070588-78.305882 0-72.282353-54.211765 12.047059-96.376471 30.117647-234.917647 30.117647-234.917647s-114.447059-126.494118-180.705882-204.8c-24.094118-30.117647-6.023529-66.258824 36.141176-78.305882 90.352941-18.070588 234.917647-42.164706 234.917647-42.164706s78.305882-144.564706 126.494118-234.917647c30.117647-54.211765 48.188235-48.188235 48.188235-48.188235 6.023529 0 24.094118 12.047059 36.141177 48.188235 48.188235 90.352941 126.494118 234.917647 126.494118 234.917647s138.541176 30.117647 234.917647 48.188235c42.164706 6.023529 60.235294 48.188235 36.141176 78.305883-60.235294 60.235294-174.682353 192.752941-174.682353 192.752941z"
@@ -593,8 +593,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="15785"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M171.569028 0H1194.726824v1023.157796H171.569028z"
@@ -625,8 +625,8 @@
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               p-id="2336"
-              :width="getIsMobile ? 16 : 16"
-              :height="getIsMobile ? 16 : 16"
+              width="16"
+              height="16"
             >
               <path
                 d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z"
@@ -767,8 +767,8 @@
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               p-id="57945"
-              :width="getIsMobile ? 16 : 32"
-              :height="getIsMobile ? 16 : 32"
+              width="32"
+              height="32"
             >
               <path
                 d="M671.631 408.599v588.449c0 14.892-13.109 26.952-29.285 26.952-16.175 0-29.285-12.061-29.285-26.952V403.949c0-0.864 0.189-1.683 0.274-2.527-0.852-7.057 1.453-14.386 7.247-20.078L886.709 120.14c-5.188-38.51-42.206-68.378-87.168-68.378v-0.352c-1.305 0.157-2.597 0.352-3.953 0.352H151.32c-1.676 0-3.289-0.197-4.884-0.435v0.435c-44.963 0-81.981 29.869-87.168 68.378l266.126 261.204c5.691 5.585 8.031 12.748 7.31 19.683 0.051 0.622 0.211 1.213 0.211 1.845v362.327c0 14.295-13.115 25.881-29.285 25.881-16.175 0-29.285-11.586-29.285-25.881V408.594L7.532 146.72c-0.435-0.427-0.732-0.917-1.133-1.362-0.641-0.718-1.275-1.431-1.83-2.207-0.503-0.713-0.921-1.446-1.344-2.189-0.429-0.753-0.852-1.501-1.195-2.295-0.354-0.821-0.618-1.65-0.875-2.492-0.24-0.776-0.48-1.542-0.635-2.346-0.183-0.933-0.258-1.868-0.32-2.811-0.04-0.544-0.189-1.062-0.189-1.615C0.011 57.938 65.57 0 146.436 0v0.435C148.032 0.197 149.644 0 151.32 0h644.268c1.356 0 2.648 0.195 3.953 0.351V0c80.865 0 146.419 57.938 146.419 129.403 0 0.553-0.144 1.071-0.184 1.617-0.068 0.943-0.137 1.878-0.32 2.811-0.16 0.804-0.4 1.57-0.635 2.346-0.258 0.841-0.521 1.67-0.875 2.492-0.349 0.794-0.772 1.542-1.201 2.295-0.418 0.743-0.835 1.476-1.344 2.189-0.556 0.776-1.185 1.488-1.831 2.207-0.395 0.444-0.691 0.935-1.126 1.362L671.631 408.599z m59.53 33.958c0 14.295 13.11 25.881 29.285 25.881h234.279c16.176 0 29.285-11.586 29.285-25.881s-13.109-25.88-29.285-25.88H760.447c-16.175 0-29.286 11.585-29.286 25.88z m29.28 291.586h234.279c16.176 0 29.285-11.585 29.285-25.88s-13.109-25.881-29.285-25.881H760.441c-16.175 0-29.285 11.586-29.285 25.881s13.11 25.88 29.285 25.88z m234.285 238.096H760.447c-16.175 0-29.285 11.585-29.285 25.88S744.272 1024 760.447 1024h234.279c16.176 0 29.285-11.586 29.285-25.881s-13.109-25.88-29.285-25.88z"
@@ -793,8 +793,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="2643"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                 >
                   <path
                     d="M1278.7257 634l-56-364c-16-102-92-184-190-206C774.7257 6 506.7257 6 248.7257 64 148.7257 86 74.7257 168 58.7257 270L2.7257 634c-22 148 92 282 240 282 94 0 178-52 218-136l28-56h304l28 56c40 84 124 136 216 136h2c148 0 262-134 240-282z m-130 136c-28 32-68 50-112 50-54 0-104-30-130-82l-36-74c-12-22-34-36-58-36H468.7257c-24 0-48 14-58 36l-36 74c-26 52-76 82-132 82-42 0-82-18-110-50-28-34-42-78-34-122l54-362c10-64 56-114 118-128 244-56 496-56 740 0 62 14 108 64 118 128l54 362c6 44-6 88-34 122zM800.7257 436c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z m-304-80h-64v-64c0-26-22-48-48-48s-48 22-48 48v64h-64c-26 0-48 22-48 48s22 48 48 48h64v64c0 26 22 48 48 48s48-22 48-48v-64h64c26 0 48-22 48-48s-22-48-48-48z m432-112c-36 0-64 30-64 64s28 64 64 64 64-28 64-64-28-64-64-64z"
@@ -809,8 +809,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="12065"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                   v-if="item.id == 2"
                 >
                   <path
@@ -826,8 +826,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="3606"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                   v-if="item.id == 3"
                 >
                   <path
@@ -848,8 +848,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="12241"
-                  :width="getIsMobile ? 16 : 16"
-                  :height="getIsMobile ? 16 : 16"
+                  width="16"
+                  height="16"
                   v-if="item.id == 4"
                 >
                   <path
@@ -870,8 +870,8 @@
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               p-id="2336"
-              :width="getIsMobile ? 16 : 16"
-              :height="getIsMobile ? 16 : 16"
+              width="16"
+              height="16"
               v-if="item.id == 1"
             >
               <path
@@ -912,8 +912,8 @@
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               p-id="17389"
-              :width="getIsMobile ? 16 : 16"
-              :height="getIsMobile ? 16 : 16"
+              width="16"
+              height="16"
             >
               <path
                 d="M953.474215 908.234504l-152.576516-163.241391c61.92508-74.48211 95.81186-167.36973 95.81186-265.073744 0-229.294809-186.63531-415.930119-416.102133-415.930119-229.294809 0-415.930119 186.63531-415.930119 415.930119s186.63531 415.930119 415.930119 415.930119c60.032925 0 118.00168-12.55703 172.186125-37.327062 16.169326-7.396607 23.221905-26.318159 15.825298-42.315471-7.396607-16.169326-26.318159-23.221905-42.315471-15.825298-45.927768 20.813707-94.951789 31.478582-145.695952 31.478582-194.031917 0-351.94087-157.908953-351.94087-351.94087 0-194.031917 157.908953-351.94087 351.94087-351.94087 194.031917 0 351.94087 157.908953 351.94087 351.94087 0 91.339493-34.918864 177.86259-98.048043 243.743995-12.213002 12.729044-11.868974 33.026709 0.860071 45.239711 1.032085 0.860071 2.236183 1.204099 3.268268 2.064169 0.860071 1.204099 1.376113 2.752226 2.408198 3.956325l165.477574 177.00252c6.192508 6.70855 14.793214 10.148833 23.393919 10.148833 7.912649 0 15.653284-2.92424 21.845792-8.600706C964.827146 941.433227 965.515202 921.135562 953.474215 908.234504z"
@@ -943,8 +943,8 @@
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               p-id="2336"
-              :width="getIsMobile ? 16 : 16"
-              :height="getIsMobile ? 16 : 16"
+              width="16"
+              height="16"
             >
               <path
                 d="M454.188 785.022c-145.192-150.177-290.378-300.353-435.422-450.526-59.842-61.836 37.327-154.021 97.313-91.899 129.23 133.647 258.318 267.296 387.548 400.868 133.646-134.287 267.436-268.574 401.083-402.934 60.84-61.123 158.011 31.060 97.244 91.971-150.105 150.89-300.279 301.703-450.454 452.521-24.933 24.934-72.666 25.575-97.311 0z"
@@ -1017,8 +1017,8 @@
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             p-id="16586"
-            :width="getIsMobile ? 16 : 16"
-            :height="getIsMobile ? 16 : 16"
+            width="16"
+            height="16"
           >
             <path
               d="M960 416V192l-73.056 73.056a447.712 447.712 0 0 0-373.6-201.088C265.92 63.968 65.312 264.544 65.312 512S265.92 960.032 513.344 960.032a448.064 448.064 0 0 0 415.232-279.488 38.368 38.368 0 1 0-71.136-28.896 371.36 371.36 0 0 1-344.096 231.584C308.32 883.232 142.112 717.024 142.112 512S308.32 140.768 513.344 140.768c132.448 0 251.936 70.08 318.016 179.84L736 416h224z"
@@ -1045,8 +1045,8 @@
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               p-id="18184"
-              :width="getIsMobile ? 16 : 16"
-              :height="getIsMobile ? 16 : 16"
+              width="16"
+              height="16"
             >
               <path
                 d="M576 512l277.333333 277.333333-64 64-277.333333-277.333333L234.666667 853.333333 170.666667 789.333333l277.333333-277.333333L170.666667 234.666667 234.666667 170.666667l277.333333 277.333333L789.333333 170.666667 853.333333 234.666667 576 512z"
@@ -1111,21 +1111,6 @@
         </div>
       </div>
     </div>
-    <div class="video_proup" v-if="videoStatus">
-      <video
-        class="video_"
-        :src="videoSrc"
-        loop
-        autoplay
-        muted
-        controls
-      ></video>
-      <img
-        :src="`${$store.state.imgUrl}close.webp`"
-        class="close_img"
-        @click="videoStatus = false"
-      />
-    </div>
     <OrderDetails
       :userselectarr="NftandBoxarr"
       :orderStatus="orderStatus"
@@ -1137,7 +1122,7 @@
 import BoxComponents from "@/components/BoxComponents.vue"
 import OrderDetails from "./PendingOrderDetails.vue";
 import { mapGetters } from "vuex";
-import { marketInfo,getSigner,token,getSourceUrl,market,sn,sb,contract,util } from 'sealemlab-sdk'
+import { marketInfo,token,getSourceUrl,sn,util } from 'sealemlab-sdk'
 export default {
   components: {
     OrderDetails,BoxComponents
@@ -1157,14 +1142,13 @@ export default {
       stApproveLoading:false,// st授权loading
       busdApprove:false,//busd是否授权
       stApprove:false,//st是否授权
-      priceCoin:'ST',
+      priceCoin:'BUSD',
       NftandBoxarr: { isnft: false, isbox: false, arr: [] },// 选择以后的盲盒或者nft数据
       orderStatus: false,// sell弹窗详情页面状态
       selectAll: false,//全选
       showSelect: false,//展示选择框
       sellPageStatus: true,// sell页面时 为假
       historyStatus: true,// history页面时 为假
-      videoStatus: '',
       nftArr: [],
       sortTXT: 'message.market.sortTXT',
       disablehover: false,
@@ -1214,7 +1198,7 @@ export default {
         {
           id: 3,
           title: 'Price',
-          showStatus: false,
+          showStatus: true,
           arr: [
             {
               title: 'ST',
@@ -1481,14 +1465,13 @@ export default {
         if (newValue == 0) {
           this.loadMoreStatus = true
           this.integrationBoxAnsNft() // 获取用户的nft跟盒子
-          // this.isApproveFunPage() // 是否授权
         } else if (newValue > 0) {
           this.loadMoreStatus = true
           localStorage.removeItem('nftInfo')
           this.nftArr = []
           this.$utils.antiShakeFun(() => {
             this.integrationBoxAnsNft()
-            // this.isApproveFunPage()
+            this.encapsulationFun(false)
           }, 2000)()
         }
       },
@@ -1497,50 +1480,6 @@ export default {
     },
   },
   methods: {
-    // 用户购买nft或者盒子
-    userBuyFun(item){
-      // console.log('item: ', item);
-      if(item.isnft){
-        sn().ownerOf(item.nftId).then(res => {
-          // console.log('res: ', res);
-          if(res != contract().Market){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
-          }else{
-            // console.log("买盒子")
-            if(item.buyloading)return
-            item.buyloading = true
-            this.sdkBuyFun(item)
-          }
-        })
-      }else{
-        // console.log("买盒子")
-        sb().ownerOf(item.nftId).then(res => {
-          // console.log('res: ', res);
-          if(res != contract().Market){
-            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
-          }else{
-            if(item.buyloading)return
-            item.buyloading = true
-            this.sdkBuyFun(item)
-          }
-        })
-      }
-    },
-    // sdk方法买盒子
-    sdkBuyFun(item){
-      market().connect(getSigner()).buy([item.nft],[item.nftId],localStorage.getItem('Invitee')).then(async res1 => {
-        // console.log('用户购买nft或者盒子res: ', res1);
-        const etReceipt = await res1.wait();
-        if(etReceipt.status == 1){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
-          item.buyloading = false
-        }else{
-          item.buyloading = false
-        }
-      }).catch(() => {
-        item.buyloading = false
-      })
-    },
     //去挂单按钮
     goSellFun () {
       this.cancleStatus = false
@@ -1587,6 +1526,7 @@ export default {
           this.historyID = 2
           this.sortObj.nft = ''
           this.sortObj.token = ''
+          this.BothsortObj.skip = 0
           this.sortObj.seller = this.getAccount
           this.encapsulationFun()
           break;
@@ -1597,6 +1537,7 @@ export default {
           this.nftArr = []
           this.BothsortObj.seller = this.getAccount
           this.BothsortObj.buyer = ''
+          this.BothsortObj.skip = 0
           this.BothSidesEncapsulationFun()
           break;
         case 4:
@@ -1605,6 +1546,7 @@ export default {
           this.showCancle = false
           this.nftArr = []
           this.BothsortObj.seller = ''
+          this.BothsortObj.skip = 0
           this.BothsortObj.buyer = this.getAccount
           this.BothSidesEncapsulationFun()
           break;
@@ -1633,7 +1575,7 @@ export default {
             this.navArr[1].arr[1].disable = false
 
             this.deleteItem('box')
-            this.navArr.push({id: 4,title: 'Mystery Box',showStatus: false,arr: [{ title: 'Common mystery box',status:true }]},)
+            this.navArr.push({id: 4,title: 'Mystery Box',showStatus: true,arr: [{ title: 'Common mystery box',status:true }]},)
             
             if(!this.sellPageStatus){
               this.clearStstus()
@@ -2000,8 +1942,7 @@ export default {
         item.selectStatus = !item.selectStatus
       } else {
         if (item.isnft) {
-          this.videoStatus = true
-          this.videoSrc = item.videoSrc
+          this.$emit('openVideo',item.videoSrc)
         }
       }
     },
@@ -2013,6 +1954,7 @@ export default {
       this.clearBtn()
     },
     inputAppply(){
+      if(!this.MinInputvalue || !this.MaxInputvalue)return
       this.selectArr.forEach((item,i) => {
         if(item.priceStatus){
           this.selectArr.splice(i,1)
@@ -2023,8 +1965,8 @@ export default {
       obj.title = this.priceCoin + ' Min: ' + this.MinInputvalue + ' to ' + 'Max: ' + this.MaxInputvalue
       this.selectArr.unshift(obj)
 
-      this.sortObj.price_gte = this.MinInputvalue
-      this.sortObj.price_lte = this.MaxInputvalue
+      this.sortObj.price_gte = Number(this.MinInputvalue)
+      this.sortObj.price_lte = Number(this.MaxInputvalue)
       this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
       this.encapsulationFun()
     },
@@ -2246,7 +2188,13 @@ export default {
       this.busy = true;
       if(this.loadMoreStatus && this.isOneLoading) {
         // console.log("loadmore加载更多")
-        this.encapsulationFun(false)
+        if(this.sellPageStatus && this.historyStatus){
+          this.encapsulationFun(false)
+        }else if(!this.historyStatus){
+          this.BothSidesEncapsulationFun()
+        }
+        //sellPageStatus //sell页面时 为假
+        //historyStatus // history页面时 为假
       }
     },
     // 排序--筛选--封装函数(当前市场上边正在售卖中的nft跟box信息)
@@ -2320,69 +2268,6 @@ export default {
         console.log('市场统计信息err: ',err);
       })
     }
-    // 判断是否授权
-    // isApproveFunPage(){
-    //   this.$utils.isApproveFun(this.getAccount,token().BUSD,contract().Market).then(res => {
-    //     // console.log('busd是否授权res: ', res);
-    //     if(res){
-    //       this.busdApprove = true
-    //       this.busdallLoading = false
-    //     }else{
-    //       this.busdApprove = false
-    //       this.busdallLoading = false
-    //     }
-    //   }).catch(() => {
-    //     this.busdApprove = false
-    //     this.busdallLoading = false
-    //   })
-    //   this.$utils.isApproveFun(this.getAccount,token().ST,contract().Market).then(res => {
-    //     // console.log('st是否授权res: ', res); 
-    //     if(res){
-    //       this.stApprove = true
-    //       this.stallLoading = false
-    //     }else{
-    //       this.stApprove = false
-    //       this.stallLoading = false
-    //     }
-    //   }).catch(() => {
-    //     this.stApprove = false
-    //     this.stallLoading = false
-    //   })
-    // },
-    // 去授权
-    // ApproveFun(data){
-    //   if(data == 'busd'){
-    //     if(this.busdApproveLoading)return
-    //     this.busdApproveLoading = true
-    //     this.$utils.goApproveFun(token().BUSD,contract().Market).then(res => {
-    //       if(res){
-    //         this.busdApprove = true
-    //         this.busdApproveLoading = false
-    //       }else{
-    //         this.busdApprove = false
-    //         this.busdApproveLoading = false
-    //       }
-    //     }).catch(() => {
-    //       this.busdApprove = false
-    //       this.busdApproveLoading = false
-    //     })
-    //   }else if(data == 'st'){
-    //     if(this.stApproveLoading)return
-    //     this.stApproveLoading = true
-    //     this.$utils.goApproveFun(token().ST,contract().Market).then(res => {
-    //       if(res){
-    //         this.stApprove = true
-    //         this.stApproveLoading = false
-    //       }else{
-    //         this.stApprove = false
-    //         this.stApproveLoading = false
-    //       }
-    //     }).catch(() => {
-    //       this.stApprove = false
-    //       this.stApproveLoading = false
-    //     })
-    //   }
-    // },
   },
   mounted(){
     this.encapsulationFun(false)
@@ -2840,13 +2725,6 @@ export default {
 .box::-webkit-scrollbar {
   width: 0;
   height: 0;
-}
-.bottom_loading {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #CED3D9;
 }
 .page_show_content {
   width: 100%;

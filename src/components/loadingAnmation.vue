@@ -58,7 +58,7 @@ export default {
 }
 @media screen and (max-width: 980px) {
   .loading_page {
-    min-height: 0.5rem;
+    min-height: 1rem;
   }
 }
 </style>

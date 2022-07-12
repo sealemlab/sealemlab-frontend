@@ -420,7 +420,7 @@ export default {
       }
     }
     .close_img {
-      width: 0.35rem;
+      width: 0.25rem;
     }
   }
 }

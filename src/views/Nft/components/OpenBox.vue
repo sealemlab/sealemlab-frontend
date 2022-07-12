@@ -12,13 +12,6 @@
       </div>
       <!-- 页面展示数组 -->
       <div class="cardarr_class">
-        <!-- <div class="onebox" v-for="(item,index) in pageshowarr" :key="index" @click="cardClick(item)">
-          <img :src="`${$store.state.imgUrl}mybox1.webp`" class="card_picture" />
-          <span class="boxID"># {{item.nftId}}</span>
-          <div class="box_select">
-            <span class="selected" v-if="item.status"></span>
-          </div>
-        </div> -->
         <BoxComponents :nftArr="pageshowarr" @nftFun="cardClick"></BoxComponents>
       </div>
     </div>
@@ -355,6 +348,9 @@ export default {
     color: #000000;
   }
 }
+.cardarr_class::-webkit-scrollbar{
+  width: 0;
+}
 @media screen and (max-width: 980px) {
   .open_box {
     z-index: 100;
@@ -368,7 +364,6 @@ export default {
       align-items: center;
       .propu_title_txt{
         width: 100%;
-        // text-align: center;
         font-weight: 600;
         color: #CED3D9;
         line-height: 0.23rem;
@@ -404,7 +399,6 @@ export default {
       .cardarr_class{
         width: 90vw;
         margin: 0 auto;
-        // max-height: calc(100%-2rem);
         overflow: auto;
         display: flex;
         align-items: center;
@@ -461,12 +455,12 @@ export default {
     .open_btn{
       cursor: pointer;
       position: fixed;
-      bottom: 20px;
+      bottom: 0.2rem;
       left: 50%;
       z-index: 8;
       transform: translateX(-50%);
-      width: 330px;
-      height: 54px;
+      width: 60%;
+      height: 0.4rem;
       background: linear-gradient(180deg, #F7E9B9 0%, #F0CE75 100%);
       border-radius: 4px;
       display: flex;

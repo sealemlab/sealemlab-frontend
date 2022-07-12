@@ -322,7 +322,7 @@ export default {
       position: absolute;
       top: 0.3rem;
       right: 0.2rem;
-      width: 0.36rem;
+      width: 0.25rem;
       object-fit: contain;
     }
     .boxarr {

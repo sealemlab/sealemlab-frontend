@@ -257,7 +257,13 @@ img {
 .cn_lang {
   font-family: "PingFangTC-Semibold" !important;
 }
-
+.bottom_loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #CED3D9;
+}
 @media screen and (min-width: 981px) {
   // 大标题字号
   .font45 {
@@ -332,7 +338,7 @@ img {
       position: absolute;
       top: 0.2rem;
       right: 0.2rem;
-      width: 0.28rem;
+      width: 0.25rem;
       cursor: pointer;
     }
   }
