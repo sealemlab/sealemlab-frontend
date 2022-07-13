@@ -83,17 +83,17 @@ export default {
   watch: {
     $route(to) {
       // 不是正式环境的话,展示
-      if(this.getProduction){
-        // || to.path == "/staking"
-        if (to.path == "/market") {
-          this.navActive = -1
-          if (!this.getNoticeNum) {
-            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-            this.$store.commit("setNoticeNum", true);
-          }
-          return
-        }
-      }
+      // if(this.getProduction){
+      //   // || to.path == "/staking"
+      //   if (to.path == "/market") {
+      //     this.navActive = -1
+      //     if (!this.getNoticeNum) {
+      //       this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+      //       this.$store.commit("setNoticeNum", true);
+      //     }
+      //     return
+      //   }
+      // }
       if(document.body.clientWidth > 980){
         this.navActive = this.callArray(to.path)
       }
@@ -125,23 +125,22 @@ export default {
       this.$store.commit("setnewinfo", JSON.stringify({}));
     },
     toRoute(item) {
-      if(this.getProduction){
-        // || item.link == "/staking"
-        if(item.link == '/market'){
-          if (!this.getNoticeNum) {
-            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-            this.$store.commit("setNoticeNum", true);
-          }
-          return
-        }
+      // if(this.getProduction){
+      //   if(item.link == '/market'){
+      //     if (!this.getNoticeNum) {
+      //       this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+      //       this.$store.commit("setNoticeNum", true);
+      //     }
+      //     return
+      //   }
+      //   this.$router.push(item.link)
+      //   this.routeArr.push(item)
+      //   localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
+      // }else{
         this.$router.push(item.link)
         this.routeArr.push(item)
         localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
-      }else{
-        this.$router.push(item.link)
-        this.routeArr.push(item)
-        localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
-      }
+      // }
     },
     goHome(){
       this.$router.push('/home');

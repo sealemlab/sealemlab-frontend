@@ -298,16 +298,16 @@ export default {
         item.status = false;
       });
 
-      if(this.getProduction){
-        // || to.path == "/staking"
-        if (to.path == "/market") {
-          if (!this.getNoticeNum) {
-            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-            this.$store.commit("setNoticeNum", true);
-          }
-          return
-        }
-      }
+      // if(this.getProduction){
+      //   // || to.path == "/staking"
+      //   if (to.path == "/market") {
+      //     if (!this.getNoticeNum) {
+      //       this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+      //       this.$store.commit("setNoticeNum", true);
+      //     }
+      //     return
+      //   }
+      // }
 
       if (to.path == "/home") {
         this.navArr[0].status = true
@@ -384,15 +384,16 @@ export default {
       this.isShowMore = false;
       switch (index) {
         case 0:
-          if(!this.getProduction){
-            this.$router.push("/market");
-          }else{
-            if (!this.getNoticeNum) {
-              this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-              this.$store.commit("setNoticeNum", true);
-            }
-          }
-          break;
+          // if(!this.getProduction){
+          //   this.$router.push("/market");
+          // }else{
+          //   if (!this.getNoticeNum) {
+          //     this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+          //     this.$store.commit("setNoticeNum", true);
+          //   }
+          // }
+          // break;
+          this.$router.push("/market");
         case 1:
           // if(!this.getProduction){
           //   this.$router.push("/staking");
