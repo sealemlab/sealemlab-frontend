@@ -127,7 +127,7 @@ export default {
         .catch(err => {
           console.log('提现申请err: ', err);
           this.doingLoading = false;
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':res.msg}));
+          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':err.msg}));
         });
     },
   }

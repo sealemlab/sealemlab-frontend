@@ -795,7 +795,7 @@ export default {
         Object.assign(obj,{Speed:util.formatEther(res)})
       }).catch(() => {
         count++
-        Object.assign(obj,{Speed:util.formatEther(res)})
+        Object.assign(obj,{Speed:0})
       })
       // Private(私募轮)
       st().balanceOf('0x6Da48f41319fd8023e7886F55AB15DaE927F49b4').then(res => {
@@ -803,7 +803,7 @@ export default {
         Object.assign(obj,{Private:util.formatEther(res)})
       }).catch(() => {
         count++
-        Object.assign(obj,{Private:util.formatEther(res)})
+        Object.assign(obj,{Private:0})
       })
       // Team（团队）
       st().balanceOf('0xB830656B5A9de339086e175E3C570C0Dd7A6Ed30').then(res => {
@@ -811,7 +811,7 @@ export default {
         Object.assign(obj,{Team:util.formatEther(res)})
       }).catch(() => {
         count++
-        Object.assign(obj,{Team:util.formatEther(res)})
+        Object.assign(obj,{Team:0})
       })
       //Market（市场） 
       st().balanceOf('0x4eC43757Bd35EFAD892799dE846Dcf15B1fdEf9e').then(res => {
@@ -819,7 +819,7 @@ export default {
         Object.assign(obj,{Market:util.formatEther(res)})
       }).catch(() => {
         count++
-        Object.assign(obj,{Market:util.formatEther(res)})
+        Object.assign(obj,{Market:0})
       })
       // CEX（交易所）
       st().balanceOf('0x3dAd3dD5686EbDcF9f0773D28ff4267bB0a2aAD5').then(res => {
@@ -827,7 +827,7 @@ export default {
         Object.assign(obj,{CEX:util.formatEther(res)})
       }).catch(() => {
         count++
-        Object.assign(obj,{CEX:util.formatEther(res)})
+        Object.assign(obj,{CEX:0})
       })
       // Bond（债券）
       st().balanceOf('0x09627963fEB32DDe5c122A47726f80Ad067F019F').then(res => {
@@ -835,7 +835,7 @@ export default {
         Object.assign(obj,{Bond:util.formatEther(res)})
       }).catch(() => {
         count++
-        Object.assign(obj,{Bond:util.formatEther(res)})
+        Object.assign(obj,{Bond:0})
       })
       this.getuserbalanceTimer = setInterval(() => {
         if(count == 7){
