@@ -60,7 +60,7 @@ export default {
 @media screen and (max-width: 980px) {
   .market_page {
     width: 100%;
-    padding: 1rem 5vw 0.2rem;
+    padding: 0.7rem 5vw 0.2rem;
   }
   .pc_content{
     display: none;

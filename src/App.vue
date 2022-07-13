@@ -384,25 +384,17 @@ export default {
       this.isShowMore = false;
       switch (index) {
         case 0:
-          // if(!this.getProduction){
-          //   this.$router.push("/market");
-          // }else{
-          //   if (!this.getNoticeNum) {
-          //     this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-          //     this.$store.commit("setNoticeNum", true);
-          //   }
-          // }
-          // break;
-          this.$router.push("/market");
+          if(!this.getProduction){
+            this.$router.push("/market");
+          }else{
+            if (!this.getNoticeNum) {
+              this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+              this.$store.commit("setNoticeNum", true);
+            }
+          }
+          // this.$router.push("/market");
+          break;
         case 1:
-          // if(!this.getProduction){
-          //   this.$router.push("/staking");
-          // }else{
-          //   if (!this.getNoticeNum) {
-          //     this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-          //     this.$store.commit("setNoticeNum", true);
-          //   }
-          // }
           this.$router.push("/staking");
           break;
         case 2:

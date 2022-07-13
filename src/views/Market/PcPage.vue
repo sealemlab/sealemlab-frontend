@@ -1186,12 +1186,14 @@ export default {
             {
               title: 'Mystery Box',
               status: false,
-              disable:false
+              disable:false,
+              content:'box'
             },
             {
               title: 'NFT',
               status: true,
-              disable:true
+              disable:true,
+              content:'nft'
             }
           ]
         },
@@ -1755,8 +1757,42 @@ export default {
       obj.title = item1.title
       obj.id = item.id
       obj.index = index
-      obj.selectItem = true
+      obj.filter = item1.content
       this.selectArr.unshift(obj)
+      console.log('this.selectArr: ', this.selectArr);
+    },
+    // 关闭 当前的选择数据
+    closeSelect (item, index) {
+      this.navArr.forEach(ele => {
+        if (ele.id == item.id) {
+          ele.arr[item.index].status = false
+        }
+      })
+      // if(item.id != 4 && item.id != 2){
+      //   this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
+      // }
+      // if(item.id == 4){
+      //   this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
+      // }
+      switch(item.id){
+        case 1:
+          console.log("id为1")
+          break;
+      }
+      if (item.id == 2) {
+        this.navArr.forEach((a, i) => {
+          if (a.id == 4) {
+            this.navArr.splice(i, 1)
+          }
+          if (a.id == 5) {
+            this.navArr.splice(i, 5)
+          }
+        })
+        if(!this.sellPageStatus){
+          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
+        }
+      }
+      this.selectArr.splice(index, 1)
     },
     // 删除nft/box 所对应的子选项
     deleteItem(type){
@@ -1807,36 +1843,6 @@ export default {
       if(type == 'search'){
         this.SearchInputvalue = data
       }
-    },
-    closeSelect (item, index) {
-      // console.log('item, index: ', item, index);
-      if (item.selectItem) {
-        this.navArr.forEach(ele => {
-          if (ele.id == item.id) {
-            ele.arr[item.index].status = false
-          }
-        })
-      }
-      // if(item.id != 4 && item.id != 2){
-      //   this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-      // }
-      // if(item.id == 4){
-      //   this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
-      // }
-      if (item.id == 2) {
-        this.navArr.forEach((a, i) => {
-          if (a.id == 4) {
-            this.navArr.splice(i, 1)
-          }
-          if (a.id == 5) {
-            this.navArr.splice(i, 5)
-          }
-        })
-        if(!this.sellPageStatus){
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-        }
-      }
-      this.selectArr.splice(index, 1)
     },
     clearBtn () {
       this.selectArr = []
@@ -1986,18 +1992,6 @@ export default {
         item.showSelect = false
         item.selectStatus = false
       })
-    },
-    enterClick(){
-      // console.log('enter事件')
-      this.selectArr.forEach((item,i) => {
-        if(item.searchStatus){
-          this.selectArr.splice(i,1)
-        }
-      })
-      let obj = {}
-      obj.searchStatus = true
-      obj.title = this.SearchInputvalue
-      this.selectArr.unshift(obj)
     },
     // 返回市场页面
     backClick () {
@@ -2267,6 +2261,18 @@ export default {
         })
       }
     }
+    // enterClick(){
+    //   // console.log('enter事件')
+    //   this.selectArr.forEach((item,i) => {
+    //     if(item.searchStatus){
+    //       this.selectArr.splice(i,1)
+    //     }
+    //   })
+    //   let obj = {}
+    //   obj.searchStatus = true
+    //   obj.title = this.SearchInputvalue
+    //   this.selectArr.unshift(obj)
+    // },
   },
   mounted(){
     this.encapsulationFun(false)

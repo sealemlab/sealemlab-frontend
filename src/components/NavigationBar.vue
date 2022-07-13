@@ -125,22 +125,22 @@ export default {
       this.$store.commit("setnewinfo", JSON.stringify({}));
     },
     toRoute(item) {
-      // if(this.getProduction){
-      //   if(item.link == '/market'){
-      //     if (!this.getNoticeNum) {
-      //       this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-      //       this.$store.commit("setNoticeNum", true);
-      //     }
-      //     return
-      //   }
-      //   this.$router.push(item.link)
-      //   this.routeArr.push(item)
-      //   localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
-      // }else{
+      if(this.getProduction){
+        if(item.link == '/market'){
+          if (!this.getNoticeNum) {
+            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
+            this.$store.commit("setNoticeNum", true);
+          }
+          return
+        }
         this.$router.push(item.link)
         this.routeArr.push(item)
         localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
-      // }
+      }else{
+        this.$router.push(item.link)
+        this.routeArr.push(item)
+        localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
+      }
     },
     goHome(){
       this.$router.push('/home');
