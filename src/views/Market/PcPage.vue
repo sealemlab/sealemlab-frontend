@@ -1319,8 +1319,8 @@ export default {
         token:(token().BUSD).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
-        stars:'',
-        rarity: '',
+        stars:'',// 星级
+        rarity: '',// 稀有度
         role: '',//职业
         part: '',//部位
         suit: '',//套装
@@ -1570,7 +1570,7 @@ export default {
           item1.status = true
           return
         case 2:
-          console.log("id为2")
+          console.log("选择box----id为2")
           if(index == 0){
             this.getSNandSBHolders('box')
             item1.status = true
@@ -1585,8 +1585,27 @@ export default {
               this.clearStstus()
               this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
             }else{
-              this.sortObj.nft = (token().SB).toLowerCase()
-              this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
+              
+              console.log("重新获取box的数据")
+              this.sortObj = {
+                first: 8,
+                skip: 0,
+                orderBy: "sellTime",
+                orderDirection: "desc",
+                seller: '',
+                nft:(token().SB).toLowerCase(),
+                token:(token()[this.priceCoin]).toLowerCase(),
+                price_gte:'',
+                price_lte:'',
+                stars:'',
+                rarity: '',
+                role: '',
+                part: '',
+                suit: '',
+                boxType:'',
+              }// 市场上正在售卖的盲盒跟nft的信息
+              // this.sortObj.nft = (token().SB).toLowerCase()
+              // this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
               this.encapsulationFun()
 
               this.dataInfo.nft = (token().SB).toLowerCase()
@@ -1712,33 +1731,48 @@ export default {
           return
         case 5://英雄
           console.log("id为5")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'role',value:item1.content}))
-          this.sortObj.role = item1.content
-          this.encapsulationFun()
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'role',value:item1.content}))
+          }else{
+            this.sortObj.role = item1.content
+            this.encapsulationFun()
+          }
           break;
         case 6:// 套装
           console.log("id为6")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'suit',value:item1.content}))
-          this.sortObj.suit = item1.content
-          this.encapsulationFun()
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'suit',value:item1.content}))
+          }else{
+            this.sortObj.suit = item1.content
+            this.encapsulationFun()
+          }
           break;
         case 7:// 部位
           console.log("id为7")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'part',value:item1.content}))
-          this.sortObj.part = item1.content
-          this.encapsulationFun()
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'part',value:item1.content}))
+          }else{
+            this.sortObj.part = item1.content
+            this.encapsulationFun()
+          }
           break;
         case 8://星级
           console.log("id为8")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'stars',value:item1.content}))
-          this.sortObj.stars = item1.content
-          this.encapsulationFun()
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'stars',value:item1.content}))
+          }else{
+            this.sortObj.stars = item1.content
+            this.encapsulationFun()
+          }
           break;
         case 9:// 稀有度
           console.log("id为9")
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'power',value:item1.content}))
-          this.sortObj.rarity = item1.content
-          this.encapsulationFun()
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'power',value:item1.content}))
+          }else{
+            this.sortObj.rarity = item1.content
+            this.encapsulationFun()
+          }
           break;
         default:
           break;
@@ -1761,36 +1795,182 @@ export default {
       this.selectArr.unshift(obj)
       console.log('this.selectArr: ', this.selectArr);
     },
-    // 关闭 当前的选择数据
+    // 清除所有选择的内容
+    clearBtn () {
+      this.MinInputvalue = this.MaxInputvalue = ''
+      this.selectArr = []
+      this.navArr = this.navOldArr
+      if(!this.sellPageStatus){
+        this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
+      }else{
+        this.sortObj = {
+          first: 8,
+          skip: 0,
+          orderBy: "sellTime",
+          orderDirection: "desc",
+          seller: '',
+          nft:(token().SN).toLowerCase(),
+          token:(token().BUSD).toLowerCase(),
+          price_gte:'',
+          price_lte:'',
+          stars:'',
+          rarity: '',
+          role: '',
+          part: '',
+          suit: '',
+          boxType:'',
+        }
+        this.encapsulationFun()
+      }
+    },
+    // 关闭 单个当前的选择数据
     closeSelect (item, index) {
+      console.log('关闭 当前的选择数据item, index: ', item, index);
       this.navArr.forEach(ele => {
-        if (ele.id == item.id) {
+        if (ele.id == item.id && ele.id != 3) {
           ele.arr[item.index].status = false
         }
       })
-      // if(item.id != 4 && item.id != 2){
-      //   this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-      // }
-      // if(item.id == 4){
-      //   this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
-      // }
       switch(item.id){
-        case 1:
-          console.log("id为1")
+        case 2:
+          console.log("id为2--type")
+          if(index == 0){
+            this.navArr.push(
+              {
+                id: 5,
+                title: 'Character',
+                showStatus: false,
+                arr: [
+                  { title: 'Gladiator', status: false,content:1 },
+                  { title: 'Assassin', status: false,content:2 },
+                  { title: 'Wizard', status: false,content:3 },
+                  { title: 'Fighter', status: false, content:4 }
+                ]
+              },
+              {
+                id: 6,
+                title: 'Suit',
+                showStatus: false,
+                arr: [
+                  { title: 'Sacred light', status: false,content:1 },
+                  { title: 'Ancient mysteries', status: false,content:2 },
+                  { title: 'Iron', status: false,content:3 },
+                  { title: 'Conquerors silence', status: false,content:4 }
+                ]
+              },
+              {
+                id: 7,
+                title: 'Part',
+                showStatus: false,
+                arr: [
+                  { title: 'Weapon', status: false,content:1},
+                  { title: 'Helm', status: false,content:2},
+                  { title: 'Plate', status: false,content:3},
+                  { title: 'Gauntlet', status: false,content:4},
+                  { title: 'Boots', status: false,content:5},
+                  { title: 'Belt', status: false,content:6},
+                  { title: 'Necklace', status: false,content:7},
+                  { title: 'Ring', status: false,content:8},
+                ]
+              },
+              {
+                id: 8,
+                title: 'Stars',
+                showStatus: false,
+                arr: [
+                  { title: '4', status: false,content:4 },
+                  { title: '5', status: false,content:5 },
+                  { title: '6', status: false,content:6 },
+                  { title: '7', status: false,content:7},
+                  { title: '8', status: false,content:8 },
+                ]
+              },
+              {
+                id: 9,
+                title: 'Rarity',
+                showStatus: false,
+                arr: [
+                  { title: 'Normal', status: false,content:1 },
+                  { title: 'Medium', status: false,content:2 },
+                  { title: 'Rare', status: false,content:3 },
+                  { title: 'Epic', status: false,content:4 },
+                  { title: 'Legend', status: false,content:5 }
+                ]
+              },
+            )
+            this.deleteItem('nft')
+            this.navArr[1].arr[1].status = true
+            this.navArr[1].arr[1].disable = true
+            this.navArr[1].arr[0].status = false
+            this.navArr[1].arr[0].disable = false
+            if(!this.sellPageStatus){
+              this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
+            }else{
+              this.sortObj.nft = (token().SN).toLowerCase()
+              this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
+              this.encapsulationFun()
+            }
+          }else{
+            return
+          }
           break;
-      }
-      if (item.id == 2) {
-        this.navArr.forEach((a, i) => {
-          if (a.id == 4) {
-            this.navArr.splice(i, 1)
+        case 3:
+          console.log("id为3--price")
+          this.MinInputvalue = this.MaxInputvalue = ''
+          this.sortObj.price_gte = ''
+          this.sortObj.price_lte = ''
+          this.encapsulationFun()
+          break;
+        case 4:
+          console.log("id为4--mystery box---暂时不需要")
+          break;
+        case 5:
+          console.log("id为5--职业---Character")
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'role',value:item.filter}))
+          }else{
+            this.sortObj.role = ''
+            this.encapsulationFun()
           }
-          if (a.id == 5) {
-            this.navArr.splice(i, 5)
+          break;
+        case 6:
+          console.log("id为6--suit")
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'suit',value:item.filter}))
+          }else{
+            this.sortObj.suit = ''
+            this.encapsulationFun()
           }
-        })
-        if(!this.sellPageStatus){
-          this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-        }
+          break;
+        case 7:
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'part',value:item.filter}))
+          }else{
+            this.sortObj.part = ''
+            this.encapsulationFun()
+          }
+          console.log("id为7--part")
+          break;
+        case 8:
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'stars',value:item.filter}))
+          }else{
+            this.sortObj.stars = ''
+            this.encapsulationFun()
+          }
+          console.log("id为8---stars")
+          break;
+        case 9:
+          if(!this.sellPageStatus){
+            this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'rarity',value:item.filter}))
+          }else{
+            this.sortObj.rarity = ''
+            this.encapsulationFun()
+          }
+          console.log("id为9--parity")
+          break;
+        default:
+          break;
       }
       this.selectArr.splice(index, 1)
     },
@@ -1823,12 +2003,16 @@ export default {
           let need_NftArr = this.userNftAndBoxArr.filter(item => {
             return item.isnft
           })
+          console.log("用户自己的nft")
           if(!filterInfo.children){
             this.nftArr = need_NftArr
+            
+            console.log("用户自己的nft--children不存在")
           }else{
             this.nftArr = need_NftArr.filter(item => {
               return item[filterInfo.children] == filterInfo.value
             })
+            console.log("用户自己的nft--children存在")
           }
         }
       }
@@ -1840,16 +2024,9 @@ export default {
       if(type == 'max'){
         this.MaxInputvalue = data
       }
-      if(type == 'search'){
-        this.SearchInputvalue = data
-      }
-    },
-    clearBtn () {
-      this.selectArr = []
-      this.navArr = this.navOldArr
-      if(!this.sellPageStatus){
-        this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-      }
+      // if(type == 'search'){
+      //   this.SearchInputvalue = data
+      // }
     },
     sortClik (data) {
       this.disablehover = true;
@@ -1943,6 +2120,7 @@ export default {
       this.clearBtn()
     },
     inputAppply(){
+      if(!this.sellPageStatus)return
       if(!this.MinInputvalue || !this.MaxInputvalue)return
       this.selectArr.forEach((item,i) => {
         if(item.priceStatus){
@@ -1951,12 +2129,12 @@ export default {
       })
       let obj = {}
       obj.priceStatus = true
+      obj.id = 3
       obj.title = this.priceCoin + ' Min: ' + this.MinInputvalue + ' to ' + 'Max: ' + this.MaxInputvalue
       this.selectArr.unshift(obj)
-
-      this.sortObj.price_gte = Number(this.MinInputvalue)
-      this.sortObj.price_lte = Number(this.MaxInputvalue)
-      this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
+      this.sortObj.price_gte = (util.parseUnits(this.MinInputvalue)).toString()
+      this.sortObj.price_lte = (util.parseUnits(this.MaxInputvalue)).toString()
+      this.sortObj.skip = 0
       this.encapsulationFun()
     },
     // 全选按钮
@@ -1992,6 +2170,7 @@ export default {
         item.showSelect = false
         item.selectStatus = false
       })
+      
     },
     // 返回市场页面
     backClick () {
