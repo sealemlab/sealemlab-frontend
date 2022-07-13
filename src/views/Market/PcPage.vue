@@ -904,7 +904,7 @@
       <div class="right_content">
         <!-- 搜索框  sell/history 按钮  全选  -->
         <div class="top_search" v-if="historyStatus">
-          <div class="seach font16" :class="isEnLang ? 'en_medium' : ''">
+          <!-- <div class="seach font16" :class="isEnLang ? 'en_medium' : ''">
             <svg
               t="1655113375644"
               class="icon"
@@ -931,7 +931,7 @@
                 @enterClick="enterClick"
               ></Input>
             </div>
-          </div>
+          </div> -->
           <div class="sort_box" :class="[disablehover ? 'clear_hover' : '']">
             <span class="font16" :class="isEnLang ? 'en_medium' : ''">
               {{ $t(sortTXT) }}</span
@@ -974,7 +974,7 @@
           </div>
           <!-- history 按钮 -->
           <div
-            class="sell_btn btn_black font16"
+            class="sell_btn history_btn font16"
             v-if="sellPageStatus"
             @click="historyClick"
           >
@@ -1006,7 +1006,7 @@
           </div>
         </div>
         <!-- 搜索结果 -->
-        <div class="search_items font16"
+        <!-- <div class="search_items font16"
           :class="isEnLang ? 'en_medium' : ''"
           v-if="historyStatus"
         >
@@ -1027,7 +1027,7 @@
             ></path>
           </svg>
           <span>0 items</span>
-        </div>
+        </div> -->
         <!-- 选择项 盲盒还是nft  套装 部位 职业 等等 -->
         <div class="select_item" v-if="selectArr.length > 0 ">
           <div
@@ -1122,7 +1122,7 @@
 import BoxComponents from "@/components/BoxComponents.vue"
 import OrderDetails from "./PendingOrderDetails.vue";
 import { mapGetters } from "vuex";
-import { marketInfo,token,getSourceUrl,sn,util } from 'sealemlab-sdk'
+import { marketInfo,token,getSourceUrl,sn,util,snInfo,sbInfo} from 'sealemlab-sdk'
 export default {
   components: {
     OrderDetails,BoxComponents
@@ -1314,7 +1314,7 @@ export default {
         orderDirection: "desc", // 降序or升序，填desc或asc
         seller: '',// 卖家地址
         nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().ST).toLowerCase(), // 代币地址
+        token:(token().BUSD).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
         stars:'',
@@ -1456,7 +1456,8 @@ export default {
             { title: 'Epic', status: false,content:4 },
             { title: 'Legend', status: false,content:5 }
           ]
-      }]
+      }],
+      loadingHistory:false,// 进入history页面第一次获取数据以后 变量为真
     }
   },
   watch: {
@@ -1569,6 +1570,7 @@ export default {
         case 2:
           console.log("id为2")
           if(index == 0){
+            this.getSNandSBHolders('box')
             item1.status = true
             if(item1.disable)return
             item1.disable = true
@@ -1601,6 +1603,7 @@ export default {
               })
             }
           }else if(index == 1){
+            this.getSNandSBHolders('nft')
             item1.status = true
             this.navArr[1].arr[0].disable = false
             if(item1.disable)return
@@ -1837,28 +1840,9 @@ export default {
     },
     clearBtn () {
       this.selectArr = []
-      this.navArr = JSON.parse(JSON.stringify(this.navOldArr))
+      this.navArr = this.navOldArr
       if(!this.sellPageStatus){
         this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-      }else{
-        this.sortObj = {
-          first: 8, //查询结果数量，比如填10，就展示前10个结果
-          skip: 0, //跳过结果数量，用于分页，比如填50，相当于从第6页开始
-          orderBy: "sellTime", // 排序字段，填字段名，所有字段见下文查询结果
-          orderDirection: "desc", // 降序or升序，填desc或asc
-          seller: '',// 卖家地址
-          nft:(token().SN).toLowerCase(),//nft地址
-          token:(token().ST).toLowerCase(), // 代币地址
-          price_gte:'',//最小价格
-          price_lte:'',//最大价格
-          stars:'',
-          rarity: '',
-          role: '',//职业
-          part: '',//部位
-          suit: '',//套装
-          boxType:'',//盲盒类型
-        }
-        this.encapsulationFun()
       }
     },
     sortClik (data) {
@@ -1950,7 +1934,6 @@ export default {
     sellPageClick () {
       this.cancleStatus = false //不显示历史记录的取消按钮
       this.sellPageStatus = false
-      this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
       this.clearBtn()
     },
     inputAppply(){
@@ -2018,11 +2001,11 @@ export default {
     },
     // 返回市场页面
     backClick () {
+      this.loadingHistory = false
       this.clearBtn()
       this.historyID = 2
       this.showSelect = false
       this.sellPageStatus = this.historyStatus = true
-      this.navArr = this.navOldArr
       this.sortObj = {
         first: 8, //查询结果数量，比如填10，就展示前10个结果
         skip: 0, //跳过结果数量，用于分页，比如填50，相当于从第6页开始
@@ -2030,7 +2013,7 @@ export default {
         orderDirection: "desc", // 降序or升序，填desc或asc
         seller: '',// 卖家地址
         nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().ST).toLowerCase(), // 代币地址
+        token:(token().BUSD).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
         stars:'',
@@ -2190,7 +2173,7 @@ export default {
         // console.log("loadmore加载更多")
         if(this.sellPageStatus && this.historyStatus){
           this.encapsulationFun(false)
-        }else if(!this.historyStatus){
+        }else if(!this.historyStatus &&  this.loadingHistory){
           this.BothSidesEncapsulationFun()
         }
         //sellPageStatus //sell页面时 为假
@@ -2243,6 +2226,7 @@ export default {
           this.isOneLoading = false
           this.busy = true
         }
+        this.loadingHistory = true
       }).catch(() => {
         this.nftArr = [];
         this.isOneLoading = false
@@ -2267,11 +2251,26 @@ export default {
       }).catch(err => {
         console.log('市场统计信息err: ',err);
       })
+    },
+    // holder
+    getSNandSBHolders(type){
+      if(type == 'nft'){
+        // 装备持有者
+        snInfo.getSnCounts(1,0,'owners','desc').then(res => {
+          console.log('装备持有者res: ', res);
+          this.arr2[4].num = res.data.snCounts[0].owners
+        })
+      }else if(type == 'box'){
+        sbInfo.getSbCounts(1,0,'owners','desc').then(res => {
+          console.log('盒子持有者res: ', res);
+          this.arr2[4].num = res.data.sbCounts[0].owners
+        })
+      }
     }
   },
   mounted(){
     this.encapsulationFun(false)
-
+    this.getSNandSBHolders('nft')
     // 地板价
     this.getMarketInfo({
         first: 8, //查询结果数量，比如填10，就展示前10个结果
@@ -2280,7 +2279,7 @@ export default {
         orderDirection: "asc", // 降序or升序，填desc或asc
         seller: '',// 卖家地址
         nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().ST).toLowerCase(), // 代币地址
+        token:(token().BUSD).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
         stars:'',
@@ -2500,7 +2499,7 @@ export default {
                   border: 1px solid #373636;
                   border-top: none;
                   border-radius: 4px;
-                  padding: 0 5px 5px;
+                  padding: 0 7px 5px;
                   margin-top: 24px;
                   .span1 {
                     cursor: pointer;
@@ -2557,25 +2556,26 @@ export default {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        .seach {
-          width: 35%;
-          height: 40px;
-          background: #2c2b2b;
-          box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
-            inset 0px 3px 8px 0px rgba(17, 16, 16, 0.5),
-            inset 0px -1px 3px 0px rgba(0, 0, 0, 0.5);
-          border-radius: 20px;
-          border: 1px solid #373636;
-          padding-left: 13px;
-          font-weight: 500;
-          color: #8f8e8e;
-          display: flex;
-          align-items: center;
-          .inputbox {
-            margin-left: 5px;
-          }
-        }
+        margin-bottom:31px;
+        // justify-content: space-between;
+        // .seach {
+        //   width: 35%;
+        //   height: 40px;
+        //   background: #2c2b2b;
+        //   box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
+        //     inset 0px 3px 8px 0px rgba(17, 16, 16, 0.5),
+        //     inset 0px -1px 3px 0px rgba(0, 0, 0, 0.5);
+        //   border-radius: 20px;
+        //   border: 1px solid #373636;
+        //   padding-left: 13px;
+        //   font-weight: 500;
+        //   color: #8f8e8e;
+        //   display: flex;
+        //   align-items: center;
+        //   .inputbox {
+        //     margin-left: 5px;
+        //   }
+        // }
         .sort_box {
           position: relative;
           width: 30%;
@@ -2630,18 +2630,23 @@ export default {
           cursor: pointer;
           min-width: 130px;
           width: 15%;
-          height: 48px;
+          height: 40px;
           box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
           border-radius: 4px;
           backdrop-filter: blur(14px);
           text-align: center;
-          line-height: 48px;
+          line-height: 40px;
           font-weight: bold;
+          margin-left: 10%;
+        }
+        .history_btn{
+          border: 1px solid #918256;
         }
         .sell_content {
           display: flex;
           align-items: center;
           cursor: pointer;
+          margin-left: 10%;
           .radious {
             width: 16px;
             height: 16px;
@@ -2663,24 +2668,23 @@ export default {
           }
         }
       }
-      .search_items {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        font-weight: 500;
-        color: #ced3d9;
-        margin: 34px 0 31px;
-        cursor: pointer;
-        span {
-          margin-left: 5px;
-        }
-      }
+      // .search_items {
+      //   width: 100%;
+      //   display: flex;
+      //   align-items: center;
+      //   font-weight: 500;
+      //   color: #ced3d9;
+      //   cursor: pointer;
+      //   span {
+      //     margin-left: 5px;
+      //   }
+      // }
       .select_item {
         width: 100%;
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        margin-bottom: 16px;
+        margin-bottom:16px;
         .oneitem {
           cursor: pointer;
           min-width: 15%;
@@ -2718,7 +2722,7 @@ export default {
 }
 .box{
   width: 100%;
-  max-height: 630px;
+  max-height: 730px;
   overflow: auto;
   padding-bottom: 20px;
 }

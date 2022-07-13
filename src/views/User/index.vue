@@ -390,7 +390,7 @@ export default {
   .user_center_page{
     min-height: 2rem;
     margin-top: 0;
-    padding-top: 0.8rem;
+    padding-top: 0.6rem;
     .user_info{
       position: relative;
       width: 100%;

@@ -1408,7 +1408,7 @@ export default {
 @media screen and (max-width: 980px) {
   .bond_page {
     margin-top: 0;
-    padding-top: 0.8rem;
+    padding-top: 0.6rem;
     width: 100%;
     height: auto;
   }

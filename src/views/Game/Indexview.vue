@@ -111,13 +111,14 @@ export default {
 @media screen and (max-width: 980px) {
   .page {
     width: 100vw;
+    padding-top: 0.6rem;
     min-height: calc(100vh - 2rem);
   }
   .menu {
     width: 100%;
     position: fixed;
     left: 0;
-    top: 90px;
+    top: 0.6rem;
     padding: 0 5vw;
     ul {
       width: 100%;

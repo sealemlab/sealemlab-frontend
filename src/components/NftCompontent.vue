@@ -1,7 +1,7 @@
 <template>
   <div class="nft_arr_page">
     <div class="box" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
-      <BoxComponents :nftArr="nftArr" @nftFun="nftFun"></BoxComponents>
+      <BoxComponents :selfBoxBetween="getIsMobile?true:false" :nftArr="nftArr" @nftFun="nftFun"></BoxComponents>
       <div class="bottom_loading font16" v-if="nftArr.length > 9">
         <span v-if="loadMoreStatus">Loading...</span>
         <span v-else-if="!loadMoreStatus">End</span>
@@ -26,7 +26,7 @@ import { mapGetters } from "vuex";
 import { sn } from "sealemlab-sdk";
 export default {
   computed: {
-    ...mapGetters(["getAccount","getIstrue","getAccountStatus","isEnLang"])
+    ...mapGetters(["getIsMobile","getAccount","getIstrue","getAccountStatus","isEnLang"])
   },
   data(){
     return{

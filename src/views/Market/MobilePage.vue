@@ -7,17 +7,22 @@
         <span v-else-if="!sellPageStatus">Sell</span>
         <span v-else-if="!historyStatus">History</span>
       </div>
+      <img
+        :src="`${$store.state.imgUrl}back.webp`"
+        class="back_img"
+        @click="backClick"
+      />
     </div>
     <!-- 数据总结 -->
-    <div class="data_display" v-if="historyStatus">
+    <div class="data_display" v-if="historyStatus && sellPageStatus">
       <div class="onebox" v-for="(item, index) in arr2" :key="index">
-        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-if="index == 0 || index == 1">$ {{
+        <span class="mobile_font16" :class="isEnLang ? 'en_Bold' : ''" v-if="index == 0 || index == 1">$ {{
           item.num | PriceConversion
         }}</span>
-        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-else>{{
+        <span class="mobile_font16" :class="isEnLang ? 'en_Bold' : ''" v-else>{{
           item.num
         }}</span>
-        <span class="font16" :class="isEnLang ? 'en_medium' : ''">{{
+        <span :class="isEnLang ? 'en_medium' : ''">{{
           item.title
         }}</span>
       </div>
@@ -45,7 +50,7 @@
         <span class="mobile_font14" :class="isEnLang ? 'en_Bold' : ''">Filter</span>
       </div>
       <!-- 排序 -->
-      <div class="sort_box" :class="[disablehover ? 'clear_hover' : '']"  v-if="historyStatus">
+      <div class="sort_box" :class="[disablehover ? 'clear_hover' : '']" v-if="historyStatus">
         <span class="mobile_font14" :class="isEnLang ? 'en_medium' : ''">{{ $t(sortTXT) }}</span>
         <svg
           t="1654321191240"
@@ -75,12 +80,12 @@
         </div>
       </div>
       <!-- sell 按钮 -->
-      <div v-if="historyStatus" class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="SellClick">Sell</div>
-      <div v-if="!historyStatus" class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="backHistory">Back</div>
+      <!-- <div v-if="historyStatus" class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="SellClick">Sell</div>
+      <div v-if="!historyStatus" class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="backHistory">Back</div> -->
     </div>
     <!-- 搜索 history按钮 -->
-    <div class="mobile_bottom" v-if="historyStatus">
-      <div class="seach mobile_font14" :class="isEnLang ? 'en_medium' : ''">
+    <div class="mobile_bottom" v-if="historyStatus && sellPageStatus">
+      <!-- <div class="seach mobile_font14" :class="isEnLang ? 'en_medium' : ''">
         <svg
           t="1655113375644"
           class="icon"
@@ -106,12 +111,13 @@
             @input="InputClick('search',$event)"
           ></Input>
         </div>
-      </div>
+      </div> -->
+      <div v-if="historyStatus" class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="SellClick">Sell</div>
       <!-- history 按钮 -->
-      <div class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="historyClick">History</div>
+      <div class="sell_btn history_btn mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="historyClick">History</div>
     </div>
     <!-- 选择框 -->
-    <div class="mobile_select" v-if="showSelectStatus">
+    <div class="mobile_select" v-if="showSelectStatus && historyStatus">
       <!-- 选择框 -->
       <div
         @click="singleChoiceFun"
@@ -1004,7 +1010,7 @@
 <script>
 import OrderDetails from "./PendingOrderDetails.vue";
 import { mapGetters } from "vuex";
-import { marketInfo,token,getSourceUrl,sn,util } from 'sealemlab-sdk'
+import { marketInfo,token,getSourceUrl,sn,util,snInfo,sbInfo } from 'sealemlab-sdk'
 export default {
   components: {
     OrderDetails
@@ -1271,6 +1277,7 @@ export default {
         suit: '',//套装
         boxType:'',//盲盒类型
       }, // 正在售卖中的nft很box参数信息
+      loadingHistory:false
     }
   },
   methods:{
@@ -1286,6 +1293,7 @@ export default {
         case 2:
           // console.log("id为2")
           if(index == 0){
+            this.getSNandSBHolders('box')
             item1.status = true
             if(item1.disable)return
             item1.disable = true
@@ -1318,6 +1326,7 @@ export default {
               })
             }
           }else if(index == 1){
+            this.getSNandSBHolders('nft')
             item1.status = true
             this.navArr[1].arr[0].disable = false
             if(item1.disable)return
@@ -1575,6 +1584,7 @@ export default {
           this.isOneLoading = false
           this.busy = true
         }
+        this.loadingHistory = true
       }).catch(() => {
         this.nftArr = [];
         this.isOneLoading = false
@@ -1648,6 +1658,7 @@ export default {
       this.encapsulationFun()
     },
     backHistory(){
+      this.loadingHistory = false
       this.historyStatus = true
       this.sortObj = this.oldInfo
       this.loadMoreStatus = true
@@ -1685,9 +1696,8 @@ export default {
         if(this.sellPageStatus && this.historyStatus){
           console.log("加载市场上正在挂单的数据")
           this.encapsulationFun(false)
-        }else if(!this.historyStatus){
+        }else if(!this.historyStatus &&  this.loadingHistory){
           this.BothSidesEncapsulationFun()
-          console.log("用户历史纪录 ")
         }
       }
     },
@@ -1966,10 +1976,25 @@ export default {
         })
       }
     },
+    // holder
+    getSNandSBHolders(type){
+      if(type == 'nft'){
+        // 装备持有者
+        snInfo.getSnCounts(1,0,'owners','desc').then(res => {
+          console.log('装备持有者res: ', res);
+          this.arr2[4].num = res.data.snCounts[0].owners
+        })
+      }else if(type == 'box'){
+        sbInfo.getSbCounts(1,0,'owners','desc').then(res => {
+          console.log('盒子持有者res: ', res);
+          this.arr2[4].num = res.data.sbCounts[0].owners
+        })
+      }
+    }
   },
   mounted(){
     this.encapsulationFun(false)
-
+    this.getSNandSBHolders('nft')
     // 地板价
     this.getMarketInfo({
       first: 8, //查询结果数量，比如填10，就展示前10个结果
@@ -1978,7 +2003,7 @@ export default {
       orderDirection: "asc", // 降序or升序，填desc或asc
       seller: '',// 卖家地址
       nft:(token().SN).toLowerCase(),//nft地址
-      token:(token().ST).toLowerCase(), // 代币地址
+      token:(token().BUSD).toLowerCase(), // 代币地址
       price_gte:'',//最小价格
       price_lte:'',//最大价格
       stars:'',
@@ -2027,6 +2052,10 @@ export default {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    .back_img {
+      width: 0.3rem;
+      cursor: pointer;
+    }
   }
   .data_display {
     width: 100%;
@@ -2052,17 +2081,13 @@ export default {
         }
       }
     }
-    .back_img {
-      width: 0.3rem;
-      cursor: pointer;
-    }
   }
   .mobile_top{
     width: 100%;
     display: flex;
     justify-content: space-between;
     .filter_box{
-      width: 0.97rem;
+      width: 1.2rem;
       height: 0.35rem;
       background: #171718;
       box-shadow: 0px 20px 20px 0px rgba(0,0,0,0.3900), inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
@@ -2078,7 +2103,7 @@ export default {
     }
     .sort_box {
       position: relative;
-      width: 1.51rem;
+      width: 1.9rem;
       height: 0.35rem;
       background: #171718;
       box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.39),
@@ -2089,7 +2114,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 0.09rem;
+      padding: 0 0.1rem;
       span {
         font-weight: 500;
         color: #8f8e8e;
@@ -2128,7 +2153,7 @@ export default {
   }
   .sell_btn {
     cursor: pointer;
-    width: 0.69rem;
+    width: 49%;
     height: 0.35rem;
     box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
     border-radius: 0.04rem;
@@ -2136,6 +2161,9 @@ export default {
     text-align: center;
     line-height: 0.35rem;
     font-weight: bold;
+  }
+  .history_btn{
+    border: 1px solid #918256;
   }
   .mobile_bottom{
     width: 100%;
@@ -2166,7 +2194,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 23%;
+    // padding-right: 23%;
     margin-top: 0.1rem;
     .sell_content {
       display: flex;

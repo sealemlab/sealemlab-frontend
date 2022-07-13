@@ -1024,7 +1024,7 @@ export default {
 @media screen and (max-width: 980px) {
   .staking_box {
     width: 100vw;
-    padding: 1rem 5vw 0;
+    padding: 0.8rem 5vw 0;
     .img_bg {
       width: 100%;
       position: relative;

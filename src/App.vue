@@ -527,7 +527,7 @@ export default {
 @media screen and (max-width: 980px) {
   #app {
     width: 100%;
-    padding-bottom: 1.1rem;
+    padding-bottom: 0.8rem;
   }
   .mobile_nav {
     position: fixed;
@@ -557,6 +557,9 @@ export default {
         font-weight: 600;
         color: #ced3d9;
         line-height: 0.14rem;
+      }
+      .box_color {
+        color: #eccf83;
       }
     }
   }
@@ -598,9 +601,6 @@ export default {
         }
       }
     }
-  }
-  .box_color {
-    color: #eccf83;
   }
 }
 </style>

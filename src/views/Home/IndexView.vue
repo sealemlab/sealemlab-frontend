@@ -1676,7 +1676,7 @@ export default {
 }
 @media screen and (max-width: 980px) {
   .home{
-    padding-top: 0.8rem;
+    padding-top: 0.6rem;
     .border_{
       width: 100%;
       height: auto;

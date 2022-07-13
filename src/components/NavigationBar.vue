@@ -406,6 +406,7 @@ export default {
 @media screen and (max-width: 980px) {
   .nav {
     padding: 0 0.15rem;
+    height: 0.6rem;
     background: linear-gradient(180deg, #1b1919 0%, #000000 100%);
     border-radius: 0px 0px 17px 17px;
     border: 1px solid #eccf83;

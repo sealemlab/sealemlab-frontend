@@ -1,7 +1,7 @@
 <template>
   <div class="market_page">
-    <PcPage class="pc_content" @openVideo="openVideo"></PcPage>
-    <MobilePage class="mobile_content" @openVideo="openVideo"></MobilePage>
+    <PcPage class="pc_content" @openVideo="openVideo" v-if="!getIsMobile"></PcPage>
+    <MobilePage class="mobile_content" @openVideo="openVideo" v-if="getIsMobile"></MobilePage>
     <div class="video_proup" v-if="videoStatus">
       <video
         class="video_"
@@ -22,9 +22,13 @@
 <script>
 import MobilePage from "./MobilePage.vue";
 import PcPage from "./PcPage.vue";
+import { mapGetters } from "vuex";
 export default {
   components: {
     MobilePage,PcPage
+  },
+  computed: {
+    ...mapGetters(["getIsMobile"])
   },
   data(){
     return{

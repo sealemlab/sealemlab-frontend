@@ -101,10 +101,10 @@ export default {
   .nft_page{
     width: 100%;
     .content_box{
-      padding-top: 0.8rem;
+      padding-top: 0.6rem;
       .menu_box{
         position: fixed;
-        top: 0.8rem;
+        top: 0.6rem;
         left: 0;
         width: 100%;
         z-index: 15;
