@@ -1142,7 +1142,7 @@ export default {
       stApproveLoading:false,// st授权loading
       busdApprove:false,//busd是否授权
       stApprove:false,//st是否授权
-      priceCoin:'BUSD',
+      priceCoin:'ST',
       NftandBoxarr: { isnft: false, isbox: false, arr: [] },// 选择以后的盲盒或者nft数据
       orderStatus: false,// sell弹窗详情页面状态
       selectAll: false,//全选
@@ -1424,7 +1424,7 @@ export default {
         orderDirection: "desc", // 降序or升序，填desc或asc
         seller: '',// 卖家地址
         nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().BUSD).toLowerCase(), // 代币地址
+        token:(token().ST).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
         stars:'',// 星级
@@ -1819,7 +1819,7 @@ export default {
           orderDirection: "desc",
           seller: '',
           nft:(token().SN).toLowerCase(),
-          token:(token().BUSD).toLowerCase(),
+          token:(token().ST).toLowerCase(),
           price_gte:'',
           price_lte:'',
           stars:'',
@@ -2158,6 +2158,7 @@ export default {
         obj.title = this.priceCoin + 'Max: ' + this.MaxInputvalue
       }else{
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.inputPrice'}));
+        return
       }
       this.selectArr.unshift(obj)
       this.sortObj.skip = 0
@@ -2201,7 +2202,7 @@ export default {
     // 返回市场页面
     backClick () {
       this.loadingHistory = false
-      this.priceCoin = 'BUSD'
+      this.priceCoin = 'ST'
       this.clearBtn()
       this.historyID = 2
       this.showSelect = false
@@ -2213,7 +2214,7 @@ export default {
         orderDirection: "desc", // 降序or升序，填desc或asc
         seller: '',// 卖家地址
         nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().BUSD).toLowerCase(), // 代币地址
+        token:(token().ST).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
         stars:'',
@@ -2495,7 +2496,7 @@ export default {
         orderDirection: "asc", // 降序or升序，填desc或asc
         seller: '',// 卖家地址
         nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().BUSD).toLowerCase(), // 代币地址
+        token:(token().ST).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
         stars:'',

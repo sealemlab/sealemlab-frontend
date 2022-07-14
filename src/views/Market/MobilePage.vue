@@ -1144,7 +1144,7 @@ export default {
         },
       ],
       historyID:2,
-      priceCoin:'BUSD',
+      priceCoin:'ST',
       coinArr:[
         {title:'ST'},
         {title:'BUSD'}
@@ -1175,7 +1175,7 @@ export default {
         orderDirection: "desc", // 降序or升序，填desc或asc
         seller: '',// 卖家地址
         nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().BUSD).toLowerCase(), // 代币地址
+        token:(token().ST).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
         stars:'',
@@ -1241,7 +1241,7 @@ export default {
         orderDirection: "desc", // 降序or升序，填desc或asc
         seller: '',// 卖家地址
         nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().BUSD).toLowerCase(), // 代币地址
+        token:(token().ST).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
         stars:'',
@@ -1257,7 +1257,7 @@ export default {
   methods:{
     backClick(){
       console.log("返回")
-      this.priceCoin = 'BUSD'
+      this.priceCoin = 'ST'
       this.clearStstus()
       this.sellPageStatus = this.historyStatus = true
       this.cancleStatus = false //不显示历史记录的取消按钮
@@ -1268,7 +1268,7 @@ export default {
         orderDirection: "desc", // 降序or升序，填desc或asc
         seller: '',// 卖家地址
         nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().BUSD).toLowerCase(), // 代币地址
+        token:(token().ST).toLowerCase(), // 代币地址
         price_gte:'',//最小价格
         price_lte:'',//最大价格
         stars:'',
@@ -1497,11 +1497,19 @@ export default {
     },
     inputAppply(){
       if(!this.sellPageStatus)return
-      if(!this.MinInputvalue || !this.MaxInputvalue)return
-      this.sortObj.price_gte = (util.parseUnits(this.MinInputvalue)).toString()
-      this.sortObj.price_lte = (util.parseUnits(this.MaxInputvalue)).toString()
+      if(this.MinInputvalue && this.MaxInputvalue){
+        this.sortObj.price_gte = (util.parseUnits(this.MinInputvalue)).toString()
+        this.sortObj.price_lte = (util.parseUnits(this.MaxInputvalue)).toString()
+      }else if(this.MinInputvalue){
+        this.sortObj.price_gte = (util.parseUnits(this.MinInputvalue)).toString()
+      }else if(this.MaxInputvalue){
+        this.sortObj.price_lte = (util.parseUnits(this.MaxInputvalue)).toString()
+      }else{
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.inputPrice'}));
+        return
+      }
+
       this.sortObj.skip = 0
-      // this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
       this.encapsulationFun()
       this.mobileMenStatus = false
     },
@@ -2023,7 +2031,7 @@ export default {
       orderDirection: "asc", // 降序or升序，填desc或asc
       seller: '',// 卖家地址
       nft:(token().SN).toLowerCase(),//nft地址
-      token:(token().BUSD).toLowerCase(), // 代币地址
+      token:(token().ST).toLowerCase(), // 代币地址
       price_gte:'',//最小价格
       price_lte:'',//最大价格
       stars:'',

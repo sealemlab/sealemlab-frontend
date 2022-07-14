@@ -71,7 +71,7 @@
                   <span class="font12"># {{ item.nftId }}</span>
                   <img
                     :src="`${$store.state.imgUrl}new_3dimg.webp`"
-                    class="img_3d"
+                    class="img_3d anmation_3d"
                   />
                 </div>
               </div>
@@ -597,6 +597,20 @@ export default {
       min-width:65px;
       padding:5px;
     }
+  }
+}
+.anmation_3d{
+  animation: scaleAni 2s linear 0s infinite normal;
+}
+@keyframes scaleAni {
+  0% {
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 @media screen and (max-width: 980px) {

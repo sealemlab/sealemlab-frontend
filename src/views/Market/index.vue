@@ -38,6 +38,7 @@ export default {
   },
   methods:{
     openVideo(data){
+      console.log('data: ', data);
       this.videoStatus = true
       this.videoSrc = data
     }
