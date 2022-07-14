@@ -1513,6 +1513,10 @@ export default {
     },
     // 进入histor页面
     historyClick () {
+      if(!this.getIstrue){
+        this.$store.commit("setwalletstatus", true);
+        return
+      }
       this.selectArr = []
       this.historyStatus = false
       this.showCancle = true
@@ -2131,6 +2135,10 @@ export default {
     },
     // sell按钮
     sellPageClick () {
+      if(!this.getIstrue){
+        this.$store.commit("setwalletstatus", true);
+        return
+      }
       this.cancleStatus = false //不显示历史记录的取消按钮
       this.sellPageStatus = false
       this.clearBtn()

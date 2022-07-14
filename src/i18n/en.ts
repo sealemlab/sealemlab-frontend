@@ -1091,7 +1091,8 @@ export const message = {
     self_sell_txt:'Please enter the selling price',
     self_sell_out:'The current NFT is sold',
     ordering:'Pending...',
-    inputPrice:'Please enter at least one price'
+    inputPrice:'Please enter at least one price',
+    canclOrder:'Cancel pending order...'
   },//提示性文案
   approve: "Approve",
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="market_page">
-    <PcPage class="pc_content" @openVideo="openVideo" v-if="!getIsMobile"></PcPage>
-    <MobilePage class="mobile_content" @openVideo="openVideo" v-if="getIsMobile"></MobilePage>
+    <PcPage @openVideo="openVideo" v-if="!getIsMobile"></PcPage>
+    <MobilePage @openVideo="openVideo" v-if="getIsMobile"></MobilePage>
     <div class="video_proup" v-if="videoStatus">
       <video
         class="video_"
@@ -50,24 +50,11 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 120px;
-}
-.pc_content{
-  display: flex;
-}
-.mobile_content{
-  display: none;
 }
 @media screen and (max-width: 980px) {
   .market_page {
     width: 100%;
     padding: 0.7rem 5vw 0.2rem;
-  }
-  .pc_content{
-    display: none;
-  }
-  .mobile_content{
-    display: flex;
   }
 }
 </style>

@@ -775,7 +775,7 @@
                       :key="index"
                       @click="selectCoin(ele)"
                     >
-                      {{ $ele.title }}
+                      {{ $t(ele.title) }}
                     </span>
                   </div>
                 </div>
@@ -1674,6 +1674,10 @@ export default {
 
     // 进入histor页面
     historyClick () {
+      if(!this.getIstrue){
+        this.$store.commit("setwalletstatus", true);
+        return
+      }
       this.historyStatus = false
       this.showCancle = true
       this.cancleStatus = true
@@ -1799,6 +1803,10 @@ export default {
     },
     // 展示选择框(点击sell按钮)
     SellClick(){
+      if(!this.getIstrue){
+        this.$store.commit("setwalletstatus", true);
+        return
+      }
       this.cancleStatus = false //不显示历史记录的取消按钮
       this.sellPageStatus = !this.sellPageStatus // 进入挂单页面.
       if(!this.sellPageStatus){
