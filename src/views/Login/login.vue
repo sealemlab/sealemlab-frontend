@@ -101,6 +101,7 @@ export default {
               activationTime: res.data.activationTime,
               lastLogin: res.data.lastLogin,
               addr: res.data.addr,
+              isValid:res.data.isValid
             });
             this.$router.push("/myaccount/information");
           }

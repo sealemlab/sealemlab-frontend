@@ -742,6 +742,7 @@ export const message = {
     txt10: "Update information",
     txt11: "Account Status",
     txt12: "Active",
+    txt12_1: "Sealing...",
     txt13: "Email Approval",
     txt14: "Approved",
     txt15: "Date of Registration",
@@ -796,8 +797,6 @@ export const message = {
     txt26: "2. The interest rate increases by 0.1% per 1K USD of bonds purchased or  staking by the invitee.",
     txt27: "3. The invitation staking interest rate changes according to the actual staking amount of the invitee.",
   },//用户中心
-  approve: "Approve",
-
   gamepage: {
     text1: "Game",
     text2: "Recharge/Claim",
@@ -913,14 +912,6 @@ export const message = {
     txt34:"MIN.",
     txt35:"SEC."
 
-
-    // txt24:"可获得ST数量",
-    // txt25:"请输入购买金额",
-    // txt26:"用户不在白名单",
-    // txt27:"用户剩余购买量不足",
-    // txt28:"库存剩余购买量不足",
-    // txt29:"活动已结束",
-
   },
   market:{
     txt1:'Search by name or traits',
@@ -939,7 +930,8 @@ export const message = {
     order_2:'Price',
     order_3:'Fees',
     order_4:'You will get',
-    order_5:'同时挂单多个NFT,挂单价格一致',
+    order_5:'Pending multiple NFTs at the same time, the price of the pending order is the same',
+
     order_6:'Preview',
 
     market_title1:'Welcome to NFTs mark',
@@ -1095,11 +1087,11 @@ export const message = {
     self_userBuyNum:'The current STLP purchase volume is loading',
     self_write:'Please enter the amount of bond to buy',
 
-    self_select:'请选择盒子或者nft',
-    self_sell_txt:'请输入售卖价格',
-    self_sell_out:'当前卡牌已售出',
-
-    ordering:'挂单中...',
-    inputPrice:'请输入至少一个价格'
+    self_select:'Please choose the Mystery Box or NFT',
+    self_sell_txt:'Please enter the selling price',
+    self_sell_out:'The current NFT is sold',
+    ordering:'Pending...',
+    inputPrice:'Please enter at least one price'
   },//提示性文案
+  approve: "Approve",
 };

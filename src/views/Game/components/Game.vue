@@ -39,7 +39,7 @@
                   fill="#EAD28E"
                 ></path>
               </svg>
-              <span class="btn_txt font16" :class="isEnLang?'en_medium':''">{{ $t("message.gamepage.text13") }}</span>
+              <div class="btn_txt font16" :class="isEnLang?'en_medium':''">{{ $t("message.gamepage.text13") }}</div>
             </div>
           </div>
           <div class="btn" @click="download('pc')">
@@ -60,7 +60,7 @@
                 fill="#EAD28E"
               ></path>
             </svg>
-            <span class="btn_txt font16" :class="isEnLang?'en_medium':''"> {{ $t("message.gamepage.text14") }}</span>
+            <div class="btn_txt font16" :class="isEnLang?'en_medium':''"> {{ $t("message.gamepage.text14") }}</div>
             </div>
           </div>
         </div>

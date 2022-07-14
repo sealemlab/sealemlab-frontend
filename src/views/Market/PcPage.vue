@@ -30,7 +30,7 @@
         @click="backClick"
       />
     </div>
-    <!-- 导航栏 -->
+    <!-- 主内容 -->
     <div class="page">
       <!-- 市场 以及挂单时候的菜单栏 -->
       <ul class="left_nav" v-if="historyStatus">
@@ -1074,13 +1074,13 @@
           </div>
         </div>
         <!-- loding -->
-        <div class="market_ loading_box_content" v-if="nftArr.length == 0 && getIstrue && loadMoreStatus">
+        <div class="market_ loading_box_content" v-if="nftArr.length == 0 && loadMoreStatus">
           <LoadingAnmation></LoadingAnmation>
         </div>
         <!-- nodata -->
         <div
           class="loading_box_content"
-          v-else-if="nftArr.length == 0 || !getIstrue"
+          v-else-if="nftArr.length == 0"
         >
           <svg
             t="1653726615818"
@@ -1481,7 +1481,6 @@ export default {
           this.nftArr = []
           this.$utils.antiShakeFun(() => {
             this.integrationBoxAnsNft()
-            this.encapsulationFun(false)
           }, 2000)()
         }
       },

@@ -14,6 +14,7 @@ export default new Vuex.Store({
     }, // 开盲盒弹窗信息
     userBoxInfo: sessionStorage.getItem("setBoxInfo") || [], //用户的盲盒信息
     userInfo: {
+      isValid:0,// 账号是否被封
       loginStatus: false, // 登录状态
       rememberStatus: false,
       mailAccount: "",

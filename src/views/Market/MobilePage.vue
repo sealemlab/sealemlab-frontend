@@ -999,7 +999,6 @@ export default {
           localStorage.removeItem('nftInfo')
           this.nftArr = []
           this.$utils.antiShakeFun(() => {
-            this.encapsulationFun(false)
             this.integrationBoxAnsNft()
           }, 2000)()
         }

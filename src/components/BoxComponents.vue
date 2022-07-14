@@ -107,7 +107,10 @@
             >{{ item.price | PriceConversion }} {{ item.price_currency }}</span
           >
         </div>
-        <div v-if="item.price_currency == 'BUSD'">
+        <div class="btn btn_normal font12" :class="isEnLang ? 'en_Bold' : ''" v-if="!getIstrue" @click="connectFun">
+          Connect
+        </div>
+        <div v-if="item.price_currency == 'BUSD' && getIstrue">
           <div class="btn add_btnn_loading btn_normal" v-if="busdallLoading">
             <BtnLoading :isloading="true"></BtnLoading>
           </div>
@@ -129,7 +132,7 @@
             </div>
           </div>
         </div>
-        <div v-if="item.price_currency == 'ST'">
+        <div v-if="item.price_currency == 'ST' && getIstrue">
           <div class="btn add_btnn_loading btn_normal" v-if="stallLoading">
             <BtnLoading :isloading="true"></BtnLoading>
           </div>
@@ -206,7 +209,7 @@ export default {
     },// 用户取消挂单按钮 默认显示 ()
   },
   computed: {
-    ...mapGetters(["isEnLang","getAccount",])
+    ...mapGetters(["getIstrue","isEnLang","getAccount","getAccountStatus"])
   },
   watch:{
     'nftArr': {
@@ -215,6 +218,19 @@ export default {
           if(this.sellPageStatus){
             this.isApproveFunPage() // 是否授权
           }
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    'getAccountStatus': {
+      handler: function (newValue) {
+        if (newValue == 0) {
+          this.isApproveFunPage()
+        } else if (newValue > 0) {
+          this.$utils.antiShakeFun(() => {
+            this.isApproveFunPage()
+          }, 2000)()
         }
       },
       deep: true,
@@ -234,6 +250,9 @@ export default {
   methods:{
     nftFun(item){
       this.$emit("nftFun",item)
+    },
+    connectFun(){
+      this.$store.commit("setwalletstatus", true);
     },
     // 判断是否授权
     isApproveFunPage(){
@@ -584,7 +603,8 @@ export default {
       align-items: center;
     }
     .btn {
-      padding:5px 15px;
+      padding:5px;
+      min-width: 50px;
       box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
       border-radius: 4px;
       backdrop-filter: blur(14px);
@@ -782,6 +802,7 @@ export default {
       }
       .btn {
         padding:0.05rem 0.07rem;
+        min-width: 0.1rem;
         box-shadow: 0px 15px 10px 0px rgba(42, 37, 30, 0.45);
         border-radius: 0.04rem;
         backdrop-filter: blur(14px);

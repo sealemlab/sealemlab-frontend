@@ -31,7 +31,8 @@
       <div class="right_content">
         <div class="right_line">
           <span class="account_status font24" :class="isEnLang ? 'en_Bold' : ''">{{ $t("message.account.txt11") }}</span>
-          <span class="_status font14" :class="isEnLang ? 'en_medium' : ''">{{ $t("message.account.txt12") }}</span>
+          <span class="_status font14" :class="isEnLang ? 'en_medium' : ''" v-if="getLogin.isValid == '0'">{{ $t("message.account.txt12") }}</span>
+          <span class="_status font14" :class="isEnLang ? 'en_medium' : ''" v-if="getLogin.isValid == '1'">{{ $t("message.account.txt12_1") }}</span>
         </div>
         <div class="right_line">
           <span class="account_status font24" :class="isEnLang ? 'en_Bold' : ''">{{ $t("message.account.txt13") }}</span>
