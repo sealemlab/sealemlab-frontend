@@ -1807,8 +1807,9 @@ export default {
       obj.filter = item1.content
       this.selectArr.unshift(obj)
     },
-    // 清除所有选择的内容
+    // 清除所有选择的内容(带x的,可以关闭)
     clearBtn () {
+      this.priceCoin = 'ST'
       this.MinInputvalue = this.MaxInputvalue = ''
       this.selectArr = []
       this.navArr = JSON.parse(JSON.stringify(this.navOldArr))
