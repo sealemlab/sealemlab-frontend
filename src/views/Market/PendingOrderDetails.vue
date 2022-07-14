@@ -3,8 +3,8 @@
     <img :src="`${$store.state.imgUrl}back.webp`" class="back_img" @click="closeOrder" />
     <div class="content">
       <div class="left_">
-        <p class="font32 p1 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">List item for sale</p>
-        <p class="font24 p2 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">Price</p>
+        <p class="font32 p1 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">{{$t("message.market.order_1")}}</p>
+        <p class="font24 p2 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">{{$t("message.market.order_2")}}</p>
         <div class="box">
           <div class="type" :class="[disablehover ? 'clear_hover' : '']">
             {{selectCoin}}
@@ -46,20 +46,20 @@
             ></Input>
           </div>
         </div>
-        <p class="font24 p2 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">Fees</p>
+        <p class="font24 p2 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">{{$t("message.market.order_3")}}</p>
         <div class="box">
           <div class="input_" v-if="feeStatus">
             <BtnLoading :isloading="true"></BtnLoading>
           </div>
           <div class="input_" v-else>{{fee | MultiplyBySquare}} %</div>
         </div>
-        <p class="font24 p2 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">You will get</p>
+        <p class="font24 p2 mobile_font14" :class="isEnLang ? 'en_Bold' : ''">{{$t("message.market.order_4")}}</p>
         <div class="box">
           <div class="input_">{{getValue | PriceConversion}}</div>
         </div>
         <div class="tip_txt font16" :class="isEnLang?'en_medium':''">
           <img :src="`${$store.state.imgUrl}ques_new.webp`" class="ques_img"/>
-          同时挂单多个NFT，挂单价格一致
+          {{$t("message.market.order_5")}}
         </div>
         <div class="btn btn_normal" v-if="allLoading">
           <BtnLoading :isloading="true"></BtnLoading>
@@ -95,7 +95,7 @@
         </div>
       </div>
       <div class="right_">
-        <p class="p_positon font32 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">Preview</p>
+        <p class="p_positon font32 mobile_font20" :class="isEnLang ? 'en_Bold' : ''">{{$t("message.market.order_6")}}</p>
         <div class="showbox">
           <BoxComponents :nftArr="orderArr" :isColumn="true"></BoxComponents>
         </div>
@@ -225,6 +225,9 @@ export default {
             }
             if(that.userselectarr.isnft){
               console.log("刷新nft")
+              this.$utils.getUserBindbox(this.getAccount, 0, 10000000).then(res3 => {
+                localStorage.setItem('nftInfo',JSON.stringify(res3))
+              })
             }
             that.Pricevalue = ''
             that.getValue = 0

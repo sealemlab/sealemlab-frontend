@@ -933,7 +933,18 @@ export const message = {
     txt19_1: "Star low to high", //
     txt20: "Rarity high to low", //
     txt20_1: "Rarity low to high", //
-    sell_btn:'Complete listing'
+    sell_btn:'Complete listing',
+
+    order_1:'List item for sale',
+    order_2:'Price',
+    order_3:'Fees',
+    order_4:'You will get',
+    order_5:'同时挂单多个NFT,挂单价格一致',
+    order_6:'Preview',
+    order_7:'List',
+    order_8:'List',
+    order_9:'List',
+    order_10:'List',
   },
   stake:{
     txt1:'Stake',

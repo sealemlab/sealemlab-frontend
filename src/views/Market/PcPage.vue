@@ -2546,6 +2546,8 @@ export default {
     display: flex;
     .left_nav {
       width: 177px;
+      max-height: 700px;
+      overflow: auto;
       display: flex;
       flex-direction: column;
       li {
@@ -2731,6 +2733,10 @@ export default {
           }
         }
       }
+    }
+    .left_nav::-webkit-scrollbar {
+      width: 0;
+      height: 0;
     }
     .right_content {
       width: calc(100% - 177px);

@@ -1253,6 +1253,7 @@ export default {
   methods:{
     backClick(){
       console.log("返回")
+      this.clearStstus()
       this.sellPageStatus = this.historyStatus = true
       this.cancleStatus = false //不显示历史记录的取消按钮
       this.sortObj = {
@@ -1299,8 +1300,25 @@ export default {
               this.clearStstus()
               this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
             }else{
-              this.sortObj.nft = (token().SB).toLowerCase()
-              this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
+              // this.sortObj.nft = (token().SB).toLowerCase()
+              // this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
+              this.sortObj = {
+                first: 8,
+                skip: 0,
+                orderBy: "sellTime",
+                orderDirection: "desc",
+                seller: '',
+                nft:(token().SB).toLowerCase(),
+                token:(token()[this.priceCoin]).toLowerCase(),
+                price_gte:'',
+                price_lte:'',
+                stars:'',
+                rarity: '',
+                role: '',
+                part: '',
+                suit: '',
+                boxType:'',
+              }// 市场上正在售卖的盲盒跟nft的信息
               this.encapsulationFun()
 
               this.dataInfo.nft = (token().SB).toLowerCase()
@@ -1469,10 +1487,12 @@ export default {
       })
     },
     inputAppply(){
+      if(!this.sellPageStatus)return
       if(!this.MinInputvalue || !this.MaxInputvalue)return
-      this.sortObj.price_gte = Number(this.MinInputvalue)
-      this.sortObj.price_lte = Number(this.MaxInputvalue)
-      this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
+      this.sortObj.price_gte = (util.parseUnits(this.MinInputvalue)).toString()
+      this.sortObj.price_lte = (util.parseUnits(this.MaxInputvalue)).toString()
+      this.sortObj.skip = 0
+      // this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
       this.encapsulationFun()
       this.mobileMenStatus = false
     },

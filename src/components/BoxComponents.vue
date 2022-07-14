@@ -301,28 +301,23 @@ export default {
     // 用户购买nft或者盒子
     userBuyFun(item){
       console.log("用户购买")
-      // console.log('item: ', item);
+      if(item.buyloading)return
+      item.buyloading = true
       if(item.isnft){
         sn().ownerOf(item.nftId).then(res => {
-          // console.log('res: ', res);
           if(res != contract().Market){
+            item.buyloading = false
             this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
           }else{
-            // console.log("买盒子")
-            if(item.buyloading)return
-            item.buyloading = true
             this.sdkBuyFun(item)
           }
         })
       }else{
-        // console.log("买盒子")
         sb().ownerOf(item.nftId).then(res => {
-          // console.log('res: ', res);
           if(res != contract().Market){
+            item.buyloading = false
             this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
           }else{
-            if(item.buyloading)return
-            item.buyloading = true
             this.sdkBuyFun(item)
           }
         })
@@ -348,18 +343,47 @@ export default {
       console.log('取消挂单item: ', item)
       if(item.buyloading)return
       item.buyloading = true
-      market().connect(getSigner()).cancel([item.nft],[item.nftId]).then(async res1 => {
-        // console.log('用户批量取消挂单NFTres: ', res1);
-        const etReceipt = await res1.wait();
-        if(etReceipt.status == 1){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'取消挂单成功'}));
-          item.buyloading = false
-        }else{
-          item.buyloading = false
-        }
-      }).catch(() => {
-        item.buyloading = false
-      })
+      if(item.isnft){
+        sn().ownerOf(item.nftId).then(res => {
+          if(res != contract().Market){
+            item.buyloading = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
+          }else{
+            market().connect(getSigner()).cancel([item.nft],[item.nftId]).then(async res1 => {
+              // console.log('用户批量取消挂单NFTres: ', res1);
+              const etReceipt = await res1.wait();
+              if(etReceipt.status == 1){
+                this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'取消挂单成功'}));
+                item.buyloading = false
+              }else{
+                item.buyloading = false
+              }
+            }).catch(() => {
+              item.buyloading = false
+            })
+          }
+        })
+      }else{
+        sb().ownerOf(item.nftId).then(res => {
+          if(res != contract().Market){
+            item.buyloading = false
+            this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
+          }else{
+            market().connect(getSigner()).cancel([item.nft],[item.nftId]).then(async res1 => {
+              // console.log('用户批量取消挂单NFTres: ', res1);
+              const etReceipt = await res1.wait();
+              if(etReceipt.status == 1){
+                this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'取消挂单成功'}));
+                item.buyloading = false
+              }else{
+                item.buyloading = false
+              }
+            }).catch(() => {
+              item.buyloading = false
+            })
+          }
+        })
+      }
     }
   }
 }
