@@ -6,7 +6,10 @@
       <div class="onebox display_flex">
         <ul v-for="(ele, index) in footerArr" :key="index">
           <li class="font14 en_Regular" v-for="(item, index1) in ele.children" :key="index1">
-            <a v-if="item.link == ''" href="javascript:;">{{ $t(item.title) }}</a>
+            <a v-if="item.link == ''" href="javascript:;">
+              <span v-if="index1 == 3">{{ $t(item.title) }}{{getUserCoin.stPrice | PriceConversion}}</span>
+              <span v-else>{{ $t(item.title) }}</span>
+            </a>
             <a v-else :href="isEnLang?(item.link_en?item.link_en:item.link):item.link" target="_blank" rel="noopener noreferrer" >{{ $t(item.title) }}</a>
           </li>
         </ul>
@@ -23,7 +26,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["isEnLang"])
+    ...mapGetters(["isEnLang","getUserCoin"])
   },
   data(){
     return{

@@ -149,8 +149,8 @@ export const message = {
     txt15: "Sacred Realm",
     txt16: "Help Center",
     txt17: "Team",
-    txt18: "ST $0.00",
-    txt19: "SR $0.00",
+    txt18: "ST ",
+    txt19: "SR N/A",
 
     txt21: "COPYRIGHT © 2022 Sealem Lab, All Rights Reserved",
   },//底部

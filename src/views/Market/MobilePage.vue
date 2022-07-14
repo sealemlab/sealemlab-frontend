@@ -1716,8 +1716,14 @@ export default {
     // 关闭挂单弹窗
     closeOrder (data) {
       if (data) {
+        this.selectAll = this.showSelect = false
+        this.nftArr.forEach(item => {
+          item.showSelect = false
+          item.selectStatus = false
+        })
         this.integrationBoxAnsNft()
       }
+
       this.orderStatus = false
     },
     // 加载更多
