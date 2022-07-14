@@ -94,7 +94,8 @@
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == -1">{{ $t("message.gamepage.txt45") }}</div>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == 0">{{ $t("message.gamepage.txt46") }}</div>
               <div class="claim_btn btn_normal font12" :class="isEnLang?'en_Bold':''" v-if="item.tbStatus == 1" @click="userClaim(item)">
-                {{ $t("message.gamepage.txt47") }}
+                <span v-if="!getIstrue" @click.stop="connectFun">Connect</span>
+                <span v-else>{{ $t("message.gamepage.txt47") }}</span>
                 <BtnLoading :isloading="item.claimLoading"></BtnLoading>
               </div>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == 2">{{ $t("message.gamepage.txt48") }}</div>
@@ -170,6 +171,9 @@ export default {
     }
   },
   methods: {
+    connectFun(){
+      this.$store.commit("setwalletstatus", true);
+    },
     loadMore() {
       this.busy = true;
       if(this.loadMoreStatus && this.isOneLoading) {
@@ -343,8 +347,10 @@ export default {
           // console.log('绑定提现订单签名res: ', res);
           if(res.code == 200){
             srWithdraw().connect(getSigner()).claimPayment(util.parseUnits(item.amount+''),item.id,res.data).then(async res1 => {
+              this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.Withdrawing','link':res1.hash}));
               const etReceipt = await res1.wait();
               if(etReceipt.status == 1){
+                this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
                 this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt50'}));
                 item.claimLoading = false
                 this.$utils.getUserCoinQuantity(token().SR,'sr',this.getAccount)
@@ -353,10 +359,12 @@ export default {
                 })
                 this.getUserGameBalance()
               }else{
+                this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
                 item.claimLoading = false
               }
             }).catch(() => {
               item.claimLoading = false
+                this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
             })
           }else{
             item.claimLoading = false

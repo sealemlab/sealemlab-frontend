@@ -1092,7 +1092,8 @@ export const message = {
     self_sell_out:'The current NFT is sold',
     ordering:'Pending...',
     inputPrice:'Please enter at least one price',
-    canclOrder:'Cancel pending order...'
+    canclOrder:'Cancel pending order...',
+    Withdrawing:'Withdrawing...'
   },//提示性文案
   approve: "Approve",
 };

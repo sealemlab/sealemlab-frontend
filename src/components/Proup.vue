@@ -241,13 +241,13 @@ export default {
     }
     .box{
       width: 100%;
-      height: 0.12rem;
+      height: 0.08rem;
       background: #000;
       box-shadow: inset 0px 4px 11px 0px #0D0E0E, inset 0px -1px 7px 0px #0D0E0E;
       border-radius: 0.13rem;
       .load{
         width:0;
-        height: 0.12rem;
+        height: 0.08rem;
         background: linear-gradient(180deg, #F2D47B 0%, #F7E9B9 52%, #F0CE75 100%);
         border-radius: 0.13rem;
       }

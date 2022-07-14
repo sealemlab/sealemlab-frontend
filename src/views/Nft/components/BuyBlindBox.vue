@@ -299,6 +299,7 @@ export default {
       sb().connect(getSigner()).buyBoxes(this.sliderValue,this.bindboxType,localStorage.getItem('Invitee')).then(async (res) => {
         // 进度条
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res.hash}));
+        this.$store.commit("setProgressInfo", JSON.stringify({'speed':50}));
         const etReceipt = await res.wait();
         if(etReceipt.status == 1){
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then(res => {
