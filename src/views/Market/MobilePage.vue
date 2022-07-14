@@ -1257,6 +1257,7 @@ export default {
   methods:{
     backClick(){
       console.log("返回")
+      this.priceCoin = 'BUSD'
       this.clearStstus()
       this.sellPageStatus = this.historyStatus = true
       this.cancleStatus = false //不显示历史记录的取消按钮

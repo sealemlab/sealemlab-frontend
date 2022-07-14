@@ -1808,7 +1808,7 @@ export default {
     clearBtn () {
       this.MinInputvalue = this.MaxInputvalue = ''
       this.selectArr = []
-      this.navArr = this.navOldArr
+      this.navArr = JSON.parse(JSON.stringify(this.navOldArr))
       if(!this.sellPageStatus){
         this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
       }else{
@@ -2138,7 +2138,6 @@ export default {
     },
     inputAppply(){
       if(!this.sellPageStatus)return
-      if(!this.MinInputvalue || !this.MaxInputvalue)return
       this.selectArr.forEach((item,i) => {
         if(item.priceStatus){
           this.selectArr.splice(i,1)
@@ -2147,10 +2146,20 @@ export default {
       let obj = {}
       obj.priceStatus = true
       obj.id = 3
-      obj.title = this.priceCoin + ' Min: ' + this.MinInputvalue + ' to ' + 'Max: ' + this.MaxInputvalue
+      if(this.MinInputvalue && this.MaxInputvalue){
+        obj.title = this.priceCoin + ' Min: ' + this.MinInputvalue + ' to ' + 'Max: ' + this.MaxInputvalue
+        this.sortObj.price_gte = (util.parseUnits(this.MinInputvalue)).toString()
+        this.sortObj.price_lte = (util.parseUnits(this.MaxInputvalue)).toString()
+      }else if(this.MinInputvalue){
+        this.sortObj.price_gte = (util.parseUnits(this.MinInputvalue)).toString()
+        obj.title = this.priceCoin + ' Min: ' + this.MinInputvalue
+      }else if(this.MaxInputvalue){
+        this.sortObj.price_lte = (util.parseUnits(this.MaxInputvalue)).toString()
+        obj.title = this.priceCoin + 'Max: ' + this.MaxInputvalue
+      }else{
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.inputPrice'}));
+      }
       this.selectArr.unshift(obj)
-      this.sortObj.price_gte = (util.parseUnits(this.MinInputvalue)).toString()
-      this.sortObj.price_lte = (util.parseUnits(this.MaxInputvalue)).toString()
       this.sortObj.skip = 0
       this.encapsulationFun()
     },
@@ -2192,6 +2201,7 @@ export default {
     // 返回市场页面
     backClick () {
       this.loadingHistory = false
+      this.priceCoin = 'BUSD'
       this.clearBtn()
       this.historyID = 2
       this.showSelect = false
@@ -2567,7 +2577,7 @@ export default {
     display: flex;
     .left_nav {
       width: 177px;
-      max-height: 700px;
+      max-height: 637px;
       overflow: auto;
       display: flex;
       flex-direction: column;

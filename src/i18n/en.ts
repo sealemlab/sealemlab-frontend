@@ -1001,11 +1001,7 @@ export const message = {
     menu34:'Selled',
     menu35:'Bought',
 
-    menu36:'Common mystery box',
-    menu37:'',
-    menu38:'',
-    menu39:'',
-    menu40:'',
+    menu36:'Common mystery box'
   },
   stake:{
     txt1:'Stake',
@@ -1023,7 +1019,6 @@ export const message = {
     txt12:'Claim',
     txt13:'Withdraw',
     txt14:'Early quit tax',
-    txt14_1:'提示内容',
     txt15:'More pool coming soon',
     txt16:'ST Staking',
     txt17:'ST to stake',
@@ -1104,6 +1099,7 @@ export const message = {
     self_sell_txt:'请输入售卖价格',
     self_sell_out:'当前卡牌已售出',
 
-    ordering:'挂单中...'
+    ordering:'挂单中...',
+    inputPrice:'请输入至少一个价格'
   },//提示性文案
 };
