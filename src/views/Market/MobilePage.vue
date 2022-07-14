@@ -933,7 +933,7 @@
                 </svg>
               </div>
               <span class="font16" :class="{'en_Bold':isEnLang,'active_history':item.id == historyID}">{{
-                item.title
+                $t(item.title)
               }}</span>
             </div>
             <svg
@@ -963,7 +963,7 @@
                 :key="index1"
               >
                 <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{
-                  item1.title
+                  $t(item.title)
                 }}</span>
                 <div class="checkbox">
                   <span class="correct font18" v-show="item1.status"></span>
