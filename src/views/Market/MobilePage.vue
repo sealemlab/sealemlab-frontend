@@ -3,9 +3,9 @@
     <!-- 背景图 -->
     <div class="bg_">
       <div class="change_txt font35 mobile_font28" :class="isEnLang ? 'en_heavy' : ''">
-        <span v-if="sellPageStatus && historyStatus">Welcome to NFTs mark</span>
-        <span v-else-if="!sellPageStatus">Sell</span>
-        <span v-else-if="!historyStatus">History</span>
+        <span v-if="sellPageStatus && historyStatus">{{$t("message.market.market_title1")}}</span>
+        <span v-else-if="!sellPageStatus">{{$t("message.market.market_title2")}}</span>
+        <span v-else-if="!historyStatus">{{$t("message.market.market_title3")}}</span>
       </div>
       <img
         :src="`${$store.state.imgUrl}back.webp`"
@@ -24,7 +24,7 @@
           item.num
         }}</span>
         <span :class="isEnLang ? 'en_medium' : ''">{{
-          item.title
+          $t(item.title)
         }}</span>
       </div>
     </div>
@@ -48,7 +48,7 @@
             p-id="57946"
           ></path>
         </svg>
-        <span class="mobile_font14" :class="isEnLang ? 'en_Bold' : ''">Filter</span>
+        <span class="mobile_font14" :class="isEnLang ? 'en_Bold' : ''">{{$t("message.market.filter")}}</span>
       </div>
       <!-- 排序 -->
       <div class="sort_box" :class="[disablehover ? 'clear_hover' : '']" v-if="historyStatus">
@@ -83,8 +83,8 @@
     </div>
     <!-- sell/history 按钮 -->
     <div class="mobile_bottom" v-if="historyStatus && sellPageStatus">
-      <div class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="SellClick">Sell</div>
-      <div class="sell_btn history_btn mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="historyClick">History</div>
+      <div class="sell_btn btn_normal mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="SellClick">{{$t("message.market.btn1")}}</div>
+      <div class="sell_btn history_btn mobile_font14" :class="isEnLang ? 'en_Bold' : ''" @click="historyClick">{{$t("message.market.btn2")}}</div>
     </div>
     <!-- 选择框 -->
     <div class="mobile_select" v-if="!sellPageStatus">
@@ -97,7 +97,7 @@
         <div class="radious">
           <div v-if="showSelect"></div>
         </div>
-        Multi-Select
+        {{$t("message.market.btn3")}}
       </div>
       <!-- 全选 -->
       <div
@@ -108,7 +108,7 @@
         <div class="radious">
           <div v-if="selectAll"></div>
         </div>
-        Select all/Unselect
+        {{$t("message.market.btn4")}}
       </div>
     </div>
     <div class="box"  v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
@@ -143,7 +143,7 @@
     </div>
     <!-- 去挂单按钮 -->
     <div class="show_sell_btn mobile_font14 btn_normal" @click="goSellFun" :class="isEnLang ? 'en_Bold' : ''" v-if="!sellPageStatus && nftArr.length > 0">
-      Sell
+      {{$t("message.market.btn1")}}
     </div>
     <OrderDetails
       :userselectarr="NftandBoxarr"
@@ -152,7 +152,7 @@
     ></OrderDetails>
     <!-- 菜单栏 -->
     <div class="mobile_market_proup_page" v-if="mobileMenStatus">
-      <p class="title_ mobile_font20" :class="isEnLang ? 'en_heavy' : ''">Filter</p>
+      <p class="title_ mobile_font20" :class="isEnLang ? 'en_heavy' : ''">{{$t("message.market.filter")}}</p>
       <ul class="left_nav" v-if="historyStatus">
         <li v-for="(item, index) in navArr" :key="index">
           <!-- 一级标题栏 -->
@@ -711,7 +711,7 @@
                 </svg>
               </div>
               <span class="mobile_font16" :class="isEnLang ? 'en_Bold' : ''">{{
-                item.title
+                $t(item.title)
               }}</span>
             </div>
             <svg
@@ -741,7 +741,7 @@
                 @click="itemClick(item, item1, index1)"
               >
                 <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{
-                  item1.title
+                  $t(item1.title)
                 }}</span>
                 <div class="checkbox">
                   <span class="correct font18" v-show="item1.status"></span>
@@ -775,7 +775,7 @@
                       :key="index"
                       @click="selectCoin(ele)"
                     >
-                      {{ $t(ele.title) }}
+                      {{ $ele.title }}
                     </span>
                   </div>
                 </div>
@@ -804,7 +804,7 @@
                 :class="isEnLang ? 'en_Bold' : ''"
                 @click="inputAppply"
               >
-                Apply
+                {{$t("message.market.btn6")}}
               </div>
             </div>
             <div class="id_box" v-if="item.id == 8">
@@ -816,7 +816,7 @@
               >
                 <p>
                   <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{
-                    item1.title
+                    $t(item1.title)
                   }}</span>
                   <img
                     :src="`${$store.state.imgUrl}start.webp`"
@@ -841,7 +841,7 @@
                     class="power_img"
                   />
                   <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{
-                    item1.title
+                    $t(item1.title)
                   }}</span>
                 </p>
                 <div class="checkbox">
@@ -1015,27 +1015,30 @@ export default {
       navArr: [
         {
           id: 1,
-          title: 'Game',
+          title: 'message.market.menu1',
           showStatus: true,
           arr: [
             {
-              title: 'Sacred Realm',
+              title: 'message.market.menu2',
+              label:'Sacred Realm',
               status: true
             }
           ]
         },
         {
           id: 2,
-          title: 'Type',
+          title: 'message.market.menu3',
           showStatus: true,
           arr: [
             {
-              title: 'Mystery Box',
+              title: 'message.market.menu4',
+              label: 'Mystery Box',
               status: false,
               disable:false
             },
             {
-              title: 'NFT',
+              title: 'message.market.menu5',
+              label: 'NFT',
               status: true,
               disable:true
             }
@@ -1043,100 +1046,101 @@ export default {
         },
         {
           id: 3,
-          title: 'Price',
+          title: 'message.market.menu6',
           showStatus: true,
           arr: [
             {
               title: 'ST',
+              label:'ST',
               status: false
             },
           ]
         },
         {
           id: 5,
-          title: 'Character',
+          title: 'message.market.menu7',
           showStatus: false,
           arr: [
-            { title: 'Gladiator', status: false,content:1 },
-            { title: 'Assassin', status: false,content:2 },
-            { title: 'Wizard', status: false,content:3 },
-            { title: 'Fighter', status: false, content:4 }
+            { title: 'message.market.menu8',label: 'Gladiator', status: false,content:1 },
+            { title: 'message.market.menu9',label: 'Assassin', status: false,content:2 },
+            { title: 'message.market.menu10',label: 'Wizard', status: false,content:3 },
+            { title: 'message.market.menu11', label: 'Fighter', status: false, content:4 }
           ]
         },
         {
           id: 6,
-          title: 'Suit',
+          title: 'message.market.menu12',
           showStatus: false,
           arr: [
-            { title: 'Sacred light', status: false,content:1 },
-            { title: 'Ancient mysteries', status: false,content:2 },
-            { title: 'Iron', status: false,content:3 },
-            { title: 'Conquerors silence', status: false,content:4 }
+            { title: 'message.market.menu13', label: 'Sacred light',status: false,content:1 },
+            { title: 'message.market.menu14', label: 'Ancient mysteries',status: false,content:2 },
+            { title: 'message.market.menu15', label: 'Iron',status: false,content:3 },
+            { title: 'message.market.menu16', label: 'Conquerors silence',status: false,content:4 }
           ]
         },
         {
           id: 7,
-          title: 'Part',
+          title: 'message.market.menu17',
           showStatus: false,
           arr: [
-            { title: 'Weapon', status: false,content:1},
-            { title: 'Helm', status: false,content:2},
-            { title: 'Plate', status: false,content:3},
-            { title: 'Gauntlet', status: false,content:4},
-            { title: 'Boots', status: false,content:5},
-            { title: 'Belt', status: false,content:6},
-            { title: 'Necklace', status: false,content:7},
-            { title: 'Ring', status: false,content:8},
+            { title: 'message.market.menu18',label: 'Weapon', status: false,content:1},
+            { title: 'message.market.menu19',label: 'Helm', status: false,content:2},
+            { title: 'message.market.menu20',label: 'Plate', status: false,content:3},
+            { title: 'message.market.menu21',label: 'Gauntlet', status: false,content:4},
+            { title: 'message.market.menu22',label: 'Boots', status: false,content:5},
+            { title: 'message.market.menu23',label: 'Belt', status: false,content:6},
+            { title: 'message.market.menu24',label: 'Necklace', status: false,content:7},
+            { title: 'message.market.menu25',label: 'Ring', status: false,content:8},
           ]
         },
         {
           id: 8,
-          title: 'Stars',
+          title: 'message.market.menu26',
           showStatus: false,
           arr: [
-            { title: '4', status: false,content:4 },
-            { title: '5', status: false,content:5 },
-            { title: '6', status: false,content:6 },
-            { title: '7', status: false,content:7},
-            { title: '8', status: false,content:8 },
+            { title: '4',label:4, status: false,content:4 },
+            { title: '5',label:5,  status: false,content:5 },
+            { title: '6',label:6,  status: false,content:6 },
+            { title: '7',label:7,  status: false,content:7},
+            { title: '8',label:8,  status: false,content:8 },
           ]
         },
         {
           id: 9,
-          title: 'Rarity',
+          title: 'message.market.menu27',
           showStatus: false,
-          arr: [
-            { title: 'Normal', status: false,content:1 },
-            { title: 'Medium', status: false,content:2 },
-            { title: 'Rare', status: false,content:3 },
-            { title: 'Epic', status: false,content:4 },
-            { title: 'Legend', status: false,content:5 }
+          arr: [ 
+            { title: 'message.market.menu28',label: 'Normal',status: false,content:1 },
+            { title: 'message.market.menu29',label: 'Medium', status: false,content:2 },
+            { title: 'message.market.menu30',label: 'Rare',status: false,content:3 },
+            { title: 'message.market.menu31',label: 'Epic', status: false,content:4 },
+            { title: 'message.market.menu32',label: 'Legend', status: false,content:5 }
           ]
         }
       ],
       historyArr: [
         {
           id: 1,
-          title: 'Game',
+          title: 'message.market.menu1',
           showStatus: true,
           arr: [
             {
-              title: 'Sacred Realm',
+              title: 'message.market.menu2',
               status: true
             }
           ]
         },
         {
           id: 2,
-          title: 'Selling'
+          title: 'message.market.menu33'
         },
         {
           id: 3,
-          title: 'Selled'
+          title: 'message.market.menu34'
         },
         {
           id: 4,
-          title: 'Bought'
+          title: 'message.market.menu35'
         },
       ],
       historyID:2,
@@ -1200,11 +1204,11 @@ export default {
         boxType:'',//盲盒类型
       },// 市场上成交的买卖双方的信息
       arr2: [
-        { num: 0, title: "Total volume" },
-        { num: 0, title: "Floor price" },
-        { num: 0, title: "Items" },
-        { num: 0, title: "Transactions" },
-        { num: 0, title: "Holders" },
+        { num: 0, title: "message.market.data1" },
+        { num: 0, title: "message.market.data2" },
+        { num: 0, title: "message.market.data3" },
+        { num: 0, title: "message.market.data4" },
+        { num: 0, title: "message.market.data5" },
       ],
       selectAll:false,//全选按钮
       showSelectStatus:false,// 点击sell 展示选择框
@@ -1294,7 +1298,11 @@ export default {
             this.navArr[1].arr[1].disable = false
 
             this.deleteItem('box')
-            this.navArr.push({id: 4,title: 'Mystery Box',showStatus: true,arr: [{ title: 'Common mystery box',status:true }]},)
+            this.navArr.push(
+              {id: 4,title: 'message.market.menu4',
+              showStatus: true,
+              arr: [{ title: 'message.market.menu36',status:true }]}
+            )
             
             if(!this.sellPageStatus){
               this.clearStstus()
@@ -1347,65 +1355,65 @@ export default {
             this.navArr.push(
               {
                 id: 5,
-                title: 'Character',
+                title: 'message.market.menu7',
                 showStatus: false,
                 arr: [
-                  { title: 'Gladiator', status: false,content:1 },
-                  { title: 'Assassin', status: false,content:2 },
-                  { title: 'Wizard', status: false,content:3 },
-                  { title: 'Fighter', status: false, content:4 }
+                  { title: 'message.market.menu8',label: 'Gladiator', status: false,content:1 },
+                  { title: 'message.market.menu9',label: 'Assassin', status: false,content:2 },
+                  { title: 'message.market.menu10',label: 'Wizard', status: false,content:3 },
+                  { title: 'message.market.menu11', label: 'Fighter', status: false, content:4 }
                 ]
               },
               {
                 id: 6,
-                title: 'Suit',
+                title: 'message.market.menu12',
                 showStatus: false,
                 arr: [
-                  { title: 'Sacred light', status: false,content:1 },
-                  { title: 'Ancient mysteries', status: false,content:2 },
-                  { title: 'Iron', status: false,content:3 },
-                  { title: 'Conquerors silence', status: false,content:4 }
+                  { title: 'message.market.menu13', label: 'Sacred light',status: false,content:1 },
+                  { title: 'message.market.menu14', label: 'Ancient mysteries',status: false,content:2 },
+                  { title: 'message.market.menu15', label: 'Iron',status: false,content:3 },
+                  { title: 'message.market.menu16', label: 'Conquerors silence',status: false,content:4 }
                 ]
               },
               {
                 id: 7,
-                title: 'Part',
+                title: 'message.market.menu17',
                 showStatus: false,
                 arr: [
-                  { title: 'Weapon', status: false,content:1},
-                  { title: 'Helm', status: false,content:2},
-                  { title: 'Plate', status: false,content:3},
-                  { title: 'Gauntlet', status: false,content:4},
-                  { title: 'Boots', status: false,content:5},
-                  { title: 'Belt', status: false,content:6},
-                  { title: 'Necklace', status: false,content:7},
-                  { title: 'Ring', status: false,content:8},
+                  { title: 'message.market.menu18',label: 'Weapon', status: false,content:1},
+                  { title: 'message.market.menu19',label: 'Helm', status: false,content:2},
+                  { title: 'message.market.menu20',label: 'Plate', status: false,content:3},
+                  { title: 'message.market.menu21',label: 'Gauntlet', status: false,content:4},
+                  { title: 'message.market.menu22',label: 'Boots', status: false,content:5},
+                  { title: 'message.market.menu23',label: 'Belt', status: false,content:6},
+                  { title: 'message.market.menu24',label: 'Necklace', status: false,content:7},
+                  { title: 'message.market.menu25',label: 'Ring', status: false,content:8},
                 ]
               },
               {
                 id: 8,
-                title: 'Stars',
+                title: 'message.market.menu26',
                 showStatus: false,
                 arr: [
-                  { title: '4', status: false,content:4 },
-                  { title: '5', status: false,content:5 },
-                  { title: '6', status: false,content:6 },
-                  { title: '7', status: false,content:7},
-                  { title: '8', status: false,content:8 },
+                  { title: '4',label:4, status: false,content:4 },
+                  { title: '5',label:5,  status: false,content:5 },
+                  { title: '6',label:6,  status: false,content:6 },
+                  { title: '7',label:7,  status: false,content:7},
+                  { title: '8',label:8,  status: false,content:8 },
                 ]
               },
               {
                 id: 9,
-                title: 'Rarity',
+                title: 'message.market.menu27',
                 showStatus: false,
-                arr: [
-                  { title: 'Normal', status: false,content:1 },
-                  { title: 'Medium', status: false,content:2 },
-                  { title: 'Rare', status: false,content:3 },
-                  { title: 'Epic', status: false,content:4 },
-                  { title: 'Legend', status: false,content:5 }
+                arr: [ 
+                  { title: 'message.market.menu28',label: 'Normal',status: false,content:1 },
+                  { title: 'message.market.menu29',label: 'Medium', status: false,content:2 },
+                  { title: 'message.market.menu30',label: 'Rare',status: false,content:3 },
+                  { title: 'message.market.menu31',label: 'Epic', status: false,content:4 },
+                  { title: 'message.market.menu32',label: 'Legend', status: false,content:5 }
                 ]
-              },
+              }
             )
             
             if(!this.sellPageStatus){

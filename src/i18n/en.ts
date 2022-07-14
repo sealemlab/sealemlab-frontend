@@ -941,10 +941,71 @@ export const message = {
     order_4:'You will get',
     order_5:'同时挂单多个NFT,挂单价格一致',
     order_6:'Preview',
-    order_7:'List',
-    order_8:'List',
-    order_9:'List',
-    order_10:'List',
+
+    market_title1:'Welcome to NFTs mark',
+    market_title2:'Sell',
+    market_title3:'History',
+
+    data1:'Total volume',
+    data2:'Floor price',
+    data3:'Items',
+    data4:'Transactions',
+    data5:'Holders',
+
+    filter:'Filter',
+
+    btn1:'Sell',
+    btn2:'History',
+    btn3:'Multi-Select',
+    btn4:'Select all/Unselect',
+    btn5:'Clear all',
+    btn6:'Apply',
+
+    menu1:'Game',
+    menu2:'Sacred Realm',
+    menu3:'Type',
+    menu4:'Mystery Box',
+    menu5:'NFT',
+    menu6:'Price',
+    menu7:'Character',
+    menu8:'Gladiator',
+    menu9:'Assassin',
+    menu10:'Wizard',
+    menu11:'Fighter',
+    menu12:'Suit',
+    menu13:'Sacred light',
+    menu14:'Ancient mysteries',
+    menu15:'Iron',
+    menu16:'Conquerors silence',
+    menu17:'Part',
+    menu18:'Weapon',
+    menu19:'Helm',
+    menu20:'Plate',
+
+    menu21:'Gauntlet',
+    menu22:'Boots',
+    menu23:'Belt',
+    menu24:'Necklace',
+    menu25:'Ring',
+    menu26:'Stars',
+    menu27:'Rarity',
+    menu28:'Normal',
+    menu29:'Medium',
+    menu30:'Rare',
+
+    menu31:'Epic',
+    menu32:'Legend',
+
+
+    menu33:'Selling',
+    menu34:'Selled',
+    menu35:'Bought',
+
+    menu36:'Common mystery box',
+    menu37:'',
+    menu38:'',
+    menu39:'',
+    menu40:'',
   },
   stake:{
     txt1:'Stake',
@@ -1041,6 +1102,8 @@ export const message = {
 
     self_select:'请选择盒子或者nft',
     self_sell_txt:'请输入售卖价格',
-    self_sell_out:'当前卡牌已售出'
+    self_sell_out:'当前卡牌已售出',
+
+    ordering:'挂单中...'
   },//提示性文案
 };

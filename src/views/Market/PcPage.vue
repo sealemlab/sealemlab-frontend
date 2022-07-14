@@ -3,9 +3,9 @@
     <!-- 背景图 -->
     <div class="bg_">
       <div class="change_txt font35 mobile_font28" :class="isEnLang ? 'en_heavy' : ''">
-        <span v-if="sellPageStatus && historyStatus">Welcome to NFTs mark</span>
-        <span v-else-if="!sellPageStatus">Sell</span>
-        <span v-else-if="!historyStatus">History</span>
+        <span v-if="sellPageStatus && historyStatus">{{$t("message.market.market_title1")}}</span>
+        <span v-else-if="!sellPageStatus">{{$t("message.market.market_title2")}}</span>
+        <span v-else-if="!historyStatus">{{$t("message.market.market_title3")}}</span>
       </div>
     </div>
     <!-- 数据总结 -->
@@ -18,7 +18,7 @@
           item.num
         }}</span>
         <span class="font16" :class="isEnLang ? 'en_medium' : ''">{{
-          item.title
+          $t(item.title)
         }}</span>
       </div>
     </div>
@@ -54,7 +54,7 @@
               ></path>
             </svg>
             <span class="font24" :class="isEnLang ? 'en_Bold' : ''"
-              >Filter</span
+              >{{$t("message.market.filter")}}</span
             >
           </div>
         </li>
@@ -615,7 +615,7 @@
                 </svg>
               </div>
               <span class="font16" :class="isEnLang ? 'en_Bold' : ''">{{
-                item.title
+                $t(item.title)
               }}</span>
             </div>
             <svg
@@ -645,7 +645,7 @@
                 @click="itemClick(item, item1, index1)"
               >
                 <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{
-                  item1.title
+                  $t(item1.title)
                 }}</span>
                 <div class="checkbox">
                   <span class="correct font18" v-show="item1.status"></span>
@@ -679,7 +679,7 @@
                       :key="index"
                       @click="selectCoin(ele)"
                     >
-                      {{ $t(ele.title) }}
+                      {{ele.title }}
                     </span>
                   </div>
                 </div>
@@ -708,7 +708,7 @@
                 :class="isEnLang ? 'en_Bold' : ''"
                 @click="inputAppply"
               >
-                Apply
+                {{$t('message.market.btn6')}}
               </div>
             </div>
             <div class="id_box" v-if="item.id == 8">
@@ -745,7 +745,7 @@
                     class="power_img"
                   />
                   <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{
-                    item1.title
+                    $t(item1.title)
                   }}</span>
                 </p>
                 <div class="checkbox">
@@ -777,7 +777,7 @@
               ></path>
             </svg>
             <span class="font24" :class="isEnLang ? 'en_Bold' : ''"
-              >Filter</span
+              >{{$t("message.market.filter")}}</span
             >
           </div>
         </li>
@@ -860,7 +860,7 @@
                 </svg>
               </div>
               <span class="font16" :class="{'en_Bold':isEnLang,'active_history':item.id == historyID}">{{
-                item.title
+                $t(item.title)
               }}</span>
             </div>
             <svg
@@ -890,7 +890,7 @@
                 :key="index1"
               >
                 <span class="font14" :class="isEnLang ? 'en_Bold' : ''">{{
-                  item1.title
+                  $t(item1.title)
                 }}</span>
                 <div class="checkbox">
                   <span class="correct font18" v-show="item1.status"></span>
@@ -970,7 +970,7 @@
             v-if="sellPageStatus"
             @click="sellPageClick"
           >
-            Sell
+          {{$t("message.market.btn1")}}
           </div>
           <!-- history 按钮 -->
           <div
@@ -978,7 +978,7 @@
             v-if="sellPageStatus"
             @click="historyClick"
           >
-            History
+            {{$t("message.market.btn2")}}
           </div>
           <!-- 选择框 -->
           <div
@@ -990,7 +990,7 @@
             <div class="radious">
               <div v-if="showSelect"></div>
             </div>
-            Multi-Select
+            {{$t("message.market.btn3")}}
           </div>
           <!-- 全选 -->
           <div
@@ -1002,7 +1002,7 @@
             <div class="radious">
               <div v-if="selectAll"></div>
             </div>
-            Select all/Unselect
+            {{$t("message.market.btn4")}}
           </div>
         </div>
         <!-- 搜索结果 -->
@@ -1060,7 +1060,7 @@
             :class="isEnLang ? 'en_Bold' : ''"
             @click="clearBtn"
           >
-            Clear all
+            {{$t("message.market.btn5")}}
           </div>
         </div>
         <!-- 盲盒跟nft装备 -->
@@ -1107,7 +1107,7 @@
           :class="isEnLang ? 'en_Bold' : ''"
           v-if="!sellPageStatus && nftArr.length > 0"
         >
-          Sell
+          {{$t("message.market.btn1")}}
         </div>
       </div>
     </div>
@@ -1156,143 +1156,251 @@ export default {
       MinInputvalue: '',
       MaxInputvalue: '',
       arr2: [
-        { num: 0, title: "Total volume" },
-        { num: 0, title: "Floor price" },
-        { num: 0, title: "Items" },
-        { num: 0, title: "Transactions" },
-        { num: 0, title: "Holders" },
+        { num: 0, title: "message.market.data1" },
+        { num: 0, title: "message.market.data2" },
+        { num: 0, title: "message.market.data3" },
+        { num: 0, title: "message.market.data4" },
+        { num: 0, title: "message.market.data5" },
       ],
       coinArr:[
         {title:'ST'},
         {title:'BUSD'}
       ],
-      navArr: [
+      navOldArr:[
         {
           id: 1,
-          title: 'Game',
-          showStatus: false,
+          title: 'message.market.menu1',
+          showStatus: true,
           arr: [
             {
-              title: 'Sacred Realm',
+              title: 'message.market.menu2',
+              label:'Sacred Realm',
               status: true
             }
           ]
         },
         {
           id: 2,
-          title: 'Type',
+          title: 'message.market.menu3',
           showStatus: true,
           arr: [
             {
-              title: 'Mystery Box',
+              title: 'message.market.menu4',
+              label: 'Mystery Box',
               status: false,
-              disable:false,
-              content:'box'
+              disable:false
             },
             {
-              title: 'NFT',
+              title: 'message.market.menu5',
+              label: 'NFT',
               status: true,
-              disable:true,
-              content:'nft'
+              disable:true
             }
           ]
         },
         {
           id: 3,
-          title: 'Price',
+          title: 'message.market.menu6',
           showStatus: true,
           arr: [
             {
               title: 'ST',
+              label:'ST',
               status: false
             },
           ]
         },
         {
           id: 5,
-          title: 'Character',
+          title: 'message.market.menu7',
           showStatus: false,
           arr: [
-            { title: 'Gladiator', status: false,content:1 },
-            { title: 'Assassin', status: false,content:2 },
-            { title: 'Wizard', status: false,content:3 },
-            { title: 'Fighter', status: false, content:4 }
+            { title: 'message.market.menu8',label: 'Gladiator', status: false,content:1 },
+            { title: 'message.market.menu9',label: 'Assassin', status: false,content:2 },
+            { title: 'message.market.menu10',label: 'Wizard', status: false,content:3 },
+            { title: 'message.market.menu11', label: 'Fighter', status: false, content:4 }
           ]
         },
         {
           id: 6,
-          title: 'Suit',
+          title: 'message.market.menu12',
           showStatus: false,
           arr: [
-            { title: 'Sacred light', status: false,content:1 },
-            { title: 'Ancient mysteries', status: false,content:2 },
-            { title: 'Iron', status: false,content:3 },
-            { title: 'Conquerors silence', status: false,content:4 }
+            { title: 'message.market.menu13', label: 'Sacred light',status: false,content:1 },
+            { title: 'message.market.menu14', label: 'Ancient mysteries',status: false,content:2 },
+            { title: 'message.market.menu15', label: 'Iron',status: false,content:3 },
+            { title: 'message.market.menu16', label: 'Conquerors silence',status: false,content:4 }
           ]
         },
         {
           id: 7,
-          title: 'Part',
+          title: 'message.market.menu17',
           showStatus: false,
           arr: [
-            { title: 'Weapon', status: false,content:1},
-            { title: 'Helm', status: false,content:2},
-            { title: 'Plate', status: false,content:3},
-            { title: 'Gauntlet', status: false,content:4},
-            { title: 'Boots', status: false,content:5},
-            { title: 'Belt', status: false,content:6},
-            { title: 'Necklace', status: false,content:7},
-            { title: 'Ring', status: false,content:8},
+            { title: 'message.market.menu18',label: 'Weapon', status: false,content:1},
+            { title: 'message.market.menu19',label: 'Helm', status: false,content:2},
+            { title: 'message.market.menu20',label: 'Plate', status: false,content:3},
+            { title: 'message.market.menu21',label: 'Gauntlet', status: false,content:4},
+            { title: 'message.market.menu22',label: 'Boots', status: false,content:5},
+            { title: 'message.market.menu23',label: 'Belt', status: false,content:6},
+            { title: 'message.market.menu24',label: 'Necklace', status: false,content:7},
+            { title: 'message.market.menu25',label: 'Ring', status: false,content:8},
           ]
         },
         {
           id: 8,
-          title: 'Stars',
+          title: 'message.market.menu26',
           showStatus: false,
           arr: [
-            { title: '4', status: false,content:4 },
-            { title: '5', status: false,content:5 },
-            { title: '6', status: false,content:6 },
-            { title: '7', status: false,content:7},
-            { title: '8', status: false,content:8 },
+            { title: '4',label:4, status: false,content:4 },
+            { title: '5',label:5,  status: false,content:5 },
+            { title: '6',label:6,  status: false,content:6 },
+            { title: '7',label:7,  status: false,content:7},
+            { title: '8',label:8,  status: false,content:8 },
           ]
         },
         {
           id: 9,
-          title: 'Rarity',
+          title: 'message.market.menu27',
           showStatus: false,
-          arr: [
-            { title: 'Normal', status: false,content:1 },
-            { title: 'Medium', status: false,content:2 },
-            { title: 'Rare', status: false,content:3 },
-            { title: 'Epic', status: false,content:4 },
-            { title: 'Legend', status: false,content:5 }
+          arr: [ 
+            { title: 'message.market.menu28',label: 'Normal',status: false,content:1 },
+            { title: 'message.market.menu29',label: 'Medium', status: false,content:2 },
+            { title: 'message.market.menu30',label: 'Rare',status: false,content:3 },
+            { title: 'message.market.menu31',label: 'Epic', status: false,content:4 },
+            { title: 'message.market.menu32',label: 'Legend', status: false,content:5 }
           ]
         }
       ],
-      historyArr: [
+      navArr: [
         {
           id: 1,
-          title: 'Game',
+          title: 'message.market.menu1',
           showStatus: true,
           arr: [
             {
-              title: 'Sacred Realm',
+              title: 'message.market.menu2',
+              label:'Sacred Realm',
               status: true
             }
           ]
         },
         {
           id: 2,
-          title: 'Selling'
+          title: 'message.market.menu3',
+          showStatus: true,
+          arr: [
+            {
+              title: 'message.market.menu4',
+              label: 'Mystery Box',
+              status: false,
+              disable:false
+            },
+            {
+              title: 'message.market.menu5',
+              label: 'NFT',
+              status: true,
+              disable:true
+            }
+          ]
         },
         {
           id: 3,
-          title: 'Selled'
+          title: 'message.market.menu6',
+          showStatus: true,
+          arr: [
+            {
+              title: 'ST',
+              label:'ST',
+              status: false
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: 'message.market.menu7',
+          showStatus: false,
+          arr: [
+            { title: 'message.market.menu8',label: 'Gladiator', status: false,content:1 },
+            { title: 'message.market.menu9',label: 'Assassin', status: false,content:2 },
+            { title: 'message.market.menu10',label: 'Wizard', status: false,content:3 },
+            { title: 'message.market.menu11', label: 'Fighter', status: false, content:4 }
+          ]
+        },
+        {
+          id: 6,
+          title: 'message.market.menu12',
+          showStatus: false,
+          arr: [
+            { title: 'message.market.menu13', label: 'Sacred light',status: false,content:1 },
+            { title: 'message.market.menu14', label: 'Ancient mysteries',status: false,content:2 },
+            { title: 'message.market.menu15', label: 'Iron',status: false,content:3 },
+            { title: 'message.market.menu16', label: 'Conquerors silence',status: false,content:4 }
+          ]
+        },
+        {
+          id: 7,
+          title: 'message.market.menu17',
+          showStatus: false,
+          arr: [
+            { title: 'message.market.menu18',label: 'Weapon', status: false,content:1},
+            { title: 'message.market.menu19',label: 'Helm', status: false,content:2},
+            { title: 'message.market.menu20',label: 'Plate', status: false,content:3},
+            { title: 'message.market.menu21',label: 'Gauntlet', status: false,content:4},
+            { title: 'message.market.menu22',label: 'Boots', status: false,content:5},
+            { title: 'message.market.menu23',label: 'Belt', status: false,content:6},
+            { title: 'message.market.menu24',label: 'Necklace', status: false,content:7},
+            { title: 'message.market.menu25',label: 'Ring', status: false,content:8},
+          ]
+        },
+        {
+          id: 8,
+          title: 'message.market.menu26',
+          showStatus: false,
+          arr: [
+            { title: '4',label:4, status: false,content:4 },
+            { title: '5',label:5,  status: false,content:5 },
+            { title: '6',label:6,  status: false,content:6 },
+            { title: '7',label:7,  status: false,content:7},
+            { title: '8',label:8,  status: false,content:8 },
+          ]
+        },
+        {
+          id: 9,
+          title: 'message.market.menu27',
+          showStatus: false,
+          arr: [ 
+            { title: 'message.market.menu28',label: 'Normal',status: false,content:1 },
+            { title: 'message.market.menu29',label: 'Medium', status: false,content:2 },
+            { title: 'message.market.menu30',label: 'Rare',status: false,content:3 },
+            { title: 'message.market.menu31',label: 'Epic', status: false,content:4 },
+            { title: 'message.market.menu32',label: 'Legend', status: false,content:5 }
+          ]
+        }
+      ],
+      historyArr: [
+        {
+          id: 1,
+          title: 'message.market.menu1',
+          showStatus: true,
+          arr: [
+            {
+              title: 'message.market.menu2',
+              status: true
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: 'message.market.menu33'
+        },
+        {
+          id: 3,
+          title: 'message.market.menu34'
         },
         {
           id: 4,
-          title: 'Bought'
+          title: 'message.market.menu35'
         },
       ],
       historyID:2,
@@ -1358,107 +1466,6 @@ export default {
         nft: '',
         token: '',
       },
-      navOldArr:[
-        {
-          id: 1,
-          title: 'Game',
-          showStatus: false,
-          arr: [
-            {
-              title: 'Sacred Realm',
-              status: true
-            }
-          ]
-        },
-        {
-          id: 2,
-          title: 'Type',
-          showStatus: true,
-          arr: [
-            {
-              title: 'Mystery Box',
-              status: false,
-              disable:false
-            },
-            {
-              title: 'NFT',
-              status: true,
-              disable:true
-            }
-          ]
-        },
-        {
-          id: 3,
-          title: 'Price',
-          showStatus: false,
-          arr: [
-            {
-              title: 'ST',
-              status: false
-            },
-          ]
-        },
-        {
-          id: 5,
-          title: 'Character',
-          showStatus: false,
-          arr: [
-            { title: 'Gladiator', status: false,content:1 },
-            { title: 'Assassin', status: false,content:2 },
-            { title: 'Wizard', status: false,content:3 },
-            { title: 'Fighter', status: false, content:4 }
-          ]
-        },
-        {
-          id: 6,
-          title: 'Suit',
-          showStatus: false,
-          arr: [
-            { title: 'Sacred light', status: false,content:1 },
-            { title: 'Ancient mysteries', status: false,content:2 },
-            { title: 'Iron', status: false,content:3 },
-            { title: 'Conquerors silence', status: false,content:4 }
-          ]
-        },
-        {
-          id: 7,
-          title: 'Part',
-          showStatus: false,
-          arr: [
-            { title: 'Weapon', status: false,content:1},
-            { title: 'Helm', status: false,content:2},
-            { title: 'Plate', status: false,content:3},
-            { title: 'Gauntlet', status: false,content:4},
-            { title: 'Boots', status: false,content:5},
-            { title: 'Belt', status: false,content:6},
-            { title: 'Necklace', status: false,content:7},
-            { title: 'Ring', status: false,content:8},
-          ]
-        },
-        {
-          id: 8,
-          title: 'Stars',
-          showStatus: false,
-          arr: [
-            { title: '4', status: false,content:4 },
-            { title: '5', status: false,content:5 },
-            { title: '6', status: false,content:6 },
-            { title: '7', status: false,content:7},
-            { title: '8', status: false,content:8 },
-          ]
-        },
-        {
-          id: 9,
-          title: 'Rarity',
-          showStatus: false,
-          arr: [
-            { title: 'Normal', status: false,content:1 },
-            { title: 'Medium', status: false,content:2 },
-            { title: 'Rare', status: false,content:3 },
-            { title: 'Epic', status: false,content:4 },
-            { title: 'Legend', status: false,content:5 }
-          ]
-      }],
       loadingHistory:false,// 进入history页面第一次获取数据以后 变量为真
     }
   },
@@ -1579,8 +1586,11 @@ export default {
             this.navArr[1].arr[1].disable = false
 
             this.deleteItem('box')
-            this.navArr.push({id: 4,title: 'Mystery Box',showStatus: true,arr: [{ title: 'Common mystery box',status:true }]},)
-            
+            this.navArr.push(
+              {id: 4,title: 'message.market.menu4',
+              showStatus: true,
+              arr: [{ title: 'message.market.menu36',status:true }]}
+            )
             if(!this.sellPageStatus){
               this.clearStstus()
               this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
@@ -1634,65 +1644,65 @@ export default {
             this.navArr.push(
               {
                 id: 5,
-                title: 'Character',
+                title: 'message.market.menu7',
                 showStatus: false,
                 arr: [
-                  { title: 'Gladiator', status: false,content:1 },
-                  { title: 'Assassin', status: false,content:2 },
-                  { title: 'Wizard', status: false,content:3 },
-                  { title: 'Fighter', status: false, content:4 }
+                  { title: 'message.market.menu8',label: 'Gladiator', status: false,content:1 },
+                  { title: 'message.market.menu9',label: 'Assassin', status: false,content:2 },
+                  { title: 'message.market.menu10',label: 'Wizard', status: false,content:3 },
+                  { title: 'message.market.menu11', label: 'Fighter', status: false, content:4 }
                 ]
               },
               {
                 id: 6,
-                title: 'Suit',
+                title: 'message.market.menu12',
                 showStatus: false,
                 arr: [
-                  { title: 'Sacred light', status: false,content:1 },
-                  { title: 'Ancient mysteries', status: false,content:2 },
-                  { title: 'Iron', status: false,content:3 },
-                  { title: 'Conquerors silence', status: false,content:4 }
+                  { title: 'message.market.menu13', label: 'Sacred light',status: false,content:1 },
+                  { title: 'message.market.menu14', label: 'Ancient mysteries',status: false,content:2 },
+                  { title: 'message.market.menu15', label: 'Iron',status: false,content:3 },
+                  { title: 'message.market.menu16', label: 'Conquerors silence',status: false,content:4 }
                 ]
               },
               {
                 id: 7,
-                title: 'Part',
+                title: 'message.market.menu17',
                 showStatus: false,
                 arr: [
-                  { title: 'Weapon', status: false,content:1},
-                  { title: 'Helm', status: false,content:2},
-                  { title: 'Plate', status: false,content:3},
-                  { title: 'Gauntlet', status: false,content:4},
-                  { title: 'Boots', status: false,content:5},
-                  { title: 'Belt', status: false,content:6},
-                  { title: 'Necklace', status: false,content:7},
-                  { title: 'Ring', status: false,content:8},
+                  { title: 'message.market.menu18',label: 'Weapon', status: false,content:1},
+                  { title: 'message.market.menu19',label: 'Helm', status: false,content:2},
+                  { title: 'message.market.menu20',label: 'Plate', status: false,content:3},
+                  { title: 'message.market.menu21',label: 'Gauntlet', status: false,content:4},
+                  { title: 'message.market.menu22',label: 'Boots', status: false,content:5},
+                  { title: 'message.market.menu23',label: 'Belt', status: false,content:6},
+                  { title: 'message.market.menu24',label: 'Necklace', status: false,content:7},
+                  { title: 'message.market.menu25',label: 'Ring', status: false,content:8},
                 ]
               },
               {
                 id: 8,
-                title: 'Stars',
+                title: 'message.market.menu26',
                 showStatus: false,
                 arr: [
-                  { title: '4', status: false,content:4 },
-                  { title: '5', status: false,content:5 },
-                  { title: '6', status: false,content:6 },
-                  { title: '7', status: false,content:7},
-                  { title: '8', status: false,content:8 },
+                  { title: '4',label:4, status: false,content:4 },
+                  { title: '5',label:5,  status: false,content:5 },
+                  { title: '6',label:6,  status: false,content:6 },
+                  { title: '7',label:7,  status: false,content:7},
+                  { title: '8',label:8,  status: false,content:8 },
                 ]
               },
               {
                 id: 9,
-                title: 'Rarity',
+                title: 'message.market.menu27',
                 showStatus: false,
-                arr: [
-                  { title: 'Normal', status: false,content:1 },
-                  { title: 'Medium', status: false,content:2 },
-                  { title: 'Rare', status: false,content:3 },
-                  { title: 'Epic', status: false,content:4 },
-                  { title: 'Legend', status: false,content:5 }
+                arr: [ 
+                  { title: 'message.market.menu28',label: 'Normal',status: false,content:1 },
+                  { title: 'message.market.menu29',label: 'Medium', status: false,content:2 },
+                  { title: 'message.market.menu30',label: 'Rare',status: false,content:3 },
+                  { title: 'message.market.menu31',label: 'Epic', status: false,content:4 },
+                  { title: 'message.market.menu32',label: 'Legend', status: false,content:5 }
                 ]
-              },
+              }
             )
             
             if(!this.sellPageStatus){
@@ -1788,12 +1798,11 @@ export default {
         }
       })
       let obj = {}
-      obj.title = item1.title
+      obj.title = item1.label
       obj.id = item.id
       obj.index = index
       obj.filter = item1.content
       this.selectArr.unshift(obj)
-      console.log('this.selectArr: ', this.selectArr);
     },
     // 清除所有选择的内容
     clearBtn () {
@@ -1822,6 +1831,12 @@ export default {
         }
         this.encapsulationFun()
       }
+      if(this.nftArr.length > 0){
+        this.nftArr.forEach(item => {
+          item.showSelect = false
+          item.selectStatus = false
+        })
+      }
     },
     // 关闭 单个当前的选择数据
     closeSelect (item, index) {
@@ -1838,65 +1853,65 @@ export default {
             this.navArr.push(
               {
                 id: 5,
-                title: 'Character',
+                title: 'message.market.menu7',
                 showStatus: false,
                 arr: [
-                  { title: 'Gladiator', status: false,content:1 },
-                  { title: 'Assassin', status: false,content:2 },
-                  { title: 'Wizard', status: false,content:3 },
-                  { title: 'Fighter', status: false, content:4 }
+                  { title: 'message.market.menu8',label: 'Gladiator', status: false,content:1 },
+                  { title: 'message.market.menu9',label: 'Assassin', status: false,content:2 },
+                  { title: 'message.market.menu10',label: 'Wizard', status: false,content:3 },
+                  { title: 'message.market.menu11', label: 'Fighter', status: false, content:4 }
                 ]
               },
               {
                 id: 6,
-                title: 'Suit',
+                title: 'message.market.menu12',
                 showStatus: false,
                 arr: [
-                  { title: 'Sacred light', status: false,content:1 },
-                  { title: 'Ancient mysteries', status: false,content:2 },
-                  { title: 'Iron', status: false,content:3 },
-                  { title: 'Conquerors silence', status: false,content:4 }
+                  { title: 'message.market.menu13', label: 'Sacred light',status: false,content:1 },
+                  { title: 'message.market.menu14', label: 'Ancient mysteries',status: false,content:2 },
+                  { title: 'message.market.menu15', label: 'Iron',status: false,content:3 },
+                  { title: 'message.market.menu16', label: 'Conquerors silence',status: false,content:4 }
                 ]
               },
               {
                 id: 7,
-                title: 'Part',
+                title: 'message.market.menu17',
                 showStatus: false,
                 arr: [
-                  { title: 'Weapon', status: false,content:1},
-                  { title: 'Helm', status: false,content:2},
-                  { title: 'Plate', status: false,content:3},
-                  { title: 'Gauntlet', status: false,content:4},
-                  { title: 'Boots', status: false,content:5},
-                  { title: 'Belt', status: false,content:6},
-                  { title: 'Necklace', status: false,content:7},
-                  { title: 'Ring', status: false,content:8},
+                  { title: 'message.market.menu18',label: 'Weapon', status: false,content:1},
+                  { title: 'message.market.menu19',label: 'Helm', status: false,content:2},
+                  { title: 'message.market.menu20',label: 'Plate', status: false,content:3},
+                  { title: 'message.market.menu21',label: 'Gauntlet', status: false,content:4},
+                  { title: 'message.market.menu22',label: 'Boots', status: false,content:5},
+                  { title: 'message.market.menu23',label: 'Belt', status: false,content:6},
+                  { title: 'message.market.menu24',label: 'Necklace', status: false,content:7},
+                  { title: 'message.market.menu25',label: 'Ring', status: false,content:8},
                 ]
               },
               {
                 id: 8,
-                title: 'Stars',
+                title: 'message.market.menu26',
                 showStatus: false,
                 arr: [
-                  { title: '4', status: false,content:4 },
-                  { title: '5', status: false,content:5 },
-                  { title: '6', status: false,content:6 },
-                  { title: '7', status: false,content:7},
-                  { title: '8', status: false,content:8 },
+                  { title: '4',label:4, status: false,content:4 },
+                  { title: '5',label:5,  status: false,content:5 },
+                  { title: '6',label:6,  status: false,content:6 },
+                  { title: '7',label:7,  status: false,content:7},
+                  { title: '8',label:8,  status: false,content:8 },
                 ]
               },
               {
                 id: 9,
-                title: 'Rarity',
+                title: 'message.market.menu27',
                 showStatus: false,
-                arr: [
-                  { title: 'Normal', status: false,content:1 },
-                  { title: 'Medium', status: false,content:2 },
-                  { title: 'Rare', status: false,content:3 },
-                  { title: 'Epic', status: false,content:4 },
-                  { title: 'Legend', status: false,content:5 }
+                arr: [ 
+                  { title: 'message.market.menu28',label: 'Normal',status: false,content:1 },
+                  { title: 'message.market.menu29',label: 'Medium', status: false,content:2 },
+                  { title: 'message.market.menu30',label: 'Rare',status: false,content:3 },
+                  { title: 'message.market.menu31',label: 'Epic', status: false,content:4 },
+                  { title: 'message.market.menu32',label: 'Legend', status: false,content:5 }
                 ]
-              },
+              }
             )
             this.deleteItem('nft')
             this.navArr[1].arr[1].status = true
@@ -1998,15 +2013,16 @@ export default {
             return !item.isnft
           })
           this.nftArr = need_boxArr
+          this.loadMoreStatus = false
         }
         if(filterInfo.type == 'nft'){
           let need_NftArr = this.userNftAndBoxArr.filter(item => {
             return item.isnft
           })
+          console.log('need_NftArr: ', need_NftArr);
           console.log("用户自己的nft")
           if(!filterInfo.children){
             this.nftArr = need_NftArr
-            
             console.log("用户自己的nft--children不存在")
           }else{
             this.nftArr = need_NftArr.filter(item => {
@@ -2014,6 +2030,7 @@ export default {
             })
             console.log("用户自己的nft--children存在")
           }
+          this.loadMoreStatus = false
         }
       }
     },
@@ -2113,7 +2130,7 @@ export default {
         }
       }
     },
-    // 显示可挂单的数据的sell按钮
+    // sell按钮
     sellPageClick () {
       this.cancleStatus = false //不显示历史记录的取消按钮
       this.sellPageStatus = false
@@ -2343,10 +2360,14 @@ export default {
     loadMore() {
       this.busy = true;
       if(this.loadMoreStatus && this.isOneLoading) {
-        // console.log("loadmore加载更多")
+        console.log("loadmore加载更多")
         if(this.sellPageStatus && this.historyStatus){
+          console.log('俩变量都为真')
           this.encapsulationFun(false)
-        }else if(!this.historyStatus &&  this.loadingHistory){
+        }else if(!this.historyStatus){
+          console.log('历史记录的selling数据')
+          this.encapsulationFun(false)
+        }else if(!this.historyStatus && this.loadingHistory){
           this.BothSidesEncapsulationFun()
         }
         //sellPageStatus //sell页面时 为假
@@ -2430,12 +2451,12 @@ export default {
       if(type == 'nft'){
         // 装备持有者
         snInfo.getSnCounts(1,0,'owners','desc').then(res => {
-          console.log('装备持有者res: ', res);
+          // console.log('装备持有者res: ', res);
           this.arr2[4].num = res.data.snCounts[0].owners
         })
       }else if(type == 'box'){
         sbInfo.getSbCounts(1,0,'owners','desc').then(res => {
-          console.log('盒子持有者res: ', res);
+          // console.log('盒子持有者res: ', res);
           this.arr2[4].num = res.data.sbCounts[0].owners
         })
       }
@@ -2516,7 +2537,7 @@ export default {
   }
   .data_display {
     width: 90vw;
-    margin: 63px auto 70px;
+    margin: 30px auto;
     display: flex;
     .onebox {
       display: flex;

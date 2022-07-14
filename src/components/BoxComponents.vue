@@ -327,14 +327,18 @@ export default {
     sdkBuyFun(item){
       market().connect(getSigner()).buy([item.nft],[item.nftId],localStorage.getItem('Invitee')).then(async res1 => {
         // console.log('用户购买nft或者盒子res: ', res1);
+        this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res1.hash}));
         const etReceipt = await res1.wait();
         if(etReceipt.status == 1){
           this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
           item.buyloading = false
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
         }else{
           item.buyloading = false
+          this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
         }
       }).catch(() => {
+        this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
         item.buyloading = false
       })
     },
@@ -351,15 +355,19 @@ export default {
           }else{
             market().connect(getSigner()).cancel([item.nft],[item.nftId]).then(async res1 => {
               // console.log('用户批量取消挂单NFTres: ', res1);
+              this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res1.hash}));
               const etReceipt = await res1.wait();
               if(etReceipt.status == 1){
                 this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'取消挂单成功'}));
                 item.buyloading = false
+                this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
               }else{
                 item.buyloading = false
+                this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
               }
             }).catch(() => {
               item.buyloading = false
+              this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
             })
           }
         })
@@ -371,15 +379,19 @@ export default {
           }else{
             market().connect(getSigner()).cancel([item.nft],[item.nftId]).then(async res1 => {
               // console.log('用户批量取消挂单NFTres: ', res1);
+              this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res1.hash}));
               const etReceipt = await res1.wait();
               if(etReceipt.status == 1){
                 this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'取消挂单成功'}));
                 item.buyloading = false
+                this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
               }else{
                 item.buyloading = false
+                this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
               }
             }).catch(() => {
               item.buyloading = false
+              this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
             })
           }
         })

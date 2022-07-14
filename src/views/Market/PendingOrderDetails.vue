@@ -192,6 +192,7 @@ export default {
       if(!this.Pricevalue){
         return this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_txt'}));
       }
+      let that = this
       this.buyLoading = true
       // console.log('选中的nft/box: ', this.userselectarr.arr);
       // this.$utils.convertNormalToBigNumber(Number(this.Pricevalue), 18)
@@ -209,13 +210,16 @@ export default {
         let contractArr = info.map(item => {
           return item.address
         })
-        let that = this
         market().connect(getSigner()).sell(contractArr,idArr,payAdress,priceArr).then(async data => {
           console.log('用户批量挂单data: ', data);
+          that.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.ordering','link':data.hash}));
+          that.$store.commit("setProgressInfo", JSON.stringify({'speed':50}));
           const etReceipt = await data.wait();
           if(etReceipt.status == 1){
             that.buyLoading = false
             that.alredaySellStatus = true
+            that.orderArr = []
+            that.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
             that.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
             if(that.userselectarr.isbox){
               console.log("刷新box")
@@ -225,7 +229,7 @@ export default {
             }
             if(that.userselectarr.isnft){
               console.log("刷新nft")
-              this.$utils.getUserBindbox(this.getAccount, 0, 10000000).then(res3 => {
+              that.$utils.getUserBindbox(this.getAccount, 0, 10000000).then(res3 => {
                 localStorage.setItem('nftInfo',JSON.stringify(res3))
               })
             }
@@ -233,9 +237,11 @@ export default {
             that.getValue = 0
           }else{
             that.buyLoading = false
+            that.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
           }
 
         }).catch(() => {
+          that.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt9'}));
           that.buyLoading = false
         })
       })
