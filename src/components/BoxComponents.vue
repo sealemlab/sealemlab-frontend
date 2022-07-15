@@ -162,7 +162,7 @@
           >
         </div>
         <div class="btn btn_normal font12" :class="isEnLang ? 'en_Bold' : ''" v-if="showCancle">
-          Cancle<BtnLoading :isloading="item.buyloading"></BtnLoading>
+          Cancel<BtnLoading :isloading="item.buyloading"></BtnLoading>
         </div>
       </div>
     </div>
