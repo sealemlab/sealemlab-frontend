@@ -992,12 +992,12 @@ export default {
     'getAccountStatus': {
       handler: function (newValue) {
         if (newValue == 0) {
-          this.loadMoreStatus = true
+          // this.loadMoreStatus = true
           this.integrationBoxAnsNft() // 获取用户的nft跟盒子
         } else if (newValue > 0) {
-          this.loadMoreStatus = true
+          // this.loadMoreStatus = true
           localStorage.removeItem('nftInfo')
-          this.nftArr = []
+          // this.nftArr = []
           this.$utils.antiShakeFun(() => {
             this.integrationBoxAnsNft()
           }, 2000)()
