@@ -209,7 +209,7 @@ export default {
     },// 用户取消挂单按钮 默认显示 ()
   },
   computed: {
-    ...mapGetters(["getIstrue","isEnLang","getAccount","getAccountStatus"])
+    ...mapGetters(["getIstrue","isEnLang","getAccount","getAccountStatus","getUserCoin"])
   },
   watch:{
     'nftArr': {
@@ -319,7 +319,7 @@ export default {
     },
     // 用户购买nft或者盒子
     userBuyFun(item){
-      console.log("用户购买")
+      console.log("用户购买",item)
       if(item.buyloading)return
       item.buyloading = true
       if(item.isnft){
@@ -328,6 +328,11 @@ export default {
             item.buyloading = false
             this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
           }else{
+            if(100 > Number(this.getUserCoin[item.price_currency.toLowerCase()])){
+              this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.InsufficientBalance'}));
+              item.buyloading = false
+              return
+            }
             this.sdkBuyFun(item)
           }
         })
@@ -337,6 +342,11 @@ export default {
             item.buyloading = false
             this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
           }else{
+            if(Number(item.price) > Number(this.getUserCoin[item.price_currency.toLowerCase()])){
+              this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.InsufficientBalance'}));
+              item.buyloading = false
+              return
+            }
             this.sdkBuyFun(item)
           }
         })

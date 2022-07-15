@@ -1093,7 +1093,9 @@ export const message = {
     ordering:'Pending...',
     inputPrice:'Please enter at least one price',
     canclOrder:'Cancel pending order...',
-    Withdrawing:'Withdrawing...'
+    Withdrawing:'Withdrawing...',
+
+    InsufficientBalance: "Insufficient balance",// 余额不足
   },//提示性文案
   approve: "Approve",
 };
