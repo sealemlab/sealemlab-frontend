@@ -1260,7 +1260,6 @@ export default {
       console.log("返回")
       this.priceCoin = 'ST'
       this.clearStstus()
-      this.showCancle = false // 取消按钮 不展示
       this.sellPageStatus = this.historyStatus = true
       this.cancleStatus = false //不显示历史记录的取消按钮
       this.sortObj = {
