@@ -328,7 +328,7 @@ export default {
             item.buyloading = false
             this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_sell_out'}));
           }else{
-            if(100 > Number(this.getUserCoin[item.price_currency.toLowerCase()])){
+            if(Number(item.price) > Number(this.getUserCoin[item.price_currency.toLowerCase()])){
               this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.InsufficientBalance'}));
               item.buyloading = false
               return
