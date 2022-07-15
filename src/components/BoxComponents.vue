@@ -538,6 +538,8 @@ export default {
               display: flex;
               justify-content: space-between;
               align-items: center;
+              perspective: 800px;
+  transform-style: preserve-3d;
               span {
                 font-weight: 800;
                 line-height: 14px;
@@ -633,13 +635,13 @@ export default {
 }
 @keyframes scaleAni {
   0% {
-    transform: scale(1);
+    transform:rotateY(0) scale(0.6);
   }
   50%{
-    transform: scale(0.8);
+    transform: rotateY(360deg) scale(1);
   }
   100% {
-    transform: scale(1);
+    transform:rotateY(0) scale(0.6);
   }
 }
 @media screen and (max-width: 980px) {

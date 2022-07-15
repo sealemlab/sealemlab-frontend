@@ -9,7 +9,7 @@ export default {
     return service.post(`${BASE_API}comm/sendEmail`, data);
   },
   accountLogin: (data: any) => {
-    return service.post(`${BASE_API}comm/login`, data);
+    return service.post(`${BASE_API}comm/uccnLogin`, data);
   },
   accountUpdateInfo: (data: any) => {
     return service.post(`${BASE_API}comm/updateInfo`, data);

@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <!-- Claimable -->
+      <!-- Apply -->
       <div>
         <div class="label">{{ $t("message.gamepage.text20") }}</div>
         <div class="content">
@@ -38,7 +38,8 @@
             </div>
             <div class="balance">{{claimValue | PriceConversion | Thousandths}}</div>
             <!-- <input type="number" :value="claimValue" disabled /> -->
-            <div class="btn" @click="ApplyFun">{{ $t("message.gamepage.text21") }}</div>
+            <div class="btn" @click="ApplyFun" v-if="getLogin.isValid == '0'">{{ $t("message.gamepage.text21") }}</div>
+            <div class="btn" @click="ApplyFun" v-if="getLogin.isValid == '1'">{{ $t("message.account.txt12_1") }}</div>
           </div>
         </div>
       </div>
@@ -493,6 +494,7 @@ export default {
   > div {
     width: 33%;
     padding-bottom: 2rem;
+    padding-right: 0.5rem;
     font-size: 18px;
     display: flex;
     align-items: center;
