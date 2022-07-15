@@ -25,9 +25,27 @@
           <span class="lefttxt">{{$t("message.nft.txt24")}}</span>
           <BtnLoading :isloading="true" v-if="priceStatus"></BtnLoading>
           <span class="righttxt no_border" v-else>{{stPrice | PriceConversion}}</span>
-          <span class="unit_class">ST</span>
-          <!-- <span class="unit_class" v-if="bindboxType == 0">HC</span>
-          <span class="unit_class" v-if="bindboxType == 1">BNB</span> -->
+          <div class="unit_class add_coin_name">
+            <span>{{coinName}}</span>
+            <svg
+              @click="changeCoin"
+              style="cursor: pointer"
+              t="1656322005289"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="12615"
+              width="16"
+              height="16"
+            >
+              <path
+                d="M96 416h832c0.32 0 0.576-0.192 0.896-0.192a30.656 30.656 0 0 0 30.976-30.976C959.808 384.576 960 384.32 960 384a31.424 31.424 0 0 0-14.912-26.368l-188.48-188.48a30.72 30.72 0 1 0-43.456 43.456L852.544 352H96a32 32 0 0 0 0 64zM928 608h-832c-0.32 0-0.576 0.192-0.896 0.192a30.528 30.528 0 0 0-30.976 30.976C64.192 639.424 64 639.68 64 640c0 11.264 6.144 20.672 14.912 26.368l188.48 188.48a30.72 30.72 0 1 0 43.456-43.456L171.456 672H928a32 32 0 0 0 0-64z"
+                p-id="12616"
+                fill="#8F8E8E"
+              ></path>
+            </svg>
+          </div>
         </div>
         <div class="line_onebox font16 mobile_font14">
           <span class="lefttxt">{{$t("message.nft.txt25")}}</span>
@@ -39,21 +57,16 @@
         <div class="line_onebox font16 mobile_font14">
           <span class="lefttxt">{{$t("message.nft.txt26")}}</span>
           <span class="righttxt">{{stTotal}}</span>
-          <span class="unit_class">ST</span>
-          <!-- <span class="unit_class" v-if="bindboxType == 0">HC</span>
-          <span class="unit_class" v-if="bindboxType == 1">BNB</span> -->
+          <span class="unit_class">{{coinName}}</span>
         </div>
         <div class="balance_txt">
           {{$t("message.nft.txt27")}}&nbsp;
           <BtnLoading :isloading="true" v-if="balanceStatus"></BtnLoading>
           <span v-else>{{balance | Thousandths}}</span>
-          <span>&nbsp;ST</span>
-          <!-- <span v-if="bindboxType == 0">HC</span>
-          <span v-if="bindboxType == 1">BNB</span> -->
+          <span>&nbsp;{{coinName}}</span>
           <img :src="`${$store.state.imgUrl}link.webp`" class="link_img" />
         </div>
         <div class="btnbox font20 mobile_font16" :class="disable?'disable_bnb':''">
-          <!-- {{$t("message.nft.txt28")}} -->
           <FunBtn
             :allLoading="allLoading"
             :isapprove="isapprove"
@@ -201,6 +214,9 @@ export default {
       userBuyNum:0,//用户剩余购买数量(频控)
       stTotal:0,//st的总价格
       sliderValue:0,// 拖动条value
+      coinName:'',// 根据合约返回的代币地址,转成相对应的代币名称
+      changeCOINStatus:true, // 防止频繁切换代币
+      coinTimer:null,//函数防抖
     };
   },
   watch: {
@@ -238,6 +254,23 @@ export default {
     },
   },
   methods: {
+    changeCoin(){
+      console.log("用户狂点击中")
+      if(this.changeCOINStatus){
+        this.changeCOINStatus = false
+        if(this.bindboxType == 0){
+          this.$router.push('/nft/buy-blind-box/1')
+        }else if(this.bindboxType == 1){
+          this.$router.push('/nft/buy-blind-box/0')
+        }
+        console.log("获取新数据中")
+      }
+      if(this.coinTimer)return
+      this.coinTimer = setTimeout(() => {
+        this.changeCOINStatus = true
+        this.coinTimer = null
+      },4000)
+    },
     // 去授权
     sonapprove() {
       if (this.buy_isloading) return;
@@ -340,8 +373,9 @@ export default {
       })
       // 获取某类型的盲盒的支付代币地址
       sb().tokenAddrs(boxtypeInfo).then(res => {
-        // console.log('获取某类型的盲盒的支付代币地址res: ', res);
+        // console.log('获取某类型的盲盒的支付代币地址res:%s,传的:%s', res,boxtypeInfo);
         this.payAddress = res
+        this.coinName = this.$utils.getFindKey(this.payAddress,token())
         // 获取用户某代币余额
         this.getUserBalance(res)
       });
@@ -485,6 +519,14 @@ export default {
       color: #ECCF83;
       line-height: 19px;
       text-align: right;
+    }
+    .add_coin_name{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      span{
+        margin-right: 5px;
+      }
     }
     .line_onebox{
       width: 100%;

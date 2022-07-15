@@ -25,6 +25,14 @@ export default {
     }
     return res;
   },
+  // 根据value获取key
+  getFindKey(value:any,obj:any) {
+    let objlist = JSON.parse(JSON.stringify(obj))
+    let findKey = (value: any, compare = (a:any, b:any) => a === b) =>{
+    return Object.keys(objlist).find(k => compare(objlist[k], value))
+    }
+    return findKey(value);
+  },
   // 复制
   copyClick(params: any) {
     const dummy = document.createElement("input");
