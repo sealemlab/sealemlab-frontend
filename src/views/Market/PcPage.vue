@@ -2247,12 +2247,12 @@ export default {
           item.showSelect = false
           item.selectStatus = false
         })
-        this.integrationBoxAnsNft()
+        this.integrationBoxAnsNft(true)
       }
       this.orderStatus = false
     },
     // 整合盲盒数据跟nft数据
-    integrationBoxAnsNft (istrue = true) {
+    integrationBoxAnsNft (istrue = false) {
       this.userNftAndBoxArr = []
       let userBoxArr = JSON.parse(sessionStorage.getItem("setBoxInfo"))
       let userNftArr = JSON.parse(localStorage.getItem("nftInfo"))

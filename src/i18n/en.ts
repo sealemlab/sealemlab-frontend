@@ -934,7 +934,7 @@ export const message = {
 
     order_6:'Preview',
 
-    market_title1:'Welcome to NFTs mark',
+    market_title1:'Welcome to NFTs market',
     market_title2:'Sell',
     market_title3:'History',
 

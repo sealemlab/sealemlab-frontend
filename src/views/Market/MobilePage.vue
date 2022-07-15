@@ -1554,6 +1554,10 @@ export default {
           this.arr2[3].num = res.data.counters[0].transactions
           this.arr2[2].num = res.data.counters[0].items
           this.arr2[0].num = res.data.counters[0].volume / 1e18
+        }else{
+          this.arr2[3].num = 0
+          this.arr2[2].num = 0
+          this.arr2[0].num = 0
         }
       }).catch(err => {
         console.log('市场统计信息err: ',err);
@@ -1723,7 +1727,7 @@ export default {
           item.showSelect = false
           item.selectStatus = false
         })
-        this.integrationBoxAnsNft()
+        this.integrationBoxAnsNft(true)
       }
 
       this.orderStatus = false
@@ -1992,7 +1996,7 @@ export default {
       });
     },
     // 整合盲盒数据跟nft数据
-    integrationBoxAnsNft () {
+    integrationBoxAnsNft (istrue = false) {
       this.userNftAndBoxArr = []
       let userBoxArr = JSON.parse(sessionStorage.getItem("setBoxInfo"))
       let userNftArr = JSON.parse(localStorage.getItem("nftInfo"))
@@ -2002,9 +2006,15 @@ export default {
           if(userNftArr.length != res2[0].length){
             this.$utils.getUserBindbox(this.getAccount, 0, 10000000).then(res3 => {
               this.userNftAndBoxArr =  res3.concat(userBoxArr)
+              if(istrue){
+                this.nftArr = this.userNftAndBoxArr
+              }
             })
           }else{
             this.userNftAndBoxArr =  userNftArr.concat(userBoxArr)
+            if(istrue){
+              this.nftArr = this.userNftAndBoxArr
+            }
           }
         })
       } else {
@@ -2013,8 +2023,14 @@ export default {
           if (res.length > 0) {
             this.userNftAndBoxArr = res.concat(userBoxArr)
             localStorage.setItem('nftInfo', JSON.stringify(res))
+            if(istrue){
+              this.nftArr = this.userNftAndBoxArr
+            }
           } else {
             this.userNftAndBoxArr = userBoxArr
+            if(istrue){
+              this.nftArr = this.userNftAndBoxArr
+            }
           }
         })
       }
