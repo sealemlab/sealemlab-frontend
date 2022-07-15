@@ -2220,6 +2220,7 @@ export default {
       this.clearBtn()
       this.historyID = 2
       this.showSelect = false
+      this.showCancle = false // 取消按钮 不展示
       this.sellPageStatus = this.historyStatus = true
       this.sortObj = {
         first: 8, //查询结果数量，比如填10，就展示前10个结果

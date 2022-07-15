@@ -414,7 +414,7 @@ export default {
               this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.tip.self_txt8','link':res1.hash}));
               const etReceipt = await res1.wait();
               if(etReceipt.status == 1){
-                this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'取消挂单成功'}));
+                this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.tip.self_txt7'}));
                 item.buyloading = false
                 this.$store.dispatch("setProgressInfo", JSON.stringify({'value':100,'title':'message.tip.self_txt7'}));
               }else{
