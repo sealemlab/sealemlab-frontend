@@ -11,15 +11,16 @@
     <!-- 数据总结 -->
     <div class="data_display" v-if="sellPageStatus && historyStatus">
       <div class="onebox" v-for="(item, index) in arr2" :key="index">
-        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-if="index == 0 || index == 1">$ {{
-          item.num | PriceConversion
-        }}</span>
-        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-else>{{
-          item.num
-        }}</span>
-        <span class="font16" :class="isEnLang ? 'en_medium' : ''">{{
-          $t(item.title)
-        }}</span>
+        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-if="(index == 0 || index == 1) && priceCoin == 'ST'">
+          {{item.num | PriceConversion}} ST
+        </span>
+        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-else-if="(index == 0 || index == 1) && priceCoin == 'BUSD'">
+          $ {{item.num | PriceConversion}}
+        </span>
+        <span class="font24" :class="isEnLang ? 'en_Bold' : ''" v-else>
+          {{item.num}}</span>
+        <span class="font16" :class="isEnLang ? 'en_medium' : ''">
+          {{$t(item.title)}}</span>
       </div>
     </div>
     <!-- 返回 -->
@@ -621,6 +622,7 @@
             <svg
               t="1654321191240"
               class="icon"
+              :class="item.showStatus?'rotateClass':''"
               viewBox="0 0 1024 1024"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
@@ -866,6 +868,7 @@
             <svg
               t="1654321191240"
               class="icon"
+              :class="item.showStatus?'rotateClass':''"
               viewBox="0 0 1024 1024"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
@@ -2107,8 +2110,11 @@ export default {
       }, 600);
 
       this.priceCoin = data.title
+
       this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
       this.encapsulationFun()
+
+      console.log('传的参数this.dataInfo: ', this.dataInfo);
 
       this.dataInfo.token = (token()[this.priceCoin]).toLowerCase()
       this.getMarketStatistics(this.dataInfo)
@@ -2236,16 +2242,17 @@ export default {
     },
     closeOrder (data) {
       if (data) {
-        // this.nftArr.forEach(item => {
-        //   item.showSelect = true
-        //   item.selectStatus = false
-        // })
+        this.selectAll = this.showSelect = false
+        this.nftArr.forEach(item => {
+          item.showSelect = false
+          item.selectStatus = false
+        })
         this.integrationBoxAnsNft()
       }
       this.orderStatus = false
     },
     // 整合盲盒数据跟nft数据
-    integrationBoxAnsNft () {
+    integrationBoxAnsNft (istrue = true) {
       this.userNftAndBoxArr = []
       let userBoxArr = JSON.parse(sessionStorage.getItem("setBoxInfo"))
       let userNftArr = JSON.parse(localStorage.getItem("nftInfo"))
@@ -2255,9 +2262,15 @@ export default {
           if(userNftArr.length != res2[0].length){
             this.$utils.getUserBindbox(this.getAccount, 0, 10000000).then(res3 => {
               this.userNftAndBoxArr =  res3.concat(userBoxArr)
+              if(istrue){
+                this.nftArr = this.userNftAndBoxArr
+              }
             })
           }else{
             this.userNftAndBoxArr =  userNftArr.concat(userBoxArr)
+            if(istrue){
+              this.nftArr = this.userNftAndBoxArr
+            }
           }
           // this.loadMoreStatus = false
         })
@@ -2268,9 +2281,15 @@ export default {
             this.userNftAndBoxArr = res.concat(userBoxArr)
             localStorage.setItem('nftInfo', JSON.stringify(res))
             // this.loadMoreStatus = false
+            if(istrue){
+              this.nftArr = this.userNftAndBoxArr
+            }
           } else {
             this.userNftAndBoxArr = userBoxArr
             // this.loadMoreStatus = false
+            if(istrue){
+              this.nftArr = this.userNftAndBoxArr
+            }
           }
         })
       }
@@ -2460,6 +2479,10 @@ export default {
           this.arr2[3].num = res.data.counters[0].transactions
           this.arr2[2].num = res.data.counters[0].items
           this.arr2[0].num = res.data.counters[0].volume / 1e18
+        }else{
+          this.arr2[3].num = 0
+          this.arr2[2].num = 0
+          this.arr2[0].num = 0
         }
       }).catch(err => {
         console.log('市场统计信息err: ',err);
@@ -2633,6 +2656,9 @@ export default {
             .active_history{
               color: #edd083;
             }
+          }
+          .rotateClass{
+            transform: rotate(-180deg);
           }
           .select_img {
             width: 12px;

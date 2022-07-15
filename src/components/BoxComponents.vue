@@ -71,7 +71,7 @@
                   <span class="font12"># {{ item.nftId }}</span>
                   <img
                     :src="`${$store.state.imgUrl}new_3dimg.webp`"
-                    class="img_3d anmation_3d"
+                    class="img_3d"
                   />
                 </div>
               </div>
@@ -640,20 +640,21 @@ export default {
 // .onebox:hover{
 //   box-shadow: 0 0 20px 2px #F0CE75 ;
 // }
-.anmation_3d{
-  animation: scaleAni 3s linear 0s infinite normal;
-}
-@keyframes scaleAni {
-  0% {
-    transform:rotateY(0) scale(0.6);
-  }
-  50%{
-    transform: rotateY(360deg) scale(1);
-  }
-  100% {
-    transform:rotateY(0) scale(0.6);
-  }
-}
+
+// .anmation_3d{
+//   animation: scaleAni 3s linear 0s infinite normal;
+// }
+// @keyframes scaleAni {
+//   0% {
+//     transform:rotateY(0) scale(0.6);
+//   }
+//   50%{
+//     transform: rotateY(360deg) scale(1);
+//   }
+//   100% {
+//     transform:rotateY(0) scale(0.6);
+//   }
+// }
 @media screen and (max-width: 980px) {
   .self_box {
     width: 100%;
