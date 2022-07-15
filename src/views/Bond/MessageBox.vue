@@ -76,6 +76,7 @@ export default {
   left: 0;
   height: 100vh;
   width: 100vw;
+  z-index: 999999999;
   .postion_box {
     position: absolute;
     .showTitle {

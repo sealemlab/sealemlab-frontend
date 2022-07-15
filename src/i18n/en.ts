@@ -742,7 +742,7 @@ export const message = {
     txt10: "Update information",
     txt11: "Account Status",
     txt12: "Active",
-    txt12_1: "Sealing...",
+    txt12_1: "Banned",
     txt13: "Email Approval",
     txt14: "Approved",
     txt15: "Date of Registration",

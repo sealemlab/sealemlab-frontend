@@ -37,9 +37,8 @@
               <span>SR</span>
             </div>
             <div class="balance">{{claimValue | PriceConversion | Thousandths}}</div>
-            <!-- <input type="number" :value="claimValue" disabled /> -->
             <div class="btn" @click="ApplyFun" v-if="getLogin.isValid == '0'">{{ $t("message.gamepage.text21") }}</div>
-            <div class="btn" @click="ApplyFun" v-if="getLogin.isValid == '1'">{{ $t("message.account.txt12_1") }}</div>
+            <div class="btn disable_bnb" v-if="getLogin.isValid == '1'">{{ $t("message.account.txt12_1") }}</div>
           </div>
         </div>
       </div>
@@ -53,7 +52,6 @@
               <span>SR</span>
             </div>
             <div class="balance locked_input">{{lockedValue | PriceConversion | Thousandths}}</div>
-            <!-- <input type="number" :value="lockedValue" class="locked_input" disabled /> -->
           </div>
         </div>
       </div>
@@ -94,8 +92,9 @@
             <td>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == -1">{{ $t("message.gamepage.txt45") }}</div>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == 0">{{ $t("message.gamepage.txt46") }}</div>
-              <div class="claim_btn btn_normal font12" :class="isEnLang?'en_Bold':''" v-if="item.tbStatus == 1" @click="userClaim(item)">
+              <div class="claim_btn font12" :class="{'btn_normal':getLogin.isValid == '0','disable_bnb':getLogin.isValid == '1','en_Bold':isEnLang,}" v-if="item.tbStatus == 1" @click="userClaim(item)">
                 <span v-if="!getIstrue" @click.stop="connectFun">Connect</span>
+                <span v-else-if="getLogin.isValid == '1'">{{ $t("message.account.txt12_1") }}</span>
                 <span v-else>{{ $t("message.gamepage.txt47") }}</span>
                 <BtnLoading :isloading="item.claimLoading"></BtnLoading>
               </div>
@@ -137,9 +136,6 @@ export default {
   components: { PopupRecharge,ProupApply,MessageBox },
   computed: { 
     ...mapGetters(["getLogin","isEnLang","getUserCoin","getAccount","getIstrue"]),
-    // istrue(){
-    //   return !this.isShowClaimList || !this.applyHistory
-    // }
   },
   data() {
     return {
@@ -152,7 +148,6 @@ export default {
       proupRecharge: false,
       proupClaimStatus:false,
       isShowClaimList: true,// calim / recharge
-      // applyHistory:true,// apply / calim 
       list:[],
       datacontent:'',
       clientX:0,
@@ -336,6 +331,7 @@ export default {
     // 用户提取游戏中的sr
     userClaim(item){
       console.log('item: ', item);
+      if(this.getLogin.isValid == '1')return
       if(item.claimLoading)return
       if(this.getLogin.addr.toLowerCase() != this.getAccount.toLowerCase()){
         this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt60'}));
