@@ -626,7 +626,7 @@ export const message = {
     txt32: "Estimated tax rate",
     txt33: "Purchased within 14 days",
     txt34:
-      "Bond will be claimed in ST when expired; tax and invite to buy bond will be reset every 14 daystax and invite to buy bond will be reset every 14 days. If the purchase quantity exceeds the stock or the maximum, the excess will be returned as ST-BUSD LP. You can go to pancake to remove liquidity.",
+      "Bond will be claimed in ST when expired; tax and invite to buy bond will be reset every 14 days. If the purchase quantity exceeds the stock or the maximum, the excess will be returned as ST-BUSD LP. You can go to pancake to remove liquidity.",
     txt35: "Capacity",
     txt36: "Extra rate",
     txt37: "Duration",

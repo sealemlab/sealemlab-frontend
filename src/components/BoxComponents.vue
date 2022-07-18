@@ -548,8 +548,8 @@ export default {
               display: flex;
               justify-content: space-between;
               align-items: center;
-              perspective: 800px;
-  transform-style: preserve-3d;
+              // perspective: 800px;
+              // transform-style: preserve-3d;
               span {
                 font-weight: 800;
                 line-height: 14px;
@@ -558,6 +558,9 @@ export default {
               }
               .img_3d {
                 width: 30px;
+                // &:hover{
+                //   animation: scaleAni 3s linear 0s 1 normal;
+                // }
               }
             }
           }
@@ -644,17 +647,17 @@ export default {
 // .anmation_3d{
 //   animation: scaleAni 3s linear 0s infinite normal;
 // }
-// @keyframes scaleAni {
-//   0% {
-//     transform:rotateY(0) scale(0.6);
-//   }
-//   50%{
-//     transform: rotateY(360deg) scale(1);
-//   }
-//   100% {
-//     transform:rotateY(0) scale(0.6);
-//   }
-// }
+@keyframes scaleAni {
+  0% {
+    transform:rotateY(0) scale(1);
+  }
+  50%{
+    transform: rotateY(360deg) scale(0.6);
+  }
+  100% {
+    transform:rotateY(0) scale(1);
+  }
+}
 @media screen and (max-width: 980px) {
   .self_box {
     width: 100%;
