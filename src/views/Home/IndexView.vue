@@ -11,7 +11,7 @@
             <p class="font_1 font26 mobile_font16">{{$t("message.home.txt2")}}</p>
             <p class="font_2 demo_font_color font45 mobile_font28" :class="isEnLang?'en_heavy':''">
               <!-- {{$t("message.home.add_txt1")}} -->
-              {{maxAPY | MultiplyBySquare}}% APY
+              {{maxAPY | PriceConversion}}% APY
             </p>
             <div class="btnbox font20 mobile_font16">
               <span @click="bondClick">{{$t("message.home.txt3")}}</span>

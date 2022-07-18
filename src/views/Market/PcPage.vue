@@ -784,7 +784,7 @@
           </div>
         </li>
         <li v-for="(item, index) in historyArr" :key="index">
-          <div class="game" @click="historyNavClick(item,index)">
+          <div class="game" @click="historyNavClick(item)">
             <div class="title_left">
               <div class="add_content">
                 <svg
@@ -1531,7 +1531,7 @@ export default {
       this.sortObj.seller = this.getAccount
       this.encapsulationFun()
     },
-    historyNavClick(item,index){
+    historyNavClick(item){
       // console.log('item,index: ', item,index);
       this.cancleStatus = true
       switch(item.id){
