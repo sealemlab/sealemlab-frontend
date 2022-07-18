@@ -215,7 +215,7 @@ export const message = {
     txt51: "Insufficient balance of mystery boxes",
     txt52: "Purchase successfully",
 
-    txt53: "Common mystery box",
+    txt53: "SacredRealm box",
     txt54: "Creation mystery box",
     txt55: "Rare mystery box",
     txt56: "Epic mystery box",

@@ -3,7 +3,7 @@
     <div class="home_bgbox">
       <LoadingAnmation v-if="videoStatus"></LoadingAnmation>
       <video class="video_" ref="video" loop autoplay muted v-show="!videoStatus">
-        <source :src="`${$store.state.videoUrl}sacredrealm.mp4`" type="video/mp4" />
+        <source :src="`${$store.state.videoUrl}new_home_sacredrealm.mp4`" type="video/mp4" />
       </video>
       <div class="content">
         <div class="content_center">

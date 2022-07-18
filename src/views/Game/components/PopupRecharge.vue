@@ -4,15 +4,11 @@
       <div class="close_img" @click="closePopup"></div>
       <div class="content">
         <div class="title">{{ $t("message.gamepage.text19") }}</div>
-        <div class="friends font12" :class="isEnLang?'en_medium':''" @click="friendsStatus = !friendsStatus">
-          <span v-if="friendsStatus">{{ $t("message.gamepage.txt57") }}</span>
-          <span v-else>{{ $t("message.gamepage.txt58") }}</span>
-        </div>
         <!-- 给别人充值 -->
-        <div class="box" v-if="!friendsStatus">
+        <div class="box">
           <div class="title">{{ $t("message.gamepage.txt43") }}</div>
           <div class="inputbox">
-            <Input :fontSize="getIsMobile?'0.14rem':'16px'" class="friends_inputbox" :modelValue="friendAddress" :placeholder='$t("message.gamepage.txt42")' @input="addressInputClick"></Input>
+            <Input :fontSize="getIsMobile?'0.14rem':'16px'" class="friends_inputbox" :modelValue="getLogin.addr?getLogin.addr:friendAddress" :placeholder='$t("message.gamepage.txt42")' @input="addressInputClick"></Input>
           </div>
         </div>
         <!-- 给自己充值 -->
@@ -71,7 +67,6 @@ export default {
   data(){
     return {
       friendAddress:'',
-      friendsStatus:true,
       allLoading:true,
       isapprove:false,
       doingLoading:false,
@@ -104,7 +99,6 @@ export default {
   methods: {
     closePopup() {
       this.friendAddress = ''
-      this.friendsStatus = true
       this.allLoading = true
       this.SRmsg = ''
       this.$emit('closeRecharge',this.rechargeStatus)
@@ -176,18 +170,20 @@ export default {
         return
       }
       let addres = ''
-      if(!this.friendsStatus){
-        try{ 
-          addres = util.getAddress(this.friendAddress)
-        } catch(error){
-          this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt53'}));
-          return
-        }
+      if(this.getLogin.addr){
+        addres = this.getLogin.addr
       }else{
-        addres = this.getAccount
+        addres = this.friendAddress
+      }
+      try{
+        addres = util.getAddress(addres)
+        console.log('try---addres: ', addres);
+      } catch(error){
+        console.log('error---addres: ', addres);
+        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt53'}));
+        return
       }
       this.doingLoading = true;
-      // console.log('addres,util.parseUnits(this.SRmsg): ', addres,util.parseUnits(this.SRmsg));
       srDeposit().connect(getSigner()).deposit(addres,util.parseUnits(this.SRmsg)).then(async res => {
         this.$store.commit("setProupStatus", JSON.stringify({'status':true,'isProgress':false,'title':'message.gamepage.txt54','link':res.hash}));
         this.$store.commit("setProgressInfo", JSON.stringify({'speed':50}));
@@ -287,7 +283,7 @@ export default {
           box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
           border-radius: 8px;
           border: 1px solid #373636;
-          padding: 0 0.5rem;
+          padding: 0 0.8rem;
           color: #ced3d9;
           font-weight: 600;
         }

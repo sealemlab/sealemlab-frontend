@@ -221,20 +221,23 @@ export default {
       this.proupRecharge = false
     },
     openRecharge() {
-      if (!this.getLogin.loginStatus) {
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt61'}));
-        setTimeout(() => {
-          this.proupRecharge = true;
-        },2000)
-      }else if(this.getLogin.addr.toLowerCase() != this.getAccount.toLowerCase()){
-        this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt62'}));
-        setTimeout(() => {
-          this.proupRecharge = true;
-        },2000)
-      }else{
-        this.proupRecharge = true;
+      // if (!this.getLogin.loginStatus) {
+      //   this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt61'}));
+      //   setTimeout(() => {
+      //     this.proupRecharge = true;
+      //   },2000)
+      // }else if(this.getLogin.addr.toLowerCase() != this.getAccount.toLowerCase()){
+      //   this.$store.commit("setNoticeStatus", JSON.stringify({'status':true,'word':'message.gamepage.txt62'}));
+      //   setTimeout(() => {
+      //     this.proupRecharge = true;
+      //   },2000)
+      // }else{
+      if(!this.getIstrue){
+        this.$store.commit("setwalletstatus", true)
+        return
       }
-      
+      this.proupRecharge = true;
+      // }
     },
     ClaimFun(data){
       this.loadMoreStatus = true
