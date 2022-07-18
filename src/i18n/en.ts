@@ -1096,6 +1096,8 @@ export const message = {
     Withdrawing:'Withdrawing...',
 
     InsufficientBalance: "Insufficient balance",// 余额不足
+
+    navTitle:'Buy box',
   },//提示性文案
   approve: "Approve",
 };

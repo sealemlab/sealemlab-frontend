@@ -8,9 +8,9 @@
         </li>
       </ul>
     </div>
-    <!-- <div class="buy_box" :class="{activepage:navActive == 6}" @click="buybox">
-      <span>{{ $t("message.nav.txt14") }}</span>
-    </div> -->
+    <div class="buy_box" :class="{activepage:navActive == 2}" @click="buybox">
+      <span>{{ $t("message.tip.navTitle") }}</span>
+    </div>
     <div class="nav_right">
       <div class="st_price">
         <img :src="`${$store.state.imgUrl}new_stlogo.webp`" class="st_price_img" />
@@ -174,9 +174,9 @@ export default {
       this.$store.commit("setwalletstatus", true);
     },
     buybox(){
-      this.routeArr.push({link: "/activepage",id:6})
+      this.routeArr.push({link: "/nft",id:2})
       localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
-      this.$router.push('/activepage/0');
+      this.$router.push('/nft/buy-blind-box/0');
     }
   },
 };
@@ -232,6 +232,7 @@ export default {
   font-weight: bold;
   color: #CED3D9;
   &:hover{
+    border: 1px solid #ECCF83;
     span {
       color: #EDD083;
     }
@@ -422,7 +423,7 @@ export default {
   }
   .buy_box{
     width: auto;
-    padding: 0 0.16rem;
+    padding: 0 0.05rem;
     height: 0.26rem;
     line-height: 0.26rem;
   }
@@ -434,11 +435,11 @@ export default {
       }
       .font_price {
         line-height: 0.14rem;
-        margin-left: 0.1rem;
+        margin-left: 0.05rem;
       }
     }
     .login_box {
-      margin: 0 0.1rem;
+      margin: 0 0.05rem;
       .font_login {
         font-weight: bold;
         line-height: 0.14rem;
@@ -446,7 +447,7 @@ export default {
     }
     .connect {
       cursor: pointer;
-      padding: 0.05rem 0.15rem;
+      padding: 0.05rem;
       border-radius: 0.08rem;
       margin-right: 0;
       line-height: 0.12rem;
@@ -483,6 +484,13 @@ export default {
     }
     .mobile_lang {
       display: none;
+    }
+  }
+  
+  .activepage{
+    border: 1px solid #ECCF83;
+    span {
+      color: #EDD083;
     }
   }
 }
