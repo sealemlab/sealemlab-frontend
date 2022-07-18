@@ -8,14 +8,14 @@
         <div class="box">
           <div class="title">{{ $t("message.gamepage.txt43") }}</div>
           <div class="inputbox">
-            <Input :fontSize="getIsMobile?'0.14rem':'16px'" class="friends_inputbox" :modelValue="getLogin.addr?getLogin.addr:friendAddress" :placeholder='$t("message.gamepage.txt42")' @input="addressInputClick"></Input>
+            <Input :fontSize="getIsMobile?'0.12rem':'16px'" class="friends_inputbox" :modelValue="getLogin.addr?getLogin.addr:friendAddress" :placeholder='$t("message.gamepage.txt42")' @input="addressInputClick"></Input>
           </div>
         </div>
         <!-- 给自己充值 -->
         <div class="box">
           <div class="title">{{ $t("message.gamepage.text31") }}</div>
           <div class="inputbox">
-            <Input :fontSize="getIsMobile?'0.14rem':'16px'" :modelValue="SRmsg" type="number" :placeholder='$t("message.gamepage.text32")' @input="busdInputClick" class="me_input"></Input>
+            <Input :fontSize="getIsMobile?'0.12rem':'16px'" :modelValue="SRmsg" type="number" :placeholder='$t("message.gamepage.text32")' @input="busdInputClick" class="me_input"></Input>
             <div class="sr">
               <img :src="`${$store.state.imgUrl}srlogo.webp`" alt="" />
               <span>SR</span>
@@ -421,7 +421,7 @@ export default {
             box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
             border-radius: 8px;
             border: 1px solid #373636;
-            padding: 0 0.1rem 0 0.55rem;
+            padding: 0 0.1rem;
             color: #ced3d9;
             font-weight: 600;
           }

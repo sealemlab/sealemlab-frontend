@@ -477,6 +477,10 @@ export default {
     }
   },
   mounted () {
+    // window.onload = function(){
+    //   console.log("页面加载完成")
+    //   document.getElementById('app').style.opacity = 1
+    // }
     if (localStorage.getItem("walletType")) {
       this.$utils.connectWallet(localStorage.getItem("walletType"));
     }
@@ -509,6 +513,7 @@ export default {
   width: calc(100vw - 5px);
   min-height: 100vh;
   overflow-x: hidden;
+  // opacity: 0;
   background: linear-gradient(132deg, #0e0e0e 0%, #0b0a0a 100%);
 }
 @media screen and (min-width: 981px) {

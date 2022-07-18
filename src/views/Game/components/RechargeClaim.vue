@@ -92,7 +92,7 @@
             <td>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == -1">{{ $t("message.gamepage.txt45") }}</div>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == 0">{{ $t("message.gamepage.txt46") }}</div>
-              <div class="claim_btn font12" :class="{'btn_normal':getLogin.isValid == '0','disable_bnb':getLogin.isValid == '1','en_Bold':isEnLang,}" v-if="item.tbStatus == 1" @click="userClaim(item)">
+              <div class="claim_btn font12 mobile_font12" :class="{'btn_normal':getLogin.isValid == '0','disable_bnb':getLogin.isValid == '1','en_Bold':isEnLang,}" v-if="item.tbStatus == 1" @click="userClaim(item)">
                 <span v-if="!getIstrue" @click.stop="connectFun">Connect</span>
                 <span v-else-if="getLogin.isValid == '1'">{{ $t("message.account.txt12_1") }}</span>
                 <span v-else>{{ $t("message.gamepage.txt47") }}</span>
@@ -679,10 +679,13 @@ export default {
         }
         .claim_btn{
           cursor: pointer;
-          width: 98px;
+          width: 70px;
           height: 34px;
           border-radius: 4px;
           backdrop-filter: blur(14px);
+          span{
+            margin-left: 0;
+          }
         }
         .claim_txt{
           font-weight: 500;
@@ -812,7 +815,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 16px;
+          font-size: 0.14rem;
           font-weight: bold;
           color: #000000;
           &.disable {
@@ -913,8 +916,8 @@ export default {
           }
           .claim_btn{
             cursor: pointer;
-            width: 98px;
-            height: 34px;
+            width: 0.7rem;
+            height: 0.3rem;
             border-radius: 4px;
             backdrop-filter: blur(14px);
           }

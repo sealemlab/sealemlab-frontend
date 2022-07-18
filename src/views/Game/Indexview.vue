@@ -111,7 +111,7 @@ export default {
 @media screen and (max-width: 980px) {
   .page {
     width: 100vw;
-    padding-top: 0.6rem;
+    padding-top: 0.25rem;
     min-height: calc(100vh - 2rem);
   }
   .menu {

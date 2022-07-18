@@ -12,7 +12,7 @@
       </div>
       <!-- 页面展示数组 -->
       <div class="cardarr_class">
-        <BoxComponents :selfBoxBetween="true" :nftArr="pageshowarr" @nftFun="cardClick"></BoxComponents>
+        <BoxComponents :centr="true" :nftArr="pageshowarr" @nftFun="cardClick"></BoxComponents>
       </div>
     </div>
     <img :src="`${$store.state.imgUrl}back.webp`" class="close_img" @click.stop="closeOpen"/>
