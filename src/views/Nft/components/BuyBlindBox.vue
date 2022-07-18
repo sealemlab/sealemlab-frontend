@@ -264,6 +264,12 @@ export default {
           this.$router.push('/nft/buy-blind-box/0')
         }
         console.log("获取新数据中")
+        this.sliderValue = 0
+        this.stTotal = 0
+        this.resetdata = true
+        setTimeout(() => {
+          this.resetdata = false
+        },1500)
       }
       if(this.coinTimer)return
       this.coinTimer = setTimeout(() => {
