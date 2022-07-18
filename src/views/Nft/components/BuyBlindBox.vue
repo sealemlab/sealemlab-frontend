@@ -413,21 +413,18 @@ export default {
       // 获取某类型的盲盒是否开启白名单
       sb().whiteListFlags(boxtypeInfo).then(res => {
         // console.log('获取某类型的盲盒是否开启白名单:', res);
-        // this.isOpenWhiteList = res
-        // 判断某用户是否在某类型的盲盒的白名单
-        sb().getWhiteListExistence(boxtypeInfo,this.getAccount).then(res1 => {
-          // console.log('判断某用户是否在某类型的盲盒的白名单:', res1);
-          // this.isWhiteList = res1
-          if(res){//为真证明开启白名单限制
+        if(res){
+          sb().getWhiteListExistence(boxtypeInfo,this.getAccount).then(res1 => {
+            // console.log('判断某用户是否在某类型的盲盒的白名单:', res1);
             if(!res1){
               this.disable = true
             }else{
               this.disable = false
             }
-          }else{
-            this.disable = false
-          }
-        });
+          })
+        }else{
+          this.disable = false
+        }
       });
     }
   },

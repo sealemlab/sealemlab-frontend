@@ -524,7 +524,6 @@ export default {
         top: 0;
         img {
           width: 23px;
-          height: 23px;
           margin: 0 5px;
         }
       }
@@ -738,6 +737,7 @@ export default {
     > div {
       width: 100%;
       padding-bottom: 0.1rem;
+      padding-right: 0;
       font-size: 0.16rem;
       display: flex;
       align-items: center;
@@ -747,13 +747,13 @@ export default {
     }
     .content {
       width: calc(100% - 0.7rem);
-      font-size: 18px;
+      font-size: 0.14rem;
       font-weight: 500;
       display: flex;
       align-items: center;
       .inputbox {
         width: 100%;
-        height: 0.5rem;
+        height: 0.3rem;
         background: #171718;
         box-shadow: inset 0px 4px 11px 0px #0d0e0e, inset 0px -1px 7px 0px #0d0e0e;
         border-radius: 8px;
@@ -770,8 +770,7 @@ export default {
           left: 0;
           top: 0;
           img {
-            width: 23px;
-            height: 23px;
+            width: 0.23rem;
             margin: 0 5px;
           }
         }
@@ -825,6 +824,10 @@ export default {
         }
       }
     }
+    .question_content{
+      width: calc(100% - 0.85rem);
+      margin-left: 0.2rem;
+    }
   }
   .box2 {
     margin-top: 0.2rem;
@@ -835,7 +838,7 @@ export default {
       margin-top: 0.2rem;
       div {
         width: 50%;
-        height: 0.5rem;
+        height: 0.4rem;
         margin-right: 0.2rem;
         display: flex;
         align-items: center;
@@ -859,17 +862,18 @@ export default {
   .box3 {
     margin: 0.2rem 0;
     table {
-      padding-left: 0;
+      padding: 0 0 0.2rem 0.1rem;
       thead {
-        width: 100%;
+        width: calc(100% - 0.2rem);
         background: linear-gradient(311deg, #121212 0%, #0c0c0c 100%);
         position: absolute;
-        top: 0;
+        top: 0.05rem;
       }
       tbody {
         display: block;
         width: 100%;
-        height: 3rem;
+        height: 4rem;
+        max-height: 100%;
         margin-top: 0.3rem;
         overflow-y: auto;
       }

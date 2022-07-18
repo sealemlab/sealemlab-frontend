@@ -82,7 +82,6 @@ export default {
     .showTitle {
       padding: 10px;
       max-width: 200px;
-      background: #fff;
       background: #252526;
       border: 1px solid #373636;
       box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.07), inset 0px 4px 9px 0px rgba(22, 24, 25, 0.82), inset 0px -1px 9px 0px #161819;
