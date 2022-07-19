@@ -15,7 +15,7 @@
             </div>
             <div class="inputbtn" @click="maxClick">{{ $t("message.gamepage.text33") }}</div>
             <div class="tip font12" :class="isEnLang?'en_medium':''">
-              {{ $t("message.gamepage.text34") }}: {{usernum | PriceConversion}}
+              {{ $t("message.gamepage.text34") }}: {{usernum | PriceConversion | Thousandths}}
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@
           <div class="title">{{ $t("message.gamepage.text35") }}</div>
           <div class="list">
             <span :class="index == selectIndex?'active_span':''" v-for="(item,index) in rechargeArr" :key="index" @click="selectFun(item,index)">
-              {{item}}
+              {{item | Thousandths}}
             </span>
           </div>
         </div>

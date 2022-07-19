@@ -774,9 +774,9 @@
                       class="span1 font14"
                       v-for="(ele, index) in coinArr"
                       :key="index"
-                      @click="selectCoin(ele)"
+                      @click.stop="selectCoin(ele)"
                     >
-                      {{ $t(ele.title) }}
+                      {{ ele.title }}
                     </span>
                   </div>
                 </div>

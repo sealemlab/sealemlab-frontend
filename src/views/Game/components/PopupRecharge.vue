@@ -21,7 +21,7 @@
               <span>SR</span>
             </div>
             <div class="inputbtn" @click="maxClick">{{ $t("message.gamepage.text33") }}</div>
-            <div class="tip font12" :class="isEnLang?'en_medium':''">{{ $t("message.gamepage.text34") }}: {{getUserCoin.sr | PriceConversion}}</div>
+            <div class="tip font12" :class="isEnLang?'en_medium':''">{{ $t("message.gamepage.text34") }}: {{getUserCoin.sr | PriceConversion | Thousandths}}</div>
           </div>
         </div>
         <!-- shortcut -->

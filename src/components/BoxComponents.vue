@@ -107,7 +107,7 @@
             >{{ item.price | PriceConversion }} {{ item.price_currency }}</span
           >
         </div>
-        <div class="btn btn_normal font12" :class="isEnLang ? 'en_Bold' : ''" v-if="!getIstrue" @click="connectFun">
+        <div class="btn btn_normal font12" :class="isEnLang ? 'en_Bold' : ''" v-if="!getIstrue" @click.stop="connectFun">
           Connect
         </div>
         <div v-if="item.price_currency == 'BUSD' && getIstrue">
