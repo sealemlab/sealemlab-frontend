@@ -189,7 +189,7 @@ export default {
     jumpFun(){
       let arr = []
       arr.push({link: "/bond",id:0})
-      localStorage.setItem('routeArr',JSON.stringify(arr))
+      sessionStorage.setItem('routeArr',JSON.stringify(arr))
       this.closeProup()
       this.$router.push('/bond')
     },

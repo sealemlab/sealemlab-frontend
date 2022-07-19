@@ -872,7 +872,7 @@ export default {
     toPledge(){
       let arr = []
       arr.push({link: "/staking",id:1})
-      localStorage.setItem('routeArr',JSON.stringify(arr))
+      sessionStorage.setItem('routeArr',JSON.stringify(arr))
       this.$router.push('/staking')
     },
     closeLP(data) {

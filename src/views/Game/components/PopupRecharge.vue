@@ -99,7 +99,6 @@ export default {
   methods: {
     closePopup() {
       this.friendAddress = ''
-      this.allLoading = true
       this.SRmsg = ''
       this.$emit('closeRecharge',this.rechargeStatus)
     },

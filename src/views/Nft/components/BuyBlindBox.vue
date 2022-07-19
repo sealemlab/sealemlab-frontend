@@ -216,7 +216,6 @@ export default {
       sliderValue:0,// 拖动条value
       coinName:'',// 根据合约返回的代币地址,转成相对应的代币名称
       changeCOINStatus:true, // 防止频繁切换代币
-      coinTimer:null,//函数防抖
     };
   },
   watch: {
@@ -271,11 +270,9 @@ export default {
           this.resetdata = false
         },1500)
       }
-      if(this.coinTimer)return
-      this.coinTimer = setTimeout(() => {
+      this.$utils.antiShakeFun(() => {
         this.changeCOINStatus = true
-        this.coinTimer = null
-      },4000)
+      },2000)()
     },
     // 去授权
     sonapprove() {

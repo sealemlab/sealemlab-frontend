@@ -109,7 +109,7 @@ export default {
       if(data == '/home'){
         return -1
       }
-      let localeArr = JSON.parse(localStorage.getItem('routeArr'))
+      let localeArr = JSON.parse(sessionStorage.getItem('routeArr'))
       let arr = localeArr.filter(item => {
         return data.indexOf(item.link) != -1
       })
@@ -135,11 +135,11 @@ export default {
         // }
         this.$router.push(item.link)
         this.routeArr.push(item)
-        localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
+        sessionStorage.setItem('routeArr',JSON.stringify(this.routeArr))
       }else{
         this.$router.push(item.link)
         this.routeArr.push(item)
-        localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
+        sessionStorage.setItem('routeArr',JSON.stringify(this.routeArr))
       }
     },
     goHome(){
@@ -147,7 +147,7 @@ export default {
     },
     loginClick(data) {
       this.routeArr.push({link: "/myaccount",id:7},{link: "/signin",id:7})
-      localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
+      sessionStorage.setItem('routeArr',JSON.stringify(this.routeArr))
       switch (data) {
         case "myaccout":
           this.$router.push("/myaccount/information");
@@ -175,7 +175,7 @@ export default {
     },
     buybox(){
       this.routeArr.push({link: "/nft",id:2})
-      localStorage.setItem('routeArr',JSON.stringify(this.routeArr))
+      sessionStorage.setItem('routeArr',JSON.stringify(this.routeArr))
       this.$router.push('/nft/buy-blind-box/0');
     }
   },

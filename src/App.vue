@@ -384,14 +384,6 @@ export default {
       this.isShowMore = false;
       switch (index) {
         case 0:
-          // if(!this.getProduction){
-          //   this.$router.push("/market");
-          // }else{
-          //   if (!this.getNoticeNum) {
-          //     this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-          //     this.$store.commit("setNoticeNum", true);
-          //   }
-          // }
           this.$router.push("/market");
           break;
         case 1:
@@ -421,36 +413,6 @@ export default {
     // 关闭开盲盒弹窗
     closepageFun () {
       this.$store.commit("setPrizeInfo", JSON.stringify({ status: false, boxarr: [] }));
-    },
-    //屏幕滑动 //手指按下屏幕
-    handleTouchstart (event) {
-      this.startTime = Date.now();
-      // this.startX = event.changedTouches[0].clientX
-      this.startY = event.changedTouches[0].clientY;
-    },
-    //手指离开屏幕
-    handleTouchend (event) {
-      const endTime = Date.now();
-      // const endX = event.changedTouches[0].clientX
-      const endY = event.changedTouches[0].clientY;
-      //判断按下的时长
-      if (endTime - this.startTime > 2000) {
-        console.log("时间大于2秒");
-        return;
-      }
-      //滑动的方向
-      let direction = endY - this.startY > 10 ? "top" : "bottom";
-      console.log("endY -this.startY: ", endY, this.startY);
-      //用户做了合法的滑动操作
-      // console.log('方向'+direction)
-      if (direction === "bottom") {
-        console.log("下滑");
-        this.$store.commit("setMoblieTouch", JSON.stringify({ direction: "bottom" }));
-      }
-      if (direction === "top") {
-        console.log("上滑");
-        this.$store.commit("setMoblieTouch", JSON.stringify({ direction: "top" }));
-      }
     },
     scrollingFun () {
       const bodyWidth = document.body.clientWidth;
@@ -488,20 +450,8 @@ export default {
     window.addEventListener("load", this.setRem);
     window.addEventListener("resize", this.setRem);
 
-    let beginTime = 0;//开始时间
-    let differTime = 0;//时间差
-    window.onunload = function (){
-      differTime = new Date().getTime() - beginTime;
-      if(differTime <= 5){
-        console.log("页面关闭")
-        localStorage.removeItem('routeArr')
-      }
-    };
-    window.onbeforeunload = function (){
-      beginTime = new Date().getTime();
-    };
     bondDepository().getStPrice().then(res => {
-      let stPrice = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
+      let stPrice = util.formatEther(res)
       this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
     })
   }

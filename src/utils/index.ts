@@ -426,16 +426,15 @@ export default {
   },
   // 函数防抖
   antiShakeFun(fn:any,delay:number){
-    let timer:any= null
     return function() {
       // @ts-ignore
       let that = this
-      // @ts-ignore
-      // let args = arguments
-      if(timer){
-        clearTimeout(timer)
+      if(store.state.antiShakeTimer){
+        // @ts-ignore
+        clearTimeout(store.state.antiShakeTimer)
       }
-      timer = setTimeout(function(){
+      // @ts-ignore
+      store.state.antiShakeTimer = setTimeout(function(){
         fn.apply(that)
       },delay)
     }
