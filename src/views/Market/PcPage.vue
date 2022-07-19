@@ -1810,41 +1810,6 @@ export default {
       obj.filter = item1.content
       this.selectArr.unshift(obj)
     },
-    // 清除所有选择的内容(带x的,可以关闭)
-    clearBtn () {
-      this.priceCoin = 'ST'
-      this.MinInputvalue = this.MaxInputvalue = ''
-      this.selectArr = []
-      this.navArr = JSON.parse(JSON.stringify(this.navOldArr))
-      if(!this.sellPageStatus){
-        this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
-      }else{
-        this.sortObj = {
-          first: 8,
-          skip: 0,
-          orderBy: "sellTime",
-          orderDirection: "desc",
-          seller: '',
-          nft:(token().SN).toLowerCase(),
-          token:(token().ST).toLowerCase(),
-          price_gte:'',
-          price_lte:'',
-          stars:'',
-          rarity: '',
-          role: '',
-          part: '',
-          suit: '',
-          boxType:'',
-        }
-        this.encapsulationFun()
-      }
-      if(this.nftArr.length > 0){
-        this.nftArr.forEach(item => {
-          item.showSelect = false
-          item.selectStatus = false
-        })
-      }
-    },
     // 关闭 单个当前的选择数据
     closeSelect (item, index) {
       console.log('关闭 当前的选择数据item, index: ', item, index);
@@ -2213,33 +2178,67 @@ export default {
       })
       
     },
+    // 清除所有选择的内容(带x的,可以关闭)
+    clearBtn () {
+      this.priceCoin = 'ST'
+      this.MinInputvalue = this.MaxInputvalue = ''
+      this.selectArr = []
+      this.navArr = JSON.parse(JSON.stringify(this.navOldArr))
+      if(!this.sellPageStatus){
+        this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
+      }else{
+        this.sortObj = {
+          first: 8,
+          skip: 0,
+          orderBy: "sellTime",
+          orderDirection: "desc",
+          seller: '',
+          nft:(token().SN).toLowerCase(),
+          token:(token().ST).toLowerCase(),
+          price_gte:'',
+          price_lte:'',
+          stars:'',
+          rarity: '',
+          role: '',
+          part: '',
+          suit: '',
+          boxType:'',
+        }
+        this.encapsulationFun()
+      }
+      if(this.nftArr.length > 0){
+        this.nftArr.forEach(item => {
+          item.showSelect = false
+          item.selectStatus = false
+        })
+      }
+    },
     // 返回市场页面
     backClick () {
       this.loadingHistory = false
-      this.priceCoin = 'ST'
-      this.clearBtn()
       this.historyID = 2
-      this.showSelect = false
-      this.cancleStatus = false // 取消按钮 不展示
+      this.showSelect = this.cancleStatus = this.selectAll = false 
       this.sellPageStatus = this.historyStatus = true
-      this.sortObj = {
-        first: 8, //查询结果数量，比如填10，就展示前10个结果
-        skip: 0, //跳过结果数量，用于分页，比如填50，相当于从第6页开始
-        orderBy: "sellTime", // 排序字段，填字段名，所有字段见下文查询结果
-        orderDirection: "desc", // 降序or升序，填desc或asc
-        seller: '',// 卖家地址
-        nft:(token().SN).toLowerCase(),//nft地址
-        token:(token().ST).toLowerCase(), // 代币地址
-        price_gte:'',//最小价格
-        price_lte:'',//最大价格
-        stars:'',
-        rarity: '',
-        role: '',//职业
-        part: '',//部位
-        suit: '',//套装
-        boxType:'',//盲盒类型
-      }
-      this.encapsulationFun()
+      
+      this.clearBtn()
+      // this.sortObj = {
+      //   first: 8, //查询结果数量，比如填10，就展示前10个结果
+      //   skip: 0, //跳过结果数量，用于分页，比如填50，相当于从第6页开始
+      //   orderBy: "sellTime", // 排序字段，填字段名，所有字段见下文查询结果
+      //   orderDirection: "desc", // 降序or升序，填desc或asc
+      //   seller: '',// 卖家地址
+      //   nft:(token().SN).toLowerCase(),//nft地址
+      //   token:(token().ST).toLowerCase(), // 代币地址
+      //   price_gte:'',//最小价格
+      //   price_lte:'',//最大价格
+      //   stars:'',
+      //   rarity: '',
+      //   role: '',//职业
+      //   part: '',//部位
+      //   suit: '',//套装
+      //   boxType:'',//盲盒类型
+      // }
+      // this.encapsulationFun()
     },
     closeOrder (data) {
       if (data) {
@@ -2418,6 +2417,7 @@ export default {
       // console.log("筛选")
       if(!this.sellPageStatus)return
       if(istrue){
+        console.log("进入判断")
         this.sortObj.skip = 0
         this.nftArr = []
       }
