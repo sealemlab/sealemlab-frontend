@@ -2,6 +2,7 @@
   <div class="loading_page">
     <div class="loader"></div>
     <span class="font20 loading_margin" v-if="isshowtxt">Loading...</span>
+    <span class="cancle_loading" v-if="cancleStatus" @click="cancleloading">Cancel loading</span>
   </div>
 </template>
 <script>
@@ -10,8 +11,17 @@ export default {
     isshowtxt: {
       type: Boolean,
       default: false
-    }
+    },
+    cancleStatus: {
+      type: Boolean,
+      default: false
+    },
   },
+  methods:{
+    cancleloading(){
+      this.$emit('cancleloading')
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -38,6 +48,15 @@ export default {
     color: #CED3D9;
     line-height: 34px;
   }
+  .cancle_loading{
+    cursor: pointer;
+    padding:6px 5px;
+    background: #000;
+    margin-top: 60px;
+    font-weight: normal;
+    color: #CED3D9;
+    border-radius: 4px;
+  }
 }
 @keyframes loadingA {
   0% {
@@ -59,6 +78,9 @@ export default {
 @media screen and (max-width: 980px) {
   .loading_page {
     min-height: 2rem;
+  }
+  .cancle_loading{
+    margin-top: 0.2rem;
   }
 }
 </style>

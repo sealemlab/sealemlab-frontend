@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="isEnLang ? 'en_Regular' : 'cn_lang'">
     <div id="showloding">
-      <LoadingAnmation></LoadingAnmation>
+      <LoadingAnmation :cancleStatus="cancleStatus" @cancleloading="cancleloading"></LoadingAnmation>
     </div>
     <NavigationBar />
     <router-view />
@@ -218,6 +218,7 @@ export default {
   },
   data () {
     return {
+      cancleStatus:false,
       navArr: [
         { label: "message.nav.txt10", link: "/home", status: true,id:-1 },
         { label: "message.nav.txt1", link: "/bond", status: false,id:0 },
@@ -241,22 +242,15 @@ export default {
   watch: {
     getAccountStatus: {
       handler: function (newValue) {
-        if(newValue > 0){
-          this.$utils.antiShakeFun(() => {
-            this.getUserCoinInfo()
-          },2000)()
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
-    getIstrue: {
-      handler: function (newValue) {
-        if (newValue) {
+        if (newValue == 0) {
           this.$utils.newgetUserBoxInfoFun(this.getAccount).then((res) => {
             sessionStorage.setItem("sb_count", res);
           })
           this.getUserCoinInfo()
+        }else if(newValue > 0){
+          this.$utils.antiShakeFun(() => {
+            this.getUserCoinInfo()
+          },2000)()
         }
       },
       deep: true,
@@ -300,17 +294,6 @@ export default {
       this.ortherNavArr.forEach((item) => {
         item.status = false;
       });
-
-      // if(this.getProduction){
-      //   // || to.path == "/staking"
-      //   if (to.path == "/market") {
-      //     if (!this.getNoticeNum) {
-      //       this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: "message.tip.txt5" }));
-      //       this.$store.commit("setNoticeNum", true);
-      //     }
-      //     return
-      //   }
-      // }
 
       if (to.path == "/home") {
         this.navArr[0].status = true
@@ -430,22 +413,33 @@ export default {
       erc20(token().ST).balanceOf(this.getAccount).then(res => {
         let st = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{st:st}));
+      }).catch(() => {
+        console.log('st余额获取错误')
       })
       erc20(token().SR).balanceOf(this.getAccount).then(res => {
         let sr = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{sr:sr}));
+      }).catch(() => {
+        console.log('sr余额获取错误')
       })
       erc20(token().BUSD).balanceOf(this.getAccount).then(res => {
         let busd = util.formatEther(res) //this.$utils.convertBigNumberToNormal(Number(res),0,18,true)
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{busd:busd}))
+      }).catch(() => {
+        console.log('busd余额获取错误')
       })
+    },
+    cancleloading(){
+      document.getElementById('showloding').style.display = 'none'
     }
   },
   mounted () {
     window.onload = function(){
-      console.log("页面加载完成")
       document.getElementById('showloding').style.display = 'none'
     }
+    setTimeout(() => {
+        this.cancleStatus = true
+      },5000)
     if (localStorage.getItem("walletType")) {
       this.$utils.connectWallet(localStorage.getItem("walletType"));
     }
@@ -456,6 +450,8 @@ export default {
     bondDepository().getStPrice().then(res => {
       let stPrice = util.formatEther(res)
       this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
+    }).catch(() => {
+      console.log('st价格获取错误')
     })
   }
 };
