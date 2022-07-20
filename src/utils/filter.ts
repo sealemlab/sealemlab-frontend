@@ -25,6 +25,6 @@ const Thousandths = (val :any) => {
 // 有问题待研究
 // const NumDelimiter = (val :Number) => {
 // 	if (!val) return '0.00';
-// 	return val.toLocaleString('en-US')
+// 	return val.toLocaleString()
 // }
 export default { PriceConversion,SquareRoot,MultiplyBySquare,Thousandths};

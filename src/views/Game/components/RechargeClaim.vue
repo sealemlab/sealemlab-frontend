@@ -90,7 +90,7 @@
               </div>
             </td>
             <td>
-              <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == -1">{{ $t("message.gamepage.txt45") }}</div>
+              <div class="claim_txt font16 reject_color" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == -1">{{ $t("message.gamepage.txt45") }}</div>
               <div class="claim_txt font16" :class="isEnLang?'en_medium':''" v-if="item.tbStatus == 0">{{ $t("message.gamepage.txt46") }}</div>
               <div class="claim_btn font12 mobile_font12" :class="{'btn_normal':getLogin.isValid == '0','disable_bnb':getLogin.isValid == '1','en_Bold':isEnLang,}" v-if="item.tbStatus == 1" @click="userClaim(item)">
                 <span v-if="!getIstrue" @click.stop="connectFun">Connect</span>
@@ -695,6 +695,9 @@ export default {
       }
     }
   }
+}
+.reject_color{
+  color: red !important;
 }
 @media screen and (max-width: 980px) {
   .game_title {
