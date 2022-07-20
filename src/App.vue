@@ -1,5 +1,8 @@
 <template>
   <div id="app" :class="isEnLang ? 'en_Regular' : 'cn_lang'">
+    <div id="showloding">
+      <LoadingAnmation></LoadingAnmation>
+    </div>
     <NavigationBar />
     <router-view />
     <FooterComponents />
@@ -439,10 +442,10 @@ export default {
     }
   },
   mounted () {
-    // window.onload = function(){
-    //   console.log("页面加载完成")
-    //   document.getElementById('app').style.opacity = 1
-    // }
+    window.onload = function(){
+      console.log("页面加载完成")
+      document.getElementById('showloding').style.display = 'none'
+    }
     if (localStorage.getItem("walletType")) {
       this.$utils.connectWallet(localStorage.getItem("walletType"));
     }
@@ -459,11 +462,22 @@ export default {
 </script>
 
 <style lang="scss">
+#showloding{
+  position: relative;
+  z-index: 99999999;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(61, 60, 60,0.5);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 #app {
   width: calc(100vw - 5px);
   min-height: 100vh;
   overflow-x: hidden;
-  // opacity: 0;
   background: linear-gradient(132deg, #0e0e0e 0%, #0b0a0a 100%);
 }
 @media screen and (min-width: 981px) {

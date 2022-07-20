@@ -207,7 +207,7 @@ export const message = {
 
     txt45: "Please enter the quantity",
     txt46: "Mystery box is loading",
-    txt47: "There is no data for the mystery box",
+    txt47: "There is no data for the sacredRealm box",
     txt48: "",
 
     txt49: "Insufficient balance",
