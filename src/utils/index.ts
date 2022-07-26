@@ -195,7 +195,7 @@ export default {
       return "null";
     }
   },
-  // 小数点后边有0  去掉0
+  // 小数点后边有0  去掉0---- 可以使用:parseFloat(10.123456000) --> 10.123456
   cutZero(old: any) {
     old = old.toString();
     //拷贝一份 返回去掉零的新串
@@ -426,15 +426,28 @@ export default {
   },
   // 函数防抖
   antiShakeFun(fn:any,delay:number){
+    // return function() {
+    //   // @ts-ignore
+    //   let that = this
+    //   if(store.state.antiShakeTimer){
+    //     // @ts-ignore
+    //     clearTimeout(store.state.antiShakeTimer)
+    //   }
+    //   // @ts-ignore
+    //   store.state.antiShakeTimer = setTimeout(function(){
+    //     fn.apply(that)
+    //   },delay)
+    // }
     return function() {
+      let time = null
       // @ts-ignore
       let that = this
-      if(store.state.antiShakeTimer){
+      if(time){
         // @ts-ignore
-        clearTimeout(store.state.antiShakeTimer)
+        clearTimeout(time)
       }
       // @ts-ignore
-      store.state.antiShakeTimer = setTimeout(function(){
+      time = setTimeout(function(){
         fn.apply(that)
       },delay)
     }

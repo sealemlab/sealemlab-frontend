@@ -33,10 +33,14 @@ export default {
   },
   watch:{
     'isShowTitle'(newvala){
+      let width = ''
       if(newvala){
         document.body.style.overflow='hidden'
+        width = document.getElementById('app').style.width
+        document.getElementById('app').style.width = '100%'
       }else{
         document.body.style.overflow='visible'
+        document.getElementById('app').style.width  = width
       }
     },
   },
