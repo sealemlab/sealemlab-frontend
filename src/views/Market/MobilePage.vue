@@ -1209,7 +1209,7 @@ export default {
         { num: 0, title: "message.market.data2" },
         { num: 0, title: "message.market.data3" },
         { num: 0, title: "message.market.data4" },
-        { num: 0, title: "message.market.data5" },
+        // { num: 0, title: "message.market.data5" },
       ],
       selectAll:false,//全选按钮
       showSelectStatus:false,// 点击sell 展示选择框
@@ -1293,7 +1293,7 @@ export default {
         case 2:
           // console.log("id为2")
           if(index == 0){
-            this.getSNandSBHolders('box')
+            // this.getSNandSBHolders('box')
             item1.status = true
             if(item1.disable)return
             item1.disable = true
@@ -1347,7 +1347,7 @@ export default {
               })
             }
           }else if(index == 1){
-            this.getSNandSBHolders('nft')
+            // this.getSNandSBHolders('nft')
             item1.status = true
             this.navArr[1].arr[0].disable = false
             if(item1.disable)return
@@ -2053,7 +2053,7 @@ export default {
   },
   mounted(){
     this.encapsulationFun(false)
-    this.getSNandSBHolders('nft')
+    // this.getSNandSBHolders('nft')
     // 地板价
     this.getMarketInfo({
       first: 8, //查询结果数量，比如填10，就展示前10个结果
@@ -2126,7 +2126,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     .onebox {
-      width: 33%;
+      width: 25%;
       display: flex;
       flex-direction: column;
       margin-right: 0;

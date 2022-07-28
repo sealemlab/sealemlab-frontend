@@ -8,9 +8,9 @@
         </li>
       </ul>
     </div>
-    <div class="buy_box" :class="{activepage:navActive == 2}" @click="buybox">
+    <!-- <div class="buy_box" :class="{activepage:navActive == 2}" @click="buybox">
       <span>{{ $t("message.tip.navTitle") }}</span>
-    </div>
+    </div> -->
     <div class="nav_right">
       <div class="st_price">
         <img :src="`${$store.state.imgUrl}new_stlogo.webp`" class="st_price_img" />
@@ -425,7 +425,7 @@ export default {
     width: auto;
     padding: 0 0.05rem;
     height: 0.26rem;
-    line-height: 0.26rem;
+    line-height: 0.22rem;
   }
   .nav_right {
     justify-content: space-between;

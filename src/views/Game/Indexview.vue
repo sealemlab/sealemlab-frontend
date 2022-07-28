@@ -143,7 +143,7 @@ export default {
   }
   .main {
     width: 100vw;
-    padding: 0 5vw;
+    padding: 0.16rem 5vw;
     .main_content {
       padding-left: 0;
     }
