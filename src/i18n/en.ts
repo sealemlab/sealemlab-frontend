@@ -847,7 +847,7 @@ export const message = {
     txt42:'Enter the address',
     txt43:'Address',
 
-    txt44:'The withdrawal SR will be locked if the amount withdrawn exceeds 30,000.',
+    txt44:'The withdrawal SR will be locked if the amount withdrawn exceeds 1,000,000, the withdrawal can be made after the approval.',
     txt45:'Review failed',
     txt46:'In review',
     txt47:'Withdraw',
