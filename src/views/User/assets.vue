@@ -122,7 +122,7 @@ export default {
     'getAccountStatus': {
       handler: function (newValue) {
         if(newValue == -1 || newValue == undefined){
-          this.loadMoreStatus = true
+          this.loadMoreStatus = false
           this.nftArr = []
         }else if (newValue == 0) {
           this.integrationBoxAnsNft(true) // 获取用户的nft跟盒子
