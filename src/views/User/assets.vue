@@ -121,7 +121,10 @@ export default {
   watch: {
     'getAccountStatus': {
       handler: function (newValue) {
-        if (newValue == 0) {
+        if(newValue == -1 || newValue == undefined){
+          this.loadMoreStatus = true
+          this.nftArr = []
+        }else if (newValue == 0) {
           this.integrationBoxAnsNft(true) // 获取用户的nft跟盒子
         } else if (newValue > 0) {
           localStorage.removeItem('nftInfo')
