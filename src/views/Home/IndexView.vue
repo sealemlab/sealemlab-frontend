@@ -53,7 +53,7 @@
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num | PriceConversion | Thousandths}} ST</p>
-            <p class="font35" :class="isEnLang?'en_heavy':''" v-else-if="index == 5">N/A</p>
+            <!-- <p class="font35" :class="isEnLang?'en_heavy':''" v-else-if="index == 5">N/A</p> -->
             <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion | Thousandths}}</p>
           </div>
         </div>
@@ -849,6 +849,7 @@ export default {
     },
     mountedFun(){
       this.addArr[4].num = this.getUserCoin.stPrice
+      this.addArr[5].num = this.getUserCoin.srPrice
       // this.addArr[5].num = 'N/A'
 
       // 获取池子总质押ST数量

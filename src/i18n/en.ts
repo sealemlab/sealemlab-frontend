@@ -150,7 +150,7 @@ export const message = {
     txt16: "Help Center",
     txt17: "Team",
     txt18: "ST ",
-    txt19: "SR N/A",
+    txt19: "SR ",
 
     txt21: "COPYRIGHT © 2022 Sealem Lab, All Rights Reserved",
   },//底部

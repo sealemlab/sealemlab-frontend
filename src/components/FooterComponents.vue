@@ -8,6 +8,7 @@
           <li class="font14 en_Regular" v-for="(item, index1) in ele.children" :key="index1">
             <a v-if="item.link == ''" href="javascript:;">
               <span v-if="index1 == 3">{{ $t(item.title) }} $ {{getUserCoin.stPrice | PriceConversion}}</span>
+              <span v-else-if="index1 == 4">{{ $t(item.title) }} $ {{getUserCoin.srPrice | PriceConversion}}</span>
               <span v-else>{{ $t(item.title) }}</span>
             </a>
             <a v-else :href="isEnLang?(item.link_en?item.link_en:item.link):item.link" target="_blank" rel="noopener noreferrer" >{{ $t(item.title) }}</a>

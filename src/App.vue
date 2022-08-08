@@ -211,7 +211,7 @@ import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponents from "@/components/FooterComponents.vue";
 import OpenProup from "@/components/OpenProup.vue";
 import { mapGetters } from "vuex";
-import { token,erc20,bondDepository,util } from  "sealemlab-sdk";
+import { token,erc20,bondDepository,util,pancakeRouter } from  "sealemlab-sdk";
 export default { 
   computed: {
     ...mapGetters(["getAccountStatus","getProduction","getUserCoin","getPrizeInfo", "getIstrue", "getAccount", "isEnLang", "getProupInfo", "getNoticeInfo", "getProgressInfo"]),
@@ -431,6 +431,20 @@ export default {
     },
     cancleloading(){
       document.getElementById('showloding').style.display = 'none'
+    },
+    getPrice(){
+      bondDepository().getStPrice().then(res => {
+        let stPrice = util.formatEther(res)
+        this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
+      }).catch(() => {
+        console.log('st价格获取错误')
+      })
+      pancakeRouter().getAmountsOut(util.parseUnits('1'),[token('production').SR,token('production').BUSD]).then(res => {
+        let srPrice = util.formatEther(res[1])
+        this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{srPrice:srPrice}))
+      }).catch(err => {
+        console.log('sr价格获取错误',errs)
+      })
     }
   },
   mounted () {
@@ -446,13 +460,7 @@ export default {
     window.addEventListener("scroll", this.scrollingFun);
     window.addEventListener("load", this.setRem);
     window.addEventListener("resize", this.setRem);
-
-    bondDepository().getStPrice().then(res => {
-      let stPrice = util.formatEther(res)
-      this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{stPrice:stPrice}))
-    }).catch(() => {
-      console.log('st价格获取错误')
-    })
+    this.getPrice()
   }
 };
 </script>
