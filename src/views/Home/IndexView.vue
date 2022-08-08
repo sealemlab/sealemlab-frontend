@@ -53,7 +53,7 @@
               <span class="span font24" :class="isEnLang?'en_medium':''">{{$t(item.title)}}</span>
             </div>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-if="index == 3">{{item.num | PriceConversion | Thousandths}} ST</p>
-            <!-- <p class="font35" :class="isEnLang?'en_heavy':''" v-else-if="index == 5">N/A</p> -->
+            <p class="font35" :class="isEnLang?'en_heavy':''" v-else-if="index == 5">$ {{item.num | PriceConversion(5) | Thousandths}}</p>
             <p class="font35" :class="isEnLang?'en_heavy':''" v-else>$ {{item.num | PriceConversion | Thousandths}}</p>
           </div>
         </div>

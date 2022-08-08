@@ -443,7 +443,7 @@ export default {
         let srPrice = util.formatEther(res[1])
         this.$store.commit("setUserCoin",Object.assign(this.getUserCoin,{srPrice:srPrice}))
       }).catch(err => {
-        console.log('sr价格获取错误',errs)
+        console.log('sr价格获取错误',err)
       })
     }
   },
