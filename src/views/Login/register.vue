@@ -131,6 +131,9 @@ export default {
               that.codebtnloading = false;
             });
           });
+        }).catch(() => {
+          that.codebtnloading = false;
+          that.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: 'Unable to connect to the authentication service, please change the network operator and try again' }));
         })
       }
     },
