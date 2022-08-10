@@ -2418,7 +2418,7 @@ export default {
     // 加载更多
     loadMore() {
       this.busy = true;
-      console.log("loadmore加载函数")
+      // console.log("loadmore加载函数")
       if(this.loadMoreStatus && this.isOneLoading) {
         console.log("loadmore加载更多")
         if(this.sellPageStatus && this.historyStatus){
