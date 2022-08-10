@@ -10,20 +10,6 @@
       </div>
     </div>
     <div class="user_inputbox">
-      <p class="email_txt">{{ $t("message.signin.txt19") }}</p>
-      <div class="inputbox">
-        <input type="text" v-model.trim="registerForm.verifyCode" />
-        <div class="verification" @click="sendEmail">
-          <span v-if="showCountdown">{{ minutes + " : " + seconds }}</span>
-          <span v-else>{{ $t("message.signin.txt39") }}</span>
-          <BtnLoading :isloading="codebtnloading"></BtnLoading>
-        </div>
-      </div>
-      <div class="input_prompt font12" v-if="registerForm.prompt2">
-        <span>* {{ $t(registerForm.prompt2) }}</span>
-      </div>
-    </div>
-    <div class="user_inputbox">
       <p class="email_txt">{{ $t("message.signin.txt17") }}</p>
       <div class="inputbox">
         <input :type="isShowPassword ? 'text' : 'password'" v-model.trim="registerForm.password" />
@@ -45,6 +31,20 @@
       </div>
       <div class="input_prompt font12" v-if="registerForm.prompt4">
         <span>* {{ $t(registerForm.prompt4) }}</span>
+      </div>
+    </div>
+    <div class="user_inputbox">
+      <p class="email_txt">{{ $t("message.signin.txt19") }}</p>
+      <div class="inputbox">
+        <input type="text" v-model.trim="registerForm.verifyCode" />
+        <div class="verification" @click="sendEmail">
+          <span v-if="showCountdown">{{ minutes + " : " + seconds }}</span>
+          <span v-else>{{ $t("message.signin.txt39") }}</span>
+          <BtnLoading :isloading="codebtnloading"></BtnLoading>
+        </div>
+      </div>
+      <div class="input_prompt font12" v-if="registerForm.prompt2">
+        <span>* {{ $t(registerForm.prompt2) }}</span>
       </div>
     </div>
     <div class="agree_box font16" ref="circular" @click="igraeeFlag = !igraeeFlag">
@@ -110,28 +110,28 @@ export default {
         }
       } else {
         this.codebtnloading = true;
+        let that = this
         e.preventDefault();
         grecaptcha.ready(function() {
           grecaptcha.execute('6LejNWIhAAAAAEIBxOBXNNdxT8-idDbNhyDZZi6l', {action: 'submit'}).then(function(token) {
             console.log('token: ', token);
+            that.$api
+            .accountSendEmail({ token:token,email: that.registerForm.mailAccount, method: "1" })
+            .then((res) => {
+              if (res.code === 200) {
+                that.showCountdown = true;
+                const end = Date.parse(new Date()) + 10 * 60 * 1000; // 10分钟
+                localStorage.setItem(`rvc${that.registerForm.mailAccount}`, JSON.stringify(end));
+                that.countdownFun(end);
+              }
+              that.codebtnloading = false;
+              that.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+            })
+            .catch(() => {
+              that.codebtnloading = false;
+            });
           });
-        });
-        return
-        this.$api
-          .accountSendEmail({ email: this.registerForm.mailAccount, method: "1" })
-          .then((res) => {
-            if (res.code === 200) {
-              this.showCountdown = true;
-              const end = Date.parse(new Date()) + 10 * 60 * 1000; // 10分钟
-              localStorage.setItem(`rvc${this.registerForm.mailAccount}`, JSON.stringify(end));
-              this.countdownFun(end);
-            }
-            this.codebtnloading = false;
-            this.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
-          })
-          .catch(() => {
-            this.codebtnloading = false;
-          });
+        })
       }
     },
     registerFun() {
