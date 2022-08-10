@@ -93,7 +93,7 @@ export default {
     };
   },
   methods: {
-    sendEmail() {
+    sendEmail(e) {
       if (this.codebtnloading || this.showCountdown) return;
       if (!this.registerForm.mailAccount) return (this.registerForm.prompt1 = "message.signin.txt30"); // 填写邮箱
       if (!mailReg.test(this.registerForm.mailAccount)) return (this.registerForm.prompt1 = "message.signin.txt31"); // 邮箱不合法
@@ -110,6 +110,13 @@ export default {
         }
       } else {
         this.codebtnloading = true;
+        e.preventDefault();
+        grecaptcha.ready(function() {
+          grecaptcha.execute('6LejNWIhAAAAAEIBxOBXNNdxT8-idDbNhyDZZi6l', {action: 'submit'}).then(function(token) {
+            console.log('token: ', token);
+          });
+        });
+        return
         this.$api
           .accountSendEmail({ email: this.registerForm.mailAccount, method: "1" })
           .then((res) => {
