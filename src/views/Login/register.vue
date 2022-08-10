@@ -13,7 +13,7 @@
       <p class="email_txt">{{ $t("message.signin.txt19") }}</p>
       <div class="inputbox">
         <input type="text" v-model.trim="registerForm.verifyCode" />
-        <div class="verification" @click="sendEmail()">
+        <div class="verification" @click="sendEmail">
           <span v-if="showCountdown">{{ minutes + " : " + seconds }}</span>
           <span v-else>{{ $t("message.signin.txt39") }}</span>
           <BtnLoading :isloading="codebtnloading"></BtnLoading>
