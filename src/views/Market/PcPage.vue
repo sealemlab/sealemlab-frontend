@@ -1601,7 +1601,7 @@ export default {
               this.clearStstus()
               this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
             }else{
-              
+              this.busy = false // 新增
               console.log("重新获取box的数据")
               this.sortObj = {
                 first: 8,
@@ -1715,6 +1715,7 @@ export default {
               this.clearStstus()
               this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
             }else{
+              this.busy = false // 新增
               this.sortObj.nft = (token().SN).toLowerCase()
               this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
               console.log('筛选nft的参数this.sortObj: ', this.sortObj);
@@ -2424,10 +2425,9 @@ export default {
       }
       this.loadMoreStatus = true
       this.getMarketInfo(this.sortObj).then((res) => {
-
         console.log('正在售卖的----筛选以后的结果res: ', res);
         this.sortObj.skip += this.sortObj.first;
-        istrue = false
+        // istrue = false // 新增
         if (res.status == 0) {
           this.nftArr = this.nftArr.concat(res.arr)
           this.loadMoreStatus = true
