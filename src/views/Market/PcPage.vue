@@ -1067,7 +1067,7 @@
           </div>
         </div>
         <!-- 盲盒跟nft装备 -->
-        <div class="box" ref="scrollbox" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
+        <div class="box" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
           <div class="page_show_content">
             <BoxComponents :showCancle="showCancle" :sellPageStatus="sellPageStatus" :cancleStatus="cancleStatus" :nftArr="nftArr" @nftFun="nftFun"></BoxComponents>
           </div>
@@ -1602,7 +1602,6 @@ export default {
               this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
             }else{
               console.log("重新获取box的数据")
-              this.$refs.scrollbox.style.height = '100px'
               this.sortObj = {
                 first: 8,
                 skip: 0,
@@ -1624,6 +1623,8 @@ export default {
               // this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
               this.encapsulationFun()
 
+              this.loadMore()
+              
               this.dataInfo.nft = (token().SB).toLowerCase()
               this.dataInfo.token = (token()[this.priceCoin]).toLowerCase()
               this.getMarketStatistics(this.dataInfo)
@@ -1715,12 +1716,13 @@ export default {
               this.clearStstus()
               this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
             }else{
-              this.$refs.scrollbox.style.height = '100px'
               this.sortObj.nft = (token().SN).toLowerCase()
               this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
               console.log('筛选nft的参数this.sortObj: ', this.sortObj);
               this.encapsulationFun()
               
+              this.loadMore()
+
               this.dataInfo.nft = (token().SN).toLowerCase()
               this.dataInfo.token = (token()[this.priceCoin]).toLowerCase()
               this.getMarketStatistics(this.dataInfo)
