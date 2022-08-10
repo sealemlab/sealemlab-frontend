@@ -1717,8 +1717,23 @@ export default {
               this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
             }else{
               this.nftArr = []
-              this.sortObj.nft = (token().SN).toLowerCase()
-              this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
+              this.sortObj = {
+                first: 8,
+                skip: 0,
+                orderBy: "sellTime",
+                orderDirection: "desc",
+                seller: '',
+                nft:(token().SN).toLowerCase(),
+                token:(token()[this.priceCoin]).toLowerCase(),
+                price_gte:'',
+                price_lte:'',
+                stars:'',
+                rarity: '',
+                role: '',
+                part: '',
+                suit: '',
+                boxType:'',
+              }
               console.log('筛选nft的参数this.sortObj: ', this.sortObj);
               // this.encapsulationFun()
               
