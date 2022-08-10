@@ -1603,6 +1603,7 @@ export default {
             }else{
               console.log("重新获取box的数据")
               this.nftArr = []
+              this.loadMoreStatus = this.isOneLoading = true
               this.sortObj = {
                 first: 8,
                 skip: 0,
@@ -1717,6 +1718,7 @@ export default {
               this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
             }else{
               this.nftArr = []
+              this.loadMoreStatus = this.isOneLoading = true
               this.sortObj = {
                 first: 8,
                 skip: 0,
