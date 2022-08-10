@@ -1602,6 +1602,7 @@ export default {
               this.filterArr(Object.assign(this.filterInfo,{type:'box',children:'',value:''}))
             }else{
               console.log("重新获取box的数据")
+              this.nftArr = []
               this.sortObj = {
                 first: 8,
                 skip: 0,
@@ -1619,12 +1620,11 @@ export default {
                 suit: '',
                 boxType:'',
               }// 市场上正在售卖的盲盒跟nft的信息
-              // this.sortObj.nft = (token().SB).toLowerCase()
-              // this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
-              this.encapsulationFun()
 
-              this.loadMore()
+              // this.encapsulationFun()
               
+              this.loadMore()
+
               this.dataInfo.nft = (token().SB).toLowerCase()
               this.dataInfo.token = (token()[this.priceCoin]).toLowerCase()
               this.getMarketStatistics(this.dataInfo)
@@ -1716,10 +1716,11 @@ export default {
               this.clearStstus()
               this.filterArr(Object.assign(this.filterInfo,{type:'nft',children:'',value:''}))
             }else{
+              this.nftArr = []
               this.sortObj.nft = (token().SN).toLowerCase()
               this.sortObj.token = (token()[this.priceCoin]).toLowerCase()
               console.log('筛选nft的参数this.sortObj: ', this.sortObj);
-              this.encapsulationFun()
+              // this.encapsulationFun()
               
               this.loadMore()
 
