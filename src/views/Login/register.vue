@@ -111,30 +111,32 @@ export default {
       } else {
         this.codebtnloading = true;
         let that = this
-        e.preventDefault();
-        grecaptcha.ready(function() {
-          grecaptcha.execute('6LejNWIhAAAAAEIBxOBXNNdxT8-idDbNhyDZZi6l', {action: 'submit'}).then(function(token) {
-            console.log('token: ', token);
-            that.$api
-            .accountSendEmail({ token:token,email: that.registerForm.mailAccount, method: "1" })
-            .then((res) => {
-              if (res.code === 200) {
-                that.showCountdown = true;
-                const end = Date.parse(new Date()) + 10 * 60 * 1000; // 10分钟
-                localStorage.setItem(`rvc${that.registerForm.mailAccount}`, JSON.stringify(end));
-                that.countdownFun(end);
-              }
-              that.codebtnloading = false;
-              that.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
-            })
-            .catch(() => {
-              that.codebtnloading = false;
+        try{
+          e.preventDefault();
+          grecaptcha.ready(function() {
+            grecaptcha.execute('6LejNWIhAAAAAEIBxOBXNNdxT8-idDbNhyDZZi6l', {action: 'submit'}).then(function(token) {
+              console.log('token: ', token);
+              that.$api
+              .accountSendEmail({ token:token,email: that.registerForm.mailAccount, method: "1" })
+              .then((res) => {
+                if (res.code === 200) {
+                  that.showCountdown = true;
+                  const end = Date.parse(new Date()) + 10 * 60 * 1000; // 10分钟
+                  localStorage.setItem(`rvc${that.registerForm.mailAccount}`, JSON.stringify(end));
+                  that.countdownFun(end);
+                }
+                that.codebtnloading = false;
+                that.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: res.msg }));
+              })
+              .catch(() => {
+                that.codebtnloading = false;
+              });
             });
-          });
-        }).catch(() => {
+          })
+        } catch(error){
           that.codebtnloading = false;
           that.$store.commit("setNoticeStatus", JSON.stringify({ status: true, word: 'Unable to connect to the authentication service, please change the network operator and try again' }));
-        })
+        }
       }
     },
     registerFun() {
