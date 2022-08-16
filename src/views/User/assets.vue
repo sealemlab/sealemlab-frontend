@@ -146,10 +146,15 @@ export default {
       this.menuIndex = index
       switch(index){
         case 0:
+          if(!this.getIstrue){
+            this.nftArr = []
+            return
+          }
           this.nftArr = this.userNftAndBoxArr
           break;
         case 1:
           this.nftArr = []
+          if(!this.getIstrue)return
           this.BothsortObj.seller = ''
           this.BothsortObj.skip = 0
           this.BothsortObj.buyer = this.getAccount
@@ -157,6 +162,7 @@ export default {
           break;
         case 2:
           this.nftArr = []
+          if(!this.getIstrue)return
           this.BothsortObj.seller = this.getAccount
           this.BothsortObj.buyer = ''
           this.BothsortObj.skip = 0
