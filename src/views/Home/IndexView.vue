@@ -287,7 +287,7 @@
       </div>
     </div>
     <!-- 邀请者 -->
-    <div class="characteristic_box display_flex">
+    <!-- <div class="characteristic_box display_flex">
       <div class="title_txt font32 mobile_font18" :class="isEnLang?'en_heavy':''">{{$t("message.home.txt78")}}</div>
       <div class="gamebox">
         <div class="partener_box display_flex">
@@ -302,7 +302,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -707,20 +707,20 @@ export default {
           },
         },
       },
-      inviteArr:[
-        {
-          id:1,//coinhub
-          src:`${this.$store.state.imgUrl}inviter_1.webp`
-        },
-        {
-          id:2,//coinhub
-          src:`${this.$store.state.imgUrl}inviter_2.webp`
-        },
-        {
-          id:3,//coinhub
-          src:`${this.$store.state.imgUrl}inviter_3.webp`
-        }
-      ],
+      // inviteArr:[
+      //   {
+      //     id:1,//coinhub
+      //     src:`${this.$store.state.imgUrl}inviter_1.webp`
+      //   },
+      //   {
+      //     id:2,//coinhub
+      //     src:`${this.$store.state.imgUrl}inviter_2.webp`
+      //   },
+      //   {
+      //     id:3,//coinhub
+      //     src:`${this.$store.state.imgUrl}inviter_3.webp`
+      //   }
+      // ],
       imgTimer:null,
       getuserbalanceTimer:null
     }
