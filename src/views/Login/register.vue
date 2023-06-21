@@ -208,7 +208,6 @@ export default {
     },
     igraeeTheTreaty() {
       window.location.href = `${this.$store.state.htmlUrl}SealemLab_protocol.html`;
-      // https://cdn.sealemlab.com/sealemlab_assets_test/htmls/SealemLab_protocol.html?lang=zh
     },
     toLogin() {
       this.$router.push("/signin/login");

@@ -2355,7 +2355,7 @@ export default {
                 element.videoSrc = getSourceUrl([element.stars,element.power,element.role,element.part,element.suit]) + '.mp4'
               }else{
                 element.title = 'Mysterybox'
-                element.src = '//cdn.sealemlab.com/sealemlab_assets_test/images/mybox1.webp'
+                element.src = '//cdn.crystallabs.games/sealemlab/sealemlab_assets_test/images/mybox1.webp'
               }
             });
             resolve({ status: 0, arr: arr, msg: "Success" });
@@ -2405,7 +2405,7 @@ export default {
                 element.videoSrc = getSourceUrl([element.stars,element.power,element.role,element.part,element.suit]) + '.mp4'
               }else{
                 element.title = 'Mysterybox'
-                element.src = '//cdn.sealemlab.com/sealemlab_assets_test/images/mybox1.webp'
+                element.src = '//cdn.crystallabs.games/sealemlab/sealemlab_assets_test/images/mybox1.webp'
               }
             });
             resolve({ status: 0, arr: arr, msg: "Success" });

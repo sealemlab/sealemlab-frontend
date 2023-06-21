@@ -1012,7 +1012,7 @@ export default {
       width: 12px;
       height: 12px;
       filter: blur(0px);
-      background: url(//cdn.sealemlab.com/sealemlab_assets_test/images/ques_new.webp)
+      background: url(//cdn.crystallabs.games/sealemlab/sealemlab_assets_test/images/ques_new.webp)
         no-repeat;
       background-size: 100% 100%;
       position: absolute;
@@ -1346,7 +1346,7 @@ export default {
       width: 0.1rem;
       height: 0.1rem;
       filter: blur(0px);
-      background: url(//cdn.sealemlab.com/sealemlab_assets_test/images/ques_new.webp)
+      background: url(//cdn.crystallabs.games/sealemlab/sealemlab_assets_test/images/ques_new.webp)
         no-repeat;
       background-size: 100% 100%;
       position: absolute;

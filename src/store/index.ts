@@ -43,15 +43,14 @@ export default new Vuex.Store({
       status: false,
       word: "",
     }, //轻提示信息
-    // https://cdn.sealemlab.com/sealemlab_assets_test/images/accrow.webp
     imgUrl:
       process.env.NODE_ENV === "production"
-        ? "//cdn.sealemlab.com/sealemlab_assets_main/images/"
-        : "//cdn.sealemlab.com/sealemlab_assets_test/images/", //图片前缀
+        ? "//cdn.crystallabs.games/sealemlab/sealemlab_assets_main/images/"
+        : "//cdn.crystallabs.games/sealemlab/sealemlab_assets_test/images/", //图片前缀
     videoUrl:
-      process.env.NODE_ENV === "production" ? "//cdn.sealemlab.com/sealemlab_assets_main/video/" : "//cdn.sealemlab.com/sealemlab_assets_test/video/", //视频前缀
+      process.env.NODE_ENV === "production" ? "//cdn.crystallabs.games/sealemlab/sealemlab_assets_main/video/" : "//cdn.crystallabs.games/sealemlab/sealemlab_assets_test/video/", //视频前缀
     htmlUrl:
-      process.env.NODE_ENV === "production" ? "//cdn.sealemlab.com/sealemlab_assets_main/htmls/" : "//cdn.sealemlab.com/sealemlab_assets_test/htmls/", //图片前缀
+      process.env.NODE_ENV === "production" ? "//cdn.crystallabs.games/sealemlab/sealemlab_assets_main/htmls/" : "//cdn.crystallabs.games/sealemlab/sealemlab_assets_test/htmls/", //图片前缀
     codeTime: 60, //验证码重新发送时间
     emailReg: /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/, //邮箱校验
     pwReg: /^[a-zA-Z0-9]{6,16}$/, //密码校验 6-16位数字英文组合
