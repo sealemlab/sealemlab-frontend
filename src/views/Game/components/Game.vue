@@ -105,9 +105,9 @@ export default {
   methods: {
     download (data) {
       if(data == 'pc'){
-        window.open('https://cdn.sealemlab.com/sacredrealm_app_release/SacredRealm_Main_1.0.8_PC.rar')
+        window.open('//cdn.crystallabs.games/sealemlab/sacredrealm_app_release/SacredRealm_Main_1.0.8_PC.rar')
       }else{
-        window.open('https://cdn.sealemlab.com/sacredrealm_app_release/SacredRealm_Main_1.0.8.apk')
+        window.open('//cdn.crystallabs.games/sealemlab/sacredrealm_app_release/SacredRealm_Main_1.0.8.apk')
       }
     },
   }

@@ -2,11 +2,10 @@ const isProd = process.env.NODE_ENV == "production";
 // const timestamp = new Date().getTime(); // 获取当前时间戳
 
 module.exports = {
-  publicPath: "/",
+  publicPath: "./",
   devServer: { disableHostCheck: true },
   lintOnSave: true,
   productionSourceMap: false,
-
   chainWebpack(config) {
     config.module.rule("scss").oneOfs.store.forEach((item) => {
       item

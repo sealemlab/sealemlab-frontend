@@ -348,7 +348,7 @@ export default {
               type:0,//盲盒类型
               title:'Mysterybox',
               isnft: false,
-              src:'//cdn.sealemlab.com/sealemlab_assets_test/images/mybox1.webp',
+              src:'//cdn.crystallabs.games/sealemlab/sealemlab_assets_test/images/mybox1.webp',
               status:false,//状态
               showSelect: false, // 展示选择框
               selectStatus: false // 选中状态
